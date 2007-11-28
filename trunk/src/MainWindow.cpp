@@ -29,12 +29,19 @@ MainWindow::MainWindow()
 	Gtk::HBox* hbox = dynamic_cast < Gtk::HBox* >
 		(ui_xml->get_widget("hFrame"));
 	
+	Gtk::Button* bt_fullscreen=dynamic_cast <Gtk::Button* >
+		(ui_xml->get_widget("bt_fullscreen"));
 	GMplayer* gmp = new GMplayer;	
 	if (hbox)
 		hbox->pack_end(*gmp, true, true);
 
+	bt_fullscreen->signal_clicked().
+		connect(sigc::mem_fun(*this, &MainWindow::on_fullscreen));
 	this->add(*vbox);
 	this->show_all();
 	gmp->start("a.avi");
 }
 
+void MainWindow::on_fullscreen()
+{
+}
