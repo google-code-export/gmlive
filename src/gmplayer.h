@@ -1,18 +1,19 @@
-#ifndef GTKMMPLAYER_H_
-#define GTKMMPLAYER_H_
+#ifndef GTKMPLAYER_H_
+#define GTKMPLAYER_H_
 
 #include <stdlib.h>
 #include <iostream>
 #include <gtkmm.h>
 #include <gtkmm/socket.h>
 
+#include "pst_ctrl.h"
 
-class GMMplayer : public Gtk::VBox
+
+class GMplayer : public Gtk::Socket
 {
 	public:
-		GMMplayer();
-		~GMMplayer();
-		void show();
+		GMplayer();
+		~GMplayer();
 		void start(const std::string&);
 		void start();
 		void stop();
@@ -21,7 +22,7 @@ class GMMplayer : public Gtk::VBox
 		void change_size(Gtk::Allocation& allocation);
 		bool is_runing();
 
-		Gtk::Socket 	mySocket;       /* the socket (internal)*/
+		PstCtrl 	pst_ctrl;
 		std::string	file;		/* filename (internal)*/
 		guint32		xid;		/* X window handle (internal)*/
 		int		width;		/* widget's width*/

@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.61)
-AC_INIT(gmmlive, 0.01, xihels@gmail.com)
+AC_INIT(gmlive, 0.01, xihels@gmail.com)
 AC_COPYRIGHT([Copyright (C) 2007 xihels@gmail.com])
 AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADER([config.h])
@@ -32,3 +32,4 @@ AC_SUBST(PACKAGE_LIBS)
 AC_OUTPUT([Makefile
 	   src/Makefile
 	   data/Makefile])
+

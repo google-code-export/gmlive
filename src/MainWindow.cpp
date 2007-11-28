@@ -17,7 +17,7 @@
  */
 
 #include "MainWindow.h"
-#include "gmmplayer.h"
+#include "gmplayer.h"
 
 MainWindow::MainWindow()
 {
@@ -29,12 +29,12 @@ MainWindow::MainWindow()
 	Gtk::HBox* hbox = dynamic_cast < Gtk::HBox* >
 		(ui_xml->get_widget("hFrame"));
 	
-	GMMplayer* gmp = new GMMplayer;	
-	//if (hbox)
+	GMplayer* gmp = new GMplayer;	
+	if (hbox)
 		hbox->pack_end(*gmp, true, true);
 
 	this->add(*vbox);
 	this->show_all();
-	//gmp->start("a.avi");
+	gmp->start("a.avi");
 }
 
