@@ -1,0 +1,551 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+ACLOCAL	Makefile	/^ACLOCAL = ${SHELL} \/tmp\/gmmlive\/missing --run aclocal-1.10$/;"	m
+ACLOCAL	data/Makefile	/^ACLOCAL = ${SHELL} \/tmp\/gmmlive\/missing --run aclocal-1.10$/;"	m
+ACLOCAL	src/Makefile	/^ACLOCAL = ${SHELL} \/tmp\/gmmlive\/missing --run aclocal-1.10$/;"	m
+ACLOCAL_M4	Makefile	/^ACLOCAL_M4 = $(top_srcdir)\/aclocal.m4$/;"	m
+ACLOCAL_M4	data/Makefile	/^ACLOCAL_M4 = $(top_srcdir)\/aclocal.m4$/;"	m
+ACLOCAL_M4	src/Makefile	/^ACLOCAL_M4 = $(top_srcdir)\/aclocal.m4$/;"	m
+AMTAR	Makefile	/^AMTAR = ${SHELL} \/tmp\/gmmlive\/missing --run tar$/;"	m
+AMTAR	data/Makefile	/^AMTAR = ${SHELL} \/tmp\/gmmlive\/missing --run tar$/;"	m
+AMTAR	src/Makefile	/^AMTAR = ${SHELL} \/tmp\/gmmlive\/missing --run tar$/;"	m
+AUTOCONF	Makefile	/^AUTOCONF = ${SHELL} \/tmp\/gmmlive\/missing --run autoconf$/;"	m
+AUTOCONF	data/Makefile	/^AUTOCONF = ${SHELL} \/tmp\/gmmlive\/missing --run autoconf$/;"	m
+AUTOCONF	src/Makefile	/^AUTOCONF = ${SHELL} \/tmp\/gmmlive\/missing --run autoconf$/;"	m
+AUTOHEADER	Makefile	/^AUTOHEADER = ${SHELL} \/tmp\/gmmlive\/missing --run autoheader$/;"	m
+AUTOHEADER	data/Makefile	/^AUTOHEADER = ${SHELL} \/tmp\/gmmlive\/missing --run autoheader$/;"	m
+AUTOHEADER	src/Makefile	/^AUTOHEADER = ${SHELL} \/tmp\/gmmlive\/missing --run autoheader$/;"	m
+AUTOMAKE	Makefile	/^AUTOMAKE = ${SHELL} \/tmp\/gmmlive\/missing --run automake-1.10$/;"	m
+AUTOMAKE	data/Makefile	/^AUTOMAKE = ${SHELL} \/tmp\/gmmlive\/missing --run automake-1.10$/;"	m
+AUTOMAKE	src/Makefile	/^AUTOMAKE = ${SHELL} \/tmp\/gmmlive\/missing --run automake-1.10$/;"	m
+AWK	Makefile	/^AWK = gawk$/;"	m
+AWK	data/Makefile	/^AWK = gawk$/;"	m
+AWK	src/Makefile	/^AWK = gawk$/;"	m
+CDPATH	Makefile	/^am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd$/;"	m
+CDPATH	data/Makefile	/^am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd$/;"	m
+CDPATH	src/Makefile	/^am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd$/;"	m
+CONFIG_CLEAN_FILES	Makefile	/^CONFIG_CLEAN_FILES =$/;"	m
+CONFIG_CLEAN_FILES	data/Makefile	/^CONFIG_CLEAN_FILES =$/;"	m
+CONFIG_CLEAN_FILES	src/Makefile	/^CONFIG_CLEAN_FILES =$/;"	m
+CONFIG_HEADER	Makefile	/^CONFIG_HEADER = config.h$/;"	m
+CONFIG_HEADER	data/Makefile	/^CONFIG_HEADER = $(top_builddir)\/config.h$/;"	m
+CONFIG_HEADER	src/Makefile	/^CONFIG_HEADER = $(top_builddir)\/config.h$/;"	m
+CPPFLAGS	Makefile	/^CPPFLAGS = $/;"	m
+CPPFLAGS	data/Makefile	/^CPPFLAGS = $/;"	m
+CPPFLAGS	src/Makefile	/^CPPFLAGS = $/;"	m
+CTAGS	Makefile	/^CTAGS = ctags$/;"	m
+CTAGS	src/Makefile	/^CTAGS = ctags$/;"	m
+CXX	Makefile	/^CXX = g++$/;"	m
+CXX	data/Makefile	/^CXX = g++$/;"	m
+CXX	src/Makefile	/^CXX = g++$/;"	m
+CXXCOMPILE	src/Makefile	/^CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \\$/;"	m
+CXXCPP	Makefile	/^CXXCPP = g++ -E$/;"	m
+CXXCPP	data/Makefile	/^CXXCPP = g++ -E$/;"	m
+CXXCPP	src/Makefile	/^CXXCPP = g++ -E$/;"	m
+CXXDEPMODE	Makefile	/^CXXDEPMODE = depmode=gcc3$/;"	m
+CXXDEPMODE	data/Makefile	/^CXXDEPMODE = depmode=gcc3$/;"	m
+CXXDEPMODE	src/Makefile	/^CXXDEPMODE = depmode=gcc3$/;"	m
+CXXFLAGS	Makefile	/^CXXFLAGS = -g -O2$/;"	m
+CXXFLAGS	data/Makefile	/^CXXFLAGS = -g -O2$/;"	m
+CXXFLAGS	src/Makefile	/^CXXFLAGS = -g -O2$/;"	m
+CXXLD	src/Makefile	/^CXXLD = $(CXX)$/;"	m
+CXXLINK	src/Makefile	/^CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \\$/;"	m
+CYGPATH_W	Makefile	/^CYGPATH_W = echo$/;"	m
+CYGPATH_W	data/Makefile	/^CYGPATH_W = echo$/;"	m
+CYGPATH_W	src/Makefile	/^CYGPATH_W = echo$/;"	m
+DATA	data/Makefile	/^DATA = $(gmmliveui_DATA)$/;"	m
+DEFAULT_INCLUDES	src/Makefile	/^DEFAULT_INCLUDES = -I. -I$(top_builddir)$/;"	m
+DEFS	Makefile	/^DEFS = -DHAVE_CONFIG_H$/;"	m
+DEFS	data/Makefile	/^DEFS = -DHAVE_CONFIG_H$/;"	m
+DEFS	src/Makefile	/^DEFS = -DHAVE_CONFIG_H$/;"	m
+DEPDIR	Makefile	/^DEPDIR = .deps$/;"	m
+DEPDIR	data/Makefile	/^DEPDIR = .deps$/;"	m
+DEPDIR	src/Makefile	/^DEPDIR = .deps$/;"	m
+DESTDIR	Makefile	/^	       && $(MAKE) $(AM_MAKEFLAGS) DESTDIR="$$dc_destdir" \\$/;"	m
+DESTDIR	Makefile	/^	       && $(MAKE) $(AM_MAKEFLAGS) DESTDIR="$$dc_destdir" install \\$/;"	m
+DESTDIR	Makefile	/^	       && $(MAKE) $(AM_MAKEFLAGS) DESTDIR="$$dc_destdir" uninstall \\$/;"	m
+DISTFILES	Makefile	/^DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)$/;"	m
+DISTFILES	data/Makefile	/^DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)$/;"	m
+DISTFILES	src/Makefile	/^DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)$/;"	m
+DIST_ARCHIVES	Makefile	/^DIST_ARCHIVES = $(distdir).tar.gz $(distdir).tar.bz2$/;"	m
+DIST_COMMON	Makefile	/^DIST_COMMON = $(am__configure_deps) $(srcdir)\/Makefile.am \\$/;"	m
+DIST_COMMON	data/Makefile	/^DIST_COMMON = $(srcdir)\/Makefile.am $(srcdir)\/Makefile.in$/;"	m
+DIST_COMMON	src/Makefile	/^DIST_COMMON = $(noinst_HEADERS) $(srcdir)\/Makefile.am \\$/;"	m
+DIST_SOURCES	Makefile	/^DIST_SOURCES =$/;"	m
+DIST_SOURCES	data/Makefile	/^DIST_SOURCES =$/;"	m
+DIST_SOURCES	src/Makefile	/^DIST_SOURCES = $(gmmlive_SOURCES)$/;"	m
+DIST_SUBDIRS	Makefile	/^DIST_SUBDIRS = $(SUBDIRS)$/;"	m
+ECHO_C	Makefile	/^ECHO_C = $/;"	m
+ECHO_C	data/Makefile	/^ECHO_C = $/;"	m
+ECHO_C	src/Makefile	/^ECHO_C = $/;"	m
+ECHO_N	Makefile	/^ECHO_N = -n$/;"	m
+ECHO_N	data/Makefile	/^ECHO_N = -n$/;"	m
+ECHO_N	src/Makefile	/^ECHO_N = -n$/;"	m
+ECHO_T	Makefile	/^ECHO_T = $/;"	m
+ECHO_T	data/Makefile	/^ECHO_T = $/;"	m
+ECHO_T	src/Makefile	/^ECHO_T = $/;"	m
+ETAGS	Makefile	/^ETAGS = etags$/;"	m
+ETAGS	src/Makefile	/^ETAGS = etags$/;"	m
+EXEEXT	Makefile	/^EXEEXT = $/;"	m
+EXEEXT	data/Makefile	/^EXEEXT = $/;"	m
+EXEEXT	src/Makefile	/^EXEEXT = $/;"	m
+EXTRA_DIST	data/Makefile	/^EXTRA_DIST = \\$/;"	m
+GMMplayer	src/gmmplayer.cpp	/^GMMplayer::GMMplayer():$/;"	f	class:GMMplayer	signature:()
+GMMplayer	src/gmmplayer.h	/^		GMMplayer();$/;"	p	class:GMMplayer	access:public	signature:()
+GMMplayer	src/gmmplayer.h	/^class GMMplayer : public Gtk::VBox$/;"	c	inherits:Gtk::VBox
+GMMplayer::GMMplayer	src/gmmplayer.cpp	/^GMMplayer::GMMplayer():$/;"	f	class:GMMplayer	signature:()
+GMMplayer::GMMplayer	src/gmmplayer.h	/^		GMMplayer();$/;"	p	class:GMMplayer	access:public	signature:()
+GMMplayer::change_size	src/gmmplayer.cpp	/^void GMMplayer::change_size(Gtk::Allocation& allocation)$/;"	f	class:GMMplayer	signature:(Gtk::Allocation& allocation)
+GMMplayer::change_size	src/gmmplayer.h	/^		void change_size(Gtk::Allocation& allocation);$/;"	p	class:GMMplayer	access:private	signature:(Gtk::Allocation& allocation)
+GMMplayer::childpid	src/gmmplayer.h	/^		int		childpid;	\/* mplayer's pid (internal)*\/$/;"	m	class:GMMplayer	access:private
+GMMplayer::file	src/gmmplayer.h	/^		std::string	file;		\/* filename (internal)*\/$/;"	m	class:GMMplayer	access:private
+GMMplayer::height	src/gmmplayer.h	/^		int		height;		\/* widget's height*\/$/;"	m	class:GMMplayer	access:private
+GMMplayer::is_runing	src/gmmplayer.cpp	/^bool GMMplayer::is_runing()$/;"	f	class:GMMplayer	signature:()
+GMMplayer::is_runing	src/gmmplayer.h	/^		bool is_runing();$/;"	p	class:GMMplayer	access:private	signature:()
+GMMplayer::mySocket	src/gmmplayer.h	/^		Gtk::Socket 	mySocket;       \/* the socket (internal)*\/$/;"	m	class:GMMplayer	access:private
+GMMplayer::my_system	src/gmmplayer.cpp	/^int GMMplayer::my_system(const std::string& cmd)$/;"	f	class:GMMplayer	signature:(const std::string& cmd)
+GMMplayer::my_system	src/gmmplayer.h	/^		int my_system(const std::string&);$/;"	p	class:GMMplayer	access:private	signature:(const std::string&)
+GMMplayer::ready	src/gmmplayer.h	/^		bool		ready;		\/* is the player ready (internal)*\/$/;"	m	class:GMMplayer	access:private
+GMMplayer::show	src/gmmplayer.cpp	/^void GMMplayer::show()$/;"	f	class:GMMplayer	signature:()
+GMMplayer::show	src/gmmplayer.h	/^		void show();$/;"	p	class:GMMplayer	access:public	signature:()
+GMMplayer::start	src/gmmplayer.cpp	/^void GMMplayer::start()$/;"	f	class:GMMplayer	signature:()
+GMMplayer::start	src/gmmplayer.cpp	/^void GMMplayer::start(const std::string& filename)$/;"	f	class:GMMplayer	signature:(const std::string& filename)
+GMMplayer::start	src/gmmplayer.h	/^		void start();$/;"	p	class:GMMplayer	access:public	signature:()
+GMMplayer::start	src/gmmplayer.h	/^		void start(const std::string&);$/;"	p	class:GMMplayer	access:public	signature:(const std::string&)
+GMMplayer::stop	src/gmmplayer.cpp	/^void GMMplayer::stop()$/;"	f	class:GMMplayer	signature:()
+GMMplayer::stop	src/gmmplayer.h	/^		void stop();$/;"	p	class:GMMplayer	access:public	signature:()
+GMMplayer::timer	src/gmmplayer.h	/^		guint		timer;		\/* timer (internal) *\/$/;"	m	class:GMMplayer	access:private
+GMMplayer::width	src/gmmplayer.h	/^		int		width;		\/* widget's width*\/$/;"	m	class:GMMplayer	access:private
+GMMplayer::xid	src/gmmplayer.h	/^		guint32		xid;		\/* X window handle (internal)*\/$/;"	m	class:GMMplayer	access:private
+GMMplayer::~GMMplayer	src/gmmplayer.cpp	/^GMMplayer::~GMMplayer()$/;"	f	class:GMMplayer	signature:()
+GMMplayer::~GMMplayer	src/gmmplayer.h	/^		~GMMplayer();$/;"	p	class:GMMplayer	access:public	signature:()
+GTKMMPLAYER_H_	src/gmmplayer.h	2;"	d
+GZIP	Makefile	/^	  GZIP=$(GZIP_ENV) gunzip -c $(distdir).shar.gz | unshar ;;\\$/;"	m
+GZIP	Makefile	/^	  GZIP=$(GZIP_ENV) gunzip -c $(distdir).tar.gz | $(am__untar) ;;\\$/;"	m
+GZIP	Makefile	/^	shar $(distdir) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).shar.gz$/;"	m
+GZIP	Makefile	/^	tardir=$(distdir) && $(am__tar) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).tar.gz$/;"	m
+GZIP_ENV	Makefile	/^GZIP_ENV = --best$/;"	m
+GlademmXML	src/MainWindow.h	/^typedef Glib::RefPtr < Gnome::Glade::Xml > GlademmXML;$/;"	t
+HAVE_SOCKET	config.h	5;"	d
+HEADERS	src/Makefile	/^HEADERS = $(noinst_HEADERS)$/;"	m
+INCLUDES	src/Makefile	/^INCLUDES = \\$/;"	m
+INSTALL	Makefile	/^INSTALL = \/usr\/bin\/install -c$/;"	m
+INSTALL	data/Makefile	/^INSTALL = \/usr\/bin\/install -c$/;"	m
+INSTALL	src/Makefile	/^INSTALL = \/usr\/bin\/install -c$/;"	m
+INSTALL_DATA	Makefile	/^INSTALL_DATA = ${INSTALL} -m 644$/;"	m
+INSTALL_DATA	data/Makefile	/^INSTALL_DATA = ${INSTALL} -m 644$/;"	m
+INSTALL_DATA	src/Makefile	/^INSTALL_DATA = ${INSTALL} -m 644$/;"	m
+INSTALL_HEADER	Makefile	/^INSTALL_HEADER = $(INSTALL_DATA)$/;"	m
+INSTALL_HEADER	data/Makefile	/^INSTALL_HEADER = $(INSTALL_DATA)$/;"	m
+INSTALL_HEADER	src/Makefile	/^INSTALL_HEADER = $(INSTALL_DATA)$/;"	m
+INSTALL_PROGRAM	Makefile	/^	$(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \\$/;"	m
+INSTALL_PROGRAM	Makefile	/^INSTALL_PROGRAM = ${INSTALL}$/;"	m
+INSTALL_PROGRAM	data/Makefile	/^	$(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \\$/;"	m
+INSTALL_PROGRAM	data/Makefile	/^INSTALL_PROGRAM = ${INSTALL}$/;"	m
+INSTALL_PROGRAM	src/Makefile	/^	$(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \\$/;"	m
+INSTALL_PROGRAM	src/Makefile	/^INSTALL_PROGRAM = ${INSTALL}$/;"	m
+INSTALL_PROGRAM_ENV	Makefile	/^	    echo "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'"` install$/;"	m
+INSTALL_PROGRAM_ENV	data/Makefile	/^	    echo "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'"` install$/;"	m
+INSTALL_PROGRAM_ENV	src/Makefile	/^	    echo "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'"` install$/;"	m
+INSTALL_SCRIPT	Makefile	/^INSTALL_SCRIPT = ${INSTALL}$/;"	m
+INSTALL_SCRIPT	data/Makefile	/^INSTALL_SCRIPT = ${INSTALL}$/;"	m
+INSTALL_SCRIPT	src/Makefile	/^INSTALL_SCRIPT = ${INSTALL}$/;"	m
+INSTALL_STRIP_FLAG	Makefile	/^	  install_sh_PROGRAM="$(INSTALL_STRIP_PROGRAM)" INSTALL_STRIP_FLAG=-s \\$/;"	m
+INSTALL_STRIP_FLAG	data/Makefile	/^	  install_sh_PROGRAM="$(INSTALL_STRIP_PROGRAM)" INSTALL_STRIP_FLAG=-s \\$/;"	m
+INSTALL_STRIP_FLAG	src/Makefile	/^	  install_sh_PROGRAM="$(INSTALL_STRIP_PROGRAM)" INSTALL_STRIP_FLAG=-s \\$/;"	m
+INSTALL_STRIP_PROGRAM	Makefile	/^INSTALL_STRIP_PROGRAM = $(install_sh) -c -s$/;"	m
+INSTALL_STRIP_PROGRAM	data/Makefile	/^INSTALL_STRIP_PROGRAM = $(install_sh) -c -s$/;"	m
+INSTALL_STRIP_PROGRAM	src/Makefile	/^INSTALL_STRIP_PROGRAM = $(install_sh) -c -s$/;"	m
+LDFLAGS	Makefile	/^LDFLAGS = $/;"	m
+LDFLAGS	data/Makefile	/^LDFLAGS = $/;"	m
+LDFLAGS	src/Makefile	/^LDFLAGS = $/;"	m
+LIBOBJS	Makefile	/^LIBOBJS = $/;"	m
+LIBOBJS	data/Makefile	/^LIBOBJS = $/;"	m
+LIBOBJS	src/Makefile	/^LIBOBJS = $/;"	m
+LIBS	Makefile	/^LIBS = $/;"	m
+LIBS	data/Makefile	/^LIBS = $/;"	m
+LIBS	src/Makefile	/^LIBS = $/;"	m
+LTLIBOBJS	Makefile	/^LTLIBOBJS = $/;"	m
+LTLIBOBJS	data/Makefile	/^LTLIBOBJS = $/;"	m
+LTLIBOBJS	src/Makefile	/^LTLIBOBJS = $/;"	m
+MAKEINFO	Makefile	/^MAKEINFO = ${SHELL} \/tmp\/gmmlive\/missing --run makeinfo$/;"	m
+MAKEINFO	data/Makefile	/^MAKEINFO = ${SHELL} \/tmp\/gmmlive\/missing --run makeinfo$/;"	m
+MAKEINFO	src/Makefile	/^MAKEINFO = ${SHELL} \/tmp\/gmmlive\/missing --run makeinfo$/;"	m
+MKDIR_P	Makefile	/^MKDIR_P = \/bin\/mkdir -p$/;"	m
+MKDIR_P	data/Makefile	/^MKDIR_P = \/bin\/mkdir -p$/;"	m
+MKDIR_P	src/Makefile	/^MKDIR_P = \/bin\/mkdir -p$/;"	m
+MainWindow	src/MainWindow.cpp	/^MainWindow::MainWindow()$/;"	f	class:MainWindow	signature:()
+MainWindow	src/MainWindow.h	/^		MainWindow();$/;"	p	class:MainWindow	access:public	signature:()
+MainWindow	src/MainWindow.h	/^class MainWindow : public Gtk::Window {$/;"	c	inherits:Gtk::Window
+MainWindow::MainWindow	src/MainWindow.cpp	/^MainWindow::MainWindow()$/;"	f	class:MainWindow	signature:()
+MainWindow::MainWindow	src/MainWindow.h	/^		MainWindow();$/;"	p	class:MainWindow	access:public	signature:()
+MainWindow::ui_xml	src/MainWindow.h	/^		GlademmXML ui_xml;$/;"	m	class:MainWindow	access:private
+NORMAL_INSTALL	Makefile	/^NORMAL_INSTALL = :$/;"	m
+NORMAL_INSTALL	data/Makefile	/^NORMAL_INSTALL = :$/;"	m
+NORMAL_INSTALL	src/Makefile	/^NORMAL_INSTALL = :$/;"	m
+NORMAL_UNINSTALL	Makefile	/^NORMAL_UNINSTALL = :$/;"	m
+NORMAL_UNINSTALL	data/Makefile	/^NORMAL_UNINSTALL = :$/;"	m
+NORMAL_UNINSTALL	src/Makefile	/^NORMAL_UNINSTALL = :$/;"	m
+OBJEXT	Makefile	/^OBJEXT = o$/;"	m
+OBJEXT	data/Makefile	/^OBJEXT = o$/;"	m
+OBJEXT	src/Makefile	/^OBJEXT = o$/;"	m
+PACKAGE	Makefile	/^PACKAGE = gmmlive$/;"	m
+PACKAGE	data/Makefile	/^PACKAGE = gmmlive$/;"	m
+PACKAGE	src/Makefile	/^PACKAGE = gmmlive$/;"	m
+PACKAGE_BUGREPORT	Makefile	/^PACKAGE_BUGREPORT = xihels@gmail.com$/;"	m
+PACKAGE_BUGREPORT	config.h	8;"	d
+PACKAGE_BUGREPORT	data/Makefile	/^PACKAGE_BUGREPORT = xihels@gmail.com$/;"	m
+PACKAGE_BUGREPORT	src/Makefile	/^PACKAGE_BUGREPORT = xihels@gmail.com$/;"	m
+PACKAGE_CFLAGS	Makefile	/^PACKAGE_CFLAGS = -I\/usr\/local\/include\/freetype2 -I\/usr\/local\/include\/libpng12 -I\/usr\/include\/gtkmm-2.4 -I\/usr\/lib\/gtkmm-2.4\/include -I\/usr\/include\/glibmm-2.4 -I\/usr\/lib\/glibmm-2.4\/include -I\/usr\/include\/gdkmm-2.4 -I\/usr\/lib\/gdkmm-2.4\/include -I\/usr\/include\/pangomm-1.4 -I\/usr\/include\/atkmm-1.6 -I\/usr\/include\/gtk-2.0 -I\/usr\/include\/sigc++-2.0 -I\/usr\/lib\/sigc++-2.0\/include -I\/usr\/include\/glib-2.0 -I\/usr\/lib\/glib-2.0\/include -I\/usr\/lib\/gtk-2.0\/include -I\/usr\/include\/cairomm-1.0 -I\/usr\/include\/pango-1.0 -I\/usr\/include\/cairo -I\/usr\/include\/atk-1.0 -I\/usr\/include\/libglademm-2.4 -I\/usr\/lib\/libglademm-2.4\/include -I\/usr\/include\/libglade-2.0 -I\/usr\/include\/libxml2  $/;"	m
+PACKAGE_CFLAGS	data/Makefile	/^PACKAGE_CFLAGS = -I\/usr\/local\/include\/freetype2 -I\/usr\/local\/include\/libpng12 -I\/usr\/include\/gtkmm-2.4 -I\/usr\/lib\/gtkmm-2.4\/include -I\/usr\/include\/glibmm-2.4 -I\/usr\/lib\/glibmm-2.4\/include -I\/usr\/include\/gdkmm-2.4 -I\/usr\/lib\/gdkmm-2.4\/include -I\/usr\/include\/pangomm-1.4 -I\/usr\/include\/atkmm-1.6 -I\/usr\/include\/gtk-2.0 -I\/usr\/include\/sigc++-2.0 -I\/usr\/lib\/sigc++-2.0\/include -I\/usr\/include\/glib-2.0 -I\/usr\/lib\/glib-2.0\/include -I\/usr\/lib\/gtk-2.0\/include -I\/usr\/include\/cairomm-1.0 -I\/usr\/include\/pango-1.0 -I\/usr\/include\/cairo -I\/usr\/include\/atk-1.0 -I\/usr\/include\/libglademm-2.4 -I\/usr\/lib\/libglademm-2.4\/include -I\/usr\/include\/libglade-2.0 -I\/usr\/include\/libxml2  $/;"	m
+PACKAGE_CFLAGS	src/Makefile	/^PACKAGE_CFLAGS = -I\/usr\/local\/include\/freetype2 -I\/usr\/local\/include\/libpng12 -I\/usr\/include\/gtkmm-2.4 -I\/usr\/lib\/gtkmm-2.4\/include -I\/usr\/include\/glibmm-2.4 -I\/usr\/lib\/glibmm-2.4\/include -I\/usr\/include\/gdkmm-2.4 -I\/usr\/lib\/gdkmm-2.4\/include -I\/usr\/include\/pangomm-1.4 -I\/usr\/include\/atkmm-1.6 -I\/usr\/include\/gtk-2.0 -I\/usr\/include\/sigc++-2.0 -I\/usr\/lib\/sigc++-2.0\/include -I\/usr\/include\/glib-2.0 -I\/usr\/lib\/glib-2.0\/include -I\/usr\/lib\/gtk-2.0\/include -I\/usr\/include\/cairomm-1.0 -I\/usr\/include\/pango-1.0 -I\/usr\/include\/cairo -I\/usr\/include\/atk-1.0 -I\/usr\/include\/libglademm-2.4 -I\/usr\/lib\/libglademm-2.4\/include -I\/usr\/include\/libglade-2.0 -I\/usr\/include\/libxml2  $/;"	m
+PACKAGE_LIBS	Makefile	/^PACKAGE_LIBS = -lglademm-2.4 -lgtkmm-2.4 -lglade-2.0 -lgdkmm-2.4 -latkmm-1.6 -lpangomm-1.4 -lcairomm-1.0 -lglibmm-2.4 -lsigc-2.0 -lgtk-x11-2.0 -lxml2 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangocairo-1.0 -lfontconfig -lXext -lXrender -lXinerama -lXi -lXrandr -lXcursor -lXcomposite -lXdamage -lpango-1.0 -lcairo -lX11 -lXfixes -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  $/;"	m
+PACKAGE_LIBS	data/Makefile	/^PACKAGE_LIBS = -lglademm-2.4 -lgtkmm-2.4 -lglade-2.0 -lgdkmm-2.4 -latkmm-1.6 -lpangomm-1.4 -lcairomm-1.0 -lglibmm-2.4 -lsigc-2.0 -lgtk-x11-2.0 -lxml2 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangocairo-1.0 -lfontconfig -lXext -lXrender -lXinerama -lXi -lXrandr -lXcursor -lXcomposite -lXdamage -lpango-1.0 -lcairo -lX11 -lXfixes -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  $/;"	m
+PACKAGE_LIBS	src/Makefile	/^PACKAGE_LIBS = -lglademm-2.4 -lgtkmm-2.4 -lglade-2.0 -lgdkmm-2.4 -latkmm-1.6 -lpangomm-1.4 -lcairomm-1.0 -lglibmm-2.4 -lsigc-2.0 -lgtk-x11-2.0 -lxml2 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangocairo-1.0 -lfontconfig -lXext -lXrender -lXinerama -lXi -lXrandr -lXcursor -lXcomposite -lXdamage -lpango-1.0 -lcairo -lX11 -lXfixes -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  $/;"	m
+PACKAGE_NAME	Makefile	/^PACKAGE_NAME = gmmlive$/;"	m
+PACKAGE_NAME	config.h	11;"	d
+PACKAGE_NAME	data/Makefile	/^PACKAGE_NAME = gmmlive$/;"	m
+PACKAGE_NAME	src/Makefile	/^PACKAGE_NAME = gmmlive$/;"	m
+PACKAGE_STRING	Makefile	/^PACKAGE_STRING = gmmlive 0.01$/;"	m
+PACKAGE_STRING	config.h	14;"	d
+PACKAGE_STRING	data/Makefile	/^PACKAGE_STRING = gmmlive 0.01$/;"	m
+PACKAGE_STRING	src/Makefile	/^PACKAGE_STRING = gmmlive 0.01$/;"	m
+PACKAGE_TARNAME	Makefile	/^PACKAGE_TARNAME = gmmlive$/;"	m
+PACKAGE_TARNAME	config.h	17;"	d
+PACKAGE_TARNAME	data/Makefile	/^PACKAGE_TARNAME = gmmlive$/;"	m
+PACKAGE_TARNAME	src/Makefile	/^PACKAGE_TARNAME = gmmlive$/;"	m
+PACKAGE_VERSION	Makefile	/^PACKAGE_VERSION = 0.01$/;"	m
+PACKAGE_VERSION	config.h	20;"	d
+PACKAGE_VERSION	data/Makefile	/^PACKAGE_VERSION = 0.01$/;"	m
+PACKAGE_VERSION	src/Makefile	/^PACKAGE_VERSION = 0.01$/;"	m
+PATH_SEPARATOR	Makefile	/^PATH_SEPARATOR = :$/;"	m
+PATH_SEPARATOR	data/Makefile	/^PATH_SEPARATOR = :$/;"	m
+PATH_SEPARATOR	src/Makefile	/^PATH_SEPARATOR = :$/;"	m
+PKG_CONFIG	Makefile	/^PKG_CONFIG = \/usr\/bin\/pkg-config$/;"	m
+PKG_CONFIG	data/Makefile	/^PKG_CONFIG = \/usr\/bin\/pkg-config$/;"	m
+PKG_CONFIG	src/Makefile	/^PKG_CONFIG = \/usr\/bin\/pkg-config$/;"	m
+POST_INSTALL	Makefile	/^POST_INSTALL = :$/;"	m
+POST_INSTALL	data/Makefile	/^POST_INSTALL = :$/;"	m
+POST_INSTALL	src/Makefile	/^POST_INSTALL = :$/;"	m
+POST_UNINSTALL	Makefile	/^POST_UNINSTALL = :$/;"	m
+POST_UNINSTALL	data/Makefile	/^POST_UNINSTALL = :$/;"	m
+POST_UNINSTALL	src/Makefile	/^POST_UNINSTALL = :$/;"	m
+PRE_INSTALL	Makefile	/^PRE_INSTALL = :$/;"	m
+PRE_INSTALL	data/Makefile	/^PRE_INSTALL = :$/;"	m
+PRE_INSTALL	src/Makefile	/^PRE_INSTALL = :$/;"	m
+PRE_UNINSTALL	Makefile	/^PRE_UNINSTALL = :$/;"	m
+PRE_UNINSTALL	data/Makefile	/^PRE_UNINSTALL = :$/;"	m
+PRE_UNINSTALL	src/Makefile	/^PRE_UNINSTALL = :$/;"	m
+PROGRAMS	src/Makefile	/^PROGRAMS = $(bin_PROGRAMS)$/;"	m
+RECURSIVE_CLEAN_TARGETS	Makefile	/^RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\\$/;"	m
+RECURSIVE_TARGETS	Makefile	/^RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \\$/;"	m
+SET_MAKE	Makefile	/^SET_MAKE = $/;"	m
+SET_MAKE	data/Makefile	/^SET_MAKE = $/;"	m
+SET_MAKE	src/Makefile	/^SET_MAKE = $/;"	m
+SHELL	Makefile	/^SHELL = \/bin\/bash$/;"	m
+SHELL	data/Makefile	/^SHELL = \/bin\/bash$/;"	m
+SHELL	src/Makefile	/^SHELL = \/bin\/bash$/;"	m
+SOURCES	Makefile	/^SOURCES =$/;"	m
+SOURCES	data/Makefile	/^SOURCES =$/;"	m
+SOURCES	src/Makefile	/^SOURCES = $(gmmlive_SOURCES)$/;"	m
+STRIP	Makefile	/^STRIP = $/;"	m
+STRIP	data/Makefile	/^STRIP = $/;"	m
+STRIP	src/Makefile	/^STRIP = $/;"	m
+STRIPPROG	Makefile	/^	    echo "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'"` install$/;"	m
+STRIPPROG	data/Makefile	/^	    echo "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'"` install$/;"	m
+STRIPPROG	src/Makefile	/^	    echo "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'"` install$/;"	m
+SUBDIRS	Makefile	/^SUBDIRS = src data$/;"	m
+VERSION	Makefile	/^VERSION = 0.01$/;"	m
+VERSION	data/Makefile	/^VERSION = 0.01$/;"	m
+VERSION	src/Makefile	/^VERSION = 0.01$/;"	m
+_MAINWINDOW_HH	src/MainWindow.h	21;"	d
+abs_builddir	Makefile	/^abs_builddir = \/tmp\/gmmlive$/;"	m
+abs_builddir	data/Makefile	/^abs_builddir = \/tmp\/gmmlive\/data$/;"	m
+abs_builddir	src/Makefile	/^abs_builddir = \/tmp\/gmmlive\/src$/;"	m
+abs_srcdir	Makefile	/^abs_srcdir = \/tmp\/gmmlive$/;"	m
+abs_srcdir	data/Makefile	/^abs_srcdir = \/tmp\/gmmlive\/data$/;"	m
+abs_srcdir	src/Makefile	/^abs_srcdir = \/tmp\/gmmlive\/src$/;"	m
+abs_top_builddir	Makefile	/^abs_top_builddir = \/tmp\/gmmlive$/;"	m
+abs_top_builddir	data/Makefile	/^abs_top_builddir = \/tmp\/gmmlive$/;"	m
+abs_top_builddir	src/Makefile	/^abs_top_builddir = \/tmp\/gmmlive$/;"	m
+abs_top_srcdir	Makefile	/^abs_top_srcdir = \/tmp\/gmmlive$/;"	m
+abs_top_srcdir	data/Makefile	/^abs_top_srcdir = \/tmp\/gmmlive$/;"	m
+abs_top_srcdir	src/Makefile	/^abs_top_srcdir = \/tmp\/gmmlive$/;"	m
+ac_ct_CXX	Makefile	/^ac_ct_CXX = g++$/;"	m
+ac_ct_CXX	data/Makefile	/^ac_ct_CXX = g++$/;"	m
+ac_ct_CXX	src/Makefile	/^ac_ct_CXX = g++$/;"	m
+am__CONFIG_DISTCLEAN_FILES	Makefile	/^am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \\$/;"	m
+am__aclocal_m4_deps	Makefile	/^am__aclocal_m4_deps = $(top_srcdir)\/configure.in$/;"	m
+am__aclocal_m4_deps	data/Makefile	/^am__aclocal_m4_deps = $(top_srcdir)\/configure.in$/;"	m
+am__aclocal_m4_deps	src/Makefile	/^am__aclocal_m4_deps = $(top_srcdir)\/configure.in$/;"	m
+am__cd	Makefile	/^am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd$/;"	m
+am__cd	data/Makefile	/^am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd$/;"	m
+am__cd	src/Makefile	/^am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd$/;"	m
+am__configure_deps	Makefile	/^am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \\$/;"	m
+am__configure_deps	data/Makefile	/^am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \\$/;"	m
+am__configure_deps	src/Makefile	/^am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \\$/;"	m
+am__depfiles_maybe	src/Makefile	/^am__depfiles_maybe = depfiles$/;"	m
+am__include	Makefile	/^am__include = include$/;"	m
+am__include	data/Makefile	/^am__include = include$/;"	m
+am__include	src/Makefile	/^am__include = include$/;"	m
+am__installdirs	data/Makefile	/^am__installdirs = "$(DESTDIR)$(gmmliveuidir)"$/;"	m
+am__installdirs	src/Makefile	/^am__installdirs = "$(DESTDIR)$(bindir)"$/;"	m
+am__leading_dot	Makefile	/^am__leading_dot = .$/;"	m
+am__leading_dot	data/Makefile	/^am__leading_dot = .$/;"	m
+am__leading_dot	src/Makefile	/^am__leading_dot = .$/;"	m
+am__quote	Makefile	/^am__quote = $/;"	m
+am__quote	data/Makefile	/^am__quote = $/;"	m
+am__quote	src/Makefile	/^am__quote = $/;"	m
+am__remove_distdir	Makefile	/^		am__remove_distdir=: \\$/;"	m
+am__remove_distdir	Makefile	/^am__remove_distdir = \\$/;"	m
+am__skip_length_check	Makefile	/^		am__skip_length_check=: \\$/;"	m
+am__strip_dir	data/Makefile	/^am__strip_dir = `echo $$p | sed -e 's|^.*\/||'`;$/;"	m
+am__tar	Makefile	/^am__tar = ${AMTAR} chof - "$$tardir"$/;"	m
+am__tar	data/Makefile	/^am__tar = ${AMTAR} chof - "$$tardir"$/;"	m
+am__tar	src/Makefile	/^am__tar = ${AMTAR} chof - "$$tardir"$/;"	m
+am__untar	Makefile	/^am__untar = ${AMTAR} xf -$/;"	m
+am__untar	data/Makefile	/^am__untar = ${AMTAR} xf -$/;"	m
+am__untar	src/Makefile	/^am__untar = ${AMTAR} xf -$/;"	m
+am__vpath_adj	data/Makefile	/^am__vpath_adj = case $$p in \\$/;"	m
+am__vpath_adj_setup	data/Makefile	/^am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;$/;"	m
+am_gmmlive_OBJECTS	src/Makefile	/^am_gmmlive_OBJECTS = main.$(OBJEXT) MainWindow.$(OBJEXT) \\$/;"	m
+as_func_failure	configure	/^as_func_failure () {$/;"	f
+as_func_ret_failure	configure	/^as_func_ret_failure () {$/;"	f
+as_func_ret_success	configure	/^as_func_ret_success () {$/;"	f
+as_func_success	configure	/^as_func_success () {$/;"	f
+binPROGRAMS_INSTALL	src/Makefile	/^binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)$/;"	m
+bin_PROGRAMS	src/Makefile	/^bin_PROGRAMS = gmmlive$(EXEEXT)$/;"	m
+bindir	Makefile	/^bindir = ${exec_prefix}\/bin$/;"	m
+bindir	data/Makefile	/^bindir = ${exec_prefix}\/bin$/;"	m
+bindir	src/Makefile	/^bindir = ${exec_prefix}\/bin$/;"	m
+build_alias	Makefile	/^build_alias = $/;"	m
+build_alias	data/Makefile	/^build_alias = $/;"	m
+build_alias	src/Makefile	/^build_alias = $/;"	m
+builddir	Makefile	/^builddir = .$/;"	m
+builddir	data/Makefile	/^builddir = .$/;"	m
+builddir	src/Makefile	/^builddir = .$/;"	m
+change_size	src/gmmplayer.cpp	/^void GMMplayer::change_size(Gtk::Allocation& allocation)$/;"	f	class:GMMplayer	signature:(Gtk::Allocation& allocation)
+change_size	src/gmmplayer.h	/^		void change_size(Gtk::Allocation& allocation);$/;"	p	class:GMMplayer	access:private	signature:(Gtk::Allocation& allocation)
+childpid	src/gmmplayer.h	/^		int		childpid;	\/* mplayer's pid (internal)*\/$/;"	m	class:GMMplayer	access:private
+datadir	Makefile	/^datadir = ${datarootdir}$/;"	m
+datadir	data/Makefile	/^datadir = ${datarootdir}$/;"	m
+datadir	src/Makefile	/^datadir = ${datarootdir}$/;"	m
+datarootdir	Makefile	/^datarootdir = ${prefix}\/share$/;"	m
+datarootdir	data/Makefile	/^datarootdir = ${prefix}\/share$/;"	m
+datarootdir	src/Makefile	/^datarootdir = ${prefix}\/share$/;"	m
+dc_destdir	Makefile	/^	  && dc_destdir="$${TMPDIR-\/tmp}\/am-dc-$$$$\/" \\$/;"	m
+dc_install_base	Makefile	/^	dc_install_base=`$(am__cd) $(distdir)\/_inst && pwd | sed -e 's,^[^:\\\\\/]:[\\\\\/],\/,'` \\$/;"	m
+depcomp	src/Makefile	/^depcomp = $(SHELL) $(top_srcdir)\/depcomp$/;"	m
+depmode	Makefile	/^CXXDEPMODE = depmode=gcc3$/;"	m
+depmode	data/Makefile	/^CXXDEPMODE = depmode=gcc3$/;"	m
+depmode	src/Makefile	/^CXXDEPMODE = depmode=gcc3$/;"	m
+dir	Makefile	/^	    dir=`echo "\/$$file" | sed -e 's,\/[^\/]*$$,,'`; \\$/;"	m
+dir	data/Makefile	/^	    dir=`echo "\/$$file" | sed -e 's,\/[^\/]*$$,,'`; \\$/;"	m
+dir	src/Makefile	/^	    dir=`echo "\/$$file" | sed -e 's,\/[^\/]*$$,,'`; \\$/;"	m
+dist_files	Makefile	/^	  dist_files=`for file in $$list; do echo $$file; done | \\$/;"	m
+dist_files	data/Makefile	/^	  dist_files=`for file in $$list; do echo $$file; done | \\$/;"	m
+dist_files	src/Makefile	/^	  dist_files=`for file in $$list; do echo $$file; done | \\$/;"	m
+distcleancheck_listfiles	Makefile	/^distcleancheck_listfiles = find . -type f -print$/;"	m
+distdir	Makefile	/^	        distdir="$$distdir\/$$subdir" \\$/;"	m
+distdir	Makefile	/^	    distdir=`$(am__cd) $(distdir) && pwd`; \\$/;"	m
+distdir	Makefile	/^distdir = $(PACKAGE)-$(VERSION)$/;"	m
+distuninstallcheck_dir	Makefile	/^	            distuninstallcheck_dir="$$dc_destdir" distuninstallcheck; \\$/;"	m
+distuninstallcheck_dir	Makefile	/^	  && $(MAKE) $(AM_MAKEFLAGS) distuninstallcheck_dir="$$dc_install_base" \\$/;"	m
+distuninstallcheck_listfiles	Makefile	/^distuninstallcheck_listfiles = find . -type f -print$/;"	m
+docdir	Makefile	/^docdir = ${datarootdir}\/doc\/${PACKAGE_TARNAME}$/;"	m
+docdir	data/Makefile	/^docdir = ${datarootdir}\/doc\/${PACKAGE_TARNAME}$/;"	m
+docdir	src/Makefile	/^docdir = ${datarootdir}\/doc\/${PACKAGE_TARNAME}$/;"	m
+dot_seen	Makefile	/^	    dot_seen=yes; \\$/;"	m
+dot_seen	Makefile	/^	dot_seen=no; \\$/;"	m
+dvidir	Makefile	/^dvidir = ${docdir}$/;"	m
+dvidir	data/Makefile	/^dvidir = ${docdir}$/;"	m
+dvidir	src/Makefile	/^dvidir = ${docdir}$/;"	m
+empty_fix	Makefile	/^	  empty_fix=.; \\$/;"	m
+empty_fix	Makefile	/^	  empty_fix=; \\$/;"	m
+exec_prefix	Makefile	/^exec_prefix = ${prefix}$/;"	m
+exec_prefix	data/Makefile	/^exec_prefix = ${prefix}$/;"	m
+exec_prefix	src/Makefile	/^exec_prefix = ${prefix}$/;"	m
+f	data/Makefile	/^	  f=$(am__strip_dir) \\$/;"	m
+f	data/Makefile	/^    $(srcdir)\/*) f=`echo "$$p" | sed "s|^$$srcdirstrip\/||"`;; \\$/;"	m
+f	data/Makefile	/^    *) f=$$p;; \\$/;"	m
+f	src/Makefile	/^	    f=`echo "$$p1" | sed 's,^.*\/,,;$(transform);s\/$$\/$(EXEEXT)\/'`; \\$/;"	m
+f	src/Makefile	/^	  f=`echo "$$p" | sed 's,^.*\/,,;s\/$(EXEEXT)$$\/\/;$(transform);s\/$$\/$(EXEEXT)\/'`; \\$/;"	m
+failcom	Makefile	/^	    *k*) failcom='fail=yes';; \\$/;"	m
+file	src/gmmplayer.h	/^		std::string	file;		\/* filename (internal)*\/$/;"	m	class:GMMplayer	access:private
+gmmlive_DEPENDENCIES	src/Makefile	/^gmmlive_DEPENDENCIES =$/;"	m
+gmmlive_LDADD	src/Makefile	/^gmmlive_LDADD =  -lglademm-2.4 -lgtkmm-2.4 -lglade-2.0 -lgdkmm-2.4 -latkmm-1.6 -lpangomm-1.4 -lcairomm-1.0 -lglibmm-2.4 -lsigc-2.0 -lgtk-x11-2.0 -lxml2 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangocairo-1.0 -lfontconfig -lXext -lXrender -lXinerama -lXi -lXrandr -lXcursor -lXcomposite -lXdamage -lpango-1.0 -lcairo -lX11 -lXfixes -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  $/;"	m
+gmmlive_OBJECTS	src/Makefile	/^gmmlive_OBJECTS = $(am_gmmlive_OBJECTS)$/;"	m
+gmmlive_SOURCES	src/Makefile	/^gmmlive_SOURCES = \\$/;"	m
+gmmlive_ui	data/Makefile	/^gmmlive_ui = gmmlive.xml$/;"	m
+gmmliveuiDATA_INSTALL	data/Makefile	/^gmmliveuiDATA_INSTALL = $(INSTALL_DATA)$/;"	m
+gmmliveui_DATA	data/Makefile	/^gmmliveui_DATA = $(EXTRA_DIST)$/;"	m
+gmmliveuidir	data/Makefile	/^gmmliveuidir = $(pkgdatadir)$/;"	m
+height	src/gmmplayer.h	/^		int		height;		\/* widget's height*\/$/;"	m	class:GMMplayer	access:private
+here	Makefile	/^	here=`$(am__cd) $(top_builddir) && pwd` \\$/;"	m
+here	Makefile	/^	here=`pwd`; \\$/;"	m
+here	src/Makefile	/^	here=`$(am__cd) $(top_builddir) && pwd` \\$/;"	m
+here	src/Makefile	/^	here=`pwd`; \\$/;"	m
+host_alias	Makefile	/^host_alias = $/;"	m
+host_alias	data/Makefile	/^host_alias = $/;"	m
+host_alias	src/Makefile	/^host_alias = $/;"	m
+htmldir	Makefile	/^htmldir = ${docdir}$/;"	m
+htmldir	data/Makefile	/^htmldir = ${docdir}$/;"	m
+htmldir	src/Makefile	/^htmldir = ${docdir}$/;"	m
+include_option	Makefile	/^	  include_option=--etags-include; \\$/;"	m
+include_option	Makefile	/^	  include_option=--include; \\$/;"	m
+includedir	Makefile	/^includedir = ${prefix}\/include$/;"	m
+includedir	data/Makefile	/^includedir = ${prefix}\/include$/;"	m
+includedir	src/Makefile	/^includedir = ${prefix}\/include$/;"	m
+infodir	Makefile	/^infodir = ${datarootdir}\/info$/;"	m
+infodir	data/Makefile	/^infodir = ${datarootdir}\/info$/;"	m
+infodir	src/Makefile	/^infodir = ${datarootdir}\/info$/;"	m
+install_sh	Makefile	/^install_sh = $(SHELL) \/tmp\/gmmlive\/install-sh$/;"	m
+install_sh	data/Makefile	/^install_sh = $(SHELL) \/tmp\/gmmlive\/install-sh$/;"	m
+install_sh	src/Makefile	/^install_sh = $(SHELL) \/tmp\/gmmlive\/install-sh$/;"	m
+install_sh_DATA	Makefile	/^install_sh_DATA = $(install_sh) -c -m 644$/;"	m
+install_sh_DATA	data/Makefile	/^install_sh_DATA = $(install_sh) -c -m 644$/;"	m
+install_sh_DATA	src/Makefile	/^install_sh_DATA = $(install_sh) -c -m 644$/;"	m
+install_sh_PROGRAM	Makefile	/^	  install_sh_PROGRAM="$(INSTALL_STRIP_PROGRAM)" INSTALL_STRIP_FLAG=-s \\$/;"	m
+install_sh_PROGRAM	Makefile	/^install_sh_PROGRAM = $(install_sh) -c$/;"	m
+install_sh_PROGRAM	data/Makefile	/^	  install_sh_PROGRAM="$(INSTALL_STRIP_PROGRAM)" INSTALL_STRIP_FLAG=-s \\$/;"	m
+install_sh_PROGRAM	data/Makefile	/^install_sh_PROGRAM = $(install_sh) -c$/;"	m
+install_sh_PROGRAM	src/Makefile	/^	  install_sh_PROGRAM="$(INSTALL_STRIP_PROGRAM)" INSTALL_STRIP_FLAG=-s \\$/;"	m
+install_sh_PROGRAM	src/Makefile	/^install_sh_PROGRAM = $(install_sh) -c$/;"	m
+install_sh_SCRIPT	Makefile	/^install_sh_SCRIPT = $(install_sh) -c$/;"	m
+install_sh_SCRIPT	data/Makefile	/^install_sh_SCRIPT = $(install_sh) -c$/;"	m
+install_sh_SCRIPT	src/Makefile	/^install_sh_SCRIPT = $(install_sh) -c$/;"	m
+is_runing	src/gmmplayer.cpp	/^bool GMMplayer::is_runing()$/;"	f	class:GMMplayer	signature:()
+is_runing	src/gmmplayer.h	/^		bool is_runing();$/;"	p	class:GMMplayer	access:private	signature:()
+libdir	Makefile	/^libdir = ${exec_prefix}\/lib$/;"	m
+libdir	data/Makefile	/^libdir = ${exec_prefix}\/lib$/;"	m
+libdir	src/Makefile	/^libdir = ${exec_prefix}\/lib$/;"	m
+libexecdir	Makefile	/^libexecdir = ${exec_prefix}\/libexec$/;"	m
+libexecdir	data/Makefile	/^libexecdir = ${exec_prefix}\/libexec$/;"	m
+libexecdir	src/Makefile	/^libexecdir = ${exec_prefix}\/libexec$/;"	m
+list	Makefile	/^	  *) list='$(SUBDIRS)' ;; \\$/;"	m
+list	Makefile	/^	  distclean-* | maintainer-clean-*) list='$(DIST_SUBDIRS)' ;; \\$/;"	m
+list	Makefile	/^	  list='$(DIST_ARCHIVES)'; for i in $$list; do echo $$i; done) | \\$/;"	m
+list	Makefile	/^	list='$(DISTFILES)'; \\$/;"	m
+list	Makefile	/^	list='$(DIST_SUBDIRS)'; for subdir in $$list; do \\$/;"	m
+list	Makefile	/^	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \\$/;"	m
+list	Makefile	/^	list='$(SOURCES) $(HEADERS) config.h.in $(LISP) $(TAGS_FILES)'; \\$/;"	m
+list	Makefile	/^	list='$(SUBDIRS)'; for subdir in $$list; do \\$/;"	m
+list	data/Makefile	/^	list='$(DISTFILES)'; \\$/;"	m
+list	src/Makefile	/^	list='$(DISTFILES)'; \\$/;"	m
+list	src/Makefile	/^	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \\$/;"	m
+list	src/Makefile	/^	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \\$/;"	m
+local_target	Makefile	/^	    local_target="$$target"; \\$/;"	m
+local_target	Makefile	/^	    local_target="$$target-am"; \\$/;"	m
+localedir	Makefile	/^localedir = ${datarootdir}\/locale$/;"	m
+localedir	data/Makefile	/^localedir = ${datarootdir}\/locale$/;"	m
+localedir	src/Makefile	/^localedir = ${datarootdir}\/locale$/;"	m
+localstatedir	Makefile	/^localstatedir = ${prefix}\/var$/;"	m
+localstatedir	data/Makefile	/^localstatedir = ${prefix}\/var$/;"	m
+localstatedir	src/Makefile	/^localstatedir = ${prefix}\/var$/;"	m
+main	src/main.cpp	/^int main(int argc, char* argv[])$/;"	f	signature:(int argc, char* argv[])
+main_ui	src/MainWindow.h	27;"	d
+mandir	Makefile	/^mandir = ${datarootdir}\/man$/;"	m
+mandir	data/Makefile	/^mandir = ${datarootdir}\/man$/;"	m
+mandir	src/Makefile	/^mandir = ${datarootdir}\/man$/;"	m
+mkdir_p	Makefile	/^mkdir_p = \/bin\/mkdir -p$/;"	m
+mkdir_p	data/Makefile	/^mkdir_p = \/bin\/mkdir -p$/;"	m
+mkdir_p	src/Makefile	/^mkdir_p = \/bin\/mkdir -p$/;"	m
+mkinstalldirs	Makefile	/^mkinstalldirs = $(install_sh) -d$/;"	m
+mkinstalldirs	data/Makefile	/^mkinstalldirs = $(install_sh) -d$/;"	m
+mkinstalldirs	src/Makefile	/^mkinstalldirs = $(install_sh) -d$/;"	m
+mySocket	src/gmmplayer.h	/^		Gtk::Socket 	mySocket;       \/* the socket (internal)*\/$/;"	m	class:GMMplayer	access:private
+my_system	src/gmmplayer.cpp	/^int GMMplayer::my_system(const std::string& cmd)$/;"	f	class:GMMplayer	signature:(const std::string& cmd)
+my_system	src/gmmplayer.h	/^		int my_system(const std::string&);$/;"	p	class:GMMplayer	access:private	signature:(const std::string&)
+noinst_HEADERS	src/Makefile	/^noinst_HEADERS = \\$/;"	m
+oldincludedir	Makefile	/^oldincludedir = \/usr\/include$/;"	m
+oldincludedir	data/Makefile	/^oldincludedir = \/usr\/include$/;"	m
+oldincludedir	src/Makefile	/^oldincludedir = \/usr\/include$/;"	m
+p1	src/Makefile	/^	  p1=`echo $$p|sed 's\/$(EXEEXT)$$\/\/'`; \\$/;"	m
+pdfdir	Makefile	/^pdfdir = ${docdir}$/;"	m
+pdfdir	data/Makefile	/^pdfdir = ${docdir}$/;"	m
+pdfdir	src/Makefile	/^pdfdir = ${docdir}$/;"	m
+pkgdatadir	Makefile	/^pkgdatadir = $(datadir)\/gmmlive$/;"	m
+pkgdatadir	data/Makefile	/^pkgdatadir = $(datadir)\/gmmlive$/;"	m
+pkgdatadir	src/Makefile	/^pkgdatadir = $(datadir)\/gmmlive$/;"	m
+pkgincludedir	Makefile	/^pkgincludedir = $(includedir)\/gmmlive$/;"	m
+pkgincludedir	data/Makefile	/^pkgincludedir = $(includedir)\/gmmlive$/;"	m
+pkgincludedir	src/Makefile	/^pkgincludedir = $(includedir)\/gmmlive$/;"	m
+pkglibdir	Makefile	/^pkglibdir = $(libdir)\/gmmlive$/;"	m
+pkglibdir	data/Makefile	/^pkglibdir = $(libdir)\/gmmlive$/;"	m
+pkglibdir	src/Makefile	/^pkglibdir = $(libdir)\/gmmlive$/;"	m
+prefix	Makefile	/^prefix = \/usr\/local$/;"	m
+prefix	data/Makefile	/^prefix = \/usr\/local$/;"	m
+prefix	src/Makefile	/^prefix = \/usr\/local$/;"	m
+program_transform_name	Makefile	/^program_transform_name = s,x,x,$/;"	m
+program_transform_name	data/Makefile	/^program_transform_name = s,x,x,$/;"	m
+program_transform_name	src/Makefile	/^program_transform_name = s,x,x,$/;"	m
+psdir	Makefile	/^psdir = ${docdir}$/;"	m
+psdir	data/Makefile	/^psdir = ${docdir}$/;"	m
+psdir	src/Makefile	/^psdir = ${docdir}$/;"	m
+ready	src/gmmplayer.h	/^		bool		ready;		\/* is the player ready (internal)*\/$/;"	m	class:GMMplayer	access:private
+rev	Makefile	/^	    rev="$$subdir $$rev"; \\$/;"	m
+rev	Makefile	/^	rev="$$rev ."; \\$/;"	m
+rev	Makefile	/^	rev=''; for subdir in $$list; do \\$/;"	m
+sbindir	Makefile	/^sbindir = ${exec_prefix}\/sbin$/;"	m
+sbindir	data/Makefile	/^sbindir = ${exec_prefix}\/sbin$/;"	m
+sbindir	src/Makefile	/^sbindir = ${exec_prefix}\/sbin$/;"	m
+sharedstatedir	Makefile	/^sharedstatedir = ${prefix}\/com$/;"	m
+sharedstatedir	data/Makefile	/^sharedstatedir = ${prefix}\/com$/;"	m
+sharedstatedir	src/Makefile	/^sharedstatedir = ${prefix}\/com$/;"	m
+show	src/gmmplayer.cpp	/^void GMMplayer::show()$/;"	f	class:GMMplayer	signature:()
+show	src/gmmplayer.h	/^		void show();$/;"	p	class:GMMplayer	access:public	signature:()
+srcdir	Makefile	/^srcdir = .$/;"	m
+srcdir	data/Makefile	/^srcdir = .$/;"	m
+srcdir	src/Makefile	/^srcdir = .$/;"	m
+srcdirstrip	data/Makefile	/^am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;$/;"	m
+start	src/gmmplayer.cpp	/^void GMMplayer::start()$/;"	f	class:GMMplayer	signature:()
+start	src/gmmplayer.cpp	/^void GMMplayer::start(const std::string& filename)$/;"	f	class:GMMplayer	signature:(const std::string& filename)
+start	src/gmmplayer.h	/^		void start();$/;"	p	class:GMMplayer	access:public	signature:()
+start	src/gmmplayer.h	/^		void start(const std::string&);$/;"	p	class:GMMplayer	access:public	signature:(const std::string&)
+stop	src/gmmplayer.cpp	/^void GMMplayer::stop()$/;"	f	class:GMMplayer	signature:()
+stop	src/gmmplayer.h	/^		void stop();$/;"	p	class:GMMplayer	access:public	signature:()
+subdir	Makefile	/^subdir = .$/;"	m
+subdir	data/Makefile	/^subdir = data$/;"	m
+subdir	src/Makefile	/^subdir = src$/;"	m
+sysconfdir	Makefile	/^sysconfdir = ${prefix}\/etc$/;"	m
+sysconfdir	data/Makefile	/^sysconfdir = ${prefix}\/etc$/;"	m
+sysconfdir	src/Makefile	/^sysconfdir = ${prefix}\/etc$/;"	m
+tags	Makefile	/^	      tags="$$tags $$include_option=$$here\/$$subdir\/TAGS"; \\$/;"	m
+tags	Makefile	/^	tags=; \\$/;"	m
+tags	src/Makefile	/^	tags=; \\$/;"	m
+tardir	Makefile	/^	tardir=$(distdir) && $(am__tar) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).tar.gz$/;"	m
+tardir	Makefile	/^	tardir=$(distdir) && $(am__tar) | bzip2 -9 -c >$(distdir).tar.bz2$/;"	m
+tardir	Makefile	/^	tardir=$(distdir) && $(am__tar) | compress -c >$(distdir).tar.Z$/;"	m
+target	Makefile	/^	target=`echo $@ | sed s\/-recursive\/\/`; \\$/;"	m
+target_alias	Makefile	/^target_alias = $/;"	m
+target_alias	data/Makefile	/^target_alias = $/;"	m
+target_alias	src/Makefile	/^target_alias = $/;"	m
+timer	src/gmmplayer.h	/^		guint		timer;		\/* timer (internal) *\/$/;"	m	class:GMMplayer	access:private
+top_builddir	Makefile	/^top_builddir = .$/;"	m
+top_builddir	data/Makefile	/^top_builddir = ..$/;"	m
+top_builddir	src/Makefile	/^top_builddir = ..$/;"	m
+top_distdir	Makefile	/^	        top_distdir="$$top_distdir" \\$/;"	m
+top_distdir	Makefile	/^	    top_distdir=`$(am__cd) $(top_distdir) && pwd`; \\$/;"	m
+top_distdir	Makefile	/^top_distdir = $(distdir)$/;"	m
+top_srcdir	Makefile	/^top_srcdir = .$/;"	m
+top_srcdir	data/Makefile	/^top_srcdir = ..$/;"	m
+top_srcdir	src/Makefile	/^top_srcdir = ..$/;"	m
+topsrcdirstrip	Makefile	/^	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's\/[].[^$$\\\\*]\/\\\\\\\\&\/g'`; \\$/;"	m
+topsrcdirstrip	data/Makefile	/^	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's\/[].[^$$\\\\*]\/\\\\\\\\&\/g'`; \\$/;"	m
+topsrcdirstrip	src/Makefile	/^	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's\/[].[^$$\\\\*]\/\\\\\\\\&\/g'`; \\$/;"	m
+transform	Makefile	/^transform = $(program_transform_name)$/;"	m
+transform	data/Makefile	/^transform = $(program_transform_name)$/;"	m
+transform	src/Makefile	/^transform = $(program_transform_name)$/;"	m
+ui_xml	src/MainWindow.h	/^		GlademmXML ui_xml;$/;"	m	class:MainWindow	access:private
+unique	Makefile	/^	  test -n "$$unique" || unique=$$empty_fix; \\$/;"	m
+unique	Makefile	/^	unique=`for i in $$list; do \\$/;"	m
+unique	src/Makefile	/^	  test -n "$$unique" || unique=$$empty_fix; \\$/;"	m
+unique	src/Makefile	/^	unique=`for i in $$list; do \\$/;"	m
+width	src/gmmplayer.h	/^		int		width;		\/* widget's width*\/$/;"	m	class:GMMplayer	access:private
+xid	src/gmmplayer.h	/^		guint32		xid;		\/* X window handle (internal)*\/$/;"	m	class:GMMplayer	access:private
+~GMMplayer	src/gmmplayer.cpp	/^GMMplayer::~GMMplayer()$/;"	f	class:GMMplayer	signature:()
+~GMMplayer	src/gmmplayer.h	/^		~GMMplayer();$/;"	p	class:GMMplayer	access:public	signature:()
