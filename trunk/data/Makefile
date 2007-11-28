@@ -15,9 +15,9 @@
 
 
 
-pkgdatadir = $(datadir)/gmmlive
-pkglibdir = $(libdir)/gmmlive
-pkgincludedir = $(includedir)/gmmlive
+pkgdatadir = $(datadir)/gmlive
+pkglibdir = $(libdir)/gmlive
+pkgincludedir = $(includedir)/gmlive
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
@@ -47,16 +47,16 @@ am__vpath_adj = case $$p in \
     *) f=$$p;; \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
-am__installdirs = "$(DESTDIR)$(gmmliveuidir)"
-gmmliveuiDATA_INSTALL = $(INSTALL_DATA)
-DATA = $(gmmliveui_DATA)
+am__installdirs = "$(DESTDIR)$(gmliveuidir)"
+gmliveuiDATA_INSTALL = $(INSTALL_DATA)
+DATA = $(gmliveui_DATA)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /tmp/gmlive/missing --run aclocal-1.10
-AMTAR = ${SHELL} /tmp/gmlive/missing --run tar
-AUTOCONF = ${SHELL} /tmp/gmlive/missing --run autoconf
-AUTOHEADER = ${SHELL} /tmp/gmlive/missing --run autoheader
-AUTOMAKE = ${SHELL} /tmp/gmlive/missing --run automake-1.10
-AWK = mawk
+ACLOCAL = ${SHELL} /home/wind/work/gmlive/missing --run aclocal-1.10
+AMTAR = ${SHELL} /home/wind/work/gmlive/missing --run tar
+AUTOCONF = ${SHELL} /home/wind/work/gmlive/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/wind/work/gmlive/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/wind/work/gmlive/missing --run automake-1.10
+AWK = gawk
 CPPFLAGS = 
 CXX = g++
 CXXCPP = g++ -E
@@ -69,7 +69,7 @@ ECHO_C =
 ECHO_N = -n
 ECHO_T = 
 EXEEXT = 
-INSTALL = /usr/bin/install -c
+INSTALL = /bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
@@ -78,16 +78,16 @@ LDFLAGS =
 LIBOBJS = 
 LIBS = 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /tmp/gmlive/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/wind/work/gmlive/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 OBJEXT = o
-PACKAGE = gmmlive
+PACKAGE = gmlive
 PACKAGE_BUGREPORT = xihels@gmail.com
-PACKAGE_CFLAGS = -I/usr/include/gtkmm-2.4 -I/usr/lib/gtkmm-2.4/include -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/gdkmm-2.4 -I/usr/lib/gdkmm-2.4/include -I/usr/include/pangomm-1.4 -I/usr/include/atkmm-1.6 -I/usr/include/gtk-2.0 -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/cairomm-1.0 -I/usr/include/pango-1.0 -I/usr/include/cairo -I/usr/include/atk-1.0 -I/usr/include/libglademm-2.4 -I/usr/lib/libglademm-2.4/include -I/usr/include/libglade-2.0 -I/usr/include/libxml2  
-PACKAGE_LIBS = -lglademm-2.4 -lgtkmm-2.4 -lglade-2.0 -lgdkmm-2.4 -latkmm-1.6 -lpangomm-1.4 -lcairomm-1.0 -lglibmm-2.4 -lsigc-2.0 -lgtk-x11-2.0 -lxml2 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangocairo-1.0 -lfontconfig -lXext -lXrender -lXinerama -lXi -lXrandr -lXcursor -lXfixes -lpango-1.0 -lcairo -lX11 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
-PACKAGE_NAME = gmmlive
-PACKAGE_STRING = gmmlive 0.01
-PACKAGE_TARNAME = gmmlive
+PACKAGE_CFLAGS = -I/usr/include/gtkmm-2.4 -I/usr/lib/gtkmm-2.4/include -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/gdkmm-2.4 -I/usr/lib/gdkmm-2.4/include -I/usr/include/pangomm-1.4 -I/usr/include/atkmm-1.6 -I/usr/include/gtk-2.0 -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/cairomm-1.0 -I/usr/include/pango-1.0 -I/usr/include/cairo -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/atk-1.0 -I/usr/include/libglademm-2.4 -I/usr/lib/libglademm-2.4/include -I/usr/include/libglade-2.0 -I/usr/include/libxml2  
+PACKAGE_LIBS = -lglademm-2.4 -lgtkmm-2.4 -lglade-2.0 -lgdkmm-2.4 -latkmm-1.6 -lpangomm-1.4 -lcairomm-1.0 -lglibmm-2.4 -lsigc-2.0 -lgtk-x11-2.0 -lxml2 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0 -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
+PACKAGE_NAME = gmlive
+PACKAGE_STRING = gmlive 0.01
+PACKAGE_TARNAME = gmlive
 PACKAGE_VERSION = 0.01
 PATH_SEPARATOR = :
 PKG_CONFIG = /usr/bin/pkg-config
@@ -95,10 +95,10 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = 
 VERSION = 0.01
-abs_builddir = /tmp/gmlive/data
-abs_srcdir = /tmp/gmlive/data
-abs_top_builddir = /tmp/gmlive
-abs_top_srcdir = /tmp/gmlive
+abs_builddir = /home/wind/work/gmlive/data
+abs_srcdir = /home/wind/work/gmlive/data
+abs_top_builddir = /home/wind/work/gmlive
+abs_top_srcdir = /home/wind/work/gmlive
 ac_ct_CXX = g++
 am__include = include
 am__leading_dot = .
@@ -117,7 +117,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = $(SHELL) /tmp/gmlive/install-sh
+install_sh = $(SHELL) /home/wind/work/gmlive/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -136,12 +136,15 @@ sysconfdir = ${prefix}/etc
 target_alias = 
 top_builddir = ..
 top_srcdir = ..
-gmmlive_ui = gmmlive.xml
-EXTRA_DIST = \
-	     $(gmmlive_ui)
+gmlive_ui = \
+	    gmlive.xml \
+	    gmlive.png
 
-gmmliveuidir = $(pkgdatadir)
-gmmliveui_DATA = $(EXTRA_DIST)
+EXTRA_DIST = \
+	     $(gmlive_ui)
+
+gmliveuidir = $(pkgdatadir)
+gmliveui_DATA = $(EXTRA_DIST)
 all: all-am
 
 .SUFFIXES:
@@ -174,22 +177,22 @@ $(top_srcdir)/configure:  $(am__configure_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
-install-gmmliveuiDATA: $(gmmliveui_DATA)
+install-gmliveuiDATA: $(gmliveui_DATA)
 	@$(NORMAL_INSTALL)
-	test -z "$(gmmliveuidir)" || $(MKDIR_P) "$(DESTDIR)$(gmmliveuidir)"
-	@list='$(gmmliveui_DATA)'; for p in $$list; do \
+	test -z "$(gmliveuidir)" || $(MKDIR_P) "$(DESTDIR)$(gmliveuidir)"
+	@list='$(gmliveui_DATA)'; for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  f=$(am__strip_dir) \
-	  echo " $(gmmliveuiDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(gmmliveuidir)/$$f'"; \
-	  $(gmmliveuiDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(gmmliveuidir)/$$f"; \
+	  echo " $(gmliveuiDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(gmliveuidir)/$$f'"; \
+	  $(gmliveuiDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(gmliveuidir)/$$f"; \
 	done
 
-uninstall-gmmliveuiDATA:
+uninstall-gmliveuiDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(gmmliveui_DATA)'; for p in $$list; do \
+	@list='$(gmliveui_DATA)'; for p in $$list; do \
 	  f=$(am__strip_dir) \
-	  echo " rm -f '$(DESTDIR)$(gmmliveuidir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(gmmliveuidir)/$$f"; \
+	  echo " rm -f '$(DESTDIR)$(gmliveuidir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(gmliveuidir)/$$f"; \
 	done
 tags: TAGS
 TAGS:
@@ -228,7 +231,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(DATA)
 installdirs:
-	for dir in "$(DESTDIR)$(gmmliveuidir)"; do \
+	for dir in "$(DESTDIR)$(gmliveuidir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -273,7 +276,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-gmmliveuiDATA
+install-data-am: install-gmliveuiDATA
 
 install-dvi: install-dvi-am
 
@@ -307,7 +310,7 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-gmmliveuiDATA
+uninstall-am: uninstall-gmliveuiDATA
 
 .MAKE: install-am install-strip
 
@@ -315,12 +318,12 @@ uninstall-am: uninstall-gmmliveuiDATA
 	distclean-generic distdir dvi dvi-am html html-am info info-am \
 	install install-am install-data install-data-am install-dvi \
 	install-dvi-am install-exec install-exec-am \
-	install-gmmliveuiDATA install-html install-html-am \
-	install-info install-info-am install-man install-pdf \
-	install-pdf-am install-ps install-ps-am install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
+	install-gmliveuiDATA install-html install-html-am install-info \
+	install-info-am install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
-	pdf-am ps ps-am uninstall uninstall-am uninstall-gmmliveuiDATA
+	pdf-am ps ps-am uninstall uninstall-am uninstall-gmliveuiDATA
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

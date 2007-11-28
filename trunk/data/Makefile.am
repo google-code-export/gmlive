@@ -1,6 +1,8 @@
-gmmlive_ui = gmmlive.xml
+gmlive_ui = \
+	    gmlive.xml \
+	    gmlive.png
 
 EXTRA_DIST = \
-	     $(gmmlive_ui)
-gmmliveuidir = $(pkgdatadir)
-gmmliveui_DATA = $(EXTRA_DIST)
+	     $(gmlive_ui)
+gmliveuidir = $(pkgdatadir)
+gmliveui_DATA = $(EXTRA_DIST)

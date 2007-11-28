@@ -8,13 +8,13 @@
 #define PACKAGE_BUGREPORT "xihels@gmail.com"
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "gmmlive"
+#define PACKAGE_NAME "gmlive"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "gmmlive 0.01"
+#define PACKAGE_STRING "gmlive 0.01"
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "gmmlive"
+#define PACKAGE_TARNAME "gmlive"
 
 /* Define to the version of this package. */
 #define PACKAGE_VERSION "0.01"

@@ -16,9 +16,9 @@
 
 
 
-pkgdatadir = $(datadir)/gmmlive
-pkglibdir = $(libdir)/gmmlive
-pkgincludedir = $(includedir)/gmmlive
+pkgdatadir = $(datadir)/gmlive
+pkglibdir = $(libdir)/gmlive
+pkgincludedir = $(includedir)/gmlive
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
@@ -31,7 +31,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = gmmlive$(EXEEXT)
+bin_PROGRAMS = gmlive$(EXEEXT)
 subdir = src
 DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in
@@ -45,10 +45,10 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_gmmlive_OBJECTS = main.$(OBJEXT) MainWindow.$(OBJEXT) \
-	gmmplayer.$(OBJEXT)
-gmmlive_OBJECTS = $(am_gmmlive_OBJECTS)
-gmmlive_DEPENDENCIES =
+am_gmlive_OBJECTS = ec_throw.$(OBJEXT) main.$(OBJEXT) \
+	pst_ctrl.$(OBJEXT) MainWindow.$(OBJEXT) gmplayer.$(OBJEXT)
+gmlive_OBJECTS = $(am_gmlive_OBJECTS)
+gmlive_DEPENDENCIES =
 DEFAULT_INCLUDES = -I. -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -57,18 +57,18 @@ CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
-SOURCES = $(gmmlive_SOURCES)
-DIST_SOURCES = $(gmmlive_SOURCES)
+SOURCES = $(gmlive_SOURCES)
+DIST_SOURCES = $(gmlive_SOURCES)
 HEADERS = $(noinst_HEADERS)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /tmp/gmlive/missing --run aclocal-1.10
-AMTAR = ${SHELL} /tmp/gmlive/missing --run tar
-AUTOCONF = ${SHELL} /tmp/gmlive/missing --run autoconf
-AUTOHEADER = ${SHELL} /tmp/gmlive/missing --run autoheader
-AUTOMAKE = ${SHELL} /tmp/gmlive/missing --run automake-1.10
-AWK = mawk
+ACLOCAL = ${SHELL} /home/wind/work/gmlive/missing --run aclocal-1.10
+AMTAR = ${SHELL} /home/wind/work/gmlive/missing --run tar
+AUTOCONF = ${SHELL} /home/wind/work/gmlive/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/wind/work/gmlive/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/wind/work/gmlive/missing --run automake-1.10
+AWK = gawk
 CPPFLAGS = 
 CXX = g++
 CXXCPP = g++ -E
@@ -81,7 +81,7 @@ ECHO_C =
 ECHO_N = -n
 ECHO_T = 
 EXEEXT = 
-INSTALL = /usr/bin/install -c
+INSTALL = /bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
@@ -90,16 +90,16 @@ LDFLAGS =
 LIBOBJS = 
 LIBS = 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /tmp/gmlive/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/wind/work/gmlive/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 OBJEXT = o
-PACKAGE = gmmlive
+PACKAGE = gmlive
 PACKAGE_BUGREPORT = xihels@gmail.com
-PACKAGE_CFLAGS = -I/usr/include/gtkmm-2.4 -I/usr/lib/gtkmm-2.4/include -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/gdkmm-2.4 -I/usr/lib/gdkmm-2.4/include -I/usr/include/pangomm-1.4 -I/usr/include/atkmm-1.6 -I/usr/include/gtk-2.0 -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/cairomm-1.0 -I/usr/include/pango-1.0 -I/usr/include/cairo -I/usr/include/atk-1.0 -I/usr/include/libglademm-2.4 -I/usr/lib/libglademm-2.4/include -I/usr/include/libglade-2.0 -I/usr/include/libxml2  
-PACKAGE_LIBS = -lglademm-2.4 -lgtkmm-2.4 -lglade-2.0 -lgdkmm-2.4 -latkmm-1.6 -lpangomm-1.4 -lcairomm-1.0 -lglibmm-2.4 -lsigc-2.0 -lgtk-x11-2.0 -lxml2 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangocairo-1.0 -lfontconfig -lXext -lXrender -lXinerama -lXi -lXrandr -lXcursor -lXfixes -lpango-1.0 -lcairo -lX11 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
-PACKAGE_NAME = gmmlive
-PACKAGE_STRING = gmmlive 0.01
-PACKAGE_TARNAME = gmmlive
+PACKAGE_CFLAGS = -I/usr/include/gtkmm-2.4 -I/usr/lib/gtkmm-2.4/include -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/gdkmm-2.4 -I/usr/lib/gdkmm-2.4/include -I/usr/include/pangomm-1.4 -I/usr/include/atkmm-1.6 -I/usr/include/gtk-2.0 -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/cairomm-1.0 -I/usr/include/pango-1.0 -I/usr/include/cairo -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/atk-1.0 -I/usr/include/libglademm-2.4 -I/usr/lib/libglademm-2.4/include -I/usr/include/libglade-2.0 -I/usr/include/libxml2  
+PACKAGE_LIBS = -lglademm-2.4 -lgtkmm-2.4 -lglade-2.0 -lgdkmm-2.4 -latkmm-1.6 -lpangomm-1.4 -lcairomm-1.0 -lglibmm-2.4 -lsigc-2.0 -lgtk-x11-2.0 -lxml2 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0 -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
+PACKAGE_NAME = gmlive
+PACKAGE_STRING = gmlive 0.01
+PACKAGE_TARNAME = gmlive
 PACKAGE_VERSION = 0.01
 PATH_SEPARATOR = :
 PKG_CONFIG = /usr/bin/pkg-config
@@ -107,10 +107,10 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = 
 VERSION = 0.01
-abs_builddir = /tmp/gmlive/src
-abs_srcdir = /tmp/gmlive/src
-abs_top_builddir = /tmp/gmlive
-abs_top_srcdir = /tmp/gmlive
+abs_builddir = /home/wind/work/gmlive/src
+abs_srcdir = /home/wind/work/gmlive/src
+abs_top_builddir = /home/wind/work/gmlive
+abs_top_srcdir = /home/wind/work/gmlive
 ac_ct_CXX = g++
 am__include = include
 am__leading_dot = .
@@ -129,7 +129,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = $(SHELL) /tmp/gmlive/install-sh
+install_sh = $(SHELL) /home/wind/work/gmlive/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -149,21 +149,25 @@ target_alias =
 top_builddir = ..
 top_srcdir = ..
 INCLUDES = \
-	-I$(top_srcdir)				\
-	-I$(srcdir)				\
-	-DDATA_DIR=\""${datadir}/gmmlive"\"	\
-	-I/usr/include/gtkmm-2.4 -I/usr/lib/gtkmm-2.4/include -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/gdkmm-2.4 -I/usr/lib/gdkmm-2.4/include -I/usr/include/pangomm-1.4 -I/usr/include/atkmm-1.6 -I/usr/include/gtk-2.0 -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/cairomm-1.0 -I/usr/include/pango-1.0 -I/usr/include/cairo -I/usr/include/atk-1.0 -I/usr/include/libglademm-2.4 -I/usr/lib/libglademm-2.4/include -I/usr/include/libglade-2.0 -I/usr/include/libxml2  
+						-I$(top_srcdir)				\
+						-I$(srcdir)				\
+						-DDATA_DIR=\""${datadir}/gmlive"\"	\
+						-I/usr/include/gtkmm-2.4 -I/usr/lib/gtkmm-2.4/include -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/gdkmm-2.4 -I/usr/lib/gdkmm-2.4/include -I/usr/include/pangomm-1.4 -I/usr/include/atkmm-1.6 -I/usr/include/gtk-2.0 -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/cairomm-1.0 -I/usr/include/pango-1.0 -I/usr/include/cairo -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/atk-1.0 -I/usr/include/libglademm-2.4 -I/usr/lib/libglademm-2.4/include -I/usr/include/libglade-2.0 -I/usr/include/libxml2  
 
-gmmlive_SOURCES = \
-		  main.cpp \
-		  MainWindow.cpp \
-		  gmmplayer.cpp
+gmlive_SOURCES = \
+		 ec_throw.cpp \
+		 main.cpp \
+		 pst_ctrl.cpp \
+		 MainWindow.cpp \
+		 gmplayer.cpp
 
 noinst_HEADERS = \
-		MainWindow.h \
-		gmmplayer.h
+		 ec_throw.h \
+		 pst_ctrl.h \
+		 MainWindow.h \
+		 gmplayer.h
 
-gmmlive_LDADD =  -lglademm-2.4 -lgtkmm-2.4 -lglade-2.0 -lgdkmm-2.4 -latkmm-1.6 -lpangomm-1.4 -lcairomm-1.0 -lglibmm-2.4 -lsigc-2.0 -lgtk-x11-2.0 -lxml2 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangocairo-1.0 -lfontconfig -lXext -lXrender -lXinerama -lXi -lXrandr -lXcursor -lXfixes -lpango-1.0 -lcairo -lX11 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
+gmlive_LDADD =  -lglademm-2.4 -lgtkmm-2.4 -lglade-2.0 -lgdkmm-2.4 -latkmm-1.6 -lpangomm-1.4 -lcairomm-1.0 -lglibmm-2.4 -lsigc-2.0 -lgtk-x11-2.0 -lxml2 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0 -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
 all: all-am
 
 .SUFFIXES:
@@ -220,9 +224,9 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
-gmmlive$(EXEEXT): $(gmmlive_OBJECTS) $(gmmlive_DEPENDENCIES) 
-	@rm -f gmmlive$(EXEEXT)
-	$(CXXLINK) $(gmmlive_OBJECTS) $(gmmlive_LDADD) $(LIBS)
+gmlive$(EXEEXT): $(gmlive_OBJECTS) $(gmlive_DEPENDENCIES) 
+	@rm -f gmlive$(EXEEXT)
+	$(CXXLINK) $(gmlive_OBJECTS) $(gmlive_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -231,8 +235,10 @@ distclean-compile:
 	-rm -f *.tab.c
 
 include ./$(DEPDIR)/MainWindow.Po
-include ./$(DEPDIR)/gmmplayer.Po
+include ./$(DEPDIR)/ec_throw.Po
+include ./$(DEPDIR)/gmplayer.Po
 include ./$(DEPDIR)/main.Po
+include ./$(DEPDIR)/pst_ctrl.Po
 
 .cpp.o:
 	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

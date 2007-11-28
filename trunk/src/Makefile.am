@@ -1,17 +1,21 @@
 INCLUDES = 					\
-	-I$(top_srcdir)				\
-	-I$(srcdir)				\
-	-DDATA_DIR=\""${datadir}/gmmlive"\"	\
-	@PACKAGE_CFLAGS@
+						-I$(top_srcdir)				\
+						-I$(srcdir)				\
+						-DDATA_DIR=\""${datadir}/gmlive"\"	\
+						@PACKAGE_CFLAGS@
 
-bin_PROGRAMS = gmmlive
-gmmlive_SOURCES = \
-		  main.cpp \
-		  MainWindow.cpp \
-		  gmmplayer.cpp
+bin_PROGRAMS = gmlive
+gmlive_SOURCES = \
+		 ec_throw.cpp \
+		 main.cpp \
+		 pst_ctrl.cpp \
+		 MainWindow.cpp \
+		 gmplayer.cpp
 
 noinst_HEADERS = \
-		MainWindow.h \
-		gmmplayer.h
+		 ec_throw.h \
+		 pst_ctrl.h \
+		 MainWindow.h \
+		 gmplayer.h
 
-gmmlive_LDADD = @LIBS@ @PACKAGE_LIBS@
+gmlive_LDADD = @LIBS@ @PACKAGE_LIBS@
