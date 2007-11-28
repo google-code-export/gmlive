@@ -30,6 +30,7 @@ typedef Glib::RefPtr < Gnome::Glade::Xml > GlademmXML;
 class MainWindow : public Gtk::Window {
 	public:
 		MainWindow();
+		void on_fullscreen();
 
 	private:
 		GlademmXML ui_xml;

@@ -11,6 +11,11 @@ GMplayer::GMplayer():
 	xid(-1),
 	timer(0)
 {
+	Glib::signal_io().connect(
+			sigc::mem_fun(*this, &GMplayer::on_callback),
+			pst_ctrl,
+			Glib::IO_IN | Glib::IO_OUT);
+
 }
 
 
@@ -19,6 +24,9 @@ GMplayer::~GMplayer()
 	stop();
 }
 
+void GMplayer::on_callback()
+{
+}
 
 
 int GMplayer::my_system(const std::string& cmd)

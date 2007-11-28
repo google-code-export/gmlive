@@ -162,7 +162,7 @@
 		      </child>
 
 		      <child>
-			<widget class="GtkButton" id="button7">
+			<widget class="GtkButton" id="bt_fullscreen">
 			  <property name="visible">True</property>
 			  <property name="can_focus">True</property>
 			  <property name="label">gtk-fullscreen</property>
