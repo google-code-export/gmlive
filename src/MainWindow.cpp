@@ -30,12 +30,24 @@ MainWindow::MainWindow()
 	
 	Gtk::Button* bt_fullscreen=dynamic_cast <Gtk::Button* >
 		(ui_xml->get_widget("bt_fullscreen"));
+	Gtk::Button* bt_stop=dynamic_cast <Gtk::Button* >
+		(ui_xml->get_widget("bt_stop"));
+	Gtk::Button* bt_record=dynamic_cast<Gtk::Button* >
+		(ui_xml->get_widget("bt_record"));
+	Gtk::Button* bt_play=dynamic_cast<Gtk::Button*>
+		(ui_xml->get_widget("bt_play"));
 	gmp = new GMplayer;	
 	if (hbox)
 		hbox->pack_end(*gmp, true, true);
 
 	bt_fullscreen->signal_clicked().
 		connect(sigc::mem_fun(*this, &MainWindow::on_fullscreen));
+	bt_stop->signal_clicked().
+		connect(sigc::mem_fun(*this, &MainWindow::on_stop));
+	bt_record->signal_clicked().
+		connect(sigc::mem_fun(*this, &MainWindow::on_record));
+	bt_play->signal_clicked().
+		connect(sigc::mem_fun(*this, &MainWindow::on_play));
 	this->add(*vbox);
 	this->show_all();
 	gmp->start("a.avi");
@@ -44,4 +56,17 @@ MainWindow::MainWindow()
 void MainWindow::on_fullscreen()
 {
 	gmp->full_screen();
+}
+
+void MainWindow::on_stop()
+{
+	gmp->stop();
+}
+
+void MainWindow::on_play()
+{
+}
+
+void MainWindow::on_record()
+{
 }
