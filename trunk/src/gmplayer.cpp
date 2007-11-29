@@ -71,7 +71,7 @@ bool GMplayer::is_runing()
 {
 	return ready && (childpid > 0);
 }
-
+/*
 void GMplayer::stop()
 {
 	if (childpid > 0) {
@@ -81,6 +81,7 @@ void GMplayer::stop()
 	}
 	ready = true;
 }
+*/
 
 void GMplayer::start()
 {
@@ -111,8 +112,12 @@ void GMplayer::start(const std::string& filename)
 
 void GMplayer::full_screen()
 {
+}
+void GMplayer::stop()
+{
 	int fd = pst_ctrl.get_ptm();
 	char ch = 'q';
 	write(fd, &ch, 1);
+	ready = true;
 }
 

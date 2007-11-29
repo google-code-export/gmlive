@@ -32,6 +32,9 @@ class MainWindow : public Gtk::Window {
 	public:
 		MainWindow();
 		void on_fullscreen();
+		void on_stop();
+		void on_play();
+		void on_record();
 
 	private:
 		GlademmXML ui_xml;
