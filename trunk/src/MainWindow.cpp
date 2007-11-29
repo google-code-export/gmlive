@@ -17,7 +17,6 @@
  */
 
 #include "MainWindow.h"
-#include "gmplayer.h"
 
 MainWindow::MainWindow()
 {
@@ -31,7 +30,7 @@ MainWindow::MainWindow()
 	
 	Gtk::Button* bt_fullscreen=dynamic_cast <Gtk::Button* >
 		(ui_xml->get_widget("bt_fullscreen"));
-	GMplayer* gmp = new GMplayer;	
+	gmp = new GMplayer;	
 	if (hbox)
 		hbox->pack_end(*gmp, true, true);
 
@@ -44,4 +43,5 @@ MainWindow::MainWindow()
 
 void MainWindow::on_fullscreen()
 {
+	gmp->full_screen();
 }

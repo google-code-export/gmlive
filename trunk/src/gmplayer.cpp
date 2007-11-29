@@ -11,9 +11,9 @@ GMplayer::GMplayer():
 	xid(-1),
 	timer(0)
 {
-	Glib::signal_io().connect(
-			sigc::mem_fun(*this, &GMplayer::on_callback),
-			pst_ctrl.get_ptm(), Glib::IO_OUT);
+//	Glib::signal_io().connect(
+//			sigc::mem_fun(*this, &GMplayer::on_callback),
+//			pst_ctrl.get_ptm(), Glib::IO_OUT);
 
 }
 
@@ -101,5 +101,12 @@ void GMplayer::start(const std::string& filename)
 	if (filename != file)
 		file = filename;
 	start();
+}
+
+void GMplayer::full_screen()
+{
+	int fd = pst_ctrl.get_ptm();
+	char ch = 'q';
+	write(fd, &ch, 1);
 }
 
