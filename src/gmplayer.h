@@ -17,6 +17,7 @@ class GMplayer : public Gtk::Socket
 		void start(const std::string&);
 		void start();
 		void stop();
+		void full_screen();
 	private:
 		int my_system(const std::string&);
 		void change_size(Gtk::Allocation& allocation);

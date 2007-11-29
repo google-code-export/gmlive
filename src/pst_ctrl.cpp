@@ -53,8 +53,8 @@ void PstCtrl::setup_slave()
 	EC_THROW(fchmod(pts, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH ) == -1 && errno != EPERM) ;
 
 	EC_THROW( -1 == dup2(pts, STDIN_FILENO));
-	EC_THROW( -1 == dup2(pts, STDOUT_FILENO));
-	EC_THROW( -1 == dup2(pts, STDERR_FILENO));
+//	EC_THROW( -1 == dup2(pts, STDOUT_FILENO));
+//	EC_THROW( -1 == dup2(pts, STDERR_FILENO));
 }
 
 

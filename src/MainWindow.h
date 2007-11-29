@@ -23,6 +23,7 @@
 #include <gtkmm.h>
 #include <libglademm/xml.h>
 #include <iostream>
+#include "gmplayer.h"
 
 #define main_ui	    DATA_DIR"/gmlive.xml"
 typedef Glib::RefPtr < Gnome::Glade::Xml > GlademmXML;
@@ -34,6 +35,7 @@ class MainWindow : public Gtk::Window {
 
 	private:
 		GlademmXML ui_xml;
+		GMplayer* gmp;
 };
 
 #endif // _MAINWINDOW_HH 
