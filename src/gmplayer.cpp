@@ -13,8 +13,7 @@ GMplayer::GMplayer():
 {
 	Glib::signal_io().connect(
 			sigc::mem_fun(*this, &GMplayer::on_callback),
-			pst_ctrl,
-			Glib::IO_IN | Glib::IO_OUT);
+			pst_ctrl.get_ptm(), Glib::IO_OUT);
 
 }
 
@@ -24,8 +23,12 @@ GMplayer::~GMplayer()
 	stop();
 }
 
-void GMplayer::on_callback()
+bool GMplayer::on_callback(Glib::IOCondition condition)
 {
+	char buf[256];
+	read(pst_ctrl.get_ptm(), buf, 256);
+		printf("%s", buf);
+	return true;
 }
 
 
@@ -39,6 +42,9 @@ int GMplayer::my_system(const std::string& cmd)
 	if (pid == 0) {
 
 		pst_ctrl.setup_slave();
+//		int out = open("/dev/null", O_RDWR);
+//		EC_THROW( -1 == dup2(out, STDOUT_FILENO));
+//		EC_THROW( -1 == dup2(out, STDERR_FILENO));
 		//close(STDOUT_FILENO);
 		//close(STDERR_FILENO);
 		//close(STDIN_FILENO);

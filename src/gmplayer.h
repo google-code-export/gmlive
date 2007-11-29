@@ -20,7 +20,7 @@ class GMplayer : public Gtk::Socket
 	private:
 		int my_system(const std::string&);
 		void change_size(Gtk::Allocation& allocation);
-		void on_callback();
+		bool on_callback(Glib::IOCondition condition);
 		bool is_runing();
 
 		PstCtrl 	pst_ctrl;
