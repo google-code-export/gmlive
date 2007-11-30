@@ -15,6 +15,16 @@ class Channel:public Gtk::TreeView
 		~Channel();
 
 	private:
+		class ChannelColumns:public Gtk::TreeModel::ColumnRecord{
+			public:
+				ChannelColumns();
+				{
+					add(id);
+					add(name);
+				}
+				Gtk::TreeModelColumn<Glib::string> id;
+				Gtk::TreeModelColumn<Glib::ustring> name;
+		};
 	protected:
 		bool on_button_press_event(GdkEventButton *);
 
