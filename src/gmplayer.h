@@ -17,6 +17,7 @@ class GMplayer : public Gtk::Socket
 		void start();
 		void stop();
 		void full_screen();
+		void nslive_play();
 	private:
 		void wait_mplayer_exit(GPid, int);
 		int my_system(const std::string&);

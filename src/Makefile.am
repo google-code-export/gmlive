@@ -10,12 +10,14 @@ gmlive_SOURCES = \
 		 main.cpp \
 		 pst_ctrl.cpp \
 		 MainWindow.cpp \
+		 channel.cpp \
 		 gmplayer.cpp
 
 noinst_HEADERS = \
 		 ec_throw.h \
 		 pst_ctrl.h \
 		 MainWindow.h \
+		 channel.h \
 		 gmplayer.h
 
 gmlive_LDADD = @LIBS@ @PACKAGE_LIBS@

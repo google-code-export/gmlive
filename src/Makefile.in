@@ -46,7 +46,8 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
 am_gmlive_OBJECTS = ec_throw.$(OBJEXT) main.$(OBJEXT) \
-	pst_ctrl.$(OBJEXT) MainWindow.$(OBJEXT) gmplayer.$(OBJEXT)
+	pst_ctrl.$(OBJEXT) MainWindow.$(OBJEXT) channel.$(OBJEXT) \
+	gmplayer.$(OBJEXT)
 gmlive_OBJECTS = $(am_gmlive_OBJECTS)
 gmlive_DEPENDENCIES =
 DEFAULT_INCLUDES = -I. -I$(top_builddir)@am__isrc@
@@ -159,12 +160,14 @@ gmlive_SOURCES = \
 		 main.cpp \
 		 pst_ctrl.cpp \
 		 MainWindow.cpp \
+		 channel.cpp \
 		 gmplayer.cpp
 
 noinst_HEADERS = \
 		 ec_throw.h \
 		 pst_ctrl.h \
 		 MainWindow.h \
+		 channel.h \
 		 gmplayer.h
 
 gmlive_LDADD = @LIBS@ @PACKAGE_LIBS@
@@ -235,6 +238,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/MainWindow.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/channel.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ec_throw.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gmplayer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
