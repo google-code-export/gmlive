@@ -40,6 +40,13 @@ MainWindow::MainWindow()
 	if (hbox)
 		hbox->pack_end(*gmp, true, true);
 
+	channel = Gtk::manage(new class Channel(this));
+	channel->init();
+	Gtk::ScrolledWindow* scrolledwin1 = dynamic_cast<Gtk::ScrolledWindow*>
+		(ui_xml->get_widget("scrolledwindow1"));
+	scrolledwin1->add(*channel);
+
+
 	bt_fullscreen->signal_clicked().
 		connect(sigc::mem_fun(*this, &MainWindow::on_fullscreen));
 	bt_stop->signal_clicked().
@@ -50,7 +57,7 @@ MainWindow::MainWindow()
 		connect(sigc::mem_fun(*this, &MainWindow::on_play));
 	this->add(*vbox);
 	this->show_all();
-	gmp->start("a.avi");
+	//gmp->start("a.avi");
 }
 
 void MainWindow::on_fullscreen()
@@ -69,4 +76,10 @@ void MainWindow::on_play()
 
 void MainWindow::on_record()
 {
+}
+
+void MainWindow::nslive_play(int channel_num)
+{
+	gmp->nslive_play();
+
 }

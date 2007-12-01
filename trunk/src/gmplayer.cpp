@@ -130,4 +130,9 @@ void GMplayer::stop()
 	char ch = 'q';
 	write(fd, &ch, 1);
 }
+void GMplayer::nslive_play()
+{
+	std::string filename = "http://127.0.0.1:9000" ;
+	start(filename);
+}
 
