@@ -3,6 +3,7 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <sstream>
+#include <sys/wait.h>
 
 
 GMplayer::GMplayer():
@@ -11,7 +12,8 @@ GMplayer::GMplayer():
 	xid(-1),
 	timer(0)
 {
-	Glib::signal_io().connect(
+
+	ptm_conn = Glib::signal_io().connect(
 			sigc::mem_fun(*this, &GMplayer::on_callback),
 			pst_ctrl.get_ptm(), Glib::IO_IN);
 
@@ -37,6 +39,18 @@ bool GMplayer::on_callback(const Glib::IOCondition& condition)
 	return true;
 }
 
+void GMplayer::wait_mplayer_exit(GPid pid, int)
+{
+	if (childpid != -1) {
+		ptm_conn.disconnect();
+
+		waitpid(childpid, NULL, 0);
+		childpid = -1;
+
+		pst_ctrl.close_ptm();
+		ready = true;
+	}
+}
 
 int GMplayer::my_system(const std::string& cmd)
 {
@@ -48,12 +62,6 @@ int GMplayer::my_system(const std::string& cmd)
 	if (pid == 0) {
 
 		pst_ctrl.setup_slave();
-//		int out = open("/dev/null", O_RDWR);
-//		EC_THROW( -1 == dup2(out, STDOUT_FILENO));
-//		EC_THROW( -1 == dup2(out, STDERR_FILENO));
-		//close(STDOUT_FILENO);
-		//close(STDERR_FILENO);
-		//close(STDIN_FILENO);
 
 		const char* argv[4] = {"sh", "-c", cmd.c_str()};
 		execve("/bin/sh", (char**)argv, environ);
@@ -61,9 +69,12 @@ int GMplayer::my_system(const std::string& cmd)
 		exit(127);
 	} 
 
+	childpid = pid;
+	Glib::signal_child_watch().connect
+		(sigc::mem_fun(*this, &GMplayer::wait_mplayer_exit), pid);
+
 	pst_ctrl.wait_slave();
 	std::cout << pid << std::endl;
-	childpid = pid;
 
 }
 
@@ -72,16 +83,16 @@ bool GMplayer::is_runing()
 	return ready && (childpid > 0);
 }
 /*
-void GMplayer::stop()
-{
-	if (childpid > 0) {
-		kill(childpid, SIGKILL);
-		kill(childpid+1, SIGKILL);
-		childpid = -1;
-	}
-	ready = true;
-}
-*/
+   void GMplayer::stop()
+   {
+   if (childpid > 0) {
+   kill(childpid, SIGKILL);
+   kill(childpid+1, SIGKILL);
+   childpid = -1;
+   }
+   ready = true;
+   }
+   */
 
 void GMplayer::start()
 {
@@ -118,6 +129,5 @@ void GMplayer::stop()
 	int fd = pst_ctrl.get_ptm();
 	char ch = 'q';
 	write(fd, &ch, 1);
-	ready = true;
 }
 

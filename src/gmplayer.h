@@ -8,7 +8,6 @@
 
 #include "pst_ctrl.h"
 
-
 class GMplayer : public Gtk::Socket
 {
 	public:
@@ -19,11 +18,13 @@ class GMplayer : public Gtk::Socket
 		void stop();
 		void full_screen();
 	private:
+		void wait_mplayer_exit(GPid, int);
 		int my_system(const std::string&);
 		void change_size(Gtk::Allocation& allocation);
 		bool on_callback(const Glib::IOCondition& condition);
 		bool is_runing();
 
+		sigc::connection ptm_conn;
 		PstCtrl 	pst_ctrl;
 		std::string	file;		/* filename (internal)*/
 		guint32		xid;		/* X window handle (internal)*/

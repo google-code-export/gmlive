@@ -31,6 +31,7 @@ class PstCtrl {
 		void setup_slave();
 		void wait_slave();
 		int get_ptm() const { return ptm; }
+		void close_ptm() { ::close(ptm); }
 	private:
 		std::string ptsname;
 		int ptm;
