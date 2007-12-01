@@ -45,7 +45,7 @@ void PstCtrl::setup_slave()
 	EC_THROW( -1 == setsid());
 
 	if (pts != -1)
-		EC_THROW(-1 == close(pts));
+		EC_THROW(-1 == ::close(pts));
 
 	fprintf(stderr, "%s\n", ptsname.c_str());
 	EC_THROW( -1 == (pts = open(ptsname.c_str(), O_RDWR)));
@@ -55,6 +55,8 @@ void PstCtrl::setup_slave()
 	EC_THROW( -1 == dup2(pts, STDIN_FILENO));
 	EC_THROW( -1 == dup2(pts, STDOUT_FILENO));
 	EC_THROW( -1 == dup2(pts, STDERR_FILENO));
+
+	::close(ptm);
 }
 
 
