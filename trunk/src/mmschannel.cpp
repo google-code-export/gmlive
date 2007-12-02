@@ -95,7 +95,7 @@ bool MMSChannel::on_button_press_event(GdkEventButton * ev)
 		Glib::ustring name = (*iter)[columns.name];
 		parent->mms_play(stream);
 		const int id=0;
-		parent->getRecentChannel().saveLine(id,name,stream);
+		//parent->getRecentChannel().saveLine(id,name,stream);
 
 	} else if ((ev->type == GDK_BUTTON_PRESS)
 		   && (ev->button == 3)) {

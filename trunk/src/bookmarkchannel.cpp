@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  nslivechannel.cpp
+ *       Filename:  bookmarkchannel.cpp
  *
- *    Description:  support nslive channel list
+ *    Description:  bookmark for channel list
  *
  *        Version:  1.0
- *        Created:  2007年12月02日 09时00分39秒 CST
+ *        Created:  2007年12月03日 00时44分49秒 CST
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -19,21 +19,18 @@
 #include <stdlib.h>
 #include <fstream>
 #include <iostream>
-#include "nslivechannel.h"
+#include "bookmarkchannel.h"
 #include "MainWindow.h"
 
-
-NSLiveChannel::NSLiveChannel(MainWindow* parent_):parent( parent_)
+BookMarkChannel::BookMarkChannel(MainWindow* parent_):parent( parent_)
 {
-
-
 }
-void NSLiveChannel::init()
-{
 
+void BookMarkChannel::init()
+{
 	char buf[512];
 	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/nslive.lst",homedir);
+	snprintf(buf, 512,"%s/.gmlive/bookmark.lst",homedir);
 	std::ifstream file(buf);
 	if(!file){
 		printf("buf is %s\n",buf);
@@ -42,18 +39,17 @@ void NSLiveChannel::init()
 	}
 	std::string line;
 	std::string name;
-	std::string uid;
-	std::string stream(NSLIVESTREAM);
-	int id;
+	std::string stream;
+	int id=1;
 	if(file){
 		while(std::getline(file,line)){
 			size_t pos = line.find_first_of("#");
 			if(pos==std::string::npos)
 				continue;
 			name = line.substr(0,pos);
-			uid = line.substr(pos+1,std::string::npos);
-			id = atoi(uid.c_str());
+			stream= line.substr(pos+1,std::string::npos);
 			addLine(id,name,stream);
+			id++;
 		}
 	}
 
@@ -61,18 +57,20 @@ void NSLiveChannel::init()
 
 }
 
-void NSLiveChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream)
+void BookMarkChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream)
 {
 	Gtk::TreeModel::iterator iter = m_liststore->append();
 	(*iter)[columns.id] = num;
 	(*iter)[columns.name] = name;
 	(*iter)[columns.freq] = 100;
 	(*iter)[columns.stream]=stream;
+	if(0 == num)
+	(*iter)[columns.type]=MMS_CHANNEL;
+	else
 	(*iter)[columns.type]=NSLIVE_CHANNEL;
-
 }
 
-bool NSLiveChannel::on_button_press_event(GdkEventButton * ev)
+bool BookMarkChannel::on_button_press_event(GdkEventButton * ev)
 {
 	bool result = Gtk::TreeView::on_button_press_event(ev);
 
@@ -91,12 +89,11 @@ bool NSLiveChannel::on_button_press_event(GdkEventButton * ev)
 		return FALSE;
 	if ((ev->type == GDK_2BUTTON_PRESS ||
 	     ev->type == GDK_3BUTTON_PRESS)) {
-		int channle_num = (*iter)[columns.id];
-		Glib::ustring name = (*iter)[columns.name];
 		std::string stream = (*iter)[columns.stream];
-		parent->nslive_play(channle_num);
-		//parent->getRecentChannel().saveLine(channle_num,name,stream);
-
+		Glib::ustring name = (*iter)[columns.name];
+		parent->mms_play(stream);
+		const int id=0;
+		//parent->getRecentChannel().saveLine(id,name,stream);
 
 	} else if ((ev->type == GDK_BUTTON_PRESS)
 		   && (ev->button == 3)) {
