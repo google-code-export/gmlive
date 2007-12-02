@@ -33,14 +33,15 @@ typedef Glib::RefPtr < Gnome::Glade::Xml > GlademmXML;
 class MainWindow : public Gtk::Window {
 	public:
 		MainWindow();
+		void nslive_play(int channel_num);
+		void mms_play(const std::string& stream);
+	private:
 		void on_fullscreen();
 		void on_stop();
 		void on_play();
 		void on_record();
-		void nslive_play(int channel_num);
-		void mms_play(const std::string& stream);
+		bool on_mplayer_callback(const Glib::IOCondition& condition);
 		void showMsg(const std::string& msg,unsigned int id=0);
-
 	private:
 		GlademmXML ui_xml;
 		GMplayer* gmp;

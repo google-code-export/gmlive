@@ -36,10 +36,10 @@ MainWindow::MainWindow()
 		(ui_xml->get_widget("bt_record"));
 	Gtk::Button* bt_play=dynamic_cast<Gtk::Button*>
 		(ui_xml->get_widget("bt_play"));
-	Gtk::Statusbar* statusbar  = dynamic_cast<Gtk::Statusbar*>
+	statusbar = dynamic_cast<Gtk::Statusbar*>
 		(ui_xml->get_widget("statusbar"));
 
-	gmp = new GMplayer(this);	
+	gmp = new GMplayer(sigc::mem_fun(*this, &MainWindow::on_mplayer_callback));	
 	if (hbox)
 		hbox->pack_end(*gmp, true, true);
 
@@ -73,8 +73,8 @@ MainWindow::MainWindow()
 
 void MainWindow::showMsg(const std::string& msg, unsigned int id)
 {
-	statusbar->pop();
-	statusbar->push(msg);
+	statusbar->pop(id);
+	statusbar->push(msg, id);
 }
 void MainWindow::on_fullscreen()
 {
@@ -104,3 +104,18 @@ void MainWindow::mms_play(const std::string& stream)
 {
 	gmp->start(stream);
 }
+
+
+bool MainWindow::on_mplayer_callback(const Glib::IOCondition& condition)
+{
+	char buf[256];
+	while (int len = gmp->get_mplayer_log(buf, 256)) {
+		if (len < 256) {
+			buf[len] = 0;
+			showMsg(buf);
+			break;
+		}
+	}
+	return true;
+}
+
