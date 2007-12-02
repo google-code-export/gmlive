@@ -34,6 +34,7 @@ PstCtrl::PstCtrl() :
 	char buf[256];
 	EC_THROW( 0 != (ptsname_r(ptm, buf, 256)));
 	ptsname.assign(buf);
+	
 }
 
 PstCtrl::~PstCtrl()

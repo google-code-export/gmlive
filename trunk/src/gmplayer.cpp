@@ -4,16 +4,15 @@
 #include <signal.h>
 #include <sstream>
 #include <sys/wait.h>
-#include "MainWindow.h"
 
 
-GMplayer::GMplayer(MainWindow* parent_):
-	parent(parent_),
+GMplayer::GMplayer(const sigc::slot<bool, Glib::IOCondition>& slot):
 	ready(true),
 	childpid(-1),
 	xid(-1),
 	timer(0),
 	replay(false), 
+	child_call(slot),
 	pst_ctrl(NULL)
 {
 }
@@ -24,20 +23,22 @@ GMplayer::~GMplayer()
 	stop();
 }
 
-bool GMplayer::on_callback(const Glib::IOCondition& condition)
-{
-	char buf[256];
-	while (int len = read(pst_ctrl->get_ptm(), buf, 255)) {
-		if (len < 256) {
-			buf[len] = 0;
-			printf("%s", buf);
-			//parent->showMsg(buf);
-			break;
-		}
-		printf("-%s", buf);
-	}
-	return true;
-}
+	
+//
+//bool GMplayer::on_callback(const Glib::IOCondition& condition)
+//{
+//	char buf[256];
+//	while (int len = read(pst_ctrl->get_ptm(), buf, 255)) {
+//		if (len < 256) {
+//			buf[len] = 0;
+//			printf("%s", buf);
+//			//parent->showMsg(buf);
+//			break;
+//		}
+//		printf("-%s", buf);
+//	}
+//	return true;
+//}
 
 void GMplayer::wait_mplayer_exit(GPid pid, int)
 {
@@ -78,7 +79,7 @@ int GMplayer::my_system(const std::string& cmd)
 	} 
 
 	ptm_conn = Glib::signal_io().connect(
-			sigc::mem_fun(*this, &GMplayer::on_callback),
+			child_call,
 			pst_ctrl->get_ptm(), Glib::IO_IN);
 
 	childpid = pid;
