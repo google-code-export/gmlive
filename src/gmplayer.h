@@ -31,12 +31,13 @@ class GMplayer : public Gtk::Socket
 		sigc::connection ptm_conn;
 		PstCtrl* 	pst_ctrl;
 		std::string	file;		/* filename (internal)*/
-		guint32		xid;		/* X window handle (internal)*/
 		int		width;		/* widget's width*/
 		int		height;		/* widget's height*/
-		bool		ready;		/* is the player ready (internal)*/
 		int		childpid;	/* mplayer's pid (internal)*/
+		guint32		xid;		/* X window handle (internal)*/
 		guint		timer;		/* timer (internal) */
+		bool		ready;		/* is the player ready (internal)*/
+		bool		replay;		/* 重新播放状态 */
 };
 
 #endif

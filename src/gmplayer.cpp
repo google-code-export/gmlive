@@ -13,6 +13,7 @@ GMplayer::GMplayer(MainWindow* parent_):
 	childpid(-1),
 	xid(-1),
 	timer(0),
+	replay(false), 
 	pst_ctrl(NULL)
 {
 }
@@ -51,6 +52,10 @@ void GMplayer::wait_mplayer_exit(GPid pid, int)
 
 		ready = true;
 	}
+
+	if (replay) {
+		start();
+	}
 }
 
 int GMplayer::my_system(const std::string& cmd)
@@ -87,24 +92,29 @@ int GMplayer::my_system(const std::string& cmd)
 
 bool GMplayer::is_runing()
 {
-	return ready && (childpid > 0);
+	return (!ready) && (childpid > 0);
 }
 /*
-   void GMplayer::stop()
-   {
-   if (childpid > 0) {
-   kill(childpid, SIGKILL);
-   kill(childpid+1, SIGKILL);
-   childpid = -1;
-   }
-   ready = true;
-   }
-   */
+void GMplayer::stop()
+{
+	if (childpid > 0) {
+		kill(childpid, SIGKILL);
+		kill(childpid+1, SIGKILL);
+		childpid = -1;
+	}
+	ready = true;
+}
+*/
 
 void GMplayer::start()
 {
-	if (is_runing()) 
+	if (is_runing()) {
+		stop();
+		replay = true; // 正在播放，要等到当前的mplayer停止再启动新的
 		return;
+	}
+
+	replay = false;
 
 	if (file.empty())
 		return;
