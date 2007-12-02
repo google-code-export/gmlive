@@ -14,9 +14,10 @@ class GMplayer : public Gtk::Socket
 	public:
 		GMplayer(MainWindow* parent_);
 		~GMplayer();
+		void send_ctrl_word(char c);
 		void start(const std::string&);
 		void start();
-		void stop();
+		void stop() { send_ctrl_word('q'); }
 		void full_screen();
 		void nslive_play();
 	private:
@@ -28,7 +29,7 @@ class GMplayer : public Gtk::Socket
 		bool is_runing();
 
 		sigc::connection ptm_conn;
-		PstCtrl 	pst_ctrl;
+		PstCtrl* 	pst_ctrl;
 		std::string	file;		/* filename (internal)*/
 		guint32		xid;		/* X window handle (internal)*/
 		int		width;		/* widget's width*/

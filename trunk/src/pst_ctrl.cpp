@@ -38,6 +38,7 @@ PstCtrl::PstCtrl() :
 
 PstCtrl::~PstCtrl()
 {
+	close(ptm);
 }
 
 void PstCtrl::setup_slave()
