@@ -5,13 +5,14 @@
 #include <iostream>
 #include <gtkmm.h>
 #include <gtkmm/socket.h>
-
 #include "pst_ctrl.h"
+
+class MainWindow;
 
 class GMplayer : public Gtk::Socket
 {
 	public:
-		GMplayer();
+		GMplayer(MainWindow* parent_);
 		~GMplayer();
 		void start(const std::string&);
 		void start();
@@ -19,6 +20,7 @@ class GMplayer : public Gtk::Socket
 		void full_screen();
 		void nslive_play();
 	private:
+		MainWindow* parent;
 		void wait_mplayer_exit(GPid, int);
 		int my_system(const std::string&);
 		void change_size(Gtk::Allocation& allocation);

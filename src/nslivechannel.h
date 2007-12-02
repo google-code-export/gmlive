@@ -1,0 +1,37 @@
+/*
+ * =====================================================================================
+ * 
+ *       Filename:  nslivechannel.h
+ * 
+ *    Description:  support to nslive channel list
+ * 
+ *        Version:  1.0
+ *        Created:  2007年12月02日 08时59分11秒 CST
+ *       Revision:  none
+ *       Compiler:  gcc
+ * 
+ *         Author:  lerosua (), lerosua@gmail.com
+ *        Company:  Cyclone
+ * 
+ * =====================================================================================
+ */
+
+#ifndef  NSLIVECHANNEL_FILE_HEADER_INC
+#define  NSLIVECHANNEL_FILE_HEADER_INC
+#include "channel.h"
+class MainWindow;
+class NSLiveChannel:public Channel
+{
+	public:
+		NSLiveChannel(MainWindow* parent_);
+		void init();
+		void  addLine(const int id,const Glib::ustring& name,const std::string& sream);
+
+	private:
+		MainWindow* parent;
+	protected:
+		bool on_button_press_event(GdkEventButton *);
+
+};
+#endif   /* ----- #ifndef NSLIVECHANNEL_FILE_HEADER_INC  ----- */
+

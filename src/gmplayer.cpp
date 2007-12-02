@@ -4,9 +4,11 @@
 #include <signal.h>
 #include <sstream>
 #include <sys/wait.h>
+#include "MainWindow.h"
 
 
-GMplayer::GMplayer():
+GMplayer::GMplayer(MainWindow* parent_):
+	parent(parent_),
 	ready(true),
 	childpid(-1),
 	xid(-1),
@@ -32,6 +34,7 @@ bool GMplayer::on_callback(const Glib::IOCondition& condition)
 		if (len < 256) {
 			buf[len] = 0;
 			printf("%s", buf);
+			//parent->showMsg(buf);
 			break;
 		}
 		printf("-%s", buf);
