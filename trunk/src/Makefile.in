@@ -48,7 +48,7 @@ PROGRAMS = $(bin_PROGRAMS)
 am_gmlive_OBJECTS = ec_throw.$(OBJEXT) main.$(OBJEXT) \
 	pst_ctrl.$(OBJEXT) MainWindow.$(OBJEXT) channel.$(OBJEXT) \
 	nslivechannel.$(OBJEXT) mmschannel.$(OBJEXT) \
-	gmplayer.$(OBJEXT)
+	recentchannel.$(OBJEXT) gmplayer.$(OBJEXT)
 gmlive_OBJECTS = $(am_gmlive_OBJECTS)
 gmlive_DEPENDENCIES =
 DEFAULT_INCLUDES = -I. -I$(top_builddir)@am__isrc@
@@ -164,6 +164,7 @@ gmlive_SOURCES = \
 		 channel.cpp \
 		 nslivechannel.cpp \
 		 mmschannel.cpp \
+		 recentchannel.cpp \
 		 gmplayer.cpp
 
 noinst_HEADERS = \
@@ -173,6 +174,7 @@ noinst_HEADERS = \
 		 channel.h \
 		 nslivechannel.h \
 		 mmschannel.h \
+		 recentchannel.h \
 		 gmplayer.h
 
 gmlive_LDADD = @LIBS@ @PACKAGE_LIBS@
@@ -250,6 +252,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mmschannel.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nslivechannel.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pst_ctrl.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/recentchannel.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

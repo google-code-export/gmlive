@@ -35,16 +35,11 @@ enum TypeChannel{
 class Channel:public Gtk::TreeView
 {
 	public:
-		//Channel(MainWindow* parent_);
 		Channel();
-		//void init();
 		virtual void init()=0;
 		virtual ~Channel();
 		
 		virtual void  addLine(const int id,const Glib::ustring& name,const std::string& sream)=0;
-		//void addLine(const int id,const Glib::ustring& name);
-		//Gtk::TreeModel::iterator getListIter(Gtk::TreeModel::Children children,
-		//		const int id);
 
 	public:
 		class ChannelColumns:public Gtk::TreeModel::ColumnRecord{
@@ -64,7 +59,6 @@ class Channel:public Gtk::TreeView
 				Gtk::TreeModelColumn<TypeChannel> type;
 		};
 
-		//MainWindow* parent;
 		ChannelColumns columns;
 		Glib::RefPtr< Gtk::ListStore> m_liststore;
 	protected:
@@ -72,20 +66,6 @@ class Channel:public Gtk::TreeView
 
 };
 
-/*
-class NSLiveChannel:public Channel
-{
-	public:
-		NSLiveChannel(MainWindow* parent_);
-		void init();
-		void  addLine(const int id,const Glib::ustring& name,const std::string& sream);
 
-	private:
-		MainWindow* parent;
-	protected:
-		bool on_button_press_event(GdkEventButton *);
-
-};
-*/
 #endif   /* ----- #ifndef CHANNEL_FILE_HEADER_INC  ----- */
 
