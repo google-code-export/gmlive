@@ -36,15 +36,21 @@ MainWindow::MainWindow()
 		(ui_xml->get_widget("bt_record"));
 	Gtk::Button* bt_play=dynamic_cast<Gtk::Button*>
 		(ui_xml->get_widget("bt_play"));
-	gmp = new GMplayer;	
+	Gtk::Statusbar* statusbar  = dynamic_cast<Gtk::Statusbar*>
+		(ui_xml->get_widget("statusbar"));
+
+	gmp = new GMplayer(this);	
 	if (hbox)
 		hbox->pack_end(*gmp, true, true);
 
-	channel = Gtk::manage(new class Channel(this));
-	channel->init();
-	Gtk::ScrolledWindow* scrolledwin1 = dynamic_cast<Gtk::ScrolledWindow*>
-		(ui_xml->get_widget("scrolledwindow1"));
-	scrolledwin1->add(*channel);
+	nsliveChannel = Gtk::manage(new class NSLiveChannel(this));
+	Gtk::ScrolledWindow* scrolledwin_nslive = dynamic_cast<Gtk::ScrolledWindow*>
+		(ui_xml->get_widget("scrolledwin_nslive"));
+	scrolledwin_nslive->add(*nsliveChannel);
+	mmsChannel = Gtk::manage(new class MMSChannel(this));
+	Gtk::ScrolledWindow* scrolledwin_mms = dynamic_cast<Gtk::ScrolledWindow*>
+		(ui_xml->get_widget("scrolledwin_mms"));
+	scrolledwin_mms->add(*mmsChannel);
 
 
 	bt_fullscreen->signal_clicked().
@@ -56,10 +62,20 @@ MainWindow::MainWindow()
 	bt_play->signal_clicked().
 		connect(sigc::mem_fun(*this, &MainWindow::on_play));
 	this->add(*vbox);
+
+	mmsChannel->init();
+	nsliveChannel->init();
+
 	this->show_all();
 	//gmp->start("a.avi");
+	
 }
 
+void MainWindow::showMsg(const std::string& msg, unsigned int id)
+{
+	statusbar->pop();
+	statusbar->push(msg);
+}
 void MainWindow::on_fullscreen()
 {
 	gmp->full_screen();
@@ -80,6 +96,11 @@ void MainWindow::on_record()
 
 void MainWindow::nslive_play(int channel_num)
 {
+	//启动nslive 的进程，然后再启动mplayer
 	gmp->nslive_play();
 
+}
+void MainWindow::mms_play(const std::string& stream)
+{
+	gmp->start(stream);
 }

@@ -11,6 +11,8 @@ gmlive_SOURCES = \
 		 pst_ctrl.cpp \
 		 MainWindow.cpp \
 		 channel.cpp \
+		 nslivechannel.cpp \
+		 mmschannel.cpp \
 		 gmplayer.cpp
 
 noinst_HEADERS = \
@@ -18,6 +20,8 @@ noinst_HEADERS = \
 		 pst_ctrl.h \
 		 MainWindow.h \
 		 channel.h \
+		 nslivechannel.h \
+		 mmschannel.h \
 		 gmplayer.h
 
 gmlive_LDADD = @LIBS@ @PACKAGE_LIBS@

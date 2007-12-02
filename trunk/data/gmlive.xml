@@ -223,7 +223,7 @@
 		      <property name="enable_popup">False</property>
 
 		      <child>
-			<widget class="GtkScrolledWindow" id="scrolledwindow1">
+			<widget class="GtkScrolledWindow" id="scrolledwin_nslive">
 			  <property name="visible">True</property>
 			  <property name="can_focus">True</property>
 			  <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
@@ -244,7 +244,7 @@
 		      <child>
 			<widget class="GtkLabel" id="label4">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">频道列表</property>
+			  <property name="label" translatable="yes">nslive频道列表</property>
 			  <property name="use_underline">False</property>
 			  <property name="use_markup">False</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -265,7 +265,7 @@
 		      </child>
 
 		      <child>
-			<widget class="GtkScrolledWindow" id="scrolledwindow2">
+			<widget class="GtkScrolledWindow" id="scrolledwin_mms">
 			  <property name="visible">True</property>
 			  <property name="can_focus">True</property>
 			  <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
@@ -274,17 +274,7 @@
 			  <property name="window_placement">GTK_CORNER_TOP_LEFT</property>
 
 			  <child>
-			    <widget class="GtkTreeView" id="treeview2">
-			      <property name="visible">True</property>
-			      <property name="can_focus">True</property>
-			      <property name="headers_visible">True</property>
-			      <property name="rules_hint">False</property>
-			      <property name="reorderable">False</property>
-			      <property name="enable_search">True</property>
-			      <property name="fixed_height_mode">False</property>
-			      <property name="hover_selection">False</property>
-			      <property name="hover_expand">False</property>
-			    </widget>
+			    <placeholder/>
 			  </child>
 			</widget>
 			<packing>
@@ -296,7 +286,7 @@
 		      <child>
 			<widget class="GtkLabel" id="label5">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">我的收藏</property>
+			  <property name="label" translatable="yes">MMS流</property>
 			  <property name="use_underline">False</property>
 			  <property name="use_markup">False</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
