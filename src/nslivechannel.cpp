@@ -92,8 +92,11 @@ bool NSLiveChannel::on_button_press_event(GdkEventButton * ev)
 	if ((ev->type == GDK_2BUTTON_PRESS ||
 	     ev->type == GDK_3BUTTON_PRESS)) {
 		int channle_num = (*iter)[columns.id];
-		printf("双击事件%d \n",channle_num);
+		Glib::ustring name = (*iter)[columns.name];
+		std::string stream = (*iter)[columns.stream];
 		parent->nslive_play(channle_num);
+		parent->getRecentChannel().saveLine(channle_num,name,stream);
+
 
 	} else if ((ev->type == GDK_BUTTON_PRESS)
 		   && (ev->button == 3)) {

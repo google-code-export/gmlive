@@ -51,6 +51,10 @@ MainWindow::MainWindow()
 	Gtk::ScrolledWindow* scrolledwin_mms = dynamic_cast<Gtk::ScrolledWindow*>
 		(ui_xml->get_widget("scrolledwin_mms"));
 	scrolledwin_mms->add(*mmsChannel);
+	recentChannel = Gtk::manage(new class RecentChannel(this));
+	Gtk::ScrolledWindow* scrolledwin_recent= dynamic_cast<Gtk::ScrolledWindow*>
+		(ui_xml->get_widget("scrolledwin_recent"));
+	scrolledwin_recent->add(*recentChannel);
 
 
 	bt_fullscreen->signal_clicked().
@@ -65,6 +69,7 @@ MainWindow::MainWindow()
 
 	mmsChannel->init();
 	nsliveChannel->init();
+	recentChannel->init();
 
 	this->show_all();
 	//gmp->start("a.avi");
