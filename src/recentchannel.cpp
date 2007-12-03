@@ -122,21 +122,23 @@ void RecentChannel::saveLine(const int id, const Glib::ustring & name,const std:
 		std::string str(b);
 		stream = name +"\t#"+str+"\t;nslive";
 	}
-	std::vector<std::string>::iterator iter = list.begin();
-	if(num>10)
+	std::vector<std::string>::iterator iter = std::find(list.begin(),list.end(),stream);
+	if(iter == list.end())
 	{
-	list.erase(iter);
-	}
 	list.push_back(stream);
 	std::ofstream outfile(buf);
-	
-	for(iter==list.begin();iter!=list.end();iter++)
+	//std::vector<std::string>::iterator iter = list.begin();
+	for(iter=list.begin();iter!=list.end();iter++)
 	{
+		if(iter == list.begin())
+			;
+		else
 		outfile<<*iter<<std::endl;
 	}
 	outfile.close();
 
 	addLine(id, name,stream_);
+	}
 
 }
 bool RecentChannel::on_button_press_event(GdkEventButton * ev)
