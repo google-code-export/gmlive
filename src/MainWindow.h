@@ -43,7 +43,7 @@ class MainWindow : public Gtk::Window {
 		void on_play();
 		void on_record();
 		bool on_mplayer_callback(const Glib::IOCondition& condition);
-		void showMsg(const std::string& msg,unsigned int id=0);
+		void show_msg(const Glib::ustring& msg,unsigned int id=0);
 
 	private:
 		GlademmXML ui_xml;
