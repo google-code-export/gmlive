@@ -20,6 +20,9 @@
 
 Glib::ustring get_print_string(const char* buf, int len)
 {
+	if (len < 4)
+		return Glib::ustring();
+	len -= 3;
 	char new_buf[len];
 	char* pnew = new_buf;
 	const char* pend = buf + len;
@@ -28,7 +31,7 @@ Glib::ustring get_print_string(const char* buf, int len)
 			continue;
 		*pnew++ = *buf;
 	}
-	*pnew++ = 0;
+	*pnew = 0;
 	return Glib::ustring(new_buf, pnew);
 }
 
