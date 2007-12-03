@@ -26,7 +26,7 @@
 RecentChannel::RecentChannel(MainWindow* parent_):parent( parent_)
 {
 }
-	
+
 RecentChannel::~RecentChannel()
 {}
 void RecentChannel::init()
@@ -82,9 +82,9 @@ void RecentChannel::addLine(const int num, const Glib::ustring & name,const std:
 	(*iter)[columns.freq] = 100;
 	(*iter)[columns.stream]=stream_;
 	if(0 == num)
-	(*iter)[columns.type]=MMS_CHANNEL;
+		(*iter)[columns.type]=MMS_CHANNEL;
 	else
-	(*iter)[columns.type]=NSLIVE_CHANNEL;
+		(*iter)[columns.type]=NSLIVE_CHANNEL;
 
 }
 
@@ -125,19 +125,19 @@ void RecentChannel::saveLine(const int id, const Glib::ustring & name,const std:
 	std::vector<std::string>::iterator iter = std::find(list.begin(),list.end(),stream);
 	if(iter == list.end())
 	{
-	list.push_back(stream);
-	std::ofstream outfile(buf);
-	//std::vector<std::string>::iterator iter = list.begin();
-	for(iter=list.begin();iter!=list.end();iter++)
-	{
-		if(iter == list.begin())
-			;
-		else
-		outfile<<*iter<<std::endl;
-	}
-	outfile.close();
+		list.push_back(stream);
+		std::ofstream outfile(buf);
+		//std::vector<std::string>::iterator iter = list.begin();
+		for(iter=list.begin();iter!=list.end();iter++)
+		{
+			if(iter == list.begin())
+				;
+			else
+				outfile<<*iter<<std::endl;
+		}
+		outfile.close();
 
-	addLine(id, name,stream_);
+		addLine(id, name,stream_);
 	}
 
 }
@@ -146,7 +146,7 @@ bool RecentChannel::on_button_press_event(GdkEventButton * ev)
 	bool result = Gtk::TreeView::on_button_press_event(ev);
 
 	Glib::RefPtr < Gtk::TreeSelection > selection =
-	    this->get_selection();
+		this->get_selection();
 	Gtk::TreeModel::iterator iter = selection->get_selected();
 	if (!selection->count_selected_rows())
 		return result;
@@ -154,12 +154,12 @@ bool RecentChannel::on_button_press_event(GdkEventButton * ev)
 	Gtk::TreeModel::Path path(iter);
 	Gtk::TreeViewColumn * tvc;
 	int cx, cy;
-					/** get_path_at_pos() 是为确认鼠标是否在选择行上点击的*/
+	/** get_path_at_pos() 是为确认鼠标是否在选择行上点击的*/
 	if (!this->
-	    get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
+			get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
 		return FALSE;
 	if ((ev->type == GDK_2BUTTON_PRESS ||
-	     ev->type == GDK_3BUTTON_PRESS)) {
+				ev->type == GDK_3BUTTON_PRESS)) {
 		std::string stream = (*iter)[columns.stream];
 		int id = (*iter)[columns.id];
 
@@ -169,7 +169,7 @@ bool RecentChannel::on_button_press_event(GdkEventButton * ev)
 			parent->nslive_play(id);
 
 	} else if ((ev->type == GDK_BUTTON_PRESS)
-		   && (ev->button == 3)) {
+			&& (ev->button == 3)) {
 	}
 
 }
