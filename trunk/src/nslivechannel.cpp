@@ -95,7 +95,7 @@ bool NSLiveChannel::on_button_press_event(GdkEventButton * ev)
 		Glib::ustring name = (*iter)[columns.name];
 		std::string stream = (*iter)[columns.stream];
 		parent->nslive_play(channle_num);
-		//parent->getRecentChannel().saveLine(channle_num,name,stream);
+		parent->getRecentChannel().saveLine(channle_num,name,stream);
 
 
 	} else if ((ev->type == GDK_BUTTON_PRESS)

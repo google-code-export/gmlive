@@ -34,11 +34,11 @@ tvb8	#mms://61.139.37.135/tvb8
 东方卫视	#mms://61.139.37.135/dfws
 好莱坞电影台	#mms://61.139.37.135/starmovies
 浙江	#mms://ztv7.zrtg.com:1095/
-南京>新闻频道	#mms://live.njbg.com.cn:88/NJTV01
-南京>18	#mms://live.njbg.com.cn:88/NJTV18
-温州>新闻综合	#mms://202.107.219.58/wztv1
-温州>经济生活	#mms://202.107.219.58/wztv2
-長春>综合频道	#mms://video.chinactv.com/ctv
+南京-新闻频道	#mms://live.njbg.com.cn:88/NJTV01
+南京-18	#mms://live.njbg.com.cn:88/NJTV18
+温州-新闻综合	#mms://202.107.219.58/wztv1
+温州-经济生活	#mms://202.107.219.58/wztv2
+長春-综合频道	#mms://video.chinactv.com/ctv
 青岛电视台	#mms://movie.top86.com/qtv
 潮州新闻综合	#mms://219.131.159.153/cztv1
 常州新闻频道	#mms://vod1.cztv.tv/cztv1

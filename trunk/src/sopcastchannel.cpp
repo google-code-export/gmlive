@@ -1,37 +1,20 @@
-/*
- * =====================================================================================
- *
- *       Filename:  mmschannel.cpp
- *
- *    Description:  
- *
- *        Version:  1.0
- *        Created:  2007年12月02日 09时16分15秒 CST
- *       Revision:  none
- *       Compiler:  gcc
- *
- *         Author:  lerosua (), lerosua@gmail.com
- *        Company:  Cyclone
- *
- * =====================================================================================
- */
-
 
 #include <stdlib.h>
 #include <fstream>
 #include <iostream>
-#include "mmschannel.h"
+#include "sopcastchannel.h"
 #include "MainWindow.h"
 
-MMSChannel::MMSChannel(MainWindow* parent_):parent( parent_)
+
+SopcastChannel::SopcastChannel(MainWindow* parent_):parent( parent_)
 {
 }
 
-void MMSChannel::init()
+void SopcastChannel::init()
 {
 	char buf[512];
 	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/mms.lst",homedir);
+	snprintf(buf, 512,"%s/.gmlive/sopcast.lst",homedir);
 	std::ifstream file(buf);
 	if(!file){
 		//char dir[512];
@@ -61,7 +44,7 @@ void MMSChannel::init()
 
 }
 
-void MMSChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream)
+void SopcastChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream)
 {
 	Gtk::TreeModel::iterator iter = m_liststore->append();
 	(*iter)[columns.id] = num;
@@ -72,7 +55,7 @@ void MMSChannel::addLine(const int num, const Glib::ustring & name,const std::st
 
 }
 
-bool MMSChannel::on_button_press_event(GdkEventButton * ev)
+bool SopcastChannel::on_button_press_event(GdkEventButton * ev)
 {
 	bool result = Gtk::TreeView::on_button_press_event(ev);
 
@@ -93,9 +76,9 @@ bool MMSChannel::on_button_press_event(GdkEventButton * ev)
 	     ev->type == GDK_3BUTTON_PRESS)) {
 		std::string stream = (*iter)[columns.stream];
 		Glib::ustring name = (*iter)[columns.name];
-		parent->mms_play(stream);
+		//parent->mms_play(stream);
 		const int id=0;
-		parent->getRecentChannel().saveLine(id,name,stream);
+		//parent->getRecentChannel().saveLine(id,name,stream);
 
 	} else if ((ev->type == GDK_BUTTON_PRESS)
 		   && (ev->button == 3)) {
