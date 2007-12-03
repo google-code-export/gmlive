@@ -18,6 +18,21 @@
 
 #include "MainWindow.h"
 
+Glib::ustring get_print_string(const char* buf, int len)
+{
+	char new_buf[len];
+	char* pnew = new_buf;
+	const char* pend = buf + len;
+	for(;buf < pend; ++buf) {
+		if (iscntrl(*buf))
+			continue;
+		*pnew++ = *buf;
+	}
+	*pnew++ = 0;
+	return Glib::ustring(new_buf, pnew);
+}
+
+
 MainWindow::MainWindow()
 {
 	ui_xml = Gnome::Glade::Xml::create(main_ui, "mainFrame");
@@ -76,7 +91,7 @@ MainWindow::MainWindow()
 	
 }
 
-void MainWindow::showMsg(const std::string& msg, unsigned int id)
+void MainWindow::show_msg(const Glib::ustring& msg, unsigned int id)
 {
 	statusbar->pop(id);
 	statusbar->push(msg, id);
@@ -117,7 +132,7 @@ bool MainWindow::on_mplayer_callback(const Glib::IOCondition& condition)
 	while (int len = gmp->get_mplayer_log(buf, 256)) {
 		if (len < 256) {
 			buf[len] = 0;
-			showMsg(buf);
+			show_msg(get_print_string(buf, len));
 			break;
 		}
 	}
