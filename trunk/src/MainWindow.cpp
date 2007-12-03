@@ -17,6 +17,8 @@
  */
 
 #include "MainWindow.h"
+#include "mms_live_player.h"
+#include "ns_live_player.h"
 
 Glib::ustring get_print_string(const char* buf, int len)
 {
@@ -36,7 +38,8 @@ Glib::ustring get_print_string(const char* buf, int len)
 }
 
 
-MainWindow::MainWindow()
+MainWindow::MainWindow():
+	live_player(NULL)
 {
 	ui_xml = Gnome::Glade::Xml::create(main_ui, "mainFrame");
 	Gtk::VBox* vbox = 
@@ -57,7 +60,10 @@ MainWindow::MainWindow()
 	statusbar = dynamic_cast<Gtk::Statusbar*>
 		(ui_xml->get_widget("statusbar"));
 
-	gmp = new GMplayer(sigc::mem_fun(*this, &MainWindow::on_mplayer_callback));	
+	gmp = new GMplayer(sigc::mem_fun(*this, &MainWindow::on_gmplayer_out));	
+	gmp->signal_start_play().connect(sigc::mem_fun(*this, &MainWindow::on_gmplayer_start));
+	gmp->signal_stop_play().connect(sigc::mem_fun(*this, &MainWindow::on_gmplayer_stop));
+
 	if (hbox)
 		hbox->pack_end(*gmp, true, true);
 
@@ -94,6 +100,11 @@ MainWindow::MainWindow()
 	
 }
 
+MainWindow::~MainWindow()
+{
+	delete live_player;
+}
+
 void MainWindow::show_msg(const Glib::ustring& msg, unsigned int id)
 {
 	statusbar->pop(id);
@@ -106,7 +117,10 @@ void MainWindow::on_fullscreen()
 
 void MainWindow::on_stop()
 {
-	gmp->stop();
+	if (live_player)
+		live_player->stop();
+	delete live_player;
+	live_player = NULL;
 }
 
 void MainWindow::on_play()
@@ -119,17 +133,20 @@ void MainWindow::on_record()
 
 void MainWindow::nslive_play(int channel_num)
 {
-	//启动nslive 的进程，然后再启动mplayer
-	gmp->nslive_play();
-
+	on_stop();
+	live_player = new NsLivePlayer(*gmp, channel_num);
+	live_player->play();
 }
+
 void MainWindow::mms_play(const std::string& stream)
 {
-	gmp->start(stream);
+	on_stop();
+	live_player = new MmsLivePlayer(*gmp, stream);
+	live_player->play();
 }
 
 
-bool MainWindow::on_mplayer_callback(const Glib::IOCondition& condition)
+bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 {
 	char buf[256];
 	while (int len = gmp->get_mplayer_log(buf, 256)) {
@@ -140,5 +157,16 @@ bool MainWindow::on_mplayer_callback(const Glib::IOCondition& condition)
 		}
 	}
 	return true;
+}
+
+void MainWindow::on_gmplayer_start()
+{
+
+}
+
+void MainWindow::on_gmplayer_stop()
+{
+	on_stop();
+	show_msg("ready...");
 }
 

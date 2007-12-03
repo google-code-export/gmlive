@@ -14,7 +14,9 @@ gmlive_SOURCES = \
 		 nslivechannel.cpp \
 		 mmschannel.cpp \
 		 recentchannel.cpp \
-		 gmplayer.cpp
+		 gmplayer.cpp \
+		 mms_live_player.cpp \
+		 ns_live_player.cpp
 
 noinst_HEADERS = \
 		 ec_throw.h \
@@ -24,6 +26,9 @@ noinst_HEADERS = \
 		 nslivechannel.h \
 		 mmschannel.h \
 		 recentchannel.h \
-		 gmplayer.h
+		 gmplayer.h \
+		 live_player.h \
+		 mms_live_player.h \
+		 ns_live_player.h
 
 gmlive_LDADD = @LIBS@ @PACKAGE_LIBS@

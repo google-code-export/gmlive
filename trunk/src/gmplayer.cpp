@@ -53,6 +53,8 @@ void GMplayer::wait_mplayer_exit(GPid pid, int)
 
 		ready = true;
 	}
+	
+	signal_stop_play_.emit();
 
 	if (replay) {
 		start();
@@ -87,7 +89,8 @@ int GMplayer::my_system(const std::string& cmd)
 		(sigc::mem_fun(*this, &GMplayer::wait_mplayer_exit), pid);
 
 	pst_ctrl->wait_slave();
-	std::cout << pid << std::endl;
+
+	signal_start_play_.emit();
 
 }
 
@@ -149,9 +152,4 @@ void GMplayer::send_ctrl_word(char c)
 	}
 }
 
-void GMplayer::nslive_play()
-{
-	std::string filename = "http://127.0.0.1:9000" ;
-	start(filename);
-}
 

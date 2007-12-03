@@ -27,6 +27,7 @@
 #include "nslivechannel.h"
 #include "mmschannel.h"
 #include "recentchannel.h"
+#include "live_player.h"
 
 #define main_ui	    DATA_DIR"/gmlive.xml"
 typedef Glib::RefPtr < Gnome::Glade::Xml > GlademmXML;
@@ -34,6 +35,7 @@ typedef Glib::RefPtr < Gnome::Glade::Xml > GlademmXML;
 class MainWindow : public Gtk::Window {
 	public:
 		MainWindow();
+		~MainWindow();
 		void nslive_play(int channel_num);
 		void mms_play(const std::string& stream);
 		RecentChannel& getRecentChannel(){ return *recentChannel;}
@@ -42,15 +44,18 @@ class MainWindow : public Gtk::Window {
 		void on_stop();
 		void on_play();
 		void on_record();
-		bool on_mplayer_callback(const Glib::IOCondition& condition);
+		bool on_gmplayer_out(const Glib::IOCondition& condition);
+		void on_gmplayer_start();
+		void on_gmplayer_stop();
 		void show_msg(const Glib::ustring& msg,unsigned int id=0);
 
 	private:
 		GlademmXML ui_xml;
 		GMplayer* gmp;
-		NSLiveChannel* nsliveChannel;
+		LivePlayer* live_player;
+		NSLiveChannel* 	nsliveChannel;
 		MMSChannel*	mmsChannel;
-		RecentChannel* recentChannel;
+		RecentChannel* 	recentChannel;
 		Gtk::Statusbar* statusbar;
 };
 
