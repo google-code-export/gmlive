@@ -44,6 +44,7 @@ void NSLiveChannel::init()
 	std::string name;
 	std::string uid;
 	std::string stream(NSLIVESTREAM);
+	std::string groupname;
 	int id;
 	if(file){
 		while(std::getline(file,line)){
@@ -51,9 +52,13 @@ void NSLiveChannel::init()
 			if(pos==std::string::npos)
 				continue;
 			name = line.substr(0,pos);
-			uid = line.substr(pos+1,std::string::npos);
+			size_t pos2 = line.find_last_of(";");
+			if(pos2==std::string::npos)
+				continue;
+			groupname= line.substr(pos2+1,std::string::npos);
+			uid = line.substr(pos+1,pos2);
 			id = atoi(uid.c_str());
-			addLine(id,name,stream);
+			addLine(id,name,stream,groupname);
 		}
 	}
 
@@ -61,16 +66,35 @@ void NSLiveChannel::init()
 
 }
 
-void NSLiveChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream)
+
+void NSLiveChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream,const Glib::ustring& groupname)
 {
-	Gtk::TreeModel::iterator iter = m_liststore->append();
+	Gtk::TreeModel::Children children = m_liststore->children();
+	Gtk::TreeModel::iterator listiter;
+	listiter = getListIter(children,groupname);
+	if(listiter == children.end())
+		listiter = addGroup(groupname);
+
+	Gtk::TreeModel::iterator iter = m_liststore->append(listiter->children());
+	//Gtk::TreeModel::iterator iter = m_liststore->append();
 	(*iter)[columns.id] = num;
 	(*iter)[columns.name] = name;
-	(*iter)[columns.freq] = 100;
+	(*iter)[columns.freq] = 350;
 	(*iter)[columns.stream]=stream;
 	(*iter)[columns.type]=NSLIVE_CHANNEL;
 
 }
+
+/*
+Gtk::TreeModel::iterator NSLiveChannel::addGroup(const Glib::ustring& group)
+{
+	Gtk::TreeModel::iterator iter = m_liststore->append();
+	(*iter)[columns.name] = group;
+	(*iter)[columns.type]=GROUP_CHANNEL;
+
+	return iter;
+}
+*/
 
 bool NSLiveChannel::on_button_press_event(GdkEventButton * ev)
 {
@@ -91,11 +115,21 @@ bool NSLiveChannel::on_button_press_event(GdkEventButton * ev)
 		return FALSE;
 	if ((ev->type == GDK_2BUTTON_PRESS ||
 	     ev->type == GDK_3BUTTON_PRESS)) {
-		int channle_num = (*iter)[columns.id];
-		Glib::ustring name = (*iter)[columns.name];
-		std::string stream = (*iter)[columns.stream];
-		parent->nslive_play(channle_num);
-		parent->getRecentChannel().saveLine(channle_num,name,stream);
+		if(NSLIVE_CHANNEL == (*iter)[columns.type]){
+			int channle_num = (*iter)[columns.id];
+			Glib::ustring name = (*iter)[columns.name];
+			std::string stream = (*iter)[columns.stream];
+			parent->nslive_play(channle_num);
+			parent->getRecentChannel().saveLine(channle_num,name,stream);
+		}
+		else if(GROUP_CHANNEL == (*iter)[columns.type]){
+			if(this->row_expanded(path))
+				this->collapse_row(path);
+			else{
+				this->expand_row(path,false);
+				this->scroll_to_row(path);
+			}
+		}
 
 
 	} else if ((ev->type == GDK_BUTTON_PRESS)

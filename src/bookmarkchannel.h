@@ -26,6 +26,7 @@ class BookMarkChannel:public Channel
 		BookMarkChannel(MainWindow* parent_);
 		void init();
 		void  addLine(const int id,const Glib::ustring& name,const std::string& sream);
+		void saveLine(const int id,const Glib::ustring& name,const std::string& sream);
 	private:
 		MainWindow* parent;
 	protected:

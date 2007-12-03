@@ -44,6 +44,7 @@ void MMSChannel::init()
 	std::string line;
 	std::string name;
 	std::string stream;
+	std::string groupname;
 	int id=1;
 	if(file){
 		while(std::getline(file,line)){
@@ -51,8 +52,12 @@ void MMSChannel::init()
 			if(pos==std::string::npos)
 				continue;
 			name = line.substr(0,pos);
-			stream= line.substr(pos+1,std::string::npos);
-			addLine(id,name,stream);
+			size_t pos2 = line.find_last_of(";");
+			if(pos2 == std::string::npos)
+				continue;
+			groupname = line.substr(pos2+1,std::string::npos);
+			stream= line.substr(pos+1,pos2);
+			addLine(id,name,stream,groupname);
 			id++;
 		}
 	}
@@ -61,9 +66,15 @@ void MMSChannel::init()
 
 }
 
-void MMSChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream)
+void MMSChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream,const Glib::ustring& groupname)
 {
-	Gtk::TreeModel::iterator iter = m_liststore->append();
+	Gtk::TreeModel::Children children = m_liststore->children();
+	Gtk::TreeModel::iterator listiter;
+	listiter = getListIter(children,groupname);
+	if(listiter == children.end())
+		listiter = addGroup(groupname);
+
+	Gtk::TreeModel::iterator iter = m_liststore->append(listiter->children());
 	(*iter)[columns.id] = num;
 	(*iter)[columns.name] = name;
 	(*iter)[columns.freq] = 100;
@@ -91,12 +102,21 @@ bool MMSChannel::on_button_press_event(GdkEventButton * ev)
 		return FALSE;
 	if ((ev->type == GDK_2BUTTON_PRESS ||
 	     ev->type == GDK_3BUTTON_PRESS)) {
+		if(MMS_CHANNEL == (*iter)[columns.type]){
 		std::string stream = (*iter)[columns.stream];
 		Glib::ustring name = (*iter)[columns.name];
 		parent->mms_play(stream);
 		const int id=0;
 		parent->getRecentChannel().saveLine(id,name,stream);
-
+	}
+		else if(GROUP_CHANNEL == (*iter)[columns.type]){
+			if(this->row_expanded(path))
+				this->collapse_row(path);
+			else{
+				this->expand_row(path,false);
+				this->scroll_to_row(path);
+			}
+		}
 	} else if ((ev->type == GDK_BUTTON_PRESS)
 		   && (ev->button == 3)) {
 	}

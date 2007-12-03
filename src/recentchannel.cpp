@@ -74,6 +74,10 @@ void RecentChannel::init()
 	file.close();
 
 }
+
+void  RecentChannel::addLine(const int id,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname){}
+
+
 void RecentChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream_)
 {
 	Gtk::TreeModel::iterator iter = m_liststore->prepend();
@@ -130,7 +134,7 @@ void RecentChannel::saveLine(const int id, const Glib::ustring & name,const std:
 		//std::vector<std::string>::iterator iter = list.begin();
 		for(iter=list.begin();iter!=list.end();iter++)
 		{
-			if(iter == list.begin())
+			if(iter == list.begin()&&(num==10))
 				;
 			else
 				outfile<<*iter<<std::endl;
