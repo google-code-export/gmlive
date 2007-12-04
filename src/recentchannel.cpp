@@ -55,19 +55,22 @@ void RecentChannel::init()
 			if(pos2==std::string::npos)
 				continue;
 			type= line.substr(pos2+1,std::string::npos);
-			if("mms"==type)
+			if("mms"==type||"sopcast"==type)
 			{
 				id=0;
 				stream=line.substr(pos+1,pos2);
-				addLine(id,name,stream);
+				//addLine(id,name,stream,type);
 			}
 			else if("nslive" == type)
 			{
 				stream=line.substr(pos+1,pos2);
 				id = atoi(stream.c_str());
 				std::string stream_(NSLIVESTREAM);
-				addLine(id,name,stream_);
+				//addLine(id,name,stream_);
 			}
+			else
+				continue;
+			addLine(id,name,stream,type);
 		}
 	}
 
@@ -75,22 +78,33 @@ void RecentChannel::init()
 
 }
 
-void  RecentChannel::addLine(const int num,const Glib::ustring& name,const std::string& stream_,const Glib::ustring& groupname)
-//void RecentChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream_)
+void  RecentChannel::addLine(const int num,const Glib::ustring& name,const std::string& stream_,const Glib::ustring& type)
 {
 	Gtk::TreeModel::iterator iter = m_liststore->prepend();
 	(*iter)[columns.id] = num;
 	(*iter)[columns.name] = name;
 	(*iter)[columns.freq] = 100;
 	(*iter)[columns.stream]=stream_;
+	/*
 	if(0 == num)
 		(*iter)[columns.type]=MMS_CHANNEL;
 	else
 		(*iter)[columns.type]=NSLIVE_CHANNEL;
+		*/
+	TypeChannel type_;
+	if("mms"==type)
+		type_ = MMS_CHANNEL;
+	else if("nslive" == type)
+		type_ = NSLIVE_CHANNEL;
+	else if("sopcast" == type)
+		type_ = SOPCAST_CHANNEL;
+	else
+		type_ = NONE;
+	(*iter)[columns.type]=type_ ;
 
 }
 
-void RecentChannel::saveLine(const int id, const Glib::ustring & name,const std::string& stream_)
+void RecentChannel::saveLine(const int id, const Glib::ustring & name,const std::string& stream_,TypeChannel type)
 {
 
 	char buf[512];
@@ -115,21 +129,34 @@ void RecentChannel::saveLine(const int id, const Glib::ustring & name,const std:
 	}
 	file.close();
 	std::string stream;
+	/*
 	if(0==id)
 		stream = name +"\t#"+stream_+"\t;mms";
+	*/
+	std::string strtype;
+	if(type == MMS_CHANNEL)
+	{
+		stream = name +"\t#"+stream_+"\t;mms";
+		strtype = "mms";
+	}
+	else if (type == SOPCAST_CHANNEL)
+	{
+		stream = name +"\t#"+stream_+"\t;sopcast";
+		strtype = "sopcast";
+	}
 	else
 	{
 		char b[12];
 		sprintf(b,"%d",id);
 		std::string str(b);
 		stream = name +"\t#"+str+"\t;nslive";
+		strtype = "nslive";
 	}
 	std::vector<std::string>::iterator iter = std::find(list.begin(),list.end(),stream);
 	if(iter == list.end())
 	{
 		list.push_back(stream);
 		std::ofstream outfile(buf);
-		//std::vector<std::string>::iterator iter = list.begin();
 		for(iter=list.begin();iter!=list.end();iter++)
 		{
 			if(iter == list.begin()&&(num==10))
@@ -139,7 +166,7 @@ void RecentChannel::saveLine(const int id, const Glib::ustring & name,const std:
 		}
 		outfile.close();
 
-		addLine(id, name,stream_);
+		addLine(id, name,stream_,strtype);
 	}
 
 }
@@ -164,11 +191,15 @@ bool RecentChannel::on_button_press_event(GdkEventButton * ev)
 				ev->type == GDK_3BUTTON_PRESS)) {
 		std::string stream = (*iter)[columns.stream];
 		int id = (*iter)[columns.id];
+		TypeChannel type_ = (*iter)[columns.type];
+		parent->play(id,stream,type_);
 
+		/*
 		if(MMS_CHANNEL == (*iter)[columns.type])
-			parent->mms_play(stream);
+			parent->play(id,stream,MMS_CHANNEL);
 		else if(NSLIVE_CHANNEL == (*iter)[columns.type])
-			parent->nslive_play(id);
+			parent->play(id,stream,NSLIVE__CHANNEL);
+			*/
 
 	} else if ((ev->type == GDK_BUTTON_PRESS)
 			&& (ev->button == 3)) {

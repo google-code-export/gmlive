@@ -128,8 +128,8 @@ bool NSLiveChannel::on_button_press_event(GdkEventButton * ev)
 			int channle_num = (*iter)[columns.id];
 			Glib::ustring name = (*iter)[columns.name];
 			std::string stream = (*iter)[columns.stream];
-			parent->nslive_play(channle_num);
-			parent->getRecentChannel().saveLine(channle_num,name,stream);
+			parent->play(channle_num,stream,NSLIVE_CHANNEL);
+			parent->getRecentChannel().saveLine(channle_num,name,stream,NSLIVE_CHANNEL);
 		}
 		else if(GROUP_CHANNEL == (*iter)[columns.type]){
 			if(this->row_expanded(path))
