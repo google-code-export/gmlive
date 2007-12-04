@@ -23,8 +23,10 @@
 #include <gtkmm/treeview.h>
 #include <gtkmm/treestore.h>
 #include <gtkmm/treeselection.h>
-#include <functional>
+#include "gmlive.h"
+//#include <functional>
 
+/*
 #define NSLIVESTREAM "http://127.0.0.1:9000"
 enum TypeChannel{
 	NSLIVE_CHANNEL,
@@ -33,6 +35,7 @@ enum TypeChannel{
 	GROUP_CHANNEL,
 	NONE
 };
+*/
 
 class Channel:public Gtk::TreeView
 {

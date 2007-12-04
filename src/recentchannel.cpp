@@ -75,10 +75,8 @@ void RecentChannel::init()
 
 }
 
-void  RecentChannel::addLine(const int id,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname){}
-
-
-void RecentChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream_)
+void  RecentChannel::addLine(const int num,const Glib::ustring& name,const std::string& stream_,const Glib::ustring& groupname)
+//void RecentChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream_)
 {
 	Gtk::TreeModel::iterator iter = m_liststore->prepend();
 	(*iter)[columns.id] = num;

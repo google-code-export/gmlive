@@ -16,12 +16,13 @@
  * =====================================================================================
  */
 
-#include "ns_live_player.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <signal.h>
 #include <sys/wait.h>
+#include "gmlive.h"
+#include "ns_live_player.h"
 
 
 NsLivePlayer::NsLivePlayer(GMplayer& gmp, int id_) : 
@@ -53,7 +54,8 @@ void NsLivePlayer::play()
 
 	ns_pid = pid;
 	printf("%d",ns_pid);
-	gmp.start("http://127.0.0.1:9000");
+	//gmp.start("http://127.0.0.1:9000");
+	gmp.start(NSLIVESTREAM);
 }
 
 void NsLivePlayer::stop()
