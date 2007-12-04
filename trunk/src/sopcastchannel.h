@@ -1,6 +1,23 @@
+/*
+ * =====================================================================================
+ * 
+ *       Filename:  sopcastchannel.h
+ * 
+ *    Description:  sopcast的列表支持
+ * 
+ *        Version:  1.0
+ *        Created:  2007年12月04日 20时11分23秒 CST
+ *       Revision:  none
+ *       Compiler:  gcc
+ * 
+ *         Author:  lerosua (), lerosua@gmail.com
+ *        Company:  Cyclone
+ * 
+ * =====================================================================================
+ */
 
-#ifndef SOPCASTCHANNEL_H_
-#define SOPCASTCHANNEL_H_
+#ifndef  SOPCASTCHANNEL_FILE_HEADER_INC
+#define  SOPCASTCHANNEL_FILE_HEADER_INC
 #include "channel.h"
 class MainWindow;
 class SopcastChannel:public Channel
@@ -17,8 +34,5 @@ class SopcastChannel:public Channel
 
 
 
+#endif   /* ----- #ifndef SOPCASTCHANNEL_FILE_HEADER_INC  ----- */
 
-
-
-
-#endif

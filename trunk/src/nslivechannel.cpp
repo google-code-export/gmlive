@@ -53,19 +53,14 @@ void NSLiveChannel::init()
 			if(pos==std::string::npos)
 				continue;
 			name = line.substr(0,pos);
+			last = line.substr(pos+1,std::string::npos);
 
 			pos = last.find_first_of(";");
 			if(pos == std::string::npos)
 				continue;
 			uid = last.substr(0,pos);
 			groupname = last.substr(pos+1,std::string::npos);
-			/*
-			size_t pos2 = line.find_last_of(";");
-			if(pos2==std::string::npos)
-				continue;
-			groupname= line.substr(pos2+1,std::string::npos);
-			uid = line.substr(pos+1,pos2);
-			*/
+			
 			id = atoi(uid.c_str());
 			addLine(id,name,stream,groupname);
 		}
@@ -85,7 +80,6 @@ void NSLiveChannel::addLine(const int num, const Glib::ustring & name,const std:
 		listiter = addGroup(groupname);
 
 	Gtk::TreeModel::iterator iter = m_liststore->append(listiter->children());
-	//Gtk::TreeModel::iterator iter = m_liststore->append();
 	(*iter)[columns.id] = num;
 	(*iter)[columns.name] = name;
 	(*iter)[columns.freq] = 350;
@@ -104,6 +98,31 @@ Gtk::TreeModel::iterator NSLiveChannel::addGroup(const Glib::ustring& group)
 	return iter;
 }
 */
+
+void NSLiveChannel::play_selection()
+{
+	Glib::RefPtr < Gtk::TreeSelection > selection =
+	    this->get_selection();
+	Gtk::TreeModel::iterator iter = selection->get_selected();
+	if (!selection->count_selected_rows())
+		return ;
+	TypeChannel page = (*iter)[columns.type];
+	int channle_num = (*iter)[columns.id];
+	Glib::ustring name = (*iter)[columns.name];
+	std::string stream = (*iter)[columns.stream];
+
+	parent->play(channle_num,stream,page);
+	parent->getRecentChannel().saveLine(channle_num,name,stream,page);
+}
+
+void NSLiveChannel::record_selection()
+{
+
+}
+
+		
+
+
 
 bool NSLiveChannel::on_button_press_event(GdkEventButton * ev)
 {
@@ -143,6 +162,8 @@ bool NSLiveChannel::on_button_press_event(GdkEventButton * ev)
 
 	} else if ((ev->type == GDK_BUTTON_PRESS)
 		   && (ev->button == 3)) {
+		if(GROUP_CHANNEL != (*iter)[columns.type])
+			parent->getMenu().popup(1,ev->time);
 	}
 
 }

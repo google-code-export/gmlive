@@ -10,6 +10,7 @@ gmlive_SOURCES = \
 		 main.cpp \
 		 pst_ctrl.cpp \
 		 MainWindow.cpp \
+		 StreamMenu.cpp \
 		 channel.cpp \
 		 nslivechannel.cpp \
 		 mmschannel.cpp \
@@ -22,6 +23,7 @@ noinst_HEADERS = \
 		 ec_throw.h \
 		 pst_ctrl.h \
 		 MainWindow.h \
+		 StreamMenu.h \
 		 channel.h \
 		 nslivechannel.h \
 		 mmschannel.h \

@@ -27,6 +27,8 @@ class MMSChannel:public Channel
 		MMSChannel(MainWindow* parent_);
 		void init();
 		void  addLine(const int id,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
+		void play_selection();
+		void record_selection();
 	private:
 		MainWindow* parent;
 	protected:
