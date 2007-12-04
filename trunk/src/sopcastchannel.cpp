@@ -17,9 +17,6 @@ void SopcastChannel::init()
 	snprintf(buf, 512,"%s/.gmlive/sopcast.lst",homedir);
 	std::ifstream file(buf);
 	if(!file){
-		//char dir[512];
-		//snprintf(dir,512,"%s/.gmlive",homedir);
-		//mkdir(dir,S_IRUSR|S_IWUSR|S_IXUSR);
 		printf("buf is %s\n",buf);
 		std::cout<<"file error\n";
 		return;
@@ -44,14 +41,22 @@ void SopcastChannel::init()
 
 }
 
-void SopcastChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream)
+void SopcastChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream,const Glib::ustring& groupname)
 {
-	Gtk::TreeModel::iterator iter = m_liststore->append();
+	
+	Gtk::TreeModel::Children children = m_liststore->children();
+	Gtk::TreeModel::iterator listiter;
+	listiter = getListIter(children,groupname);
+	if(listiter == children.end())
+		listiter = addGroup(groupname);
+
+	Gtk::TreeModel::iterator iter = m_liststore->append(listiter->children());
+	
 	(*iter)[columns.id] = num;
 	(*iter)[columns.name] = name;
 	(*iter)[columns.freq] = 100;
 	(*iter)[columns.stream]=stream;
-	(*iter)[columns.type]=MMS_CHANNEL;
+	(*iter)[columns.type]=SOPCAST_CHANNEL;
 
 }
 

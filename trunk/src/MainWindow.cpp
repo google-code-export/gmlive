@@ -96,7 +96,6 @@ MainWindow::MainWindow():
 	recentChannel->init();
 
 	this->show_all();
-	//gmp->start("a.avi");
 	
 }
 
@@ -131,6 +130,20 @@ void MainWindow::on_record()
 {
 }
 
+void MainWindow::play(int channel_num,const std::string& stream,TypeChannel type)
+{
+	on_stop();
+	if(NSLIVE_CHANNEL == type)
+		live_player = new NsLivePlayer(*gmp, channel_num);
+	else if(MMS_CHANNEL == type)
+		live_player = new MmsLivePlayer(*gmp, stream);
+	else if(SOPCAST_CHANNEL ==type)
+		return;//live_player = new SopcastLivePlayer(*gmp, stream);
+	else
+		return;
+	live_player->play();
+}
+/*
 void MainWindow::nslive_play(int channel_num)
 {
 	on_stop();
@@ -144,6 +157,7 @@ void MainWindow::mms_play(const std::string& stream)
 	live_player = new MmsLivePlayer(*gmp, stream);
 	live_player->play();
 }
+*/
 
 
 bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)

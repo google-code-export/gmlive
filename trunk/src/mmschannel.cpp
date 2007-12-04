@@ -20,6 +20,7 @@
 #include <stdlib.h>
 #include <fstream>
 #include <iostream>
+#include "gmlive.h"
 #include "mmschannel.h"
 #include "MainWindow.h"
 
@@ -108,9 +109,9 @@ bool MMSChannel::on_button_press_event(GdkEventButton * ev)
 		if(MMS_CHANNEL == (*iter)[columns.type]){
 		std::string stream = (*iter)[columns.stream];
 		Glib::ustring name = (*iter)[columns.name];
-		parent->mms_play(stream);
 		const int id=0;
-		parent->getRecentChannel().saveLine(id,name,stream);
+		parent->play(id,stream,MMS_CHANNEL);
+		parent->getRecentChannel().saveLine(id,name,stream,MMS_CHANNEL);
 	}
 		else if(GROUP_CHANNEL == (*iter)[columns.type]){
 			if(this->row_expanded(path))

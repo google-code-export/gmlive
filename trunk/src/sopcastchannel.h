@@ -8,7 +8,7 @@ class SopcastChannel:public Channel
 	public:
 		SopcastChannel(MainWindow* parent_);
 		void init();
-		void  addLine(const int id,const Glib::ustring& name,const std::string& sream);
+		void  addLine(const int id,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
 	private:
 		MainWindow* parent;
 	protected:
