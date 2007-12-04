@@ -13,7 +13,7 @@
  *         Author:  wind (xihe), xihels@gmail.com
  *        Company:  cyclone
  *
- * =====================================================================================
+k* =====================================================================================
  */
 
 #include "MainWindow.h"
@@ -59,6 +59,8 @@ MainWindow::MainWindow():
 		(ui_xml->get_widget("bt_play"));
 	statusbar = dynamic_cast<Gtk::Statusbar*>
 		(ui_xml->get_widget("statusbar"));
+	picture = dynamic_cast<Gtk::Notebook*>
+		(ui_xml->get_widget("notebook_picture"));
 
 	gmp = new GMplayer(sigc::mem_fun(*this, &MainWindow::on_gmplayer_out));	
 	gmp->signal_start_play().connect(sigc::mem_fun(*this, &MainWindow::on_gmplayer_start));
@@ -176,11 +178,13 @@ bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 void MainWindow::on_gmplayer_start()
 {
 
+	picture->set_current_page(PAGE_MPLAYER);
 }
 
 void MainWindow::on_gmplayer_stop()
 {
 	on_stop();
 	show_msg("ready...");
+	picture->set_current_page(PAGE_PICTURE);
 }
 
