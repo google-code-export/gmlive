@@ -41,6 +41,7 @@ void NSLiveChannel::init()
 		return;
 	}
 	std::string line;
+	std::string last;
 	std::string name;
 	std::string uid;
 	std::string stream(NSLIVESTREAM);
@@ -52,11 +53,19 @@ void NSLiveChannel::init()
 			if(pos==std::string::npos)
 				continue;
 			name = line.substr(0,pos);
+
+			pos = last.find_first_of(";");
+			if(pos == std::string::npos)
+				continue;
+			uid = last.substr(0,pos);
+			groupname = last.substr(pos+1,std::string::npos);
+			/*
 			size_t pos2 = line.find_last_of(";");
 			if(pos2==std::string::npos)
 				continue;
 			groupname= line.substr(pos2+1,std::string::npos);
 			uid = line.substr(pos+1,pos2);
+			*/
 			id = atoi(uid.c_str());
 			addLine(id,name,stream,groupname);
 		}

@@ -27,6 +27,7 @@ noinst_HEADERS = \
 		 mmschannel.h \
 		 recentchannel.h \
 		 gmplayer.h \
+		 gmlive.h 	\
 		 live_player.h \
 		 mms_live_player.h \
 		 ns_live_player.h

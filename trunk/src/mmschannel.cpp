@@ -45,6 +45,7 @@ void MMSChannel::init()
 	std::string name;
 	std::string stream;
 	std::string groupname;
+	std::string last;
 	int id=1;
 	if(file){
 		while(std::getline(file,line)){
@@ -52,11 +53,13 @@ void MMSChannel::init()
 			if(pos==std::string::npos)
 				continue;
 			name = line.substr(0,pos);
-			size_t pos2 = line.find_last_of(";");
-			if(pos2 == std::string::npos)
+			last = line.substr(pos+1,std::string::npos);
+
+			pos = last.find_first_of(";");
+			if(pos == std::string::npos)
 				continue;
-			groupname = line.substr(pos2+1,std::string::npos);
-			stream= line.substr(pos+1,pos2);
+			stream = last.substr(0,pos);
+			groupname = last.substr(pos+1,std::string::npos);
 			addLine(id,name,stream,groupname);
 			id++;
 		}
