@@ -66,6 +66,7 @@ class MainWindow : public Gtk::Window {
 		MMSChannel*	mmsChannel;
 		RecentChannel* 	recentChannel;
 		Gtk::Statusbar* statusbar;
+		Gtk::Notebook* picture;
 };
 
 #endif // _MAINWINDOW_HH 
