@@ -28,6 +28,7 @@
 #include "mmschannel.h"
 #include "recentchannel.h"
 #include "live_player.h"
+#include "StreamMenu.h"
 
 #define main_ui	    DATA_DIR"/gmlive.xml"
 typedef Glib::RefPtr < Gnome::Glade::Xml > GlademmXML;
@@ -48,6 +49,13 @@ class MainWindow : public Gtk::Window {
 		 */
 		void play(int channel_num,const std::string& stream,TypeChannel type);
 		RecentChannel& getRecentChannel(){ return *recentChannel;}
+		StreamMenu& getMenu() { return streamMenu;}
+	public:
+		/** 菜单里的回调函数*/
+		void on_menu_play_activate();
+		void on_menu_record_activate();
+		void on_menu_add_activate();
+		void on_menu_refresh_activate();
 	private:
 		void on_fullscreen();
 		void on_stop();
@@ -67,6 +75,8 @@ class MainWindow : public Gtk::Window {
 		RecentChannel* 	recentChannel;
 		Gtk::Statusbar* statusbar;
 		Gtk::Notebook* picture;
+		Gtk::Notebook* listNotebook;
+		StreamMenu streamMenu;
 };
 
 #endif // _MAINWINDOW_HH 

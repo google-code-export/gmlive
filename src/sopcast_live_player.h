@@ -1,7 +1,23 @@
+/*
+ * =====================================================================================
+ * 
+ *       Filename:  sopcast_live_player.h
+ * 
+ *    Description:  sopcast播放器类
+ * 
+ *        Version:  1.0
+ *        Created:  2007年12月04日 20时12分55秒 CST
+ *       Revision:  none
+ *       Compiler:  gcc
+ * 
+ *         Author:  lerosua (), lerosua@gmail.com
+ *        Company:  Cyclone
+ * 
+ * =====================================================================================
+ */
 
-#ifndef SOPCAST_LIVE_PLAYER_H_
-#define SOPCAST_LIVE_PLAYER_H_
-
+#ifndef  SOPCAST_LIVE_PLAYER_FILE_HEADER_INC
+#define  SOPCAST_LIVE_PLAYER_FILE_HEADER_INC
 #include "live_player.h"
 
 class SopcastPlayer : public LivePlayer {
@@ -15,4 +31,6 @@ class SopcastPlayer : public LivePlayer {
 		std::string stream;
 };
 
-#endif
+
+#endif   /* ----- #ifndef SOPCAST_LIVE_PLAYER_FILE_HEADER_INC  ----- */
+

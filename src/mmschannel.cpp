@@ -86,7 +86,25 @@ void MMSChannel::addLine(const int num, const Glib::ustring & name,const std::st
 	(*iter)[columns.type]=MMS_CHANNEL;
 
 }
+void MMSChannel::play_selection()
+{
+	Glib::RefPtr < Gtk::TreeSelection > selection =
+	    this->get_selection();
+	Gtk::TreeModel::iterator iter = selection->get_selected();
+	if (!selection->count_selected_rows())
+		return ;
+	TypeChannel page = (*iter)[columns.type];
+	int channle_num = (*iter)[columns.id];
+	Glib::ustring name = (*iter)[columns.name];
+	std::string stream = (*iter)[columns.stream];
 
+	parent->play(channle_num,stream,page);
+	parent->getRecentChannel().saveLine(channle_num,name,stream,page);
+}
+
+void MMSChannel::record_selection()
+{
+}
 bool MMSChannel::on_button_press_event(GdkEventButton * ev)
 {
 	bool result = Gtk::TreeView::on_button_press_event(ev);
@@ -123,6 +141,8 @@ bool MMSChannel::on_button_press_event(GdkEventButton * ev)
 		}
 	} else if ((ev->type == GDK_BUTTON_PRESS)
 		   && (ev->button == 3)) {
+		if(GROUP_CHANNEL != (*iter)[columns.type])
+			parent->getMenu().popup(1,ev->time);
 	}
 
 }

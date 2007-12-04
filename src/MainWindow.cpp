@@ -39,7 +39,8 @@ Glib::ustring get_print_string(const char* buf, int len)
 
 
 MainWindow::MainWindow():
-	live_player(NULL)
+	live_player(NULL),
+	streamMenu(*this)
 {
 	ui_xml = Gnome::Glade::Xml::create(main_ui, "mainFrame");
 	Gtk::VBox* vbox = 
@@ -61,6 +62,8 @@ MainWindow::MainWindow():
 		(ui_xml->get_widget("statusbar"));
 	picture = dynamic_cast<Gtk::Notebook*>
 		(ui_xml->get_widget("notebook_picture"));
+	listNotebook = dynamic_cast<Gtk::Notebook*>
+		(ui_xml->get_widget("listnotebook"));
 
 	gmp = new GMplayer(sigc::mem_fun(*this, &MainWindow::on_gmplayer_out));	
 	gmp->signal_start_play().connect(sigc::mem_fun(*this, &MainWindow::on_gmplayer_start));
@@ -188,3 +191,38 @@ void MainWindow::on_gmplayer_stop()
 	picture->set_current_page(PAGE_PICTURE);
 }
 
+
+
+
+void MainWindow::on_menu_play_activate()
+{
+	int page = listNotebook->get_current_page();
+
+	Glib::RefPtr < Gtk::TreeSelection > selection ;
+
+	if(page == NSLIVE_CHANNEL)
+		nsliveChannel->play_selection();
+	else if(MMS_CHANNEL == page)
+		mmsChannel->play_selection();
+	else if(SOPCAST_CHANNEL == page)
+		;
+}
+void MainWindow::on_menu_record_activate()
+{
+	int page = listNotebook->get_current_page();
+
+	Glib::RefPtr < Gtk::TreeSelection > selection ;
+
+	if(page == NSLIVE_CHANNEL)
+		nsliveChannel->record_selection();
+	else if(MMS_CHANNEL == page)
+		mmsChannel->record_selection();
+	else if(SOPCAST_CHANNEL == page)
+		;
+}
+void MainWindow::on_menu_add_activate()
+{
+}
+void MainWindow::on_menu_refresh_activate()
+{
+}
