@@ -88,17 +88,6 @@ void NSLiveChannel::addLine(const int num, const Glib::ustring & name,const std:
 
 }
 
-/*
-Gtk::TreeModel::iterator NSLiveChannel::addGroup(const Glib::ustring& group)
-{
-	Gtk::TreeModel::iterator iter = m_liststore->append();
-	(*iter)[columns.name] = group;
-	(*iter)[columns.type]=GROUP_CHANNEL;
-
-	return iter;
-}
-*/
-
 void NSLiveChannel::play_selection()
 {
 	Glib::RefPtr < Gtk::TreeSelection > selection =
@@ -119,7 +108,21 @@ void NSLiveChannel::record_selection()
 {
 
 }
+void NSLiveChannel::store_selection()
+{
+	Glib::RefPtr < Gtk::TreeSelection > selection =
+	    this->get_selection();
+	Gtk::TreeModel::iterator iter = selection->get_selected();
+	if (!selection->count_selected_rows())
+		return ;
+	TypeChannel page = (*iter)[columns.type];
+	int channle_num = (*iter)[columns.id];
+	Glib::ustring name = (*iter)[columns.name];
+	std::string stream = (*iter)[columns.stream];
 
+	parent->getBookMarkChannel().saveLine(channle_num,name,stream,page);
+
+}
 		
 
 

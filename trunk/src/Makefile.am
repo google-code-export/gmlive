@@ -15,6 +15,7 @@ gmlive_SOURCES = \
 		 nslivechannel.cpp \
 		 mmschannel.cpp \
 		 recentchannel.cpp \
+		 bookmarkchannel.cpp \
 		 gmplayer.cpp \
 		 mms_live_player.cpp \
 		 ns_live_player.cpp
@@ -28,6 +29,7 @@ noinst_HEADERS = \
 		 nslivechannel.h \
 		 mmschannel.h \
 		 recentchannel.h \
+		 bookmarkchannel.h \
 		 gmplayer.h \
 		 gmlive.h 	\
 		 live_player.h \

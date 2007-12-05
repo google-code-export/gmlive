@@ -194,13 +194,6 @@ bool RecentChannel::on_button_press_event(GdkEventButton * ev)
 		TypeChannel type_ = (*iter)[columns.type];
 		parent->play(id,stream,type_);
 
-		/*
-		if(MMS_CHANNEL == (*iter)[columns.type])
-			parent->play(id,stream,MMS_CHANNEL);
-		else if(NSLIVE_CHANNEL == (*iter)[columns.type])
-			parent->play(id,stream,NSLIVE__CHANNEL);
-			*/
-
 	} else if ((ev->type == GDK_BUTTON_PRESS)
 			&& (ev->button == 3)) {
 	}

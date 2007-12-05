@@ -28,6 +28,7 @@ class NSLiveChannel:public Channel
 		void  addLine(const int id,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
 		void play_selection();
 		void record_selection();
+		void store_selection();
 
 	private:
 		MainWindow* parent;

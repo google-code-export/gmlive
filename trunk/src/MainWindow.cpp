@@ -85,6 +85,10 @@ MainWindow::MainWindow():
 		(ui_xml->get_widget("scrolledwin_recent"));
 	scrolledwin_recent->add(*recentChannel);
 
+	bookMarkChannel = Gtk::manage(new class BookMarkChannel(this));
+	Gtk::ScrolledWindow* scrolledwin_bookmark = dynamic_cast<Gtk::ScrolledWindow*>
+		(ui_xml->get_widget("scrolledwin_bookmark"));
+	scrolledwin_bookmark->add(*bookMarkChannel);
 
 	bt_fullscreen->signal_clicked().
 		connect(sigc::mem_fun(*this, &MainWindow::on_fullscreen));
@@ -222,6 +226,16 @@ void MainWindow::on_menu_record_activate()
 }
 void MainWindow::on_menu_add_activate()
 {
+	int page = listNotebook->get_current_page();
+
+	Glib::RefPtr < Gtk::TreeSelection > selection ;
+
+	if(page == NSLIVE_CHANNEL)
+		nsliveChannel->store_selection();
+	else if(MMS_CHANNEL == page)
+		mmsChannel->store_selection();
+	else if(SOPCAST_CHANNEL == page)
+		;
 }
 void MainWindow::on_menu_refresh_activate()
 {

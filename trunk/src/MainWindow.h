@@ -27,6 +27,7 @@
 #include "nslivechannel.h"
 #include "mmschannel.h"
 #include "recentchannel.h"
+#include "bookmarkchannel.h"
 #include "live_player.h"
 #include "StreamMenu.h"
 
@@ -49,6 +50,7 @@ class MainWindow : public Gtk::Window {
 		 */
 		void play(int channel_num,const std::string& stream,TypeChannel type);
 		RecentChannel& getRecentChannel(){ return *recentChannel;}
+		BookMarkChannel& getBookMarkChannel() { return *bookMarkChannel; }
 		StreamMenu& getMenu() { return streamMenu;}
 	public:
 		/** 菜单里的回调函数*/
@@ -73,6 +75,7 @@ class MainWindow : public Gtk::Window {
 		NSLiveChannel* 	nsliveChannel;
 		MMSChannel*	mmsChannel;
 		RecentChannel* 	recentChannel;
+		BookMarkChannel* bookMarkChannel;
 		Gtk::Statusbar* statusbar;
 		Gtk::Notebook* picture;
 		Gtk::Notebook* listNotebook;
