@@ -28,7 +28,7 @@ void SopcastLivePlayer::play()
 		return ;
 	if (pid == 0) {
 		char buf[256];
-		sprintf(buf, "sp-sc-auth %s 3908 8908", stream.c_str());
+		sprintf(buf, "sp-sc-auth %s 3908 8908 >/dev/null", stream.c_str());
 		const char* argv[4] = {"sh", "-c", buf};
 		execve("/bin/sh", (char**)argv, environ);
 		exit(127);

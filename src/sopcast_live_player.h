@@ -20,10 +20,10 @@
 #define  SOPCAST_LIVE_PLAYER_FILE_HEADER_INC
 #include "live_player.h"
 
-class SopcastPlayer : public LivePlayer {
+class SopcastLivePlayer : public LivePlayer {
 	public:
-		SopcastPlayer(GMplayer& gmp, const std::string& stream_);
-		~SopcastPlayer();
+		SopcastLivePlayer(GMplayer& gmp, const std::string& stream_);
+		~SopcastLivePlayer();
 		void play();
 		void stop();
 	private:
