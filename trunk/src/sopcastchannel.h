@@ -19,6 +19,9 @@
 #ifndef  SOPCASTCHANNEL_FILE_HEADER_INC
 #define  SOPCASTCHANNEL_FILE_HEADER_INC
 #include "channel.h"
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+
 class MainWindow;
 class SopcastChannel:public Channel
 {
@@ -30,6 +33,10 @@ class SopcastChannel:public Channel
 		void record_selection();
 		void store_selection();
 	private:
+		void parse_channel (Gtk::TreeModel::iterator& iter, xmlNode* a_node);
+
+		void parse_channels(xmlNode* a_node);
+		void parse_group(xmlNode* a_node);
 		MainWindow* parent;
 	protected:
 		bool on_button_press_event(GdkEventButton *);
