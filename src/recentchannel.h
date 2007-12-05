@@ -28,9 +28,9 @@ class RecentChannel:public Channel
 		~RecentChannel();
 		void init();
 		/** 只添加进列表中*/
-		void  addLine(const int id,const Glib::ustring& name,const std::string& sream,const Glib::ustring& type);
+		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& type);
 		/** 写进文件中*/
-		void saveLine(const int id,const Glib::ustring& name,const std::string& sream,TypeChannel type);
+		void saveLine(const Glib::ustring& name,const std::string& sream,TypeChannel type);
 
 	private:
 		MainWindow* parent;

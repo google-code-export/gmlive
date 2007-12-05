@@ -106,8 +106,6 @@ void SopcastChannel::init()
 	snprintf(buf, 512,"%s/.gmlive/sopcast.lst",homedir);
 	
 	xmlDoc* doc = xmlReadFile(buf, NULL, 0);
-//	std::ifstream file(buf);
-//	if(!file){
 	if (!doc) {
 		std::cout <<"file error: " << buf << std::endl;
 		return;
@@ -124,32 +122,6 @@ void SopcastChannel::init()
 	
 	xmlCleanupParser();
 	
-//	std::string line;
-//	std::string name;
-//	std::string stream;
-//	std::string groupname;
-//	std::string last;
-//	int id=1;
-//	if(file){
-//		while(std::getline(file,line)){
-//			size_t pos = line.find_first_of("#");
-//			if(pos==std::string::npos)
-//				continue;
-//			name = line.substr(0,pos);
-//			last = line.substr(pos+1,std::string::npos);
-//
-//			pos = last.find_first_of(";");
-//			if(pos == std::string::npos)
-//				continue;
-//			stream = last.substr(0,pos);
-//			groupname = last.substr(pos+1,std::string::npos);
-//			addLine(id,name,stream,groupname);
-//			id++;
-//		}
-//	}
-//
-//	file.close();
-
 }
 
 void SopcastChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream,const Glib::ustring& groupname)
@@ -163,7 +135,7 @@ void SopcastChannel::addLine(const int num, const Glib::ustring & name,const std
 
 	Gtk::TreeModel::iterator iter = m_liststore->append(listiter->children());
 	
-	(*iter)[columns.id] = num;
+	(*iter)[columns.users] = num;
 	(*iter)[columns.name] = name;
 	(*iter)[columns.freq] = 100;
 	(*iter)[columns.stream]=stream;
@@ -179,12 +151,11 @@ void SopcastChannel::play_selection()
 	if (!selection->count_selected_rows())
 		return ;
 	TypeChannel page = (*iter)[columns.type];
-	int channle_num = (*iter)[columns.id];
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
 
-	parent->play(channle_num,stream,page);
-	parent->getRecentChannel().saveLine(channle_num,name,stream,page);
+	parent->play(stream,page);
+	parent->getRecentChannel().saveLine(name,stream,page);
 }
 
 void SopcastChannel::record_selection()
@@ -199,11 +170,11 @@ void SopcastChannel::store_selection()
 	if (!selection->count_selected_rows())
 		return ;
 	TypeChannel page = (*iter)[columns.type];
-	int channle_num = (*iter)[columns.id];
+	int channle_num = (*iter)[columns.users];
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
 
-	parent->getBookMarkChannel().saveLine(channle_num,name,stream,page);
+	parent->getBookMarkChannel().saveLine(name,stream,page);
 
 }
 
@@ -228,11 +199,10 @@ bool SopcastChannel::on_button_press_event(GdkEventButton * ev)
 	if ((ev->type == GDK_2BUTTON_PRESS ||
 	     ev->type == GDK_3BUTTON_PRESS)) {
 		if(SOPCAST_CHANNEL == (*iter)[columns.type]){
-			int channle_num = (*iter)[columns.id];
 			Glib::ustring name = (*iter)[columns.name];
 			std::string stream = (*iter)[columns.stream];
-			parent->play(channle_num,stream,SOPCAST_CHANNEL);
-			parent->getRecentChannel().saveLine(channle_num,name,stream,SOPCAST_CHANNEL);
+			parent->play(stream,SOPCAST_CHANNEL);
+			parent->getRecentChannel().saveLine(name,stream,SOPCAST_CHANNEL);
 		}
 		else if(GROUP_CHANNEL == (*iter)[columns.type]){
 			if(this->row_expanded(path))

@@ -29,6 +29,7 @@ Channel::Channel()
 	channel->set_model( m_liststore);
 	channel->append_column("频道", columns.name);
 	channel->append_column("码率", columns.freq);
+	channel->append_column("用户数", columns.users);
 	//channel->append_column("channel", columns.name);
 	//channel->append_column("freq", columns.freq);
 	channel->show();

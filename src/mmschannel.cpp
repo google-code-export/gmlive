@@ -47,7 +47,7 @@ void MMSChannel::init()
 	std::string stream;
 	std::string groupname;
 	std::string last;
-	int id=1;
+	int users=0;
 	if(file){
 		while(std::getline(file,line)){
 			size_t pos = line.find_first_of("#");
@@ -56,13 +56,12 @@ void MMSChannel::init()
 			name = line.substr(0,pos);
 			last = line.substr(pos+1,std::string::npos);
 
-			pos = last.find_first_of(";");
+			pos = last.find_first_of("#");
 			if(pos == std::string::npos)
 				continue;
 			stream = last.substr(0,pos);
 			groupname = last.substr(pos+1,std::string::npos);
-			addLine(id,name,stream,groupname);
-			id++;
+			addLine(users,name,stream,groupname);
 		}
 	}
 
@@ -79,7 +78,7 @@ void MMSChannel::addLine(const int num, const Glib::ustring & name,const std::st
 		listiter = addGroup(groupname);
 
 	Gtk::TreeModel::iterator iter = m_liststore->append(listiter->children());
-	(*iter)[columns.id] = num;
+	(*iter)[columns.users] = num;
 	(*iter)[columns.name] = name;
 	(*iter)[columns.freq] = 100;
 	(*iter)[columns.stream]=stream;
@@ -94,12 +93,11 @@ void MMSChannel::play_selection()
 	if (!selection->count_selected_rows())
 		return ;
 	TypeChannel page = (*iter)[columns.type];
-	int channle_num = (*iter)[columns.id];
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
 
-	parent->play(channle_num,stream,page);
-	parent->getRecentChannel().saveLine(channle_num,name,stream,page);
+	parent->play(stream,page);
+	parent->getRecentChannel().saveLine(name,stream,page);
 }
 
 void MMSChannel::record_selection()
@@ -114,11 +112,10 @@ void MMSChannel::store_selection()
 	if (!selection->count_selected_rows())
 		return ;
 	TypeChannel page = (*iter)[columns.type];
-	int channle_num = (*iter)[columns.id];
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
 
-	parent->getBookMarkChannel().saveLine(channle_num,name,stream,page);
+	parent->getBookMarkChannel().saveLine(name,stream,page);
 
 }
 bool MMSChannel::on_button_press_event(GdkEventButton * ev)
@@ -143,9 +140,8 @@ bool MMSChannel::on_button_press_event(GdkEventButton * ev)
 		if(MMS_CHANNEL == (*iter)[columns.type]){
 		std::string stream = (*iter)[columns.stream];
 		Glib::ustring name = (*iter)[columns.name];
-		const int id=0;
-		parent->play(id,stream,MMS_CHANNEL);
-		parent->getRecentChannel().saveLine(id,name,stream,MMS_CHANNEL);
+		parent->play(stream,MMS_CHANNEL);
+		parent->getRecentChannel().saveLine(name,stream,MMS_CHANNEL);
 	}
 		else if(GROUP_CHANNEL == (*iter)[columns.type]){
 			if(this->row_expanded(path))

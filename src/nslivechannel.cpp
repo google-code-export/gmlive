@@ -43,10 +43,10 @@ void NSLiveChannel::init()
 	std::string line;
 	std::string last;
 	std::string name;
-	std::string uid;
+	std::string users;
 	std::string stream(NSLIVESTREAM);
 	std::string groupname;
-	int id;
+	int num;
 	if(file){
 		while(std::getline(file,line)){
 			size_t pos = line.find_first_of("#");
@@ -55,14 +55,19 @@ void NSLiveChannel::init()
 			name = line.substr(0,pos);
 			last = line.substr(pos+1,std::string::npos);
 
-			pos = last.find_first_of(";");
+			pos = last.find_first_of("#");
 			if(pos == std::string::npos)
 				continue;
-			uid = last.substr(0,pos);
-			groupname = last.substr(pos+1,std::string::npos);
+			stream  = last.substr(0,pos);
+			line  = last.substr(pos+1,std::string::npos);
+			pos = line.find_first_of("#");
+			if(pos == std::string::npos)
+				continue;
+			groupname= line.substr(0,pos);
+			users = line.substr(pos+1,std::string::npos);
 			
-			id = atoi(uid.c_str());
-			addLine(id,name,stream,groupname);
+			num=atoi(users.c_str());
+			addLine(num,name,stream,groupname);
 		}
 	}
 
@@ -80,7 +85,7 @@ void NSLiveChannel::addLine(const int num, const Glib::ustring & name,const std:
 		listiter = addGroup(groupname);
 
 	Gtk::TreeModel::iterator iter = m_liststore->append(listiter->children());
-	(*iter)[columns.id] = num;
+	(*iter)[columns.users] = num;
 	(*iter)[columns.name] = name;
 	(*iter)[columns.freq] = 350;
 	(*iter)[columns.stream]=stream;
@@ -96,12 +101,11 @@ void NSLiveChannel::play_selection()
 	if (!selection->count_selected_rows())
 		return ;
 	TypeChannel page = (*iter)[columns.type];
-	int channle_num = (*iter)[columns.id];
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
 
-	parent->play(channle_num,stream,page);
-	parent->getRecentChannel().saveLine(channle_num,name,stream,page);
+	parent->play(stream,page);
+	parent->getRecentChannel().saveLine(name,stream,page);
 }
 
 void NSLiveChannel::record_selection()
@@ -116,11 +120,10 @@ void NSLiveChannel::store_selection()
 	if (!selection->count_selected_rows())
 		return ;
 	TypeChannel page = (*iter)[columns.type];
-	int channle_num = (*iter)[columns.id];
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
 
-	parent->getBookMarkChannel().saveLine(channle_num,name,stream,page);
+	parent->getBookMarkChannel().saveLine(name,stream,page);
 
 }
 		
@@ -147,11 +150,10 @@ bool NSLiveChannel::on_button_press_event(GdkEventButton * ev)
 	if ((ev->type == GDK_2BUTTON_PRESS ||
 	     ev->type == GDK_3BUTTON_PRESS)) {
 		if(NSLIVE_CHANNEL == (*iter)[columns.type]){
-			int channle_num = (*iter)[columns.id];
 			Glib::ustring name = (*iter)[columns.name];
 			std::string stream = (*iter)[columns.stream];
-			parent->play(channle_num,stream,NSLIVE_CHANNEL);
-			parent->getRecentChannel().saveLine(channle_num,name,stream,NSLIVE_CHANNEL);
+			parent->play(stream,NSLIVE_CHANNEL);
+			parent->getRecentChannel().saveLine(name,stream,NSLIVE_CHANNEL);
 		}
 		else if(GROUP_CHANNEL == (*iter)[columns.type]){
 			if(this->row_expanded(path))

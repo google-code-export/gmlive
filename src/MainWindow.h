@@ -40,16 +40,14 @@ class MainWindow : public Gtk::Window {
 		MainWindow();
 		~MainWindow();
 		/** 通用型播放函数，各种流播放调用入口
-		 * @param channel_num 播放端口，只对 nslive流有起作用
 		 * @param stream	feed给mpalyer的流,mms流等
 		 * @param TypeChannel   用于标识传入的流的类型
 		 */
 		/** i don't know how to decribe it in english
-		 * @param channel_num play port. just useful for nslive stream
 		 * @param stream the stream feed to mplayer. example mms://
 		 * @param TypeChannel indentify the stream type.
 		 */
-		void play(int channel_num,const std::string& stream,TypeChannel type);
+		void play(const std::string& stream,TypeChannel type);
 		RecentChannel& getRecentChannel(){ return *recentChannel;}
 		BookMarkChannel& getBookMarkChannel() { return *bookMarkChannel; }
 		StreamMenu& getMenu() { return streamMenu;}

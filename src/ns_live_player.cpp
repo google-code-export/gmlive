@@ -46,7 +46,7 @@ void NsLivePlayer::play()
 		return ;
 	if (pid == 0) {
 		char buf[256];
-		sprintf(buf, "nslive -p %d", id);
+		sprintf(buf, "nslive -p %d>/dev/null", id);
 		const char* argv[4] = {"sh", "-c", buf};
 		execve("/bin/sh", (char**)argv, environ);
 		exit(127);
