@@ -3291,7 +3291,7 @@ fi
 done
 
 
-pkg_modules="gtkmm-2.4 >= 2.6.0 libglademm-2.4 >= 2.4.0"
+pkg_modules="gtkmm-2.4 >= 2.6.0 libglademm-2.4 >= 2.4.0 libxml-2.0 >= 2.6.0"
 
 
 if test "x$ac_cv_env_PKG_CONFIG_set" != "xset"; then

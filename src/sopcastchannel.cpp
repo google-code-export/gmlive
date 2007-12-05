@@ -4,48 +4,151 @@
 #include <iostream>
 #include "sopcastchannel.h"
 #include "MainWindow.h"
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+xmlNode* get_sop_address(xmlNode* a_node,
+	       	Glib::ustring& str)
+{
+	if (!a_node)
+		return NULL;
 
+	while (xmlStrcmp(a_node->name, (const xmlChar*)"sop_address"))
+		a_node = a_node->next;
+	if (a_node) {
+		xmlNode* cur_node = a_node->children;
+		xmlChar* value = 
+			xmlNodeListGetString(cur_node->doc,
+					cur_node->xmlChildrenNode, 1);
+		str.assign((const char*)value);	
+		xmlFree(value);
+	}
+	return a_node;
+}
+
+
+
+xmlNode* get_channel_item(xmlNode* a_node,
+	       	const xmlChar* name, Glib::ustring& str)
+{
+	if (!a_node)
+		return NULL;
+
+	while (xmlStrcmp(a_node->name, name))
+		a_node = a_node->next;
+	if (a_node) {
+		xmlChar* name = 
+			xmlNodeListGetString(a_node->doc,
+					a_node->xmlChildrenNode, 1);
+		str.assign((const char*)name);	
+		xmlFree(name);
+	}
+	return a_node;
+}
 
 SopcastChannel::SopcastChannel(MainWindow* parent_):parent( parent_)
 {
 }
+
+
+void SopcastChannel::parse_channel
+(Gtk::TreeModel::iterator& iter, xmlNode* a_node)
+{
+
+	xmlChar* id = xmlGetProp(a_node, (const xmlChar*)"id");
+	//(*iter)[columns.id] = id;
+	xmlFree(id);
+	Glib::ustring str;
+	xmlNode* cur_node = a_node->children;
+	if (cur_node->type != XML_ELEMENT_NODE) 
+		return;
+	cur_node = get_channel_item(cur_node, (const xmlChar*)"name", str);
+	(*iter)[columns.name] = str;
+
+	cur_node = get_sop_address(cur_node, str);
+	(*iter)[columns.stream] = str;
+}
+
+
+void SopcastChannel::parse_group(xmlNode* a_node)
+{
+	xmlChar* name = xmlNodeListGetString(a_node->doc,
+			a_node->xmlChildrenNode, 1);
+	Gtk::TreeModel::iterator iter = addGroup((const char*)name);
+	xmlFree(name);
+
+	for (xmlNode* cur_node = a_node->children; cur_node; 
+			cur_node = cur_node->next) {
+		if ((cur_node->type == XML_ELEMENT_NODE) && 
+				(!xmlStrcmp(cur_node->name, 
+					    (const xmlChar*)"channel"))) {
+			Gtk::TreeModel::iterator citer = m_liststore->append(iter->children());
+			parse_channel(citer, cur_node);
+		}
+	}
+}
+
+void SopcastChannel::parse_channels(xmlNode* a_node)
+{
+	for (xmlNode* cur_node = a_node->children;
+		       	cur_node; cur_node = cur_node->next) {
+		if ((cur_node->type == XML_ELEMENT_NODE) &&
+				(!xmlStrcmp(cur_node->name,
+					    (const xmlChar*)"group")))
+			parse_group(cur_node);
+	}
+}
+					    
 
 void SopcastChannel::init()
 {
 	char buf[512];
 	char* homedir = getenv("HOME");
 	snprintf(buf, 512,"%s/.gmlive/sopcast.lst",homedir);
-	std::ifstream file(buf);
-	if(!file){
-		printf("buf is %s\n",buf);
-		std::cout<<"file error\n";
+	
+	xmlDoc* doc = xmlReadFile(buf, NULL, 0);
+//	std::ifstream file(buf);
+//	if(!file){
+	if (!doc) {
+		std::cout <<"file error: " << buf << std::endl;
 		return;
 	}
-	std::string line;
-	std::string name;
-	std::string stream;
-	std::string groupname;
-	std::string last;
-	int id=1;
-	if(file){
-		while(std::getline(file,line)){
-			size_t pos = line.find_first_of("#");
-			if(pos==std::string::npos)
-				continue;
-			name = line.substr(0,pos);
-			last = line.substr(pos+1,std::string::npos);
 
-			pos = last.find_first_of(";");
-			if(pos == std::string::npos)
-				continue;
-			stream = last.substr(0,pos);
-			groupname = last.substr(pos+1,std::string::npos);
-			addLine(id,name,stream,groupname);
-			id++;
-		}
+	xmlNode* root_element = xmlDocGetRootElement(doc);
+	if (!root_element) {
+		xmlCleanupParser();
+		std::cout << "file is empty\n";
+		return;
 	}
 
-	file.close();
+	parse_channels(root_element);
+	
+	xmlCleanupParser();
+	
+//	std::string line;
+//	std::string name;
+//	std::string stream;
+//	std::string groupname;
+//	std::string last;
+//	int id=1;
+//	if(file){
+//		while(std::getline(file,line)){
+//			size_t pos = line.find_first_of("#");
+//			if(pos==std::string::npos)
+//				continue;
+//			name = line.substr(0,pos);
+//			last = line.substr(pos+1,std::string::npos);
+//
+//			pos = last.find_first_of(";");
+//			if(pos == std::string::npos)
+//				continue;
+//			stream = last.substr(0,pos);
+//			groupname = last.substr(pos+1,std::string::npos);
+//			addLine(id,name,stream,groupname);
+//			id++;
+//		}
+//	}
+//
+//	file.close();
 
 }
 
