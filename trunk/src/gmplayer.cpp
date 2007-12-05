@@ -90,7 +90,6 @@ int GMplayer::my_system(const std::string& cmd)
 
 	pst_ctrl->wait_slave();
 
-	signal_start_play_.emit();
 
 }
 
@@ -122,6 +121,8 @@ void GMplayer::start()
 
 	if (file.empty())
 		return;
+
+	signal_start_play_.emit();
 
 	Glib::RefPtr<Gdk::Window> gwin = this->get_window();
 	if(gwin)
