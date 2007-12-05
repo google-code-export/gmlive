@@ -105,6 +105,22 @@ void MMSChannel::play_selection()
 void MMSChannel::record_selection()
 {
 }
+
+void MMSChannel::store_selection()
+{
+	Glib::RefPtr < Gtk::TreeSelection > selection =
+	    this->get_selection();
+	Gtk::TreeModel::iterator iter = selection->get_selected();
+	if (!selection->count_selected_rows())
+		return ;
+	TypeChannel page = (*iter)[columns.type];
+	int channle_num = (*iter)[columns.id];
+	Glib::ustring name = (*iter)[columns.name];
+	std::string stream = (*iter)[columns.stream];
+
+	parent->getBookMarkChannel().saveLine(channle_num,name,stream,page);
+
+}
 bool MMSChannel::on_button_press_event(GdkEventButton * ev)
 {
 	bool result = Gtk::TreeView::on_button_press_event(ev);

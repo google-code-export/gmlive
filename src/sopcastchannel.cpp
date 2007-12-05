@@ -60,6 +60,43 @@ void SopcastChannel::addLine(const int num, const Glib::ustring & name,const std
 
 }
 
+void SopcastChannel::play_selection()
+{
+	Glib::RefPtr < Gtk::TreeSelection > selection =
+	    this->get_selection();
+	Gtk::TreeModel::iterator iter = selection->get_selected();
+	if (!selection->count_selected_rows())
+		return ;
+	TypeChannel page = (*iter)[columns.type];
+	int channle_num = (*iter)[columns.id];
+	Glib::ustring name = (*iter)[columns.name];
+	std::string stream = (*iter)[columns.stream];
+
+	parent->play(channle_num,stream,page);
+	parent->getRecentChannel().saveLine(channle_num,name,stream,page);
+}
+
+void SopcastChannel::record_selection()
+{
+
+}
+void SopcastChannel::store_selection()
+{
+	Glib::RefPtr < Gtk::TreeSelection > selection =
+	    this->get_selection();
+	Gtk::TreeModel::iterator iter = selection->get_selected();
+	if (!selection->count_selected_rows())
+		return ;
+	TypeChannel page = (*iter)[columns.type];
+	int channle_num = (*iter)[columns.id];
+	Glib::ustring name = (*iter)[columns.name];
+	std::string stream = (*iter)[columns.stream];
+
+	parent->getBookMarkChannel().saveLine(channle_num,name,stream,page);
+
+}
+
+
 bool SopcastChannel::on_button_press_event(GdkEventButton * ev)
 {
 	bool result = Gtk::TreeView::on_button_press_event(ev);
@@ -79,14 +116,26 @@ bool SopcastChannel::on_button_press_event(GdkEventButton * ev)
 		return FALSE;
 	if ((ev->type == GDK_2BUTTON_PRESS ||
 	     ev->type == GDK_3BUTTON_PRESS)) {
-		std::string stream = (*iter)[columns.stream];
-		Glib::ustring name = (*iter)[columns.name];
-		//parent->mms_play(stream);
-		const int id=0;
-		//parent->getRecentChannel().saveLine(id,name,stream);
+		if(SOPCAST_CHANNEL == (*iter)[columns.type]){
+			int channle_num = (*iter)[columns.id];
+			Glib::ustring name = (*iter)[columns.name];
+			std::string stream = (*iter)[columns.stream];
+			parent->play(channle_num,stream,SOPCAST_CHANNEL);
+			parent->getRecentChannel().saveLine(channle_num,name,stream,SOPCAST_CHANNEL);
+		}
+		else if(GROUP_CHANNEL == (*iter)[columns.type]){
+			if(this->row_expanded(path))
+				this->collapse_row(path);
+			else{
+				this->expand_row(path,false);
+				this->scroll_to_row(path);
+			}
+
 
 	} else if ((ev->type == GDK_BUTTON_PRESS)
 		   && (ev->button == 3)) {
+		if(GROUP_CHANNEL != (*iter)[columns.type])
+			parent->getMenu().popup(1,ev->time);
 	}
 
 }
