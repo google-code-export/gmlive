@@ -142,17 +142,21 @@ void MainWindow::on_stop()
 
 void MainWindow::on_play()
 {
+	on_menu_play_activate();
 }
 
 void MainWindow::on_record()
 {
 }
 
-void MainWindow::play(int channel_num,const std::string& stream,TypeChannel type)
+void MainWindow::play(const std::string& stream,TypeChannel type)
 {
 	on_stop();
 	if(NSLIVE_CHANNEL == type)
+	{
+		int channel_num = atoi(stream.c_str());
 		live_player = new NsLivePlayer(*gmp, channel_num);
+	}
 	else if(MMS_CHANNEL == type)
 		live_player = new MmsLivePlayer(*gmp, stream);
 	else if(SOPCAST_CHANNEL ==type)

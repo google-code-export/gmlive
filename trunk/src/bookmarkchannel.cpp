@@ -40,20 +40,20 @@ void BookMarkChannel::init()
 	std::string name;
 	std::string stream;
 	std::string type;
-	int id;
 	if(file){
 		while(std::getline(file,line)){
 			size_t pos = line.find_first_of("#");
 			if(pos==std::string::npos)
 				continue;
 			name = line.substr(0,pos);
-			size_t pos2 = line.find_first_of(";");
+			size_t pos2 = line.find_first_of("#");
 			if(pos2==std::string::npos)
 				continue;
 			type= line.substr(pos2+1,std::string::npos);
+				stream=line.substr(pos+1,pos2);
+				/*
 			if("mms"==type||"sopcast"==type)
 			{
-				id=0;
 				stream=line.substr(pos+1,pos2);
 			}
 			else if("nslive" == type)
@@ -64,6 +64,8 @@ void BookMarkChannel::init()
 			}
 			else
 				continue;
+				*/
+			int id=0;
 			addLine(id,name,stream,type);
 		}
 	}
@@ -76,7 +78,6 @@ void BookMarkChannel::init()
 void  BookMarkChannel::addLine(const int num,const Glib::ustring& name,const std::string& stream_,const Glib::ustring& type)
 {
 	Gtk::TreeModel::iterator iter = m_liststore->prepend();
-	(*iter)[columns.id] = num;
 	(*iter)[columns.name] = name;
 	(*iter)[columns.freq] = 100;
 	(*iter)[columns.stream]=stream_;
@@ -93,7 +94,7 @@ void  BookMarkChannel::addLine(const int num,const Glib::ustring& name,const std
 	(*iter)[columns.type]=type_ ;
 
 }
-void BookMarkChannel::saveLine(const int id, const Glib::ustring & name,const std::string& stream_,TypeChannel type)
+void BookMarkChannel::saveLine(const Glib::ustring & name,const std::string& stream_,TypeChannel type)
 {
 
 	char buf[512];
@@ -121,15 +122,13 @@ void BookMarkChannel::saveLine(const int id, const Glib::ustring & name,const st
 	}
 	else
 	{
-		char b[12];
-		sprintf(b,"%d",id);
-		std::string str(b);
-		stream = name +"\t#"+str+"\t;nslive";
+		stream = name +"\t#"+stream_+"\t;nslive";
 		strtype = "nslive";
 	}
 	file<<stream<<std::endl;
 	file.close();
-	addLine(id, name,stream_,strtype);
+	int users = 0;
+	addLine(users, name,stream_,strtype);
 
 }
 
@@ -153,11 +152,10 @@ bool BookMarkChannel::on_button_press_event(GdkEventButton * ev)
 	if ((ev->type == GDK_2BUTTON_PRESS ||
 	     ev->type == GDK_3BUTTON_PRESS)) {
 		std::string stream = (*iter)[columns.stream];
-		int id = (*iter)[columns.id];
 		Glib::ustring name = (*iter)[columns.name];
 		TypeChannel type_ = (*iter)[columns.type];
-		parent->play(id,stream,type_);
-		parent->getRecentChannel().saveLine(id,name,stream,type_);
+		parent->play(stream,type_);
+		parent->getRecentChannel().saveLine(name,stream,type_);
 
 	} else if ((ev->type == GDK_BUTTON_PRESS)
 		   && (ev->button == 3)) {
