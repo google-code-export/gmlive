@@ -157,7 +157,7 @@ void RecentChannel::saveLine(const int id, const Glib::ustring & name,const std:
 	{
 		list.push_back(stream);
 		std::ofstream outfile(buf);
-		for(iter=list.begin();iter!=list.end();iter++)
+		for(iter=list.begin();iter!=list.end();++iter)
 		{
 			if(iter == list.begin()&&(num==10))
 				;
