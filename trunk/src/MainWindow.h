@@ -26,6 +26,7 @@
 #include "gmplayer.h"
 #include "nslivechannel.h"
 #include "mmschannel.h"
+#include "sopcastchannel.h"
 #include "recentchannel.h"
 #include "bookmarkchannel.h"
 #include "live_player.h"
@@ -74,6 +75,7 @@ class MainWindow : public Gtk::Window {
 		LivePlayer* live_player;
 		NSLiveChannel* 	nsliveChannel;
 		MMSChannel*	mmsChannel;
+		SopcastChannel* sopcastChannel;
 		RecentChannel* 	recentChannel;
 		BookMarkChannel* bookMarkChannel;
 		Gtk::Statusbar* statusbar;

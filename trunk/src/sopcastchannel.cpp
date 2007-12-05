@@ -24,6 +24,8 @@ void SopcastChannel::init()
 	std::string line;
 	std::string name;
 	std::string stream;
+	std::string groupname;
+	std::string last;
 	int id=1;
 	if(file){
 		while(std::getline(file,line)){
@@ -31,8 +33,14 @@ void SopcastChannel::init()
 			if(pos==std::string::npos)
 				continue;
 			name = line.substr(0,pos);
-			stream= line.substr(pos+1,std::string::npos);
-			addLine(id,name,stream);
+			last = line.substr(pos+1,std::string::npos);
+
+			pos = last.find_first_of(";");
+			if(pos == std::string::npos)
+				continue;
+			stream = last.substr(0,pos);
+			groupname = last.substr(pos+1,std::string::npos);
+			addLine(id,name,stream,groupname);
 			id++;
 		}
 	}
@@ -130,6 +138,7 @@ bool SopcastChannel::on_button_press_event(GdkEventButton * ev)
 				this->expand_row(path,false);
 				this->scroll_to_row(path);
 			}
+		}
 
 
 	} else if ((ev->type == GDK_BUTTON_PRESS)

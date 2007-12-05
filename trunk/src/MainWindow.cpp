@@ -19,6 +19,7 @@ k* =============================================================================
 #include "MainWindow.h"
 #include "mms_live_player.h"
 #include "ns_live_player.h"
+#include "sopcast_live_player.h"
 
 Glib::ustring get_print_string(const char* buf, int len)
 {
@@ -80,6 +81,12 @@ MainWindow::MainWindow():
 	Gtk::ScrolledWindow* scrolledwin_mms = dynamic_cast<Gtk::ScrolledWindow*>
 		(ui_xml->get_widget("scrolledwin_mms"));
 	scrolledwin_mms->add(*mmsChannel);
+
+	sopcastChannel = Gtk::manage(new class SopcastChannel(this));
+	Gtk::ScrolledWindow* scrolledwin_sopcast = dynamic_cast<Gtk::ScrolledWindow*>
+		(ui_xml->get_widget("scrolledwin_sop"));
+	scrolledwin_sopcast->add(*sopcastChannel);
+
 	recentChannel = Gtk::manage(new class RecentChannel(this));
 	Gtk::ScrolledWindow* scrolledwin_recent= dynamic_cast<Gtk::ScrolledWindow*>
 		(ui_xml->get_widget("scrolledwin_recent"));
@@ -102,6 +109,8 @@ MainWindow::MainWindow():
 
 	mmsChannel->init();
 	nsliveChannel->init();
+	sopcastChannel->init();
+	bookMarkChannel->init();
 	recentChannel->init();
 
 	this->show_all();
@@ -147,27 +156,11 @@ void MainWindow::play(int channel_num,const std::string& stream,TypeChannel type
 	else if(MMS_CHANNEL == type)
 		live_player = new MmsLivePlayer(*gmp, stream);
 	else if(SOPCAST_CHANNEL ==type)
-		return;//live_player = new SopcastLivePlayer(*gmp, stream);
+		live_player = new SopcastLivePlayer(*gmp, stream);
 	else
 		return;
 	live_player->play();
 }
-/*
-void MainWindow::nslive_play(int channel_num)
-{
-	on_stop();
-	live_player = new NsLivePlayer(*gmp, channel_num);
-	live_player->play();
-}
-
-void MainWindow::mms_play(const std::string& stream)
-{
-	on_stop();
-	live_player = new MmsLivePlayer(*gmp, stream);
-	live_player->play();
-}
-*/
-
 
 bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 {
@@ -209,7 +202,7 @@ void MainWindow::on_menu_play_activate()
 	else if(MMS_CHANNEL == page)
 		mmsChannel->play_selection();
 	else if(SOPCAST_CHANNEL == page)
-		;
+		sopcastChannel->play_selection();
 }
 void MainWindow::on_menu_record_activate()
 {
@@ -222,7 +215,7 @@ void MainWindow::on_menu_record_activate()
 	else if(MMS_CHANNEL == page)
 		mmsChannel->record_selection();
 	else if(SOPCAST_CHANNEL == page)
-		;
+		sopcastChannel->record_selection();
 }
 void MainWindow::on_menu_add_activate()
 {
@@ -235,7 +228,7 @@ void MainWindow::on_menu_add_activate()
 	else if(MMS_CHANNEL == page)
 		mmsChannel->store_selection();
 	else if(SOPCAST_CHANNEL == page)
-		;
+		sopcastChannel->store_selection();
 }
 void MainWindow::on_menu_refresh_activate()
 {
