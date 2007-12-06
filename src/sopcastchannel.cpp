@@ -64,6 +64,14 @@ void SopcastChannel::parse_channel
 	cur_node = get_channel_item(cur_node, (const xmlChar*)"name", str);
 	(*iter)[columns.name] = str;
 
+	cur_node = get_channel_item(cur_node, (const xmlChar*)"user_count", str);
+	int users = atoi(str.c_str());
+	(*iter)[columns.users] = users;
+
+	cur_node = get_channel_item(cur_node, (const xmlChar*)"kbps", str);
+	int freq = atoi(str.c_str());
+	(*iter)[columns.freq] = freq;
+
 	cur_node = get_sop_address(cur_node, str);
 	(*iter)[columns.stream] = str;
 }
