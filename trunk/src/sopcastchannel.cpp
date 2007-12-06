@@ -74,6 +74,8 @@ void SopcastChannel::parse_channel
 
 	cur_node = get_sop_address(cur_node, str);
 	(*iter)[columns.stream] = str;
+
+	(*iter)[columns.type]=SOPCAST_CHANNEL;
 }
 
 
