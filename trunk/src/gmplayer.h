@@ -29,7 +29,7 @@ class GMplayer : public Gtk::Socket
 		{ return signal_start_play_; }	
 	private:
 		void wait_mplayer_exit(GPid, int);
-		int my_system(const std::string&);
+		int my_system(char* const argv[]);
 		void change_size(Gtk::Allocation& allocation);
 		bool is_runing();
 
