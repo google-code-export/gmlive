@@ -45,15 +45,25 @@ void NsLivePlayer::play()
 	if (pid == -1)
 		return ;
 	if (pid == 0) {
-		char buf[256];
-		sprintf(buf, "nslive -p %d>/dev/null", id);
-		const char* argv[4] = {"sh", "-c", buf};
-		execve("/bin/sh", (char**)argv, environ);
+		close(STDOUT_FILENO);
+		close(STDERR_FILENO);
+
+		char id_buf[32];
+		sprintf(id_buf, "%d", id);
+
+		const char* argv[4];
+       		argv[0] = "nslive";
+		argv[1] = "-p";
+		argv[2] = id_buf;
+		argv[3] = NULL;
+
+		execvp("nslive", (char* const *)argv);
+		perror("nslive execvp:");
 		exit(127);
 	} 
 
 	ns_pid = pid;
-	printf("%d",ns_pid);
+	printf("%d\n",ns_pid);
 	//gmp.start("http://127.0.0.1:9000");
 	gmp.start(NSLIVESTREAM);
 }

@@ -49,7 +49,6 @@ void PstCtrl::setup_slave()
 	if (pts != -1)
 		EC_THROW(-1 == ::close(pts));
 
-	fprintf(stderr, "%s\n", ptsname.c_str());
 	EC_THROW( -1 == (pts = open(ptsname.c_str(), O_RDWR)));
 
 	EC_THROW(fchmod(pts, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH ) == -1 && errno != EPERM) ;

@@ -2,7 +2,7 @@
 #include <gdk/gdkx.h>
 #include <sys/types.h>
 #include <signal.h>
-#include <sstream>
+//#include <sstream>
 #include <sys/wait.h>
 
 
@@ -61,7 +61,7 @@ void GMplayer::wait_mplayer_exit(GPid pid, int)
 	}
 }
 
-int GMplayer::my_system(const std::string& cmd)
+int GMplayer::my_system(char* const argv[])
 {
 	extern char **environ;
 
@@ -74,9 +74,11 @@ int GMplayer::my_system(const std::string& cmd)
 
 		pst_ctrl->setup_slave();
 
-		const char* argv[4] = {"sh", "-c", cmd.c_str()};
-		execve("/bin/sh", (char**)argv, environ);
+		//const char* argv[2] = {"mplayer", cmd.c_str()};
+		//execle("/usr/bin/mplayer", cmd.c_str(), environ);
+		execvp("/usr/bin/mplayer", argv);
 
+		perror("mplayer execvp:");
 		exit(127);
 	} 
 
@@ -128,11 +130,18 @@ void GMplayer::start()
 	if(gwin)
 		xid=GDK_WINDOW_XID(gwin->gobj());
 
-	std::stringstream sst;
-	sst << "mplayer " << 
-		"-wid " << xid << " " << file ;
+	char wid_buf[32];
+	sprintf(wid_buf, "%d", xid);
+
+	const char* argv[5];
+       	argv[0] = "mplayer";
+	argv[1] = "-wid";
+	argv[2] = wid_buf;
+	argv[3] = file.c_str();
+	argv[4] = NULL;
+
 	ready = false;
-	my_system(sst.str());
+	my_system((char* const *) argv);
 }
 
 void GMplayer::start(const std::string& filename)
