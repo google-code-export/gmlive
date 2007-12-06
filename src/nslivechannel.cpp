@@ -139,6 +139,10 @@ void NSLiveChannel::store_selection()
 		
 
 
+void NSLiveChannel::refresh_list()
+{
+
+}
 
 bool NSLiveChannel::on_button_press_event(GdkEventButton * ev)
 {

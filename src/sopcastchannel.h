@@ -32,6 +32,7 @@ class SopcastChannel:public Channel
 		void play_selection();
 		void record_selection();
 		void store_selection();
+		void refresh_list();
 	private:
 		void parse_channel (Gtk::TreeModel::iterator& iter, xmlNode* a_node);
 

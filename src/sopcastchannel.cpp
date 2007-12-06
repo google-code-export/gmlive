@@ -78,6 +78,10 @@ void SopcastChannel::parse_channel
 	(*iter)[columns.type]=SOPCAST_CHANNEL;
 }
 
+void SopcastChannel::refresh_list()
+{
+
+}
 
 void SopcastChannel::parse_group(xmlNode* a_node)
 {

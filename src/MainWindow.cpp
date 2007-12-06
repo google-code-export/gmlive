@@ -119,7 +119,7 @@ MainWindow::MainWindow():
 
 MainWindow::~MainWindow()
 {
-	delete live_player;
+	on_stop();
 }
 
 
@@ -243,4 +243,15 @@ void MainWindow::on_menu_add_activate()
 }
 void MainWindow::on_menu_refresh_activate()
 {
+	int page = listNotebook->get_current_page();
+
+	Glib::RefPtr < Gtk::TreeSelection > selection ;
+
+	if(page == NSLIVE_CHANNEL)
+		nsliveChannel->refresh_list();
+	else if(SOPCAST_CHANNEL == page)
+		sopcastChannel->refresh_list();
+	else if(MMS_CHANNEL == page)
+		//mmsChannel->refresh_selection();
+		return;
 }

@@ -64,7 +64,6 @@ void NsLivePlayer::play()
 
 	ns_pid = pid;
 	printf("%d\n",ns_pid);
-	//gmp.start("http://127.0.0.1:9000");
 	gmp.start(NSLIVESTREAM);
 }
 
@@ -73,6 +72,7 @@ void NsLivePlayer::stop()
 	gmp.stop();
 	if (ns_pid > 0) {
 		kill(ns_pid, SIGKILL);
+	//	kill(ns_pid+1, SIGKILL);
 		waitpid(ns_pid, NULL, 0);
 		ns_pid = -1;
 	}
