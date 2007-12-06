@@ -48,7 +48,6 @@ void SopcastLivePlayer::play()
 
 	sop_pid = pid;
 	printf("%d\n",sop_pid);
-	//gmp.start("http://127.0.0.1:8908/tv.asf");
 	gmp.start(SOPCASTSTREAM);
 }
 
@@ -57,6 +56,7 @@ void SopcastLivePlayer::stop()
 	gmp.stop();
 	if (sop_pid > 0) {
 		kill(sop_pid, SIGKILL);
+		//kill(sop_pid+1, SIGKILL);
 		waitpid(sop_pid, NULL, 0);
 		sop_pid = -1;
 	}
