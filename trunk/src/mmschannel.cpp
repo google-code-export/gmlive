@@ -102,6 +102,16 @@ void MMSChannel::play_selection()
 
 void MMSChannel::record_selection()
 {
+	Glib::RefPtr < Gtk::TreeSelection > selection =
+	    this->get_selection();
+	Gtk::TreeModel::iterator iter = selection->get_selected();
+	if (!selection->count_selected_rows())
+		return ;
+	TypeChannel page = (*iter)[columns.type];
+	Glib::ustring name = (*iter)[columns.name];
+	std::string stream = (*iter)[columns.stream];
+
+	parent->record(stream,page);
 }
 
 void MMSChannel::store_selection()

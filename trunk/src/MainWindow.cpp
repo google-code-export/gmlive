@@ -122,6 +122,7 @@ MainWindow::~MainWindow()
 	delete live_player;
 }
 
+
 void MainWindow::show_msg(const Glib::ustring& msg, unsigned int id)
 {
 	statusbar->pop(id);
@@ -147,6 +148,7 @@ void MainWindow::on_play()
 
 void MainWindow::on_record()
 {
+	on_menu_record_activate();
 }
 
 void MainWindow::play(const std::string& stream,TypeChannel type)
@@ -164,6 +166,11 @@ void MainWindow::play(const std::string& stream,TypeChannel type)
 	else
 		return;
 	live_player->play();
+}
+
+void MainWindow::record(const std::string& stream, TypeChannel type)
+{
+
 }
 
 bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)

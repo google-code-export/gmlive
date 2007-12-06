@@ -48,6 +48,7 @@ class MainWindow : public Gtk::Window {
 		 * @param TypeChannel indentify the stream type.
 		 */
 		void play(const std::string& stream,TypeChannel type);
+		void record(const std::string& stream,TypeChannel type);
 		RecentChannel& getRecentChannel(){ return *recentChannel;}
 		BookMarkChannel& getBookMarkChannel() { return *bookMarkChannel; }
 		StreamMenu& getMenu() { return streamMenu;}
