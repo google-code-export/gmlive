@@ -22,7 +22,6 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
-//class MainWindow;
 class GMplayer;
 class SopcastChannel:public Channel
 {
@@ -58,9 +57,6 @@ class SopcastChannel:public Channel
 		int wget_pid;
 		bool refresh;
 
-		//MainWindow* parent;
-	//protected:
-	//	bool on_button_press_event(GdkEventButton *);
 };
 
 

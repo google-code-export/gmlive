@@ -34,10 +34,6 @@ class MMSChannel:public Channel
 		void play_selection();
 		void record_selection();
 		void store_selection();
-	//private:
-	//	MainWindow* parent;
-	//protected:
-	//	bool on_button_press_event(GdkEventButton *);
 };
 
 #endif   /* ----- #ifndef MMSCHANNEL_FILE_HEADER_INC  ----- */

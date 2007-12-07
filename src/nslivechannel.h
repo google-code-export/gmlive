@@ -32,10 +32,10 @@ class NSLiveChannel:public Channel
 		void store_selection();
 		void refresh_list();
 
-	//private:
-	//	MainWindow* parent;
-	//protected:
-	//	bool on_button_press_event(GdkEventButton *);
+		void wait_pid_exit(GPid pid, int);
+		int genlist_pid;
+		bool refresh;
+
 
 };
 #endif   /* ----- #ifndef NSLIVECHANNEL_FILE_HEADER_INC  ----- */

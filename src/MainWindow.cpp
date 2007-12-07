@@ -114,12 +114,6 @@ MainWindow::MainWindow():
 		connect(sigc::mem_fun(*this, &MainWindow::on_play));
 	this->add(*vbox);
 
-//	mmsChannel->init();
-//	nsliveChannel->init();
-//	sopcastChannel->init();
-//	bookMarkChannel->init();
-//	recentChannel->init();
-
 	this->show_all();
 	
 }
@@ -172,17 +166,6 @@ void MainWindow::play(const std::string& stream ,Channel* channel)
 	assert(channel);
 	on_stop();
 	live_player = channel->get_player(*gmp, stream);
-//	if(NSLIVE_CHANNEL == type)
-//	{
-//		int channel_num = atoi(stream.c_str());
-//		live_player = new NsLivePlayer(*gmp, channel_num);
-//	}
-//	else if(MMS_CHANNEL == type)
-//		live_player = new MmsLivePlayer(*gmp, stream);
-//	else if(SOPCAST_CHANNEL ==type)
-//		live_player = new SopcastLivePlayer(*gmp, stream);
-//	else
-//		return;
 	if (live_player)		
 		live_player->play();
 }
@@ -229,12 +212,6 @@ void MainWindow::on_menu_play_activate()
 		channel->play_selection();
 
 
-//	if(page == NSLIVE_CHANNEL)
-//		nsliveChannel->play_selection();
-//	else if(MMS_CHANNEL == page)
-//		mmsChannel->play_selection();
-//	else if(SOPCAST_CHANNEL == page)
-//		sopcastChannel->play_selection();
 }
 void MainWindow::on_menu_record_activate()
 {
@@ -242,16 +219,6 @@ void MainWindow::on_menu_record_activate()
 	Channel* channel = get_cur_channel();
 	if (channel)
 		channel->record_selection();
-//	int page = listNotebook->get_current_page();
-//
-//	Glib::RefPtr < Gtk::TreeSelection > selection ;
-//
-//	if(page == NSLIVE_CHANNEL)
-//		nsliveChannel->record_selection();
-//	else if(MMS_CHANNEL == page)
-//		mmsChannel->record_selection();
-//	else if(SOPCAST_CHANNEL == page)
-//		sopcastChannel->record_selection();
 }
 void MainWindow::on_menu_add_activate()
 {
@@ -260,16 +227,6 @@ void MainWindow::on_menu_add_activate()
 	if (channel)
 		channel->store_selection();
 
-//	int page = listNotebook->get_current_page();
-//
-//	Glib::RefPtr < Gtk::TreeSelection > selection ;
-//
-//	if(page == NSLIVE_CHANNEL)
-//		nsliveChannel->store_selection();
-//	else if(MMS_CHANNEL == page)
-//		mmsChannel->store_selection();
-//	else if(SOPCAST_CHANNEL == page)
-//		sopcastChannel->store_selection();
 }
 void MainWindow::on_menu_refresh_activate()
 {
@@ -277,15 +234,4 @@ void MainWindow::on_menu_refresh_activate()
 	if (channel)
 		channel->refresh_list();
 
-//	int page = listNotebook->get_current_page();
-//
-//	Glib::RefPtr < Gtk::TreeSelection > selection ;
-//
-//	if(page == NSLIVE_CHANNEL)
-//		nsliveChannel->refresh_list();
-//	else if(SOPCAST_CHANNEL == page)
-//		sopcastChannel->refresh_list();
-//	else if(MMS_CHANNEL == page)
-//		//mmsChannel->refresh_selection();
-//		return;
 }
