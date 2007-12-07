@@ -22,25 +22,45 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
-class MainWindow;
+//class MainWindow;
+class GMplayer;
 class SopcastChannel:public Channel
 {
 	public:
 		SopcastChannel(MainWindow* parent_);
+		LivePlayer* get_player(GMplayer& gmp, const std::string& stream);
 		void init();
 		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
 		void play_selection();
 		void record_selection();
 		void store_selection();
 		void refresh_list();
+
+				typedef sigc::signal<void> type_signal_stop;
+		type_signal_stop signal_stop_refresh()
+		{ return signal_stop_refresh_; }
+		
+		typedef sigc::signal<void> type_signal_start;
+		type_signal_start signal_start_refresh()
+		{ return signal_start_refresh_; }	
+
+	protected:
+		void wait_wget_exit(GPid pid, int);
 	private:
 		void parse_channel (Gtk::TreeModel::iterator& iter, xmlNode* a_node);
 
 		void parse_channels(xmlNode* a_node);
 		void parse_group(xmlNode* a_node);
-		MainWindow* parent;
-	protected:
-		bool on_button_press_event(GdkEventButton *);
+
+		type_signal_stop  signal_stop_refresh_;
+		type_signal_start signal_start_refresh_;
+		
+		int wget_pid;
+		bool refresh;
+
+		//MainWindow* parent;
+	//protected:
+	//	bool on_button_press_event(GdkEventButton *);
 };
 
 
