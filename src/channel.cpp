@@ -44,19 +44,17 @@ Gtk::TreeModel::iterator Channel::getListIter(Gtk::TreeModel::
 				Children children, const std::string& groupname)
 {
 
-	Gtk::TreeModel::iterator listiter= children.begin();
-	for( ; listiter!=children.end();listiter++)
-	{
-		if((*listiter)[columns.name] == groupname)
-			return listiter;
-	}
-			return listiter;
+//	Gtk::TreeModel::iterator listiter= children.begin();
+//	for( ; listiter!=children.end();listiter++)
+//	{
+//		if((*listiter)[columns.name] == groupname)
+//			return listiter;
+//	}
+//			return listiter;
 
-			/*
 	return find_if(children.begin(),
 			children.end(),
 			bind2nd(CompareChannel(columns),groupname));
-			*/
 }
 Gtk::TreeModel::iterator Channel::addGroup(const Glib::ustring& group)
 {

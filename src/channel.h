@@ -24,7 +24,7 @@
 #include <gtkmm/treestore.h>
 #include <gtkmm/treeselection.h>
 #include "gmlive.h"
-//#include <functional>
+#include <functional>
 
 /*
 #define NSLIVESTREAM "http://127.0.0.1:9000"
@@ -82,18 +82,18 @@ class Channel:public Gtk::TreeView
 	protected:
 		bool on_button_press_event(GdkEventButton *);
 		MainWindow* parent;
-/*
 	private:
-		struct CompareChannel:public binary_function < Gtk::TreeModel::Row,
+		struct CompareChannel:public std::binary_function < Gtk::TreeModel::Row,
 		const Glib::ustring,bool >{
 			explicit CompareChannel(const ChannelColumns& 
-					column_):column(column_) {
-			} bool operator () (const Gtk::TreeRow& lhs,
-					const Glib::ustring& var) const {
-				return lhs[column.name] == var;
-			} const ChannelColumns& column;
+					column_):column(column_) {} 
+			bool operator () (const Gtk::TreeRow& lhs,
+					const Glib::ustring& var) const 
+			{
+				return lhs[column.name] == var; 
+			}
+			const ChannelColumns& column;
 		};
-		*/
 
 };
 
