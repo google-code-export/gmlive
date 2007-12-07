@@ -19,11 +19,12 @@
 #ifndef  NSLIVECHANNEL_FILE_HEADER_INC
 #define  NSLIVECHANNEL_FILE_HEADER_INC
 #include "channel.h"
-class MainWindow;
+class GMplayer;
 class NSLiveChannel:public Channel
 {
 	public:
 		NSLiveChannel(MainWindow* parent_);
+		LivePlayer* get_player(GMplayer& gmp, const std::string& stream);
 		void init();
 		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
 		void play_selection();
@@ -31,10 +32,10 @@ class NSLiveChannel:public Channel
 		void store_selection();
 		void refresh_list();
 
-	private:
-		MainWindow* parent;
-	protected:
-		bool on_button_press_event(GdkEventButton *);
+	//private:
+	//	MainWindow* parent;
+	//protected:
+	//	bool on_button_press_event(GdkEventButton *);
 
 };
 #endif   /* ----- #ifndef NSLIVECHANNEL_FILE_HEADER_INC  ----- */

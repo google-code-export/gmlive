@@ -20,22 +20,23 @@
 #define  RECENTCHANNEL_FILE_HEADER_INC
 
 #include "channel.h"
-class MainWindow;
+//class MainWindow;
 class RecentChannel:public Channel
 {
 	public:
 		RecentChannel(MainWindow* parent_);
 		~RecentChannel();
 		void init();
-		/** 只添加进列表中*/
-		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& type);
 		/** 写进文件中*/
 		void saveLine(const Glib::ustring& name,const std::string& sream,TypeChannel type);
-
-	private:
-		MainWindow* parent;
 	protected:
-		bool on_button_press_event(GdkEventButton *);
+		/** 只添加进列表中*/
+		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& type);
+
+	//private:
+	//	MainWindow* parent;
+	//protected:
+		//bool on_button_press_event(GdkEventButton *);
 
 };
 #endif   /* ----- #ifndef RECENTCHANNEL_FILE_HEADER_INC  ----- */

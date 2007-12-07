@@ -36,17 +36,24 @@ enum TypeChannel{
 	NONE
 };
 */
-
+class MainWindow;
+class LivePlayer;
+class GMplayer;
 class Channel:public Gtk::TreeView
 {
 	public:
-		Channel();
-		virtual void init()=0;
+		Channel(MainWindow* parent_);
 		virtual ~Channel();
+		virtual void play_selection(){};
+		virtual void record_selection(){};
+		virtual void store_selection(){};
+		virtual void refresh_list(){};
+		virtual LivePlayer* get_player(GMplayer& gmp, const std::string&) { return NULL; }
+
 		Gtk::TreeModel::iterator getListIter(Gtk::TreeModel::
 				Children children, const std::string& groupname);
 		
-		virtual void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname)=0;
+		//virtual void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname)=0;
 		Gtk::TreeModel::iterator addGroup(const Glib::ustring& group);
 
 	public:
@@ -73,7 +80,8 @@ class Channel:public Gtk::TreeView
 		//Glib::RefPtr< Gtk::ListStore> m_liststore;
 		Glib::RefPtr< Gtk::TreeStore> m_liststore;
 	protected:
-		//bool on_button_press_event(GdkEventButton *);
+		bool on_button_press_event(GdkEventButton *);
+		MainWindow* parent;
 /*
 	private:
 		struct CompareChannel:public binary_function < Gtk::TreeModel::Row,

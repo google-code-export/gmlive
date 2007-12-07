@@ -21,12 +21,18 @@
 #include <iostream>
 #include "nslivechannel.h"
 #include "MainWindow.h"
+#include "ns_live_player.h"
 
 
-NSLiveChannel::NSLiveChannel(MainWindow* parent_):parent( parent_)
+NSLiveChannel::NSLiveChannel(MainWindow* parent_):Channel( parent_)
 {
+	init();
+}
 
-
+LivePlayer* NSLiveChannel::get_player(GMplayer& gmp, const std::string& stream)
+{
+	int channel_num = atoi(stream.c_str());
+	return new NsLivePlayer(gmp, channel_num);
 }
 void NSLiveChannel::init()
 {
@@ -104,7 +110,7 @@ void NSLiveChannel::play_selection()
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
 
-	parent->play(stream,page);
+	parent->play(stream,this);
 	parent->getRecentChannel().saveLine(name,stream,page);
 }
 
@@ -119,7 +125,7 @@ void NSLiveChannel::record_selection()
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
 
-	parent->record(stream,page);
+	parent->record(stream,this);
 
 }
 void NSLiveChannel::store_selection()
@@ -144,45 +150,45 @@ void NSLiveChannel::refresh_list()
 
 }
 
-bool NSLiveChannel::on_button_press_event(GdkEventButton * ev)
-{
-	bool result = Gtk::TreeView::on_button_press_event(ev);
-
-	Glib::RefPtr < Gtk::TreeSelection > selection =
-	    this->get_selection();
-	Gtk::TreeModel::iterator iter = selection->get_selected();
-	if (!selection->count_selected_rows())
-		return result;
-
-	Gtk::TreeModel::Path path(iter);
-	Gtk::TreeViewColumn * tvc;
-	int cx, cy;
-					/** get_path_at_pos() 是为确认鼠标是否在选择行上点击的*/
-	if (!this->
-	    get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
-		return FALSE;
-	if ((ev->type == GDK_2BUTTON_PRESS ||
-	     ev->type == GDK_3BUTTON_PRESS)) {
-		if(NSLIVE_CHANNEL == (*iter)[columns.type]){
-			Glib::ustring name = (*iter)[columns.name];
-			std::string stream = (*iter)[columns.stream];
-			parent->play(stream,NSLIVE_CHANNEL);
-			parent->getRecentChannel().saveLine(name,stream,NSLIVE_CHANNEL);
-		}
-		else if(GROUP_CHANNEL == (*iter)[columns.type]){
-			if(this->row_expanded(path))
-				this->collapse_row(path);
-			else{
-				this->expand_row(path,false);
-				this->scroll_to_row(path);
-			}
-		}
-
-
-	} else if ((ev->type == GDK_BUTTON_PRESS)
-		   && (ev->button == 3)) {
-		if(GROUP_CHANNEL != (*iter)[columns.type])
-			parent->getMenu().popup(1,ev->time);
-	}
-
-}
+//bool NSLiveChannel::on_button_press_event(GdkEventButton * ev)
+//{
+//	bool result = Gtk::TreeView::on_button_press_event(ev);
+//
+//	Glib::RefPtr < Gtk::TreeSelection > selection =
+//	    this->get_selection();
+//	Gtk::TreeModel::iterator iter = selection->get_selected();
+//	if (!selection->count_selected_rows())
+//		return result;
+//
+//	Gtk::TreeModel::Path path(iter);
+//	Gtk::TreeViewColumn * tvc;
+//	int cx, cy;
+//					/** get_path_at_pos() 是为确认鼠标是否在选择行上点击的*/
+//	if (!this->
+//	    get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
+//		return FALSE;
+//	if ((ev->type == GDK_2BUTTON_PRESS ||
+//	     ev->type == GDK_3BUTTON_PRESS)) {
+//		if(NSLIVE_CHANNEL == (*iter)[columns.type]){
+//			Glib::ustring name = (*iter)[columns.name];
+//			std::string stream = (*iter)[columns.stream];
+//			parent->play(stream,NSLIVE_CHANNEL);
+//			parent->getRecentChannel().saveLine(name,stream,NSLIVE_CHANNEL);
+//		}
+//		else if(GROUP_CHANNEL == (*iter)[columns.type]){
+//			if(this->row_expanded(path))
+//				this->collapse_row(path);
+//			else{
+//				this->expand_row(path,false);
+//				this->scroll_to_row(path);
+//			}
+//		}
+//
+//
+//	} else if ((ev->type == GDK_BUTTON_PRESS)
+//		   && (ev->button == 3)) {
+//		if(GROUP_CHANNEL != (*iter)[columns.type])
+//			parent->getMenu().popup(1,ev->time);
+//	}
+//
+//}

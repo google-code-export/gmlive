@@ -40,13 +40,12 @@ NsLivePlayer::~NsLivePlayer()
 
 void NsLivePlayer::play()
 {
-	extern char **environ;
+	//extern char **environ;
 	int pid = fork();
 	if (pid == -1)
 		return ;
 	if (pid == 0) {
 		close(STDOUT_FILENO);
-		close(STDERR_FILENO);
 
 		char id_buf[32];
 		sprintf(id_buf, "%d", id);

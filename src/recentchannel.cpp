@@ -21,9 +21,9 @@
 #include <iostream>
 #include <vector>
 #include "recentchannel.h"
-#include "MainWindow.h"
+//#include "MainWindow.h"
 
-RecentChannel::RecentChannel(MainWindow* parent_):parent( parent_)
+RecentChannel::RecentChannel(MainWindow* parent_):Channel( parent_)
 {
 }
 
@@ -162,31 +162,31 @@ void RecentChannel::saveLine(const Glib::ustring & name,const std::string& strea
 	}
 
 }
-bool RecentChannel::on_button_press_event(GdkEventButton * ev)
-{
-	bool result = Gtk::TreeView::on_button_press_event(ev);
-
-	Glib::RefPtr < Gtk::TreeSelection > selection =
-		this->get_selection();
-	Gtk::TreeModel::iterator iter = selection->get_selected();
-	if (!selection->count_selected_rows())
-		return result;
-
-	Gtk::TreeModel::Path path(iter);
-	Gtk::TreeViewColumn * tvc;
-	int cx, cy;
-	/** get_path_at_pos() 是为确认鼠标是否在选择行上点击的*/
-	if (!this->
-			get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
-		return FALSE;
-	if ((ev->type == GDK_2BUTTON_PRESS ||
-				ev->type == GDK_3BUTTON_PRESS)) {
-		std::string stream = (*iter)[columns.stream];
-		TypeChannel type_ = (*iter)[columns.type];
-		parent->play(stream,type_);
-
-	} else if ((ev->type == GDK_BUTTON_PRESS)
-			&& (ev->button == 3)) {
-	}
-
-}
+//bool RecentChannel::on_button_press_event(GdkEventButton * ev)
+//{
+//	bool result = Gtk::TreeView::on_button_press_event(ev);
+//
+//	Glib::RefPtr < Gtk::TreeSelection > selection =
+//		this->get_selection();
+//	Gtk::TreeModel::iterator iter = selection->get_selected();
+//	if (!selection->count_selected_rows())
+//		return result;
+//
+//	Gtk::TreeModel::Path path(iter);
+//	Gtk::TreeViewColumn * tvc;
+//	int cx, cy;
+//	/** get_path_at_pos() 是为确认鼠标是否在选择行上点击的*/
+//	if (!this->
+//			get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
+//		return FALSE;
+//	if ((ev->type == GDK_2BUTTON_PRESS ||
+//				ev->type == GDK_3BUTTON_PRESS)) {
+//		std::string stream = (*iter)[columns.stream];
+//		TypeChannel type_ = (*iter)[columns.type];
+//		parent->play(stream,type_);
+//
+//	} else if ((ev->type == GDK_BUTTON_PRESS)
+//			&& (ev->button == 3)) {
+//	}
+//
+//}

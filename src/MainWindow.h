@@ -24,9 +24,10 @@
 #include <libglademm/xml.h>
 #include <iostream>
 #include "gmplayer.h"
-#include "nslivechannel.h"
-#include "mmschannel.h"
-#include "sopcastchannel.h"
+#include "channel.h"
+//#include "nslivechannel.h"
+//#include "mmschannel.h"
+//#include "sopcastchannel.h"
 #include "recentchannel.h"
 #include "bookmarkchannel.h"
 #include "live_player.h"
@@ -47,11 +48,15 @@ class MainWindow : public Gtk::Window {
 		 * @param stream the stream feed to mplayer. example mms://
 		 * @param TypeChannel indentify the stream type.
 		 */
-		void play(const std::string& stream,TypeChannel type);
-		void record(const std::string& stream,TypeChannel type);
-		RecentChannel& getRecentChannel(){ return *recentChannel;}
-		BookMarkChannel& getBookMarkChannel() { return *bookMarkChannel; }
+		void play(const std::string& stream, Channel* channel);
+		void record(const std::string& stream, Channel* channel);
+		RecentChannel& getRecentChannel()
+		{ return dynamic_cast<RecentChannel&>(*recentChannel);}
+		BookMarkChannel& getBookMarkChannel()
+	       	{ return dynamic_cast<BookMarkChannel&>(*bookMarkChannel); }
 		StreamMenu& getMenu() { return streamMenu;}
+	protected:
+		Channel* get_cur_channel();
 	public:
 		/** 菜单里的回调函数*/
 		void on_menu_play_activate();
@@ -72,11 +77,11 @@ class MainWindow : public Gtk::Window {
 		GlademmXML ui_xml;
 		GMplayer* gmp;
 		LivePlayer* live_player;
-		NSLiveChannel* 	nsliveChannel;
-		MMSChannel*	mmsChannel;
-		SopcastChannel* sopcastChannel;
-		RecentChannel* 	recentChannel;
-		BookMarkChannel* bookMarkChannel;
+	//	Channel* 	nsliveChannel;
+	//	Channel*	mmsChannel;
+	//	Channel* 	sopcastChannel;
+		Channel* 	recentChannel;
+		Channel* 	bookMarkChannel;
 		Gtk::Statusbar* statusbar;
 		Gtk::Notebook* picture;
 		Gtk::Notebook* listNotebook;

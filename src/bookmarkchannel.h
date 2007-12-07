@@ -19,7 +19,7 @@
 #ifndef  BOOKMARKCHANNEL_FILE_HEADER_INC
 #define  BOOKMARKCHANNEL_FILE_HEADER_INC
 #include "channel.h"
-class MainWindow;
+//class MainWindow;
 class BookMarkChannel:public Channel
 {
 	public:
@@ -27,10 +27,10 @@ class BookMarkChannel:public Channel
 		void init();
 		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
 		void saveLine(const Glib::ustring& name,const std::string& sream,TypeChannel type);
-	private:
-		MainWindow* parent;
-	protected:
-		bool on_button_press_event(GdkEventButton *);
+	//private:
+	//	MainWindow* parent;
+	//protected:
+	//	bool on_button_press_event(GdkEventButton *);
 };
 
 

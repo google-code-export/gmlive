@@ -22,8 +22,9 @@
 #include "bookmarkchannel.h"
 #include "MainWindow.h"
 
-BookMarkChannel::BookMarkChannel(MainWindow* parent_):parent( parent_)
+BookMarkChannel::BookMarkChannel(MainWindow* parent_):Channel( parent_)
 {
+	init();
 }
 void BookMarkChannel::init()
 {
@@ -132,33 +133,33 @@ void BookMarkChannel::saveLine(const Glib::ustring & name,const std::string& str
 
 }
 
-bool BookMarkChannel::on_button_press_event(GdkEventButton * ev)
-{
-	bool result = Gtk::TreeView::on_button_press_event(ev);
-
-	Glib::RefPtr < Gtk::TreeSelection > selection =
-	    this->get_selection();
-	Gtk::TreeModel::iterator iter = selection->get_selected();
-	if (!selection->count_selected_rows())
-		return result;
-
-	Gtk::TreeModel::Path path(iter);
-	Gtk::TreeViewColumn * tvc;
-	int cx, cy;
-					/** get_path_at_pos() 是为确认鼠标是否在选择行上点击的*/
-	if (!this->
-	    get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
-		return FALSE;
-	if ((ev->type == GDK_2BUTTON_PRESS ||
-	     ev->type == GDK_3BUTTON_PRESS)) {
-		std::string stream = (*iter)[columns.stream];
-		Glib::ustring name = (*iter)[columns.name];
-		TypeChannel type_ = (*iter)[columns.type];
-		parent->play(stream,type_);
-		parent->getRecentChannel().saveLine(name,stream,type_);
-
-	} else if ((ev->type == GDK_BUTTON_PRESS)
-		   && (ev->button == 3)) {
-	}
-
-}
+//bool BookMarkChannel::on_button_press_event(GdkEventButton * ev)
+//{
+//	bool result = Gtk::TreeView::on_button_press_event(ev);
+//
+//	Glib::RefPtr < Gtk::TreeSelection > selection =
+//	    this->get_selection();
+//	Gtk::TreeModel::iterator iter = selection->get_selected();
+//	if (!selection->count_selected_rows())
+//		return result;
+//
+//	Gtk::TreeModel::Path path(iter);
+//	Gtk::TreeViewColumn * tvc;
+//	int cx, cy;
+//					/** get_path_at_pos() 是为确认鼠标是否在选择行上点击的*/
+//	if (!this->
+//	    get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
+//		return FALSE;
+//	if ((ev->type == GDK_2BUTTON_PRESS ||
+//	     ev->type == GDK_3BUTTON_PRESS)) {
+//		std::string stream = (*iter)[columns.stream];
+//		Glib::ustring name = (*iter)[columns.name];
+//		TypeChannel type_ = (*iter)[columns.type];
+//		parent->play(stream,type_);
+//		parent->getRecentChannel().saveLine(name,stream,type_);
+//
+//	} else if ((ev->type == GDK_BUTTON_PRESS)
+//		   && (ev->button == 3)) {
+//	}
+//
+//}
