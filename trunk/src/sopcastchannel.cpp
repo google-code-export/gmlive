@@ -55,7 +55,8 @@ SopcastChannel::SopcastChannel(MainWindow* parent_)
 	 ,wget_pid(-1)
 	 ,refresh(false)
 {
-	init();
+	//init();
+	refresh_list();
 }
 
 LivePlayer* SopcastChannel::get_player(GMplayer& gmp, const std::string& stream)
@@ -68,7 +69,6 @@ void SopcastChannel::parse_channel
 {
 
 	xmlChar* id = xmlGetProp(a_node, (const xmlChar*)"id");
-	//(*iter)[columns.id] = id;
 	xmlFree(id);
 	Glib::ustring str;
 	xmlNode* cur_node = a_node->children;
@@ -100,6 +100,7 @@ void SopcastChannel::wait_wget_exit(GPid pid, int)
 		refresh = false;
 	}
 	
+	init();
 	signal_stop_refresh_.emit();
 }
 void SopcastChannel::refresh_list()
@@ -126,7 +127,7 @@ void SopcastChannel::refresh_list()
 		argv[4] = NULL;
 
 		execvp("wget", (char* const *)argv);
-		perror("nslive execvp:");
+		perror("wget execvp:");
 		exit(127);
 	} 
 	Glib::signal_child_watch().connect
@@ -170,6 +171,7 @@ void SopcastChannel::init()
 	char* homedir = getenv("HOME");
 	snprintf(buf, 512,"%s/.gmlive/sopcast.lst",homedir);
 	
+	m_liststore->clear();
 	xmlDoc* doc = xmlReadFile(buf, NULL, 0);
 	if (!doc) {
 		std::cout <<"file error: " << buf << std::endl;
@@ -189,24 +191,6 @@ void SopcastChannel::init()
 	
 }
 
-//void SopcastChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream,const Glib::ustring& groupname)
-//{
-//	
-//	Gtk::TreeModel::Children children = m_liststore->children();
-//	Gtk::TreeModel::iterator listiter;
-//	listiter = getListIter(children,groupname);
-//	if(listiter == children.end())
-//		listiter = addGroup(groupname);
-//
-//	Gtk::TreeModel::iterator iter = m_liststore->append(listiter->children());
-//	
-//	(*iter)[columns.users] = num;
-//	(*iter)[columns.name] = name;
-//	(*iter)[columns.freq] = 100;
-//	(*iter)[columns.stream]=stream;
-//	(*iter)[columns.type]=SOPCAST_CHANNEL;
-//
-//}
 
 void SopcastChannel::play_selection()
 {
@@ -254,45 +238,4 @@ void SopcastChannel::store_selection()
 }
 
 
-//bool SopcastChannel::on_button_press_event(GdkEventButton * ev)
-//{
-//	bool result = Gtk::TreeView::on_button_press_event(ev);
-//
-//	Glib::RefPtr < Gtk::TreeSelection > selection =
-//	    this->get_selection();
-//	Gtk::TreeModel::iterator iter = selection->get_selected();
-//	if (!selection->count_selected_rows())
-//		return result;
-//
-//	Gtk::TreeModel::Path path(iter);
-//	Gtk::TreeViewColumn * tvc;
-//	int cx, cy;
-//					/** get_path_at_pos() 是为确认鼠标是否在选择行上点击的*/
-//	if (!this->
-//	    get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
-//		return FALSE;
-//	if ((ev->type == GDK_2BUTTON_PRESS ||
-//	     ev->type == GDK_3BUTTON_PRESS)) {
-//		if(SOPCAST_CHANNEL == (*iter)[columns.type]){
-//			Glib::ustring name = (*iter)[columns.name];
-//			std::string stream = (*iter)[columns.stream];
-//			parent->play(stream,SOPCAST_CHANNEL);
-//			parent->getRecentChannel().saveLine(name,stream,SOPCAST_CHANNEL);
-//		}
-//		else if(GROUP_CHANNEL == (*iter)[columns.type]){
-//			if(this->row_expanded(path))
-//				this->collapse_row(path);
-//			else{
-//				this->expand_row(path,false);
-//				this->scroll_to_row(path);
-//			}
-//		}
-//
-//
-//	} else if ((ev->type == GDK_BUTTON_PRESS)
-//		   && (ev->button == 3)) {
-//		if(GROUP_CHANNEL != (*iter)[columns.type])
-//			parent->getMenu().popup(1,ev->time);
-//	}
-//
-//}
+

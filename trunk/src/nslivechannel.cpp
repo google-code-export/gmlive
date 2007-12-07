@@ -19,14 +19,19 @@
 #include <stdlib.h>
 #include <fstream>
 #include <iostream>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include "nslivechannel.h"
 #include "MainWindow.h"
 #include "ns_live_player.h"
 
 
 NSLiveChannel::NSLiveChannel(MainWindow* parent_):Channel( parent_)
+	 ,genlist_pid(-1)
+	 ,refresh(false)
 {
-	init();
+	//init();
+	refresh_list();
 }
 
 LivePlayer* NSLiveChannel::get_player(GMplayer& gmp, const std::string& stream)
@@ -40,6 +45,10 @@ void NSLiveChannel::init()
 	char buf[512];
 	char* homedir = getenv("HOME");
 	snprintf(buf, 512,"%s/.gmlive/nslive.lst",homedir);
+
+
+	m_liststore->clear();
+
 	std::ifstream file(buf);
 	if(!file){
 		printf("buf is %s\n",buf);
@@ -143,52 +152,44 @@ void NSLiveChannel::store_selection()
 
 }
 		
+void NSLiveChannel::wait_pid_exit(GPid pid, int)
+{
+	if (genlist_pid != -1) {
+		waitpid(genlist_pid, NULL, 0);
+		genlist_pid = -1;
 
+		refresh = false;
+	}
+	
+	init();
+}
 
 void NSLiveChannel::refresh_list()
 {
+	if (refresh)
+		return;
+	refresh = true;
+
+	int pid = fork();
+	if (pid == -1)
+		return ;
+	if (pid == 0) {
+		close(STDOUT_FILENO);
+		char buf[512];
+		char* homedir = getenv("HOME");
+		snprintf(buf, 512,"%s/.gmlive/nslive.lst",homedir);
+
+		const char* argv[2];
+       		argv[0] = "list";
+		argv[1] = NULL;
+
+		execvp("gennslist", (char* const* )argv);
+		perror("gennslist  execvp:");
+		exit(127);
+	} 
+	Glib::signal_child_watch().connect
+		(sigc::mem_fun(*this, &NSLiveChannel::wait_pid_exit), pid);
 
 }
 
-//bool NSLiveChannel::on_button_press_event(GdkEventButton * ev)
-//{
-//	bool result = Gtk::TreeView::on_button_press_event(ev);
-//
-//	Glib::RefPtr < Gtk::TreeSelection > selection =
-//	    this->get_selection();
-//	Gtk::TreeModel::iterator iter = selection->get_selected();
-//	if (!selection->count_selected_rows())
-//		return result;
-//
-//	Gtk::TreeModel::Path path(iter);
-//	Gtk::TreeViewColumn * tvc;
-//	int cx, cy;
-//					/** get_path_at_pos() 是为确认鼠标是否在选择行上点击的*/
-//	if (!this->
-//	    get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
-//		return FALSE;
-//	if ((ev->type == GDK_2BUTTON_PRESS ||
-//	     ev->type == GDK_3BUTTON_PRESS)) {
-//		if(NSLIVE_CHANNEL == (*iter)[columns.type]){
-//			Glib::ustring name = (*iter)[columns.name];
-//			std::string stream = (*iter)[columns.stream];
-//			parent->play(stream,NSLIVE_CHANNEL);
-//			parent->getRecentChannel().saveLine(name,stream,NSLIVE_CHANNEL);
-//		}
-//		else if(GROUP_CHANNEL == (*iter)[columns.type]){
-//			if(this->row_expanded(path))
-//				this->collapse_row(path);
-//			else{
-//				this->expand_row(path,false);
-//				this->scroll_to_row(path);
-//			}
-//		}
-//
-//
-//	} else if ((ev->type == GDK_BUTTON_PRESS)
-//		   && (ev->button == 3)) {
-//		if(GROUP_CHANNEL != (*iter)[columns.type])
-//			parent->getMenu().popup(1,ev->time);
-//	}
-//
-//}
+

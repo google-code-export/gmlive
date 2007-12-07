@@ -53,7 +53,6 @@ class Channel:public Gtk::TreeView
 		Gtk::TreeModel::iterator getListIter(Gtk::TreeModel::
 				Children children, const std::string& groupname);
 		
-		//virtual void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname)=0;
 		Gtk::TreeModel::iterator addGroup(const Glib::ustring& group);
 
 	public:
@@ -61,14 +60,12 @@ class Channel:public Gtk::TreeView
 			public:
 				ChannelColumns()
 				{
-					//add(id);
 					add(name);
 					add(stream);
 					add(freq);
 					add(type);
 					add(users);
 				}
-				//Gtk::TreeModelColumn<int> id;
 				Gtk::TreeModelColumn<Glib::ustring> name;
 				Gtk::TreeModelColumn<std::string> stream;
 				Gtk::TreeModelColumn<int> freq;
@@ -77,7 +74,6 @@ class Channel:public Gtk::TreeView
 		};
 
 		ChannelColumns columns;
-		//Glib::RefPtr< Gtk::ListStore> m_liststore;
 		Glib::RefPtr< Gtk::TreeStore> m_liststore;
 	protected:
 		bool on_button_press_event(GdkEventButton *);
