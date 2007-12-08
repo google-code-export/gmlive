@@ -76,7 +76,6 @@ void RecentChannel::init()
 			type= last.substr(pos+1,std::string::npos);
 			
 			int id=0;
-			std::cout<<"add "<<name<<"in "<<type<<"  streamis "<<stream<<std::endl;
 			addLine(id,name,stream,type);
 		}
 	}
