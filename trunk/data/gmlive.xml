@@ -86,7 +86,7 @@
 		      <child>
 			<widget class="GtkImage" id="image2">
 			  <property name="visible">True</property>
-			  <property name="pixbuf">gmlive.png</property>
+			  <property name="pixbuf">gmlive_big.png</property>
 			  <property name="xalign">0.5</property>
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
@@ -666,7 +666,7 @@
 	      <child>
 		<widget class="GtkImage" id="image1">
 		  <property name="visible">True</property>
-		  <property name="pixbuf">gmlive.png</property>
+		  <property name="pixbuf">gmlive_big.png</property>
 		  <property name="xalign">0.5</property>
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
