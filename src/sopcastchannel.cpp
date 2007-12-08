@@ -55,7 +55,7 @@ SopcastChannel::SopcastChannel(MainWindow* parent_)
 	 ,wget_pid(-1)
 	 ,refresh(false)
 {
-	//init();
+	init();
 	refresh_list();
 }
 
