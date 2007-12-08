@@ -166,7 +166,16 @@ void MainWindow::play(LivePlayer* lp)
 	assert(lp);
 	on_stop();
 	live_player = lp;
+	
+	live_player->signal_status().connect(sigc::mem_fun(*this, &MainWindow::on_live_player_status));
 	live_player->play();
+}
+
+void MainWindow::on_live_player_status(int percentage)
+{
+	char buf[256];
+	sprintf(buf, "Connect... \%%d", percentage);
+	show_msg(buf, sizeof (buf));
 }
 
 void MainWindow::record(LivePlayer* lp)

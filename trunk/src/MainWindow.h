@@ -64,6 +64,7 @@ class MainWindow : public Gtk::Window {
 		void on_play();
 		void on_record();
 		bool on_gmplayer_out(const Glib::IOCondition& condition);
+		void on_live_player_status(int percentage);
 		void on_gmplayer_start();
 		void on_gmplayer_stop();
 		void show_msg(const Glib::ustring& msg,unsigned int id=0);

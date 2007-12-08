@@ -24,6 +24,8 @@
 #include "nslivechannel.h"
 #include "MainWindow.h"
 #include "ns_live_player.h"
+#include <sys/stat.h>
+#include <sys/types.h>
 
 
 NSLiveChannel::NSLiveChannel(MainWindow* parent_):Channel( parent_)
