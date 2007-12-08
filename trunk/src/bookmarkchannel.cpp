@@ -31,15 +31,17 @@ BookMarkChannel::BookMarkChannel(MainWindow* parent_):Channel( parent_)
 }
 LivePlayer* BookMarkChannel::get_player(GMplayer& gmp, const std::string& stream,TypeChannel page)
 {
-	if( page == MMS_CHANNEL)
-		return new MmsLivePlayer(gmp, stream);
-	else if (page == NSLIVE_CHANNEL)
-	{
-		int channel_num = atoi(stream.c_str());
-		return new NsLivePlayer(gmp, channel_num);
+	switch( page ) {
+		case MMS_CHANNEL:
+			return new MmsLivePlayer(gmp, stream);
+		case NSLIVE_CHANNEL:
+			{
+				int channel_num = atoi(stream.c_str());
+				return new NsLivePlayer(gmp, channel_num);
+			}
+		case SOPCAST_CHANNEL:
+			return new SopcastLivePlayer(gmp,stream);
 	}
-	else if (page == SOPCAST_CHANNEL)
-		return new 	SopcastLivePlayer(gmp,stream);
 }
 
 
@@ -119,20 +121,19 @@ void BookMarkChannel::saveLine(const Glib::ustring & name,const std::string& str
 	std::string stream;
 
 	std::string strtype;
-	if(type == MMS_CHANNEL)
-	{
-		stream = name +"\t#"+stream_+"\t#mms";
-		strtype = "mms";
-	}
-	else if (type == SOPCAST_CHANNEL)
-	{
-		stream = name +"\t#"+stream_+"\t#sopcast";
-		strtype = "sopcast";
-	}
-	else
-	{
-		stream = name +"\t#"+stream_+"\t#nslive";
-		strtype = "nslive";
+	switch (type) {
+		case MMS_CHANNEL:
+			stream = name +"\t#"+stream_+"\t#mms";
+			strtype = "mms";
+			break;
+		case SOPCAST_CHANNEL:
+			stream = name +"\t#"+stream_+"\t#sopcast";
+			strtype = "sopcast";
+			break;
+		default:
+			stream = name +"\t#"+stream_+"\t#nslive";
+			strtype = "nslive";
+			break;
 	}
 	file<<stream<<std::endl;
 	file.close();

@@ -77,7 +77,7 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 			Glib::ustring name = (*iter)[columns.name];
 			std::string stream = (*iter)[columns.stream];
 			TypeChannel npage =  (*iter)[columns.type];
-			parent->play(stream,this,npage);
+			parent->play(get_player(parent->get_gmp(), stream, npage));
 			RecentChannel* rc = &(parent->getRecentChannel());
 			if (this != rc)
 				rc->saveLine(name,stream,npage);
@@ -111,7 +111,7 @@ void Channel::play_selection()
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
 
-	parent->play(stream,this,page);
+	parent->play(get_player(parent->get_gmp(), stream, page));
 	RecentChannel* rc = &(parent->getRecentChannel());
 	if (this != rc)
 		rc->saveLine(name,stream,page);
@@ -129,7 +129,7 @@ void Channel::record_selection()
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
 
-	parent->record(stream,this);
+	parent->record(get_player(parent->get_gmp(), stream, page));
 
 	RecentChannel* rc = &(parent->getRecentChannel());
 	if (this != rc)

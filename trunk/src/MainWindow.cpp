@@ -160,17 +160,16 @@ void MainWindow::on_record()
 	on_menu_record_activate();
 }
 
-void MainWindow::play(const std::string& stream ,Channel* channel,TypeChannel page)
+void MainWindow::play(LivePlayer* lp)
 {
 
-	assert(channel);
+	assert(lp);
 	on_stop();
-	live_player = channel->get_player(*gmp, stream,page);
-	if (live_player)		
-		live_player->play();
+	live_player = lp;
+	live_player->play();
 }
 
-void MainWindow::record(const std::string& stream, Channel* channel)
+void MainWindow::record(LivePlayer* lp)
 {
 
 }
