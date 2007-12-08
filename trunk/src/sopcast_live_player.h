@@ -26,9 +26,18 @@ class SopcastLivePlayer : public LivePlayer {
 		~SopcastLivePlayer();
 		void play();
 		void stop();
+
+	protected:
+		bool on_sop_sock(const Glib::IOCondition& condition);
+		bool on_sop_time_status();
+		
 	private:
-		int sop_pid;
+		sigc::connection sop_time_conn;
+		sigc::connection sop_sock_conn;
 		std::string stream;
+		int sop_pid;
+		int sop_sock;
+		bool player;
 };
 
 

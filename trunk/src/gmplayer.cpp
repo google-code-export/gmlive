@@ -4,7 +4,15 @@
 #include <signal.h>
 //#include <sstream>
 #include <sys/wait.h>
-
+#include "ec_throw.h"
+void GMplayer::set_s_pipe()
+{
+	close(stdin_pipe[1]);
+	close(stdout_pipe[0]);
+	EC_THROW( -1 == dup2(stdin_pipe[0], STDIN_FILENO));
+	EC_THROW( -1 == dup2(stdout_pipe[1], STDOUT_FILENO));
+	EC_THROW( -1 == dup2(stdout_pipe[1], STDERR_FILENO));
+}
 
 GMplayer::GMplayer(const sigc::slot<bool, Glib::IOCondition>& slot):
 	ready(true),
@@ -12,9 +20,11 @@ GMplayer::GMplayer(const sigc::slot<bool, Glib::IOCondition>& slot):
 	xid(-1),
 	timer(0),
 	replay(false), 
-	child_call(slot),
-	pst_ctrl(NULL)
+	child_call(slot)
+	//pst_ctrl(NULL)
 {
+	EC_THROW(-1 == pipe(stdin_pipe));
+	EC_THROW(-1 == pipe(stdout_pipe));
 }
 
 
@@ -48,8 +58,8 @@ void GMplayer::wait_mplayer_exit(GPid pid, int)
 		waitpid(childpid, NULL, 0);
 		childpid = -1;
 
-		delete pst_ctrl;
-		pst_ctrl = NULL;
+		//delete pst_ctrl;
+		//pst_ctrl = NULL;
 
 		ready = true;
 	}
@@ -65,32 +75,30 @@ int GMplayer::my_system(char* const argv[])
 {
 	extern char **environ;
 
-	pst_ctrl = new PstCtrl;
+	//pst_ctrl = new PstCtrl;
+
+	ptm_conn = Glib::signal_io().connect(
+			child_call,
+			stdout_pipe[0], Glib::IO_IN);
+
 
 	int pid = fork();
 	if (pid == -1)
 		return -1;
 	if (pid == 0) {
 
-		pst_ctrl->setup_slave();
 
+		set_s_pipe();
 		//const char* argv[2] = {"mplayer", cmd.c_str()};
 		//execle("/usr/bin/mplayer", cmd.c_str(), environ);
-		execvp("/usr/bin/mplayer", argv);
+		execvp(argv[0], argv);
 
 		perror("mplayer execvp:");
 		exit(127);
 	} 
-
-	ptm_conn = Glib::signal_io().connect(
-			child_call,
-			pst_ctrl->get_ptm(), Glib::IO_IN);
-
 	childpid = pid;
 	Glib::signal_child_watch().connect
 		(sigc::mem_fun(*this, &GMplayer::wait_mplayer_exit), pid);
-
-	pst_ctrl->wait_slave();
 
 
 }
@@ -130,15 +138,21 @@ void GMplayer::start()
 	if(gwin)
 		xid=GDK_WINDOW_XID(gwin->gobj());
 
-	char wid_buf[32];
-	sprintf(wid_buf, "%d", xid);
+	//char wid_buf[32];
+	//sprintf(wid_buf, "%d", xid);
+	char command_buf[64];
+	sprintf(command_buf, "mplayer -wid %d %s", xid, file.c_str());
 
 	const char* argv[5];
-       	argv[0] = "mplayer";
-	argv[1] = "-wid";
-	argv[2] = wid_buf;
-	argv[3] = file.c_str();
-	argv[4] = NULL;
+       	argv[0] = "sh";
+	argv[1] = "-c";
+	argv[2] = command_buf;
+	argv[3] = NULL;
+	//argv[0] = "mplayer";
+	//argv[1] = "-wid";
+	//argv[2] = wid_buf;
+	//argv[3] = file.c_str();
+	//argv[4] = NULL;
 
 	ready = false;
 	my_system((char* const *) argv);
@@ -157,9 +171,10 @@ void GMplayer::full_screen()
 
 void GMplayer::send_ctrl_word(char c)
 {
-	if (pst_ctrl) {
-		EC_THROW(-1 == write(pst_ctrl->get_ptm(), &c, sizeof (char)));
-	}
+	//if (pst_ctrl) {
+		//EC_THROW(-1 == write(pst_ctrl->get_ptm(), &c, sizeof (char)));
+		EC_THROW(-1 == write(stdin_pipe[1], &c, sizeof (char)));
+	//}
 }
 
 

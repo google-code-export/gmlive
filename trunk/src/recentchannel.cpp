@@ -35,15 +35,17 @@ RecentChannel::~RecentChannel()
 {}
 LivePlayer* RecentChannel::get_player(GMplayer& gmp, const std::string& stream,TypeChannel page)
 {
-	if( page == MMS_CHANNEL)
-		return new MmsLivePlayer(gmp, stream);
-	else if (page == NSLIVE_CHANNEL)
-	{
-		int channel_num = atoi(stream.c_str());
-		return new NsLivePlayer(gmp, channel_num);
+	switch(page) {
+		case MMS_CHANNEL:
+			return new MmsLivePlayer(gmp, stream);
+		case NSLIVE_CHANNEL:
+			{
+				int channel_num = atoi(stream.c_str());
+				return new NsLivePlayer(gmp, channel_num);
+			}
+		case SOPCAST_CHANNEL:
+			return new SopcastLivePlayer(gmp,stream);
 	}
-	else if (page == SOPCAST_CHANNEL)
-		return new 	SopcastLivePlayer(gmp,stream);
 }
 void RecentChannel::init()
 {

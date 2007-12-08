@@ -8,7 +8,6 @@ bin_PROGRAMS = gmlive
 gmlive_SOURCES = \
 		 ec_throw.cpp \
 		 main.cpp \
-		 pst_ctrl.cpp \
 		 MainWindow.cpp \
 		 StreamMenu.cpp \
 		 channel.cpp \
@@ -24,7 +23,7 @@ gmlive_SOURCES = \
 
 noinst_HEADERS = \
 		 ec_throw.h \
-		 pst_ctrl.h \
+		 scope_gruard.h \
 		 MainWindow.h \
 		 StreamMenu.h \
 		 channel.h \
