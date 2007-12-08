@@ -1,6 +1,0 @@
-#!/bin/sh
-nsweb
-iconv -f cp936 -t utf8 ~/.ulive/prog.list -o /tmp/nslive.lst
-cat /tmp/nslive.lst | awk -F "," '{print $2 "\t#" $1 "\t#" $3 "\t#" $5}' >~/.gmlive/nslive.lst
-killall nsweb
-rm /tmp/nslive.lst

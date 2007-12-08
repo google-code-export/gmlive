@@ -42,12 +42,8 @@ void MMSChannel::init()
 	snprintf(buf, 512,"%s/.gmlive/mms.lst",homedir);
 	std::ifstream file(buf);
 	if(!file){
-		//char dir[512];
-		//snprintf(dir,512,"%s/.gmlive",homedir);
-		//mkdir(dir,S_IRUSR|S_IWUSR|S_IXUSR);
-		printf("buf is %s\n",buf);
-		std::cout<<"file error\n";
-		return;
+		snprintf(buf,512,"%s/mms.lst",DATA_DIR);
+		file.open(buf);
 	}
 	std::string line;
 	std::string name;
