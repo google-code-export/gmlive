@@ -29,7 +29,8 @@ AC_SUBST(PACKAGE_LIBS)
 
 # Checks for library functions.
 
-AC_OUTPUT([Makefile
+AC_CONFIG_FILES([Makefile
 	   src/Makefile
 	   data/Makefile])
+AC_OUTPUT
 
