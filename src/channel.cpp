@@ -78,7 +78,10 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 			std::string stream = (*iter)[columns.stream];
 			TypeChannel npage =  (*iter)[columns.type];
 			parent->play(stream,this,npage);
-			parent->getRecentChannel().saveLine(name,stream,npage);
+			RecentChannel* rc = &(parent->getRecentChannel());
+			if (this != rc)
+				rc->saveLine(name,stream,npage);
+			//parent->getRecentChannel().saveLine(name,stream,npage);
 			//parent->getRecentChannel().saveLine(name,stream,(*iter)[columns.type]);
 		}
 		else {
