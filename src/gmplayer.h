@@ -5,7 +5,7 @@
 #include <iostream>
 #include <gtkmm.h>
 #include <gtkmm/socket.h>
-#include "pst_ctrl.h"
+//#include "pst_ctrl.h"
 
 class GMplayer : public Gtk::Socket
 {
@@ -18,7 +18,7 @@ class GMplayer : public Gtk::Socket
 		void stop() { send_ctrl_word('q'); }
 		void full_screen();
 		ssize_t get_mplayer_log(char* buf, size_t count) 
-		{ return read(pst_ctrl->get_ptm(), buf, count); }
+		{ return read(stdout_pipe[0], buf, count); }
 
 		typedef sigc::signal<void> type_signal_stop;
 		type_signal_stop signal_stop_play()
@@ -28,6 +28,7 @@ class GMplayer : public Gtk::Socket
 		type_signal_start signal_start_play()
 		{ return signal_start_play_; }	
 	private:
+		void set_s_pipe();
 		void wait_mplayer_exit(GPid, int);
 		int my_system(char* const argv[]);
 		void change_size(Gtk::Allocation& allocation);
@@ -37,7 +38,9 @@ class GMplayer : public Gtk::Socket
 		sigc::connection 			ptm_conn;
 		type_signal_stop  			signal_stop_play_;
 		type_signal_start 			signal_start_play_;
-		PstCtrl* 	pst_ctrl;
+		int stdout_pipe[2];
+		int stdin_pipe[2];
+		//PstCtrl* 	pst_ctrl;
 		std::string	file;		/* filename (internal)*/
 		int		width;		/* widget's width*/
 		int		height;		/* widget's height*/
