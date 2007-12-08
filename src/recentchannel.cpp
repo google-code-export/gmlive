@@ -21,14 +21,30 @@
 #include <iostream>
 #include <vector>
 #include "recentchannel.h"
-//#include "MainWindow.h"
+#include "MainWindow.h"
+#include "mms_live_player.h"
+#include "sopcast_live_player.h"
+#include "ns_live_player.h"
 
 RecentChannel::RecentChannel(MainWindow* parent_):Channel( parent_)
 {
+	init();
 }
 
 RecentChannel::~RecentChannel()
 {}
+LivePlayer* RecentChannel::get_player(GMplayer& gmp, const std::string& stream,TypeChannel page)
+{
+	if( page == MMS_CHANNEL)
+		return new MmsLivePlayer(gmp, stream);
+	else if (page == NSLIVE_CHANNEL)
+	{
+		int channel_num = atoi(stream.c_str());
+		return new NsLivePlayer(gmp, channel_num);
+	}
+	else if (page == SOPCAST_CHANNEL)
+		return new 	SopcastLivePlayer(gmp,stream);
+}
 void RecentChannel::init()
 {
 	char buf[512];
@@ -130,17 +146,17 @@ void RecentChannel::saveLine(const Glib::ustring & name,const std::string& strea
 	std::string strtype;
 	if(type == MMS_CHANNEL)
 	{
-		stream = name +"\t#"+stream_+"\t;mms";
+		stream = name +"\t#"+stream_+"\t#mms";
 		strtype = "mms";
 	}
 	else if (type == SOPCAST_CHANNEL)
 	{
-		stream = name +"\t#"+stream_+"\t;sopcast";
+		stream = name +"\t#"+stream_+"\t#sopcast";
 		strtype = "sopcast";
 	}
 	else
 	{
-		stream = name +"\t#"+stream_+"\t;nslive";
+		stream = name +"\t#"+stream_+"\t#nslive";
 		strtype = "nslive";
 	}
 	std::vector<std::string>::iterator iter = std::find(list.begin(),list.end(),stream);
@@ -162,31 +178,20 @@ void RecentChannel::saveLine(const Glib::ustring & name,const std::string& strea
 	}
 
 }
-//bool RecentChannel::on_button_press_event(GdkEventButton * ev)
-//{
-//	bool result = Gtk::TreeView::on_button_press_event(ev);
-//
-//	Glib::RefPtr < Gtk::TreeSelection > selection =
-//		this->get_selection();
-//	Gtk::TreeModel::iterator iter = selection->get_selected();
-//	if (!selection->count_selected_rows())
-//		return result;
-//
-//	Gtk::TreeModel::Path path(iter);
-//	Gtk::TreeViewColumn * tvc;
-//	int cx, cy;
-//	/** get_path_at_pos() 是为确认鼠标是否在选择行上点击的*/
-//	if (!this->
-//			get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
-//		return FALSE;
-//	if ((ev->type == GDK_2BUTTON_PRESS ||
-//				ev->type == GDK_3BUTTON_PRESS)) {
-//		std::string stream = (*iter)[columns.stream];
-//		TypeChannel type_ = (*iter)[columns.type];
-//		parent->play(stream,type_);
-//
-//	} else if ((ev->type == GDK_BUTTON_PRESS)
-//			&& (ev->button == 3)) {
-//	}
-//
-//}
+
+void RecentChannel::play_selection()
+{
+	Glib::RefPtr < Gtk::TreeSelection > selection =
+	    this->get_selection();
+	Gtk::TreeModel::iterator iter = selection->get_selected();
+	if (!selection->count_selected_rows())
+		return ;
+	TypeChannel page = (*iter)[columns.type];
+	Glib::ustring name = (*iter)[columns.name];
+	std::string stream = (*iter)[columns.stream];
+
+	parent->play(stream,this,page);
+}
+void RecentChannel::record_selection()
+{
+}

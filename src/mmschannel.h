@@ -27,7 +27,7 @@ class MMSChannel:public Channel
 		MMSChannel(MainWindow* parent_);
 		~MMSChannel(){}
 		void init();
-		LivePlayer* get_player(GMplayer& gmp, const std::string&);
+		LivePlayer* get_player(GMplayer& gmp, const std::string& stream,TypeChannel page);
 	protected:
 		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
 

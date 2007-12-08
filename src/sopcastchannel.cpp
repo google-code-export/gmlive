@@ -59,7 +59,7 @@ SopcastChannel::SopcastChannel(MainWindow* parent_)
 	refresh_list();
 }
 
-LivePlayer* SopcastChannel::get_player(GMplayer& gmp, const std::string& stream)
+LivePlayer* SopcastChannel::get_player(GMplayer& gmp, const std::string& stream,TypeChannel page)
 {
 	return new SopcastLivePlayer(gmp, stream);
 }

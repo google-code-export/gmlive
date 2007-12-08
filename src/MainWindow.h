@@ -40,15 +40,7 @@ class MainWindow : public Gtk::Window {
 	public:
 		MainWindow();
 		~MainWindow();
-		/** 通用型播放函数，各种流播放调用入口
-		 * @param stream	feed给mpalyer的流,mms流等
-		 * @param TypeChannel   用于标识传入的流的类型
-		 */
-		/** i don't know how to decribe it in english
-		 * @param stream the stream feed to mplayer. example mms://
-		 * @param TypeChannel indentify the stream type.
-		 */
-		void play(const std::string& stream, Channel* channel);
+		void play(const std::string& stream, Channel* channel,TypeChannel page=NONE);
 		void record(const std::string& stream, Channel* channel);
 		RecentChannel& getRecentChannel()
 		{ return dynamic_cast<RecentChannel&>(*recentChannel);}
@@ -63,6 +55,8 @@ class MainWindow : public Gtk::Window {
 		void on_menu_record_activate();
 		void on_menu_add_activate();
 		void on_menu_refresh_activate();
+		void on_menu_expand_activate();
+		void on_menu_collapse_activate();
 	private:
 		void on_fullscreen();
 		void on_stop();
@@ -77,9 +71,6 @@ class MainWindow : public Gtk::Window {
 		GlademmXML ui_xml;
 		GMplayer* gmp;
 		LivePlayer* live_player;
-	//	Channel* 	nsliveChannel;
-	//	Channel*	mmsChannel;
-	//	Channel* 	sopcastChannel;
 		Channel* 	recentChannel;
 		Channel* 	bookMarkChannel;
 		Gtk::Statusbar* statusbar;
