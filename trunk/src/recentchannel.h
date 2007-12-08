@@ -20,23 +20,21 @@
 #define  RECENTCHANNEL_FILE_HEADER_INC
 
 #include "channel.h"
-//class MainWindow;
+class GMplayer;
 class RecentChannel:public Channel
 {
 	public:
 		RecentChannel(MainWindow* parent_);
 		~RecentChannel();
+		LivePlayer* get_player(GMplayer& gmp, const std::string& stream,TypeChannel page);
 		void init();
 		/** 写进文件中*/
 		void saveLine(const Glib::ustring& name,const std::string& sream,TypeChannel type);
 	protected:
 		/** 只添加进列表中*/
 		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& type);
-
-	//private:
-	//	MainWindow* parent;
-	//protected:
-		//bool on_button_press_event(GdkEventButton *);
+		void play_selection();
+		void record_selection();
 
 };
 #endif   /* ----- #ifndef RECENTCHANNEL_FILE_HEADER_INC  ----- */

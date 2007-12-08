@@ -19,18 +19,17 @@
 #ifndef  BOOKMARKCHANNEL_FILE_HEADER_INC
 #define  BOOKMARKCHANNEL_FILE_HEADER_INC
 #include "channel.h"
-//class MainWindow;
+class GMplayer;
 class BookMarkChannel:public Channel
 {
 	public:
 		BookMarkChannel(MainWindow* parent_);
 		void init();
+		LivePlayer* get_player(GMplayer& gmp, const std::string& stream,TypeChannel page);
 		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
 		void saveLine(const Glib::ustring& name,const std::string& sream,TypeChannel type);
-	//private:
-	//	MainWindow* parent;
-	//protected:
-	//	bool on_button_press_event(GdkEventButton *);
+		void play_selection();
+		void record_selection();
 };
 
 

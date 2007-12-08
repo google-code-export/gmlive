@@ -21,11 +21,28 @@
 #include <iostream>
 #include "bookmarkchannel.h"
 #include "MainWindow.h"
+#include "mms_live_player.h"
+#include "sopcast_live_player.h"
+#include "ns_live_player.h"
 
 BookMarkChannel::BookMarkChannel(MainWindow* parent_):Channel( parent_)
 {
 	init();
 }
+LivePlayer* BookMarkChannel::get_player(GMplayer& gmp, const std::string& stream,TypeChannel page)
+{
+	if( page == MMS_CHANNEL)
+		return new MmsLivePlayer(gmp, stream);
+	else if (page == NSLIVE_CHANNEL)
+	{
+		int channel_num = atoi(stream.c_str());
+		return new NsLivePlayer(gmp, channel_num);
+	}
+	else if (page == SOPCAST_CHANNEL)
+		return new 	SopcastLivePlayer(gmp,stream);
+}
+
+
 void BookMarkChannel::init()
 {
 	char buf[512];
@@ -52,20 +69,7 @@ void BookMarkChannel::init()
 				continue;
 			type= line.substr(pos2+1,std::string::npos);
 				stream=line.substr(pos+1,pos2);
-				/*
-			if("mms"==type||"sopcast"==type)
-			{
-				stream=line.substr(pos+1,pos2);
-			}
-			else if("nslive" == type)
-			{
-				stream=line.substr(pos+1,pos2);
-				id = atoi(stream.c_str());
-				std::string stream_(NSLIVESTREAM);
-			}
-			else
-				continue;
-				*/
+
 			int id=0;
 			addLine(id,name,stream,type);
 		}
@@ -113,17 +117,17 @@ void BookMarkChannel::saveLine(const Glib::ustring & name,const std::string& str
 	std::string strtype;
 	if(type == MMS_CHANNEL)
 	{
-		stream = name +"\t#"+stream_+"\t;mms";
+		stream = name +"\t#"+stream_+"\t#mms";
 		strtype = "mms";
 	}
 	else if (type == SOPCAST_CHANNEL)
 	{
-		stream = name +"\t#"+stream_+"\t;sopcast";
+		stream = name +"\t#"+stream_+"\t#sopcast";
 		strtype = "sopcast";
 	}
 	else
 	{
-		stream = name +"\t#"+stream_+"\t;nslive";
+		stream = name +"\t#"+stream_+"\t#nslive";
 		strtype = "nslive";
 	}
 	file<<stream<<std::endl;
@@ -133,6 +137,25 @@ void BookMarkChannel::saveLine(const Glib::ustring & name,const std::string& str
 
 }
 
+void BookMarkChannel::play_selection()
+{
+	Glib::RefPtr < Gtk::TreeSelection > selection =
+	    this->get_selection();
+	Gtk::TreeModel::iterator iter = selection->get_selected();
+	if (!selection->count_selected_rows())
+		return ;
+	TypeChannel page = (*iter)[columns.type];
+	Glib::ustring name = (*iter)[columns.name];
+	std::string stream = (*iter)[columns.stream];
+
+	parent->play(stream,this,page);
+	parent->getRecentChannel().saveLine(name,stream,page);
+
+}
+
+void BookMarkChannel::record_selection()
+{
+}
 //bool BookMarkChannel::on_button_press_event(GdkEventButton * ev)
 //{
 //	bool result = Gtk::TreeView::on_button_press_event(ev);

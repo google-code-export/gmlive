@@ -26,16 +26,6 @@
 #include "gmlive.h"
 #include <functional>
 
-/*
-#define NSLIVESTREAM "http://127.0.0.1:9000"
-enum TypeChannel{
-	NSLIVE_CHANNEL,
-	MMS_CHANNEL,
-	SPOCAST_CHANNEL,
-	GROUP_CHANNEL,
-	NONE
-};
-*/
 class MainWindow;
 class LivePlayer;
 class GMplayer;
@@ -48,7 +38,7 @@ class Channel:public Gtk::TreeView
 		virtual void record_selection(){};
 		virtual void store_selection(){};
 		virtual void refresh_list(){};
-		virtual LivePlayer* get_player(GMplayer& gmp, const std::string&) { return NULL; }
+		virtual LivePlayer* get_player(GMplayer& gmp, const std::string&,TypeChannel page) { return NULL; }
 
 		Gtk::TreeModel::iterator getListIter(Gtk::TreeModel::
 				Children children, const std::string& groupname);

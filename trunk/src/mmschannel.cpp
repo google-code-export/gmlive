@@ -30,7 +30,7 @@ MMSChannel::MMSChannel(MainWindow* parent_):Channel(parent_)
 	init();
 }
 
-LivePlayer* MMSChannel::get_player(GMplayer& gmp, const std::string& stream)
+LivePlayer* MMSChannel::get_player(GMplayer& gmp, const std::string& stream,TypeChannel page)
 {
 	return new MmsLivePlayer(gmp, stream);
 }

@@ -160,12 +160,12 @@ void MainWindow::on_record()
 	on_menu_record_activate();
 }
 
-void MainWindow::play(const std::string& stream ,Channel* channel)
+void MainWindow::play(const std::string& stream ,Channel* channel,TypeChannel page)
 {
 
 	assert(channel);
 	on_stop();
-	live_player = channel->get_player(*gmp, stream);
+	live_player = channel->get_player(*gmp, stream,page);
 	if (live_player)		
 		live_player->play();
 }
@@ -234,4 +234,17 @@ void MainWindow::on_menu_refresh_activate()
 	if (channel)
 		channel->refresh_list();
 
+}
+
+void MainWindow::on_menu_expand_activate()
+{
+	Channel* channel = get_cur_channel();
+	if(channel)
+		channel->expand_all();
+}
+void MainWindow::on_menu_collapse_activate()
+{
+	Channel* channel = get_cur_channel();
+	if(channel)
+		channel->collapse_all();
 }

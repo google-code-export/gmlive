@@ -31,8 +31,6 @@ Channel::Channel(MainWindow* parent_):parent( parent_)
 	channel->append_column("频道", columns.name);
 	channel->append_column("码率", columns.freq);
 	channel->append_column("用户数", columns.users);
-	//channel->append_column("channel", columns.name);
-	//channel->append_column("freq", columns.freq);
 	channel->show();
 }
 
@@ -78,8 +76,10 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 		if(GROUP_CHANNEL != (*iter)[columns.type]){
 			Glib::ustring name = (*iter)[columns.name];
 			std::string stream = (*iter)[columns.stream];
-			parent->play(stream,this);
-			parent->getRecentChannel().saveLine(name,stream,(*iter)[columns.type]);
+			TypeChannel npage =  (*iter)[columns.type];
+			parent->play(stream,this,npage);
+			parent->getRecentChannel().saveLine(name,stream,npage);
+			//parent->getRecentChannel().saveLine(name,stream,(*iter)[columns.type]);
 		}
 		else {
 			if(this->row_expanded(path))
