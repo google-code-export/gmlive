@@ -34,9 +34,9 @@ class Channel:public Gtk::TreeView
 	public:
 		Channel(MainWindow* parent_);
 		virtual ~Channel();
-		virtual void play_selection(){};
-		virtual void record_selection(){};
-		virtual void store_selection(){};
+		virtual void play_selection();
+		virtual void record_selection();
+		virtual void store_selection();
 		virtual void refresh_list(){};
 		virtual LivePlayer* get_player(GMplayer& gmp, const std::string&,TypeChannel page) { return NULL; }
 

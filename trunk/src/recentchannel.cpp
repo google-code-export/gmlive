@@ -172,19 +172,19 @@ void RecentChannel::saveLine(const Glib::ustring & name,const std::string& strea
 
 }
 
-void RecentChannel::play_selection()
-{
-	Glib::RefPtr < Gtk::TreeSelection > selection =
-	    this->get_selection();
-	Gtk::TreeModel::iterator iter = selection->get_selected();
-	if (!selection->count_selected_rows())
-		return ;
-	TypeChannel page = (*iter)[columns.type];
-	Glib::ustring name = (*iter)[columns.name];
-	std::string stream = (*iter)[columns.stream];
-
-	parent->play(stream,this,page);
-}
-void RecentChannel::record_selection()
-{
-}
+//void RecentChannel::play_selection()
+//{
+//	Glib::RefPtr < Gtk::TreeSelection > selection =
+//	    this->get_selection();
+//	Gtk::TreeModel::iterator iter = selection->get_selected();
+//	if (!selection->count_selected_rows())
+//		return ;
+//	TypeChannel page = (*iter)[columns.type];
+//	Glib::ustring name = (*iter)[columns.name];
+//	std::string stream = (*iter)[columns.stream];
+//
+//	parent->play(stream,this,page);
+//}
+//void RecentChannel::record_selection()
+//{
+//}

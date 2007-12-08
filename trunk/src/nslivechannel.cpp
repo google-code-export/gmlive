@@ -108,49 +108,49 @@ void NSLiveChannel::addLine(const int num, const Glib::ustring & name,const std:
 
 }
 
-void NSLiveChannel::play_selection()
-{
-	Glib::RefPtr < Gtk::TreeSelection > selection =
-	    this->get_selection();
-	Gtk::TreeModel::iterator iter = selection->get_selected();
-	if (!selection->count_selected_rows())
-		return ;
-	TypeChannel page = (*iter)[columns.type];
-	Glib::ustring name = (*iter)[columns.name];
-	std::string stream = (*iter)[columns.stream];
-
-	parent->play(stream,this);
-	parent->getRecentChannel().saveLine(name,stream,page);
-}
-
-void NSLiveChannel::record_selection()
-{
-	Glib::RefPtr < Gtk::TreeSelection > selection =
-	    this->get_selection();
-	Gtk::TreeModel::iterator iter = selection->get_selected();
-	if (!selection->count_selected_rows())
-		return ;
-	TypeChannel page = (*iter)[columns.type];
-	Glib::ustring name = (*iter)[columns.name];
-	std::string stream = (*iter)[columns.stream];
-
-	parent->record(stream,this);
-
-}
-void NSLiveChannel::store_selection()
-{
-	Glib::RefPtr < Gtk::TreeSelection > selection =
-	    this->get_selection();
-	Gtk::TreeModel::iterator iter = selection->get_selected();
-	if (!selection->count_selected_rows())
-		return ;
-	TypeChannel page = (*iter)[columns.type];
-	Glib::ustring name = (*iter)[columns.name];
-	std::string stream = (*iter)[columns.stream];
-
-	parent->getBookMarkChannel().saveLine(name,stream,page);
-
-}
+//void NSLiveChannel::play_selection()
+//{
+//	Glib::RefPtr < Gtk::TreeSelection > selection =
+//	    this->get_selection();
+//	Gtk::TreeModel::iterator iter = selection->get_selected();
+//	if (!selection->count_selected_rows())
+//		return ;
+//	TypeChannel page = (*iter)[columns.type];
+//	Glib::ustring name = (*iter)[columns.name];
+//	std::string stream = (*iter)[columns.stream];
+//
+//	parent->play(stream,this);
+//	parent->getRecentChannel().saveLine(name,stream,page);
+//}
+//
+//void NSLiveChannel::record_selection()
+//{
+//	Glib::RefPtr < Gtk::TreeSelection > selection =
+//	    this->get_selection();
+//	Gtk::TreeModel::iterator iter = selection->get_selected();
+//	if (!selection->count_selected_rows())
+//		return ;
+//	TypeChannel page = (*iter)[columns.type];
+//	Glib::ustring name = (*iter)[columns.name];
+//	std::string stream = (*iter)[columns.stream];
+//
+//	parent->record(stream,this);
+//
+//}
+//void NSLiveChannel::store_selection()
+//{
+//	Glib::RefPtr < Gtk::TreeSelection > selection =
+//	    this->get_selection();
+//	Gtk::TreeModel::iterator iter = selection->get_selected();
+//	if (!selection->count_selected_rows())
+//		return ;
+//	TypeChannel page = (*iter)[columns.type];
+//	Glib::ustring name = (*iter)[columns.name];
+//	std::string stream = (*iter)[columns.stream];
+//
+//	parent->getBookMarkChannel().saveLine(name,stream,page);
+//
+//}
 		
 void NSLiveChannel::wait_pid_exit(GPid pid, int)
 {

@@ -98,3 +98,61 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 	}
 
 }
+
+void Channel::play_selection()
+{
+	Glib::RefPtr < Gtk::TreeSelection > selection =
+	    this->get_selection();
+	Gtk::TreeModel::iterator iter = selection->get_selected();
+	if (!selection->count_selected_rows())
+		return ;
+	TypeChannel page = (*iter)[columns.type];
+	Glib::ustring name = (*iter)[columns.name];
+	std::string stream = (*iter)[columns.stream];
+
+	parent->play(stream,this);
+	RecentChannel* rc = &(parent->getRecentChannel());
+	if (this != rc)
+		rc->saveLine(name,stream,page);
+}
+
+
+void Channel::record_selection()
+{
+	Glib::RefPtr < Gtk::TreeSelection > selection =
+	    this->get_selection();
+	Gtk::TreeModel::iterator iter = selection->get_selected();
+	if (!selection->count_selected_rows())
+		return ;
+	TypeChannel page = (*iter)[columns.type];
+	Glib::ustring name = (*iter)[columns.name];
+	std::string stream = (*iter)[columns.stream];
+
+	parent->record(stream,this);
+
+	RecentChannel* rc = &(parent->getRecentChannel());
+	if (this != rc)
+		rc->saveLine(name,stream,page);
+}
+
+void Channel::store_selection()
+{
+	Glib::RefPtr < Gtk::TreeSelection > selection =
+	    this->get_selection();
+	Gtk::TreeModel::iterator iter = selection->get_selected();
+	if (!selection->count_selected_rows())
+		return ;
+	TypeChannel page = (*iter)[columns.type];
+	Glib::ustring name = (*iter)[columns.name];
+	std::string stream = (*iter)[columns.stream];
+
+	BookMarkChannel* bc = &(parent->getBookMarkChannel());
+	if (this != bc)
+		bc->saveLine(name,stream,page);
+
+	RecentChannel* rc = &(parent->getRecentChannel());
+	if (this != rc)
+		rc->saveLine(name,stream,page);
+}
+
+
