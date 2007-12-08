@@ -20,10 +20,12 @@
 #include <fstream>
 #include <iostream>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <sys/wait.h>
 #include "nslivechannel.h"
 #include "MainWindow.h"
 #include "ns_live_player.h"
+#include "CodeConverter.h"
 #include <sys/stat.h>
 #include <sys/types.h>
 
@@ -50,7 +52,7 @@ void NSLiveChannel::init()
 
 	char buf[512];
 	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/nslive.lst",homedir);
+	snprintf(buf, 512,"%s/.ulive/prog.list",homedir);
 
 
 	m_liststore->clear();
@@ -61,6 +63,8 @@ void NSLiveChannel::init()
 		std::cout<<"file error\n";
 		return;
 	}
+	CodeConverter code("gbk","utf-8");
+	std::string gbkline;
 	std::string line;
 	std::string last;
 	std::string name;
@@ -69,24 +73,40 @@ void NSLiveChannel::init()
 	std::string groupname;
 	int num;
 	if(file){
-		while(std::getline(file,line)){
-			size_t pos = line.find_first_of("#");
+		while(std::getline(file,gbkline)){
+			line = code.convert(gbkline);
+			//get stream
+			size_t pos = line.find_first_of(",");
 			if(pos==std::string::npos)
 				continue;
-			name = line.substr(0,pos);
+			stream = line.substr(0,pos);
+			//std::cout<<"stream "<<stream<<std::endl;
 			last = line.substr(pos+1,std::string::npos);
 
-			pos = last.find_first_of("#");
+			//get name
+			pos = last.find_first_of(",");
 			if(pos == std::string::npos)
 				continue;
-			stream  = last.substr(0,pos);
+			name = last.substr(0,pos);
+			//std::cout<<"name "<<name<<std::endl;
 			line  = last.substr(pos+1,std::string::npos);
-			pos = line.find_first_of("#");
+
+			//get groupname
+			pos = line.find_first_of(",");
 			if(pos == std::string::npos)
 				continue;
 			groupname= line.substr(0,pos);
-			users = line.substr(pos+1,std::string::npos);
-			
+			//std::cout<<"groupname "<<groupname<<std::endl;
+			 last = line.substr(pos+1,std::string::npos);
+
+			 //get users
+			pos = last.find_first_of(",");
+			if(pos == std::string::npos)
+				continue;
+			users=last.substr(pos+1,std::string::npos);
+
+			//std::cout<<"users "<<users<<std::endl;
+
 			num=atoi(users.c_str());
 			addLine(num,name,stream,groupname);
 		}
@@ -114,50 +134,6 @@ void NSLiveChannel::addLine(const int num, const Glib::ustring & name,const std:
 
 }
 
-//void NSLiveChannel::play_selection()
-//{
-//	Glib::RefPtr < Gtk::TreeSelection > selection =
-//	    this->get_selection();
-//	Gtk::TreeModel::iterator iter = selection->get_selected();
-//	if (!selection->count_selected_rows())
-//		return ;
-//	TypeChannel page = (*iter)[columns.type];
-//	Glib::ustring name = (*iter)[columns.name];
-//	std::string stream = (*iter)[columns.stream];
-//
-//	parent->play(stream,this);
-//	parent->getRecentChannel().saveLine(name,stream,page);
-//}
-//
-//void NSLiveChannel::record_selection()
-//{
-//	Glib::RefPtr < Gtk::TreeSelection > selection =
-//	    this->get_selection();
-//	Gtk::TreeModel::iterator iter = selection->get_selected();
-//	if (!selection->count_selected_rows())
-//		return ;
-//	TypeChannel page = (*iter)[columns.type];
-//	Glib::ustring name = (*iter)[columns.name];
-//	std::string stream = (*iter)[columns.stream];
-//
-//	parent->record(stream,this);
-//
-//}
-//void NSLiveChannel::store_selection()
-//{
-//	Glib::RefPtr < Gtk::TreeSelection > selection =
-//	    this->get_selection();
-//	Gtk::TreeModel::iterator iter = selection->get_selected();
-//	if (!selection->count_selected_rows())
-//		return ;
-//	TypeChannel page = (*iter)[columns.type];
-//	Glib::ustring name = (*iter)[columns.name];
-//	std::string stream = (*iter)[columns.stream];
-//
-//	parent->getBookMarkChannel().saveLine(name,stream,page);
-//
-//}
-		
 void NSLiveChannel::wait_pid_exit(GPid pid, int)
 {
 	if (genlist_pid != -1) {
@@ -181,19 +157,13 @@ void NSLiveChannel::refresh_list()
 		return ;
 	if (pid == 0) {
 		close(STDOUT_FILENO);
-		char buf[512];
-		char* homedir = getenv("HOME");
-		snprintf(buf, 512,"%s/.gmlive/nslive.lst",homedir);
 
 		const char* argv[2];
        		argv[0] = "list";
 		argv[1] = NULL;
 
-		char cmd[512];
-		snprintf(cmd,512,"sh -c %s/gennslist",DATA_DIR);
-		//execv(cmd, (char* const* )argv);
-		execvp("gennslist", (char* const* )argv);
-		perror("gennslist  execvl:");
+		execvp("nsweb", (char* const* )argv);
+		perror("nsweb  execvl:");
 		exit(127);
 	} 
 	Glib::signal_child_watch().connect

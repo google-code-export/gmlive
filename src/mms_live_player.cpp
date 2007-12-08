@@ -24,6 +24,11 @@ MmsLivePlayer::MmsLivePlayer(GMplayer& gmp, const std::string& fname) :
 {
 }
 
+MmsLivePlayer::~MmsLivePlayer()
+{
+	gmp.stop();
+	printf("mms exit\n");
+}
 void MmsLivePlayer::play()
 {
 	gmp.start(filename);

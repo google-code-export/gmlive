@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+_Name=Gmlive
+_Comment=Streaming Direct Broadcast System based on P2P
+Exec=gmlive
+Terminal=false
+Type=Application
+StartupNotify=true
+Icon=gmlive.png
+Categories=Application;Multimedia;AudioVideo;

@@ -23,6 +23,7 @@ gmlive_SOURCES = \
 
 noinst_HEADERS = \
 		 ec_throw.h \
+		 CodeConverter.h \
 		 scope_gruard.h \
 		 MainWindow.h \
 		 StreamMenu.h \

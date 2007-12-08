@@ -31,9 +31,6 @@ class MMSChannel:public Channel
 		LivePlayer* get_player(GMplayer& gmp, const std::string& stream,TypeChannel page);
 		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
 
-	//	void play_selection();
-	//	void record_selection();
-	//	void store_selection();
 };
 
 #endif   /* ----- #ifndef MMSCHANNEL_FILE_HEADER_INC  ----- */
