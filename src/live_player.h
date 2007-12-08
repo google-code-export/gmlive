@@ -27,7 +27,14 @@ class LivePlayer {
 		virtual ~LivePlayer() {}
 		virtual void play() = 0;
 		virtual void stop() = 0;
+
+		typedef sigc::signal<void, int> type_signal_status;
+		type_signal_status signal_status()
+		{ return signal_status_; }
+		
 	protected:
+		type_signal_status  			signal_status_;
+
 		GMplayer& gmp;
 };
 #endif // _LIVE_PLAYER_H_

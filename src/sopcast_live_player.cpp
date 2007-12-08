@@ -83,7 +83,9 @@ void SopcastLivePlayer::play()
 
 	sop_pid = pid;
 	printf("%d\n",sop_pid);
-	
+
+	signal_status_.emit(0);
+
 	sop_time_conn = Glib::signal_timeout().connect(sigc::mem_fun(*this, &SopcastLivePlayer::on_sop_time_status), 1000);
 
 	//gmp.start(SOPCASTSTREAM);
@@ -96,33 +98,45 @@ bool SopcastLivePlayer::on_sop_time_status()
 			sop_sock = connect_to_server("127.0.0.1", 8908);
 			for (int i = 0; i < 2; i++)
 				EC_THROW( -1 == write(sop_sock, "state\ns\n", sizeof("state\ns\n")));
+
 			sop_sock_conn = Glib::signal_io().connect(
 					sigc::mem_fun(*this, &SopcastLivePlayer::on_sop_sock),
 					sop_sock, Glib::IO_IN);	
 		} catch (...)
 		{}
 	}
+
    	write(sop_sock, "s\n", sizeof("s\n"));
 	return true;
 }
 
 bool SopcastLivePlayer::on_sop_sock(const Glib::IOCondition& condition)
 {
-	char buf[256];
-	char ch;
-	int count;
-	for (count = 0; ch != '\n'; count++) {
-		 if (read(sop_sock, &ch, sizeof (ch)) < 1)
-			 break;
-		 buf[count] = ch;
+	int byte_read = 0;
+	int buf_size = 255;
+	char buf[buf_size + 1] ;
+	char *pstr = NULL;
+	memset(buf, 0, sizeof(buf));
+
+	while (byte_read < buf_size) {
+		byte_read += read(sop_sock, buf + byte_read, buf_size - byte_read);
+		if ((pstr = strstr(buf, "\n")) != 0) {
+			pstr++;
+			*pstr = 0;
+			break;
+		}
 	}
-	buf[count] = 0;
+
 	printf("%s", buf);
 	int i = atoi(buf);
 	if ((i > 70) && (!player)){
 		player = true;
 		gmp.start(SOPCASTSTREAM);
+
+		sop_time_conn.disconnect(); // 启动mpaleyr，停掉显示缓冲状态
+		return false;
 	}
+	signal_status_.emit(i);
 	return true;
 
 }
