@@ -141,25 +141,25 @@ void BookMarkChannel::saveLine(const Glib::ustring & name,const std::string& str
 
 }
 
-void BookMarkChannel::play_selection()
-{
-	Glib::RefPtr < Gtk::TreeSelection > selection =
-	    this->get_selection();
-	Gtk::TreeModel::iterator iter = selection->get_selected();
-	if (!selection->count_selected_rows())
-		return ;
-	TypeChannel page = (*iter)[columns.type];
-	Glib::ustring name = (*iter)[columns.name];
-	std::string stream = (*iter)[columns.stream];
-
-	parent->play(stream,this,page);
-	parent->getRecentChannel().saveLine(name,stream,page);
-
-}
-
-void BookMarkChannel::record_selection()
-{
-}
+//void BookMarkChannel::play_selection()
+//{
+//	Glib::RefPtr < Gtk::TreeSelection > selection =
+//	    this->get_selection();
+//	Gtk::TreeModel::iterator iter = selection->get_selected();
+//	if (!selection->count_selected_rows())
+//		return ;
+//	TypeChannel page = (*iter)[columns.type];
+//	Glib::ustring name = (*iter)[columns.name];
+//	std::string stream = (*iter)[columns.stream];
+//
+//	parent->play(stream,this,page);
+//	parent->getRecentChannel().saveLine(name,stream,page);
+//
+//}
+//
+//void BookMarkChannel::record_selection()
+//{
+//}
 //bool BookMarkChannel::on_button_press_event(GdkEventButton * ev)
 //{
 //	bool result = Gtk::TreeView::on_button_press_event(ev);

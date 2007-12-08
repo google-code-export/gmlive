@@ -33,8 +33,8 @@ class RecentChannel:public Channel
 	protected:
 		/** 只添加进列表中*/
 		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& type);
-		void play_selection();
-		void record_selection();
+	//	void play_selection();
+	//	void record_selection();
 
 };
 #endif   /* ----- #ifndef RECENTCHANNEL_FILE_HEADER_INC  ----- */
