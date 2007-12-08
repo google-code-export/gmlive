@@ -52,9 +52,12 @@ void RecentChannel::init()
 	snprintf(buf, 512,"%s/.gmlive/recent.lst",homedir);
 	std::ifstream file(buf);
 	if(!file){
+		std::ofstream out(buf);
+		out.close();
+		file.open(buf);
 		printf("buf is %s\n",buf);
 		std::cout<<"file error\n";
-		return;
+		//return;
 	}
 	std::string line;
 	std::string last;
@@ -171,19 +174,3 @@ void RecentChannel::saveLine(const Glib::ustring & name,const std::string& strea
 
 }
 
-//void RecentChannel::play_selection()
-//{
-//	Glib::RefPtr < Gtk::TreeSelection > selection =
-//	    this->get_selection();
-//	Gtk::TreeModel::iterator iter = selection->get_selected();
-//	if (!selection->count_selected_rows())
-//		return ;
-//	TypeChannel page = (*iter)[columns.type];
-//	Glib::ustring name = (*iter)[columns.name];
-//	std::string stream = (*iter)[columns.stream];
-//
-//	parent->play(stream,this,page);
-//}
-//void RecentChannel::record_selection()
-//{
-//}

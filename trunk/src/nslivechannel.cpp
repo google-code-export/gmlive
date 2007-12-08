@@ -30,7 +30,10 @@ NSLiveChannel::NSLiveChannel(MainWindow* parent_):Channel( parent_)
 	 ,genlist_pid(-1)
 	 ,refresh(false)
 {
-	//init();
+	char homepath[512];
+	char* homedir = getenv("HOME");
+	snprintf(homepath,512,"%s/.gmlive/",homedir);
+	mkdir(homepath,S_IRUSR|S_IWUSR|S_IXUSR);
 	refresh_list();
 }
 
@@ -184,8 +187,11 @@ void NSLiveChannel::refresh_list()
        		argv[0] = "list";
 		argv[1] = NULL;
 
+		char cmd[512];
+		snprintf(cmd,512,"sh -c %s/gennslist",DATA_DIR);
+		//execv(cmd, (char* const* )argv);
 		execvp("gennslist", (char* const* )argv);
-		perror("gennslist  execvp:");
+		perror("gennslist  execvl:");
 		exit(127);
 	} 
 	Glib::signal_child_watch().connect
