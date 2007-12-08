@@ -127,7 +127,7 @@ bool SopcastLivePlayer::on_sop_sock(const Glib::IOCondition& condition)
 		}
 	}
 
-	printf("%s", buf);
+	//printf("%s", buf);
 	int i = atoi(buf);
 	if ((i > 70) && (!player)){
 		player = true;
