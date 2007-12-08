@@ -40,13 +40,14 @@ class MainWindow : public Gtk::Window {
 	public:
 		MainWindow();
 		~MainWindow();
-		void play(const std::string& stream, Channel* channel,TypeChannel page=NONE);
-		void record(const std::string& stream, Channel* channel);
+		void play(LivePlayer* lp);
+		void record(LivePlayer* lp);
 		RecentChannel& getRecentChannel()
 		{ return dynamic_cast<RecentChannel&>(*recentChannel);}
 		BookMarkChannel& getBookMarkChannel()
 	       	{ return dynamic_cast<BookMarkChannel&>(*bookMarkChannel); }
 		StreamMenu& getMenu() { return streamMenu;}
+		GMplayer& get_gmp() const { return *gmp; }
 	protected:
 		Channel* get_cur_channel();
 	public:

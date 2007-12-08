@@ -27,7 +27,6 @@ class SopcastChannel:public Channel
 {
 	public:
 		SopcastChannel(MainWindow* parent_);
-		LivePlayer* get_player(GMplayer& gmp, const std::string& stream,TypeChannel page);
 		void init();
 		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
 	//	void play_selection();
@@ -44,6 +43,7 @@ class SopcastChannel:public Channel
 		{ return signal_start_refresh_; }	
 
 	protected:
+		LivePlayer* get_player(GMplayer& gmp, const std::string& stream,TypeChannel page);
 		void wait_wget_exit(GPid pid, int);
 	private:
 		void parse_channel (Gtk::TreeModel::iterator& iter, xmlNode* a_node);
