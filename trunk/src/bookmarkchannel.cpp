@@ -55,6 +55,7 @@ void BookMarkChannel::init()
 		return;
 	}
 	std::string line;
+	std::string last;
 	std::string name;
 	std::string stream;
 	std::string type;
@@ -64,11 +65,14 @@ void BookMarkChannel::init()
 			if(pos==std::string::npos)
 				continue;
 			name = line.substr(0,pos);
-			size_t pos2 = line.find_first_of("#");
-			if(pos2==std::string::npos)
+			last = line.substr(pos+1,std::string::npos);
+
+			pos = last.find_first_of("#");
+			if(pos==std::string::npos)
 				continue;
-			type= line.substr(pos2+1,std::string::npos);
-				stream=line.substr(pos+1,pos2);
+			stream=last.substr(0,pos);
+			type= last.substr(pos+1,std::string::npos);
+
 
 			int id=0;
 			addLine(id,name,stream,type);
