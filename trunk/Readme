@@ -1,0 +1,36 @@
+GMLive并不直接提供P2P直播服务。因为我们并不能对提供的服务负责。
+它尝试成为一款通用型的流媒体播放外壳。
+它以全能的Mplayer播放器为引擎。目标是支持Linuxx下多种类型的P2P广播视频
+流，提供一种方便快捷的观看网络视频的方案。
+
+添加nslive流支持请下载
+http://www.newseetv.com/soft/nslive-0.1.0.tar.gz
+添加sopcast流支持请下载
+http://download.sopcast.com/download/sp-auth.tgz 
+
+下载后，将它们的二进制文件拷贝到/usr/local/bin/或/usr/bin/
+即可
+
+关于nslive流。
+nslive是一款Linux下的p2p的网络直播软件,由andycl98@163.com所开发。
+关于此软件的支持请访问http://andycl98.blog.163.com/以获得详细信息。
+nslive流本身会调用mplayer，所以为了让它更好与gmlive一起工作，请将
+nslive的配置文件中的播放器选项注释。
+~/.ulive/ulive.conf
+#mplayer install path
+#mplayer=/usr/bin/mplayer
+
+关于sopcast流。
+sopcast流提供的服务请访问http://www.sopcast.org以获得详细信息。
+另外，我们获取sopcast播放列表的方式用的是wget这个程序，请保证您的
+系统中存在这个命令。
+
+关于MMS流
+此列表中的流服务并不是基于p2p形式的。只是网络上散落的各种网络电视
+的mms地址。例如，mms://xxx. 我们将它收集起来，以方便您观看。当然您
+也可以将收集到的mms流地址发给我们。在以后的版本中将会支持你自己添加
+地址。但在当前，如需要，您可以自己手工编辑源码中的mms.lst文件。并将
+它拷贝到您的目录下面~/.gmlive/
+
+关于软件本身
+软件本身一些功能还未加上。如全屏，录制。但这些功能将会很快到来.
