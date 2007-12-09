@@ -114,6 +114,10 @@ MainWindow::MainWindow():
 		connect(sigc::mem_fun(*this, &MainWindow::on_play));
 	this->add(*vbox);
 
+	char buf[512];
+	snprintf(buf,512,DATA_DIR"/gmlive.png");
+	Glib::RefPtr<Gdk::Pixbuf> pix = Gdk::Pixbuf::create_from_file(buf);
+	set_icon(pix);
 	this->show_all();
 	
 }

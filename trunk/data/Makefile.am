@@ -2,6 +2,7 @@ gmlive_ui = \
 	    gmlive.xml \
 	    mms.lst 	\
 	    gmlive.png  \
+	    gmlive_play.png \
 	    gmlive_big.png
 
 EXTRA_DIST = \
