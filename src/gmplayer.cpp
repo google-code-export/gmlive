@@ -20,6 +20,7 @@ GMplayer::GMplayer(const sigc::slot<bool, Glib::IOCondition>& slot):
 	timer(0),
 	replay(false), 
 	child_call(slot)
+	,mode(1)
 {
 	EC_THROW(-1 == pipe(stdin_pipe));
 	EC_THROW(-1 == pipe(stdout_pipe));
@@ -31,7 +32,6 @@ GMplayer::~GMplayer()
 	stop();
 }
 
-	
 void GMplayer::wait_mplayer_exit(GPid pid, int)
 {
 	if (childpid != -1) {
@@ -105,7 +105,11 @@ void GMplayer::start()
 		xid=GDK_WINDOW_XID(gwin->gobj());
 
 	char command_buf[256];
-	snprintf(command_buf,256, "mplayer -wid %d %s", xid, file.c_str());
+	if(mode)
+		snprintf(command_buf,256, "mplayer -wid %d %s", xid, file.c_str());
+	else
+		snprintf(command_buf,256, "mplayer  %s",  file.c_str());
+
 
 	const char* argv[5];
        	argv[0] = "sh";
