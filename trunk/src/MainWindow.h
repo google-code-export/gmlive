@@ -25,9 +25,6 @@
 #include <iostream>
 #include "gmplayer.h"
 #include "channel.h"
-//#include "nslivechannel.h"
-//#include "mmschannel.h"
-//#include "sopcastchannel.h"
 #include "recentchannel.h"
 #include "bookmarkchannel.h"
 #include "live_player.h"
@@ -67,10 +64,12 @@ class MainWindow : public Gtk::Window {
 		void on_live_player_status(int percentage);
 		void on_gmplayer_start();
 		void on_gmplayer_stop();
+		void on_toggle_player();
 		void show_msg(const Glib::ustring& msg,unsigned int id=0);
 
 	private:
 		GlademmXML ui_xml;
+		Gtk::CheckButton* checkplayer;
 		GMplayer* gmp;
 		LivePlayer* live_player;
 		Channel* 	recentChannel;

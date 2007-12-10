@@ -25,6 +25,7 @@ k* =============================================================================
 #include "mms_live_player.h"
 #include "ns_live_player.h"
 #include "sopcast_live_player.h"
+#include "gmlive.h"
 #include <assert.h>
 
 Glib::ustring get_print_string(const char* buf, int len)
@@ -104,6 +105,12 @@ MainWindow::MainWindow():
 		(ui_xml->get_widget("scrolledwin_bookmark"));
 	scrolledwin_bookmark->add(*bookMarkChannel);
 
+	checkplayer = dynamic_cast<Gtk::CheckButton*>
+		(ui_xml->get_widget("checkplayer"));
+	checkplayer->set_active();
+	checkplayer->signal_toggled().
+		connect(sigc::mem_fun(*this, &MainWindow::on_toggle_player));
+
 	bt_fullscreen->signal_clicked().
 		connect(sigc::mem_fun(*this, &MainWindow::on_fullscreen));
 	bt_stop->signal_clicked().
@@ -146,6 +153,11 @@ void MainWindow::on_fullscreen()
 	gmp->full_screen();
 }
 
+void MainWindow::on_toggle_player()
+{
+	bool embed=checkplayer->get_active();
+	gmp->set_mode(embed);
+}
 void MainWindow::on_stop()
 {
 	if (live_player)
@@ -203,6 +215,8 @@ bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 void MainWindow::on_gmplayer_start()
 {
 
+	bool embed=checkplayer->get_active();
+	if(embed)
 	picture->set_current_page(PAGE_MPLAYER);
 }
 

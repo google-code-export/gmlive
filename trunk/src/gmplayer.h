@@ -17,6 +17,7 @@ class GMplayer : public Gtk::Socket
 		void start();
 		void stop() { send_ctrl_word('q'); }
 		void full_screen();
+		void set_mode(bool embed=1){mode=embed;}
 		ssize_t get_mplayer_log(char* buf, size_t count) 
 		{ return read(stdout_pipe[0], buf, count); }
 
@@ -40,7 +41,6 @@ class GMplayer : public Gtk::Socket
 		type_signal_start 			signal_start_play_;
 		int stdout_pipe[2];
 		int stdin_pipe[2];
-		//PstCtrl* 	pst_ctrl;
 		std::string	file;		/* filename (internal)*/
 		int		width;		/* widget's width*/
 		int		height;		/* widget's height*/
@@ -49,6 +49,7 @@ class GMplayer : public Gtk::Socket
 		guint		timer;		/* timer (internal) */
 		bool		ready;		/* is the player ready (internal)*/
 		bool		replay;		/* 重新播放状态 */
+		bool		mode;
 };
 
 #endif
