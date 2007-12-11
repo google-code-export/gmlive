@@ -37,6 +37,7 @@ class MainWindow : public Gtk::Window {
 	public:
 		MainWindow();
 		~MainWindow();
+		void init();
 		void play(LivePlayer* lp);
 		void record(LivePlayer* lp);
 		RecentChannel& getRecentChannel()
@@ -78,6 +79,8 @@ class MainWindow : public Gtk::Window {
 		Gtk::Notebook* picture;
 		Gtk::Notebook* listNotebook;
 		StreamMenu streamMenu;
+		//GKeyFile* keyfile;
+		//Setting* conf;
 };
 
 #endif // _MAINWINDOW_HH 

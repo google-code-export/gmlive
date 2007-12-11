@@ -14,5 +14,8 @@ enum TypeChannel{
 	NONE
 };
 
+typedef struct{
+	bool embed;
+}Setting;
 
 #endif

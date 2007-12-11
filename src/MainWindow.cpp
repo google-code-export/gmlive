@@ -25,8 +25,12 @@ k* =============================================================================
 #include "mms_live_player.h"
 #include "ns_live_player.h"
 #include "sopcast_live_player.h"
-#include "gmlive.h"
+#include "ConfFile.h"
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <fstream>
 #include <assert.h>
+using namespace std;
 
 Glib::ustring get_print_string(const char* buf, int len)
 {
@@ -50,6 +54,9 @@ MainWindow::MainWindow():
 	live_player(NULL),
 	streamMenu(*this)
 {
+
+	init();
+
 	ui_xml = Gnome::Glade::Xml::create(main_ui, "mainFrame");
 	Gtk::VBox* vbox = 
 		dynamic_cast < Gtk::VBox* >
@@ -105,11 +112,6 @@ MainWindow::MainWindow():
 		(ui_xml->get_widget("scrolledwin_bookmark"));
 	scrolledwin_bookmark->add(*bookMarkChannel);
 
-	checkplayer = dynamic_cast<Gtk::CheckButton*>
-		(ui_xml->get_widget("checkplayer"));
-	checkplayer->set_active();
-	checkplayer->signal_toggled().
-		connect(sigc::mem_fun(*this, &MainWindow::on_toggle_player));
 
 	bt_fullscreen->signal_clicked().
 		connect(sigc::mem_fun(*this, &MainWindow::on_fullscreen));
@@ -121,7 +123,29 @@ MainWindow::MainWindow():
 		connect(sigc::mem_fun(*this, &MainWindow::on_play));
 	this->add(*vbox);
 
+	/*config page*/
 	char buf[512];
+	char* homedir = getenv("HOME");
+	snprintf(buf,512,"%s/.gmlive/config",homedir);
+
+
+
+	int embed;
+	std::string name;
+	ConfFile conf(buf,"r");
+	conf.read_int(name,embed);
+	if(name != "embed")
+		embed=1;
+	checkplayer = dynamic_cast<Gtk::CheckButton*>
+		(ui_xml->get_widget("checkplayer"));
+	std::cout<<"set embed "<<embed<<std::endl;
+	if(embed)
+		checkplayer->set_active();
+	else
+		checkplayer->set_active(false);
+	checkplayer->signal_toggled().
+		connect(sigc::mem_fun(*this, &MainWindow::on_toggle_player));
+
 	snprintf(buf,512,DATA_DIR"/gmlive.png");
 	Glib::RefPtr<Gdk::Pixbuf> pix = Gdk::Pixbuf::create_from_file(buf);
 	set_icon(pix);
@@ -132,6 +156,35 @@ MainWindow::MainWindow():
 MainWindow::~MainWindow()
 {
 	on_stop();
+}
+void MainWindow::init()
+{
+	char homepath[512];
+	char buf[512];
+	char* homedir = getenv("HOME");
+	snprintf(homepath,512,"%s/.gmlive/",homedir);
+	mkdir(homepath,S_IRUSR|S_IWUSR|S_IXUSR);
+	snprintf(buf,512,"%s/config",homepath);
+	ifstream infile(buf);
+	if(!infile)
+	{
+		ofstream outfile(buf);
+		outfile.close();
+	}
+	infile.close();
+
+//	  /* Create a new GKeyFile object and a bitwise list of flags. */
+//	  keyfile = g_key_file_new ();
+//	  GKeyFileFlags flags = G_KEY_FILE_KEEP_COMMENTS | G_KEY_FILE_KEEP_TRANSLATIONS;
+//	  GError* error=NULL;
+//	    /* Load the GKeyFile from keyfile.conf or return. */
+//	    if (!g_key_file_load_from_file (keyfile, buf, flags, &error))
+//	      {
+//			          g_error (error->message);
+//				      return -1;
+//		}
+//	    conf=g_new(Setting);
+
 }
 
 Channel* MainWindow::get_cur_channel()
@@ -157,6 +210,15 @@ void MainWindow::on_toggle_player()
 {
 	bool embed=checkplayer->get_active();
 	gmp->set_mode(embed);
+	char buf[512];
+	char* homedir = getenv("HOME");
+	int value;
+	if(embed) value=1;
+	else value=0;
+	snprintf(buf,512,"%s/.gmlive/config",homedir);
+	ConfFile config(buf,"w");
+	config.write_int("embed",value);
+	config.close();
 }
 void MainWindow::on_stop()
 {

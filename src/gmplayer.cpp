@@ -101,14 +101,19 @@ void GMplayer::start()
 	signal_start_play_.emit();
 
 	Glib::RefPtr<Gdk::Window> gwin = this->get_window();
+	int x,y,width,heigh,depth;
 	if(gwin)
+	{
 		xid=GDK_WINDOW_XID(gwin->gobj());
+		gwin->get_geometry(x,y,width,heigh,depth);
+	}
 
 	char command_buf[256];
 	if(mode)
-		snprintf(command_buf,256, "mplayer -wid %d %s", xid, file.c_str());
+		snprintf(command_buf,256, "mplayer -vop scale=%d:-3 -wid %d %s", width,xid, file.c_str());
+		//snprintf(command_buf,256, "mplayer -wid %d %s", xid, file.c_str());
 	else
-		snprintf(command_buf,256, "mplayer  %s",  file.c_str());
+		snprintf(command_buf,256, "mplayer -geometry +%d+%d  %s",x,y,  file.c_str());
 
 
 	const char* argv[5];
