@@ -34,10 +34,12 @@ NSLiveChannel::NSLiveChannel(MainWindow* parent_):Channel( parent_)
 	 ,genlist_pid(-1)
 	 ,refresh(false)
 {
+	/*
 	char homepath[512];
 	char* homedir = getenv("HOME");
 	snprintf(homepath,512,"%s/.gmlive/",homedir);
 	mkdir(homepath,S_IRUSR|S_IWUSR|S_IXUSR);
+	*/
 	refresh_list();
 }
 
