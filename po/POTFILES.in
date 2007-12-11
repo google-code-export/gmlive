@@ -1,0 +1,16 @@
+[encoding: UTF-8]
+data/gmlive.desktop.in.in
+src/bookmarkchannel.cpp
+src/channel.cpp
+src/ec_throw.cpp
+src/gmplayer.cpp
+src/main.cpp
+src/MainWindow.cpp
+src/mmschannel.cpp
+src/mms_live_player.cpp
+src/nslivechannel.cpp
+src/ns_live_player.cpp
+src/recentchannel.cpp
+src/sopcastchannel.cpp
+src/sopcast_live_player.cpp
+src/StreamMenu.cpp
