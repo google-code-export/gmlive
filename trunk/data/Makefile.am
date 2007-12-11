@@ -10,6 +10,10 @@ desktop_in_files = gmlive.desktop.in
 desktop_DATA     = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
+
+pixmapsdir = $(datadir)/pixmaps
+pixmaps_DATA = gmlive.png
+
 gmliveuidir = $(pkgdatadir)
 gmliveui_DATA = $(gmlive_ui)
 

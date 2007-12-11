@@ -50,10 +50,12 @@ am__vpath_adj = case $$p in \
     *) f=$$p;; \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
-am__installdirs = "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(gmliveuidir)"
+am__installdirs = "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(gmliveuidir)" \
+	"$(DESTDIR)$(pixmapsdir)"
 desktopDATA_INSTALL = $(INSTALL_DATA)
 gmliveuiDATA_INSTALL = $(INSTALL_DATA)
-DATA = $(desktop_DATA) $(gmliveui_DATA)
+pixmapsDATA_INSTALL = $(INSTALL_DATA)
+DATA = $(desktop_DATA) $(gmliveui_DATA) $(pixmaps_DATA)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 ALL_LINGUAS = @ALL_LINGUAS@
@@ -215,6 +217,8 @@ gmlive_ui = \
 desktopdir = $(datadir)/applications
 desktop_in_files = gmlive.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+pixmapsdir = $(datadir)/pixmaps
+pixmaps_DATA = gmlive.png
 gmliveuidir = $(pkgdatadir)
 gmliveui_DATA = $(gmlive_ui)
 EXTRA_DIST = \
@@ -295,6 +299,23 @@ uninstall-gmliveuiDATA:
 	  echo " rm -f '$(DESTDIR)$(gmliveuidir)/$$f'"; \
 	  rm -f "$(DESTDIR)$(gmliveuidir)/$$f"; \
 	done
+install-pixmapsDATA: $(pixmaps_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(pixmapsdir)" || $(MKDIR_P) "$(DESTDIR)$(pixmapsdir)"
+	@list='$(pixmaps_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f=$(am__strip_dir) \
+	  echo " $(pixmapsDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(pixmapsdir)/$$f'"; \
+	  $(pixmapsDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(pixmapsdir)/$$f"; \
+	done
+
+uninstall-pixmapsDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(pixmaps_DATA)'; for p in $$list; do \
+	  f=$(am__strip_dir) \
+	  echo " rm -f '$(DESTDIR)$(pixmapsdir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(pixmapsdir)/$$f"; \
+	done
 tags: TAGS
 TAGS:
 
@@ -332,7 +353,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(DATA)
 installdirs:
-	for dir in "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(gmliveuidir)"; do \
+	for dir in "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(gmliveuidir)" "$(DESTDIR)$(pixmapsdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -377,7 +398,8 @@ info: info-am
 
 info-am:
 
-install-data-am: install-desktopDATA install-gmliveuiDATA
+install-data-am: install-desktopDATA install-gmliveuiDATA \
+	install-pixmapsDATA
 
 install-dvi: install-dvi-am
 
@@ -411,7 +433,8 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-desktopDATA uninstall-gmliveuiDATA
+uninstall-am: uninstall-desktopDATA uninstall-gmliveuiDATA \
+	uninstall-pixmapsDATA
 
 .MAKE: install-am install-strip
 
@@ -422,11 +445,12 @@ uninstall-am: uninstall-desktopDATA uninstall-gmliveuiDATA
 	install-dvi-am install-exec install-exec-am \
 	install-gmliveuiDATA install-html install-html-am install-info \
 	install-info-am install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
+	install-pixmapsDATA install-ps install-ps-am install-strip \
+	installcheck installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic \
 	mostlyclean-libtool pdf pdf-am ps ps-am uninstall uninstall-am \
-	uninstall-desktopDATA uninstall-gmliveuiDATA
+	uninstall-desktopDATA uninstall-gmliveuiDATA \
+	uninstall-pixmapsDATA
 
 @INTLTOOL_DESKTOP_RULE@
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
