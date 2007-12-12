@@ -62,8 +62,8 @@ MainWindow::MainWindow():
 		dynamic_cast < Gtk::VBox* >
 		(ui_xml->get_widget("mainFrame"));
 
-	Gtk::HBox* hbox = dynamic_cast < Gtk::HBox* >
-		(ui_xml->get_widget("hFrame"));
+	Gtk::VBox* hbox = dynamic_cast < Gtk::VBox* >
+		(ui_xml->get_widget("playFrame"));
 	
 	Gtk::Button* bt_fullscreen=dynamic_cast <Gtk::Button* >
 		(ui_xml->get_widget("bt_fullscreen"));
