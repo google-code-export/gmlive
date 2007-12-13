@@ -1,0 +1,41 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ(2.60)
+AC_INIT(gmlive, 0.11, xihels@gmail.com)
+AC_COPYRIGHT([Copyright (C) 2007 xihels@gmail.com])
+AC_CONFIG_SRCDIR([src/main.cpp])
+AC_CONFIG_HEADER([config.h])
+AM_INIT_AUTOMAKE(dist-bzip2 no-define)
+
+AM_MAINTAINER_MODE
+IT_PROG_INTLTOOL([0.35.0])
+AC_PROG_LIBTOOL
+
+AC_PROG_CXX
+AC_PROG_CXXCPP
+
+AC_LANG_CPLUSPLUS
+
+
+# Checks for libraries.
+AC_CHECK_FUNCS([socket])
+
+pkg_modules="gtkmm-2.4 >= 2.6.0 libglademm-2.4 >= 2.4.0 libxml-2.0 >= 2.6.0"
+PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
+AC_SUBST(PACKAGE_CFLAGS)
+AC_SUBST(PACKAGE_LIBS)
+
+GETTEXT_PACKAGE=gmlive
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
+
+AM_GLIB_GNU_GETTEXT
+
+AC_CONFIG_FILES([Makefile
+	   src/Makefile
+           po/Makefile.in
+           data/gmlive.desktop.in
+	   data/Makefile])
+AC_OUTPUT
+
