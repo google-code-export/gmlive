@@ -13,7 +13,7 @@
  *         Author:  wind (xihe), xihels@gmail.com
  *        Company:  cyclone
  *
-k* =====================================================================================
+ k* =====================================================================================
  */
 
 #include "MainWindow.h"
@@ -64,7 +64,7 @@ MainWindow::MainWindow():
 
 	Gtk::VBox* hbox = dynamic_cast < Gtk::VBox* >
 		(ui_xml->get_widget("playFrame"));
-	
+
 	/*
 	Gtk::Button* bt_fullscreen=dynamic_cast <Gtk::Button* >
 		(ui_xml->get_widget("bt_fullscreen"));
@@ -158,7 +158,7 @@ MainWindow::MainWindow():
 	Glib::RefPtr<Gdk::Pixbuf> pix = Gdk::Pixbuf::create_from_file(buf);
 	set_icon(pix);
 	this->show_all();
-	
+
 }
 
 MainWindow::~MainWindow()
@@ -181,17 +181,17 @@ void MainWindow::init()
 	}
 	infile.close();
 
-//	  /* Create a new GKeyFile object and a bitwise list of flags. */
-//	  keyfile = g_key_file_new ();
-//	  GKeyFileFlags flags = G_KEY_FILE_KEEP_COMMENTS | G_KEY_FILE_KEEP_TRANSLATIONS;
-//	  GError* error=NULL;
-//	    /* Load the GKeyFile from keyfile.conf or return. */
-//	    if (!g_key_file_load_from_file (keyfile, buf, flags, &error))
-//	      {
-//			          g_error (error->message);
-//				      return -1;
-//		}
-//	    conf=g_new(Setting);
+	//	  /* Create a new GKeyFile object and a bitwise list of flags. */
+	//	  keyfile = g_key_file_new ();
+	//	  GKeyFileFlags flags = G_KEY_FILE_KEEP_COMMENTS | G_KEY_FILE_KEEP_TRANSLATIONS;
+	//	  GError* error=NULL;
+	//	    /* Load the GKeyFile from keyfile.conf or return. */
+	//	    if (!g_key_file_load_from_file (keyfile, buf, flags, &error))
+	//	      {
+	//			          g_error (error->message);
+	//				      return -1;
+	//		}
+	//	    conf=g_new(Setting);
 
 }
 
@@ -252,7 +252,7 @@ void MainWindow::play(LivePlayer* lp)
 	assert(lp);
 	on_stop();
 	live_player = lp;
-	
+
 	live_player->signal_status().connect(sigc::mem_fun(*this, &MainWindow::on_live_player_status));
 	live_player->play();
 }
@@ -287,7 +287,7 @@ void MainWindow::on_gmplayer_start()
 
 	bool embed=checkplayer->get_active();
 	if(embed)
-	picture->set_current_page(PAGE_MPLAYER);
+		picture->set_current_page(PAGE_MPLAYER);
 }
 
 void MainWindow::on_gmplayer_stop()

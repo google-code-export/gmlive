@@ -42,7 +42,7 @@ void GMplayer::set_s_pipe()
 	close(stdin_pipe[1]);
 	close(stdout_pipe[0]);
 	EC_THROW( -1 == dup2(stdin_pipe[0], STDIN_FILENO));
-	//EC_THROW( -1 == dup2(stdout_pipe[1], STDOUT_FILENO));
+	EC_THROW( -1 == dup2(stdout_pipe[1], STDOUT_FILENO));
 	//EC_THROW( -1 == dup2(stdout_pipe[1], STDERR_FILENO));
 }
 
