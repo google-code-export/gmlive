@@ -65,12 +65,16 @@ MainWindow::MainWindow():
 	Gtk::VBox* hbox = dynamic_cast < Gtk::VBox* >
 		(ui_xml->get_widget("playFrame"));
 	
+	/*
 	Gtk::Button* bt_fullscreen=dynamic_cast <Gtk::Button* >
 		(ui_xml->get_widget("bt_fullscreen"));
+		*/
 	Gtk::Button* bt_stop=dynamic_cast <Gtk::Button* >
 		(ui_xml->get_widget("bt_stop"));
+	/*
 	Gtk::Button* bt_record=dynamic_cast<Gtk::Button* >
 		(ui_xml->get_widget("bt_record"));
+		*/
 	Gtk::Button* bt_play=dynamic_cast<Gtk::Button*>
 		(ui_xml->get_widget("bt_play"));
 	statusbar = dynamic_cast<Gtk::Statusbar*>
@@ -113,12 +117,16 @@ MainWindow::MainWindow():
 	scrolledwin_bookmark->add(*bookMarkChannel);
 
 
+	/*
 	bt_fullscreen->signal_clicked().
 		connect(sigc::mem_fun(*this, &MainWindow::on_fullscreen));
+		*/
 	bt_stop->signal_clicked().
 		connect(sigc::mem_fun(*this, &MainWindow::on_stop));
+	/*
 	bt_record->signal_clicked().
 		connect(sigc::mem_fun(*this, &MainWindow::on_record));
+		*/
 	bt_play->signal_clicked().
 		connect(sigc::mem_fun(*this, &MainWindow::on_play));
 	this->add(*vbox);
