@@ -92,6 +92,9 @@ int GMplayer::my_system(char* const argv[])
 
 		set_signals();
 		set_s_pipe();
+		fprintf(stderr, "pid = %d, gpid = %d", getpid(), getpgid(0));
+		EC_THROW(-1 == setpgid(0, 0));
+		fprintf(stderr, "pid = %d, gpid = %d", getpid(), getpgid(0));
 		//sleep(4);
 		execvp(argv[0], argv);
 
@@ -170,6 +173,8 @@ void GMplayer::stop()
 		wait_conn.disconnect();
 		kill(childpid, SIGKILL);
 		waitpid(childpid, NULL, 0);
+		kill(-childpid, SIGKILL);
+		waitpid(-childpid, NULL, 0);
 		childpid = -1;	
 		signal_stop_play_.emit();
 	}
