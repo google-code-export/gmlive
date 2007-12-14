@@ -19,6 +19,9 @@
 
 #include "channel.h"
 #include "MainWindow.h"
+#include "live_player.h"
+#include "recentchannel.h"
+#include "bookmarkchannel.h"
 
 Channel::Channel(MainWindow* parent_):parent( parent_)
 {
@@ -76,11 +79,16 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 		if(GROUP_CHANNEL != (*iter)[columns.type]){
 			Glib::ustring name = (*iter)[columns.name];
 			std::string stream = (*iter)[columns.stream];
-			TypeChannel npage =  (*iter)[columns.type];
-			parent->play(get_player(parent->get_gmp(), stream, npage));
-			RecentChannel* rc = &(parent->getRecentChannel());
+			TypeChannel page =  (*iter)[columns.type];
+			LivePlayer* lp =
+			       	get_player(parent->get_mplayer(), stream, page);
+			parent->set_live_player(lp);
+			lp->play();
+			RecentChannel* rc =
+				dynamic_cast<RecentChannel*>
+				(parent->get_recent_channel());
 			if (this != rc)
-				rc->saveLine(name,stream,npage);
+				rc->saveLine(name,stream,page);
 		}
 		else {
 			if(this->row_expanded(path))
@@ -93,9 +101,10 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 
 
 	} else if ((ev->type == GDK_BUTTON_PRESS)
-		   && (ev->button == 3)) {
+			&& (ev->button == 3)) {
 		if(GROUP_CHANNEL != (*iter)[columns.type])
-			parent->getMenu().popup(1,ev->time);
+			NULL;
+		//parent->getMenu().popup(1,ev->time);
 	}
 
 }
@@ -103,7 +112,7 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 void Channel::play_selection()
 {
 	Glib::RefPtr < Gtk::TreeSelection > selection =
-	    this->get_selection();
+		this->get_selection();
 	Gtk::TreeModel::iterator iter = selection->get_selected();
 	if (!selection->count_selected_rows())
 		return ;
@@ -111,8 +120,11 @@ void Channel::play_selection()
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
 
-	parent->play(get_player(parent->get_gmp(), stream, page));
-	RecentChannel* rc = &(parent->getRecentChannel());
+	LivePlayer* lp = get_player(parent->get_mplayer(), stream, page);
+	parent->set_live_player(lp);
+	lp->play();
+	RecentChannel* rc =
+		dynamic_cast<RecentChannel*>(parent->get_recent_channel());
 	if (this != rc)
 		rc->saveLine(name,stream,page);
 }
@@ -121,7 +133,7 @@ void Channel::play_selection()
 void Channel::record_selection()
 {
 	Glib::RefPtr < Gtk::TreeSelection > selection =
-	    this->get_selection();
+		this->get_selection();
 	Gtk::TreeModel::iterator iter = selection->get_selected();
 	if (!selection->count_selected_rows())
 		return ;
@@ -129,17 +141,20 @@ void Channel::record_selection()
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
 
-	parent->record(get_player(parent->get_gmp(), stream, page));
-
-	RecentChannel* rc = &(parent->getRecentChannel());
-	if (this != rc)
-		rc->saveLine(name,stream,page);
+	LivePlayer* lp = get_player(parent->get_mplayer(), stream, page);
+	parent->set_live_player(lp);
+	//	lp->record();
+	//	RecentChannel* rc =
+	//		dynamic_cast<RecentChannel*>(parent->get_recent_channel());
+	//	if (this != rc)
+	//		rc->saveLine(name,stream,page);
+	//
 }
 
 void Channel::store_selection()
 {
 	Glib::RefPtr < Gtk::TreeSelection > selection =
-	    this->get_selection();
+		this->get_selection();
 	Gtk::TreeModel::iterator iter = selection->get_selected();
 	if (!selection->count_selected_rows())
 		return ;
@@ -147,11 +162,13 @@ void Channel::store_selection()
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
 
-	BookMarkChannel* bc = &(parent->getBookMarkChannel());
+	BookMarkChannel* bc =
+		dynamic_cast<BookMarkChannel*>(parent->get_bookmark_channel());
 	if (this != bc)
 		bc->saveLine(name,stream,page);
 
-	RecentChannel* rc = &(parent->getRecentChannel());
+	RecentChannel* rc =
+		dynamic_cast<RecentChannel*>(parent->get_recent_channel());
 	if (this != rc)
 		rc->saveLine(name,stream,page);
 }

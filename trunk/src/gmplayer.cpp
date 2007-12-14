@@ -51,7 +51,6 @@ GMplayer::GMplayer(const sigc::slot<bool, Glib::IOCondition>& slot):
 	childpid(-1),
 	xid(-1),
 	timer(0),
-	replay(false), 
 	child_call(slot)
 	,mode(1)
 {
@@ -73,22 +72,15 @@ void GMplayer::wait_mplayer_exit(GPid pid, int)
 		waitpid(childpid, NULL, 0);
 		childpid = -1;
 
-
 		ready = true;
+		signal_stop_play_.emit();
 	}
 	
-	signal_stop_play_.emit();
-
-	if (replay) {
-		start();
-	}
 }
 
 int GMplayer::my_system(char* const argv[])
 {
 	extern char **environ;
-
-
 	ptm_conn = Glib::signal_io().connect(
 			child_call,
 			stdout_pipe[0], Glib::IO_IN);
@@ -100,15 +92,16 @@ int GMplayer::my_system(char* const argv[])
 
 		set_signals();
 		set_s_pipe();
+		//sleep(4);
 		execvp(argv[0], argv);
 
 		perror("mplayer execvp:");
 		exit(127);
 	} 
 	childpid = pid;
+	wait_conn = Glib::signal_child_watch().connect(
+			sigc::mem_fun(*this, &GMplayer::wait_mplayer_exit), pid, 0);
 
-	Glib::signal_child_watch().connect
-		(sigc::mem_fun(*this, &GMplayer::wait_mplayer_exit), pid);
 	return pid;
 
 
@@ -121,13 +114,8 @@ bool GMplayer::is_runing()
 
 void GMplayer::start()
 {
-	if (is_runing()) {
+	if (is_runing()) 
 		stop();
-		replay = true; // 正在播放，要等到当前的mplayer停止再启动新的
-		return;
-	}
-
-	replay = false;
 
 	if (file.empty())
 		return;
@@ -144,12 +132,6 @@ void GMplayer::start()
 
 	char wid_buf[32];
 	snprintf(wid_buf, 32, "%d", xid);
-//	char command_buf[256];
-//	if(mode)
-//		snprintf(command_buf,256, "mplayer -slave -vf scale=%d:-3 -wid %d %s", width,xid, file.c_str());
-//		//snprintf(command_buf,256, "mplayer -wid %d %s", xid, file.c_str());
-//	else
-//		snprintf(command_buf,256, "mplayer -slave -geometry +%d+%d  %s",x,y,  file.c_str());
 
 	const char* argv[6];
 	argv[0] = "mplayer";
@@ -158,12 +140,6 @@ void GMplayer::start()
 	argv[3] = wid_buf;
 	argv[4] = file.c_str();
 	argv[5] = NULL;
-
-//	const char* argv[5];
-//       	argv[0] = "sh";
-//	argv[1] = "-c";
-//	argv[2] = command_buf;
-//	argv[3] = NULL;
 
 	ready = false;
 	my_system((char* const *) argv);
@@ -184,9 +160,19 @@ void GMplayer::send_ctrl_word(char c)
 {
 	char cb[3];
 	sprintf(cb, "%c\n", c);
-	//if (pst_ctrl) {
-		//EC_THROW(-1 == write(pst_ctrl->get_ptm(), &c, sizeof (char)));
 	EC_THROW(-1 == write(stdin_pipe[1], cb, sizeof (cb)));
 }
 
+void GMplayer::stop()
+{
+	if (childpid != -1) {
+		ptm_conn.disconnect();
+		wait_conn.disconnect();
+		kill(childpid, SIGKILL);
+		waitpid(childpid, NULL, 0);
+		childpid = -1;	
+		signal_stop_play_.emit();
+	}
+	ready = true;
+}
 

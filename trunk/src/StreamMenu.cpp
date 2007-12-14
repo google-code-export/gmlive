@@ -43,17 +43,17 @@ StreamMenu::StreamMenu(MainWindow& wnd)
 	Gtk::ImageMenuItem* itemCollapse = (Gtk::ImageMenuItem*)&this->items().back();
 	this->show_all();
 
-	itemPlay->signal_activate().connect(
-			sigc::mem_fun(wnd,&MainWindow::on_menu_play_activate));
-	itemRecord->signal_activate().connect(
-			sigc::mem_fun(wnd, &MainWindow::on_menu_record_activate));
-	itemAdd->signal_activate().connect(
-			sigc::mem_fun(wnd, &MainWindow::on_menu_add_activate));
-	itemRefresh->signal_activate().connect(
-			sigc::mem_fun(wnd, &MainWindow::on_menu_refresh_activate));
-	itemExpand->signal_activate().connect(
-			sigc::mem_fun(wnd, &MainWindow::on_menu_expand_activate));
-	itemCollapse->signal_activate().connect(
-			sigc::mem_fun(wnd, &MainWindow::on_menu_collapse_activate));
+//	itemPlay->signal_activate().connect(
+//			sigc::mem_fun(wnd,&MainWindow::on_menu_play_activate));
+//	itemRecord->signal_activate().connect(
+//			sigc::mem_fun(wnd, &MainWindow::on_menu_record_activate));
+//	itemAdd->signal_activate().connect(
+//			sigc::mem_fun(wnd, &MainWindow::on_menu_add_activate));
+//	itemRefresh->signal_activate().connect(
+//			sigc::mem_fun(wnd, &MainWindow::on_menu_refresh_activate));
+//	itemExpand->signal_activate().connect(
+//			sigc::mem_fun(wnd, &MainWindow::on_menu_expand_activate));
+//	itemCollapse->signal_activate().connect(
+//			sigc::mem_fun(wnd, &MainWindow::on_menu_collapse_activate));
 
 }

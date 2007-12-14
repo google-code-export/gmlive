@@ -24,63 +24,53 @@
 #include <libglademm/xml.h>
 #include <iostream>
 #include "gmplayer.h"
-#include "channel.h"
-#include "recentchannel.h"
-#include "bookmarkchannel.h"
-#include "live_player.h"
-#include "StreamMenu.h"
 
-#define main_ui	    DATA_DIR"/gmlive.xml"
+#define main_ui	    "../data/gmlive.xml"
 typedef Glib::RefPtr < Gnome::Glade::Xml > GlademmXML;
 
+class Channel;
+class LivePlayer;
 class MainWindow : public Gtk::Window {
 	public:
 		MainWindow();
 		~MainWindow();
-		void init();
-		void play(LivePlayer* lp);
-		void record(LivePlayer* lp);
-		RecentChannel& getRecentChannel()
-		{ return dynamic_cast<RecentChannel&>(*recentChannel);}
-		BookMarkChannel& getBookMarkChannel()
-	       	{ return dynamic_cast<BookMarkChannel&>(*bookMarkChannel); }
-		StreamMenu& getMenu() { return streamMenu;}
-		GMplayer& get_gmp() const { return *gmp; }
+		GMplayer& get_mplayer() { return *gmp; }
 	protected:
-		Channel* get_cur_channel();
-	public:
-		/** 菜单里的回调函数*/
-		void on_menu_play_activate();
-		void on_menu_record_activate();
-		void on_menu_add_activate();
-		void on_menu_refresh_activate();
-		void on_menu_expand_activate();
-		void on_menu_collapse_activate();
+		void show_msg(const Glib::ustring& msg,unsigned int id=0);
+		Gtk::Widget* create_main_menu();
 	private:
-		void on_fullscreen();
-		void on_stop();
-		void on_play();
-		void on_record();
+		friend class Channel;
+		void set_live_player(LivePlayer*);
+		Channel* get_recent_channel() { return recent_channel; }
+		Channel* get_bookmark_channel() { return bookmark_channel; }
+		// 菜单回调
+		void on_menu_file_play();
+		void on_menu_file_stop();
+		void on_menu_file_quit();
+		void on_menu_view_show_channel();
+		void on_menu_view_preferences();
+		void on_menu_help_about();
+
+		void on_live_player_out(int percentage);
 		bool on_gmplayer_out(const Glib::IOCondition& condition);
-		void on_live_player_status(int percentage);
 		void on_gmplayer_start();
 		void on_gmplayer_stop();
-		void on_toggle_player();
-		void show_msg(const Glib::ustring& msg,unsigned int id=0);
 
+		void reorder_widget(bool is_running);
+		Channel* get_cur_select_channel();
 	private:
-		GlademmXML ui_xml;
-		Gtk::CheckButton* checkplayer;
-		GMplayer* gmp;
-		LivePlayer* live_player;
-		Channel* 	recentChannel;
-		Channel* 	bookMarkChannel;
-		Gtk::Statusbar* statusbar;
-		Gtk::Notebook* picture;
-		Gtk::Notebook* listNotebook;
-		StreamMenu streamMenu;
-		//GKeyFile* keyfile;
-		//Setting* conf;
+		GlademmXML 			ui_xml;
+		Glib::RefPtr<Gtk::UIManager>	ui_manager;
+		Glib::RefPtr<Gtk::ActionGroup> 	action_group;
+		GMplayer* 			gmp;
+		Gtk::Box*			play_frame;
+		Gtk::Notebook*			channels;
+		Gtk::Statusbar* 		statusbar;
+		Gtk::Image*			backgroup;
+		Gtk::Widget*			menubar;
+		Channel* 			recent_channel;
+		Channel* 			bookmark_channel;
+		LivePlayer* 			live_player;
 };
 
 #endif // _MAINWINDOW_HH 
