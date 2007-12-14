@@ -15,23 +15,19 @@
  *
  k* =====================================================================================
  */
-
-#include "MainWindow.h"
 #include "mmschannel.h"
 #include "nslivechannel.h"
 #include "sopcastchannel.h"
 #include "recentchannel.h"
 #include "bookmarkchannel.h"
-#include "mms_live_player.h"
-#include "ns_live_player.h"
-#include "sopcast_live_player.h"
-#include "ConfFile.h"
+#include "live_player.h"
+
+#include "MainWindow.h"
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fstream>
-#include <assert.h>
+#include <cassert>
 using namespace std;
-
 Glib::ustring get_print_string(const char* buf, int len)
 {
 	if (len < 4)
@@ -49,224 +45,120 @@ Glib::ustring get_print_string(const char* buf, int len)
 	return Glib::ustring(new_buf, pnew);
 }
 
+Glib::ustring ui_info =
+"<ui>"
+"	<menubar name='MenuBar'>"
+"		<menu action='FileMenu'>"
+"			<menuitem action='FilePlay'/>"
+"			<menuitem action='FileStop'/>"
+"			<separator/>"
+"			<menuitem action='FileQuit'/>"
+"        	</menu>"
+"		<menu action='ViewMenu'>"
+"			<menuitem action='ViewShowChannel'/>"
+"			<menuitem action='ViewPreferences'/>"
+"		</menu>"
+"		<menu action='HelpMenu'>"
+"			<menuitem action='HelpAbout'/>"
+"		</menu>"
+"	</menubar>"
+"</ui>";
 
-MainWindow::MainWindow():
-	live_player(NULL),
-	streamMenu(*this)
+
+Gtk::Widget* MainWindow::create_main_menu()
 {
+	if (!action_group)
+		action_group = Gtk::ActionGroup::create();
+	//File menu:
+	action_group->add(Gtk::Action::create("FileMenu", "文件(_F)"));
+	action_group->add(Gtk::Action::create("FilePlay", Gtk::Stock::MEDIA_PLAY),
+			sigc::mem_fun(*this, &MainWindow::on_menu_file_play));
+	action_group->add(Gtk::Action::create("FileStop", Gtk::Stock::MEDIA_STOP),
+			sigc::mem_fun(*this, &MainWindow::on_menu_file_stop));
+	action_group->add(Gtk::Action::create("FileQuit", Gtk::Stock::QUIT),
+			sigc::mem_fun(*this, &MainWindow::on_menu_file_quit));
 
-	init();
+	//View menu:
+	action_group->add(Gtk::Action::create("ViewMenu", "查看(_V)"));
+	action_group->add(Gtk::ToggleAction::create("ViewShowChannel", 
+				"显示频道列表(_S)", "隐藏或显示频道列表", false),
+			sigc::mem_fun(*this, &MainWindow::on_menu_view_show_channel));
+	action_group->add(Gtk::Action::create("ViewPreferences", Gtk::Stock::PREFERENCES),
+			sigc::mem_fun(*this, &MainWindow::on_menu_view_preferences));
 
-	ui_xml = Gnome::Glade::Xml::create(main_ui, "mainFrame");
-	Gtk::VBox* vbox = 
-		dynamic_cast < Gtk::VBox* >
-		(ui_xml->get_widget("mainFrame"));
+	//Help menu:
+	action_group->add(Gtk::Action::create("HelpMenu", "帮助(_H)"));
+	action_group->add(Gtk::Action::create("HelpAbout", Gtk::Stock::HELP),
+			sigc::mem_fun(*this, &MainWindow::on_menu_help_about));
 
-	Gtk::VBox* hbox = dynamic_cast < Gtk::VBox* >
-		(ui_xml->get_widget("playFrame"));
+	if (!ui_manager)
+		ui_manager = Gtk::UIManager::create();
 
-	/*
-	Gtk::Button* bt_fullscreen=dynamic_cast <Gtk::Button* >
-		(ui_xml->get_widget("bt_fullscreen"));
-		*/
-	Gtk::Button* bt_stop=dynamic_cast <Gtk::Button* >
-		(ui_xml->get_widget("bt_stop"));
-	/*
-	Gtk::Button* bt_record=dynamic_cast<Gtk::Button* >
-		(ui_xml->get_widget("bt_record"));
-		*/
-	Gtk::Button* bt_play=dynamic_cast<Gtk::Button*>
-		(ui_xml->get_widget("bt_play"));
-	statusbar = dynamic_cast<Gtk::Statusbar*>
-		(ui_xml->get_widget("statusbar"));
-	picture = dynamic_cast<Gtk::Notebook*>
-		(ui_xml->get_widget("notebook_picture"));
-	listNotebook = dynamic_cast<Gtk::Notebook*>
-		(ui_xml->get_widget("listnotebook"));
+	ui_manager->insert_action_group(action_group);
+	add_accel_group(ui_manager->get_accel_group());
+	ui_manager->add_ui_from_string(ui_info);
 
-	gmp = new GMplayer(sigc::mem_fun(*this, &MainWindow::on_gmplayer_out));	
-	gmp->signal_start_play().connect(sigc::mem_fun(*this, &MainWindow::on_gmplayer_start));
-	gmp->signal_stop_play().connect(sigc::mem_fun(*this, &MainWindow::on_gmplayer_stop));
+	return ui_manager->get_widget("/MenuBar");
+}
 
-	if (hbox)
-		hbox->pack_end(*gmp, true, true);
-
-	Channel* channel = Gtk::manage(new class NSLiveChannel(this));
-	Gtk::ScrolledWindow* scrolledwin_nslive = dynamic_cast<Gtk::ScrolledWindow*>
-		(ui_xml->get_widget("scrolledwin_nslive"));
-	scrolledwin_nslive->add(*channel);
-
-	channel = Gtk::manage(new class MMSChannel(this));
-	Gtk::ScrolledWindow* scrolledwin_mms = dynamic_cast<Gtk::ScrolledWindow*>
-		(ui_xml->get_widget("scrolledwin_mms"));
-	scrolledwin_mms->add(*channel);
-
-	channel = Gtk::manage(new class SopcastChannel(this));
-	Gtk::ScrolledWindow* scrolledwin_sopcast = dynamic_cast<Gtk::ScrolledWindow*>
-		(ui_xml->get_widget("scrolledwin_sop"));
-	scrolledwin_sopcast->add(*channel);
-
-	recentChannel = Gtk::manage(new class RecentChannel(this));
-	Gtk::ScrolledWindow* scrolledwin_recent= dynamic_cast<Gtk::ScrolledWindow*>
-		(ui_xml->get_widget("scrolledwin_recent"));
-	scrolledwin_recent->add(*recentChannel);
-
-	bookMarkChannel = Gtk::manage(new class BookMarkChannel(this));
-	Gtk::ScrolledWindow* scrolledwin_bookmark = dynamic_cast<Gtk::ScrolledWindow*>
-		(ui_xml->get_widget("scrolledwin_bookmark"));
-	scrolledwin_bookmark->add(*bookMarkChannel);
-
-
-	/*
-	bt_fullscreen->signal_clicked().
-		connect(sigc::mem_fun(*this, &MainWindow::on_fullscreen));
-		*/
-	bt_stop->signal_clicked().
-		connect(sigc::mem_fun(*this, &MainWindow::on_stop));
-	/*
-	bt_record->signal_clicked().
-		connect(sigc::mem_fun(*this, &MainWindow::on_record));
-		*/
-	bt_play->signal_clicked().
-		connect(sigc::mem_fun(*this, &MainWindow::on_play));
-	this->add(*vbox);
-
-	/*config page*/
-	char buf[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf,512,"%s/.gmlive/config",homedir);
-
-
-
-	int embed;
-	std::string name;
-	ConfFile conf(buf,"r");
-	conf.read_int(name,embed);
-	if(name != "embed")
-		embed=1;
-	checkplayer = dynamic_cast<Gtk::CheckButton*>
-		(ui_xml->get_widget("checkplayer"));
-	std::cout<<"set embed "<<embed<<std::endl;
-	if(embed)
-		checkplayer->set_active();
+void MainWindow::on_menu_file_play()
+{
+	cout << "on_menu_file_play" << endl;
+	//gmp->start("mms://61.139.37.135/star");
+	Channel* channel = get_cur_select_channel();
+	if (channel)
+		channel->play_selection();
 	else
-		checkplayer->set_active(false);
-	checkplayer->signal_toggled().
-		connect(sigc::mem_fun(*this, &MainWindow::on_toggle_player));
-
-	snprintf(buf,512,DATA_DIR"/gmlive.png");
-	Glib::RefPtr<Gdk::Pixbuf> pix = Gdk::Pixbuf::create_from_file(buf);
-	set_icon(pix);
-	this->show_all();
-
+		cout << "Error" << endl;
+	
 }
 
-MainWindow::~MainWindow()
+void MainWindow::on_menu_file_stop()
 {
-	on_stop();
-}
-void MainWindow::init()
-{
-	char homepath[512];
-	char buf[512];
-	char* homedir = getenv("HOME");
-	snprintf(homepath,512,"%s/.gmlive/",homedir);
-	mkdir(homepath,S_IRUSR|S_IWUSR|S_IXUSR);
-	snprintf(buf,512,"%s/config",homepath);
-	ifstream infile(buf);
-	if(!infile)
-	{
-		ofstream outfile(buf);
-		outfile.close();
-	}
-	infile.close();
-
-	//	  /* Create a new GKeyFile object and a bitwise list of flags. */
-	//	  keyfile = g_key_file_new ();
-	//	  GKeyFileFlags flags = G_KEY_FILE_KEEP_COMMENTS | G_KEY_FILE_KEEP_TRANSLATIONS;
-	//	  GError* error=NULL;
-	//	    /* Load the GKeyFile from keyfile.conf or return. */
-	//	    if (!g_key_file_load_from_file (keyfile, buf, flags, &error))
-	//	      {
-	//			          g_error (error->message);
-	//				      return -1;
-	//		}
-	//	    conf=g_new(Setting);
-
+	cout << "on_menu_stop" << endl;
+	gmp->stop();
 }
 
-Channel* MainWindow::get_cur_channel()
+void MainWindow::on_menu_file_quit()
 {
-	int npage = listNotebook->get_current_page();
-	Gtk::Container* page = dynamic_cast<Gtk::Container*>(listNotebook->get_nth_page(npage));
-	if (!page)
-		return NULL;
-	return dynamic_cast< Channel* >(*(page->get_children().begin()));
+	cout << "on_menu_file_quit" << endl;
 }
 
-void MainWindow::show_msg(const Glib::ustring& msg, unsigned int id)
+void MainWindow::on_menu_view_show_channel()
 {
-	statusbar->pop(id);
-	statusbar->push(msg, id);
-}
-void MainWindow::on_fullscreen()
-{
-	gmp->full_screen();
+	cout << "on_menu_view_show_channel" << endl;
+
+	// 这种写法太白痴了
+	Glib::RefPtr<Gtk::ToggleAction> show = 
+		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewShowChannel"));
+
+	if (show->get_active())
+		channels->show();
+	else
+		channels->hide();
+	this->resize(1, 1);
 }
 
-void MainWindow::on_toggle_player()
+void MainWindow::on_menu_view_preferences()
 {
-	bool embed=checkplayer->get_active();
-	gmp->set_mode(embed);
-	char buf[512];
-	char* homedir = getenv("HOME");
-	int value;
-	if(embed) value=1;
-	else value=0;
-	snprintf(buf,512,"%s/.gmlive/config",homedir);
-	ConfFile config(buf,"w");
-	config.write_int("embed",value);
-	config.close();
+	cout << "on_menu_view_preferences" << endl;
 }
-void MainWindow::on_stop()
+
+void MainWindow::on_menu_help_about()
 {
-	if (live_player)
-		live_player->stop();
-	delete live_player;
+	cout << "on_menu_help_about" << endl;
+}
+
+void MainWindow::on_gmplayer_start()
+{
+	reorder_widget(true);
+}
+
+void MainWindow::on_gmplayer_stop()
+{
+	show_msg("ready...");
+	reorder_widget(false);
 	live_player = NULL;
-}
-
-void MainWindow::on_play()
-{
-	on_menu_play_activate();
-}
-
-void MainWindow::on_record()
-{
-	on_menu_record_activate();
-}
-
-void MainWindow::play(LivePlayer* lp)
-{
-
-	assert(lp);
-	on_stop();
-	live_player = lp;
-
-	live_player->signal_status().connect(sigc::mem_fun(*this, &MainWindow::on_live_player_status));
-	live_player->play();
-}
-
-void MainWindow::on_live_player_status(int percentage)
-{
-	char buf[256];
-	sprintf(buf, "Connect...%%%d", percentage);
-	show_msg(buf, sizeof (buf));
-}
-
-void MainWindow::record(LivePlayer* lp)
-{
-
 }
 
 bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
@@ -282,65 +174,132 @@ bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 	return true;
 }
 
-void MainWindow::on_gmplayer_start()
+void MainWindow::on_live_player_out(int percentage)
 {
-
-	bool embed=checkplayer->get_active();
-	if(embed)
-		picture->set_current_page(PAGE_MPLAYER);
+	char buf[256];
+	sprintf(buf, "Connect...%%%d", percentage);
+	show_msg(buf, sizeof (buf));
 }
 
-void MainWindow::on_gmplayer_stop()
+MainWindow::MainWindow():
+	live_player(NULL)
 {
-	on_stop();
-	show_msg("ready...");
-	picture->set_current_page(PAGE_PICTURE);
+	ui_xml = Gnome::Glade::Xml::create(main_ui, "mainFrame");
+	if (!ui_xml) 
+		exit(127);
+	Gtk::VBox* main_frame = 
+		dynamic_cast < Gtk::VBox* >
+		(ui_xml->get_widget("mainFrame"));
+
+	statusbar = dynamic_cast<Gtk::Statusbar*>
+		(ui_xml->get_widget("statusbar"));
+
+	play_frame = dynamic_cast<Gtk::Box*>
+		(ui_xml->get_widget("playFrame"));
+
+	channels = dynamic_cast<Gtk::Notebook*>
+		(ui_xml->get_widget("channels"));
+
+	Channel* channel = Gtk::manage(new class MMSChannel(this));
+	Gtk::ScrolledWindow* swnd = dynamic_cast<Gtk::ScrolledWindow*>
+		(ui_xml->get_widget("mmsChannelWnd"));
+	swnd->add(*channel);
+
+	channel = Gtk::manage(new class SopcastChannel(this));
+	swnd = dynamic_cast<Gtk::ScrolledWindow*>
+		(ui_xml->get_widget("sopcastChannelWnd"));
+	swnd->add(*channel);
+
+	channel = Gtk::manage(new class NSLiveChannel(this));
+	swnd = dynamic_cast<Gtk::ScrolledWindow*>
+		(ui_xml->get_widget("nsliveChannelWnd"));
+	swnd->add(*channel);
+
+	recent_channel = Gtk::manage(new class RecentChannel(this));
+	swnd = dynamic_cast<Gtk::ScrolledWindow*>
+		(ui_xml->get_widget("recentChannelWnd"));
+	swnd->add(*recent_channel);
+
+	bookmark_channel = Gtk::manage(new class BookMarkChannel(this));
+	swnd = dynamic_cast<Gtk::ScrolledWindow*>
+		(ui_xml->get_widget("bookmarkChannelWnd"));
+	swnd->add(*bookmark_channel);
+
+
+	backgroup = new Gtk::Image(
+			Gdk::Pixbuf::create_from_file (
+				"../data/gmlive_play.png"));
+
+	gmp = new GMplayer(sigc::mem_fun(*this, &MainWindow::on_gmplayer_out));	
+	gmp->signal_start_play().connect(sigc::mem_fun(*this, &MainWindow::on_gmplayer_start));
+	gmp->signal_stop_play().connect(sigc::mem_fun(*this, &MainWindow::on_gmplayer_stop));
+
+	menubar = create_main_menu();
+
+	play_frame->pack_start(*backgroup, true, true);
+
+	main_frame->pack_start(*menubar, false, false);
+
+	this->add(*main_frame);
+
+	Glib::RefPtr<Gdk::Pixbuf> pix = Gdk::Pixbuf::create_from_file("../data/gmlive.png");
+	this->set_icon(pix);
+
+	this->show_all();
+	channels->hide();
+	this->resize(1,1);
+}
+
+MainWindow::~MainWindow()
+{
+	delete backgroup;
+	delete gmp;
 }
 
 
 
-
-void MainWindow::on_menu_play_activate()
+void MainWindow::show_msg(const Glib::ustring& msg, unsigned int id)
 {
-
-	Channel* channel = get_cur_channel();
-	if (channel)
-		channel->play_selection();
-
-
-}
-void MainWindow::on_menu_record_activate()
-{
-
-	Channel* channel = get_cur_channel();
-	if (channel)
-		channel->record_selection();
-}
-void MainWindow::on_menu_add_activate()
-{
-
-	Channel* channel = get_cur_channel();
-	if (channel)
-		channel->store_selection();
-
-}
-void MainWindow::on_menu_refresh_activate()
-{
-	Channel* channel = get_cur_channel();
-	if (channel)
-		channel->refresh_list();
-
+	statusbar->pop(id);
+	statusbar->push(msg, id);
 }
 
-void MainWindow::on_menu_expand_activate()
+void MainWindow::reorder_widget(bool is_running)
 {
-	Channel* channel = get_cur_channel();
-	if(channel)
-		channel->expand_all();
+	if (is_running){
+		static int width = backgroup->get_width();
+		static int height = backgroup->get_height();
+		printf("%d,%d\n", width, height);
+		play_frame->remove(*backgroup);
+		play_frame->pack_start(*gmp, true, true);
+		gmp->show_all();
+		gmp->set_size_request(width, height);
+	}
+	else {
+		play_frame->remove(*gmp);
+		play_frame->pack_start(*backgroup, true, true);
+		backgroup->show_all();
+	}
+	this->resize(1,1);
 }
-void MainWindow::on_menu_collapse_activate()
+
+Channel* MainWindow::get_cur_select_channel()
 {
-	Channel* channel = get_cur_channel();
-	if(channel)
-		channel->collapse_all();
+	int npage = channels->get_current_page();
+	Gtk::Container* page = 
+		dynamic_cast<Gtk::Container*>(channels->get_nth_page(npage));
+	if (!page)
+		return NULL;
+	return dynamic_cast< Channel* >(*(page->get_children().begin()));
 }
+
+void MainWindow::set_live_player(LivePlayer* lp)
+{
+	if (lp != live_player) {
+		delete live_player;
+		live_player = lp;
+		lp->signal_status().connect(sigc::mem_fun(
+					*this, &MainWindow::on_live_player_out));
+	}
+}
+

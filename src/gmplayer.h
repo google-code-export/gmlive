@@ -15,7 +15,7 @@ class GMplayer : public Gtk::Socket
 		void send_ctrl_word(char c);
 		void start(const std::string&);
 		void start();
-		void stop() { send_ctrl_word('q'); }
+		void stop();
 		void full_screen();
 		void set_mode(bool embed=1){mode=embed;}
 		ssize_t get_mplayer_log(char* buf, size_t count) 
@@ -24,7 +24,7 @@ class GMplayer : public Gtk::Socket
 		typedef sigc::signal<void> type_signal_stop;
 		type_signal_stop signal_stop_play()
 		{ return signal_stop_play_; }
-		
+
 		typedef sigc::signal<void> type_signal_start;
 		type_signal_start signal_start_play()
 		{ return signal_start_play_; }	
@@ -37,6 +37,7 @@ class GMplayer : public Gtk::Socket
 
 		sigc::slot<bool, Glib::IOCondition> 	child_call;
 		sigc::connection 			ptm_conn;
+		sigc::connection 			wait_conn;
 		type_signal_stop  			signal_stop_play_;
 		type_signal_start 			signal_start_play_;
 		int stdout_pipe[2];
@@ -48,7 +49,6 @@ class GMplayer : public Gtk::Socket
 		guint32		xid;		/* X window handle (internal)*/
 		guint		timer;		/* timer (internal) */
 		bool		ready;		/* is the player ready (internal)*/
-		bool		replay;		/* 重新播放状态 */
 		bool		mode;
 };
 
