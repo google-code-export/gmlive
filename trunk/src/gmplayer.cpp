@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 #include <string.h>
 #include "ec_throw.h"
+#include <cassert>
 void  set_signals()
 {
 	sigset_t set;
@@ -37,6 +38,34 @@ void  set_signals()
 	
 }
 
+void GMplayer::create_pipe()
+{
+	close_pipe();
+
+	EC_THROW(-1 == pipe(stdin_pipe));
+	EC_THROW(-1 == pipe(stdout_pipe));
+}
+
+void GMplayer::close_pipe()
+{
+	if (stdin_pipe[0] != -1) {
+		close(stdin_pipe[0]);
+		stdin_pipe[0] = -1;
+	}
+	if (stdin_pipe[1] != -1) {
+		close(stdin_pipe[1]);
+		stdin_pipe[1] = -1;
+	}
+	if (stdout_pipe[0] != -1) {
+		close(stdout_pipe[0]);
+		stdout_pipe[0] = -1;
+	}
+	if (stdout_pipe[1] != -1) {
+		close(stdout_pipe[1]);
+		stdout_pipe[1] = -1;
+	}
+}
+
 void GMplayer::set_s_pipe()
 {
 	close(stdin_pipe[1]);
@@ -46,6 +75,21 @@ void GMplayer::set_s_pipe()
 	//EC_THROW( -1 == dup2(stdout_pipe[1], STDERR_FILENO));
 }
 
+void GMplayer::set_m_pipe()
+{
+	close(stdin_pipe[0]);
+	stdin_pipe[0] = -1;
+	close(stdout_pipe[1]);
+	stdout_pipe[1] = -1;
+
+	fd_set fd_set_write;
+	FD_ZERO(&fd_set_write);
+	FD_SET(stdin_pipe[1], &fd_set_write);
+
+	EC_THROW( -1 == select (stdin_pipe[1] + 1, NULL, &fd_set_write, NULL, NULL));
+
+}
+
 GMplayer::GMplayer(const sigc::slot<bool, Glib::IOCondition>& slot):
 	ready(true),
 	childpid(-1),
@@ -53,9 +97,12 @@ GMplayer::GMplayer(const sigc::slot<bool, Glib::IOCondition>& slot):
 	timer(0),
 	child_call(slot)
 	,mode(1)
+	,is_pause(false)
 {
-	EC_THROW(-1 == pipe(stdin_pipe));
-	EC_THROW(-1 == pipe(stdout_pipe));
+	stdin_pipe[0] = -1;
+	stdin_pipe[1] = -1;
+	stdout_pipe[0] = -1;
+	stdout_pipe[1] = -1;
 }
 
 
@@ -75,16 +122,13 @@ void GMplayer::wait_mplayer_exit(GPid pid, int)
 		ready = true;
 		signal_stop_play_.emit();
 	}
-	
+
 }
 
 int GMplayer::my_system(char* const argv[])
 {
 	extern char **environ;
-	ptm_conn = Glib::signal_io().connect(
-			child_call,
-			stdout_pipe[0], Glib::IO_IN);
-
+	create_pipe();
 	pid_t pid = fork();
 	if (pid == -1)
 		return -1;
@@ -92,16 +136,23 @@ int GMplayer::my_system(char* const argv[])
 
 		set_signals();
 		set_s_pipe();
-		fprintf(stderr, "pid = %d, gpid = %d", getpid(), getpgid(0));
+		// 设置 这个子进程为进程组头，
+		// 这样，只要杀掉这个进程，他的子进程也会退出
 		EC_THROW(-1 == setpgid(0, 0));
-		fprintf(stderr, "pid = %d, gpid = %d", getpid(), getpgid(0));
 		//sleep(4);
 		execvp(argv[0], argv);
 
 		perror("mplayer execvp:");
-		exit(127);
 	} 
 	childpid = pid;
+	
+	set_m_pipe();
+
+	ptm_conn = Glib::signal_io().connect(
+			child_call,
+			stdout_pipe[0], Glib::IO_IN);
+
+
 	wait_conn = Glib::signal_child_watch().connect(
 			sigc::mem_fun(*this, &GMplayer::wait_mplayer_exit), pid, 0);
 
@@ -115,14 +166,8 @@ bool GMplayer::is_runing()
 	return (!ready) && (childpid > 0);
 }
 
-void GMplayer::start()
+void GMplayer::initialize()
 {
-	if (is_runing()) 
-		stop();
-
-	if (file.empty())
-		return;
-
 	signal_start_play_.emit();
 
 	Glib::RefPtr<Gdk::Window> gwin = this->get_window();
@@ -134,6 +179,7 @@ void GMplayer::start()
 	}
 
 	char wid_buf[32];
+	printf("xid = %d\n", xid);
 	snprintf(wid_buf, 32, "%d", xid);
 
 	const char* argv[6];
@@ -141,29 +187,38 @@ void GMplayer::start()
 	argv[1] = "-slave";
 	argv[2] = "-wid";
 	argv[3] = wid_buf;
-	argv[4] = file.c_str();
+	argv[4] = "-idle";
 	argv[5] = NULL;
 
 	ready = false;
 	my_system((char* const *) argv);
 }
 
-void GMplayer::start(const std::string& filename)
+void GMplayer::play(const std::string& filename)
 {
 	if (filename != file)
 		file = filename;
-	start();
+	else {
+		if (is_pause)
+			return pause();
+	}
+
+	if (is_runing())
+		stop();
+	initialize();
+	char cb[256];
+	int len = snprintf(cb, 256, "loadfile %s\n", filename.c_str());
+	EC_THROW(-1 == write(stdin_pipe[1], cb, len));
 }
 
 void GMplayer::full_screen()
 {
 }
 
-void GMplayer::send_ctrl_word(char c)
+void GMplayer::send_ctrl_command(const char* c)
 {
-	char cb[3];
-	sprintf(cb, "%c\n", c);
-	EC_THROW(-1 == write(stdin_pipe[1], cb, sizeof (cb)));
+	assert(c != NULL);
+	EC_THROW(-1 == write(stdin_pipe[1], c, strlen (c)));
 }
 
 void GMplayer::stop()
@@ -171,13 +226,25 @@ void GMplayer::stop()
 	if (childpid != -1) {
 		ptm_conn.disconnect();
 		wait_conn.disconnect();
-		kill(childpid, SIGKILL);
-		waitpid(childpid, NULL, 0);
-		kill(-childpid, SIGKILL);
-		waitpid(-childpid, NULL, 0);
+
+		for (;;) {
+			kill(-childpid, SIGKILL);
+			int ret = (waitpid( -childpid, NULL, WNOHANG));
+			if (-1 == ret)
+				break;
+		}
+
 		childpid = -1;	
 		signal_stop_play_.emit();
 	}
 	ready = true;
 }
+
+
+void GMplayer::pause()
+{
+	is_pause = !is_pause;
+	send_ctrl_command("pause\n");
+}
+
 

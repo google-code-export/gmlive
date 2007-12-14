@@ -23,9 +23,9 @@
 
 class NsLivePlayer : public LivePlayer {
 	public:
-		NsLivePlayer(GMplayer& gmp, int id);
+		NsLivePlayer(int id);
 		~NsLivePlayer();
-		void play();
+		void play(GMplayer& gmplayer);
 		void stop();
 	private:
 		int ns_pid;

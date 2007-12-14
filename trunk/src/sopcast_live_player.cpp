@@ -9,6 +9,7 @@
 #include "gmlive.h"
 #include "ec_throw.h"
 #include "scope_gruard.h"
+#include <gmplayer.h>
 
 int connect_to_server(const char *host, int portnum)
 {
@@ -36,12 +37,12 @@ int connect_to_server(const char *host, int portnum)
 }
 
 
-SopcastLivePlayer::SopcastLivePlayer(GMplayer& gmp, const std::string& stream_) : 
-	LivePlayer(gmp),
+SopcastLivePlayer::SopcastLivePlayer(const std::string& stream_) : 
 	stream(stream_),
 	sop_pid(-1),
 	sop_sock(-1),
-	player(false)
+	player(false),
+	gmplayer(NULL)
 {
 }
 
@@ -52,8 +53,9 @@ SopcastLivePlayer::~SopcastLivePlayer()
 	printf("sopcast exit\n");
 }
 
-void SopcastLivePlayer::play()
+void SopcastLivePlayer::play(GMplayer& gmp)
 {
+	gmplayer = &gmp;
 	extern char **environ;
 	int pid = fork();
 	if (pid == -1)
@@ -61,21 +63,17 @@ void SopcastLivePlayer::play()
 	if (pid == 0) {
 		close(STDOUT_FILENO);
 
-		//char buf[256];
-		//sprintf(buf, "sp-sc-auth %s 3908 8908 ", stream.c_str());
 		const char* argv[5];
-	//	argv[0] = "sh";
-	//	argv[1] = "-c";
-	//	argv[2] = buf;
-	//	argv[3] = NULL;
+
 		argv[0] = "sp-sc-auth";
 		argv[1] = stream.c_str();
 		argv[2] = "3908";
 		argv[3] = "8908";
 		argv[4] = NULL;
 
-		//const char* argv[4] = {"sh", "-c", buf};
-		//execve("/bin/sh", (char**)argv, environ);
+		// 设置 这个子进程为进程组头，
+		// 这样，只要杀掉这个进程，他的子进程也会退出
+		EC_THROW(-1 == setpgid(0, 0));
 		execvp(argv[0], (char* const *)argv);
 		perror("sp-sc-auth execvp:");
 		exit(127);
@@ -88,7 +86,6 @@ void SopcastLivePlayer::play()
 
 	sop_time_conn = Glib::signal_timeout().connect(sigc::mem_fun(*this, &SopcastLivePlayer::on_sop_time_status), 1000);
 
-	//gmp.start(SOPCASTSTREAM);
 }
 
 bool SopcastLivePlayer::on_sop_time_status()
@@ -127,11 +124,10 @@ bool SopcastLivePlayer::on_sop_sock(const Glib::IOCondition& condition)
 		}
 	}
 
-	//printf("%s", buf);
 	int i = atoi(buf);
 	if ((i > 70) && (!player)){
 		player = true;
-		gmp.start(SOPCASTSTREAM);
+		gmplayer->play(SOPCASTSTREAM);
 
 		sop_time_conn.disconnect(); // 启动mpaleyr，停掉显示缓冲状态
 		return false;
@@ -143,14 +139,17 @@ bool SopcastLivePlayer::on_sop_sock(const Glib::IOCondition& condition)
 
 void SopcastLivePlayer::stop()
 {
-	gmp.stop();
 	if (sop_pid > 0) {
 		player = false;
 		sop_time_conn.disconnect();
 		sop_sock_conn.disconnect();
-		kill(sop_pid, SIGKILL);
-		//kill(sop_pid+1, SIGKILL);
-		waitpid(sop_pid, NULL, 0);
+		
+		for (;;) {
+			kill(-sop_pid, SIGKILL);
+			int ret = (waitpid( -sop_pid, NULL, WNOHANG));
+			if (-1 == ret)
+				break;
+		}
 		sop_pid = -1;
 	}
 

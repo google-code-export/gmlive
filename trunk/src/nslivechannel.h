@@ -25,7 +25,7 @@ class NSLiveChannel:public Channel
 	public:
 		NSLiveChannel(MainWindow* parent_);
 	protected:
-		LivePlayer* get_player(GMplayer& gmp, const std::string& stream,TypeChannel page);
+		LivePlayer* get_player(const std::string& stream,TypeChannel page);
 		void init();
 		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
 		void refresh_list();

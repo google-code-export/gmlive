@@ -33,10 +33,7 @@ class RecentChannel:public Channel
 		/** 只添加进列表中*/
 		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& type);
 	protected:
-		LivePlayer* get_player(GMplayer& gmp, const std::string& stream,TypeChannel page);
-	//	void play_selection();
-	//	void record_selection();
-
+		LivePlayer* get_player(const std::string& stream,TypeChannel page);
 };
 #endif   /* ----- #ifndef RECENTCHANNEL_FILE_HEADER_INC  ----- */
 

@@ -19,13 +19,13 @@
 #ifndef _LIVE_PLAYER_H_
 #define _LIVE_PLAYER_H_
 
-#include "gmplayer.h"
+#include <gtkmm.h>
 
+class GMplayer;
 class LivePlayer {
 	public:
-		LivePlayer(GMplayer& gmp_): gmp(gmp_) {}
 		virtual ~LivePlayer() {}
-		virtual void play() = 0;
+		virtual void play(GMplayer&) = 0;
 		virtual void stop() = 0;
 
 		typedef sigc::signal<void, int> type_signal_status;
@@ -34,8 +34,6 @@ class LivePlayer {
 		
 	protected:
 		type_signal_status  			signal_status_;
-
-		GMplayer& gmp;
 };
 #endif // _LIVE_PLAYER_H_
 

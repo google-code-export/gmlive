@@ -17,25 +17,25 @@
  */
 
 #include "mms_live_player.h"
+#include <gmplayer.h>
 
-MmsLivePlayer::MmsLivePlayer(GMplayer& gmp, const std::string& fname) :
-	LivePlayer(gmp),
+MmsLivePlayer::MmsLivePlayer(const std::string& fname) :
 	filename(fname)
 {
 }
 
 MmsLivePlayer::~MmsLivePlayer()
 {
-	gmp.stop();
+	//gmp.stop();
 	printf("mms exit\n");
 }
-void MmsLivePlayer::play()
+void MmsLivePlayer::play(GMplayer& gmp)
 {
-	gmp.start(filename);
+	gmp.play(filename);
 }
 
 void MmsLivePlayer::stop()
 {
-	gmp.stop();
+	//gmp.stop();
 }
 
