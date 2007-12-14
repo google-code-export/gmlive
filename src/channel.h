@@ -34,9 +34,9 @@ class Channel:public Gtk::TreeView
 	public:
 		Channel(MainWindow* parent_);
 		virtual ~Channel();
-		virtual void play_selection();
-		virtual void record_selection();
-		virtual void store_selection();
+		void play_selection();
+		void record_selection();
+		void store_selection();
 		virtual void refresh_list(){};
 
 		Gtk::TreeModel::iterator getListIter(Gtk::TreeModel::
@@ -66,11 +66,13 @@ class Channel:public Gtk::TreeView
 		Glib::RefPtr< Gtk::TreeStore> m_liststore;
 
 	protected:
-		virtual LivePlayer* get_player(GMplayer& gmp,
-			       	const std::string& stream,TypeChannel page = NONE ) = 0;
+		virtual LivePlayer* get_player(
+				const std::string& stream,TypeChannel page = NONE ) = 0;
 
 		bool on_button_press_event(GdkEventButton *);
+		void play_selection_iter(Gtk::TreeModel::iterator& iter);
 		MainWindow* parent;
+		LivePlayer* live_player;
 	private:
 		struct CompareChannel:public std::binary_function 
 				      < Gtk::TreeModel::Row,

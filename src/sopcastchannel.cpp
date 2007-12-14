@@ -59,9 +59,9 @@ SopcastChannel::SopcastChannel(MainWindow* parent_)
 	refresh_list();
 }
 
-LivePlayer* SopcastChannel::get_player(GMplayer& gmp, const std::string& stream,TypeChannel page)
+LivePlayer* SopcastChannel::get_player(const std::string& stream,TypeChannel page)
 {
-	return new SopcastLivePlayer(gmp, stream);
+	return new SopcastLivePlayer(stream);
 }
 
 void SopcastChannel::parse_channel
@@ -190,52 +190,4 @@ void SopcastChannel::init()
 	xmlCleanupParser();
 	
 }
-
-
-//void SopcastChannel::play_selection()
-//{
-//	Glib::RefPtr < Gtk::TreeSelection > selection =
-//	    this->get_selection();
-//	Gtk::TreeModel::iterator iter = selection->get_selected();
-//	if (!selection->count_selected_rows())
-//		return ;
-//	TypeChannel page = (*iter)[columns.type];
-//	Glib::ustring name = (*iter)[columns.name];
-//	std::string stream = (*iter)[columns.stream];
-//
-//	parent->play(stream,this);
-//	parent->getRecentChannel().saveLine(name,stream,page);
-//}
-//
-//void SopcastChannel::record_selection()
-//{
-//	Glib::RefPtr < Gtk::TreeSelection > selection =
-//	    this->get_selection();
-//	Gtk::TreeModel::iterator iter = selection->get_selected();
-//	if (!selection->count_selected_rows())
-//		return ;
-//	TypeChannel page = (*iter)[columns.type];
-//	Glib::ustring name = (*iter)[columns.name];
-//	std::string stream = (*iter)[columns.stream];
-//
-//	parent->record(stream,this);
-//
-//}
-//void SopcastChannel::store_selection()
-//{
-//	Glib::RefPtr < Gtk::TreeSelection > selection =
-//	    this->get_selection();
-//	Gtk::TreeModel::iterator iter = selection->get_selected();
-//	if (!selection->count_selected_rows())
-//		return ;
-//	TypeChannel page = (*iter)[columns.type];
-//	int channle_num = (*iter)[columns.users];
-//	Glib::ustring name = (*iter)[columns.name];
-//	std::string stream = (*iter)[columns.stream];
-//
-//	parent->getBookMarkChannel().saveLine(name,stream,page);
-//
-//}
-
-
 

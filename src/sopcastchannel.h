@@ -29,21 +29,17 @@ class SopcastChannel:public Channel
 		SopcastChannel(MainWindow* parent_);
 		void init();
 		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
-	//	void play_selection();
-	//	void record_selection();
-	//	void store_selection();
 		void refresh_list();
-
-				typedef sigc::signal<void> type_signal_stop;
+		typedef sigc::signal<void> type_signal_stop;
 		type_signal_stop signal_stop_refresh()
 		{ return signal_stop_refresh_; }
-		
+
 		typedef sigc::signal<void> type_signal_start;
 		type_signal_start signal_start_refresh()
 		{ return signal_start_refresh_; }	
 
 	protected:
-		LivePlayer* get_player(GMplayer& gmp, const std::string& stream,TypeChannel page);
+		LivePlayer* get_player(const std::string& stream,TypeChannel page);
 		void wait_wget_exit(GPid pid, int);
 	private:
 		void parse_channel (Gtk::TreeModel::iterator& iter, xmlNode* a_node);
@@ -53,7 +49,7 @@ class SopcastChannel:public Channel
 
 		type_signal_stop  signal_stop_refresh_;
 		type_signal_start signal_start_refresh_;
-		
+
 		int wget_pid;
 		bool refresh;
 

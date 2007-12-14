@@ -33,18 +33,19 @@ RecentChannel::RecentChannel(MainWindow* parent_):Channel( parent_)
 
 RecentChannel::~RecentChannel()
 {}
-LivePlayer* RecentChannel::get_player(GMplayer& gmp, const std::string& stream,TypeChannel page)
+
+LivePlayer* RecentChannel::get_player( const std::string& stream,TypeChannel page)
 {
 	switch(page) {
 		case MMS_CHANNEL:
-			return new MmsLivePlayer(gmp, stream);
+			return new MmsLivePlayer(stream);
 		case NSLIVE_CHANNEL:
 			{
 				int channel_num = atoi(stream.c_str());
-				return new NsLivePlayer(gmp, channel_num);
+				return new NsLivePlayer(channel_num);
 			}
 		case SOPCAST_CHANNEL:
-			return new SopcastLivePlayer(gmp,stream);
+			return new SopcastLivePlayer(stream);
 	}
 }
 void RecentChannel::init()

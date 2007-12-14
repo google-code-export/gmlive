@@ -41,10 +41,12 @@ class MainWindow : public Gtk::Window {
 	private:
 		friend class Channel;
 		void set_live_player(LivePlayer*);
+		LivePlayer* get_live_player() { return live_player; }
 		Channel* get_recent_channel() { return recent_channel; }
 		Channel* get_bookmark_channel() { return bookmark_channel; }
 		// 菜单回调
 		void on_menu_file_play();
+		void on_menu_file_pause();
 		void on_menu_file_stop();
 		void on_menu_file_quit();
 		void on_menu_view_show_channel();
@@ -55,6 +57,8 @@ class MainWindow : public Gtk::Window {
 		bool on_gmplayer_out(const Glib::IOCondition& condition);
 		void on_gmplayer_start();
 		void on_gmplayer_stop();
+
+		void set_gmp_size(int w, int h);
 
 		void reorder_widget(bool is_running);
 		Channel* get_cur_select_channel();
@@ -71,6 +75,8 @@ class MainWindow : public Gtk::Window {
 		Channel* 			recent_channel;
 		Channel* 			bookmark_channel;
 		LivePlayer* 			live_player;
+		int 				gmp_width;
+		int				gmp_height;
 };
 
 #endif // _MAINWINDOW_HH 

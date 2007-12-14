@@ -30,9 +30,9 @@
 using namespace std;
 Glib::ustring get_print_string(const char* buf, int len)
 {
-	if (len < 4)
-		return Glib::ustring();
-	len -= 3;
+	//if (len < 4)
+	//	return Glib::ustring();
+	//len -= 3;
 	char new_buf[len];
 	char* pnew = new_buf;
 	const char* pend = buf + len;
@@ -45,11 +45,34 @@ Glib::ustring get_print_string(const char* buf, int len)
 	return Glib::ustring(new_buf, pnew);
 }
 
+void get_video_resolution(const char* buf, int& w, int& h)
+{
+
+	// 输出行应该是这样的
+	// VO: [xv] 800x336 => 800x336 Planar YV12 
+
+	w = -1; 
+	h = -1;
+	char* pw = strstr(buf, "] ");
+	if (NULL == ++pw) 
+		return;
+	w = atoi(pw);
+
+	char* ph = strstr(pw, "x");
+	if (NULL == ++ph)
+		return ;
+	h = atoi(ph);
+
+	printf("w = %d, h = %d\n", w, h);
+}
+
+
 Glib::ustring ui_info =
 "<ui>"
 "	<menubar name='MenuBar'>"
 "		<menu action='FileMenu'>"
 "			<menuitem action='FilePlay'/>"
+"			<menuitem action='FilePause'/>"
 "			<menuitem action='FileStop'/>"
 "			<separator/>"
 "			<menuitem action='FileQuit'/>"
@@ -73,6 +96,8 @@ Gtk::Widget* MainWindow::create_main_menu()
 	action_group->add(Gtk::Action::create("FileMenu", "文件(_F)"));
 	action_group->add(Gtk::Action::create("FilePlay", Gtk::Stock::MEDIA_PLAY),
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_play));
+	action_group->add(Gtk::Action::create("FilePause", Gtk::Stock::MEDIA_PAUSE),
+			sigc::mem_fun(*this, &MainWindow::on_menu_file_pause));
 	action_group->add(Gtk::Action::create("FileStop", Gtk::Stock::MEDIA_STOP),
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_stop));
 	action_group->add(Gtk::Action::create("FileQuit", Gtk::Stock::QUIT),
@@ -119,6 +144,12 @@ void MainWindow::on_menu_file_stop()
 	gmp->stop();
 }
 
+void MainWindow::on_menu_file_pause()
+{
+	cout << "on_menu_pause" << endl;
+	gmp->pause();
+}
+
 void MainWindow::on_menu_file_quit()
 {
 	cout << "on_menu_file_quit" << endl;
@@ -161,12 +192,27 @@ void MainWindow::on_gmplayer_stop()
 	live_player = NULL;
 }
 
+
+
 bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 {
 	char buf[256];
 	while (int len = gmp->get_mplayer_log(buf, 256)) {
 		if (len < 256) {
 			buf[len] = 0;
+			if ( -1 == gmp_width) {
+				if (
+						(buf[0] =='V') &&
+						(buf[1] == 'O') && 
+						(buf[2] == ':') &&
+						(buf[3] == ' ')) {
+
+					int w;
+					int h;
+					get_video_resolution(buf, w, h);
+					set_gmp_size(w, h);
+				}
+			}
 			show_msg(get_print_string(buf, len));
 			break;
 		}
@@ -183,6 +229,8 @@ void MainWindow::on_live_player_out(int percentage)
 
 MainWindow::MainWindow():
 	live_player(NULL)
+	,gmp_width(-1)
+	,gmp_height(-1)
 {
 	ui_xml = Gnome::Glade::Xml::create(main_ui, "mainFrame");
 	if (!ui_xml) 
@@ -231,8 +279,10 @@ MainWindow::MainWindow():
 				"../data/gmlive_play.png"));
 
 	gmp = new GMplayer(sigc::mem_fun(*this, &MainWindow::on_gmplayer_out));	
-	gmp->signal_start_play().connect(sigc::mem_fun(*this, &MainWindow::on_gmplayer_start));
-	gmp->signal_stop_play().connect(sigc::mem_fun(*this, &MainWindow::on_gmplayer_stop));
+	gmp->signal_start_play().connect(
+			sigc::mem_fun(*this, &MainWindow::on_gmplayer_start));
+	gmp->signal_stop_play().connect(
+			sigc::mem_fun(*this, &MainWindow::on_gmplayer_stop));
 
 	menubar = create_main_menu();
 
@@ -264,6 +314,16 @@ void MainWindow::show_msg(const Glib::ustring& msg, unsigned int id)
 	statusbar->push(msg, id);
 }
 
+void MainWindow::set_gmp_size(int w, int h)
+{
+	gmp_width = w;
+	gmp_height = h;
+	if (w != -1) {
+		gmp->set_size_request(w, h);
+		this->resize(1, 1);
+	}
+}
+
 void MainWindow::reorder_widget(bool is_running)
 {
 	if (is_running){
@@ -273,12 +333,16 @@ void MainWindow::reorder_widget(bool is_running)
 		play_frame->remove(*backgroup);
 		play_frame->pack_start(*gmp, true, true);
 		gmp->show_all();
-		gmp->set_size_request(width, height);
+		if (gmp_width != -1)
+			gmp->set_size_request(gmp_width, gmp_height);
+		else
+			gmp->set_size_request(width, height);
 	}
 	else {
 		play_frame->remove(*gmp);
 		play_frame->pack_start(*backgroup, true, true);
 		backgroup->show_all();
+		set_gmp_size(-1, -1);
 	}
 	this->resize(1,1);
 }
@@ -296,10 +360,11 @@ Channel* MainWindow::get_cur_select_channel()
 void MainWindow::set_live_player(LivePlayer* lp)
 {
 	if (lp != live_player) {
-		delete live_player;
 		live_player = lp;
 		lp->signal_status().connect(sigc::mem_fun(
 					*this, &MainWindow::on_live_player_out));
+		gmp->stop();
+		lp->play(*gmp);
 	}
 }
 

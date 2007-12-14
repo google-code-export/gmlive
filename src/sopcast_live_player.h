@@ -20,11 +20,12 @@
 #define  SOPCAST_LIVE_PLAYER_FILE_HEADER_INC
 #include "live_player.h"
 
+class GMplayer;
 class SopcastLivePlayer : public LivePlayer {
 	public:
-		SopcastLivePlayer(GMplayer& gmp, const std::string& stream_);
+		SopcastLivePlayer(const std::string& stream_);
 		~SopcastLivePlayer();
-		void play();
+		void play(GMplayer&);
 		void stop();
 
 	protected:
@@ -34,6 +35,7 @@ class SopcastLivePlayer : public LivePlayer {
 	private:
 		sigc::connection sop_time_conn;
 		sigc::connection sop_sock_conn;
+		GMplayer* gmplayer;
 		std::string stream;
 		int sop_pid;
 		int sop_sock;

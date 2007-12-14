@@ -23,10 +23,9 @@
 #include <sys/wait.h>
 #include "gmlive.h"
 #include "ns_live_player.h"
+#include <gmplayer.h>
 
-
-NsLivePlayer::NsLivePlayer(GMplayer& gmp, int id_) : 
-	LivePlayer(gmp),
+NsLivePlayer::NsLivePlayer(int id_) : 
 	id(id_),
 	ns_pid(-1)
 {
@@ -38,7 +37,7 @@ NsLivePlayer::~NsLivePlayer()
 	printf("nslive exit\n");
 }
 
-void NsLivePlayer::play()
+void NsLivePlayer::play(GMplayer& gmp)
 {
 	//extern char **environ;
 	int pid = fork();
@@ -63,12 +62,12 @@ void NsLivePlayer::play()
 
 	ns_pid = pid;
 	printf("%d\n",ns_pid);
-	gmp.start(NSLIVESTREAM);
+	gmp.play(NSLIVESTREAM);
 }
 
 void NsLivePlayer::stop()
 {
-	gmp.stop();
+	//gmp.stop();
 	if (ns_pid > 0) {
 		kill(ns_pid, SIGKILL);
 	//	kill(ns_pid+1, SIGKILL);

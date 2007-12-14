@@ -12,9 +12,10 @@ class GMplayer : public Gtk::Socket
 	public:
 		GMplayer(const sigc::slot<bool, Glib::IOCondition>& slot);
 		~GMplayer();
-		void send_ctrl_word(char c);
-		void start(const std::string&);
-		void start();
+		void initialize();
+		void send_ctrl_command(const char* c);
+		void play(const std::string&);
+		void pause(); 
 		void stop();
 		void full_screen();
 		void set_mode(bool embed=1){mode=embed;}
@@ -30,9 +31,12 @@ class GMplayer : public Gtk::Socket
 		{ return signal_start_play_; }	
 	private:
 		void set_s_pipe();
+		void set_m_pipe();
+		void create_pipe();
+		void close_pipe();
 		void wait_mplayer_exit(GPid, int);
 		int my_system(char* const argv[]);
-		void change_size(Gtk::Allocation& allocation);
+	
 		bool is_runing();
 
 		sigc::slot<bool, Glib::IOCondition> 	child_call;
@@ -50,6 +54,7 @@ class GMplayer : public Gtk::Socket
 		guint		timer;		/* timer (internal) */
 		bool		ready;		/* is the player ready (internal)*/
 		bool		mode;
+		bool		is_pause;
 };
 
 #endif

@@ -77,18 +77,7 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 	if ((ev->type == GDK_2BUTTON_PRESS ||
 	     ev->type == GDK_3BUTTON_PRESS)) {
 		if(GROUP_CHANNEL != (*iter)[columns.type]){
-			Glib::ustring name = (*iter)[columns.name];
-			std::string stream = (*iter)[columns.stream];
-			TypeChannel page =  (*iter)[columns.type];
-			LivePlayer* lp =
-			       	get_player(parent->get_mplayer(), stream, page);
-			parent->set_live_player(lp);
-			lp->play();
-			RecentChannel* rc =
-				dynamic_cast<RecentChannel*>
-				(parent->get_recent_channel());
-			if (this != rc)
-				rc->saveLine(name,stream,page);
+			play_selection_iter(iter);
 		}
 		else {
 			if(this->row_expanded(path))
@@ -116,17 +105,9 @@ void Channel::play_selection()
 	Gtk::TreeModel::iterator iter = selection->get_selected();
 	if (!selection->count_selected_rows())
 		return ;
-	TypeChannel page = (*iter)[columns.type];
-	Glib::ustring name = (*iter)[columns.name];
-	std::string stream = (*iter)[columns.stream];
 
-	LivePlayer* lp = get_player(parent->get_mplayer(), stream, page);
-	parent->set_live_player(lp);
-	lp->play();
-	RecentChannel* rc =
-		dynamic_cast<RecentChannel*>(parent->get_recent_channel());
-	if (this != rc)
-		rc->saveLine(name,stream,page);
+	play_selection_iter(iter);
+
 }
 
 
@@ -141,7 +122,7 @@ void Channel::record_selection()
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
 
-	LivePlayer* lp = get_player(parent->get_mplayer(), stream, page);
+	LivePlayer* lp = get_player(stream, page);
 	parent->set_live_player(lp);
 	//	lp->record();
 	//	RecentChannel* rc =
@@ -174,3 +155,20 @@ void Channel::store_selection()
 }
 
 
+void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
+{
+	TypeChannel page = (*iter)[columns.type];
+	Glib::ustring name = (*iter)[columns.name];
+	std::string stream = (*iter)[columns.stream];
+	
+	LivePlayer* lp = parent->get_live_player();
+	if (live_player != lp)
+		delete lp;
+
+	live_player = get_player(stream, page);
+	parent->set_live_player(live_player);
+	RecentChannel* rc =
+		dynamic_cast<RecentChannel*>(parent->get_recent_channel());
+	if (this != rc)
+		rc->saveLine(name,stream,page);
+}
