@@ -81,7 +81,7 @@ Gtk::Widget* MainWindow::create_main_menu()
 	//View menu:
 	action_group->add(Gtk::Action::create("ViewMenu", "查看(_V)"));
 	action_group->add(Gtk::ToggleAction::create("ViewShowChannel", 
-				"显示频道列表(_S)", "隐藏或显示频道列表", false),
+				"显示频道列表(_S)", "隐藏或显示频道列表", true),
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_show_channel));
 	action_group->add(Gtk::Action::create("ViewPreferences", Gtk::Stock::PREFERENCES),
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_preferences));
@@ -246,7 +246,7 @@ MainWindow::MainWindow():
 	this->set_icon(pix);
 
 	this->show_all();
-	channels->hide();
+	//channels->hide();
 	this->resize(1,1);
 }
 
