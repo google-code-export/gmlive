@@ -94,9 +94,9 @@ GMplayer::GMplayer(const sigc::slot<bool, Glib::IOCondition>& slot):
 	ready(true),
 	childpid(-1),
 	xid(-1),
-	timer(0),
 	child_call(slot)
 	,mode(1)
+	,cache(64)
 	,is_pause(false)
 {
 	stdin_pipe[0] = -1;
@@ -176,15 +176,19 @@ void GMplayer::initialize()
 	char wid_buf[32];
 	//printf("xid = %d\n", xid);
 	snprintf(wid_buf, 32, "%d", this->get_id());
+	char cache_buf[32];
+	snprintf(cache_buf, 32, "%d", cache);
 
-	const char* argv[7];
+	const char* argv[10];
 	argv[0] = "mplayer";
 	argv[1] = "-slave";
 	argv[2] = "-wid";
 	argv[3] = wid_buf;
 	argv[4] = "-idle";
 	argv[5] = "-quiet";
-	argv[6] = NULL;
+	argv[6] = "-cache";
+	argv[7] = cache_buf;
+	argv[8] = NULL;
 
 	ready = false;
 	my_system((char* const *) argv);

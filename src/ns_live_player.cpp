@@ -63,7 +63,8 @@ void NsLivePlayer::play(GMplayer& gmp)
 	} 
 
 	ns_pid = pid;
-	printf("%d\n",ns_pid);
+	printf("ns_pid = %d\n",ns_pid);
+	gmp.set_cache(64);
 	gmp.play(NSLIVESTREAM);
 }
 

@@ -31,6 +31,7 @@ MmsLivePlayer::~MmsLivePlayer()
 }
 void MmsLivePlayer::play(GMplayer& gmp)
 {
+	gmp.set_cache(8192);
 	gmp.play(filename);
 }
 
