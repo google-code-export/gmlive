@@ -172,16 +172,10 @@ void GMplayer::initialize()
 	signal_start_play_.emit();
 
 	Glib::RefPtr<Gdk::Window> gwin = this->get_window();
-	int x,y,width,heigh,depth;
-	if(gwin)
-	{
-		xid=GDK_WINDOW_XID(gwin->gobj());
-		gwin->get_geometry(x,y,width,heigh,depth);
-	}
 
 	char wid_buf[32];
-	printf("xid = %d\n", xid);
-	snprintf(wid_buf, 32, "%d", xid);
+	//printf("xid = %d\n", xid);
+	snprintf(wid_buf, 32, "%d", this->get_id());
 
 	const char* argv[7];
 	argv[0] = "mplayer";
@@ -251,5 +245,4 @@ void GMplayer::pause()
 	is_pause = !is_pause;
 	send_ctrl_command("pause\n");
 }
-
 
