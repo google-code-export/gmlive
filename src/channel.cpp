@@ -160,20 +160,22 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 	TypeChannel page = (*iter)[columns.type];
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
-	
-	LivePlayer* lp = parent->get_live_player();
-	if (NULL != lp) {
-		if (lp->get_stream() == stream) {
-			parent->set_live_player(NULL);
-			return;
-		}
-	}
 
-	delete lp;
-	lp = get_player(stream, page);
-	parent->set_live_player(lp);
-	RecentChannel* rc =
-		dynamic_cast<RecentChannel*>(parent->get_recent_channel());
-	if (this != rc)
-		rc->saveLine(name,stream,page);
+	if(GROUP_CHANNEL != (*iter)[columns.type]) {
+		LivePlayer* lp = parent->get_live_player();
+		if (NULL != lp) {
+			if (lp->get_stream() == stream) {
+				parent->set_live_player(NULL);
+				return;
+			}
+		}
+
+		delete lp;
+		lp = get_player(stream, page);
+		parent->set_live_player(lp);
+		RecentChannel* rc =
+			dynamic_cast<RecentChannel*>(parent->get_recent_channel());
+		if (this != rc)
+			rc->saveLine(name,stream,page);
+	}
 }

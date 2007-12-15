@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.60)
-AC_INIT(gmlive, 0.11, xihels@gmail.com)
+AC_INIT(gmlive, 0.20b1, xihels@gmail.com)
 AC_COPYRIGHT([Copyright (C) 2007 xihels@gmail.com])
 AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADER([config.h])
