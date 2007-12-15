@@ -115,6 +115,7 @@ void SopcastChannel::refresh_list()
 		return ;
 	if (pid == 0) {
 		close(STDOUT_FILENO);
+		close(STDERR_FILENO);
 		char buf[512];
 		char* homedir = getenv("HOME");
 		snprintf(buf, 512,"%s/.gmlive/sopcast.lst",homedir);

@@ -164,11 +164,12 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 	LivePlayer* lp = parent->get_live_player();
 	if (NULL != lp) {
 		if (lp->get_stream() == stream) {
-			parent->set_live_player(lp);
+			//parent->set_live_player(lp);
 			return;
 		}
 	}
 
+	delete lp;
 	lp = get_player(stream, page);
 	parent->set_live_player(lp);
 	RecentChannel* rc =

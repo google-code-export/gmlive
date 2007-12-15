@@ -41,6 +41,7 @@ NSLiveChannel::NSLiveChannel(MainWindow* parent_):Channel( parent_)
 	mkdir(homepath,S_IRUSR|S_IWUSR|S_IXUSR);
 	*/
 	refresh_list();
+	//init();
 }
 
 LivePlayer* NSLiveChannel::get_player(const std::string& stream,TypeChannel page) 
@@ -54,6 +55,7 @@ void NSLiveChannel::init()
 	char buf[512];
 	char* homedir = getenv("HOME");
 	snprintf(buf, 512,"%s/.ulive/prog.list",homedir);
+	printf("%s\n", buf);
 
 
 	m_liststore->clear();

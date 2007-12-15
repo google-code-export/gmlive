@@ -49,7 +49,6 @@ bool get_video_resolution(const char* buf, int& w, int& h)
 	// 输出行应该是这样的
 	// VO: [xv] 800x336 => 800x336 Planar YV12 
 
-	printf("----%s----\n", buf);
 	if ( (buf[0] == 'V') &&
 			(buf[1] == 'O') &&
 			(buf[2] == ':')) {
@@ -57,12 +56,12 @@ bool get_video_resolution(const char* buf, int& w, int& h)
 
 		w = -1; 
 		h = -1;
-		char* pw = strstr(buf, "] ");
+		const char* pw = strstr(buf, "] ");
 		if (NULL == ++pw) 
 			return false;
 		w = atoi(pw);
 
-		char* ph = strstr(pw, "x");
+		const char* ph = strstr(pw, "x");
 		if (NULL == ++ph)
 			return false;
 		h = atoi(ph);
@@ -160,6 +159,13 @@ void MainWindow::on_menu_file_pause()
 void MainWindow::on_menu_file_quit()
 {
 	cout << "on_menu_file_quit" << endl;
+	Gtk::Main::quit();
+}
+
+bool MainWindow::on_delete_event(GdkEventAny* event)
+{
+	gmp->stop();
+	return Gtk::Window::on_delete_event(event);
 }
 
 void MainWindow::on_menu_view_show_channel()
@@ -203,9 +209,8 @@ void MainWindow::on_gmplayer_stop()
 
 bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 {
-	char buf[512];
-	memset(buf, 0, sizeof(buf));
-	int len = gmp->get_mplayer_log(buf, 511);
+	char buf[256];
+	int len = gmp->get_mplayer_log(buf, 255);
 	buf[len] = 0;
 	const char* pend = buf + len;
 	char* p1 = buf;
@@ -219,7 +224,7 @@ bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 			show_msg(Glib::ustring(p2, p1));
 			if (-1 == gmp_width) {
 				if ((p1 - p2) > 5) {
-					int w, h;
+					int w,h;
 					if (get_video_resolution(p2, w, h))
 						set_gmp_size(w, h);
 				}
@@ -232,7 +237,7 @@ bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 			p2 = p1;
 		}
 	}
-	printf("----%s----\n", buf);
+	return true;
 }
 
 void MainWindow::on_live_player_out(int percentage)
@@ -291,7 +296,7 @@ MainWindow::MainWindow():
 
 	backgroup = new Gtk::Image(
 			Gdk::Pixbuf::create_from_file (
-				"../data/gmlive_play.png"));
+				DATA_DIR"/gmlive_play.png"));
 
 	gmp = new GMplayer(sigc::mem_fun(*this, &MainWindow::on_gmplayer_out));	
 	gmp->signal_start_play().connect(
@@ -374,10 +379,7 @@ Channel* MainWindow::get_cur_select_channel()
 
 void MainWindow::set_live_player(LivePlayer* lp)
 {
-	if (lp == live_player)
-		return;
 	gmp->stop();
-	delete live_player;
 	live_player = lp;
 	lp->signal_status().connect(sigc::mem_fun(
 				*this, &MainWindow::on_live_player_out));
