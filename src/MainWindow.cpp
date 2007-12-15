@@ -164,6 +164,7 @@ MainWindow::MainWindow():
 MainWindow::~MainWindow()
 {
 	on_stop();
+	system("killall nsweb");
 }
 void MainWindow::init()
 {
