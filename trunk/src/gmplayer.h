@@ -15,6 +15,7 @@ class GMplayer : public Gtk::Socket
 		void initialize();
 		void send_ctrl_command(const char* c);
 		void play(const std::string&);
+		void play();
 		void pause(); 
 		void stop();
 		void full_screen();
@@ -30,6 +31,7 @@ class GMplayer : public Gtk::Socket
 		type_signal_start signal_start_play()
 		{ return signal_start_play_; }	
 	private:
+		bool is_runing();
 		void set_s_pipe();
 		void set_m_pipe();
 		void create_pipe();
@@ -37,7 +39,6 @@ class GMplayer : public Gtk::Socket
 		void wait_mplayer_exit(GPid, int);
 		int my_system(char* const argv[]);
 	
-		bool is_runing();
 
 		sigc::slot<bool, Glib::IOCondition> 	child_call;
 		sigc::connection 			ptm_conn;

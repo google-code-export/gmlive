@@ -196,21 +196,24 @@ void GMplayer::initialize()
 	my_system((char* const *) argv);
 }
 
-void GMplayer::play(const std::string& filename)
+void GMplayer::play()
 {
-	if (filename != file)
-		file = filename;
-	else {
-		if (is_pause)
-			return pause();
-	}
-
+	if (is_pause)
+		return pause();
 	if (is_runing())
 		stop();
 	initialize();
 	char cb[256];
-	int len = snprintf(cb, 256, "loadfile %s\n", filename.c_str());
+	int len = snprintf(cb, 256, "loadfile %s\n", file.c_str());
 	EC_THROW(-1 == write(stdin_pipe[1], cb, len));
+
+}
+
+void GMplayer::play(const std::string& filename)
+{
+	if (filename != file)
+		file = filename;
+	play();
 }
 
 void GMplayer::full_screen()

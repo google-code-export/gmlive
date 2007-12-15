@@ -130,6 +130,7 @@ bool SopcastLivePlayer::on_sop_sock(const Glib::IOCondition& condition)
 		gmplayer->play(SOPCASTSTREAM);
 
 		sop_time_conn.disconnect(); // 启动mpaleyr，停掉显示缓冲状态
+		close(sop_sock);	   // 关掉状态查询端口
 		return false;
 	}
 	signal_status_.emit(i);
