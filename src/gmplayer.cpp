@@ -129,6 +129,11 @@ int GMplayer::my_system(char* const argv[])
 {
 	extern char **environ;
 	create_pipe();
+	ptm_conn = Glib::signal_io().connect(
+			child_call,
+			stdout_pipe[0], Glib::IO_IN);
+
+
 	pid_t pid = fork();
 	if (pid == -1)
 		return -1;
@@ -145,12 +150,8 @@ int GMplayer::my_system(char* const argv[])
 		perror("mplayer execvp:");
 	} 
 	childpid = pid;
-	
-	set_m_pipe();
 
-	ptm_conn = Glib::signal_io().connect(
-			child_call,
-			stdout_pipe[0], Glib::IO_IN);
+	set_m_pipe();
 
 
 	wait_conn = Glib::signal_child_watch().connect(

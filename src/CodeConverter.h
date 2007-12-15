@@ -26,6 +26,7 @@
 
 using std::runtime_error;
 using std::string;
+#include "ec_throw.h"
 
 class CodeConverter {
     private:
@@ -33,7 +34,7 @@ class CodeConverter {
     public:
 	// 构造
 	CodeConverter(const char *from_charset,const char *to_charset) {
-	    cd = iconv_open(to_charset,from_charset);
+	    EC_THROW( (iconv_t)(-1) == (cd = iconv_open(to_charset,from_charset)));
 	}
 
 	// 析构
@@ -46,17 +47,18 @@ class CodeConverter {
 	    return convert(inbuf.c_str(), inbuf.size());
 	}
 
-	string convert(const char* inbuf, int inlen) {
-	    int outlen = inlen * 3;
+	string convert(const char* inbuf, size_t inlen) {
+	    size_t outlen = inlen * 3;
 	    char *pin = (char*)inbuf;
 	    char outbuf[outlen];
 
 	    char *pout = &outbuf[0];
 	    //bzero(pout, outbuf);
-	    int oldoutlen = outlen;
+	    size_t oldoutlen = outlen;
 
 	    if(-1 == iconv(cd,&pin,(size_t *)&inlen
 			, &pout,(size_t *)&outlen) ) {
+		    //perror("iconv:");
 		return string();
 	    } else {
 		outlen = oldoutlen - outlen;

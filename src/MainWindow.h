@@ -25,7 +25,7 @@
 #include <iostream>
 #include "gmplayer.h"
 
-#define main_ui	    "../data/gmlive.xml"
+#define main_ui	    DATA_DIR"/gmlive.xml"
 typedef Glib::RefPtr < Gnome::Glade::Xml > GlademmXML;
 
 class Channel;
@@ -36,6 +36,7 @@ class MainWindow : public Gtk::Window {
 		~MainWindow();
 		GMplayer& get_mplayer() { return *gmp; }
 	protected:
+		bool on_delete_event(GdkEventAny* event);
 		void show_msg(const Glib::ustring& msg,unsigned int id=0);
 		Gtk::Widget* create_main_menu();
 	private:
