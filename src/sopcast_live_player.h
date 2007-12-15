@@ -27,6 +27,7 @@ class SopcastLivePlayer : public LivePlayer {
 		~SopcastLivePlayer();
 		void play(GMplayer&);
 		void stop();
+		const std::string& get_stream() { return stream; }
 
 	protected:
 		bool on_sop_sock(const Glib::IOCondition& condition);

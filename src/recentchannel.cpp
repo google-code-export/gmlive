@@ -41,8 +41,7 @@ LivePlayer* RecentChannel::get_player( const std::string& stream,TypeChannel pag
 			return new MmsLivePlayer(stream);
 		case NSLIVE_CHANNEL:
 			{
-				int channel_num = atoi(stream.c_str());
-				return new NsLivePlayer(channel_num);
+				return new NsLivePlayer(stream);
 			}
 		case SOPCAST_CHANNEL:
 			return new SopcastLivePlayer(stream);

@@ -24,8 +24,9 @@
 #include "gmlive.h"
 #include "ns_live_player.h"
 #include <gmplayer.h>
+#include "ec_throw.h"
 
-NsLivePlayer::NsLivePlayer(int id_) : 
+NsLivePlayer::NsLivePlayer(const std::string& id_) : 
 	id(id_),
 	ns_pid(-1)
 {
@@ -46,14 +47,15 @@ void NsLivePlayer::play(GMplayer& gmp)
 	if (pid == 0) {
 		close(STDOUT_FILENO);
 
-		char id_buf[32];
-		sprintf(id_buf, "%d", id);
-
 		const char* argv[4];
        		argv[0] = "nslive";
 		argv[1] = "-p";
-		argv[2] = id_buf;
+		argv[2] = id.c_str();
 		argv[3] = NULL;
+
+		// 设置 这个子进程为进程组头，
+		// 这样，只要杀掉这个进程，他的子进程也会退出
+		EC_THROW(-1 == setpgid(0, 0));
 
 		execvp("nslive", (char* const *)argv);
 		perror("nslive execvp:");
@@ -67,13 +69,14 @@ void NsLivePlayer::play(GMplayer& gmp)
 
 void NsLivePlayer::stop()
 {
-	//gmp.stop();
 	if (ns_pid > 0) {
-		kill(ns_pid, SIGKILL);
-	//	kill(ns_pid+1, SIGKILL);
-		waitpid(ns_pid, NULL, 0);
+		for (;;) {
+			kill(-ns_pid, SIGKILL);
+			int ret = (waitpid( -ns_pid, NULL, WNOHANG));
+			if (-1 == ret)
+				break;
+		}
 		ns_pid = -1;
 	}
-
 }
 

@@ -23,13 +23,14 @@
 
 class NsLivePlayer : public LivePlayer {
 	public:
-		NsLivePlayer(int id);
+		NsLivePlayer(const std::string& id_);
 		~NsLivePlayer();
 		void play(GMplayer& gmplayer);
 		void stop();
+		const std::string& get_stream() { return id; }
 	private:
 		int ns_pid;
-		int id;
+		std::string id;
 };
 
 #endif // _NS_LIVE_PLAYER_H_

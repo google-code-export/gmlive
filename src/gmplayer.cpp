@@ -182,13 +182,14 @@ void GMplayer::initialize()
 	printf("xid = %d\n", xid);
 	snprintf(wid_buf, 32, "%d", xid);
 
-	const char* argv[6];
+	const char* argv[7];
 	argv[0] = "mplayer";
 	argv[1] = "-slave";
 	argv[2] = "-wid";
 	argv[3] = wid_buf;
 	argv[4] = "-idle";
-	argv[5] = NULL;
+	argv[5] = "-quiet";
+	argv[6] = NULL;
 
 	ready = false;
 	my_system((char* const *) argv);
