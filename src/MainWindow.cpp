@@ -202,7 +202,6 @@ void MainWindow::on_gmplayer_stop()
 {
 	show_msg("ready...");
 	reorder_widget(false);
-	live_player = NULL;
 }
 
 
@@ -308,7 +307,7 @@ MainWindow::MainWindow():
 
 	play_frame->pack_start(*backgroup, true, true);
 
-	main_frame->pack_start(*menubar, false, false);
+	main_frame->pack_end(*menubar, false, false);
 
 	this->add(*main_frame);
 
@@ -379,10 +378,14 @@ Channel* MainWindow::get_cur_select_channel()
 
 void MainWindow::set_live_player(LivePlayer* lp)
 {
-	gmp->stop();
-	live_player = lp;
-	lp->signal_status().connect(sigc::mem_fun(
-				*this, &MainWindow::on_live_player_out));
-	lp->play(*gmp);
+	if (lp != NULL) {
+		gmp->stop();
+		live_player = lp;
+		lp->signal_status().connect(sigc::mem_fun(
+					*this, &MainWindow::on_live_player_out));
+		lp->play(*gmp);
+	} else {
+		gmp->play();
+	}
 }
 
