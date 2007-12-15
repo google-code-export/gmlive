@@ -80,7 +80,7 @@ void SopcastLivePlayer::play(GMplayer& gmp)
 	} 
 
 	sop_pid = pid;
-	printf("%d\n",sop_pid);
+	printf("sop_pid = %d\n",sop_pid);
 
 	signal_status_.emit(0);
 
@@ -127,6 +127,7 @@ bool SopcastLivePlayer::on_sop_sock(const Glib::IOCondition& condition)
 	int i = atoi(buf);
 	if ((i > 70) && (!player)){
 		player = true;
+		gmplayer->set_cache(64);
 		gmplayer->play(SOPCASTSTREAM);
 
 		sop_time_conn.disconnect(); // 启动mpaleyr，停掉显示缓冲状态

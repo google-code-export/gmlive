@@ -14,6 +14,7 @@ class GMplayer : public Gtk::Socket
 		~GMplayer();
 		void initialize();
 		void send_ctrl_command(const char* c);
+		void set_cache(int cache_) { cache = cache_; }
 		void play(const std::string&);
 		void play();
 		void pause(); 
@@ -51,8 +52,8 @@ class GMplayer : public Gtk::Socket
 		int		width;		/* widget's width*/
 		int		height;		/* widget's height*/
 		int		childpid;	/* mplayer's pid (internal)*/
+		int 		cache;
 		guint32		xid;		/* X window handle (internal)*/
-		guint		timer;		/* timer (internal) */
 		bool		ready;		/* is the player ready (internal)*/
 		bool		mode;
 		bool		is_pause;
