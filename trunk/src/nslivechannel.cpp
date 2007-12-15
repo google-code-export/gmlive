@@ -40,8 +40,8 @@ NSLiveChannel::NSLiveChannel(MainWindow* parent_):Channel( parent_)
 	snprintf(homepath,512,"%s/.gmlive/",homedir);
 	mkdir(homepath,S_IRUSR|S_IWUSR|S_IXUSR);
 	*/
-	refresh_list();
-	//init();
+	//refresh_list();
+	init();
 }
 
 LivePlayer* NSLiveChannel::get_player(const std::string& stream,TypeChannel page) 

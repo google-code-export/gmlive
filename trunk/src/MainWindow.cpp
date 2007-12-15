@@ -312,7 +312,7 @@ MainWindow::MainWindow():
 
 	this->add(*main_frame);
 
-	Glib::RefPtr<Gdk::Pixbuf> pix = Gdk::Pixbuf::create_from_file("../data/gmlive.png");
+	Glib::RefPtr<Gdk::Pixbuf> pix = Gdk::Pixbuf::create_from_file(DATA_DIR"/gmlive.png");
 	this->set_icon(pix);
 
 	this->show_all();
