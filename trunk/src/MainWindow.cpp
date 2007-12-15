@@ -159,6 +159,7 @@ void MainWindow::on_menu_file_pause()
 void MainWindow::on_menu_file_quit()
 {
 	cout << "on_menu_file_quit" << endl;
+	gmp->stop();
 	Gtk::Main::quit();
 }
 
@@ -305,9 +306,12 @@ MainWindow::MainWindow():
 
 	menubar = create_main_menu();
 
+	Gtk::HBox* menu_box=dynamic_cast<Gtk::HBox*>
+			(ui_xml->get_widget("hbox_menu"));
+	menu_box->pack_start(*menubar,true,true);
+	//main_frame->pack_start(*menubar, false, false);
 	play_frame->pack_start(*backgroup, true, true);
 
-	main_frame->pack_end(*menubar, false, false);
 
 	this->add(*main_frame);
 
