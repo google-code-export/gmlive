@@ -162,11 +162,15 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 	std::string stream = (*iter)[columns.stream];
 	
 	LivePlayer* lp = parent->get_live_player();
-	if (live_player != lp)
-		delete lp;
+	if (NULL != lp) {
+		if (lp->get_stream() == stream) {
+			parent->set_live_player(lp);
+			return;
+		}
+	}
 
-	live_player = get_player(stream, page);
-	parent->set_live_player(live_player);
+	lp = get_player(stream, page);
+	parent->set_live_player(lp);
 	RecentChannel* rc =
 		dynamic_cast<RecentChannel*>(parent->get_recent_channel());
 	if (this != rc)

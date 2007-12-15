@@ -72,7 +72,6 @@ class Channel:public Gtk::TreeView
 		bool on_button_press_event(GdkEventButton *);
 		void play_selection_iter(Gtk::TreeModel::iterator& iter);
 		MainWindow* parent;
-		LivePlayer* live_player;
 	private:
 		struct CompareChannel:public std::binary_function 
 				      < Gtk::TreeModel::Row,

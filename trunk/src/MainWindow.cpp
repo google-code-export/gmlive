@@ -30,40 +30,47 @@
 using namespace std;
 Glib::ustring get_print_string(const char* buf, int len)
 {
-	//if (len < 4)
-	//	return Glib::ustring();
-	//len -= 3;
+
 	char new_buf[len];
 	char* pnew = new_buf;
 	const char* pend = buf + len;
 	for(;buf < pend; ++buf) {
-		if (iscntrl(*buf))
-			continue;
-		*pnew++ = *buf;
+		if (!iscntrl(*buf))
+			*pnew++ = *buf;
+		else
+			printf("%o\n", *buf);
 	}
 	*pnew = 0;
 	return Glib::ustring(new_buf, pnew);
 }
 
-void get_video_resolution(const char* buf, int& w, int& h)
+bool get_video_resolution(const char* buf, int& w, int& h)
 {
-
 	// 输出行应该是这样的
 	// VO: [xv] 800x336 => 800x336 Planar YV12 
 
-	w = -1; 
-	h = -1;
-	char* pw = strstr(buf, "] ");
-	if (NULL == ++pw) 
-		return;
-	w = atoi(pw);
+	printf("----%s----\n", buf);
+	if ( (buf[0] == 'V') &&
+			(buf[1] == 'O') &&
+			(buf[2] == ':')) {
 
-	char* ph = strstr(pw, "x");
-	if (NULL == ++ph)
-		return ;
-	h = atoi(ph);
 
-	printf("w = %d, h = %d\n", w, h);
+		w = -1; 
+		h = -1;
+		char* pw = strstr(buf, "] ");
+		if (NULL == ++pw) 
+			return false;
+		w = atoi(pw);
+
+		char* ph = strstr(pw, "x");
+		if (NULL == ++ph)
+			return false;
+		h = atoi(ph);
+
+		printf("w = %d, h = %d\n", w, h);
+		return true;
+	}
+	return false;
 }
 
 
@@ -135,7 +142,7 @@ void MainWindow::on_menu_file_play()
 		channel->play_selection();
 	else
 		cout << "Error" << endl;
-	
+
 }
 
 void MainWindow::on_menu_file_stop()
@@ -196,28 +203,36 @@ void MainWindow::on_gmplayer_stop()
 
 bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 {
-	char buf[256];
-	while (int len = gmp->get_mplayer_log(buf, 256)) {
-		if (len < 256) {
-			buf[len] = 0;
-			if ( -1 == gmp_width) {
-				if (
-						(buf[0] =='V') &&
-						(buf[1] == 'O') && 
-						(buf[2] == ':') &&
-						(buf[3] == ' ')) {
-
-					int w;
-					int h;
-					get_video_resolution(buf, w, h);
-					set_gmp_size(w, h);
+	char buf[512];
+	memset(buf, 0, sizeof(buf));
+	int len = gmp->get_mplayer_log(buf, 511);
+	buf[len] = 0;
+	const char* pend = buf + len;
+	char* p1 = buf;
+	char* p2 = buf;
+	for(; p1 < pend;) {
+		if (!iscntrl(*p1)) {
+			p1++;
+		}
+		else {
+			*p1 = 0;
+			show_msg(Glib::ustring(p2, p1));
+			if (-1 == gmp_width) {
+				if ((p1 - p2) > 5) {
+					int w, h;
+					if (get_video_resolution(p2, w, h))
+						set_gmp_size(w, h);
 				}
 			}
-			show_msg(get_print_string(buf, len));
-			break;
+
+			for (p1++; p1 < pend; p1++) {
+				if (!iscntrl(*p1))
+					break;
+			}
+			p2 = p1;
 		}
 	}
-	return true;
+	printf("----%s----\n", buf);
 }
 
 void MainWindow::on_live_player_out(int percentage)
@@ -303,6 +318,7 @@ MainWindow::MainWindow():
 MainWindow::~MainWindow()
 {
 	delete backgroup;
+	delete live_player;
 	delete gmp;
 }
 
@@ -329,7 +345,6 @@ void MainWindow::reorder_widget(bool is_running)
 	if (is_running){
 		static int width = backgroup->get_width();
 		static int height = backgroup->get_height();
-		printf("%d,%d\n", width, height);
 		play_frame->remove(*backgroup);
 		play_frame->pack_start(*gmp, true, true);
 		gmp->show_all();
@@ -359,12 +374,13 @@ Channel* MainWindow::get_cur_select_channel()
 
 void MainWindow::set_live_player(LivePlayer* lp)
 {
-	if (lp != live_player) {
-		live_player = lp;
-		lp->signal_status().connect(sigc::mem_fun(
-					*this, &MainWindow::on_live_player_out));
-		gmp->stop();
-		lp->play(*gmp);
-	}
+	if (lp == live_player)
+		return;
+	gmp->stop();
+	delete live_player;
+	live_player = lp;
+	lp->signal_status().connect(sigc::mem_fun(
+				*this, &MainWindow::on_live_player_out));
+	lp->play(*gmp);
 }
 

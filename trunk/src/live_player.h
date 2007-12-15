@@ -27,6 +27,7 @@ class LivePlayer {
 		virtual ~LivePlayer() {}
 		virtual void play(GMplayer&) = 0;
 		virtual void stop() = 0;
+		virtual const std::string& get_stream() = 0;
 
 		typedef sigc::signal<void, int> type_signal_status;
 		type_signal_status signal_status()

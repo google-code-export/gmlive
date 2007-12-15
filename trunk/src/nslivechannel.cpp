@@ -45,8 +45,7 @@ NSLiveChannel::NSLiveChannel(MainWindow* parent_):Channel( parent_)
 
 LivePlayer* NSLiveChannel::get_player(const std::string& stream,TypeChannel page) 
 {
-	int channel_num = atoi(stream.c_str());
-	return new NsLivePlayer(channel_num);
+	return new NsLivePlayer(stream);
 }
 
 void NSLiveChannel::init()
