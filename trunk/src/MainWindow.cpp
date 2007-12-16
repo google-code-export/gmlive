@@ -192,6 +192,11 @@ void MainWindow::on_menu_view_preferences()
 void MainWindow::on_menu_help_about()
 {
 	cout << "on_menu_help_about" << endl;
+	Gtk::Window* about=Gtk::manage(new Gtk::Window(Gtk::WINDOW_POPUP));
+	Gtk::VBox* about_frame=dynamic_cast<Gtk::VBox*>
+		(ui_xml->get_widget("about_frame"));
+	about->add(*about_frame);
+	about->show();
 }
 
 void MainWindow::on_gmplayer_start()
