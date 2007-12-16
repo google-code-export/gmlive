@@ -171,7 +171,7 @@ bool MainWindow::on_delete_event(GdkEventAny* event)
 
 void MainWindow::on_menu_view_show_channel()
 {
-	cout << "on_menu_view_show_channel" << endl;
+	//cout << "on_menu_view_show_channel" << endl;
 
 	// 这种写法太白痴了
 	Glib::RefPtr<Gtk::ToggleAction> show = 
@@ -191,11 +191,10 @@ void MainWindow::on_menu_view_preferences()
 
 void MainWindow::on_menu_help_about()
 {
-	cout << "on_menu_help_about" << endl;
-	Gtk::Window* about=Gtk::manage(new Gtk::Window(Gtk::WINDOW_POPUP));
-	Gtk::VBox* about_frame=dynamic_cast<Gtk::VBox*>
-		(ui_xml->get_widget("about_frame"));
-	about->add(*about_frame);
+	//cout << "on_menu_help_about" << endl;
+	GlademmXML about_xml = Gnome::Glade::Xml::create(main_ui, "aboutwindow");
+	Gtk::Window* about = dynamic_cast<Gtk::Window*>
+		(about_xml->get_widget("aboutwindow"));
 	about->show();
 }
 
