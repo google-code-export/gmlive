@@ -23,7 +23,7 @@
 #include "gmlive.h"
 #include "mmschannel.h"
 #include "MainWindow.h"
-#include "mms_live_player.h"
+#include "mmsLivePlayer.h"
 
 MMSChannel::MMSChannel(MainWindow* parent_):Channel(parent_)
 {

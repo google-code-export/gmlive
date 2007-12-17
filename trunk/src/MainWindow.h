@@ -20,13 +20,9 @@
 #ifndef _MAINWINDOW_HH
 #define _MAINWINDOW_HH
 
-#include <gtkmm.h>
-#include <libglademm/xml.h>
-#include <iostream>
+#include "gmlive.h"
 #include "gmplayer.h"
 
-#define main_ui	    DATA_DIR"/gmlive.xml"
-typedef Glib::RefPtr < Gnome::Glade::Xml > GlademmXML;
 
 class Channel;
 class LivePlayer;

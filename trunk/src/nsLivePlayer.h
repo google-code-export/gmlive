@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  * 
- *       Filename:  ns_live_player.h
+ *       Filename:  ns_livePlayer.h
  * 
  *    Description:  nslive播放管理器
  * 
@@ -19,7 +19,7 @@
 #ifndef _NS_LIVE_PLAYER_H_
 #define _NS_LIVE_PLAYER_H_
 
-#include "live_player.h"
+#include "livePlayer.h"
 
 class NsLivePlayer : public LivePlayer {
 	public:

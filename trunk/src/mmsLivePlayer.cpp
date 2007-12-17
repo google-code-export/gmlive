@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  *
- *       Filename:  mms_live_player.cpp
+ *       Filename:  mmsLivePlayer.cpp
  *
  *    Description:  mms播放管理器 
  *
@@ -16,7 +16,7 @@
  * =====================================================================================
  */
 
-#include "mms_live_player.h"
+#include "mmsLivePlayer.h"
 #include <gmplayer.h>
 
 MmsLivePlayer::MmsLivePlayer(const std::string& fname) :

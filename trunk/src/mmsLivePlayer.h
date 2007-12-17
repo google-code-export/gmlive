@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  * 
- *       Filename:  mms_live_player.h
+ *       Filename:  mms_livePlayer.h
  * 
  *    Description:  mms播放管理器
  * 
@@ -19,7 +19,7 @@
 #ifndef _MMS_LIVE_PLAYER_H_
 #define _MMS_LIVE_PLAYER_H_
 
-#include "live_player.h"
+#include "livePlayer.h"
 #include <string>
 
 class MmsLivePlayer : public LivePlayer {

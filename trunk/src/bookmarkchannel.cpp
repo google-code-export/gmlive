@@ -21,9 +21,9 @@
 #include <iostream>
 #include "bookmarkchannel.h"
 #include "MainWindow.h"
-#include "mms_live_player.h"
-#include "sopcast_live_player.h"
-#include "ns_live_player.h"
+#include "mmsLivePlayer.h"
+#include "sopcastLivePlayer.h"
+#include "nsLivePlayer.h"
 
 BookMarkChannel::BookMarkChannel(MainWindow* parent_):Channel( parent_)
 {

@@ -5,7 +5,7 @@
 #include <sys/wait.h>
 #include <sys/socket.h>
 #include <netdb.h>
-#include "sopcast_live_player.h"
+#include "sopcastLivePlayer.h"
 #include "gmlive.h"
 #include "ec_throw.h"
 #include "scope_gruard.h"

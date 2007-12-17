@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  * 
- *       Filename:  sopcast_live_player.h
+ *       Filename:  sopcast_livePlayer.h
  * 
  *    Description:  sopcast播放器类
  * 
@@ -18,7 +18,7 @@
 
 #ifndef  SOPCAST_LIVE_PLAYER_FILE_HEADER_INC
 #define  SOPCAST_LIVE_PLAYER_FILE_HEADER_INC
-#include "live_player.h"
+#include "livePlayer.h"
 
 class GMplayer;
 class SopcastLivePlayer : public LivePlayer {

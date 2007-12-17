@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  *
- *       Filename:  ns_live_player.cpp
+ *       Filename:  nsLivePlayer.cpp
  *
  *    Description:  nslive播放管理器
  *
@@ -22,7 +22,7 @@
 #include <signal.h>
 #include <sys/wait.h>
 #include "gmlive.h"
-#include "ns_live_player.h"
+#include "nsLivePlayer.h"
 #include <gmplayer.h>
 #include "ec_throw.h"
 

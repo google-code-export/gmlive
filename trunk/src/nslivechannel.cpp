@@ -24,7 +24,7 @@
 #include <sys/wait.h>
 #include "nslivechannel.h"
 #include "MainWindow.h"
-#include "ns_live_player.h"
+#include "nsLivePlayer.h"
 #include "CodeConverter.h"
 #include <sys/stat.h>
 #include <sys/types.h>

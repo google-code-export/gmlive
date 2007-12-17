@@ -20,9 +20,10 @@
 #include "sopcastchannel.h"
 #include "recentchannel.h"
 #include "bookmarkchannel.h"
-#include "live_player.h"
+#include "livePlayer.h"
 
 #include "MainWindow.h"
+#include "ConfWindow.h"
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fstream>
@@ -187,6 +188,8 @@ void MainWindow::on_menu_view_show_channel()
 void MainWindow::on_menu_view_preferences()
 {
 	cout << "on_menu_view_preferences" << endl;
+	ConfWindow* confwindow = new ConfWindow(this);
+	
 }
 
 void MainWindow::on_menu_help_about()
