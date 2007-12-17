@@ -19,7 +19,7 @@
 
 #include "channel.h"
 #include "MainWindow.h"
-#include "live_player.h"
+#include "livePlayer.h"
 #include "recentchannel.h"
 #include "bookmarkchannel.h"
 

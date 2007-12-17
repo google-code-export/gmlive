@@ -591,7 +591,7 @@ GPL 协议应该采用第二版或您所喜欢的第二版之后的任何版本�
   <property name="urgency_hint">False</property>
 
   <child>
-    <widget class="GtkVBox" id="vbox1">
+    <widget class="GtkVBox" id="vbox_conf">
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -1934,7 +1934,7 @@ GPL 协议应该采用第二版或您所喜欢的第二版之后的任何版本�
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="button3">
+	    <widget class="GtkButton" id="button_cancel">
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label">gtk-cancel</property>
@@ -1975,7 +1975,7 @@ GPL 协议应该采用第二版或您所喜欢的第二版之后的任何版本�
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="button2">
+	    <widget class="GtkButton" id="button_save">
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label">gtk-save</property>

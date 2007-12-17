@@ -9,6 +9,7 @@ gmlive_SOURCES = \
 		 ec_throw.cpp \
 		 main.cpp \
 		 MainWindow.cpp \
+		 ConfWindow.cpp \
 		 StreamMenu.cpp \
 		 channel.cpp \
 		 nslivechannel.cpp \
@@ -18,15 +19,16 @@ gmlive_SOURCES = \
 		 bookmarkchannel.cpp \
 		 gmplayer.cpp \
 		 ConfFile.cpp \
-		 sopcast_live_player.cpp \
-		 mms_live_player.cpp \
-		 ns_live_player.cpp
+		 sopcastLivePlayer.cpp \
+		 mmsLivePlayer.cpp \
+		 nsLivePlayer.cpp
 
 noinst_HEADERS = \
 		 ec_throw.h \
 		 CodeConverter.h \
 		 scope_gruard.h \
 		 MainWindow.h \
+		 ConfWindow.h \
 		 StreamMenu.h \
 		 channel.h \
 		 sopcastchannel.h \
@@ -37,9 +39,9 @@ noinst_HEADERS = \
 		 gmplayer.h \
 		 gmlive.h 	\
 		 ConfFile.h 	\
-		 live_player.h \
-		 sopcast_live_player.h \
-		 mms_live_player.h \
-		 ns_live_player.h
+		 livePlayer.h \
+		 sopcastLivePlayer.h \
+		 mmsLivePlayer.h \
+		 nsLivePlayer.h
 
 gmlive_LDADD = @LIBS@ @PACKAGE_LIBS@

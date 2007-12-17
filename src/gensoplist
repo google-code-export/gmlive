@@ -1,2 +1,0 @@
-#!/bin/sh
-wget http://www.sopcast.com/gchlxml -O ~/.gmlive/sopcast.lst

@@ -22,9 +22,9 @@
 #include <vector>
 #include "recentchannel.h"
 #include "MainWindow.h"
-#include "mms_live_player.h"
-#include "sopcast_live_player.h"
-#include "ns_live_player.h"
+#include "mmsLivePlayer.h"
+#include "sopcastLivePlayer.h"
+#include "nsLivePlayer.h"
 
 RecentChannel::RecentChannel(MainWindow* parent_):Channel( parent_)
 {

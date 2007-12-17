@@ -6,7 +6,7 @@
 #include "MainWindow.h"
 #include <libxml/parser.h>
 #include <libxml/tree.h>
-#include "sopcast_live_player.h"
+#include "sopcastLivePlayer.h"
 #include <sys/types.h>
 #include <sys/wait.h>
 
