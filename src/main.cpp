@@ -20,6 +20,7 @@
 #include "MainWindow.h"
 
 using namespace std;
+TGMConf GMConf;
 
 int main(int argc, char* argv[])
 {

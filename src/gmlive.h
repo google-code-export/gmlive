@@ -24,7 +24,9 @@ enum TypeChannel{
 	NONE
 };
 
-std::map<std::string,std::string> GMConf;
+
+typedef std::map<std::string,std::string> TGMConf;
+extern TGMConf GMConf;
 
 /*
 typedef struct{
