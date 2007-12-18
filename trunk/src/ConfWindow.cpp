@@ -26,17 +26,40 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	Gtk::VBox * vBox = dynamic_cast < Gtk::VBox * >
 	    (vbox_xml->get_widget("vbox_conf"));
 
-	Gtk::Button* btcancel= dynamic_cast<Gtk::Button*>
-		(vbox_xml->get_widget("button_cancel"));
-	Gtk::Button* btsave = dynamic_cast<Gtk::Button*>
-		(vbox_xml->get_widget("button_save"));
+	/*
+	check_embed = dynamic_cast<Gtk::CheckButton*>
+		(vbox_xml->get_widget("check_embed"));
+	mplayer_param = dynamic_cast<Gtk::Entry*>
+		(vbox_xml->get_widget("entry_parameter"));
+	mms_mplayer_cache = dynamic_cast<Gtk::Entry*>
+		(vbox_xml->get_widget("entry_mms_cache"));
+	sopcast_mplayer_cache = dynamic_cast<Gtk::Entry*>
+		(vbox_xml->get_widget("entry_sopcast_cache"));
+	nslive_mplayer_cache = dynamic_cast<Gtk::Entry*>
+		(vbox_xml->get_widget("entry_nslive_cache"));
+	nslive_delay_time = dynamic_cast<Gtk::Entry*>
+		(vbox_xml->get_widget("entry_nslive_delay"));
+		*/
+
+	m_paramter=GMConf["mplayer_paramter"];
+	m_mms_cache=GMConf["mms_mplayer_cache"];
+	m_sopcast_cache = GMConf["sopcast_mplayer_cache"];
+	m_nslive_cache = GMConf["nslive_mplayer_cache"];
+	m_nslive_delay = GMConf["nslive_delay_time"];
 
 
-	btcancel->signal_clicked().connect(
-			sigc::mem_fun(*this, &ConfWindow::on_button_cancel));
-	btsave->signal_clicked().connect(
-			sigc::mem_fun(*this, &ConfWindow::on_button_save));
+	m_pVariablesMap = new Gnome::Glade::VariablesMap(vbox_xml);
+	m_pVariablesMap->connect_widget("check_embed",m_embed);
+	m_pVariablesMap->connect_widget("entry_parameter", m_paramter);
+	m_pVariablesMap->connect_widget("entry_mms_cache", m_mms_cache);
+	m_pVariablesMap->connect_widget("entry_nslive_cache",m_nslive_cache);
+	m_pVariablesMap->connect_widget("entry_nslive_delay", m_nslive_delay);
+	m_pVariablesMap->connect_widget("entry_sopcast_cache",m_sopcast_cache);
 
+
+
+	vbox_xml->connect_clicked("button_save", sigc::mem_fun(*this,&ConfWindow::on_button_save));
+	vbox_xml->connect_clicked("button_cancel", sigc::mem_fun(*this, &ConfWindow::on_button_cancel));
 
 	add(*vBox);
 	set_transient_for(*parent);
@@ -49,15 +72,46 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 
 void ConfWindow::on_button_save()
 {
-	//save();
+	read_to_GMConf();
+	save();
 	delete this;
 }
+
 
 void ConfWindow::on_button_cancel()
 {
 	delete this;
 }
 
+void ConfWindow::read_to_GMConf()
+{
+
+	GMConf["mplayer_paramter"]      =            m_paramter   ; 
+	GMConf["mms_mplayer_cache"]     =            m_mms_cache  ;
+	GMConf["sopcast_mplayer_cache"] =            m_sopcast_cache;
+	GMConf["nslive_mplayer_cache"]  =            m_nslive_cache ;
+	GMConf["nslive_delay_time"]     =            m_nslive_delay ;
+
+
+
+}
+
+void ConfWindow::save()
+{
+		char buf[512];
+		char* homedir = getenv("HOME");
+		snprintf(buf, 512,"%s/.gmlive/config",homedir);
+		std::ofstream file(buf);
+		std::string line;
+		std::map<std::string,std::string>::iterator iter=GMConf.begin();
+		for(;iter!=GMConf.end(),iter++)
+		{
+			line=iter->first+"="iter->second;
+			file<<line<<std::endl;
+		}
+		file.close();
+
+}
 bool ConfWindow::on_key_press_event(GdkEventKey * ev)
 {
 	if (ev->type != GDK_KEY_PRESS)

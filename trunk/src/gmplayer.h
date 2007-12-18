@@ -20,7 +20,6 @@ class GMplayer : public Gtk::Socket
 		void pause(); 
 		void stop();
 		void full_screen();
-		void set_mode(bool embed=1){mode=embed;}
 		ssize_t get_mplayer_log(char* buf, size_t count) 
 		{ return read(stdout_pipe[0], buf, count); }
 

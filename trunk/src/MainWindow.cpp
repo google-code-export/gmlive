@@ -339,6 +339,34 @@ MainWindow::~MainWindow()
 	delete gmp;
 }
 
+void MainWindow::init()
+{
+		char buf[512];
+		char* homedir = getenv("HOME");
+		snprintf(buf, 512,"%s/.gmlive/config",homedir);
+		std::ifstream file(buf);
+		if(!file){
+		snprintf(buf,512,"%s/config",DATA_DIR);	
+		file.open(buf);
+		}
+		std::string line;
+		std::string name;
+		std::string key;
+
+		if(file){
+			while(std::getline(file,line)){
+				size_t pos= line.find_first_of("=");
+				if(pos==std::string::npos)
+					continue;
+				name = line.substr(0,pos);
+				key = line.substr(pos+1,std::string::npos);
+				if(name.empty()||key.empty())
+					continue;
+				GMConf.insert(std::pair<std::string,std::string>(name,key));
+			}
+		}
+		file.close();
+}
 
 
 void MainWindow::show_msg(const Glib::ustring& msg, unsigned int id)

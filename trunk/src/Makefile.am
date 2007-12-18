@@ -18,7 +18,6 @@ gmlive_SOURCES = \
 		 recentchannel.cpp \
 		 bookmarkchannel.cpp \
 		 gmplayer.cpp \
-		 ConfFile.cpp \
 		 sopcastLivePlayer.cpp \
 		 mmsLivePlayer.cpp \
 		 nsLivePlayer.cpp
@@ -38,7 +37,6 @@ noinst_HEADERS = \
 		 bookmarkchannel.h \
 		 gmplayer.h \
 		 gmlive.h 	\
-		 ConfFile.h 	\
 		 livePlayer.h \
 		 sopcastLivePlayer.h \
 		 mmsLivePlayer.h \

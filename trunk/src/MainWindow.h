@@ -30,6 +30,7 @@ class MainWindow : public Gtk::Window {
 	public:
 		MainWindow();
 		~MainWindow();
+		void init();
 		GMplayer& get_mplayer() { return *gmp; }
 	protected:
 		bool on_delete_event(GdkEventAny* event);
