@@ -18,6 +18,7 @@
 
 #include "ConfWindow.h"
 #include "MainWindow.h"
+#include <fstream>
 
 ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 {
@@ -104,9 +105,9 @@ void ConfWindow::save()
 		std::ofstream file(buf);
 		std::string line;
 		std::map<std::string,std::string>::iterator iter=GMConf.begin();
-		for(;iter!=GMConf.end(),iter++)
+		for(;iter != GMConf.end(); ++iter)
 		{
-			line=iter->first+"="iter->second;
+			line = iter->first + "=" + iter->second;
 			file<<line<<std::endl;
 		}
 		file.close();
