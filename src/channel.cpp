@@ -100,11 +100,14 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 
 void Channel::play_selection()
 {
+	printf("\nplay_selection\n");
 	Glib::RefPtr < Gtk::TreeSelection > selection =
 		this->get_selection();
 	Gtk::TreeModel::iterator iter = selection->get_selected();
-	if (!selection->count_selected_rows())
+	if (!selection->count_selected_rows()) {
+		parent->set_live_player(NULL);
 		return ;
+	}
 
 	play_selection_iter(iter);
 
@@ -157,25 +160,29 @@ void Channel::store_selection()
 
 void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 {
+	printf("\nplay_selection_iter\n");
 	TypeChannel page = (*iter)[columns.type];
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
 
-	if(GROUP_CHANNEL != (*iter)[columns.type]) {
-		LivePlayer* lp = parent->get_live_player();
-		if (NULL != lp) {
-			if (lp->get_stream() == stream) {
-				parent->set_live_player(NULL);
-				return;
-			}
-		}
-
-		delete lp;
-		lp = get_player(stream, page);
-		parent->set_live_player(lp);
-		RecentChannel* rc =
-			dynamic_cast<RecentChannel*>(parent->get_recent_channel());
-		if (this != rc)
-			rc->saveLine(name,stream,page);
+	if(GROUP_CHANNEL == (*iter)[columns.type]) {
+		parent->set_live_player(NULL);
+		return;
 	}
+
+	LivePlayer* lp = parent->get_live_player();
+	if (NULL != lp) {
+		if (lp->get_stream() == stream) {
+			parent->set_live_player(NULL);
+			return;
+		}
+	}
+
+	delete lp;
+	lp = get_player(stream, page);
+	parent->set_live_player(lp);
+	RecentChannel* rc =
+		dynamic_cast<RecentChannel*>(parent->get_recent_channel());
+	if (this != rc)
+		rc->saveLine(name,stream,page);
 }

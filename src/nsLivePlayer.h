@@ -20,17 +20,21 @@
 #define _NS_LIVE_PLAYER_H_
 
 #include "livePlayer.h"
+#include "gmlive.h"
 
 class NsLivePlayer : public LivePlayer {
 	public:
 		NsLivePlayer(const std::string& id_);
 		~NsLivePlayer();
-		void play(GMplayer& gmplayer);
+		void play(GMplayer& gmp);
 		void stop();
 		const std::string& get_stream() { return id; }
 	private:
-		int ns_pid;
-		std::string id;
+		bool on_gmp_startup_time();
+		sigc::connection		gmp_startup_time_conn;
+		std::string 		id;
+		GMplayer* gmplayer;
+		int 			ns_pid;
 };
 
 #endif // _NS_LIVE_PLAYER_H_

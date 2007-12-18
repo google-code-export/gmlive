@@ -58,7 +58,7 @@ void ConfWindow::on_button_cancel()
 	delete this;
 }
 
-bool ConfWindow::on_key_press_event(GdkEventAny * ev)
+bool ConfWindow::on_key_press_event(GdkEventKey * ev)
 {
 	if (ev->type != GDK_KEY_PRESS)
 		return Gtk::Window::on_key_press_event(ev);
