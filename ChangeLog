@@ -1,5 +1,18 @@
 2007-12-18  yetist  <yetist@gmail.com>
 
+	* depcomp: 
+	* stamp-h1: 
+	* config.h: 
+	* autoscan.log: 
+	* config.h.in~: 
+	* config.h.in: 
+	* Makefile.am: 
+	* missing: 
+	* install-sh: 
+	删除不需要的文件。
+
+2007-12-18  yetist  <yetist@gmail.com>
+
 	* Makefile.in: deleted.
 	* configure.in: 
 	* ChangeLog: 
