@@ -42,7 +42,7 @@ class SopcastChannel:public Channel
 		LivePlayer* get_player(const std::string& stream,TypeChannel page);
 		void wait_wget_exit(GPid pid, int);
 	private:
-		void parse_channel (Gtk::TreeModel::iterator& iter, xmlNode* a_node);
+		int parse_channel (Gtk::TreeModel::iterator& iter, xmlNode* a_node);
 
 		void parse_channels(xmlNode* a_node);
 		void parse_group(xmlNode* a_node);

@@ -64,7 +64,7 @@ LivePlayer* SopcastChannel::get_player(const std::string& stream,TypeChannel pag
 	return new SopcastLivePlayer(stream);
 }
 
-void SopcastChannel::parse_channel
+int SopcastChannel::parse_channel
 (Gtk::TreeModel::iterator& iter, xmlNode* a_node)
 {
 
@@ -73,7 +73,7 @@ void SopcastChannel::parse_channel
 	Glib::ustring str;
 	xmlNode* cur_node = a_node->children;
 	if ((!cur_node) && (cur_node->type != XML_ELEMENT_NODE))
-		return;
+		return 0;
 	cur_node = get_channel_item(cur_node, (const xmlChar*)"name", str);
 	(*iter)[columns.name] = str;
 
@@ -89,6 +89,7 @@ void SopcastChannel::parse_channel
 	(*iter)[columns.stream] = str;
 
 	(*iter)[columns.type]=SOPCAST_CHANNEL;
+	return users;
 }
 
 void SopcastChannel::wait_wget_exit(GPid pid, int)
@@ -143,15 +144,17 @@ void SopcastChannel::parse_group(xmlNode* a_node)
 	Gtk::TreeModel::iterator iter = addGroup((const char*)name);
 	xmlFree(name);
 
+	int user_total = 0;
 	for (xmlNode* cur_node = a_node->children; cur_node; 
 			cur_node = cur_node->next) {
 		if ((cur_node->type == XML_ELEMENT_NODE) && 
 				(!xmlStrcmp(cur_node->name, 
 					    (const xmlChar*)"channel"))) {
 			Gtk::TreeModel::iterator citer = m_liststore->append(iter->children());
-			parse_channel(citer, cur_node);
+			user_total += parse_channel(citer, cur_node);
 		}
 	}
+	(*iter)[columns.users] = user_total;
 }
 
 void SopcastChannel::parse_channels(xmlNode* a_node)
