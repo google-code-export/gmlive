@@ -1,0 +1,8 @@
+2007-12-18  yetist  <yetist@gmail.com>
+
+	* Makefile.in: deleted.
+	* configure.in: 
+	* ChangeLog: 
+	* data/Makefile.in: deleted
+	* Makefile.am: 
+	修复打包时缺少文件的问题。
