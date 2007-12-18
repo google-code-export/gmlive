@@ -68,11 +68,11 @@ void SopcastChannel::parse_channel
 (Gtk::TreeModel::iterator& iter, xmlNode* a_node)
 {
 
-	xmlChar* id = xmlGetProp(a_node, (const xmlChar*)"id");
-	xmlFree(id);
+	//xmlChar* id = xmlGetProp(a_node, (const xmlChar*)"id");
+	//xmlFree(id);
 	Glib::ustring str;
 	xmlNode* cur_node = a_node->children;
-	if (cur_node->type != XML_ELEMENT_NODE) 
+	if ((!cur_node) && (cur_node->type != XML_ELEMENT_NODE))
 		return;
 	cur_node = get_channel_item(cur_node, (const xmlChar*)"name", str);
 	(*iter)[columns.name] = str;

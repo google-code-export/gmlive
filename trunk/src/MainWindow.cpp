@@ -219,7 +219,7 @@ bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 	char buf[256];
 	int len = gmp->get_mplayer_log(buf, 255);
 	buf[len] = 0;
-	const char* pend = buf + len;
+	char* pend = buf + len;
 	char* p1 = buf;
 	char* p2 = buf;
 	for(; p1 < pend;) {
@@ -244,6 +244,8 @@ bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 			p2 = p1;
 		}
 	}
+	if (p1 != p2)
+		show_msg(Glib::ustring(p2, pend));
 	return true;
 }
 
@@ -251,7 +253,7 @@ void MainWindow::on_live_player_out(int percentage)
 {
 	char buf[256];
 	sprintf(buf, "Connect...%%%d", percentage);
-	show_msg(buf, sizeof (buf));
+	show_msg(buf, 1);
 }
 
 MainWindow::MainWindow():
@@ -389,6 +391,7 @@ Channel* MainWindow::get_cur_select_channel()
 
 void MainWindow::set_live_player(LivePlayer* lp)
 {
+	printf("\n------------------------- %o---------------\n", lp);
 	if (lp != NULL) {
 		gmp->stop();
 		live_player = lp;
@@ -396,7 +399,8 @@ void MainWindow::set_live_player(LivePlayer* lp)
 					*this, &MainWindow::on_live_player_out));
 		lp->play(*gmp);
 	} else {
-		gmp->play();
+		if (live_player)
+			gmp->play();
 	}
 }
 

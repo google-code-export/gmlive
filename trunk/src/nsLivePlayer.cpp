@@ -28,7 +28,8 @@
 
 NsLivePlayer::NsLivePlayer(const std::string& id_) : 
 	id(id_),
-	ns_pid(-1)
+	ns_pid(-1),
+	gmplayer(NULL)
 {
 }
 
@@ -40,6 +41,7 @@ NsLivePlayer::~NsLivePlayer()
 
 void NsLivePlayer::play(GMplayer& gmp)
 {
+	gmplayer = &gmp;
 	//extern char **environ;
 	int pid = fork();
 	if (pid == -1)
@@ -64,12 +66,15 @@ void NsLivePlayer::play(GMplayer& gmp)
 
 	ns_pid = pid;
 	printf("ns_pid = %d\n",ns_pid);
-	gmp.set_cache(64);
-	gmp.play(NSLIVESTREAM);
+	signal_status_.emit(0);
+	
+	gmp_startup_time_conn =  Glib::signal_timeout().connect(sigc::mem_fun(*this, &NsLivePlayer::on_gmp_startup_time), 2000);
+
 }
 
 void NsLivePlayer::stop()
 {
+	gmp_startup_time_conn.disconnect();
 	if (ns_pid > 0) {
 		for (;;) {
 			kill(-ns_pid, SIGKILL);
@@ -81,3 +86,15 @@ void NsLivePlayer::stop()
 	}
 }
 
+bool NsLivePlayer::on_gmp_startup_time()
+{
+	static bool first = true;
+	if(first){
+		first = false;
+		return true;
+	}
+	first = true;
+	gmplayer->set_cache(8192);
+	gmplayer->play(NSLIVESTREAM);
+	return false;
+}
