@@ -2,6 +2,7 @@ SUBDIRS = src data po
 
 EXTRA_DIST =                    \
         ChangeLog               \
+	autogen.sh		\
         TODO.tasks		\
         intltool-extract.in     \
         intltool-merge.in       \
