@@ -5,6 +5,7 @@
 #include <libglademm/xml.h>
 #include <glib/gi18n.h>
 #include <iostream>
+#include <map>
 
 #define PAGE_PICTURE 0
 #define PAGE_MPLAYER 1
@@ -23,8 +24,17 @@ enum TypeChannel{
 	NONE
 };
 
+std::map<std::string,std::string> GMConf;
+
+/*
 typedef struct{
 	bool embed;
-}Setting;
+	std::string mplayer_extend_param;
+	guint  mms_mplayer_cache;
+	guint  sopcast_mplayer_cache;
+	guint  nslive_mplayer_cache;
+	guint  nslive_delay_time;
+}GMConf;
+*/
 
 #endif
