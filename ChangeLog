@@ -1,5 +1,12 @@
 2007-12-18  yetist  <yetist@gmail.com>
 
+	* configure.in: 
+	* Makefile.am: 
+	* autogen.sh: 
+	添加autogen.sh到打包的文件中。
+
+2007-12-18  yetist  <yetist@gmail.com>
+
 	* depcomp: 
 	* stamp-h1: 
 	* config.h: 
