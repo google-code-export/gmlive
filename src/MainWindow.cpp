@@ -107,7 +107,6 @@ Glib::ustring ui_info =
 "		<toolitem action='FilePlay'/>"
 "		<toolitem action='FilePause'/>"
 "		<toolitem action='FileStop'/>"
-"		<toolitem action='ViewShowChannel'/>"
 "	</toolbar>"
 "</ui>";
 
@@ -341,10 +340,10 @@ MainWindow::MainWindow():
 	Gtk::Widget* menubar = ui_manager->get_widget("/MenuBar");
 	Gtk::Widget* toolbar = ui_manager->get_widget("/ToolBar");
 
-	Gtk::Box* menu_tool_box = dynamic_cast<Gtk::Box*>
+	Gtk::VBox* menu_tool_box = dynamic_cast<Gtk::VBox*>
 			(ui_xml->get_widget("box_menu_toolbar"));
-	menu_tool_box->pack_start(*toolbar,true,true);
 	menu_tool_box->pack_start(*menubar,true,true);
+	menu_tool_box->pack_start(*toolbar,false,false);
 
 	play_frame->pack_start(*backgroup, true, true);
 
@@ -359,6 +358,7 @@ MainWindow::MainWindow():
 	this->resize(1,1);
 	init();
 	set_gmp_embed();
+	//toolbar->set_toolbar_style(Gtk::TOOLBAR_ICONS);
 }
 
 void MainWindow::set_gmp_embed()
@@ -395,8 +395,12 @@ void MainWindow::init()
 	snprintf(buf, 512,"%s/.gmlive/config",homedir);
 	std::ifstream file(buf);
 	if(!file){
-		snprintf(buf,512,"%s/config",DATA_DIR);	
-		file.open(buf);
+		GMConf["mplayer_embed"]="1";
+	GMConf["mms_mplayer_cache"]     =            "8192";
+	GMConf["sopcast_mplayer_cache"] =            "64";
+	GMConf["nslive_mplayer_cache"]  =            "64";
+	GMConf["nslive_delay_time"]     =            "2";
+		return;
 	}
 	std::string line;
 	std::string name;

@@ -43,7 +43,7 @@
 	<packing>
 	  <property name="padding">0</property>
 	  <property name="expand">False</property>
-	  <property name="fill">True</property>
+	  <property name="fill">False</property>
 	</packing>
       </child>
 
@@ -818,24 +818,63 @@ GPL 协议应该采用第二版或您所喜欢的第二版之后的任何版本�
 		  </child>
 
 		  <child>
-		    <widget class="GtkEntry" id="entry_mms_cache">
+		    <widget class="GtkHBox" id="hbox12">
 		      <property name="visible">True</property>
-		      <property name="can_focus">True</property>
-		      <property name="editable">True</property>
-		      <property name="visibility">True</property>
-		      <property name="max_length">0</property>
-		      <property name="text" translatable="yes"></property>
-		      <property name="has_frame">True</property>
-		      <property name="invisible_char">●</property>
-		      <property name="activates_default">False</property>
+		      <property name="homogeneous">False</property>
+		      <property name="spacing">0</property>
+
+		      <child>
+			<widget class="GtkEntry" id="entry_mms_cache">
+			  <property name="width_request">60</property>
+			  <property name="visible">True</property>
+			  <property name="can_focus">True</property>
+			  <property name="editable">True</property>
+			  <property name="visibility">True</property>
+			  <property name="max_length">0</property>
+			  <property name="text" translatable="yes"></property>
+			  <property name="has_frame">True</property>
+			  <property name="invisible_char">●</property>
+			  <property name="activates_default">False</property>
+			</widget>
+			<packing>
+			  <property name="padding">0</property>
+			  <property name="expand">False</property>
+			  <property name="fill">False</property>
+			</packing>
+		      </child>
+
+		      <child>
+			<widget class="GtkLabel" id="label76">
+			  <property name="visible">True</property>
+			  <property name="label" translatable="yes"> Kbs </property>
+			  <property name="use_underline">False</property>
+			  <property name="use_markup">False</property>
+			  <property name="justify">GTK_JUSTIFY_LEFT</property>
+			  <property name="wrap">False</property>
+			  <property name="selectable">False</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
+			</widget>
+			<packing>
+			  <property name="padding">0</property>
+			  <property name="expand">False</property>
+			  <property name="fill">False</property>
+			</packing>
+		      </child>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
 		      <property name="right_attach">2</property>
 		      <property name="top_attach">1</property>
 		      <property name="bottom_attach">2</property>
-		      <property name="x_options"></property>
-		      <property name="y_options"></property>
+		      <property name="x_options">fill</property>
+		      <property name="y_options">fill</property>
 		    </packing>
 		  </child>
 		</widget>
@@ -966,27 +1005,6 @@ GPL 协议应该采用第二版或您所喜欢的第二版之后的任何版本�
 	      </child>
 
 	      <child>
-		<widget class="GtkEntry" id="entry_nslive_cache">
-		  <property name="visible">True</property>
-		  <property name="can_focus">True</property>
-		  <property name="editable">True</property>
-		  <property name="visibility">True</property>
-		  <property name="max_length">0</property>
-		  <property name="text" translatable="yes"></property>
-		  <property name="has_frame">True</property>
-		  <property name="invisible_char">●</property>
-		  <property name="activates_default">False</property>
-		</widget>
-		<packing>
-		  <property name="left_attach">2</property>
-		  <property name="right_attach">3</property>
-		  <property name="top_attach">1</property>
-		  <property name="bottom_attach">2</property>
-		  <property name="y_options"></property>
-		</packing>
-	      </child>
-
-	      <child>
 		<widget class="GtkLabel" id="label70">
 		  <property name="visible">True</property>
 		  <property name="label" translatable="yes">Mplayer DelayTime </property>
@@ -1015,24 +1033,124 @@ GPL 协议应该采用第二版或您所喜欢的第二版之后的任何版本�
 	      </child>
 
 	      <child>
-		<widget class="GtkEntry" id="entry_nslive_delay">
+		<widget class="GtkHBox" id="hbox13">
 		  <property name="visible">True</property>
-		  <property name="can_focus">True</property>
-		  <property name="editable">True</property>
-		  <property name="visibility">True</property>
-		  <property name="max_length">0</property>
-		  <property name="text" translatable="yes"></property>
-		  <property name="has_frame">True</property>
-		  <property name="invisible_char">●</property>
-		  <property name="activates_default">False</property>
+		  <property name="homogeneous">False</property>
+		  <property name="spacing">0</property>
+
+		  <child>
+		    <widget class="GtkEntry" id="entry_nslive_cache">
+		      <property name="width_request">60</property>
+		      <property name="visible">True</property>
+		      <property name="can_focus">True</property>
+		      <property name="editable">True</property>
+		      <property name="visibility">True</property>
+		      <property name="max_length">0</property>
+		      <property name="text" translatable="yes"></property>
+		      <property name="has_frame">True</property>
+		      <property name="invisible_char">●</property>
+		      <property name="activates_default">False</property>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">False</property>
+		      <property name="fill">False</property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label77">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes"> Kbs </property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		      <property name="width_chars">-1</property>
+		      <property name="single_line_mode">False</property>
+		      <property name="angle">0</property>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">False</property>
+		      <property name="fill">False</property>
+		    </packing>
+		  </child>
+		</widget>
+		<packing>
+		  <property name="left_attach">2</property>
+		  <property name="right_attach">3</property>
+		  <property name="top_attach">1</property>
+		  <property name="bottom_attach">2</property>
+		  <property name="x_options">fill</property>
+		  <property name="y_options">fill</property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkHBox" id="hbox14">
+		  <property name="visible">True</property>
+		  <property name="homogeneous">False</property>
+		  <property name="spacing">0</property>
+
+		  <child>
+		    <widget class="GtkEntry" id="entry_nslive_delay">
+		      <property name="width_request">60</property>
+		      <property name="visible">True</property>
+		      <property name="can_focus">True</property>
+		      <property name="editable">True</property>
+		      <property name="visibility">True</property>
+		      <property name="max_length">0</property>
+		      <property name="text" translatable="yes"></property>
+		      <property name="has_frame">True</property>
+		      <property name="invisible_char">●</property>
+		      <property name="activates_default">False</property>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">False</property>
+		      <property name="fill">False</property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label78">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes"> sec</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		      <property name="width_chars">-1</property>
+		      <property name="single_line_mode">False</property>
+		      <property name="angle">0</property>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">False</property>
+		      <property name="fill">False</property>
+		    </packing>
+		  </child>
 		</widget>
 		<packing>
 		  <property name="left_attach">2</property>
 		  <property name="right_attach">3</property>
 		  <property name="top_attach">2</property>
 		  <property name="bottom_attach">3</property>
-		  <property name="x_options"></property>
-		  <property name="y_options"></property>
+		  <property name="x_options">fill</property>
+		  <property name="y_options">fill</property>
 		</packing>
 	      </child>
 	    </widget>
@@ -1134,23 +1252,62 @@ GPL 协议应该采用第二版或您所喜欢的第二版之后的任何版本�
 		  </child>
 
 		  <child>
-		    <widget class="GtkEntry" id="entry_sopcast_cache">
+		    <widget class="GtkHBox" id="hbox15">
 		      <property name="visible">True</property>
-		      <property name="can_focus">True</property>
-		      <property name="editable">True</property>
-		      <property name="visibility">True</property>
-		      <property name="max_length">0</property>
-		      <property name="text" translatable="yes"></property>
-		      <property name="has_frame">True</property>
-		      <property name="invisible_char">●</property>
-		      <property name="activates_default">False</property>
+		      <property name="homogeneous">False</property>
+		      <property name="spacing">0</property>
+
+		      <child>
+			<widget class="GtkEntry" id="entry_sopcast_cache">
+			  <property name="width_request">60</property>
+			  <property name="visible">True</property>
+			  <property name="can_focus">True</property>
+			  <property name="editable">True</property>
+			  <property name="visibility">True</property>
+			  <property name="max_length">0</property>
+			  <property name="text" translatable="yes"></property>
+			  <property name="has_frame">True</property>
+			  <property name="invisible_char">●</property>
+			  <property name="activates_default">False</property>
+			</widget>
+			<packing>
+			  <property name="padding">0</property>
+			  <property name="expand">False</property>
+			  <property name="fill">False</property>
+			</packing>
+		      </child>
+
+		      <child>
+			<widget class="GtkLabel" id="label79">
+			  <property name="visible">True</property>
+			  <property name="label" translatable="yes"> Kbs</property>
+			  <property name="use_underline">False</property>
+			  <property name="use_markup">False</property>
+			  <property name="justify">GTK_JUSTIFY_LEFT</property>
+			  <property name="wrap">False</property>
+			  <property name="selectable">False</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
+			</widget>
+			<packing>
+			  <property name="padding">0</property>
+			  <property name="expand">False</property>
+			  <property name="fill">False</property>
+			</packing>
+		      </child>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
 		      <property name="right_attach">2</property>
 		      <property name="top_attach">1</property>
 		      <property name="bottom_attach">2</property>
-		      <property name="y_options"></property>
+		      <property name="y_options">fill</property>
 		    </packing>
 		  </child>
 		</widget>
