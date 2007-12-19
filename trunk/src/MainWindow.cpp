@@ -372,10 +372,10 @@ void MainWindow::set_gmp_embed()
 		play_frame->hide();
 		channels->show();
 		action_group->get_action("ViewShowChannel")->set_sensitive(false);
-		this->resize(1, -1);
+		this->resize(1, 1);
 	}
 	else {
-		play_frame->show();
+		play_frame->show_all();
 		action_group->get_action("ViewShowChannel")->set_sensitive(true);
 	}
 	gmp->set_embed(gmp_embed);
