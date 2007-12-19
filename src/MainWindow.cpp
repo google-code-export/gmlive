@@ -330,6 +330,8 @@ MainWindow::MainWindow():
 	this->show_all();
 	//channels->hide();
 	this->resize(1,1);
+
+	init();
 }
 
 MainWindow::~MainWindow()
