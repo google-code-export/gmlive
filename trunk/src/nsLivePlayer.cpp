@@ -67,8 +67,12 @@ void NsLivePlayer::play(GMplayer& gmp)
 	ns_pid = pid;
 	printf("ns_pid = %d\n",ns_pid);
 	signal_status_.emit(0);
+
+	std::string& delay_time = GMConf["nslive_delay_time"];
+	int itime = atoi(delay_time.c_str());
+	itime = itime > 0 ? itime : 2;
 	
-	gmp_startup_time_conn =  Glib::signal_timeout().connect(sigc::mem_fun(*this, &NsLivePlayer::on_gmp_startup_time), 2000);
+	gmp_startup_time_conn =  Glib::signal_timeout().connect(sigc::mem_fun(*this, &NsLivePlayer::on_gmp_startup_time), itime);
 
 }
 
@@ -94,7 +98,12 @@ bool NsLivePlayer::on_gmp_startup_time()
 		return true;
 	}
 	first = true;
-	gmplayer->set_cache(8192);
+	
+	std::string& cache = GMConf["nslive_mplayer_cache"];
+	int icache = atoi(cache.c_str());
+	icache = icache < 64 ? 64 : icache;
+	gmplayer->set_cache(icache);
+
 	gmplayer->play(NSLIVESTREAM);
 	return false;
 }

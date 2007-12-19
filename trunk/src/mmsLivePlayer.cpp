@@ -18,6 +18,7 @@
 
 #include "mmsLivePlayer.h"
 #include <gmplayer.h>
+#include <gmlive.h>
 
 MmsLivePlayer::MmsLivePlayer(const std::string& fname) :
 	filename(fname)
@@ -31,7 +32,11 @@ MmsLivePlayer::~MmsLivePlayer()
 }
 void MmsLivePlayer::play(GMplayer& gmp)
 {
-	gmp.set_cache(8192);
+	std::string& cache = GMConf["mms_mplayer_cache"];
+	int icache = atoi(cache.c_str());
+	icache = icache > 64 ? icache : 8192;
+
+	gmp.set_cache(icache);
 	gmp.play(filename);
 }
 
