@@ -3,7 +3,8 @@ gmlive_ui = \
 	    mms.lst 	\
 	    gmlive.png  \
 	    gmlive_play.png \
-	    gmlive_big.png
+	    gmlive_big.png \
+	    embed_mplayer.png
 
 desktopdir       = $(datadir)/applications
 desktop_in_files = gmlive.desktop.in

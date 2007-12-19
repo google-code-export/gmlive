@@ -96,6 +96,7 @@ Glib::ustring ui_info =
 "			<menuitem action='FileQuit'/>"
 "        	</menu>"
 "		<menu action='ViewMenu'>"
+"			<menuitem action='ViewEmbedMplayer'/>"
 "			<menuitem action='ViewShowChannel'/>"
 "			<menuitem action='ViewPreferences'/>"
 "		</menu>"
@@ -107,12 +108,31 @@ Glib::ustring ui_info =
 "		<toolitem action='FilePlay'/>"
 "		<toolitem action='FilePause'/>"
 "		<toolitem action='FileStop'/>"
+"		<toolitem action='ViewEmbedMplayer'/>"
 "	</toolbar>"
 "</ui>";
 
+void register_stock_items()
+{
+	Glib::RefPtr<Gtk::IconFactory> factory = Gtk::IconFactory::create();
+	Gtk::IconSource source;
+	//This throws an exception if the file is not found:
+	source.set_pixbuf( Gdk::Pixbuf::create_from_file(DATA_DIR"/embed_mplayer.png") );
 
+	source.set_size(Gtk::ICON_SIZE_SMALL_TOOLBAR);
+	source.set_size_wildcarded(); //Icon may be scaled.
+
+	Gtk::IconSet icon_set;
+	icon_set.add_source(source); //More than one source per set is allowed.
+
+	const Gtk::StockID stock_id("EmbedMplayer");
+	factory->add(stock_id, icon_set);
+	Gtk::Stock::add(Gtk::StockItem(stock_id, "EmbedMplayer"));
+	factory->add_default();
+}
 void MainWindow::init_ui_manager()
 {
+	register_stock_items();
 	if (!action_group)
 		action_group = Gtk::ActionGroup::create();
 	//File menu:
@@ -131,6 +151,9 @@ void MainWindow::init_ui_manager()
 	action_group->add(Gtk::ToggleAction::create("ViewShowChannel", 
 				"显示频道列表(_S)", "隐藏或显示频道列表", true),
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_show_channel));
+	action_group->add(Gtk::ToggleAction::create("ViewEmbedMplayer",
+			       Gtk::StockID("EmbedMplayer")),
+			sigc::mem_fun(*this, &MainWindow::on_menu_view_embed_mplayer));
 	action_group->add(Gtk::Action::create("ViewPreferences", Gtk::Stock::PREFERENCES),
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_preferences));
 
@@ -199,6 +222,16 @@ void MainWindow::on_menu_view_show_channel()
 	else
 		channels->hide();
 	this->resize(1, 1);
+}
+
+void MainWindow::on_menu_view_embed_mplayer()
+{
+	cout << "on_menu_view_embed_mplayer" << endl;
+		// 这种写法太白痴了
+	Glib::RefPtr<Gtk::ToggleAction> embed = 
+		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
+	GMConf["mplayer_embed"] = embed->get_active() ? "1": "0";
+	set_gmp_embed();
 }
 
 void MainWindow::on_menu_view_preferences()
@@ -341,7 +374,7 @@ MainWindow::MainWindow():
 	Gtk::Widget* toolbar = ui_manager->get_widget("/ToolBar");
 
 	Gtk::VBox* menu_tool_box = dynamic_cast<Gtk::VBox*>
-			(ui_xml->get_widget("box_menu_toolbar"));
+		(ui_xml->get_widget("box_menu_toolbar"));
 	menu_tool_box->pack_start(*menubar,true,true);
 	menu_tool_box->pack_start(*toolbar,false,false);
 
@@ -358,7 +391,7 @@ MainWindow::MainWindow():
 	this->resize(1,1);
 	init();
 	set_gmp_embed();
-	//toolbar->set_toolbar_style(Gtk::TOOLBAR_ICONS);
+	((Gtk::Toolbar*)toolbar)->set_toolbar_style(Gtk::TOOLBAR_ICONS);
 }
 
 void MainWindow::set_gmp_embed()
@@ -368,6 +401,10 @@ void MainWindow::set_gmp_embed()
 	if (gmp_embed == bembed)
 		return;
 	gmp_embed = bembed;
+		// 这种写法太白痴了
+	Glib::RefPtr<Gtk::ToggleAction> embed_menu = 
+		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
+	embed_menu->set_active(gmp_embed);
 	if (!gmp_embed) {
 		play_frame->hide();
 		channels->show();
