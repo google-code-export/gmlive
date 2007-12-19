@@ -6,6 +6,10 @@
 #include <string.h>
 #include "ec_throw.h"
 #include <cassert>
+#include "gmlive.h"
+#include <string>
+#include <list>
+
 void  set_signals()
 {
 	sigset_t set;
@@ -179,7 +183,22 @@ void GMplayer::initialize()
 	char cache_buf[32];
 	snprintf(cache_buf, 32, "%d", cache);
 
-	const char* argv[10];
+	std::string& paramter = GMConf["mplayer_paramter"];
+	std::list<std::string> pars;
+	if (!paramter.empty()) {
+		size_t pos1 = 0;
+		size_t pos2 = 0;
+		for(;;) {
+			pos2 = paramter.find_first_of(" \t", pos1);
+			pars.push_back(paramter.substr(pos1, pos2 - pos1));
+			if (pos2 == std::string::npos)
+				break;
+			pos1 = pos2 + 1;
+		}
+	}
+
+	int argv_len = 10 + pars.size();
+	const char* argv[argv_len];
 	argv[0] = "mplayer";
 	argv[1] = "-slave";
 	argv[2] = "-wid";
@@ -188,7 +207,12 @@ void GMplayer::initialize()
 	argv[5] = "-quiet";
 	argv[6] = "-cache";
 	argv[7] = cache_buf;
-	argv[8] = NULL;
+	std::list<std::string>::iterator iter = pars.begin();
+	int i = 8;
+	for (; i < argv_len && iter != pars.end(); i++, ++iter) {
+		argv[i] = (*iter).c_str();
+	}
+	argv[i] = NULL;
 
 	ready = false;
 	my_system((char* const *) argv);
