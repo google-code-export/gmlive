@@ -103,10 +103,16 @@ Glib::ustring ui_info =
 "			<menuitem action='HelpAbout'/>"
 "		</menu>"
 "	</menubar>"
+"	<toolbar name='ToolBar'>"
+"		<toolitem action='FilePlay'/>"
+"		<toolitem action='FilePause'/>"
+"		<toolitem action='FileStop'/>"
+"		<toolitem action='ViewShowChannel'/>"
+"	</toolbar>"
 "</ui>";
 
 
-Gtk::Widget* MainWindow::create_main_menu()
+void MainWindow::init_ui_manager()
 {
 	if (!action_group)
 		action_group = Gtk::ActionGroup::create();
@@ -141,7 +147,7 @@ Gtk::Widget* MainWindow::create_main_menu()
 	add_accel_group(ui_manager->get_accel_group());
 	ui_manager->add_ui_from_string(ui_info);
 
-	return ui_manager->get_widget("/MenuBar");
+	//return ui_manager->get_widget("/MenuBar");
 }
 
 void MainWindow::on_menu_file_play()
@@ -277,7 +283,7 @@ MainWindow::MainWindow():
 	live_player(NULL)
 	,gmp_width(-1)
 	,gmp_height(-1)
-	,gmp_embed(false)
+	,gmp_embed(true)
 {
 	ui_xml = Gnome::Glade::Xml::create(main_ui, "mainFrame");
 	if (!ui_xml) 
@@ -331,12 +337,15 @@ MainWindow::MainWindow():
 	gmp->signal_stop_play().connect(
 			sigc::mem_fun(*this, &MainWindow::on_gmplayer_stop));
 
-	menubar = create_main_menu();
+	init_ui_manager();
+	Gtk::Widget* menubar = ui_manager->get_widget("/MenuBar");
+	Gtk::Widget* toolbar = ui_manager->get_widget("/ToolBar");
 
-	Gtk::HBox* menu_box=dynamic_cast<Gtk::HBox*>
-			(ui_xml->get_widget("hbox_menu"));
-	menu_box->pack_start(*menubar,true,true);
-	//main_frame->pack_start(*menubar, false, false);
+	Gtk::Box* menu_tool_box = dynamic_cast<Gtk::Box*>
+			(ui_xml->get_widget("box_menu_toolbar"));
+	menu_tool_box->pack_start(*toolbar,true,true);
+	menu_tool_box->pack_start(*menubar,true,true);
+
 	play_frame->pack_start(*backgroup, true, true);
 
 
@@ -355,11 +364,15 @@ MainWindow::MainWindow():
 void MainWindow::set_gmp_embed()
 {
 	std::string& embed = GMConf["mplayer_embed"];
-	gmp_embed = (!embed.empty()) && (embed[0] == '1');
+	bool bembed = (!embed.empty()) && (embed[0] == '1');
+	if (gmp_embed == bembed)
+		return;
+	gmp_embed = bembed;
 	if (!gmp_embed) {
 		play_frame->hide();
 		channels->show();
 		action_group->get_action("ViewShowChannel")->set_sensitive(false);
+		this->resize(1, -1);
 	}
 	else {
 		play_frame->show();

@@ -35,7 +35,7 @@ class MainWindow : public Gtk::Window {
 	protected:
 		bool on_delete_event(GdkEventAny* event);
 		void show_msg(const Glib::ustring& msg,unsigned int id=0);
-		Gtk::Widget* create_main_menu();
+		void init_ui_manager();
 	private:
 		friend class Channel;
 		void set_live_player(LivePlayer*);
@@ -71,7 +71,6 @@ class MainWindow : public Gtk::Window {
 		Gtk::Notebook*			channels;
 		Gtk::Statusbar* 		statusbar;
 		Gtk::Image*			backgroup;
-		Gtk::Widget*			menubar;
 		Channel* 			recent_channel;
 		Channel* 			bookmark_channel;
 		LivePlayer* 			live_player;
