@@ -55,8 +55,10 @@ class MainWindow : public Gtk::Window {
 		bool on_gmplayer_out(const Glib::IOCondition& condition);
 		void on_gmplayer_start();
 		void on_gmplayer_stop();
+		void on_conf_window_quit();
 
 		void set_gmp_size(int w, int h);
+		void set_gmp_embed();
 
 		void reorder_widget(bool is_running);
 		Channel* get_cur_select_channel();
@@ -75,6 +77,7 @@ class MainWindow : public Gtk::Window {
 		LivePlayer* 			live_player;
 		int 				gmp_width;
 		int				gmp_height;
+		bool				gmp_embed;
 };
 
 #endif // _MAINWINDOW_HH 

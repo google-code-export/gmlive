@@ -102,6 +102,7 @@ GMplayer::GMplayer(const sigc::slot<bool, Glib::IOCondition>& slot):
 	,mode(1)
 	,cache(64)
 	,is_pause(false)
+	,is_embed(false)
 {
 	stdin_pipe[0] = -1;
 	stdin_pipe[1] = -1;
@@ -201,16 +202,18 @@ void GMplayer::initialize()
 	const char* argv[argv_len];
 	argv[0] = "mplayer";
 	argv[1] = "-slave";
-	argv[2] = "-wid";
-	argv[3] = wid_buf;
-	argv[4] = "-idle";
-	argv[5] = "-quiet";
-	argv[6] = "-cache";
-	argv[7] = cache_buf;
+	argv[2] = "-idle";
+	argv[3] = "-quiet";
+	argv[4] = "-cache";
+	argv[5] = cache_buf;
 	std::list<std::string>::iterator iter = pars.begin();
-	int i = 8;
+	int i = 6;
 	for (; i < argv_len && iter != pars.end(); i++, ++iter) {
 		argv[i] = (*iter).c_str();
+	}
+	if (is_embed) {
+		argv[i++] = "-wid";
+		argv[i++] = wid_buf;
 	}
 	argv[i] = NULL;
 
@@ -272,5 +275,14 @@ void GMplayer::pause()
 {
 	is_pause = !is_pause;
 	send_ctrl_command("pause\n");
+}
+
+void GMplayer::set_embed(bool embed_)
+{
+	if (is_embed == embed_)
+		return;
+	is_embed = embed_;
+	if (is_runing()) 
+		play();
 }
 

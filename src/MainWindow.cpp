@@ -28,7 +28,18 @@
 #include <sys/types.h>
 #include <fstream>
 #include <cassert>
+#include <functional>
+#include <algorithm>
+
 using namespace std;
+
+//struct IsBlank : public std::unary_function <std::string::value_type, bool> {
+//	bool operator () (std::string::value_type val)
+//	{
+//		return (val == ' ') || (val == '\t');
+//	}
+//};
+
 Glib::ustring get_print_string(const char* buf, int len)
 {
 
@@ -172,7 +183,7 @@ bool MainWindow::on_delete_event(GdkEventAny* event)
 
 void MainWindow::on_menu_view_show_channel()
 {
-	//cout << "on_menu_view_show_channel" << endl;
+	cout << "on_menu_view_show_channel" << endl;
 
 	// 这种写法太白痴了
 	Glib::RefPtr<Gtk::ToggleAction> show = 
@@ -189,7 +200,7 @@ void MainWindow::on_menu_view_preferences()
 {
 	cout << "on_menu_view_preferences" << endl;
 	ConfWindow* confwindow = new ConfWindow(this);
-	
+	confwindow->signal_quit().connect(sigc::mem_fun(*this, &MainWindow::on_conf_window_quit));
 }
 
 void MainWindow::on_menu_help_about()
@@ -199,6 +210,12 @@ void MainWindow::on_menu_help_about()
 	Gtk::Window* about = dynamic_cast<Gtk::Window*>
 		(about_xml->get_widget("aboutwindow"));
 	about->show();
+}
+
+void MainWindow::on_conf_window_quit()
+{
+	std::cout << "on_conf_window_quit" << std::endl;
+	set_gmp_embed();
 }
 
 void MainWindow::on_gmplayer_start()
@@ -260,6 +277,7 @@ MainWindow::MainWindow():
 	live_player(NULL)
 	,gmp_width(-1)
 	,gmp_height(-1)
+	,gmp_embed(false)
 {
 	ui_xml = Gnome::Glade::Xml::create(main_ui, "mainFrame");
 	if (!ui_xml) 
@@ -330,8 +348,24 @@ MainWindow::MainWindow():
 	this->show_all();
 	//channels->hide();
 	this->resize(1,1);
-
 	init();
+	set_gmp_embed();
+}
+
+void MainWindow::set_gmp_embed()
+{
+	std::string& embed = GMConf["mplayer_embed"];
+	gmp_embed = (!embed.empty()) && (embed[0] == '1');
+	if (!gmp_embed) {
+		play_frame->hide();
+		channels->show();
+		action_group->get_action("ViewShowChannel")->set_sensitive(false);
+	}
+	else {
+		play_frame->show();
+		action_group->get_action("ViewShowChannel")->set_sensitive(true);
+	}
+	gmp->set_embed(gmp_embed);
 }
 
 MainWindow::~MainWindow()
@@ -343,31 +377,49 @@ MainWindow::~MainWindow()
 
 void MainWindow::init()
 {
-		char buf[512];
-		char* homedir = getenv("HOME");
-		snprintf(buf, 512,"%s/.gmlive/config",homedir);
-		std::ifstream file(buf);
-		if(!file){
+	char buf[512];
+	char* homedir = getenv("HOME");
+	snprintf(buf, 512,"%s/.gmlive/config",homedir);
+	std::ifstream file(buf);
+	if(!file){
 		snprintf(buf,512,"%s/config",DATA_DIR);	
 		file.open(buf);
-		}
-		std::string line;
-		std::string name;
-		std::string key;
+	}
+	std::string line;
+	std::string name;
+	std::string key;
 
-		if(file){
-			while(std::getline(file,line)){
-				size_t pos= line.find_first_of("=");
-				if(pos==std::string::npos)
-					continue;
-				name = line.substr(0,pos);
-				key = line.substr(pos+1,std::string::npos);
-				if(name.empty()||key.empty())
-					continue;
-				GMConf.insert(std::pair<std::string,std::string>(name,key));
-			}
+	if(file){
+		while(std::getline(file,line)){
+			size_t pos= line.find_first_of("=");
+			if(pos==std::string::npos)
+				continue;
+			name = line.substr(0,pos);
+			key = line.substr(pos+1,std::string::npos);
+			// 下面这2个把所有的空格都去掉了
+			//key.erase(std::remove_if(key.begin(), key.end(), IsBlank()), key.end());
+			//name.erase(std::remove_if(name.begin(), name.end(), IsBlank()), name.end());
+			size_t pos1 = 0;
+			size_t pos2 = 0;
+			size_t len = 0;
+			pos1 = name.find_first_not_of(" \t");
+			pos2 = name.find_last_not_of(" \t");
+			if (pos1 == std::string::npos || pos2 == std::string::npos)
+				continue;
+			len = pos2 - pos1 + 1;
+			name = name.substr(pos1, len);
+
+			pos1 = key.find_first_not_of(" \t");
+			pos2 = key.find_last_not_of(" \t");
+			if (pos1 == std::string::npos || pos2 == std::string::npos)
+				continue;
+			len = pos2 - pos1 + 1;
+			key = key.substr(pos1, len);
+
+			GMConf.insert(std::pair<std::string,std::string>(name,key));
 		}
-		file.close();
+	}
+	file.close();
 }
 
 
@@ -383,30 +435,34 @@ void MainWindow::set_gmp_size(int w, int h)
 	gmp_height = h;
 	if (w != -1) {
 		gmp->set_size_request(w, h);
-		this->resize(1, 1);
+		if (gmp_embed)
+			this->resize(1, 1);
 	}
 }
 
 void MainWindow::reorder_widget(bool is_running)
 {
-	if (is_running){
-		static int width = backgroup->get_width();
-		static int height = backgroup->get_height();
-		play_frame->remove(*backgroup);
-		play_frame->pack_start(*gmp, true, true);
-		gmp->show_all();
-		if (gmp_width != -1)
-			gmp->set_size_request(gmp_width, gmp_height);
-		else
-			gmp->set_size_request(width, height);
-	}
+	if (!gmp_embed)
+		play_frame->hide();
 	else {
-		play_frame->remove(*gmp);
-		play_frame->pack_start(*backgroup, true, true);
-		backgroup->show_all();
-		set_gmp_size(-1, -1);
+		if (is_running){
+			static int width = backgroup->get_width();
+			static int height = backgroup->get_height();
+			play_frame->remove(*backgroup);
+			play_frame->pack_start(*gmp, true, true);
+			if (gmp_width != -1)
+				gmp->set_size_request(gmp_width, gmp_height);
+			else
+				gmp->set_size_request(width, height);
+		}
+		else {
+			play_frame->remove(*gmp);
+			play_frame->pack_start(*backgroup, true, true);
+			set_gmp_size(-1, -1);
+		}
+		play_frame->show_all();
+		this->resize(1,1);
 	}
-	this->resize(1,1);
 }
 
 Channel* MainWindow::get_cur_select_channel()
@@ -421,7 +477,6 @@ Channel* MainWindow::get_cur_select_channel()
 
 void MainWindow::set_live_player(LivePlayer* lp)
 {
-	printf("\n------------------------- %o---------------\n", lp);
 	if (lp != NULL) {
 		gmp->stop();
 		live_player = lp;
