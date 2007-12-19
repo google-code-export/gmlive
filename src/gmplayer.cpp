@@ -102,7 +102,7 @@ GMplayer::GMplayer(const sigc::slot<bool, Glib::IOCondition>& slot):
 	,mode(1)
 	,cache(64)
 	,is_pause(false)
-	,is_embed(false)
+	,is_embed(true)
 {
 	stdin_pipe[0] = -1;
 	stdin_pipe[1] = -1;
@@ -211,6 +211,7 @@ void GMplayer::initialize()
 	if (is_embed) {
 		char wid_buf[32];
 		snprintf(wid_buf, 32, "%d", this->get_id());
+		printf("%s\n", wid_buf);
 		argv[i++] = "-wid";
 		argv[i++] = wid_buf;
 	}
