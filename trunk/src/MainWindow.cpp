@@ -398,13 +398,16 @@ void MainWindow::set_gmp_embed()
 {
 	std::string& embed = GMConf["mplayer_embed"];
 	bool bembed = (!embed.empty()) && (embed[0] == '1');
+
+	Glib::RefPtr<Gtk::ToggleAction> embed_menu = 
+		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
+	embed_menu->set_active(bembed);
+
 	if (gmp_embed == bembed)
 		return;
 	gmp_embed = bembed;
-		// 这种写法太白痴了
-	Glib::RefPtr<Gtk::ToggleAction> embed_menu = 
-		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
-	embed_menu->set_active(gmp_embed);
+	// 这种写法太白痴了
+
 	if (!gmp_embed) {
 		play_frame->hide();
 		channels->show();
@@ -433,10 +436,10 @@ void MainWindow::init()
 	std::ifstream file(buf);
 	if(!file){
 		GMConf["mplayer_embed"]="1";
-	GMConf["mms_mplayer_cache"]     =            "8192";
-	GMConf["sopcast_mplayer_cache"] =            "64";
-	GMConf["nslive_mplayer_cache"]  =            "64";
-	GMConf["nslive_delay_time"]     =            "2";
+		GMConf["mms_mplayer_cache"]     =            "8192";
+		GMConf["sopcast_mplayer_cache"] =            "64";
+		GMConf["nslive_mplayer_cache"]  =            "64";
+		GMConf["nslive_delay_time"]     =            "2";
 		return;
 	}
 	std::string line;
