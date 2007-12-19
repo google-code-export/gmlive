@@ -27,20 +27,6 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	Gtk::VBox * vBox = dynamic_cast < Gtk::VBox * >
 	    (vbox_xml->get_widget("vbox_conf"));
 
-	/*
-	check_embed = dynamic_cast<Gtk::CheckButton*>
-		(vbox_xml->get_widget("check_embed"));
-	mplayer_param = dynamic_cast<Gtk::Entry*>
-		(vbox_xml->get_widget("entry_parameter"));
-	mms_mplayer_cache = dynamic_cast<Gtk::Entry*>
-		(vbox_xml->get_widget("entry_mms_cache"));
-	sopcast_mplayer_cache = dynamic_cast<Gtk::Entry*>
-		(vbox_xml->get_widget("entry_sopcast_cache"));
-	nslive_mplayer_cache = dynamic_cast<Gtk::Entry*>
-		(vbox_xml->get_widget("entry_nslive_cache"));
-	nslive_delay_time = dynamic_cast<Gtk::Entry*>
-		(vbox_xml->get_widget("entry_nslive_delay"));
-		*/
 
 	m_paramter=GMConf["mplayer_paramter"];
 	m_mms_cache=GMConf["mms_mplayer_cache"];
@@ -62,6 +48,7 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	vbox_xml->connect_clicked("button_save", sigc::mem_fun(*this,&ConfWindow::on_button_save));
 	vbox_xml->connect_clicked("button_cancel", sigc::mem_fun(*this, &ConfWindow::on_button_cancel));
 
+	m_pVariablesMap->transfer_variables_to_widgets();
 	add(*vBox);
 	set_transient_for(*parent);
 
@@ -75,17 +62,20 @@ void ConfWindow::on_button_save()
 {
 	read_to_GMConf();
 	save();
-	delete this;
+
+	on_button_cancel();
 }
 
 
 void ConfWindow::on_button_cancel()
 {
+	delete m_pVariablesMap;
 	delete this;
 }
 
 void ConfWindow::read_to_GMConf()
 {
+	m_pVariablesMap->transfer_widgets_to_variables();
 
 	GMConf["mplayer_paramter"]      =            m_paramter   ; 
 	GMConf["mms_mplayer_cache"]     =            m_mms_cache  ;
