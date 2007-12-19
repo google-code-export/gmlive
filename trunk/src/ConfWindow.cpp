@@ -28,6 +28,8 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	    (vbox_xml->get_widget("vbox_conf"));
 
 
+	std::string& embed = GMConf["mplayer_embed"];
+	m_embed = (!embed.empty()) && (embed[0] == '1');
 	m_paramter=GMConf["mplayer_paramter"];
 	m_mms_cache=GMConf["mms_mplayer_cache"];
 	m_sopcast_cache = GMConf["sopcast_mplayer_cache"];
@@ -60,9 +62,9 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 
 void ConfWindow::on_button_save()
 {
-	read_to_GMConf();
+	write_to_GMConf();
 	save();
-
+	signal_quit_.emit();
 	on_button_cancel();
 }
 
@@ -73,34 +75,33 @@ void ConfWindow::on_button_cancel()
 	delete this;
 }
 
-void ConfWindow::read_to_GMConf()
+void ConfWindow::write_to_GMConf()
 {
 	m_pVariablesMap->transfer_widgets_to_variables();
-
+	
+	GMConf["mplayer_embed"] = m_embed ? "1" : "0";
+	//GMConf["mplayer_embed"]		=	     m_embed;
 	GMConf["mplayer_paramter"]      =            m_paramter   ; 
 	GMConf["mms_mplayer_cache"]     =            m_mms_cache  ;
 	GMConf["sopcast_mplayer_cache"] =            m_sopcast_cache;
 	GMConf["nslive_mplayer_cache"]  =            m_nslive_cache ;
 	GMConf["nslive_delay_time"]     =            m_nslive_delay ;
-
-
-
 }
 
 void ConfWindow::save()
 {
-		char buf[512];
-		char* homedir = getenv("HOME");
-		snprintf(buf, 512,"%s/.gmlive/config",homedir);
-		std::ofstream file(buf);
-		std::string line;
-		std::map<std::string,std::string>::iterator iter=GMConf.begin();
-		for(;iter != GMConf.end(); ++iter)
-		{
-			line = iter->first + "=" + iter->second;
-			file<<line<<std::endl;
-		}
-		file.close();
+	char buf[512];
+	char* homedir = getenv("HOME");
+	snprintf(buf, 512,"%s/.gmlive/config",homedir);
+	std::ofstream file(buf);
+	std::string line;
+	std::map<std::string,std::string>::iterator iter=GMConf.begin();
+	for(;iter != GMConf.end(); ++iter)
+	{
+		line = iter->first + "\t=\t" + iter->second;
+		file << line << std::endl;
+	}
+	file.close();
 
 }
 bool ConfWindow::on_key_press_event(GdkEventKey * ev)
@@ -108,11 +109,18 @@ bool ConfWindow::on_key_press_event(GdkEventKey * ev)
 	if (ev->type != GDK_KEY_PRESS)
 		return Gtk::Window::on_key_press_event(ev);
 	switch (ev->keyval) {
-	case GDK_Escape:
-		on_button_cancel();
-		break;
-	default:
-		return Gtk::Window::on_key_press_event(ev);
+		case GDK_Escape:
+			on_button_cancel();
+			break;
+		default:
+			return Gtk::Window::on_key_press_event(ev);
 	}
 	return true;
 }
+
+bool ConfWindow::on_delete_event(GdkEventAny* ev)
+{
+	on_button_cancel();
+	return true;
+}
+
