@@ -178,9 +178,6 @@ void GMplayer::initialize()
 
 	Glib::RefPtr<Gdk::Window> gwin = this->get_window();
 
-	char wid_buf[32];
-	//printf("xid = %d\n", xid);
-	snprintf(wid_buf, 32, "%d", this->get_id());
 	char cache_buf[32];
 	snprintf(cache_buf, 32, "%d", cache);
 
@@ -212,6 +209,8 @@ void GMplayer::initialize()
 		argv[i] = (*iter).c_str();
 	}
 	if (is_embed) {
+		char wid_buf[32];
+		snprintf(wid_buf, 32, "%d", this->get_id());
 		argv[i++] = "-wid";
 		argv[i++] = wid_buf;
 	}
