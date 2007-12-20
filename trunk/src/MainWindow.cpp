@@ -254,6 +254,7 @@ void MainWindow::on_conf_window_quit()
 {
 	std::cout << "on_conf_window_quit" << std::endl;
 	set_gmp_embed();
+	save_conf();
 }
 
 void MainWindow::on_gmplayer_start()
@@ -412,12 +413,12 @@ void MainWindow::set_gmp_embed()
 		play_frame->hide();
 		channels->show();
 		action_group->get_action("ViewShowChannel")->set_sensitive(false);
-		this->resize(1, 1);
 	}
 	else {
 		play_frame->show_all();
 		action_group->get_action("ViewShowChannel")->set_sensitive(true);
 	}
+	this->resize(1, 1);
 	gmp->set_embed(gmp_embed);
 }
 
@@ -426,6 +427,7 @@ MainWindow::~MainWindow()
 	delete backgroup;
 	delete live_player;
 	delete gmp;
+	save_conf();
 }
 
 void MainWindow::init()
@@ -477,6 +479,23 @@ void MainWindow::init()
 		}
 	}
 	file.close();
+}
+
+void MainWindow::save_conf()
+{
+	char buf[512];
+	char* homedir = getenv("HOME");
+	snprintf(buf, 512,"%s/.gmlive/config",homedir);
+	std::ofstream file(buf);
+	std::string line;
+	std::map<std::string,std::string>::iterator iter=GMConf.begin();
+	for(;iter != GMConf.end(); ++iter)
+	{
+		line = iter->first + "\t=\t" + iter->second;
+		file << line << std::endl;
+	}
+	file.close();
+
 }
 
 
