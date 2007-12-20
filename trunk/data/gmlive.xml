@@ -357,7 +357,10 @@
       <child>
 	<widget class="GtkLabel" id="label6">
 	  <property name="visible">True</property>
-	  <property name="label" translatable="yes">    GMLive 尝试成为一款通用型的流媒体播放外壳。它以全能的Mplayer播放器为引擎。目标是
+	  <property name="label" translatable="yes">			                  
+                                             gmlive 0.20 beta2
+
+    GMLive 尝试成为一款通用型的流媒体播放外壳。它以全能的Mplayer播放器为引擎。目标是
  支持Linux下多种类型的P2P广播视频流。提供一种方便快捷的观看网络视频流的方案。
 
                                                                                               cyclone Team
