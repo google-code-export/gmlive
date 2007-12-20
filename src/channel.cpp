@@ -209,8 +209,13 @@ bool Channel::on_foreach_iter(const Gtk::TreeModel::iterator& iter)
 	const Glib::ustring& name = (*iter)[columns.name];
 	size_t pos = name.find(search_channel_name, 0);
 	if (Glib::ustring::npos != pos) {
-		this->expand_to_path(Gtk::TreeModel::Path(iter));
-		this->get_selection()->select(iter);
+		Glib::RefPtr<Gtk::TreeSelection> sel = this->get_selection();
+		if (sel->get_selected() && (sel->get_selected() == iter))
+			return false;
+		Gtk::TreeModel::Path path(iter);
+		this->expand_to_path(path);
+		this->scroll_to_row (path);
+		sel->select(iter);
 		return true;
 	}
 	return false;
