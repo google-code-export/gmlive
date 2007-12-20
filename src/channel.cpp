@@ -127,8 +127,12 @@ void Channel::record_selection()
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
 
-	LivePlayer* lp = get_player(stream, page);
-	parent->set_live_player(lp);
+	Gtk::FileChooserDialog dlg(*parent,
+		       	"选择文件", 
+			Gtk::FILE_CHOOSER_ACTION_SAVE);
+	dlg.run();
+	//LivePlayer* lp = get_player(stream, page);
+	//parent->set_live_player(lp);
 	//	lp->record();
 	//	RecentChannel* rc =
 	//		dynamic_cast<RecentChannel*>(parent->get_recent_channel());

@@ -91,6 +91,7 @@ Glib::ustring ui_info =
 "		<menu action='FileMenu'>"
 "			<menuitem action='FilePlay'/>"
 "			<menuitem action='FilePause'/>"
+"			<menuitem action='FileRecord'/>"
 "			<menuitem action='FileStop'/>"
 "			<separator/>"
 "			<menuitem action='FileQuit'/>"
@@ -107,6 +108,7 @@ Glib::ustring ui_info =
 "	<popup name='PopupMenu'>"
 "		<menuitem action='FilePlay'/>"
 "		<menuitem action='FilePause'/>"
+"		<menuitem action='FileRecord'/>"
 "		<menuitem action='FileStop'/>"
 "		<separator/>"
 "		<menuitem action='PopRefreshList'/>"
@@ -149,6 +151,8 @@ void MainWindow::init_ui_manager()
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_play));
 	action_group->add(Gtk::Action::create("FilePause", Gtk::Stock::MEDIA_PAUSE),
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_pause));
+	action_group->add(Gtk::Action::create("FileRecord", Gtk::Stock::MEDIA_RECORD),
+			sigc::mem_fun(*this, &MainWindow::on_menu_file_record));
 	action_group->add(Gtk::Action::create("FileStop", Gtk::Stock::MEDIA_STOP),
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_stop));
 	action_group->add(Gtk::Action::create("FileQuit", Gtk::Stock::QUIT),
@@ -210,6 +214,16 @@ void MainWindow::on_menu_file_pause()
 {
 	cout << "on_menu_pause" << endl;
 	gmp->pause();
+}
+
+void MainWindow::on_menu_file_record()
+{
+	cout << "on_menu_file_record" << endl;
+	Channel* channel = get_cur_select_channel();
+	if (channel)
+		channel->record_selection();
+	else
+		cout << "Error" << endl;
 }
 
 void MainWindow::on_menu_file_quit()
@@ -346,7 +360,7 @@ void MainWindow::on_live_player_out(int percentage)
 {
 	char buf[256];
 	sprintf(buf, "Connect...%%%d", percentage);
-	show_msg(buf, 1);
+	show_msg(buf);
 }
 
 MainWindow::MainWindow():
