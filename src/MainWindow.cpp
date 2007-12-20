@@ -104,6 +104,14 @@ Glib::ustring ui_info =
 "			<menuitem action='HelpAbout'/>"
 "		</menu>"
 "	</menubar>"
+"	<popup name='PopupMenu'>"
+"		<menuitem action='FilePlay'/>"
+"		<menuitem action='FilePause'/>"
+"		<menuitem action='FileStop'/>"
+"		<separator/>"
+"		<menuitem action='PopRefreshList'/>"
+"		<menuitem action='PopAddToBookmark'/>"
+"	</popup>"
 "	<toolbar name='ToolBar'>"
 "		<toolitem action='FilePlay'/>"
 "		<toolitem action='FilePause'/>"
@@ -162,6 +170,14 @@ void MainWindow::init_ui_manager()
 	action_group->add(Gtk::Action::create("HelpAbout", Gtk::Stock::HELP),
 			sigc::mem_fun(*this, &MainWindow::on_menu_help_about));
 
+	//Pop menu:
+	action_group->add(Gtk::Action::create("PopRefreshList", 
+				"刷新列表(_R)", "刷新当前的频道列表"),
+			sigc::mem_fun(*this, &MainWindow::on_menu_pop_refresh_list));
+	action_group->add(Gtk::Action::create("PopAddToBookmark", 
+				"加入书签(_A)", "把当前频道加到书签"),
+			sigc::mem_fun(*this, &MainWindow::on_menu_pop_add_to_bookmark));
+
 	if (!ui_manager)
 		ui_manager = Gtk::UIManager::create();
 
@@ -198,13 +214,34 @@ void MainWindow::on_menu_file_pause()
 
 void MainWindow::on_menu_file_quit()
 {
+	this->get_size( window_width, window_height);
 	cout << "on_menu_file_quit" << endl;
 	gmp->stop();
 	Gtk::Main::quit();
 }
 
+void MainWindow::on_menu_pop_refresh_list()
+{
+	Channel* channel = get_cur_select_channel();
+	if (channel)
+		channel->refresh_list();
+	else
+		cout << "Error" << endl;
+
+}
+
+void MainWindow::on_menu_pop_add_to_bookmark()
+{
+	Channel* channel = get_cur_select_channel();
+	if (channel)
+		channel->store_selection();
+	else
+		cout << "Error" << endl;
+}
+
 bool MainWindow::on_delete_event(GdkEventAny* event)
 {
+	this->get_size( window_width, window_height);
 	gmp->stop();
 	return Gtk::Window::on_delete_event(event);
 }
@@ -317,6 +354,8 @@ MainWindow::MainWindow():
 	,gmp_width(-1)
 	,gmp_height(-1)
 	,gmp_embed(true)
+	,window_width(1)
+	,window_height(1)
 {
 	ui_xml = Gnome::Glade::Xml::create(main_ui, "mainFrame");
 	if (!ui_xml) 
@@ -413,12 +452,16 @@ void MainWindow::set_gmp_embed()
 		play_frame->hide();
 		channels->show();
 		action_group->get_action("ViewShowChannel")->set_sensitive(false);
+		this->resize(window_width, window_height);
 	}
 	else {
+		// 这里保存好channels的尺寸
+		// 用于在不嵌入的时候恢复
+		this->get_size( window_width, window_height);
 		play_frame->show_all();
 		action_group->get_action("ViewShowChannel")->set_sensitive(true);
+		this->resize(1, 1);
 	}
-	this->resize(1, 1);
 	gmp->set_embed(gmp_embed);
 }
 
@@ -427,6 +470,12 @@ MainWindow::~MainWindow()
 	delete backgroup;
 	delete live_player;
 	delete gmp;
+	char buf[32];
+	sprintf(buf, "%d", window_width);
+	GMConf["main_window_width"] = buf;
+
+	sprintf(buf, "%d", window_height);
+	GMConf["main_window_height"] = buf;
 	save_conf();
 }
 
@@ -479,6 +528,14 @@ void MainWindow::init()
 		}
 	}
 	file.close();
+
+	const std::string& wnd_width = GMConf["main_window_width"];
+	window_width = atoi(wnd_width.c_str());
+	window_width = window_width > 0 ? window_width : 1;
+
+	const std::string& wnd_height = GMConf["main_window_height"];
+	window_height = atoi(wnd_height.c_str());
+	window_height = window_height > 0 ? window_height : 1;
 }
 
 void MainWindow::save_conf()
