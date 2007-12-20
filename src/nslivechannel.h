@@ -24,6 +24,7 @@ class NSLiveChannel:public Channel
 {
 	public:
 		NSLiveChannel(MainWindow* parent_);
+		~NSLiveChannel();
 	protected:
 		LivePlayer* get_player(const std::string& stream,TypeChannel page);
 		void init();

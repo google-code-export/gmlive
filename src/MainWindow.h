@@ -41,8 +41,7 @@ class MainWindow : public Gtk::Window {
 		friend class Channel;
 		void set_live_player(LivePlayer*);
 		LivePlayer* get_live_player() { return live_player; }
-		Glib::RefPtr<Gtk::UIManager> 
-			get_ui_manager() { return ui_manager; }
+		Gtk::Menu* get_channels_pop_menu() { return channels_pop_menu; }
 		Channel* get_recent_channel() { return recent_channel; }
 		Channel* get_bookmark_channel() { return bookmark_channel; }
 		// 菜单回调
@@ -79,6 +78,7 @@ class MainWindow : public Gtk::Window {
 		Gtk::Image*			backgroup;
 		Channel* 			recent_channel;
 		Channel* 			bookmark_channel;
+		Gtk::Menu*			channels_pop_menu;
 		LivePlayer* 			live_player;
 		int 				gmp_width;
 		int				gmp_height;

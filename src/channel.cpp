@@ -75,7 +75,7 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 	    get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
 		return false;
 	if ((ev->type == GDK_2BUTTON_PRESS ||
-	     ev->type == GDK_3BUTTON_PRESS)) {
+	     ev->type == GDK_3BUTTON_PRESS) && ev->button != 3) {
 		if(GROUP_CHANNEL != (*iter)[columns.type]){
 			play_selection_iter(iter);
 		}
@@ -89,10 +89,10 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 		}
 	} else if ((ev->type == GDK_BUTTON_PRESS)
 			&& (ev->button == 3)) {
-		if(GROUP_CHANNEL != (*iter)[columns.type])
-			NULL;
-		Gtk::Menu* pop_menu = dynamic_cast<Gtk::Menu*>(
-				parent->get_ui_manager()->get_widget("/PopupMenu"));
+		if(GROUP_CHANNEL == (*iter)[columns.type])
+			return false;
+		Gtk::Menu* pop_menu = 
+				parent->get_channels_pop_menu();
 		if (pop_menu)
 			pop_menu->popup(ev->button, ev->time);
 		return true;
