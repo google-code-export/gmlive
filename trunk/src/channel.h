@@ -55,12 +55,14 @@ class Channel:public Gtk::TreeView
 					add(freq);
 					add(type);
 					add(users);
+					add(searched);
 				}
 				Gtk::TreeModelColumn<Glib::ustring> name;
 				Gtk::TreeModelColumn<std::string> stream;
 				Gtk::TreeModelColumn<int> freq;
 				Gtk::TreeModelColumn<int> users;
 				Gtk::TreeModelColumn<TypeChannel> type;
+				Gtk::TreeModelColumn<bool> searched;
 		};
 
 		ChannelColumns columns;
@@ -68,10 +70,12 @@ class Channel:public Gtk::TreeView
 
 	protected:
 		virtual LivePlayer* get_player(
-				const std::string& stream,TypeChannel page = NONE ) = 0;
+				const std::string& stream,
+				TypeChannel page = NONE ) = 0;
 
 		bool on_button_press_event(GdkEventButton *);
 		bool on_foreach_iter(const Gtk::TreeModel::iterator& iter);
+		bool on_clean_foreach(const Gtk::TreeModel::iterator& iter);
 		void play_selection_iter(Gtk::TreeModel::iterator& iter);
 		MainWindow* parent;
 		Glib::ustring search_channel_name;
