@@ -63,7 +63,6 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 void ConfWindow::on_button_save()
 {
 	write_to_GMConf();
-	save();
 	signal_quit_.emit();
 	on_button_cancel();
 }
@@ -88,22 +87,7 @@ void ConfWindow::write_to_GMConf()
 	GMConf["nslive_delay_time"]     =            m_nslive_delay ;
 }
 
-void ConfWindow::save()
-{
-	char buf[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/config",homedir);
-	std::ofstream file(buf);
-	std::string line;
-	std::map<std::string,std::string>::iterator iter=GMConf.begin();
-	for(;iter != GMConf.end(); ++iter)
-	{
-		line = iter->first + "\t=\t" + iter->second;
-		file << line << std::endl;
-	}
-	file.close();
 
-}
 bool ConfWindow::on_key_press_event(GdkEventKey * ev)
 {
 	if (ev->type != GDK_KEY_PRESS)

@@ -30,12 +30,13 @@ class MainWindow : public Gtk::Window {
 	public:
 		MainWindow();
 		~MainWindow();
-		void init();
 		GMplayer& get_mplayer() { return *gmp; }
 	protected:
 		bool on_delete_event(GdkEventAny* event);
 		void show_msg(const Glib::ustring& msg,unsigned int id=0);
 		void init_ui_manager();
+		void save_conf();
+		void init();
 	private:
 		friend class Channel;
 		void set_live_player(LivePlayer*);

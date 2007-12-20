@@ -247,8 +247,10 @@ void GMplayer::full_screen()
 
 void GMplayer::send_ctrl_command(const char* c)
 {
-	assert(c != NULL);
-	EC_THROW(-1 == write(stdin_pipe[1], c, strlen (c)));
+	if (is_runing()) {
+		assert(c != NULL);
+		EC_THROW(-1 == write(stdin_pipe[1], c, strlen (c)));
+	}
 }
 
 void GMplayer::stop()
