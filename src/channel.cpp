@@ -199,8 +199,10 @@ void Channel::search_channel(const Glib::ustring& name_)
 {
 	if (name_.empty())
 		return;
-	search_channel_name = name_;
 	Glib::RefPtr<Gtk::TreeModel> model = this->get_model();
+	if (search_channel_name != name_)
+		model->foreach_iter(sigc::mem_fun(*this, &Channel::on_clean_foreach));
+	search_channel_name = name_;
 	model->foreach_iter(sigc::mem_fun(*this, &Channel::on_foreach_iter));
 }
 
@@ -210,14 +212,20 @@ bool Channel::on_foreach_iter(const Gtk::TreeModel::iterator& iter)
 	size_t pos = name.find(search_channel_name, 0);
 	if (Glib::ustring::npos != pos) {
 		Glib::RefPtr<Gtk::TreeSelection> sel = this->get_selection();
-		if (sel->get_selected() && (sel->get_selected() == iter))
+		if ((*iter)[columns.searched])
 			return false;
 		Gtk::TreeModel::Path path(iter);
 		this->expand_to_path(path);
 		this->scroll_to_row (path);
 		sel->select(iter);
+		(*iter)[columns.searched] = true;
 		return true;
 	}
 	return false;
 }
 
+bool Channel::on_clean_foreach(const Gtk::TreeModel::iterator& iter)
+{
+	(*iter)[columns.searched] = false;
+	return false;
+}
