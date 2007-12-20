@@ -7,10 +7,10 @@ src/gmplayer.cpp
 src/main.cpp
 src/MainWindow.cpp
 src/mmschannel.cpp
-src/mms_live_player.cpp
+src/mmsLivePlayer.cpp
 src/nslivechannel.cpp
-src/ns_live_player.cpp
+src/nsLivePlayer.cpp
 src/recentchannel.cpp
 src/sopcastchannel.cpp
-src/sopcast_live_player.cpp
+src/sopcastLivePlayer.cpp
 src/StreamMenu.cpp
