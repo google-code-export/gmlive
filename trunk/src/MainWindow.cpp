@@ -412,6 +412,8 @@ MainWindow::MainWindow():
 	init_ui_manager();
 	Gtk::Widget* menubar = ui_manager->get_widget("/MenuBar");
 	Gtk::Widget* toolbar = ui_manager->get_widget("/ToolBar");
+	channels_pop_menu = dynamic_cast<Gtk::Menu*>(
+			ui_manager->get_widget("/PopupMenu"));
 
 	Gtk::VBox* menu_tool_box = dynamic_cast<Gtk::VBox*>
 		(ui_xml->get_widget("box_menu_toolbar"));
