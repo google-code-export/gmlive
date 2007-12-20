@@ -301,6 +301,17 @@ void MainWindow::on_menu_help_about()
 	about->show();
 }
 
+void MainWindow::on_search_channel()
+{
+	Channel* channel = get_cur_select_channel();
+	if (!channel) 
+		cout << "Error" << endl;
+	Gtk::Entry* search = dynamic_cast<Gtk::Entry*>(
+			ui_xml->get_widget("entry_find_channel"));
+	if (search)
+		channel->search_channel(search->get_text());
+}
+
 void MainWindow::on_conf_window_quit()
 {
 	std::cout << "on_conf_window_quit" << std::endl;
@@ -441,6 +452,9 @@ MainWindow::MainWindow():
 
 	Glib::RefPtr<Gdk::Pixbuf> pix = Gdk::Pixbuf::create_from_file(DATA_DIR"/gmlive.png");
 	this->set_icon(pix);
+	
+	ui_xml->connect_clicked("bt_search_channel",
+		       sigc::mem_fun(*this, &MainWindow::on_search_channel));
 
 	this->show_all();
 	//channels->hide();
@@ -448,6 +462,7 @@ MainWindow::MainWindow():
 	init();
 	set_gmp_embed();
 	((Gtk::Toolbar*)toolbar)->set_toolbar_style(Gtk::TOOLBAR_ICONS);
+	
 }
 
 void MainWindow::set_gmp_embed()
