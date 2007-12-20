@@ -130,6 +130,8 @@ void Channel::record_selection()
 	Gtk::FileChooserDialog dlg(*parent,
 		       	"选择文件", 
 			Gtk::FILE_CHOOSER_ACTION_SAVE);
+	dlg.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+  	dlg.add_button(Gtk::Stock::SAVE, Gtk::RESPONSE_OK);
 	dlg.run();
 	//LivePlayer* lp = get_player(stream, page);
 	//parent->set_live_player(lp);
@@ -192,3 +194,25 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 	if (this != rc)
 		rc->saveLine(name,stream,page);
 }
+
+void Channel::search_channel(const Glib::ustring& name_)
+{
+	if (name_.empty())
+		return;
+	search_channel_name = name_;
+	Glib::RefPtr<Gtk::TreeModel> model = this->get_model();
+	model->foreach_iter(sigc::mem_fun(*this, &Channel::on_foreach_iter));
+}
+
+bool Channel::on_foreach_iter(const Gtk::TreeModel::iterator& iter)
+{
+	const Glib::ustring& name = (*iter)[columns.name];
+	size_t pos = name.find(search_channel_name, 0);
+	if (Glib::ustring::npos != pos) {
+		this->expand_to_path(Gtk::TreeModel::Path(iter));
+		this->get_selection()->select(iter);
+		return true;
+	}
+	return false;
+}
+

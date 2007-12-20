@@ -57,6 +57,8 @@ class MainWindow : public Gtk::Window {
 		void on_menu_pop_refresh_list();
 		void on_menu_pop_add_to_bookmark();
 
+		void on_search_channel();
+
 		void on_live_player_out(int percentage);
 		bool on_gmplayer_out(const Glib::IOCondition& condition);
 		void on_gmplayer_start();

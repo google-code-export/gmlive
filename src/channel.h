@@ -37,6 +37,7 @@ class Channel:public Gtk::TreeView
 		void play_selection();
 		void record_selection();
 		void store_selection();
+		void search_channel(const Glib::ustring& name);
 		virtual void refresh_list(){};
 
 		Gtk::TreeModel::iterator getListIter(Gtk::TreeModel::
@@ -70,8 +71,10 @@ class Channel:public Gtk::TreeView
 				const std::string& stream,TypeChannel page = NONE ) = 0;
 
 		bool on_button_press_event(GdkEventButton *);
+		bool on_foreach_iter(const Gtk::TreeModel::iterator& iter);
 		void play_selection_iter(Gtk::TreeModel::iterator& iter);
 		MainWindow* parent;
+		Glib::ustring search_channel_name;
 	private:
 		struct CompareChannel:public std::binary_function 
 				      < Gtk::TreeModel::Row,
