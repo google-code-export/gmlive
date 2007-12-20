@@ -47,6 +47,7 @@ class MainWindow : public Gtk::Window {
 		// 菜单回调
 		void on_menu_file_play();
 		void on_menu_file_pause();
+		void on_menu_file_record();
 		void on_menu_file_stop();
 		void on_menu_file_quit();
 		void on_menu_view_show_channel();

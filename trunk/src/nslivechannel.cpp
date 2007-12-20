@@ -132,6 +132,9 @@ void NSLiveChannel::addLine(const int num, const Glib::ustring & name,const std:
 	listiter = getListIter(children,groupname);
 	if(listiter == children.end())
 		listiter = addGroup(groupname);
+	int total_num = (*listiter)[columns.users];
+	total_num += num;
+	(*listiter)[columns.users] = total_num;
 
 	Gtk::TreeModel::iterator iter = m_liststore->append(listiter->children());
 	(*iter)[columns.users] = num;
@@ -168,11 +171,7 @@ void NSLiveChannel::refresh_list()
 	if (pid == 0) {
 		close(STDOUT_FILENO);
 
-		const char* argv[2];
-       		argv[0] = "list";
-		argv[1] = NULL;
-
-		execvp("nsweb", (char* const* )argv);
+		execlp("nsweb", "nsweb", NULL);
 		perror("nsweb  execvl:");
 		exit(127);
 	} 
