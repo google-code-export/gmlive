@@ -74,6 +74,9 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 	if (!this->
 	    get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
 		return false;
+	// 这是为了可以正常搜索，把搜索文本清空才行，该死的Gtk团队，太笨了.
+	search_channel_name.clear();
+
 	if ((ev->type == GDK_2BUTTON_PRESS ||
 	     ev->type == GDK_3BUTTON_PRESS) && ev->button != 3) {
 		if(GROUP_CHANNEL != (*iter)[columns.type]){
