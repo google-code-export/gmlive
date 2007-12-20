@@ -73,7 +73,7 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 					/** get_path_at_pos() 是为确认鼠标是否在选择行上点击的*/
 	if (!this->
 	    get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
-		return FALSE;
+		return false;
 	if ((ev->type == GDK_2BUTTON_PRESS ||
 	     ev->type == GDK_3BUTTON_PRESS)) {
 		if(GROUP_CHANNEL != (*iter)[columns.type]){
@@ -87,15 +87,17 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 				this->scroll_to_row(path);
 			}
 		}
-
-
 	} else if ((ev->type == GDK_BUTTON_PRESS)
 			&& (ev->button == 3)) {
 		if(GROUP_CHANNEL != (*iter)[columns.type])
 			NULL;
-		//parent->getMenu().popup(1,ev->time);
+		Gtk::Menu* pop_menu = dynamic_cast<Gtk::Menu*>(
+				parent->get_ui_manager()->get_widget("/PopupMenu"));
+		if (pop_menu)
+			pop_menu->popup(ev->button, ev->time);
+		return true;
 	}
-
+	return false;
 }
 
 void Channel::play_selection()
