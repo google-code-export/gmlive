@@ -40,7 +40,7 @@ NSLiveChannel::NSLiveChannel(MainWindow* parent_):Channel( parent_)
 
 NSLiveChannel::~NSLiveChannel()
 {
-	system("killall nsweb");
+	system("killall nsweb>/dev/null");
 }
 
 LivePlayer* NSLiveChannel::get_player(const std::string& stream,TypeChannel page) 
@@ -54,7 +54,7 @@ void NSLiveChannel::init()
 	char buf[512];
 	char* homedir = getenv("HOME");
 	snprintf(buf, 512,"%s/.ulive/prog.list",homedir);
-	printf("%s\n", buf);
+	//printf("%s\n", buf);
 
 
 	m_liststore->clear();
