@@ -194,7 +194,7 @@ void MainWindow::init_ui_manager()
 
 void MainWindow::on_menu_file_play()
 {
-	cout << "on_menu_file_play" << endl;
+	//cout << "on_menu_file_play" << endl;
 	//gmp->start("mms://61.139.37.135/star");
 	Channel* channel = get_cur_select_channel();
 	if (channel)
@@ -206,19 +206,19 @@ void MainWindow::on_menu_file_play()
 
 void MainWindow::on_menu_file_stop()
 {
-	cout << "on_menu_stop" << endl;
+	//cout << "on_menu_stop" << endl;
 	gmp->stop();
 }
 
 void MainWindow::on_menu_file_pause()
 {
-	cout << "on_menu_pause" << endl;
+	//cout << "on_menu_pause" << endl;
 	gmp->pause();
 }
 
 void MainWindow::on_menu_file_record()
 {
-	cout << "on_menu_file_record" << endl;
+	//cout << "on_menu_file_record" << endl;
 	Channel* channel = get_cur_select_channel();
 	if (channel)
 		channel->record_selection();
@@ -229,7 +229,7 @@ void MainWindow::on_menu_file_record()
 void MainWindow::on_menu_file_quit()
 {
 	this->get_size( window_width, window_height);
-	cout << "on_menu_file_quit" << endl;
+	//cout << "on_menu_file_quit" << endl;
 	gmp->stop();
 	Gtk::Main::quit();
 }
@@ -262,7 +262,7 @@ bool MainWindow::on_delete_event(GdkEventAny* event)
 
 void MainWindow::on_menu_view_show_channel()
 {
-	cout << "on_menu_view_show_channel" << endl;
+	//cout << "on_menu_view_show_channel" << endl;
 
 	// 这种写法太白痴了
 	Glib::RefPtr<Gtk::ToggleAction> show = 
@@ -277,7 +277,7 @@ void MainWindow::on_menu_view_show_channel()
 
 void MainWindow::on_menu_view_embed_mplayer()
 {
-	cout << "on_menu_view_embed_mplayer" << endl;
+	//cout << "on_menu_view_embed_mplayer" << endl;
 		// 这种写法太白痴了
 	Glib::RefPtr<Gtk::ToggleAction> embed = 
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
@@ -287,7 +287,7 @@ void MainWindow::on_menu_view_embed_mplayer()
 
 void MainWindow::on_menu_view_preferences()
 {
-	cout << "on_menu_view_preferences" << endl;
+	//cout << "on_menu_view_preferences" << endl;
 	ConfWindow* confwindow = new ConfWindow(this);
 	confwindow->signal_quit().connect(sigc::mem_fun(*this, &MainWindow::on_conf_window_quit));
 }
@@ -517,6 +517,9 @@ void MainWindow::init()
 	snprintf(buf, 512,"%s/.gmlive/config",homedir);
 	std::ifstream file(buf);
 	if(!file){
+		char homepath[512];
+		snprintf(homepath,512,"%s/.gmlive/",homedir);
+		mkdir(homepath,S_IRUSR|S_IWUSR|S_IXUSR);
 		GMConf["mplayer_embed"]="1";
 		GMConf["mms_mplayer_cache"]     =            "8192";
 		GMConf["sopcast_mplayer_cache"] =            "64";
