@@ -66,7 +66,8 @@ class MainWindow : public Gtk::Window {
 		void on_conf_window_quit();
 
 		void set_gmp_size(int w, int h);
-		void set_gmp_embed();
+		void set_gmp_embed(bool);
+		void set_channels_show(bool);
 
 		void reorder_widget(bool is_running);
 		Channel* get_cur_select_channel();
@@ -89,6 +90,7 @@ class MainWindow : public Gtk::Window {
 		int				window_width;
 		int				window_height;
 		bool				gmp_embed;
+		bool				channels_show;
 };
 
 #endif // _MAINWINDOW_HH 

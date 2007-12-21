@@ -270,10 +270,13 @@ void MainWindow::on_menu_view_show_channel()
 	Glib::RefPtr<Gtk::ToggleAction> show = 
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewShowChannel"));
 
-	if (show->get_active())
+	if (show->get_active()){
+		channels_show = true;
 		channels_box->show();
-	else
+	} else {
+		channels_show = false;
 		channels_box->hide();
+	}
 	this->resize(1, 1);
 }
 
@@ -283,8 +286,7 @@ void MainWindow::on_menu_view_embed_mplayer()
 		// 这种写法太白痴了
 	Glib::RefPtr<Gtk::ToggleAction> embed = 
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
-	GMConf["mplayer_embed"] = embed->get_active() ? "1": "0";
-	set_gmp_embed();
+	set_gmp_embed(embed->get_active());
 }
 
 void MainWindow::on_menu_view_preferences()
@@ -317,7 +319,7 @@ void MainWindow::on_search_channel()
 void MainWindow::on_conf_window_quit()
 {
 	std::cout << "on_conf_window_quit" << std::endl;
-	set_gmp_embed();
+	set_gmp_embed(atoi(GMConf["mplayer_embed"].c_str()));
 	save_conf();
 }
 
@@ -464,25 +466,20 @@ MainWindow::MainWindow():
 	//channels->hide();
 	this->resize(1,1);
 	init();
-	set_gmp_embed();
 	((Gtk::Toolbar*)toolbar)->set_toolbar_style(Gtk::TOOLBAR_ICONS);
 	
 }
 
-void MainWindow::set_gmp_embed()
+void MainWindow::set_gmp_embed(bool embed)
 {
-	std::string& embed = GMConf["mplayer_embed"];
-	bool bembed = (!embed.empty()) && (embed[0] == '1');
+	//std::string& embed = GMConf["mplayer_embed"];
+	//bool bembed = (!embed.empty()) && (embed[0] == '1');
+	gmp_embed = embed;
 
-	Glib::RefPtr<Gtk::ToggleAction> embed_menu = 
-		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
-	embed_menu->set_active(bembed);
-
-	if (gmp_embed == bembed)
-		return;
-	gmp_embed = bembed;
 	// 这种写法太白痴了
-
+	Glib::RefPtr<Gtk::ToggleAction> menu = 
+		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
+	menu->set_active(gmp_embed);
 	if (!gmp_embed) {
 		play_frame->hide();
 		channels_box->show();
@@ -500,6 +497,24 @@ void MainWindow::set_gmp_embed()
 	gmp->set_embed(gmp_embed);
 }
 
+void MainWindow::set_channels_show(bool show)
+{
+	Glib::RefPtr<Gtk::ToggleAction> embed_menu = 
+		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
+	channels_show = show;
+	if(channels_show){
+		channels_box->show();
+	}
+	else{
+		channels_box->hide();
+	}	
+		// 这种写法太白痴了
+	Glib::RefPtr<Gtk::ToggleAction> menu = 
+		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewShowChannel"));
+	menu->set_active(channels_show);
+
+}
+
 MainWindow::~MainWindow()
 {
 	delete backgroup;
@@ -511,6 +526,13 @@ MainWindow::~MainWindow()
 
 	sprintf(buf, "%d", window_height);
 	GMConf["main_window_height"] = buf;
+
+	sprintf(buf, "%d", channels_show);
+	GMConf["channels_show"] = buf;
+
+	sprintf(buf, "%d", gmp_embed);
+	GMConf["mplayer_embed"] = buf;
+
 	save_conf();
 }
 
@@ -524,11 +546,12 @@ void MainWindow::init()
 		char homepath[512];
 		snprintf(homepath,512,"%s/.gmlive/",homedir);
 		mkdir(homepath,S_IRUSR|S_IWUSR|S_IXUSR);
-		GMConf["mplayer_embed"]="1";
-		GMConf["mms_mplayer_cache"]     =            "8192";
-		GMConf["sopcast_mplayer_cache"] =            "64";
-		GMConf["nslive_mplayer_cache"]  =            "64";
-		GMConf["nslive_delay_time"]     =            "2";
+		GMConf["mplayer_embed"]		=	"1";
+		GMConf["mms_mplayer_cache"]     =       "8192";
+		GMConf["sopcast_mplayer_cache"] =       "64";
+		GMConf["nslive_mplayer_cache"]  =       "64";
+		GMConf["nslive_delay_time"]     =       "2";
+		GMConf["channels_show"]		=	"1";
 		return;
 	}
 	std::string line;
@@ -574,6 +597,12 @@ void MainWindow::init()
 	const std::string& wnd_height = GMConf["main_window_height"];
 	window_height = atoi(wnd_height.c_str());
 	window_height = window_height > 0 ? window_height : 1;
+
+	channels_show = atoi(GMConf["channels_show"].c_str());
+	gmp_embed     = atoi(GMConf["mplayer_embed"].c_str());
+
+	set_channels_show(channels_show);
+	set_gmp_embed(gmp_embed);
 }
 
 void MainWindow::save_conf()
