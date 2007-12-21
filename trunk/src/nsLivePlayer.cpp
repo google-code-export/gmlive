@@ -70,9 +70,8 @@ void NsLivePlayer::play(GMplayer& gmp)
 
 	std::string& delay_time = GMConf["nslive_delay_time"];
 	int itime = atoi(delay_time.c_str());
-	itime = itime > 0 ? itime : 2;
 	
-	gmp_startup_time_conn =  Glib::signal_timeout().connect(sigc::mem_fun(*this, &NsLivePlayer::on_gmp_startup_time), itime);
+	gmp_startup_time_conn =  Glib::signal_timeout().connect(sigc::mem_fun(*this, &NsLivePlayer::on_gmp_startup_time), itime * 1000);
 
 }
 
@@ -92,13 +91,6 @@ void NsLivePlayer::stop()
 
 bool NsLivePlayer::on_gmp_startup_time()
 {
-	static bool first = true;
-	if(first){
-		first = false;
-		return true;
-	}
-	first = true;
-	
 	std::string& cache = GMConf["nslive_mplayer_cache"];
 	int icache = atoi(cache.c_str());
 	icache = icache < 64 ? 64 : icache;

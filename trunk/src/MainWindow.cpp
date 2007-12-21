@@ -118,7 +118,7 @@ Glib::ustring ui_info =
 "		<toolitem action='FilePlay'/>"
 "		<toolitem action='FilePause'/>"
 "		<toolitem action='FileStop'/>"
-"		<toolitem action='ViewEmbedMplayer'/>"
+"		<toolitem action='ViewShowChannel'/>"
 "	</toolbar>"
 "</ui>";
 
@@ -127,7 +127,7 @@ void register_stock_items()
 	Glib::RefPtr<Gtk::IconFactory> factory = Gtk::IconFactory::create();
 	Gtk::IconSource source;
 	//This throws an exception if the file is not found:
-	source.set_pixbuf( Gdk::Pixbuf::create_from_file(DATA_DIR"/embed_mplayer.png") );
+	source.set_pixbuf( Gdk::Pixbuf::create_from_file(DATA_DIR"/show_channels.png") );
 
 	source.set_size(Gtk::ICON_SIZE_SMALL_TOOLBAR);
 	source.set_size_wildcarded(); //Icon may be scaled.
@@ -135,9 +135,9 @@ void register_stock_items()
 	Gtk::IconSet icon_set;
 	icon_set.add_source(source); //More than one source per set is allowed.
 
-	const Gtk::StockID stock_id("EmbedMplayer");
+	const Gtk::StockID stock_id("ShowChannels");
 	factory->add(stock_id, icon_set);
-	Gtk::Stock::add(Gtk::StockItem(stock_id, "EmbedMplayer"));
+	Gtk::Stock::add(Gtk::StockItem(stock_id, "ShowChannels"));
 	factory->add_default();
 }
 void MainWindow::init_ui_manager()
@@ -161,11 +161,13 @@ void MainWindow::init_ui_manager()
 	//View menu:
 	action_group->add(Gtk::Action::create("ViewMenu", "查看(_V)"));
 	action_group->add(Gtk::ToggleAction::create("ViewShowChannel", 
-				"显示频道列表(_S)", "隐藏或显示频道列表", true),
+				Gtk::StockID("ShowChannels")),
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_show_channel));
+
 	action_group->add(Gtk::ToggleAction::create("ViewEmbedMplayer",
-			       Gtk::StockID("EmbedMplayer")),
+			        "嵌入播放(_E)", "嵌入或者独立的Mplayer播放", true), 
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_embed_mplayer));
+
 	action_group->add(Gtk::Action::create("ViewPreferences", Gtk::Stock::PREFERENCES),
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_preferences));
 
@@ -269,9 +271,9 @@ void MainWindow::on_menu_view_show_channel()
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewShowChannel"));
 
 	if (show->get_active())
-		channels->show();
+		channels_box->show();
 	else
-		channels->hide();
+		channels_box->hide();
 	this->resize(1, 1);
 }
 
@@ -398,6 +400,8 @@ MainWindow::MainWindow():
 	channels = dynamic_cast<Gtk::Notebook*>
 		(ui_xml->get_widget("channels"));
 
+	channels_box = ui_xml->get_widget("channels_box");
+
 	Channel* channel = Gtk::manage(new class MMSChannel(this));
 	Gtk::ScrolledWindow* swnd = dynamic_cast<Gtk::ScrolledWindow*>
 		(ui_xml->get_widget("mmsChannelWnd"));
@@ -481,7 +485,7 @@ void MainWindow::set_gmp_embed()
 
 	if (!gmp_embed) {
 		play_frame->hide();
-		channels->show();
+		channels_box->show();
 		action_group->get_action("ViewShowChannel")->set_sensitive(false);
 		this->resize(window_width, window_height);
 	}
