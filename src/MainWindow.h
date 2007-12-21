@@ -77,6 +77,7 @@ class MainWindow : public Gtk::Window {
 		GMplayer* 			gmp;
 		Gtk::Box*			play_frame;
 		Gtk::Notebook*			channels;
+		Gtk::Widget*			channels_box;
 		Gtk::Statusbar* 		statusbar;
 		Gtk::Image*			backgroup;
 		Channel* 			recent_channel;
