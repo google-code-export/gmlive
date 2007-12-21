@@ -117,7 +117,9 @@ Glib::ustring ui_info =
 "	<toolbar name='ToolBar'>"
 "		<toolitem action='FilePlay'/>"
 "		<toolitem action='FilePause'/>"
+"		<toolitem action='FileRecord'/>"
 "		<toolitem action='FileStop'/>"
+"		<separator/>"
 "		<toolitem action='ViewShowChannel'/>"
 "	</toolbar>"
 "</ui>";
@@ -145,23 +147,40 @@ void MainWindow::init_ui_manager()
 	register_stock_items();
 	if (!action_group)
 		action_group = Gtk::ActionGroup::create();
+	Glib::RefPtr<Gtk::Action> action ;
 	//File menu:
 	action_group->add(Gtk::Action::create("FileMenu", "文件(_F)"));
-	action_group->add(Gtk::Action::create("FilePlay", Gtk::Stock::MEDIA_PLAY),
+
+	action = Gtk::Action::create("FilePlay", Gtk::Stock::MEDIA_PLAY);
+	action->set_tooltip("播放");
+	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_play));
-	action_group->add(Gtk::Action::create("FilePause", Gtk::Stock::MEDIA_PAUSE),
+	
+	action = Gtk::Action::create("FilePause", Gtk::Stock::MEDIA_PAUSE);
+	action->set_tooltip("暂停");
+	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_pause));
-	action_group->add(Gtk::Action::create("FileRecord", Gtk::Stock::MEDIA_RECORD),
+
+	action = Gtk::Action::create("FileRecord", Gtk::Stock::MEDIA_RECORD);
+	action->set_tooltip("录制");
+	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_record));
-	action_group->add(Gtk::Action::create("FileStop", Gtk::Stock::MEDIA_STOP),
+
+	action = Gtk::Action::create("FileStop", Gtk::Stock::MEDIA_STOP);
+	action->set_tooltip("停止");
+	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_stop));
+
 	action_group->add(Gtk::Action::create("FileQuit", Gtk::Stock::QUIT),
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_quit));
 
 	//View menu:
 	action_group->add(Gtk::Action::create("ViewMenu", "查看(_V)"));
-	action_group->add(Gtk::ToggleAction::create("ViewShowChannel", 
-				Gtk::StockID(_("HideChannels"))),
+	
+	action = Gtk::ToggleAction::create("ViewShowChannel", 
+				Gtk::StockID(_("HideChannels")));
+	action->set_tooltip("隐藏或显示频道列表");
+	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_hide_channel));
 
 	action_group->add(Gtk::ToggleAction::create("ViewEmbedMplayer",
