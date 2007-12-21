@@ -350,8 +350,8 @@ bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 		}
 		else {
 			*p1 = 0;
-			show_msg(Glib::ustring(p2, p1));
-			if (-1 == gmp_width) {
+			show_msg(play_channel_name + Glib::ustring(p2, p1));
+			if (-1 == gmp_width && gmp->is_recorded()) {
 				if ((p1 - p2) > 5) {
 					int w,h;
 					if (get_video_resolution(p2, w, h)) {
@@ -370,7 +370,7 @@ bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 		}
 	}
 	if (p1 != p2)
-		show_msg(Glib::ustring(p2, pend));
+		show_msg(play_channel_name + Glib::ustring(p2, pend));
 	return true;
 }
 
@@ -684,14 +684,12 @@ void MainWindow::set_live_player(LivePlayer* lp,
 {
 	if (lp != NULL) {
 		play_channel_name = name;
-		gmp->stop();
 		live_player = lp;
 		lp->signal_status().connect(sigc::mem_fun(
 					*this, &MainWindow::on_live_player_out));
-		lp->play(*gmp);
-	} else {
-		if (live_player)
-			gmp->play();
+		lp->start(*gmp);
+	} else if (live_player) {
+		lp->start(*gmp);
 	}
 }
 

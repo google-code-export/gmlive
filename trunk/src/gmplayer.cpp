@@ -103,6 +103,7 @@ GMplayer::GMplayer(const sigc::slot<bool, Glib::IOCondition>& slot):
 	,cache(64)
 	,is_pause(false)
 	,is_embed(true)
+	,is_record(false)
 {
 	stdin_pipe[0] = -1;
 	stdin_pipe[1] = -1;
@@ -163,8 +164,6 @@ int GMplayer::my_system(char* const argv[])
 			sigc::mem_fun(*this, &GMplayer::wait_mplayer_exit), pid, 0);
 
 	return pid;
-
-
 }
 
 bool GMplayer::is_runing()
@@ -172,7 +171,7 @@ bool GMplayer::is_runing()
 	return (!ready) && (childpid > 0);
 }
 
-void GMplayer::initialize()
+void GMplayer::initialize_play()
 {
 	signal_start_play_.emit();
 
@@ -223,11 +222,12 @@ void GMplayer::initialize()
 
 void GMplayer::play()
 {
+	is_record = false;
 	if (is_pause)
 		return pause();
 	if (is_runing())
 		stop();
-	initialize();
+	initialize_play();
 	char cb[256];
 	int len = snprintf(cb, 256, "loadfile %s\n", file.c_str());
 	EC_THROW(-1 == write(stdin_pipe[1], cb, len));
@@ -239,6 +239,48 @@ void GMplayer::play(const std::string& filename)
 	if (filename != file)
 		file = filename;
 	play();
+}
+
+void GMplayer::initialize_record(const std::string& outfilename)
+{
+	signal_start_play_.emit();
+	char cache_buf[32];
+	snprintf(cache_buf, 32, "%d", cache);
+	const char* argv[10];
+	argv[0] = "mplayer";
+	argv[1] = "-slave";
+	argv[2] = "-idle";
+	argv[3] = "-cache";
+	argv[4] = cache_buf;
+	argv[5] = "-dumpstream";
+	argv[6] = "-dumpfile";
+	argv[7] = outfilename.c_str();
+	argv[8] = "-quiet";
+	argv[9] = NULL;
+
+	ready = false;
+	my_system((char* const *) argv);
+}
+
+void GMplayer::record(const std::string& filename,
+		const std::string& outfilename)
+{
+	is_record = true;
+	file = filename;
+	outfile = outfilename;
+	if (is_runing())
+		stop();
+	initialize_record(outfilename);
+	char cb[256];
+	int len = snprintf(cb, 256, "loadfile %s\n", file.c_str());
+	EC_THROW(-1 == write(stdin_pipe[1], cb, len));
+	Glib::signal_timeout().connect(sigc::mem_fun(*this, &GMplayer::on_startup_play_time), 3);
+}
+
+bool GMplayer::on_startup_play_time()
+{
+	std::cout << "startup mplayer" << std::endl;
+	return false;
 }
 
 void GMplayer::full_screen()

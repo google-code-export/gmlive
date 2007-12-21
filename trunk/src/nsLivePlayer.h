@@ -26,7 +26,7 @@ class NsLivePlayer : public LivePlayer {
 	public:
 		NsLivePlayer(const std::string& id_);
 		~NsLivePlayer();
-		void play(GMplayer& gmp);
+		void start(GMplayer& gmp);
 		void stop();
 		const std::string& get_stream() { return id; }
 	private:
@@ -35,6 +35,7 @@ class NsLivePlayer : public LivePlayer {
 		std::string 		id;
 		GMplayer* gmplayer;
 		int 			ns_pid;
+		bool			is_running;
 };
 
 #endif // _NS_LIVE_PLAYER_H_

@@ -143,15 +143,21 @@ void Channel::record_selection()
 			Gtk::FILE_CHOOSER_ACTION_SAVE);
 	dlg.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
   	dlg.add_button(Gtk::Stock::SAVE, Gtk::RESPONSE_OK);
-	dlg.run();
-	//LivePlayer* lp = get_player(stream, page);
-	//parent->set_live_player(lp, name);
-	//	lp->record();
-	//	RecentChannel* rc =
-	//		dynamic_cast<RecentChannel*>(parent->get_recent_channel());
-	//	if (this != rc)
-	//		rc->saveLine(name,stream,page);
-	//
+	if (Gtk::RESPONSE_OK == dlg.run()) {
+		Glib::ustring outfilename = dlg.get_filename();
+		if (outfilename.empty())
+			return;
+		LivePlayer* lp = parent->get_live_player();
+		delete lp;
+		lp = get_player(stream, page);
+		lp->set_record(true);
+		lp->set_record_filename(outfilename);
+		parent->set_live_player(lp, name);
+		RecentChannel* rc =
+			dynamic_cast<RecentChannel*>(parent->get_recent_channel());
+		if (this != rc)
+			rc->saveLine(name,stream,page);
+	}
 }
 
 void Channel::store_selection()

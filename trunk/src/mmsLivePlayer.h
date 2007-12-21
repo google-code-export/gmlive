@@ -26,7 +26,7 @@ class MmsLivePlayer : public LivePlayer {
 	public:
 		MmsLivePlayer(const std::string& fname);
 		~MmsLivePlayer();
-		void play(GMplayer& gmp);
+		void start(GMplayer& gmp);
 		void stop();
 		const std::string& get_stream() { return filename; }
 	private:
