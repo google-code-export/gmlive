@@ -135,9 +135,9 @@ void register_stock_items()
 	Gtk::IconSet icon_set;
 	icon_set.add_source(source); //More than one source per set is allowed.
 
-	const Gtk::StockID stock_id("ShowChannels");
+	const Gtk::StockID stock_id("HideChannels");
 	factory->add(stock_id, icon_set);
-	Gtk::Stock::add(Gtk::StockItem(stock_id, "ShowChannels"));
+	Gtk::Stock::add(Gtk::StockItem(stock_id, "HideChannels"));
 	factory->add_default();
 }
 void MainWindow::init_ui_manager()
@@ -161,7 +161,7 @@ void MainWindow::init_ui_manager()
 	//View menu:
 	action_group->add(Gtk::Action::create("ViewMenu", "查看(_V)"));
 	action_group->add(Gtk::ToggleAction::create("ViewShowChannel", 
-				Gtk::StockID("ShowChannels")),
+				Gtk::StockID(_("HideChannels"))),
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_show_channel));
 
 	action_group->add(Gtk::ToggleAction::create("ViewEmbedMplayer",
@@ -271,11 +271,11 @@ void MainWindow::on_menu_view_show_channel()
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewShowChannel"));
 
 	if (show->get_active()){
-		channels_show = true;
-		channels_box->show();
-	} else {
 		channels_show = false;
 		channels_box->hide();
+	} else {
+		channels_show = true;
+		channels_box->show();
 	}
 	this->resize(1, 1);
 }
@@ -506,10 +506,10 @@ void MainWindow::set_channels_show(bool show)
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
 	channels_show = show;
 	if(channels_show){
-		channels_box->show();
+		channels_box->hide();
 	}
 	else{
-		channels_box->hide();
+		channels_box->show();
 	}	
 		// 这种写法太白痴了
 	Glib::RefPtr<Gtk::ToggleAction> menu = 
@@ -531,7 +531,7 @@ MainWindow::~MainWindow()
 	GMConf["main_window_height"] = buf;
 
 	sprintf(buf, "%d", channels_show);
-	GMConf["channels_show"] = buf;
+	GMConf["channels_hide"] = buf;
 
 	sprintf(buf, "%d", gmp_embed);
 	GMConf["mplayer_embed"] = buf;
@@ -554,7 +554,7 @@ void MainWindow::init()
 		GMConf["sopcast_mplayer_cache"] =       "64";
 		GMConf["nslive_mplayer_cache"]  =       "64";
 		GMConf["nslive_delay_time"]     =       "2";
-		GMConf["channels_show"]		=	"1";
+		GMConf["channels_hide"]		=	"0";
 		return;
 	}
 	std::string line;
@@ -601,7 +601,7 @@ void MainWindow::init()
 	window_height = atoi(wnd_height.c_str());
 	window_height = window_height > 0 ? window_height : 1;
 
-	channels_show = atoi(GMConf["channels_show"].c_str());
+	channels_show = atoi(GMConf["channels_hide"].c_str());
 	gmp_embed     = atoi(GMConf["mplayer_embed"].c_str());
 
 	set_channels_show(channels_show);
