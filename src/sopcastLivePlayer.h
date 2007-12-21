@@ -25,7 +25,7 @@ class SopcastLivePlayer : public LivePlayer {
 	public:
 		SopcastLivePlayer(const std::string& stream_);
 		~SopcastLivePlayer();
-		void play(GMplayer&);
+		void start(GMplayer&);
 		void stop();
 		const std::string& get_stream() { return stream; }
 
@@ -40,7 +40,7 @@ class SopcastLivePlayer : public LivePlayer {
 		std::string stream;
 		int sop_pid;
 		int sop_sock;
-		bool player;
+		bool is_running;
 };
 
 

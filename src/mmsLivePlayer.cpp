@@ -30,14 +30,17 @@ MmsLivePlayer::~MmsLivePlayer()
 	//gmp.stop();
 	printf("mms exit\n");
 }
-void MmsLivePlayer::play(GMplayer& gmp)
+void MmsLivePlayer::start(GMplayer& gmp)
 {
 	std::string& cache = GMConf["mms_mplayer_cache"];
 	int icache = atoi(cache.c_str());
 	icache = icache > 64 ? icache : 8192;
 
 	gmp.set_cache(icache);
-	gmp.play(filename);
+	if (record)
+		gmp.record(filename, outfilename);
+	else
+		gmp.play(filename);
 }
 
 void MmsLivePlayer::stop()

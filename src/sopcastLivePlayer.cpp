@@ -41,8 +41,8 @@ SopcastLivePlayer::SopcastLivePlayer(const std::string& stream_) :
 	stream(stream_),
 	sop_pid(-1),
 	sop_sock(-1),
-	player(false),
-	gmplayer(NULL)
+	gmplayer(NULL),
+	is_running(false)
 {
 }
 
@@ -53,36 +53,39 @@ SopcastLivePlayer::~SopcastLivePlayer()
 	printf("sopcast exit\n");
 }
 
-void SopcastLivePlayer::play(GMplayer& gmp)
+void SopcastLivePlayer::start(GMplayer& gmp)
 {
-	gmplayer = &gmp;
-	extern char **environ;
-	int pid = fork();
-	if (pid == -1)
-		return ;
-	if (pid == 0) {
-		close(STDOUT_FILENO);
+	if (!is_running){
+		is_running = true;
+		gmplayer = &gmp;
+		extern char **environ;
+		int pid = fork();
+		if (pid == -1)
+			return ;
+		if (pid == 0) {
+			close(STDOUT_FILENO);
 
-		const char* argv[5];
+			const char* argv[5];
 
-		argv[0] = "sp-sc-auth";
-		argv[1] = stream.c_str();
-		argv[2] = "3908";
-		argv[3] = "8908";
-		argv[4] = NULL;
+			argv[0] = "sp-sc-auth";
+			argv[1] = stream.c_str();
+			argv[2] = "3908";
+			argv[3] = "8908";
+			argv[4] = NULL;
 
-		// 设置 这个子进程为进程组头，
-		// 这样，只要杀掉这个进程，他的子进程也会退出
-		EC_THROW(-1 == setpgid(0, 0));
-		execvp(argv[0], (char* const *)argv);
-		perror("sp-sc-auth execvp:");
-		exit(127);
-	} 
+			// 设置 这个子进程为进程组头，
+			// 这样，只要杀掉这个进程，他的子进程也会退出
+			EC_THROW(-1 == setpgid(0, 0));
+			execvp(argv[0], (char* const *)argv);
+			perror("sp-sc-auth execvp:");
+			exit(127);
+		} 
 
-	sop_pid = pid;
-	printf("sop_pid = %d\n",sop_pid);
+		sop_pid = pid;
+		printf("sop_pid = %d\n",sop_pid);
 
-	signal_status_.emit(0);
+		signal_status_.emit(0);
+	}
 
 	sop_time_conn = Glib::signal_timeout().connect(sigc::mem_fun(*this, &SopcastLivePlayer::on_sop_time_status), 1000);
 
@@ -125,14 +128,16 @@ bool SopcastLivePlayer::on_sop_sock(const Glib::IOCondition& condition)
 	}
 
 	int i = atoi(buf);
-	if ((i > 70) && (!player)){
-		player = true;
+	if (i > 70){
 		std::string& cache = GMConf["sopcast_mplayer_cache"];
 		int icache = atoi(cache.c_str());
 		icache = icache > 64 ? icache : 64;
 
 		gmplayer->set_cache(icache);
-		gmplayer->play(SOPCASTSTREAM);
+		if (record)
+			gmplayer->record(SOPCASTSTREAM, outfilename);
+		else
+			gmplayer->play(SOPCASTSTREAM);
 
 		sop_time_conn.disconnect(); // 启动mpaleyr，停掉显示缓冲状态
 		close(sop_sock);	   // 关掉状态查询端口
@@ -146,7 +151,6 @@ bool SopcastLivePlayer::on_sop_sock(const Glib::IOCondition& condition)
 void SopcastLivePlayer::stop()
 {
 	if (sop_pid > 0) {
-		player = false;
 		sop_time_conn.disconnect();
 		sop_sock_conn.disconnect();
 		

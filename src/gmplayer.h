@@ -12,15 +12,16 @@ class GMplayer : public Gtk::Socket
 	public:
 		GMplayer(const sigc::slot<bool, Glib::IOCondition>& slot);
 		~GMplayer();
-		void initialize();
 		void send_ctrl_command(const char* c);
 		void set_cache(int cache_) { cache = cache_; }
 		void play(const std::string&);
 		void play();
+		void record(const std::string&, const std::string&);
 		void pause(); 
 		void stop();
 		void full_screen();
 		void set_embed(bool embed_);
+		bool is_recorded() const { return is_record; }
 		ssize_t get_mplayer_log(char* buf, size_t count) 
 		{ return read(stdout_pipe[0], buf, count); }
 
@@ -32,6 +33,8 @@ class GMplayer : public Gtk::Socket
 		type_signal_start signal_start_play()
 		{ return signal_start_play_; }	
 	private:
+		void initialize_play();
+		void initialize_record(const std::string& outfilename);	
 		bool is_runing();
 		void set_s_pipe();
 		void set_m_pipe();
@@ -39,7 +42,8 @@ class GMplayer : public Gtk::Socket
 		void close_pipe();
 		void wait_mplayer_exit(GPid, int);
 		int my_system(char* const argv[]);
-	
+		bool on_startup_play_time();
+
 
 		sigc::slot<bool, Glib::IOCondition> 	child_call;
 		sigc::connection 			ptm_conn;
@@ -49,6 +53,7 @@ class GMplayer : public Gtk::Socket
 		int stdout_pipe[2];
 		int stdin_pipe[2];
 		std::string	file;		/* filename (internal)*/
+		std::string	outfile;	/* filename (internal)*/
 		int		width;		/* widget's width*/
 		int		height;		/* widget's height*/
 		int		childpid;	/* mplayer's pid (internal)*/
@@ -58,6 +63,7 @@ class GMplayer : public Gtk::Socket
 		bool		mode;
 		bool		is_pause;
 		bool		is_embed;
+		bool		is_record;
 };
 
 #endif

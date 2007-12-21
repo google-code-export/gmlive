@@ -29,7 +29,8 @@
 NsLivePlayer::NsLivePlayer(const std::string& id_) : 
 	id(id_),
 	ns_pid(-1),
-	gmplayer(NULL)
+	gmplayer(NULL),
+	is_running(false)
 {
 }
 
@@ -39,8 +40,12 @@ NsLivePlayer::~NsLivePlayer()
 	printf("nslive exit\n");
 }
 
-void NsLivePlayer::play(GMplayer& gmp)
+void NsLivePlayer::start(GMplayer& gmp)
 {
+	if (is_running)
+		return;
+	is_running = true;
+
 	gmplayer = &gmp;
 	//extern char **environ;
 	int pid = fork();
@@ -96,6 +101,9 @@ bool NsLivePlayer::on_gmp_startup_time()
 	icache = icache < 64 ? 64 : icache;
 	gmplayer->set_cache(icache);
 
-	gmplayer->play(NSLIVESTREAM);
+	if (record)
+		gmplayer->record(NSLIVESTREAM, outfilename);
+	else
+		gmplayer->play(NSLIVESTREAM);
 	return false;
 }
