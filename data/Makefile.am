@@ -4,7 +4,7 @@ gmlive_ui = \
 	    gmlive.png  \
 	    gmlive_play.png \
 	    gmlive_big.png \
-	    embed_mplayer.png
+	    show_channels.png
 
 desktopdir       = $(datadir)/applications
 desktop_in_files = gmlive.desktop.in
