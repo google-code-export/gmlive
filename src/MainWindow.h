@@ -50,7 +50,7 @@ class MainWindow : public Gtk::Window {
 		void on_menu_file_record();
 		void on_menu_file_stop();
 		void on_menu_file_quit();
-		void on_menu_view_show_channel();
+		void on_menu_view_hide_channel();
 		void on_menu_view_embed_mplayer();
 		void on_menu_view_preferences();
 		void on_menu_help_about();
@@ -67,7 +67,7 @@ class MainWindow : public Gtk::Window {
 
 		void set_gmp_size(int w, int h);
 		void set_gmp_embed(bool);
-		void set_channels_show(bool);
+		void set_channels_hide(bool);
 
 		void reorder_widget(bool is_running);
 		Channel* get_cur_select_channel();
@@ -91,7 +91,7 @@ class MainWindow : public Gtk::Window {
 		int				window_width;
 		int				window_height;
 		bool				gmp_embed;
-		bool				channels_show;
+		bool				channels_hide;
 };
 
 #endif // _MAINWINDOW_HH 
