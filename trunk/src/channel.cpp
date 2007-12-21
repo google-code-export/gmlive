@@ -17,6 +17,7 @@
  */
 
 
+#include <sstream>
 #include "channel.h"
 #include "MainWindow.h"
 #include "livePlayer.h"
@@ -267,10 +268,23 @@ bool Channel::tooltip_timeout(GdkEventMotion * ev)
 		if (!iter)
 			return false;
 		TypeChannel type = (*iter)[columns.type];
+		Glib::ustring type_;
+		if(NSLIVE_CHANNEL == type)
+			type_  = _("NSLive Stream");
+		else if(SOPCAST_CHANNEL == type)
+			type_ = _("SopCast Stream");
+		else if(MMS_CHANNEL == type)
+			type_ = _("MMS stream");
 		Glib::ustring name = (*iter)[columns.name];
+		int num = (*iter)[columns.users];
+		std::stringstream ss;
+		ss<<num;
+		std::string user=ss.str();
+		std::string stream = (*iter)[columns.stream];
 		Glib::ustring text;
 
-		text = "<span weight='bold'>" +name +"\n" + "tesing</span>";
+		text = "<span weight='bold'>" +name +"\n" + _("users:")+user+
+			"\nURL:</span> " + stream +"\n<span weight='bold'>"+_("Type:")+type_+"\n</span>";
 		Glib::RefPtr<Gdk::Pixbuf> logo= Gdk::Pixbuf::create_from_file(DATA_DIR"/gmlive.png");
 
 			tooltips->setImage(logo);
