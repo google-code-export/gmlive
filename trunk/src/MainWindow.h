@@ -39,7 +39,7 @@ class MainWindow : public Gtk::Window {
 		void init();
 	private:
 		friend class Channel;
-		void set_live_player(LivePlayer*);
+		void set_live_player(LivePlayer*, const Glib::ustring&);
 		LivePlayer* get_live_player() { return live_player; }
 		Gtk::Menu* get_channels_pop_menu() { return channels_pop_menu; }
 		Channel* get_recent_channel() { return recent_channel; }
@@ -75,6 +75,7 @@ class MainWindow : public Gtk::Window {
 		GlademmXML 			ui_xml;
 		Glib::RefPtr<Gtk::UIManager>	ui_manager;
 		Glib::RefPtr<Gtk::ActionGroup> 	action_group;
+		Glib::ustring			play_channel_name;
 		GMplayer* 			gmp;
 		Gtk::Box*			play_frame;
 		Gtk::Notebook*			channels;

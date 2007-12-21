@@ -354,8 +354,11 @@ bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 			if (-1 == gmp_width) {
 				if ((p1 - p2) > 5) {
 					int w,h;
-					if (get_video_resolution(p2, w, h))
+					if (get_video_resolution(p2, w, h)) {
 						set_gmp_size(w, h);
+						show_msg(play_channel_name);
+						return false;
+					}
 				}
 			}
 
@@ -675,9 +678,11 @@ Channel* MainWindow::get_cur_select_channel()
 	return dynamic_cast< Channel* >(*(page->get_children().begin()));
 }
 
-void MainWindow::set_live_player(LivePlayer* lp)
+void MainWindow::set_live_player(LivePlayer* lp, 
+		const Glib::ustring& name)
 {
 	if (lp != NULL) {
+		play_channel_name = name;
 		gmp->stop();
 		live_player = lp;
 		lp->signal_status().connect(sigc::mem_fun(

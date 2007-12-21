@@ -110,7 +110,7 @@ void Channel::play_selection()
 		this->get_selection();
 	Gtk::TreeModel::iterator iter = selection->get_selected();
 	if (!selection->count_selected_rows()) {
-		parent->set_live_player(NULL);
+		parent->set_live_player(NULL, "");
 		return ;
 	}
 
@@ -137,7 +137,7 @@ void Channel::record_selection()
   	dlg.add_button(Gtk::Stock::SAVE, Gtk::RESPONSE_OK);
 	dlg.run();
 	//LivePlayer* lp = get_player(stream, page);
-	//parent->set_live_player(lp);
+	//parent->set_live_player(lp, name);
 	//	lp->record();
 	//	RecentChannel* rc =
 	//		dynamic_cast<RecentChannel*>(parent->get_recent_channel());
@@ -177,21 +177,21 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 	std::string stream = (*iter)[columns.stream];
 
 	if(GROUP_CHANNEL == (*iter)[columns.type]) {
-		parent->set_live_player(NULL);
+		parent->set_live_player(NULL,"");
 		return;
 	}
 
 	LivePlayer* lp = parent->get_live_player();
 	if (NULL != lp) {
 		if (lp->get_stream() == stream) {
-			parent->set_live_player(NULL);
+			parent->set_live_player(NULL, "");
 			return;
 		}
 	}
 
 	delete lp;
 	lp = get_player(stream, page);
-	parent->set_live_player(lp);
+	parent->set_live_player(lp, name);
 	RecentChannel* rc =
 		dynamic_cast<RecentChannel*>(parent->get_recent_channel());
 	if (this != rc)
