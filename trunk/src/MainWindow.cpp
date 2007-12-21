@@ -162,7 +162,7 @@ void MainWindow::init_ui_manager()
 	action_group->add(Gtk::Action::create("ViewMenu", "查看(_V)"));
 	action_group->add(Gtk::ToggleAction::create("ViewShowChannel", 
 				Gtk::StockID(_("HideChannels"))),
-			sigc::mem_fun(*this, &MainWindow::on_menu_view_show_channel));
+			sigc::mem_fun(*this, &MainWindow::on_menu_view_hide_channel));
 
 	action_group->add(Gtk::ToggleAction::create("ViewEmbedMplayer",
 			        "嵌入播放(_E)", "嵌入或者独立的Mplayer播放", true), 
@@ -262,19 +262,19 @@ bool MainWindow::on_delete_event(GdkEventAny* event)
 	return Gtk::Window::on_delete_event(event);
 }
 
-void MainWindow::on_menu_view_show_channel()
+void MainWindow::on_menu_view_hide_channel()
 {
-	//cout << "on_menu_view_show_channel" << endl;
+	//cout << "on_menu_view_hide_channel" << endl;
 
 	// 这种写法太白痴了
 	Glib::RefPtr<Gtk::ToggleAction> show = 
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewShowChannel"));
 
 	if (show->get_active()){
-		channels_show = false;
+		channels_hide = true;
 		channels_box->hide();
 	} else {
-		channels_show = true;
+		channels_hide = false;
 		channels_box->show();
 	}
 	this->resize(1, 1);
@@ -500,12 +500,12 @@ void MainWindow::set_gmp_embed(bool embed)
 	gmp->set_embed(gmp_embed);
 }
 
-void MainWindow::set_channels_show(bool show)
+void MainWindow::set_channels_hide(bool hide)
 {
 	Glib::RefPtr<Gtk::ToggleAction> embed_menu = 
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
-	channels_show = show;
-	if(channels_show){
+	channels_hide = hide;
+	if(channels_hide){
 		channels_box->hide();
 	}
 	else{
@@ -514,7 +514,7 @@ void MainWindow::set_channels_show(bool show)
 		// 这种写法太白痴了
 	Glib::RefPtr<Gtk::ToggleAction> menu = 
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewShowChannel"));
-	menu->set_active(channels_show);
+	menu->set_active(channels_hide);
 
 }
 
@@ -530,7 +530,7 @@ MainWindow::~MainWindow()
 	sprintf(buf, "%d", window_height);
 	GMConf["main_window_height"] = buf;
 
-	sprintf(buf, "%d", channels_show);
+	sprintf(buf, "%d", channels_hide);
 	GMConf["channels_hide"] = buf;
 
 	sprintf(buf, "%d", gmp_embed);
@@ -601,10 +601,10 @@ void MainWindow::init()
 	window_height = atoi(wnd_height.c_str());
 	window_height = window_height > 0 ? window_height : 1;
 
-	channels_show = atoi(GMConf["channels_hide"].c_str());
+	channels_hide = atoi(GMConf["channels_hide"].c_str());
 	gmp_embed     = atoi(GMConf["mplayer_embed"].c_str());
 
-	set_channels_show(channels_show);
+	set_channels_hide(channels_hide);
 	set_gmp_embed(gmp_embed);
 }
 
