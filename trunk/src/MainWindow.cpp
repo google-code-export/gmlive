@@ -495,6 +495,7 @@ void MainWindow::set_gmp_embed(bool embed)
 		this->get_size( window_width, window_height);
 		play_frame->show_all();
 		action_group->get_action("ViewShowChannel")->set_sensitive(true);
+		set_channels_hide(channels_hide);
 		this->resize(1, 1);
 	}
 	gmp->set_embed(gmp_embed);
