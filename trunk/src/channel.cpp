@@ -29,11 +29,19 @@ Channel::Channel(MainWindow* parent_):parent( parent_)
 	channel->set_flags(Gtk::CAN_FOCUS);
 	channel->set_rules_hint(false);
 
+	tooltips = new ChannelsTooltips(this);
 	m_liststore = Gtk::TreeStore::create(columns);
 	channel->set_model( m_liststore);
 	channel->append_column("频道", columns.name);
 	channel->append_column("码率", columns.freq);
 	channel->append_column("用户数", columns.users);
+	this->signal_motion_notify_event().
+	    connect(sigc::mem_fun(*this, &Channel::on_motion_event),
+		    false);
+	this->signal_leave_notify_event().
+	    connect(sigc::mem_fun(*this, &Channel::on_leave_event),
+		    false);
+
 	channel->show();
 }
 
@@ -105,7 +113,7 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 
 void Channel::play_selection()
 {
-	printf("\nplay_selection\n");
+	//printf("\nplay_selection\n");
 	Glib::RefPtr < Gtk::TreeSelection > selection =
 		this->get_selection();
 	Gtk::TreeModel::iterator iter = selection->get_selected();
@@ -171,7 +179,7 @@ void Channel::store_selection()
 
 void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 {
-	printf("\nplay_selection_iter\n");
+	//printf("\nplay_selection_iter\n");
 	TypeChannel page = (*iter)[columns.type];
 	Glib::ustring name = (*iter)[columns.name];
 	std::string stream = (*iter)[columns.stream];
@@ -231,4 +239,72 @@ bool Channel::on_clean_foreach(const Gtk::TreeModel::iterator& iter)
 {
 	(*iter)[columns.searched] = false;
 	return false;
+}
+bool Channel::on_leave_event(GdkEventCrossing * ev)
+{
+	if (tipTimeout.connected()) {
+		tipTimeout.disconnect();
+	}
+	return false;
+}
+
+bool Channel::tooltip_timeout(GdkEventMotion * ev)
+{
+	Gtk::TreeModel::Path path;
+	Gtk::TreeViewColumn * column;
+	int cell_x, cell_y;
+	if (this->
+	    get_path_at_pos((int) ev->x, (int) ev->y, path, column, cell_x,
+			    cell_y)) {
+		Gtk::TreeModel::iterator iter =
+		    this->get_model()->get_iter(path);
+		if (!iter)
+			return false;
+		TypeChannel type = (*iter)[columns.type];
+		Glib::ustring name = (*iter)[columns.name];
+		Glib::ustring text;
+
+		text = "<span weight='bold'>" +name +"\n" + "tesing</span>";
+		Glib::RefPtr<Gdk::Pixbuf> logo= Gdk::Pixbuf::create_from_file(DATA_DIR"/gmlive.png");
+
+			tooltips->setImage(logo);
+			tooltips->setLabel(text);
+			tooltips->showTooltip(ev);
+
+	}
+	return false;
+}
+bool Channel::on_motion_event(GdkEventMotion * ev)
+{
+	Gtk::TreeModel::Path path;
+	Gtk::TreeViewColumn * column;
+	int cell_x, cell_y;
+	int delay = 600;
+
+	if (tipTimeout.connected()) {
+
+		tipTimeout.disconnect();
+		tooltips->hideTooltip();
+	}
+	if (this->
+	    get_path_at_pos((int) ev->x, (int) ev->y, path, column, cell_x,
+			    cell_y)) {
+		Gtk::TreeModel::iterator iter =
+		    this->get_model()->get_iter(path);
+		TypeChannel type = (*iter)[columns.type];
+		if (GROUP_CHANNEL != type)
+			tipTimeout =
+			    Glib::signal_timeout().connect(sigc::bind <
+							   GdkEventMotion *
+							   >(sigc::
+							     mem_fun(*this,
+								     &Channel::
+								     tooltip_timeout),
+							     ev), delay);
+		else
+			tooltips->hideTooltip();
+	} else
+		tooltips->hideTooltip();
+
+	return true;
 }

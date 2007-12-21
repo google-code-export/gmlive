@@ -318,7 +318,7 @@ void MainWindow::on_search_channel()
 
 void MainWindow::on_conf_window_quit()
 {
-	std::cout << "on_conf_window_quit" << std::endl;
+	//std::cout << "on_conf_window_quit" << std::endl;
 	set_gmp_embed(atoi(GMConf["mplayer_embed"].c_str()));
 	save_conf();
 }

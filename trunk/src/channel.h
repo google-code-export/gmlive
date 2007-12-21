@@ -24,11 +24,13 @@
 #include <gtkmm/treestore.h>
 #include <gtkmm/treeselection.h>
 #include "gmlive.h"
+#include "ChannelsTooltips.h"
 #include <functional>
 
 class MainWindow;
 class LivePlayer;
 class GMplayer;
+class ChannelsTooltips;
 class Channel:public Gtk::TreeView
 {
 	public:
@@ -79,6 +81,12 @@ class Channel:public Gtk::TreeView
 		void play_selection_iter(Gtk::TreeModel::iterator& iter);
 		MainWindow* parent;
 		Glib::ustring search_channel_name;
+		ChannelsTooltips* tooltips;
+		sigc::connection tipTimeout;
+	protected:
+		bool on_motion_event(GdkEventMotion* ev);
+		bool on_leave_event(GdkEventCrossing * ev);
+		bool tooltip_timeout(GdkEventMotion* ev);
 	private:
 		struct CompareChannel:public std::binary_function 
 				      < Gtk::TreeModel::Row,
