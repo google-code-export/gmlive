@@ -1,5 +1,6 @@
 gmlive_ui = \
 	    gmlive.xml \
+	    record.xml \
 	    mms.lst 	\
 	    gmlive.png  \
 	    gmlive_play.png \
