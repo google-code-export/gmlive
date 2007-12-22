@@ -701,7 +701,6 @@ Channel* MainWindow::get_cur_select_channel()
 void MainWindow::set_live_player(LivePlayer* lp, 
 		const Glib::ustring& name)
 {
-	gmp->stop();
 	if (lp != NULL) {
 		play_channel_name = name;
 		live_player = lp;

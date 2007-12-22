@@ -55,37 +55,44 @@ SopcastLivePlayer::~SopcastLivePlayer()
 
 void SopcastLivePlayer::start(GMplayer& gmp)
 {
-	if (!is_running){
-		is_running = true;
-		gmplayer = &gmp;
-		extern char **environ;
-		int pid = fork();
-		if (pid == -1)
-			return ;
-		if (pid == 0) {
-			close(STDOUT_FILENO);
+	if (is_running) {
+		if (record)
+			gmplayer->record(SOPCASTSTREAM, outfilename);
+		else
+			gmplayer->play(SOPCASTSTREAM);
 
-			const char* argv[5];
-
-			argv[0] = "sp-sc-auth";
-			argv[1] = stream.c_str();
-			argv[2] = "3908";
-			argv[3] = "8908";
-			argv[4] = NULL;
-
-			// 设置 这个子进程为进程组头，
-			// 这样，只要杀掉这个进程，他的子进程也会退出
-			EC_THROW(-1 == setpgid(0, 0));
-			execvp(argv[0], (char* const *)argv);
-			perror("sp-sc-auth execvp:");
-			exit(127);
-		} 
-
-		sop_pid = pid;
-		printf("sop_pid = %d\n",sop_pid);
-
-		signal_status_.emit(0);
+		return;
 	}
+
+	is_running = true;
+	gmplayer = &gmp;
+	extern char **environ;
+	int pid = fork();
+	if (pid == -1)
+		return ;
+	if (pid == 0) {
+		close(STDOUT_FILENO);
+
+		const char* argv[5];
+
+		argv[0] = "sp-sc-auth";
+		argv[1] = stream.c_str();
+		argv[2] = "3908";
+		argv[3] = "8908";
+		argv[4] = NULL;
+
+		// 设置 这个子进程为进程组头，
+		// 这样，只要杀掉这个进程，他的子进程也会退出
+		EC_THROW(-1 == setpgid(0, 0));
+		execvp(argv[0], (char* const *)argv);
+		perror("sp-sc-auth execvp:");
+		exit(127);
+	} 
+
+	sop_pid = pid;
+	printf("sop_pid = %d\n",sop_pid);
+
+	signal_status_.emit(0);
 
 	sop_time_conn = Glib::signal_timeout().connect(sigc::mem_fun(*this, &SopcastLivePlayer::on_sop_time_status), 1000);
 
@@ -106,7 +113,7 @@ bool SopcastLivePlayer::on_sop_time_status()
 		{}
 	}
 
-   	write(sop_sock, "s\n", sizeof("s\n"));
+	write(sop_sock, "s\n", sizeof("s\n"));
 	return true;
 }
 
@@ -153,7 +160,7 @@ void SopcastLivePlayer::stop()
 	if (sop_pid > 0) {
 		sop_time_conn.disconnect();
 		sop_sock_conn.disconnect();
-		
+
 		for (;;) {
 			kill(-sop_pid, SIGKILL);
 			int ret = (waitpid( -sop_pid, NULL, WNOHANG));
