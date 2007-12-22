@@ -45,6 +45,8 @@ class MainWindow : public Gtk::Window {
 		Channel* get_recent_channel() { return recent_channel; }
 		Channel* get_bookmark_channel() { return bookmark_channel; }
 		// 菜单回调
+		void on_menu_open_file();
+		void on_menu_open_url();
 		void on_menu_file_play();
 		void on_menu_file_pause();
 		void on_menu_file_record();

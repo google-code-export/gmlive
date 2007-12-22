@@ -89,6 +89,8 @@ Glib::ustring ui_info =
 "<ui>"
 "	<menubar name='MenuBar'>"
 "		<menu action='FileMenu'>"
+"			<menuitem action='OpenFile'/>"
+"			<menuitem action='OpenURL'/>"
 "			<menuitem action='FilePlay'/>"
 "			<menuitem action='FilePause'/>"
 "			<menuitem action='FileRecord'/>"
@@ -151,6 +153,14 @@ void MainWindow::init_ui_manager()
 	//File menu:
 	action_group->add(Gtk::Action::create("FileMenu", "文件(_F)"));
 
+	action = Gtk::Action::create("OpenFile", Gtk::Stock::OPEN,_("Open local file"));
+	action->set_tooltip(_("Open Local File"));
+	action_group->add(action,
+			sigc::mem_fun(*this, &MainWindow::on_menu_open_file));
+	action = Gtk::Action::create("OpenURL", Gtk::Stock::OPEN,_("Open URL"));
+	action->set_tooltip(_("Open Network Stream"));
+	action_group->add(action,
+			sigc::mem_fun(*this, &MainWindow::on_menu_open_url));
 	action = Gtk::Action::create("FilePlay", Gtk::Stock::MEDIA_PLAY);
 	action->set_tooltip("播放");
 	action_group->add(action,
@@ -212,6 +222,33 @@ void MainWindow::init_ui_manager()
 
 	//return ui_manager->get_widget("/MenuBar");
 }
+
+void MainWindow::on_menu_open_file()
+{
+	Gtk::FileChooserDialog dlg(*this,
+		       	"选择文件", 
+			Gtk::FILE_CHOOSER_ACTION_SAVE);
+	dlg.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+  	dlg.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_OK);
+
+	//Gtk::FileFilter filter_media;
+	//filter_media.set_name();
+	if (Gtk::RESPONSE_OK == dlg.run()) {
+		Glib::ustring filename = dlg.get_filename();
+		if (filename.empty())
+			return;
+		std::cout<<"播放 "<<filename<<std::endl;
+		gmp->play(filename);
+
+	}
+}
+
+void MainWindow::on_menu_open_url()
+{
+
+
+}
+
 
 void MainWindow::on_menu_file_play()
 {
