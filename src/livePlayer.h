@@ -25,7 +25,7 @@ class GMplayer;
 class LivePlayer {
 	public:
 		LivePlayer():record(false) {}
-		virtual ~LivePlayer() {}
+		virtual ~LivePlayer() {} 
 		virtual void start(GMplayer&) = 0;
 		virtual void stop() = 0;
 		virtual const std::string& get_stream() = 0;
