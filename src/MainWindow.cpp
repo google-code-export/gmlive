@@ -370,7 +370,7 @@ bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 		else {
 			*p1 = 0;
 			show_msg(play_channel_name + Glib::ustring(p2, p1));
-			if (-1 == gmp_width && gmp->is_recorded()) {
+			if (-1 == gmp_width && !gmp->is_recorded()) {
 				if ((p1 - p2) > 5) {
 					int w,h;
 					if (get_video_resolution(p2, w, h)) {
