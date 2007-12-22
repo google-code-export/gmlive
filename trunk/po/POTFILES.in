@@ -1,5 +1,6 @@
 [encoding: UTF-8]
 data/gmlive.desktop.in.in
+data/gmlive.xml
 src/bookmarkchannel.cpp
 src/channel.cpp
 src/ec_throw.cpp

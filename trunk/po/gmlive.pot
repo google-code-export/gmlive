@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-20 21:18+0800\n"
+"POT-Creation-Date: 2007-12-21 23:06+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,4 +22,28 @@ msgstr ""
 
 #: ../data/gmlive.desktop.in.in.h:2
 msgid "Streaming Direct Broadcast System based on P2P"
+msgstr ""
+
+#: ../src/channel.cpp:273
+msgid "NSLive Stream"
+msgstr ""
+
+#: ../src/channel.cpp:275
+msgid "SopCast Stream"
+msgstr ""
+
+#: ../src/channel.cpp:277
+msgid "MMS stream"
+msgstr ""
+
+#: ../src/channel.cpp:286
+msgid "users:"
+msgstr ""
+
+#: ../src/channel.cpp:287
+msgid "Type:"
+msgstr ""
+
+#: ../src/MainWindow.cpp:164
+msgid "HideChannels"
 msgstr ""
