@@ -253,6 +253,7 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 				parent->set_live_player(live_player, name);
 				return;
 			} 
+
 		} else
 			assert(false);
 			// 一个频道不是空的，但不在播放也不在录制。肯定出错了.
@@ -344,9 +345,9 @@ bool Channel::tooltip_timeout(GdkEventMotion * ev)
 
 		text = "<span weight='bold'>" +name +"\n" + _("users:")+user+
 			"\nURL:</span> " + stream +"\n<span weight='bold'>"+_("Type:")+type_+"\n</span>";
-		Glib::RefPtr<Gdk::Pixbuf> logo= Gdk::Pixbuf::create_from_file(DATA_DIR"/gmlive.png");
+		//Glib::RefPtr<Gdk::Pixbuf> logo= Gdk::Pixbuf::create_from_file(DATA_DIR"/gmlive.png");
 
-		tooltips->setImage(logo);
+		//tooltips->setImage(logo);
 		tooltips->setLabel(text);
 		tooltips->showTooltip(ev);
 
