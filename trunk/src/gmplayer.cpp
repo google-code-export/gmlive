@@ -166,7 +166,7 @@ int GMplayer::my_system(char* const argv[])
 
 bool GMplayer::running()
 {
-	return (is_running) && (child_pid > 0);
+	return (is_running) && (child_pid != 0);
 }
 
 

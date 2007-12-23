@@ -30,7 +30,6 @@ class RecordStream :public GMplayer , public Gtk::Window{
 		~RecordStream();
 		void start(const std::string& filename);
 		void start();
-		void stop();
 		void set_live_player(LivePlayer* lp, const std::string& name = "");
 		LivePlayer* get_live_player() { return live_player; }
 		void set_out_file(const std::string& filename);
