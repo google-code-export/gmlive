@@ -179,10 +179,12 @@ void Channel::record_selection()
 					// 。以后弹出个对话框警告一下
 					return ;
 					//parent->set_live_player(live_player, name);
+				} else { // 停掉录制
+					record_wnd->set_live_player(NULL);
 				}
-			}
-			assert(false);
-			// 一个频道不是空的，但不在播放也不在录制。肯定出错了.
+			} else
+				assert(false);
+				// 一个频道不是空的，但不在播放也不在录制。肯定出错了.
 		}
 		delete live_player;
 		live_player = get_player(stream, page);
@@ -238,11 +240,12 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 	if (NULL != live_player) {
 		// live_player不是NULL的时候，只有2种情况，要么是在录制，要么是在播放。
 		if (live_player == lp) { // 播放的时候
+			parent->set_live_player(NULL); // 停止录制
 			if (live_player->get_stream() == stream) {
 				// 如果只是播放同一个频道，就只是重启一下mplayer好了.
 				parent->set_live_player(lp);
 				return;
-			}
+			} 
 		} else if (live_player == lr) { // 录制的时候
 			parent->get_record_gmp()->set_live_player(NULL); // 停止录制吧
 			if (live_player->get_stream() == stream) {
@@ -250,9 +253,9 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 				parent->set_live_player(live_player, name);
 				return;
 			} 
-		}
-		assert(false);
-		// 一个频道不是空的，但不在播放也不在录制。肯定出错了.
+		} else
+			assert(false);
+			// 一个频道不是空的，但不在播放也不在录制。肯定出错了.
 	}
 
 	delete live_player;
