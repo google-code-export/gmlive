@@ -131,7 +131,7 @@ void RecordStream::set_out_file(const std::string& filename)
 
 void RecordStream::on_mplayer_exit()
 {
-	delete live_player;
+//	delete live_player;
 	timeout_conn.disconnect();
 	close(outfile);
 	outfile = -1;
