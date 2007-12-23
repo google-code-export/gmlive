@@ -57,6 +57,7 @@ RecordStream::RecordStream():
 
 RecordStream::~RecordStream()
 {
+	stop();
 }
 
 void RecordStream::on_preview()
@@ -118,10 +119,6 @@ void RecordStream::start()
 	EC_THROW(-1 == write(stdin_pipe[1], cb, len));
 }
 
-void RecordStream::stop()
-{
-	GMplayer::stop();
-}
 
 void RecordStream::set_out_file(const std::string& filename)
 {

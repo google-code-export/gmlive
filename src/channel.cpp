@@ -50,6 +50,7 @@ Channel::Channel(MainWindow* parent_):parent( parent_), live_player(NULL)
 
 Channel::~Channel()
 {
+	delete live_player;
 }
 
 void Channel::on_live_player_exit()
@@ -169,7 +170,7 @@ void Channel::record_selection()
 				parent->set_live_player(NULL);
 				if (live_player->get_stream() == stream) {
 					record_wnd->set_live_player(live_player, name);
-					// 如果只是播放同一个频道在播放，直接转为录制.
+					// 如果只是同一个频道在播放，直接转为录制.
 					return;
 				}
 			} else if (live_player == lr) { // 录制的时候

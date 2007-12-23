@@ -116,14 +116,6 @@ void PlayStream::full_screen()
 }
 
 
-void PlayStream::stop()
-{
-	if (running()) {
-		GMplayer::stop();
-		PlayStream::on_mplayer_exit();
-	}
-}
-
 void PlayStream::set_embed(bool embed_)
 {
 	if (is_embed == embed_)

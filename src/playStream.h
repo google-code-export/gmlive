@@ -31,7 +31,6 @@ class PlayStream : public GMplayer, public Gtk::Socket {
 		~PlayStream();
 		void start(const std::string&);
 		void start();
-		void stop();
 		void full_screen();
 		void set_embed(bool embed_);
 	private:

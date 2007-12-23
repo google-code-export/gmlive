@@ -55,6 +55,7 @@ SopcastLivePlayer::~SopcastLivePlayer()
 
 void SopcastLivePlayer::start(GMplayer& gmp)
 {
+	gmplayer = &gmp;
 	if (is_running) {
 		gmplayer->start(SOPCASTSTREAM);
 		return;

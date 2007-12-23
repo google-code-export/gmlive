@@ -42,11 +42,11 @@ NsLivePlayer::~NsLivePlayer()
 
 void NsLivePlayer::start(GMplayer& gmp)
 {
+	gmplayer = &gmp;
 	if (is_running)
 		return;
 	is_running = true;
 
-	gmplayer = &gmp;
 	//extern char **environ;
 	int pid = fork();
 	if (pid == -1)
