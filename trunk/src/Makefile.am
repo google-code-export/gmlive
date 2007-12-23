@@ -21,7 +21,9 @@ gmlive_SOURCES = \
 		 gmplayer.cpp \
 		 sopcastLivePlayer.cpp \
 		 mmsLivePlayer.cpp \
-		 nsLivePlayer.cpp
+		 nsLivePlayer.cpp \
+		 playStream.cpp \
+		 recordStream.cpp
 
 noinst_HEADERS = \
 		 ec_throw.h \
@@ -42,6 +44,8 @@ noinst_HEADERS = \
 		 livePlayer.h \
 		 sopcastLivePlayer.h \
 		 mmsLivePlayer.h \
-		 nsLivePlayer.h
+		 nsLivePlayer.h \
+		 playStream.h \
+		 recordStream.h
 
 gmlive_LDADD = @LIBS@ @PACKAGE_LIBS@

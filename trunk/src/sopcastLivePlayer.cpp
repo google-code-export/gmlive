@@ -56,11 +56,7 @@ SopcastLivePlayer::~SopcastLivePlayer()
 void SopcastLivePlayer::start(GMplayer& gmp)
 {
 	if (is_running) {
-		if (record)
-			gmplayer->record(SOPCASTSTREAM, outfilename);
-		else
-			gmplayer->play(SOPCASTSTREAM);
-
+		gmplayer->start(SOPCASTSTREAM);
 		return;
 	}
 
@@ -141,10 +137,7 @@ bool SopcastLivePlayer::on_sop_sock(const Glib::IOCondition& condition)
 		icache = icache > 64 ? icache : 64;
 
 		gmplayer->set_cache(icache);
-		if (record)
-			gmplayer->record(SOPCASTSTREAM, outfilename);
-		else
-			gmplayer->play(SOPCASTSTREAM);
+		gmplayer->start(SOPCASTSTREAM);
 
 		sop_time_conn.disconnect(); // 启动mpaleyr，停掉显示缓冲状态
 		close(sop_sock);	   // 关掉状态查询端口

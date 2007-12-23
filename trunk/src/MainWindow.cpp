@@ -21,6 +21,7 @@
 #include "recentchannel.h"
 #include "bookmarkchannel.h"
 #include "livePlayer.h"
+#include "playStream.h"
 
 #include "MainWindow.h"
 #include "ConfWindow.h"
@@ -32,6 +33,7 @@
 #include <algorithm>
 
 using namespace std;
+
 
 //struct IsBlank : public std::unary_function <std::string::value_type, bool> {
 //	bool operator () (std::string::value_type val)
@@ -151,7 +153,7 @@ void MainWindow::init_ui_manager()
 		action_group = Gtk::ActionGroup::create();
 	Glib::RefPtr<Gtk::Action> action ;
 	//File menu:
-	action_group->add(Gtk::Action::create("FileMenu", "文件(_F)"));
+	action_group->add(Gtk::Action::create("FileMenu", _("_File")));
 
 	action = Gtk::Action::create("OpenFile", Gtk::Stock::OPEN,_("Open local file"));
 	action->set_tooltip(_("Open Local File"));
@@ -162,22 +164,22 @@ void MainWindow::init_ui_manager()
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_open_url));
 	action = Gtk::Action::create("FilePlay", Gtk::Stock::MEDIA_PLAY);
-	action->set_tooltip("播放");
+	action->set_tooltip(_("Play"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_play));
 	
 	action = Gtk::Action::create("FilePause", Gtk::Stock::MEDIA_PAUSE);
-	action->set_tooltip("暂停");
+	action->set_tooltip(_("Pause"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_pause));
 
 	action = Gtk::Action::create("FileRecord", Gtk::Stock::MEDIA_RECORD);
-	action->set_tooltip("录制");
+	action->set_tooltip(_("Record"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_record));
 
 	action = Gtk::Action::create("FileStop", Gtk::Stock::MEDIA_STOP);
-	action->set_tooltip("停止");
+	action->set_tooltip(_("Stop"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_stop));
 
@@ -185,32 +187,32 @@ void MainWindow::init_ui_manager()
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_quit));
 
 	//View menu:
-	action_group->add(Gtk::Action::create("ViewMenu", "查看(_V)"));
+	action_group->add(Gtk::Action::create("ViewMenu", _("_View")));
 	
 	action = Gtk::ToggleAction::create("ViewShowChannel", 
 				Gtk::StockID(_("HideChannels")));
-	action->set_tooltip("隐藏或显示频道列表");
+	action->set_tooltip(_("Show or hide channels list"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_hide_channel));
 
 	action_group->add(Gtk::ToggleAction::create("ViewEmbedMplayer",
-			        "嵌入播放(_E)", "嵌入或者独立的Mplayer播放", true), 
+			        _("_Embed Mplayer"), _("Embed or Separate mplayer play"), true), 
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_embed_mplayer));
 
 	action_group->add(Gtk::Action::create("ViewPreferences", Gtk::Stock::PREFERENCES),
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_preferences));
 
 	//Help menu:
-	action_group->add(Gtk::Action::create("HelpMenu", "帮助(_H)"));
+	action_group->add(Gtk::Action::create("HelpMenu", _("_Help")));
 	action_group->add(Gtk::Action::create("HelpAbout", Gtk::Stock::HELP),
 			sigc::mem_fun(*this, &MainWindow::on_menu_help_about));
 
 	//Pop menu:
 	action_group->add(Gtk::Action::create("PopRefreshList", 
-				"刷新列表(_R)", "刷新当前的频道列表"),
+				_("_Refresh list"), _("Refresh current channel list")),
 			sigc::mem_fun(*this, &MainWindow::on_menu_pop_refresh_list));
 	action_group->add(Gtk::Action::create("PopAddToBookmark", 
-				"加入书签(_A)", "把当前频道加到书签"),
+				_("Add to bookmark"), _("Bookmark this channel")),
 			sigc::mem_fun(*this, &MainWindow::on_menu_pop_add_to_bookmark));
 
 	if (!ui_manager)
@@ -238,7 +240,7 @@ void MainWindow::on_menu_open_file()
 		if (filename.empty())
 			return;
 		std::cout<<"播放 "<<filename<<std::endl;
-		gmp->play(filename);
+		gmp->start(filename);
 
 	}
 }
@@ -407,7 +409,7 @@ bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 		else {
 			*p1 = 0;
 			show_msg(play_channel_name + Glib::ustring(p2, p1));
-			if (-1 == gmp_width && !gmp->is_recorded()) {
+			if (-1 == gmp_width) {
 				if ((p1 - p2) > 5) {
 					int w,h;
 					if (get_video_resolution(p2, w, h)) {
@@ -493,11 +495,14 @@ MainWindow::MainWindow():
 			Gdk::Pixbuf::create_from_file (
 				DATA_DIR"/gmlive_play.png"));
 
-	gmp = new GMplayer(sigc::mem_fun(*this, &MainWindow::on_gmplayer_out));	
-	gmp->signal_start_play().connect(
+	gmp = new PlayStream();	
+	gmp->set_out_slot(sigc::mem_fun(*this, &MainWindow::on_gmplayer_out));
+	gmp->signal_start().connect(
 			sigc::mem_fun(*this, &MainWindow::on_gmplayer_start));
-	gmp->signal_stop_play().connect(
+	gmp->signal_stop().connect(
 			sigc::mem_fun(*this, &MainWindow::on_gmplayer_stop));
+
+	record_gmp = new RecordStream();
 
 	init_ui_manager();
 	Gtk::Widget* menubar = ui_manager->get_widget("/MenuBar");

@@ -8,7 +8,6 @@
 #include <cassert>
 #include "gmlive.h"
 #include <string>
-#include <list>
 
 void  set_signals()
 {
@@ -94,16 +93,14 @@ void GMplayer::set_m_pipe()
 
 }
 
-GMplayer::GMplayer(const sigc::slot<bool, Glib::IOCondition>& slot):
-	ready(true),
-	childpid(-1),
-	xid(-1),
-	child_call(slot)
-	,mode(1)
-	,cache(64)
+
+////////////////////////////////////////////////////////////////
+
+GMplayer::GMplayer()
+	:is_running(false)
 	,is_pause(false)
-	,is_embed(true)
-	,is_record(false)
+	,child_pid(-1)
+	,cache(64)
 {
 	stdin_pipe[0] = -1;
 	stdin_pipe[1] = -1;
@@ -114,19 +111,18 @@ GMplayer::GMplayer(const sigc::slot<bool, Glib::IOCondition>& slot):
 
 GMplayer::~GMplayer()
 {
-	stop();
 }
 
 void GMplayer::wait_mplayer_exit(GPid pid, int)
 {
-	if (childpid != -1) {
+	if (child_pid != -1) {
 		ptm_conn.disconnect();
 
-		waitpid(childpid, NULL, 0);
-		childpid = -1;
+		waitpid(child_pid, NULL, 0);
+		child_pid = -1;
 
-		ready = true;
-		signal_stop_play_.emit();
+		is_running = false;
+		on_mplayer_exit();
 	}
 
 }
@@ -135,8 +131,9 @@ int GMplayer::my_system(char* const argv[])
 {
 	extern char **environ;
 	create_pipe();
+	assert(!out_slot.empty());
 	ptm_conn = Glib::signal_io().connect(
-			child_call,
+			out_slot,
 			stdout_pipe[0], Glib::IO_IN);
 
 
@@ -155,7 +152,7 @@ int GMplayer::my_system(char* const argv[])
 
 		perror("mplayer execvp:");
 	} 
-	childpid = pid;
+	child_pid = pid;
 
 	set_m_pipe();
 
@@ -163,133 +160,19 @@ int GMplayer::my_system(char* const argv[])
 	wait_conn = Glib::signal_child_watch().connect(
 			sigc::mem_fun(*this, &GMplayer::wait_mplayer_exit), pid, 0);
 
+	is_running = true;
 	return pid;
 }
 
-bool GMplayer::is_runing()
+bool GMplayer::running()
 {
-	return (!ready) && (childpid > 0);
+	return (is_running) && (child_pid > 0);
 }
 
-void GMplayer::initialize_play()
-{
-	signal_start_play_.emit();
-
-	Glib::RefPtr<Gdk::Window> gwin = this->get_window();
-
-	char cache_buf[32];
-	snprintf(cache_buf, 32, "%d", cache);
-
-	std::string& paramter = GMConf["mplayer_paramter"];
-	std::list<std::string> pars;
-	if (!paramter.empty()) {
-		size_t pos1 = 0;
-		size_t pos2 = 0;
-		for(;;) {
-			pos2 = paramter.find_first_of(" \t", pos1);
-			pars.push_back(paramter.substr(pos1, pos2 - pos1));
-			if (pos2 == std::string::npos)
-				break;
-			pos1 = pos2 + 1;
-		}
-	}
-
-	int argv_len = 10 + pars.size();
-	const char* argv[argv_len];
-	argv[0] = "mplayer";
-	argv[1] = "-slave";
-	argv[2] = "-idle";
-	argv[3] = "-quiet";
-	argv[4] = "-cache";
-	argv[5] = cache_buf;
-	std::list<std::string>::iterator iter = pars.begin();
-	int i = 6;
-	for (; i < argv_len && iter != pars.end(); i++, ++iter) {
-		argv[i] = (*iter).c_str();
-	}
-	if (is_embed) {
-		char wid_buf[32];
-		snprintf(wid_buf, 32, "%d", this->get_id());
-		printf("%s\n", wid_buf);
-		argv[i++] = "-wid";
-		argv[i++] = wid_buf;
-	}
-	argv[i] = NULL;
-
-	ready = false;
-	my_system((char* const *) argv);
-}
-
-void GMplayer::play()
-{
-	is_record = false;
-	if (is_pause)
-		return pause();
-	if (is_runing())
-		stop();
-	initialize_play();
-	char cb[256];
-	int len = snprintf(cb, 256, "loadfile %s\n", file.c_str());
-	EC_THROW(-1 == write(stdin_pipe[1], cb, len));
-
-}
-
-void GMplayer::play(const std::string& filename)
-{
-	if (filename != file)
-		file = filename;
-	play();
-}
-
-void GMplayer::initialize_record(const std::string& outfilename)
-{
-	signal_start_play_.emit();
-	char cache_buf[32];
-	snprintf(cache_buf, 32, "%d", cache);
-	const char* argv[10];
-	argv[0] = "mplayer";
-	argv[1] = "-slave";
-	argv[2] = "-idle";
-	argv[3] = "-cache";
-	argv[4] = cache_buf;
-	argv[5] = "-dumpstream";
-	argv[6] = "-dumpfile";
-	argv[7] = outfilename.c_str();
-	argv[8] = "-quiet";
-	argv[9] = NULL;
-
-	ready = false;
-	my_system((char* const *) argv);
-}
-
-void GMplayer::record(const std::string& filename,
-		const std::string& outfilename)
-{
-	is_record = true;
-	file = filename;
-	outfile = outfilename;
-	if (is_runing())
-		stop();
-	initialize_record(outfilename);
-	char cb[256];
-	int len = snprintf(cb, 256, "loadfile %s\n", file.c_str());
-	EC_THROW(-1 == write(stdin_pipe[1], cb, len));
-	Glib::signal_timeout().connect(sigc::mem_fun(*this, &GMplayer::on_startup_play_time), 3);
-}
-
-bool GMplayer::on_startup_play_time()
-{
-	std::cout << "startup mplayer" << std::endl;
-	return false;
-}
-
-void GMplayer::full_screen()
-{
-}
 
 void GMplayer::send_ctrl_command(const char* c)
 {
-	if (is_runing()) {
+	if (running()) {
 		assert(c != NULL);
 		EC_THROW(-1 == write(stdin_pipe[1], c, strlen (c)));
 	}
@@ -297,21 +180,20 @@ void GMplayer::send_ctrl_command(const char* c)
 
 void GMplayer::stop()
 {
-	if (childpid != -1) {
+	if (child_pid != -1) {
 		ptm_conn.disconnect();
 		wait_conn.disconnect();
 
 		for (;;) {
-			kill(-childpid, SIGKILL);
-			int ret = (waitpid( -childpid, NULL, WNOHANG));
+			kill(-child_pid, SIGKILL);
+			int ret = (waitpid( -child_pid, NULL, WNOHANG));
 			if (-1 == ret)
 				break;
 		}
 
-		childpid = -1;	
-		signal_stop_play_.emit();
+		child_pid = -1;	
 	}
-	ready = true;
+	is_running = false;
 }
 
 
@@ -321,12 +203,4 @@ void GMplayer::pause()
 	send_ctrl_command("pause\n");
 }
 
-void GMplayer::set_embed(bool embed_)
-{
-	if (is_embed == embed_)
-		return;
-	is_embed = embed_;
-	if (is_runing()) 
-		play();
-}
 

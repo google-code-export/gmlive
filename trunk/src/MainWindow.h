@@ -21,7 +21,8 @@
 #define _MAINWINDOW_HH
 
 #include "gmlive.h"
-#include "gmplayer.h"
+#include "playStream.h"
+#include "recordStream.h"
 
 
 class Channel;
@@ -30,7 +31,6 @@ class MainWindow : public Gtk::Window {
 	public:
 		MainWindow();
 		~MainWindow();
-		GMplayer& get_mplayer() { return *gmp; }
 	protected:
 		bool on_delete_event(GdkEventAny* event);
 		void show_msg(const Glib::ustring& msg,unsigned int id=0);
@@ -41,6 +41,7 @@ class MainWindow : public Gtk::Window {
 		friend class Channel;
 		void set_live_player(LivePlayer*, const Glib::ustring&);
 		LivePlayer* get_live_player() { return live_player; }
+		RecordStream* get_record_gmp() { return record_gmp; }
 		Gtk::Menu* get_channels_pop_menu() { return channels_pop_menu; }
 		Channel* get_recent_channel() { return recent_channel; }
 		Channel* get_bookmark_channel() { return bookmark_channel; }
@@ -78,7 +79,8 @@ class MainWindow : public Gtk::Window {
 		Glib::RefPtr<Gtk::UIManager>	ui_manager;
 		Glib::RefPtr<Gtk::ActionGroup> 	action_group;
 		Glib::ustring			play_channel_name;
-		GMplayer* 			gmp;
+		PlayStream* 			gmp;
+		RecordStream* 			record_gmp;
 		Gtk::Box*			play_frame;
 		Gtk::Notebook*			channels;
 		Gtk::Widget*			channels_box;

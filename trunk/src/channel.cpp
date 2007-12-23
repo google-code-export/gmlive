@@ -23,6 +23,7 @@
 #include "livePlayer.h"
 #include "recentchannel.h"
 #include "bookmarkchannel.h"
+#include "recordStream.h"
 
 Channel::Channel(MainWindow* parent_):parent( parent_)
 {
@@ -37,11 +38,11 @@ Channel::Channel(MainWindow* parent_):parent( parent_)
 	channel->append_column("码率", columns.freq);
 	channel->append_column("用户数", columns.users);
 	this->signal_motion_notify_event().
-	    connect(sigc::mem_fun(*this, &Channel::on_motion_event),
-		    false);
+		connect(sigc::mem_fun(*this, &Channel::on_motion_event),
+				false);
 	this->signal_leave_notify_event().
-	    connect(sigc::mem_fun(*this, &Channel::on_leave_event),
-		    false);
+		connect(sigc::mem_fun(*this, &Channel::on_leave_event),
+				false);
 
 	channel->show();
 }
@@ -51,7 +52,7 @@ Channel::~Channel()
 }
 
 Gtk::TreeModel::iterator Channel::getListIter(Gtk::TreeModel::
-				Children children, const std::string& groupname)
+		Children children, const std::string& groupname)
 {
 	return find_if(children.begin(),
 			children.end(),
@@ -71,7 +72,7 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 	bool result = Gtk::TreeView::on_button_press_event(ev);
 
 	Glib::RefPtr < Gtk::TreeSelection > selection =
-	    this->get_selection();
+		this->get_selection();
 	Gtk::TreeModel::iterator iter = selection->get_selected();
 	if (!selection->count_selected_rows())
 		return result;
@@ -79,15 +80,15 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 	Gtk::TreeModel::Path path(iter);
 	Gtk::TreeViewColumn * tvc;
 	int cx, cy;
-					/** get_path_at_pos() 是为确认鼠标是否在选择行上点击的*/
+	/** get_path_at_pos() 是为确认鼠标是否在选择行上点击的*/
 	if (!this->
-	    get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
+			get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
 		return false;
 	// 这是为了可以正常搜索，把搜索文本清空才行，该死的Gtk团队，太笨了.
 	search_channel_name.clear();
 
 	if ((ev->type == GDK_2BUTTON_PRESS ||
-	     ev->type == GDK_3BUTTON_PRESS) && ev->button != 3) {
+				ev->type == GDK_3BUTTON_PRESS) && ev->button != 3) {
 		if(GROUP_CHANNEL != (*iter)[columns.type]){
 			play_selection_iter(iter);
 		}
@@ -104,7 +105,7 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 		if(GROUP_CHANNEL == (*iter)[columns.type])
 			return false;
 		Gtk::Menu* pop_menu = 
-				parent->get_channels_pop_menu();
+			parent->get_channels_pop_menu();
 		if (pop_menu)
 			pop_menu->popup(ev->button, ev->time);
 		return true;
@@ -140,20 +141,28 @@ void Channel::record_selection()
 	std::string stream = (*iter)[columns.stream];
 
 	Gtk::FileChooserDialog dlg(*parent,
-		       	"选择文件", 
+			"选择文件", 
 			Gtk::FILE_CHOOSER_ACTION_SAVE);
 	dlg.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
-  	dlg.add_button(Gtk::Stock::SAVE, Gtk::RESPONSE_OK);
+	dlg.add_button(Gtk::Stock::SAVE, Gtk::RESPONSE_OK);
 	if (Gtk::RESPONSE_OK == dlg.run()) {
 		Glib::ustring outfilename = dlg.get_filename();
 		if (outfilename.empty())
 			return;
-		LivePlayer* lp = parent->get_live_player();
+
+		RecordStream* record_wnd = parent->get_record_gmp();
+		LivePlayer* lp = record_wnd->get_live_player();
+
+		if (NULL != lp) {
+			if (lp->get_stream() == stream) {
+				record_wnd->set_live_player(NULL, "");
+				return;
+			}
+		}
+
 		delete lp;
 		lp = get_player(stream, page);
-		lp->set_record(true);
-		lp->set_record_filename(outfilename);
-		parent->set_live_player(lp, name);
+		record_wnd->set_live_player(lp, name);
 		RecentChannel* rc =
 			dynamic_cast<RecentChannel*>(parent->get_recent_channel());
 		if (this != rc)
@@ -261,10 +270,10 @@ bool Channel::tooltip_timeout(GdkEventMotion * ev)
 	Gtk::TreeViewColumn * column;
 	int cell_x, cell_y;
 	if (this->
-	    get_path_at_pos((int) ev->x, (int) ev->y, path, column, cell_x,
-			    cell_y)) {
+			get_path_at_pos((int) ev->x, (int) ev->y, path, column, cell_x,
+				cell_y)) {
 		Gtk::TreeModel::iterator iter =
-		    this->get_model()->get_iter(path);
+			this->get_model()->get_iter(path);
 		if (!iter)
 			return false;
 		TypeChannel type = (*iter)[columns.type];
@@ -287,9 +296,9 @@ bool Channel::tooltip_timeout(GdkEventMotion * ev)
 			"\nURL:</span> " + stream +"\n<span weight='bold'>"+_("Type:")+type_+"\n</span>";
 		Glib::RefPtr<Gdk::Pixbuf> logo= Gdk::Pixbuf::create_from_file(DATA_DIR"/gmlive.png");
 
-			tooltips->setImage(logo);
-			tooltips->setLabel(text);
-			tooltips->showTooltip(ev);
+		tooltips->setImage(logo);
+		tooltips->setLabel(text);
+		tooltips->showTooltip(ev);
 
 	}
 	return false;
@@ -307,20 +316,20 @@ bool Channel::on_motion_event(GdkEventMotion * ev)
 		tooltips->hideTooltip();
 	}
 	if (this->
-	    get_path_at_pos((int) ev->x, (int) ev->y, path, column, cell_x,
-			    cell_y)) {
+			get_path_at_pos((int) ev->x, (int) ev->y, path, column, cell_x,
+				cell_y)) {
 		Gtk::TreeModel::iterator iter =
-		    this->get_model()->get_iter(path);
+			this->get_model()->get_iter(path);
 		TypeChannel type = (*iter)[columns.type];
 		if (GROUP_CHANNEL != type)
 			tipTimeout =
-			    Glib::signal_timeout().connect(sigc::bind <
-							   GdkEventMotion *
-							   >(sigc::
-							     mem_fun(*this,
-								     &Channel::
-								     tooltip_timeout),
-							     ev), delay);
+				Glib::signal_timeout().connect(sigc::bind <
+						GdkEventMotion *
+						>(sigc::
+							mem_fun(*this,
+								&Channel::
+								tooltip_timeout),
+							ev), delay);
 		else
 			tooltips->hideTooltip();
 	} else

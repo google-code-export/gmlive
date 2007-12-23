@@ -79,6 +79,7 @@ class Channel:public Gtk::TreeView
 		bool on_foreach_iter(const Gtk::TreeModel::iterator& iter);
 		bool on_clean_foreach(const Gtk::TreeModel::iterator& iter);
 		void play_selection_iter(Gtk::TreeModel::iterator& iter);
+
 		MainWindow* parent;
 		Glib::ustring search_channel_name;
 		ChannelsTooltips* tooltips;
