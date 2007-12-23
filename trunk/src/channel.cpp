@@ -24,8 +24,9 @@
 #include "recentchannel.h"
 #include "bookmarkchannel.h"
 #include "recordStream.h"
+#include <cassert>
 
-Channel::Channel(MainWindow* parent_):parent( parent_)
+Channel::Channel(MainWindow* parent_):parent( parent_), live_player(NULL)
 {
 	Channel* channel = this;
 	channel->set_flags(Gtk::CAN_FOCUS);
@@ -49,6 +50,11 @@ Channel::Channel(MainWindow* parent_):parent( parent_)
 
 Channel::~Channel()
 {
+}
+
+void Channel::on_live_player_exit()
+{
+	live_player = NULL;
 }
 
 Gtk::TreeModel::iterator Channel::getListIter(Gtk::TreeModel::
@@ -120,7 +126,7 @@ void Channel::play_selection()
 		this->get_selection();
 	Gtk::TreeModel::iterator iter = selection->get_selected();
 	if (!selection->count_selected_rows()) {
-		parent->set_live_player(NULL, "");
+		parent->set_live_player(parent->get_live_player() ,"");
 		return ;
 	}
 
@@ -151,18 +157,39 @@ void Channel::record_selection()
 			return;
 
 		RecordStream* record_wnd = parent->get_record_gmp();
-		LivePlayer* lp = record_wnd->get_live_player();
+		record_wnd->set_out_file(outfilename);
+		LivePlayer* lr = record_wnd->get_live_player();
+		LivePlayer* lp = parent->get_live_player();
 
-		if (NULL != lp) {
-			if (lp->get_stream() == stream) {
-				record_wnd->set_live_player(NULL, "");
-				return;
+		if (NULL != live_player) {
+			// live_player不是NULL的时候，只有2种情况，
+			// 要么是在录制，要么是在播放。
+			if (live_player == lp) { // 播放的时候
+				// 停止播放
+				parent->set_live_player(NULL);
+				if (live_player->get_stream() == stream) {
+					record_wnd->set_live_player(live_player, name);
+					// 如果只是播放同一个频道在播放，直接转为录制.
+					return;
+				}
+			} else if (live_player == lr) { // 录制的时候
+				if (live_player->get_stream() == stream) {
+					// 是同一个频道在录制，怎么办？现在什么也不干
+					// 。以后弹出个对话框警告一下
+					return ;
+					//parent->set_live_player(live_player, name);
+				}
 			}
+			assert(false);
+			// 一个频道不是空的，但不在播放也不在录制。肯定出错了.
 		}
+		delete live_player;
+		live_player = get_player(stream, page);
+		live_player->signal_exit().connect(
+				sigc::mem_fun(
+					*this, &Channel::on_live_player_exit));
 
-		delete lp;
-		lp = get_player(stream, page);
-		record_wnd->set_live_player(lp, name);
+		record_wnd->set_live_player(live_player, name);
 		RecentChannel* rc =
 			dynamic_cast<RecentChannel*>(parent->get_recent_channel());
 		if (this != rc)
@@ -201,21 +228,40 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 	std::string stream = (*iter)[columns.stream];
 
 	if(GROUP_CHANNEL == (*iter)[columns.type]) {
-		parent->set_live_player(NULL,"");
+		parent->set_live_player(parent->get_live_player());
 		return;
 	}
 
 	LivePlayer* lp = parent->get_live_player();
-	if (NULL != lp) {
-		if (lp->get_stream() == stream) {
-			parent->set_live_player(NULL, "");
-			return;
+	LivePlayer* lr = parent->get_record_gmp()->get_live_player();
+	if (NULL != live_player) {
+		// live_player不是NULL的时候，只有2种情况，要么是在录制，要么是在播放。
+		if (live_player == lp) { // 播放的时候
+			if (live_player->get_stream() == stream) {
+				// 如果只是播放同一个频道，就只是重启一下mplayer好了.
+				parent->set_live_player(lp);
+				return;
+			}
+		} else if (live_player == lr) { // 录制的时候
+			parent->get_record_gmp()->set_live_player(NULL); // 停止录制吧
+			if (live_player->get_stream() == stream) {
+				// 是同一个频道，但是在录制，怎么办？停掉录制开始播放吧.
+				parent->set_live_player(live_player, name);
+				return;
+			} 
 		}
+		assert(false);
+		// 一个频道不是空的，但不在播放也不在录制。肯定出错了.
 	}
 
-	delete lp;
-	lp = get_player(stream, page);
-	parent->set_live_player(lp, name);
+	delete live_player;
+
+	live_player = get_player(stream, page);
+	live_player->signal_exit().connect(
+			sigc::mem_fun(
+				*this, &Channel::on_live_player_exit));
+
+	parent->set_live_player(live_player, name);
 	RecentChannel* rc =
 		dynamic_cast<RecentChannel*>(parent->get_recent_channel());
 	if (this != rc)
@@ -337,3 +383,4 @@ bool Channel::on_motion_event(GdkEventMotion * ev)
 
 	return true;
 }
+

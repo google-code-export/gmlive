@@ -744,13 +744,16 @@ void MainWindow::set_live_player(LivePlayer* lp,
 		const Glib::ustring& name)
 {
 	if (lp != NULL) {
-		play_channel_name = name;
+		if (!name.empty())
+			play_channel_name = name;
+		if (lp != live_player)
+			lp->signal_status().connect(sigc::mem_fun(
+						*this, &MainWindow::on_live_player_out));
 		live_player = lp;
-		lp->signal_status().connect(sigc::mem_fun(
-					*this, &MainWindow::on_live_player_out));
 		lp->start(*gmp);
-	} else if (live_player) {
-		live_player->start(*gmp);
+	} else {
+		live_player = NULL;
+		gmp->stop();
 	}
 }
 
