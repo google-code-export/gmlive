@@ -67,13 +67,17 @@ void RecordStream::on_preview()
 
 void RecordStream::on_stop()
 {
-	std::cout << "on_stop" << std::endl;
 	stop();
+	delete live_player;
+	live_player = NULL;
+	std::cout << "on_stop" << std::endl;
 }
 
 bool RecordStream::on_delete_event(GdkEventAny* event)
 {
 	stop();
+	delete live_player;
+	live_player = NULL;
 	return Gtk::Window::on_delete_event(event);
 }
 
@@ -127,6 +131,7 @@ void RecordStream::set_out_file(const std::string& filename)
 
 void RecordStream::on_mplayer_exit()
 {
+	delete live_player;
 	timeout_conn.disconnect();
 	close(outfile);
 	outfile = -1;
