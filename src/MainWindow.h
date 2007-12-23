@@ -39,9 +39,10 @@ class MainWindow : public Gtk::Window {
 		void init();
 	private:
 		friend class Channel;
-		void set_live_player(LivePlayer*, const Glib::ustring&);
+		void set_live_player(LivePlayer*, const Glib::ustring& name = "");
 		LivePlayer* get_live_player() { return live_player; }
 		RecordStream* get_record_gmp() { return record_gmp; }
+		PlayStream* get_play_gmp() { return gmp; }
 		Gtk::Menu* get_channels_pop_menu() { return channels_pop_menu; }
 		Channel* get_recent_channel() { return recent_channel; }
 		Channel* get_bookmark_channel() { return bookmark_channel; }

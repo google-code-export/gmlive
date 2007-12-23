@@ -80,14 +80,16 @@ class Channel:public Gtk::TreeView
 		bool on_clean_foreach(const Gtk::TreeModel::iterator& iter);
 		void play_selection_iter(Gtk::TreeModel::iterator& iter);
 
-		MainWindow* parent;
 		Glib::ustring search_channel_name;
-		ChannelsTooltips* tooltips;
 		sigc::connection tipTimeout;
+		ChannelsTooltips* tooltips;
+		MainWindow* parent;
+		LivePlayer* live_player;
 	protected:
 		bool on_motion_event(GdkEventMotion* ev);
 		bool on_leave_event(GdkEventCrossing * ev);
 		bool tooltip_timeout(GdkEventMotion* ev);
+		void on_live_player_exit();
 	private:
 		struct CompareChannel:public std::binary_function 
 				      < Gtk::TreeModel::Row,

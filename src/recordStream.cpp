@@ -20,31 +20,61 @@
 #include "recordStream.h"
 #include "gmlive.h"
 #include "ec_throw.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 RecordStream::RecordStream():
 	live_player(NULL)
+	,outfile(-1)
 {
 	GlademmXML ui_xml = Gnome::Glade::Xml::create(record_ui, "main_frame");
 	if (!ui_xml) 
 		exit(127);
-	
+
 	Gtk::VBox* main_frame = dynamic_cast < Gtk::VBox* >
 		(ui_xml->get_widget("main_frame"));
 
 	this->add(*main_frame);
-	//this->show_all();
+
+	record_name = dynamic_cast <Gtk::Label*>
+		(ui_xml->get_widget("label_info"));
+
+	progress_bar = dynamic_cast<Gtk::ProgressBar*>
+		(ui_xml->get_widget("progressbar"));
 
 	char buf[512];
 	char* homedir = getenv("HOME");
 	snprintf(buf, 512,"%s/gmlive_default_out_file", homedir);
 	outfilename.assign(buf);
 	this->set_out_slot(sigc::mem_fun(*this, &RecordStream::on_mplayer_out));
+
+	ui_xml->connect_clicked("bt_preview", sigc::mem_fun(*this, &RecordStream::on_preview));
+	ui_xml->connect_clicked("bt_stop", sigc::mem_fun(*this, &RecordStream::on_stop));
+	//this->show_all();
 }
 
 RecordStream::~RecordStream()
 {
 }
 
+void RecordStream::on_preview()
+{
+	std::cout << "on_preview" << std::endl;
+}
+
+void RecordStream::on_stop()
+{
+	std::cout << "on_stop" << std::endl;
+	stop();
+}
+
+bool RecordStream::on_delete_event(GdkEventAny* event)
+{
+	stop();
+	return Gtk::Window::on_delete_event(event);
+}
 
 void RecordStream::initialize()
 {
@@ -60,16 +90,21 @@ void RecordStream::initialize()
 	argv[5] = "-dumpstream";
 	argv[6] = "-dumpfile";
 	argv[7] = outfilename.c_str();
-	argv[8] = "-quiet";
-	argv[9] = NULL;
+	//argv[8] = "-quiet";
+	argv[8] = NULL;
 
-	my_system((char* const *) argv);
+	if (-1 != my_system((char* const *) argv) )
+		timeout_conn = Glib::signal_timeout().connect(
+				sigc::mem_fun(*this, &RecordStream::on_timeout), 2000);
 }
 
 void RecordStream::start(const std::string& filename_)
 {
 	if (filename != filename_)
 		filename = filename_;
+
+	Glib::ustring info = filename + " >>>>> " + outfilename;
+	record_name->set_label(info);
 	start();
 }
 
@@ -83,6 +118,11 @@ void RecordStream::start()
 	EC_THROW(-1 == write(stdin_pipe[1], cb, len));
 }
 
+void RecordStream::stop()
+{
+	GMplayer::stop();
+}
+
 void RecordStream::set_out_file(const std::string& filename)
 {
 	outfilename = filename;
@@ -90,25 +130,58 @@ void RecordStream::set_out_file(const std::string& filename)
 
 void RecordStream::on_mplayer_exit()
 {
+	timeout_conn.disconnect();
+	close(outfile);
+	outfile = -1;
+}
+
+bool RecordStream::on_timeout()
+{
+	progress_bar->pulse();
+
+	if (-1 == outfile)
+		outfile = open(outfilename.c_str(), O_RDONLY);
+	if (-1 == outfile)
+		return true;
+
+	struct stat stat;
+	EC_THROW(-1 == fstat(outfile, &stat));
+	off_t size = stat.st_size;
+	char buf[512];
+	int len = snprintf(buf, 512, "%s (%u)", outfilename.c_str(), size);
+	buf[len] = 0;
+	record_name->set_label(buf);
+	return true;
 }
 
 bool RecordStream::on_mplayer_out(const Glib::IOCondition& condition)
 {
+	char buf[256];
+	int len = this->get_mplayer_log(buf, 255);
+	buf[len] = 0;
+	printf("%s", buf);
+}
 
+void RecordStream::on_live_player_out(int percentage)
+{
 }
 
 void RecordStream::set_live_player(LivePlayer* lp,
-	       	const std::string& name)
+		const std::string& name)
 {
-	std::cout << name << std::endl;
+	this->show_all();
 	if (lp != NULL) {
-		record_channel_name = name;
+		if (!name.empty())
+			record_channel_name = name;
+		if (live_player != lp)
+			lp->signal_status().connect(sigc::mem_fun(
+						*this, &RecordStream::on_live_player_out));
 		live_player = lp;
-	//	lp->signal_status().connect(sigc::mem_fun(
-	//				*this, &RecordStream::on_live_player_out));
 		lp->start(*this);
 	} else if (live_player) {
-		live_player->start(*this);
+		live_player = NULL;
+		this->stop();
+		this->hide();
 	}	
 }
 

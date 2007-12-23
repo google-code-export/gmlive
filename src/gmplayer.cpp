@@ -190,6 +190,7 @@ void GMplayer::stop()
 			if (-1 == ret)
 				break;
 		}
+		on_mplayer_exit();
 
 		child_pid = -1;	
 	}
