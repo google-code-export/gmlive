@@ -100,10 +100,6 @@ bool NsLivePlayer::on_gmp_startup_time()
 	int icache = atoi(cache.c_str());
 	icache = icache < 64 ? 64 : icache;
 	gmplayer->set_cache(icache);
-
-	if (record)
-		gmplayer->record(NSLIVESTREAM, outfilename);
-	else
-		gmplayer->play(NSLIVESTREAM);
+	gmplayer->start(NSLIVESTREAM);
 	return false;
 }

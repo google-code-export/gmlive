@@ -37,10 +37,7 @@ void MmsLivePlayer::start(GMplayer& gmp)
 	icache = icache > 64 ? icache : 8192;
 
 	gmp.set_cache(icache);
-	if (record)
-		gmp.record(filename, outfilename);
-	else
-		gmp.play(filename);
+	gmp.start(filename);
 }
 
 void MmsLivePlayer::stop()
