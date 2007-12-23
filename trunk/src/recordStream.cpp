@@ -108,9 +108,10 @@ void RecordStream::start(const std::string& filename_)
 	if (filename != filename_)
 		filename = filename_;
 
-	Glib::ustring info = filename + " >>>>> " + outfilename;
+	Glib::ustring info = filename + " >> " + outfilename;
 	record_name->set_label(info);
 	start();
+	show_all();
 }
 
 void RecordStream::start()
@@ -150,7 +151,7 @@ bool RecordStream::on_timeout()
 	EC_THROW(-1 == fstat(outfile, &stat));
 	off_t size = stat.st_size;
 	char buf[512];
-	int len = snprintf(buf, 512, "%s (%u)", outfilename.c_str(), size);
+	int len = snprintf(buf, 512, "recoding %s (%u)", outfilename.c_str(), size);
 	buf[len] = 0;
 	record_name->set_label(buf);
 	return true;

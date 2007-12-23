@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-21 23:06+0800\n"
+"POT-Creation-Date: 2007-12-23 01:03+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,6 +44,22 @@ msgstr ""
 msgid "Type:"
 msgstr ""
 
-#: ../src/MainWindow.cpp:164
+#: ../src/MainWindow.cpp:156
+msgid "Open local file"
+msgstr ""
+
+#: ../src/MainWindow.cpp:157
+msgid "Open Local File"
+msgstr ""
+
+#: ../src/MainWindow.cpp:160
+msgid "Open URL"
+msgstr ""
+
+#: ../src/MainWindow.cpp:161
+msgid "Open Network Stream"
+msgstr ""
+
+#: ../src/MainWindow.cpp:191
 msgid "HideChannels"
 msgstr ""
