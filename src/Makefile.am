@@ -11,7 +11,6 @@ gmlive_SOURCES = \
 		 main.cpp \
 		 MainWindow.cpp \
 		 ConfWindow.cpp \
-		 StreamMenu.cpp \
 		 channel.cpp \
 		 nslivechannel.cpp \
 		 ChannelsTooltips.cpp \
@@ -32,7 +31,6 @@ noinst_HEADERS = \
 		 scope_gruard.h \
 		 MainWindow.h \
 		 ConfWindow.h \
-		 StreamMenu.h \
 		 channel.h \
 		 ChannelsTooltips.h \
 		 sopcastchannel.h \
