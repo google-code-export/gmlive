@@ -36,9 +36,9 @@ Channel::Channel(MainWindow* parent_):parent( parent_), live_player(NULL)
 	tooltips = new ChannelsTooltips(this);
 	m_liststore = Gtk::TreeStore::create(columns);
 	channel->set_model( m_liststore);
-	channel->append_column("频道", columns.name);
+	channel->append_column(_("channels"), columns.name);
 	channel->append_column("码率", columns.freq);
-	channel->append_column("用户数", columns.users);
+	channel->append_column(_("user"), columns.users);
 	this->signal_motion_notify_event().
 		connect(sigc::mem_fun(*this, &Channel::on_motion_event),
 				false);
@@ -149,7 +149,7 @@ void Channel::record_selection()
 	std::string stream = (*iter)[columns.stream];
 
 	Gtk::FileChooserDialog dlg(*parent,
-			"选择文件", 
+			_("Choose File"), 
 			Gtk::FILE_CHOOSER_ACTION_SAVE);
 	dlg.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
 	dlg.add_button(Gtk::Stock::SAVE, Gtk::RESPONSE_OK);
@@ -244,7 +244,6 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 			parent->set_live_player(NULL); // 停止播放
 			if (live_player->get_stream() == stream) {
 				// 如果只是播放同一个频道，就只是重启一下mplayer好了.
-				std::cout<<"播放时播放"<<std::endl;
 				parent->set_live_player(lp);
 				return;
 			} 
@@ -261,7 +260,6 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 			parent->get_record_gmp()->set_live_player(NULL); // 停止录制吧
 			if (live_player->get_stream() == stream) {
 				// 是同一个频道，但是在录制，怎么办？停掉录制开始播放吧.
-				std::cout<<"录制时播放"<<std::endl;
 
 
 			} 
