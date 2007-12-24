@@ -244,6 +244,7 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 			parent->set_live_player(NULL); // 停止录制
 			if (live_player->get_stream() == stream) {
 				// 如果只是播放同一个频道，就只是重启一下mplayer好了.
+				std::cout<<"播放时播放"<<std::endl;
 				parent->set_live_player(lp);
 				return;
 			} 
@@ -251,8 +252,31 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 			parent->get_record_gmp()->set_live_player(NULL); // 停止录制吧
 			if (live_player->get_stream() == stream) {
 				// 是同一个频道，但是在录制，怎么办？停掉录制开始播放吧.
-				parent->set_live_player(live_player, name);
-				return;
+				std::cout<<"录制时播放"<<std::endl;
+
+			Gtk::MessageDialog infoDialog(_("Stop Recording"),
+							false,
+							Gtk::MESSAGE_QUESTION,
+							Gtk::BUTTONS_OK_CANCEL);
+			Glib::ustring text =  _("GMLive is recording,you can play channel after stop the record.\n Are you really to do this?");
+			infoDialog.set_secondary_text(text);
+			int result = infoDialog.run();
+			switch(result){
+				case(Gtk::RESPONSE_OK):
+					{
+						std::cout<<"stop record and play"<<std::endl;
+					parent->set_live_player(live_player, name);
+					return;
+					}
+				case(Gtk::RESPONSE_CANCEL):
+					{
+						std::cout<<"Cancel clicked"<<std::endl;
+						return;
+					}
+				default:
+					return;
+			}
+
 			} 
 
 		} else
