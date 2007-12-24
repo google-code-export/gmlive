@@ -78,6 +78,7 @@ void RecordStream::on_stop()
 
 	delete live_player;
 	live_player = NULL;
+	this->hide();
 
 }
 
