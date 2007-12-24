@@ -40,7 +40,7 @@ NSLiveChannel::NSLiveChannel(MainWindow* parent_):Channel( parent_)
 
 NSLiveChannel::~NSLiveChannel()
 {
-	system("killall nsweb>/dev/null");
+	system("killall nsweb>/dev/null 2>&1");
 }
 
 LivePlayer* NSLiveChannel::get_player(const std::string& stream,TypeChannel page) 
