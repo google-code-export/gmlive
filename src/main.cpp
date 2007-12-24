@@ -18,12 +18,22 @@
 
 #include <iostream>
 #include "MainWindow.h"
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 
 using namespace std;
 TGMConf GMConf;
 
 int main(int argc, char* argv[])
 {
+	setlocale (LC_ALL, "");
+
+	bindtextdomain (GETTEXT_PACKAGE, GMLIVE_LOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, NULL);
+	textdomain (GETTEXT_PACKAGE);
+
 	Gtk::Main kit(argc, argv);
 
 	MainWindow wnd; 

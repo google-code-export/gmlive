@@ -1,8 +1,9 @@
-INCLUDES = 					\
-						-I$(top_srcdir)				\
-						-I$(srcdir)				\
-						-DDATA_DIR=\""${datadir}/gmlive"\"	\
-						@PACKAGE_CFLAGS@	
+INCLUDES = \
+	-I$(top_srcdir)				\
+	-I$(srcdir)				\
+	-DDATA_DIR=\""${datadir}/gmlive"\"	\
+	-DGMLIVE_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
+	@PACKAGE_CFLAGS@	
 
 bin_PROGRAMS = gmlive
 gmlive_SOURCES = \

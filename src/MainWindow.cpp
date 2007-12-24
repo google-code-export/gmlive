@@ -15,6 +15,9 @@
  *
  k* =====================================================================================
  */
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 #include "mmschannel.h"
 #include "nslivechannel.h"
 #include "sopcastchannel.h"
@@ -31,6 +34,7 @@
 #include <cassert>
 #include <functional>
 #include <algorithm>
+#include <glib/gi18n.h>
 
 using namespace std;
 

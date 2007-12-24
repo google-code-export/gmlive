@@ -25,6 +25,7 @@
 #include "bookmarkchannel.h"
 #include "recordStream.h"
 #include <cassert>
+#include <glib/gi18n.h>
 
 Channel::Channel(MainWindow* parent_):parent( parent_), live_player(NULL)
 {
