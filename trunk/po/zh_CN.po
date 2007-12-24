@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-24 22:01+0800\n"
-"PO-Revision-Date: 2007-12-24 22:03+0800\n"
+"POT-Creation-Date: 2007-12-24 23:09+0800\n"
+"PO-Revision-Date: 2007-12-24 23:10+0800\n"
 "Last-Translator: lerosua <lerosua@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 
 #: ../data/gmlive.desktop.in.in.h:1
 msgid "Gmlive"
-msgstr ""
+msgstr "GMLive"
 
 #: ../data/gmlive.desktop.in.in.h:2
 msgid "Streaming Direct Broadcast System based on P2P"
@@ -159,4 +159,14 @@ msgstr "录制完成"
 #: ../src/recordStream.cpp:74
 msgid " record finial"
 msgstr "录制完成"
+
+#: ../src/recordStream.cpp:167
+#, c-format
+msgid "Recording %s To %s (%u Kb)"
+msgstr "录制 %s 至 %s (%u Kb)"
+
+#: ../src/recordStream.cpp:172
+#, c-format
+msgid "Recording %s To %s (%u.%u Mb)"
+msgstr "录制 %s 至 %s (%u.%u Mb)"
 

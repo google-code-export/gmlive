@@ -76,9 +76,8 @@ void RecordStream::on_stop()
 	infoDialog.run();
 	record_name->set_label("");
 
-	//delete live_player;
-	//live_player = NULL;
-	delete this;
+	delete live_player;
+	live_player = NULL;
 
 }
 
@@ -120,7 +119,8 @@ void RecordStream::start(const std::string& filename_)
 	Glib::ustring info = filename + " >> " + outfilename;
 	record_name->set_label(info);
 	start();
-	show_all();
+	this->set_position(Gtk::WIN_POS_CENTER);
+	this->show_all();
 }
 
 void RecordStream::start()
@@ -161,8 +161,18 @@ bool RecordStream::on_timeout()
 	EC_THROW(-1 == fstat(outfile, &stat));
 	off_t size = stat.st_size/(1024);
 	char buf[512];
-	int len = snprintf(buf, 512, "Recording %s To %s (%u Kb)",record_channel_name.c_str(), outfilename.c_str(), size);
+	int len;
+	if(size<1024)
+	{
+	len = snprintf(buf, 512, _("Recording %s To %s (%u Kb)"),record_channel_name.c_str(), outfilename.c_str(), size);
+	}
+	else{
+		off_t mb=size/1024;
+		off_t kb=size%1024;
+	len = snprintf(buf, 512, _("Recording %s To %s (%u.%u Mb)"),record_channel_name.c_str(), outfilename.c_str(), mb,kb);
+	}
 	buf[len] = 0;
+
 	record_name->set_label(buf);
 	return true;
 }
