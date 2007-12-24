@@ -139,6 +139,20 @@ void Channel::play_selection()
 
 void Channel::record_selection()
 {
+		RecordStream* record_wnd = parent->get_record_gmp();
+		LivePlayer* lr = record_wnd->get_live_player();
+		LivePlayer* lp = parent->get_live_player();
+		if ((live_player!=NULL)&&(live_player == lr)) { // 录制的时候再录制跳出警告并退出
+			Gtk::MessageDialog infoDialog(_("Already Recorded"),false,
+					Gtk::MESSAGE_WARNING);
+			Glib::ustring text_ = _("The Record had working now, you must stop it beforce");
+			infoDialog.set_secondary_text(text_);
+			infoDialog.run();
+			return;
+		}
+
+
+
 	Glib::RefPtr < Gtk::TreeSelection > selection =
 		this->get_selection();
 	Gtk::TreeModel::iterator iter = selection->get_selected();
@@ -158,10 +172,8 @@ void Channel::record_selection()
 		if (outfilename.empty())
 			return;
 
-		RecordStream* record_wnd = parent->get_record_gmp();
+		//RecordStream* record_wnd = parent->get_record_gmp();
 		record_wnd->set_out_file(outfilename);
-		LivePlayer* lr = record_wnd->get_live_player();
-		LivePlayer* lp = parent->get_live_player();
 
 		if (NULL != live_player) {
 			// live_player不是NULL的时候，只有2种情况，
@@ -248,13 +260,13 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 				return;
 			} 
 		} else if (live_player == lr) { // 录制的时候
-			Gtk::MessageDialog infoDialog(_("Stop Recording"),
+			Gtk::MessageDialog askDialog(_("Stop Recording"),
 					false,
 					Gtk::MESSAGE_QUESTION,
 					Gtk::BUTTONS_OK_CANCEL);
 			Glib::ustring text =  _("GMLive is recording,you can play channel after stop the record.\n Are you really to do this?");
-			infoDialog.set_secondary_text(text);
-			if (Gtk::RESPONSE_OK != infoDialog.run())
+			askDialog.set_secondary_text(text);
+			if (Gtk::RESPONSE_OK != askDialog.run())
 				return;
 
 			parent->get_record_gmp()->set_live_player(NULL); // 停止录制吧
