@@ -255,16 +255,8 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 					Gtk::BUTTONS_OK_CANCEL);
 			Glib::ustring text =  _("GMLive is recording,you can play channel after stop the record.\n Are you really to do this?");
 			infoDialog.set_secondary_text(text);
-			int result = infoDialog.run();
-			switch(result){
-				case(Gtk::RESPONSE_CANCEL):
-					{
-						std::cout<<"Cancel clicked"<<std::endl;
-						return;
-					}
-				default:
-					return;
-			}
+			if (Gtk::RESPONSE_OK != infoDialog.run())
+				return;
 
 			parent->get_record_gmp()->set_live_player(NULL); // 停止录制吧
 			if (live_player->get_stream() == stream) {
