@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-24 19:13+0800\n"
+"POT-Creation-Date: 2007-12-24 20:17+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,6 +42,14 @@ msgstr ""
 
 #: ../src/channel.cpp:348
 msgid "Type:"
+msgstr ""
+
+#: ../src/ConfWindow.cpp:59
+msgid "GMLive Conf Window"
+msgstr ""
+
+#: ../src/MainWindow.cpp:150
+msgid "HideChannels"
 msgstr ""
 
 #. File menu:
@@ -86,10 +94,6 @@ msgstr ""
 msgid "_View"
 msgstr ""
 
-#: ../src/MainWindow.cpp:197
-msgid "HideChannels"
-msgstr ""
-
 #: ../src/MainWindow.cpp:198
 msgid "Show or hide channels list"
 msgstr ""
@@ -121,4 +125,16 @@ msgstr ""
 
 #: ../src/MainWindow.cpp:219
 msgid "Bookmark this channel"
+msgstr ""
+
+#: ../src/MainWindow.cpp:235
+msgid "Choose File"
+msgstr ""
+
+#: ../src/recordStream.cpp:73
+msgid "Record finial"
+msgstr ""
+
+#: ../src/recordStream.cpp:74
+msgid " record finial"
 msgstr ""

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-24 19:13+0800\n"
-"PO-Revision-Date: 2007-12-24 19:47+0800\n"
+"POT-Creation-Date: 2007-12-24 20:17+0800\n"
+"PO-Revision-Date: 2007-12-24 20:19+0800\n"
 "Last-Translator: lerosua <lerosua@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -42,6 +42,14 @@ msgstr "用户数："
 #: ../src/channel.cpp:348
 msgid "Type:"
 msgstr "类型："
+
+#: ../src/ConfWindow.cpp:59
+msgid "GMLive Conf Window"
+msgstr "GMLive 配置"
+
+#: ../src/MainWindow.cpp:150
+msgid "HideChannels"
+msgstr "隐藏列表"
 
 #. File menu:
 #: ../src/MainWindow.cpp:160
@@ -85,10 +93,6 @@ msgstr "停止"
 msgid "_View"
 msgstr "查看"
 
-#: ../src/MainWindow.cpp:197
-msgid "HideChannels"
-msgstr "隐藏列表"
-
 #: ../src/MainWindow.cpp:198
 msgid "Show or hide channels list"
 msgstr "显示或隐藏频道列表"
@@ -121,3 +125,15 @@ msgstr "添加到书签"
 #: ../src/MainWindow.cpp:219
 msgid "Bookmark this channel"
 msgstr "收藏此频道"
+
+#: ../src/MainWindow.cpp:235
+msgid "Choose File"
+msgstr "选择文件"
+
+#: ../src/recordStream.cpp:73
+msgid "Record finial"
+msgstr "录制完成"
+
+#: ../src/recordStream.cpp:74
+msgid " record finial"
+msgstr "录制完成"

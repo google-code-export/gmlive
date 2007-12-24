@@ -1,8 +1,11 @@
 [encoding: UTF-8]
 data/gmlive.desktop.in.in
 data/gmlive.xml
+data/record.xml
 src/bookmarkchannel.cpp
 src/channel.cpp
+src/ChannelsTooltips.cpp
+src/ConfWindow.cpp
 src/ec_throw.cpp
 src/gmplayer.cpp
 src/main.cpp
@@ -12,6 +15,6 @@ src/mmsLivePlayer.cpp
 src/nslivechannel.cpp
 src/nsLivePlayer.cpp
 src/recentchannel.cpp
+src/recordStream.cpp
 src/sopcastchannel.cpp
 src/sopcastLivePlayer.cpp
-src/StreamMenu.cpp

@@ -232,7 +232,7 @@ void MainWindow::init_ui_manager()
 void MainWindow::on_menu_open_file()
 {
 	Gtk::FileChooserDialog dlg(*this,
-		       	"选择文件", 
+		       	_("Choose File"), 
 			Gtk::FILE_CHOOSER_ACTION_SAVE);
 	dlg.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
   	dlg.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_OK);
