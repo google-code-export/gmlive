@@ -83,7 +83,7 @@ bool RecordStream::on_delete_event(GdkEventAny* event)
 
 void RecordStream::initialize()
 {
-	signal_start_.emit();
+	signal_start().emit();
 	char cache_buf[32];
 	snprintf(cache_buf, 32, "%d", cache);
 	const char* argv[10];
@@ -121,7 +121,7 @@ void RecordStream::start()
 	initialize();
 	char cb[256];
 	int len = snprintf(cb, 256, "loadfile %s\n", filename.c_str());
-	EC_THROW(-1 == write(stdin_pipe[1], cb, len));
+	send_ctrl_command(cb);
 }
 
 
@@ -132,6 +132,7 @@ void RecordStream::set_out_file(const std::string& filename)
 
 void RecordStream::on_mplayer_exit()
 {
+	signal_stop().emit();
 //	delete live_player;
 	timeout_conn.disconnect();
 	close(outfile);

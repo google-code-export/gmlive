@@ -1,6 +1,7 @@
 #include "gmplayer.h"
 #include <gdk/gdkx.h>
 #include <sys/types.h>
+#include <sys/socket.h>
 #include <signal.h>
 #include <sys/wait.h>
 #include <string.h>
@@ -38,74 +39,60 @@ void  set_signals()
 
 	EC_THROW( sigemptyset(&set));
 	EC_THROW( sigprocmask(SIG_SETMASK, &set, NULL));
-	
+
 }
 
 void GMplayer::create_pipe()
 {
 	close_pipe();
 
-	EC_THROW(-1 == pipe(stdin_pipe));
-	EC_THROW(-1 == pipe(stdout_pipe));
+	int std_pipe[2];
+	EC_THROW(-1 == socketpair(AF_UNIX, SOCK_STREAM, 0, std_pipe));
+	child_tem = std_pipe[0];
+	child_tem2 = std_pipe[1];
 }
 
 void GMplayer::close_pipe()
 {
-	if (stdin_pipe[0] != -1) {
-		close(stdin_pipe[0]);
-		stdin_pipe[0] = -1;
-	}
-	if (stdin_pipe[1] != -1) {
-		close(stdin_pipe[1]);
-		stdin_pipe[1] = -1;
-	}
-	if (stdout_pipe[0] != -1) {
-		close(stdout_pipe[0]);
-		stdout_pipe[0] = -1;
-	}
-	if (stdout_pipe[1] != -1) {
-		close(stdout_pipe[1]);
-		stdout_pipe[1] = -1;
-	}
+	if ( -1 != child_tem)
+		close(child_tem);
+	if ( -1 != child_tem2)
+		close(child_tem2);
 }
 
 void GMplayer::set_s_pipe()
 {
-	close(stdin_pipe[1]);
-	close(stdout_pipe[0]);
-	EC_THROW( -1 == dup2(stdin_pipe[0], STDIN_FILENO));
-	EC_THROW( -1 == dup2(stdout_pipe[1], STDOUT_FILENO));
-	//EC_THROW( -1 == dup2(stdout_pipe[1], STDERR_FILENO));
+	close(child_tem); // 关闭父进程端.
+	EC_THROW( -1 == dup2(child_tem2, STDIN_FILENO));
+	EC_THROW( -1 == dup2(child_tem2, STDOUT_FILENO));
+	//EC_THROW( -1 == dup2(child_tem2, STDERR_FILENO));
+	close(child_tem2);
 }
 
 void GMplayer::set_m_pipe()
 {
-	close(stdin_pipe[0]);
-	stdin_pipe[0] = -1;
-	close(stdout_pipe[1]);
-	stdout_pipe[1] = -1;
+	close(child_tem2);
+	child_tem2 = -1;
 
 	fd_set fd_set_write;
 	FD_ZERO(&fd_set_write);
-	FD_SET(stdin_pipe[1], &fd_set_write);
+	FD_SET(child_tem, &fd_set_write);
 
-	EC_THROW( -1 == select (stdin_pipe[1] + 1, NULL, &fd_set_write, NULL, NULL));
+	EC_THROW( -1 == select (child_tem + 1, NULL, &fd_set_write, NULL, NULL));
 
 }
 
 
 ////////////////////////////////////////////////////////////////
 
-GMplayer::GMplayer()
+	GMplayer::GMplayer()
 	:is_running(false)
 	,is_pause(false)
 	,child_pid(-1)
-	,cache(64)
+	 ,cache(64)
 {
-	stdin_pipe[0] = -1;
-	stdin_pipe[1] = -1;
-	stdout_pipe[0] = -1;
-	stdout_pipe[1] = -1;
+	child_tem = -1;
+	child_tem2 = -1;
 }
 
 
@@ -134,7 +121,7 @@ int GMplayer::my_system(char* const argv[])
 	assert(!out_slot.empty());
 	ptm_conn = Glib::signal_io().connect(
 			out_slot,
-			stdout_pipe[0], Glib::IO_IN);
+			child_tem, Glib::IO_IN);
 
 
 	pid_t pid = fork();
@@ -164,7 +151,7 @@ int GMplayer::my_system(char* const argv[])
 	return pid;
 }
 
-bool GMplayer::running()
+bool GMplayer::running() const
 {
 	return (is_running) && (child_pid != 0);
 }
@@ -174,7 +161,7 @@ void GMplayer::send_ctrl_command(const char* c)
 {
 	if (running()) {
 		assert(c != NULL);
-		EC_THROW(-1 == write(stdin_pipe[1], c, strlen (c)));
+		EC_THROW(-1 == write(child_tem, c, strlen (c)));
 	}
 }
 
