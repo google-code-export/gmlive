@@ -773,6 +773,9 @@ GPL 协议应该采用第二版或您所喜欢的第二版之后的任何版本�
 		  <property name="active">False</property>
 		  <property name="inconsistent">False</property>
 		  <property name="draw_indicator">True</property>
+		  <accessibility>
+		    <atkproperty name="AtkObject::accessible_name" translatable="yes" comments="embed mplayer">Embed mplayer</atkproperty>
+		  </accessibility>
 		</widget>
 		<packing>
 		  <property name="left_attach">2</property>

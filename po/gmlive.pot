@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-24 22:01+0800\n"
+"POT-Creation-Date: 2007-12-24 23:09+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -156,4 +156,14 @@ msgstr ""
 
 #: ../src/recordStream.cpp:74
 msgid " record finial"
+msgstr ""
+
+#: ../src/recordStream.cpp:167
+#, c-format
+msgid "Recording %s To %s (%u Kb)"
+msgstr ""
+
+#: ../src/recordStream.cpp:172
+#, c-format
+msgid "Recording %s To %s (%u.%u Mb)"
 msgstr ""

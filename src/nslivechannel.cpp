@@ -157,7 +157,7 @@ void NSLiveChannel::refresh_list()
 		return;
 	refresh = true;
 
-	system("killall nesweb");
+	system("killall nesweb >/dev/null 2>&1");
 
 	int pid = fork();
 	if (pid == -1)
