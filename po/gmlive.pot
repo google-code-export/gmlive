@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-23 01:03+0800\n"
+"POT-Creation-Date: 2007-12-24 19:13+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,42 +24,101 @@ msgstr ""
 msgid "Streaming Direct Broadcast System based on P2P"
 msgstr ""
 
-#: ../src/channel.cpp:273
+#: ../src/channel.cpp:334
 msgid "NSLive Stream"
 msgstr ""
 
-#: ../src/channel.cpp:275
+#: ../src/channel.cpp:336
 msgid "SopCast Stream"
 msgstr ""
 
-#: ../src/channel.cpp:277
+#: ../src/channel.cpp:338
 msgid "MMS stream"
 msgstr ""
 
-#: ../src/channel.cpp:286
+#: ../src/channel.cpp:347
 msgid "users:"
 msgstr ""
 
-#: ../src/channel.cpp:287
+#: ../src/channel.cpp:348
 msgid "Type:"
 msgstr ""
 
-#: ../src/MainWindow.cpp:156
+#. File menu:
+#: ../src/MainWindow.cpp:160
+msgid "_File"
+msgstr ""
+
+#: ../src/MainWindow.cpp:162
 msgid "Open local file"
 msgstr ""
 
-#: ../src/MainWindow.cpp:157
+#: ../src/MainWindow.cpp:163
 msgid "Open Local File"
 msgstr ""
 
-#: ../src/MainWindow.cpp:160
+#: ../src/MainWindow.cpp:166
 msgid "Open URL"
 msgstr ""
 
-#: ../src/MainWindow.cpp:161
+#: ../src/MainWindow.cpp:167
 msgid "Open Network Stream"
 msgstr ""
 
-#: ../src/MainWindow.cpp:191
+#: ../src/MainWindow.cpp:171
+msgid "Play"
+msgstr ""
+
+#: ../src/MainWindow.cpp:176
+msgid "Pause"
+msgstr ""
+
+#: ../src/MainWindow.cpp:181
+msgid "Record"
+msgstr ""
+
+#: ../src/MainWindow.cpp:186
+msgid "Stop"
+msgstr ""
+
+#. View menu:
+#: ../src/MainWindow.cpp:194
+msgid "_View"
+msgstr ""
+
+#: ../src/MainWindow.cpp:197
 msgid "HideChannels"
+msgstr ""
+
+#: ../src/MainWindow.cpp:198
+msgid "Show or hide channels list"
+msgstr ""
+
+#: ../src/MainWindow.cpp:203
+msgid "_Embed Mplayer"
+msgstr ""
+
+#: ../src/MainWindow.cpp:203
+msgid "Embed or Separate mplayer play"
+msgstr ""
+
+#. Help menu:
+#: ../src/MainWindow.cpp:210
+msgid "_Help"
+msgstr ""
+
+#: ../src/MainWindow.cpp:216
+msgid "_Refresh list"
+msgstr ""
+
+#: ../src/MainWindow.cpp:216
+msgid "Refresh current channel list"
+msgstr ""
+
+#: ../src/MainWindow.cpp:219
+msgid "Add to bookmark"
+msgstr ""
+
+#: ../src/MainWindow.cpp:219
+msgid "Bookmark this channel"
 msgstr ""
