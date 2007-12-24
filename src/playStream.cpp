@@ -44,7 +44,7 @@ PlayStream::~PlayStream()
 
 void PlayStream::initialize()
 {
-	signal_start_.emit();
+	signal_start().emit();
 
 	Glib::RefPtr<Gdk::Window> gwin = this->get_window();
 
@@ -92,14 +92,14 @@ void PlayStream::initialize()
 
 void PlayStream::start()
 {
-	if (is_pause)
+	if (pausing())
 		return pause();
 	if (running())
 		stop();
 	initialize();
 	char cb[256];
 	int len = snprintf(cb, 256, "loadfile %s\n", file.c_str());
-	EC_THROW(-1 == write(stdin_pipe[1], cb, len));
+	send_ctrl_command(cb);
 
 }
 
@@ -127,6 +127,6 @@ void PlayStream::set_embed(bool embed_)
 
 void PlayStream::on_mplayer_exit()
 {
-	signal_stop_.emit();
+	signal_stop().emit();
 }
 
