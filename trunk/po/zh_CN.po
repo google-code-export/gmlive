@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-21 23:06+0800\n"
-"PO-Revision-Date: 2007-12-21 23:12+0800\n"
+"POT-Creation-Date: 2007-12-24 19:13+0800\n"
+"PO-Revision-Date: 2007-12-24 19:47+0800\n"
 "Last-Translator: lerosua <lerosua@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,27 +23,101 @@ msgstr ""
 msgid "Streaming Direct Broadcast System based on P2P"
 msgstr ""
 
-#: ../src/channel.cpp:273
+#: ../src/channel.cpp:334
 msgid "NSLive Stream"
 msgstr "NSLive 流"
 
-#: ../src/channel.cpp:275
+#: ../src/channel.cpp:336
 msgid "SopCast Stream"
 msgstr "SopCast 流"
 
-#: ../src/channel.cpp:277
+#: ../src/channel.cpp:338
 msgid "MMS stream"
 msgstr "MMS流"
 
-#: ../src/channel.cpp:286
+#: ../src/channel.cpp:347
 msgid "users:"
 msgstr "用户数："
 
-#: ../src/channel.cpp:287
+#: ../src/channel.cpp:348
 msgid "Type:"
 msgstr "类型："
 
-#: ../src/MainWindow.cpp:164
+#. File menu:
+#: ../src/MainWindow.cpp:160
+msgid "_File"
+msgstr "文件"
+
+#: ../src/MainWindow.cpp:162
+msgid "Open local file"
+msgstr "打开本地文件"
+
+#: ../src/MainWindow.cpp:163
+msgid "Open Local File"
+msgstr "打开本地文件"
+
+#: ../src/MainWindow.cpp:166
+msgid "Open URL"
+msgstr "打开网络流"
+
+#: ../src/MainWindow.cpp:167
+msgid "Open Network Stream"
+msgstr "打开网络流"
+
+#: ../src/MainWindow.cpp:171
+msgid "Play"
+msgstr "播放"
+
+#: ../src/MainWindow.cpp:176
+msgid "Pause"
+msgstr "暂停"
+
+#: ../src/MainWindow.cpp:181
+msgid "Record"
+msgstr "录制"
+
+#: ../src/MainWindow.cpp:186
+msgid "Stop"
+msgstr "停止"
+
+#. View menu:
+#: ../src/MainWindow.cpp:194
+msgid "_View"
+msgstr "查看"
+
+#: ../src/MainWindow.cpp:197
 msgid "HideChannels"
 msgstr "隐藏列表"
 
+#: ../src/MainWindow.cpp:198
+msgid "Show or hide channels list"
+msgstr "显示或隐藏频道列表"
+
+#: ../src/MainWindow.cpp:203
+msgid "_Embed Mplayer"
+msgstr "嵌入播放器"
+
+#: ../src/MainWindow.cpp:203
+msgid "Embed or Separate mplayer play"
+msgstr "嵌入或分离播放器"
+
+#. Help menu:
+#: ../src/MainWindow.cpp:210
+msgid "_Help"
+msgstr "帮助"
+
+#: ../src/MainWindow.cpp:216
+msgid "_Refresh list"
+msgstr "刷新列表"
+
+#: ../src/MainWindow.cpp:216
+msgid "Refresh current channel list"
+msgstr "刷新当前频道列表"
+
+#: ../src/MainWindow.cpp:219
+msgid "Add to bookmark"
+msgstr "添加到书签"
+
+#: ../src/MainWindow.cpp:219
+msgid "Bookmark this channel"
+msgstr "收藏此频道"
