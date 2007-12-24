@@ -147,7 +147,7 @@ void register_stock_items()
 
 	const Gtk::StockID stock_id("HideChannels");
 	factory->add(stock_id, icon_set);
-	Gtk::Stock::add(Gtk::StockItem(stock_id, "HideChannels"));
+	Gtk::Stock::add(Gtk::StockItem(stock_id, _("HideChannels")));
 	factory->add_default();
 }
 void MainWindow::init_ui_manager()
@@ -194,7 +194,7 @@ void MainWindow::init_ui_manager()
 	action_group->add(Gtk::Action::create("ViewMenu", _("_View")));
 	
 	action = Gtk::ToggleAction::create("ViewShowChannel", 
-				Gtk::StockID(_("HideChannels")));
+				Gtk::StockID("HideChannels"));
 	action->set_tooltip(_("Show or hide channels list"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_hide_channel));
