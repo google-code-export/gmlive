@@ -68,9 +68,18 @@ void RecordStream::on_preview()
 void RecordStream::on_stop()
 {
 	stop();
-	delete live_player;
-	live_player = NULL;
 	std::cout << "on_stop" << std::endl;
+
+	Gtk::MessageDialog infoDialog(_("Record finial"));
+	Glib::ustring text = record_channel_name + _(" record finial");
+	infoDialog.set_secondary_text(text);
+	infoDialog.run();
+	record_name->set_label("");
+
+	//delete live_player;
+	//live_player = NULL;
+	delete this;
+
 }
 
 bool RecordStream::on_delete_event(GdkEventAny* event)
@@ -150,9 +159,9 @@ bool RecordStream::on_timeout()
 
 	struct stat stat;
 	EC_THROW(-1 == fstat(outfile, &stat));
-	off_t size = stat.st_size;
+	off_t size = stat.st_size/(1024);
 	char buf[512];
-	int len = snprintf(buf, 512, "recoding %s (%u)", outfilename.c_str(), size);
+	int len = snprintf(buf, 512, "Recording %s To %s (%u Kb)",record_channel_name.c_str(), outfilename.c_str(), size);
 	buf[len] = 0;
 	record_name->set_label(buf);
 	return true;
