@@ -1,3 +1,8 @@
+2007-12-24  yetist  <yetist@gmail.com>
+
+	* configure: remove
+	* po/LINGUAS: It's lost!
+
 2007-12-18  yetist  <yetist@gmail.com>
 
 	* configure.in: 
