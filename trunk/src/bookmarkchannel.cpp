@@ -33,13 +33,13 @@ LivePlayer* BookMarkChannel::get_player(const std::string& stream,TypeChannel pa
 {
 	switch( page ) {
 		case MMS_CHANNEL:
-			return new MmsLivePlayer(stream);
+			return MmsLivePlayer::create(stream);
 		case NSLIVE_CHANNEL:
 			{
-				return new NsLivePlayer(stream);
+				return NsLivePlayer::create(stream);
 			}
 		case SOPCAST_CHANNEL:
-			return new SopcastLivePlayer(stream);
+			return SopcastLivePlayer::create(stream);
 	}
 }
 

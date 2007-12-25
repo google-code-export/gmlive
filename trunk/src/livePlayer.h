@@ -24,7 +24,6 @@
 class GMplayer;
 class LivePlayer {
 	public:
-		LivePlayer() {}
 		virtual ~LivePlayer() {signal_exit_.emit();} 
 		virtual void start(GMplayer&) = 0;
 		virtual void stop() = 0;
@@ -38,6 +37,7 @@ class LivePlayer {
 		type_signal_exit signal_exit()
 		{ return signal_exit_; }
 	protected:
+		LivePlayer() {}
 		type_signal_status  			signal_status_;
 		type_signal_exit  			signal_exit_;
 };

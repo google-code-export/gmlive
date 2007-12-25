@@ -24,13 +24,16 @@
 
 class MmsLivePlayer : public LivePlayer {
 	public:
-		MmsLivePlayer(const std::string& fname);
+		static MmsLivePlayer* create(const std::string&name);
 		~MmsLivePlayer();
 		void start(GMplayer& gmp);
 		void stop();
 		const std::string& get_stream() { return filename; }
+	protected:
+		MmsLivePlayer(const std::string& fname);
 	private:
 		std::string filename;
+		static MmsLivePlayer* self;
 };
 
 #endif // _MMS_LIVE_PLAYER_H_

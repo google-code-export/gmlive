@@ -19,6 +19,14 @@
 #include "mmsLivePlayer.h"
 #include <gmplayer.h>
 #include <gmlive.h>
+MmsLivePlayer* MmsLivePlayer::self = NULL;
+
+MmsLivePlayer* MmsLivePlayer::create(const std::string& fname)
+{
+	if (!self)
+		self = new MmsLivePlayer(fname);
+	return self;
+}
 
 MmsLivePlayer::MmsLivePlayer(const std::string& fname) :
 	filename(fname)
@@ -29,6 +37,7 @@ MmsLivePlayer::~MmsLivePlayer()
 {
 	//gmp.stop();
 	printf("mms exit\n");
+	self = NULL;
 }
 void MmsLivePlayer::start(GMplayer& gmp)
 {
