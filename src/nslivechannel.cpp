@@ -169,6 +169,7 @@ void NSLiveChannel::refresh_list()
 		perror("nsweb  execvl:");
 		exit(127);
 	} 
+	genlist_pid = pid;
 	Glib::signal_child_watch().connect
 		(sigc::mem_fun(*this, &NSLiveChannel::wait_pid_exit), pid);
 
