@@ -197,12 +197,9 @@ void RecordStream::set_live_player(LivePlayer* lp,
 	if (lp != NULL) {
 		if (!name.empty())
 			record_channel_name = name;
-		if (live_player != lp) {
-			delete live_player;
-			live_player = lp;
-			lp->signal_status().connect(sigc::mem_fun(
-						*this, &RecordStream::on_live_player_out));
-		}
+		live_player = lp;
+		lp->signal_status().connect(sigc::mem_fun(
+					*this, &RecordStream::on_live_player_out));
 		lp->start(*this);
 	} else if (live_player) {
 		live_player = NULL;
