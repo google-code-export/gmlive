@@ -37,7 +37,7 @@ Channel::Channel(MainWindow* parent_):parent( parent_), live_player(NULL)
 	m_liststore = Gtk::TreeStore::create(columns);
 	channel->set_model( m_liststore);
 	channel->append_column(_("channels"), columns.name);
-	channel->append_column("码率", columns.freq);
+	channel->append_column(_("bitrate"), columns.freq);
 	channel->append_column(_("user"), columns.users);
 	this->signal_motion_notify_event().
 		connect(sigc::mem_fun(*this, &Channel::on_motion_event),
@@ -142,7 +142,8 @@ void Channel::record_selection()
 		RecordStream* record_wnd = parent->get_record_gmp();
 		LivePlayer* lr = record_wnd->get_live_player();
 		LivePlayer* lp = parent->get_live_player();
-		if ((live_player!=NULL)&&(live_player == lr)) { // 录制的时候再录制跳出警告并退出
+		//if ((live_player!=NULL)&&(live_player == lr)) { // 录制的时候再录制跳出警告并退出
+		if ((NULL != lr)) { // 录制的时候再录制跳出警告并退出
 			Gtk::MessageDialog infoDialog(_("Already Recorded"),false,
 					Gtk::MESSAGE_WARNING);
 			Glib::ustring text_ = _("The Record had working now, you must stop it beforce");
