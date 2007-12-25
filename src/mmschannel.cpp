@@ -32,7 +32,7 @@ MMSChannel::MMSChannel(MainWindow* parent_):Channel(parent_)
 
 LivePlayer* MMSChannel::get_player(const std::string& stream,TypeChannel page)
 {
-	return new MmsLivePlayer(stream);
+	return MmsLivePlayer::create(stream);
 }
 
 void MMSChannel::init()

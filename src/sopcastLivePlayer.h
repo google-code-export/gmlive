@@ -23,21 +23,23 @@
 class GMplayer;
 class SopcastLivePlayer : public LivePlayer {
 	public:
-		SopcastLivePlayer(const std::string& stream_);
+		static SopcastLivePlayer* create(const std::string& stream_);
 		~SopcastLivePlayer();
 		void start(GMplayer&);
 		void stop();
 		const std::string& get_stream() { return stream; }
 
 	protected:
+		SopcastLivePlayer(const std::string& stream_);
 		bool on_sop_sock(const Glib::IOCondition& condition);
 		bool on_sop_time_status();
 		
 	private:
 		sigc::connection sop_time_conn;
 		sigc::connection sop_sock_conn;
-		GMplayer* gmplayer;
 		std::string stream;
+		GMplayer* gmplayer;
+		static SopcastLivePlayer* self;
 		int sop_pid;
 		int sop_sock;
 		bool is_running;

@@ -24,16 +24,19 @@
 
 class NsLivePlayer : public LivePlayer {
 	public:
-		NsLivePlayer(const std::string& id_);
+		static NsLivePlayer* create(const std::string& id_);
 		~NsLivePlayer();
 		void start(GMplayer& gmp);
 		void stop();
 		const std::string& get_stream() { return id; }
+	protected:
+		NsLivePlayer(const std::string& id_);
 	private:
 		bool on_gmp_startup_time();
 		sigc::connection		gmp_startup_time_conn;
 		std::string 		id;
 		GMplayer* gmplayer;
+		static NsLivePlayer* 	self;
 		int 			ns_pid;
 		bool			is_running;
 };

@@ -26,6 +26,14 @@
 #include <gmplayer.h>
 #include "ec_throw.h"
 
+NsLivePlayer* NsLivePlayer::self = NULL;
+NsLivePlayer* NsLivePlayer::create(const std::string& id_)
+{
+	if (!self)
+		self = new NsLivePlayer(id_);
+	return self;
+}
+
 NsLivePlayer::NsLivePlayer(const std::string& id_) : 
 	id(id_),
 	ns_pid(-1),
@@ -38,6 +46,7 @@ NsLivePlayer::~NsLivePlayer()
 {
 	stop();
 	printf("nslive exit\n");
+	self = NULL;
 }
 
 void NsLivePlayer::start(GMplayer& gmp)

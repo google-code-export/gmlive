@@ -36,6 +36,14 @@ int connect_to_server(const char *host, int portnum)
 
 }
 
+SopcastLivePlayer* SopcastLivePlayer::self = NULL;
+
+SopcastLivePlayer* SopcastLivePlayer::create(const std::string& stream_)
+{
+	if (!self)
+		self = new SopcastLivePlayer(stream_);
+	return self;
+}
 
 SopcastLivePlayer::SopcastLivePlayer(const std::string& stream_) : 
 	stream(stream_),
@@ -51,6 +59,7 @@ SopcastLivePlayer::~SopcastLivePlayer()
 	stop();
 	close(sop_sock);
 	printf("sopcast exit\n");
+	self = NULL;
 }
 
 void SopcastLivePlayer::start(GMplayer& gmp)

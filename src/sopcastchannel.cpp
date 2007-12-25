@@ -61,7 +61,7 @@ SopcastChannel::SopcastChannel(MainWindow* parent_)
 
 LivePlayer* SopcastChannel::get_player(const std::string& stream,TypeChannel page)
 {
-	return new SopcastLivePlayer(stream);
+	return SopcastLivePlayer::create(stream);
 }
 
 int SopcastChannel::parse_channel

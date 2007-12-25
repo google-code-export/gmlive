@@ -27,7 +27,7 @@
 #include <cassert>
 #include <glib/gi18n.h>
 
-Channel::Channel(MainWindow* parent_):parent( parent_), live_player(NULL)
+Channel::Channel(MainWindow* parent_):parent( parent_)
 {
 	Channel* channel = this;
 	channel->set_flags(Gtk::CAN_FOCUS);
@@ -51,13 +51,8 @@ Channel::Channel(MainWindow* parent_):parent( parent_), live_player(NULL)
 
 Channel::~Channel()
 {
-	delete live_player;
 }
 
-void Channel::on_live_player_exit()
-{
-	live_player = NULL;
-}
 
 Gtk::TreeModel::iterator Channel::getListIter(Gtk::TreeModel::
 		Children children, const std::string& groupname)
@@ -177,38 +172,35 @@ void Channel::record_selection()
 		//RecordStream* record_wnd = parent->get_record_gmp();
 		record_wnd->set_out_file(outfilename);
 
-		if (NULL != live_player) {
-			// live_player不是NULL的时候，只有2种情况，
-			// 要么是在录制，要么是在播放。
-			if (live_player == lp) { // 播放的时候
-				// 停止播放
-				parent->set_live_player(NULL);
-				if (live_player->get_stream() == stream) {
-					record_wnd->set_live_player(live_player, name);
-					// 如果只是同一个频道在播放，直接转为录制.
-					return;
-				}
-			} else if (live_player == lr) { // 录制的时候
-				if (live_player->get_stream() == stream) {
-					// 是同一个频道在录制，怎么办？现在什么也不干
-					// 。以后弹出个对话框警告一下
-					return ;
-					//parent->set_live_player(live_player, name);
-				} else { // 停掉录制
-					record_wnd->set_live_player(NULL);
-				}
-			} else
-				assert(false);
-			// 一个频道不是空的，但不在播放也不在录制。肯定出错了.
+		LivePlayer* live_player = get_player(stream, page);
+		if (live_player == lp) { // 播放的时候
+			// 停止播放
+			parent->set_live_player(NULL);
+			if (live_player->get_stream() == stream) {
+				record_wnd->set_live_player(live_player, name);
+				// 如果只是同一个频道在播放，直接转为录制.
+				return;
+			} else {
+				delete live_player; 
+				// 再重新生成一个
+				live_player =  get_player(stream, page);
+			}
+		} else if (live_player == lr) { // 录制的时候
+			if (live_player->get_stream() == stream) {
+				// 是同一个频道在录制，怎么办？现在什么也不干
+				// 。以后弹出个对话框警告一下
+				return ;
+				//parent->set_live_player(live_player, name);
+			} else { // 停掉录制
+				record_wnd->set_live_player(NULL);
+				delete live_player;
+				// 再重新生成一个
+				live_player =  get_player(stream, page);
+			}
+		} else {
+			delete lr;
 		}
 		record_wnd->set_live_player(NULL);
-		delete lr;
-		delete live_player;
-		live_player = get_player(stream, page);
-		live_player->signal_exit().connect(
-				sigc::mem_fun(
-					*this, &Channel::on_live_player_exit));
-
 		record_wnd->set_live_player(live_player, name);
 		RecentChannel* rc =
 			dynamic_cast<RecentChannel*>(parent->get_recent_channel());
@@ -252,47 +244,45 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 		return;
 	}
 
+	LivePlayer* live_player = get_player(stream, page);
 	LivePlayer* lp = parent->get_live_player();
 	LivePlayer* lr = parent->get_record_gmp()->get_live_player();
-	if (NULL != live_player) {
-		// live_player不是NULL的时候，只有2种情况，要么是在录制，要么是在播放。
-		if (live_player == lp) { // 播放的时候
-			parent->set_live_player(NULL); // 停止播放
-			if (live_player->get_stream() == stream) {
-				// 如果只是播放同一个频道，就只是重启一下mplayer好了.
-				parent->set_live_player(lp);
-				return;
-			} 
-		} else if (live_player == lr) { // 录制的时候
-			Gtk::MessageDialog askDialog(_("Stop Recording"),
-					false,
-					Gtk::MESSAGE_QUESTION,
-					Gtk::BUTTONS_OK_CANCEL);
-			Glib::ustring text =  _("GMLive is recording,you can play channel after stop the record.\n Are you really to do this?");
-			askDialog.set_secondary_text(text);
-			if (Gtk::RESPONSE_OK != askDialog.run())
-				return;
 
-			parent->get_record_gmp()->set_live_player(NULL); // 停止录制吧
-			if (live_player->get_stream() == stream) {
-				// 是同一个频道，但是在录制，怎么办？停掉录制开始播放吧.
+	if (live_player == lp) { // 播放的时候
+		parent->set_live_player(NULL); // 停止播放
+		if (live_player->get_stream() == stream) {
+			// 如果只是播放同一个频道，就只是重启一下mplayer好了.
+			parent->set_live_player(lp);
+			return;
+		} else {
+			delete live_player;
+			// 再重新生成一个
+			LivePlayer* live_player = get_player(stream, page);
+		}
+	} else if (live_player == lr) { // 录制的时候
+		Gtk::MessageDialog askDialog(_("Stop Recording"),
+				false,
+				Gtk::MESSAGE_QUESTION,
+				Gtk::BUTTONS_OK_CANCEL);
+		Glib::ustring text =  _("GMLive is recording,you can play channel after stop the record.\n Are you really to do this?");
+		askDialog.set_secondary_text(text);
+		if (Gtk::RESPONSE_OK != askDialog.run())
+			return;
 
-
-			} 
-
-		} else
-			assert(false);
-		// 一个频道不是空的，但不在播放也不在录制。肯定出错了.
+		parent->get_record_gmp()->set_live_player(NULL); // 停止录制吧
+		if (live_player->get_stream() == stream) {
+			// 是同一个频道，但是在录制，怎么办？停掉录制开始播放吧.
+		}  else {
+			delete live_player;
+			// 再重新生成一个
+			live_player = get_player(stream, page);
+		}
+	} else {
+		delete lp;
 	}
 
 	parent->set_live_player(NULL);
-	delete lp;
-	delete live_player;
-
 	live_player = get_player(stream, page);
-	live_player->signal_exit().connect(
-			sigc::mem_fun(
-				*this, &Channel::on_live_player_exit));
 
 	parent->set_live_player(live_player, name);
 	RecentChannel* rc =

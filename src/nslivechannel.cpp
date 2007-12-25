@@ -45,7 +45,7 @@ NSLiveChannel::~NSLiveChannel()
 
 LivePlayer* NSLiveChannel::get_player(const std::string& stream,TypeChannel page) 
 {
-	return new NsLivePlayer(stream);
+	return NsLivePlayer::create(stream);
 }
 
 void NSLiveChannel::init()
