@@ -62,7 +62,7 @@ class MainWindow : public Gtk::Window {
 		void on_menu_pop_add_to_bookmark();
 
 		void on_search_channel();
-		void on_preview(std::string& filename);
+		void on_preview(const std::string& filename);
 
 		void on_live_player_out(int percentage);
 		bool on_gmplayer_out(const Glib::IOCondition& condition);

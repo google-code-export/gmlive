@@ -36,7 +36,7 @@ class RecordStream :public GMplayer , public Gtk::Window{
 		typedef sigc::signal<void, std::string> type_signal_preview;
 		type_signal_preview signal_preview()
 		{ return m_signal_preview; }
-	//protected:
+	protected:
 		type_signal_preview m_signal_preview;
 	private:
 		void on_preview();

@@ -507,6 +507,8 @@ MainWindow::MainWindow():
 			sigc::mem_fun(*this, &MainWindow::on_gmplayer_stop));
 
 	record_gmp = new RecordStream();
+	record_gmp->signal_preview().connect(
+			sigc::mem_fun(*this,&MainWindow::on_preview));
 
 	init_ui_manager();
 	Gtk::Widget* menubar = ui_manager->get_widget("/MenuBar");
@@ -529,9 +531,6 @@ MainWindow::MainWindow():
 	
 	ui_xml->connect_clicked("bt_search_channel",
 		       sigc::mem_fun(*this, &MainWindow::on_search_channel));
-	record_gmp->signal_preview().connect(
-			sigc::mem_fun(*this,&MainWindow::on_preview));
-
 	this->show_all();
 	//channels->hide();
 	this->resize(1,1);
@@ -763,7 +762,7 @@ void MainWindow::set_live_player(LivePlayer* lp,
 }
 
 
-void MainWindow::on_preview(std::string& filename)
+void MainWindow::on_preview(const std::string& filename)
 {
 	gmp->start(filename);
 }
