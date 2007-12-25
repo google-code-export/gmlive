@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-25 00:20+0800\n"
+"POT-Creation-Date: 2007-12-25 19:29+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,51 +28,56 @@ msgstr ""
 msgid "channels"
 msgstr ""
 
+#: ../src/channel.cpp:40
+msgid "bitrate"
+msgstr ""
+
 #: ../src/channel.cpp:41
 msgid "user"
 msgstr ""
 
+#. if ((live_player!=NULL)&&(live_player == lr)) { // 录制的时候再录制跳出警告并退出
 #. 录制的时候再录制跳出警告并退出
-#: ../src/channel.cpp:146
+#: ../src/channel.cpp:148
 msgid "Already Recorded"
 msgstr ""
 
-#: ../src/channel.cpp:148
+#: ../src/channel.cpp:150
 msgid "The Record had working now, you must stop it beforce"
 msgstr ""
 
-#: ../src/channel.cpp:166 ../src/MainWindow.cpp:235
+#: ../src/channel.cpp:168 ../src/MainWindow.cpp:235
 msgid "Choose File"
 msgstr ""
 
 #. 录制的时候
-#: ../src/channel.cpp:263
+#: ../src/channel.cpp:267
 msgid "Stop Recording"
 msgstr ""
 
-#: ../src/channel.cpp:267
+#: ../src/channel.cpp:271
 msgid ""
 "GMLive is recording,you can play channel after stop the record.\n"
 " Are you really to do this?"
 msgstr ""
 
-#: ../src/channel.cpp:355
+#: ../src/channel.cpp:361
 msgid "NSLive Stream"
 msgstr ""
 
-#: ../src/channel.cpp:357
+#: ../src/channel.cpp:363
 msgid "SopCast Stream"
 msgstr ""
 
-#: ../src/channel.cpp:359
+#: ../src/channel.cpp:365
 msgid "MMS stream"
 msgstr ""
 
-#: ../src/channel.cpp:368
+#: ../src/channel.cpp:374
 msgid "users:"
 msgstr ""
 
-#: ../src/channel.cpp:369
+#: ../src/channel.cpp:375
 msgid "Type:"
 msgstr ""
 

@@ -33,6 +33,11 @@ class RecordStream :public GMplayer , public Gtk::Window{
 		void set_live_player(LivePlayer* lp, const std::string& name = "");
 		LivePlayer* get_live_player() { return live_player; }
 		void set_out_file(const std::string& filename);
+		typedef sigc::signal<void, std::string> type_signal_preview;
+		type_signal_preview signal_preview()
+		{ return m_signal_preview; }
+	//protected:
+		type_signal_preview m_signal_preview;
 	private:
 		void on_preview();
 		void on_stop();

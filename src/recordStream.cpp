@@ -63,6 +63,7 @@ RecordStream::~RecordStream()
 void RecordStream::on_preview()
 {
 	std::cout << "on_preview" << std::endl;
+	m_signal_preview.emit(outfilename);
 }
 
 void RecordStream::on_stop()
@@ -207,4 +208,5 @@ void RecordStream::set_live_player(LivePlayer* lp,
 		this->hide();
 	}	
 }
+
 
