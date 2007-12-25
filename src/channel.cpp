@@ -139,18 +139,19 @@ void Channel::play_selection()
 
 void Channel::record_selection()
 {
-		RecordStream* record_wnd = parent->get_record_gmp();
-		LivePlayer* lr = record_wnd->get_live_player();
-		LivePlayer* lp = parent->get_live_player();
-		//if ((live_player!=NULL)&&(live_player == lr)) { // 录制的时候再录制跳出警告并退出
-		if ((NULL != lr)) { // 录制的时候再录制跳出警告并退出
-			Gtk::MessageDialog infoDialog(_("Already Recorded"),false,
-					Gtk::MESSAGE_WARNING);
-			Glib::ustring text_ = _("The Record had working now, you must stop it beforce");
-			infoDialog.set_secondary_text(text_);
-			infoDialog.run();
-			return;
-		}
+
+	RecordStream* record_wnd = parent->get_record_gmp();
+	LivePlayer* lr = record_wnd->get_live_player();
+	LivePlayer* lp = parent->get_live_player();
+	//if ((live_player!=NULL)&&(live_player == lr)) { // 录制的时候再录制跳出警告并退出
+	if ((NULL != lr)) { // 录制的时候再录制跳出警告并退出
+		Gtk::MessageDialog infoDialog(_("Already Recorded"),false,
+				Gtk::MESSAGE_WARNING);
+		Glib::ustring text_ = _("The Record had working now, you must stop it beforce");
+		infoDialog.set_secondary_text(text_);
+		infoDialog.run();
+		return;
+	}
 
 
 
@@ -198,8 +199,10 @@ void Channel::record_selection()
 				}
 			} else
 				assert(false);
-				// 一个频道不是空的，但不在播放也不在录制。肯定出错了.
+			// 一个频道不是空的，但不在播放也不在录制。肯定出错了.
 		}
+		record_wnd->set_live_player(NULL);
+		delete lr;
 		delete live_player;
 		live_player = get_player(stream, page);
 		live_player->signal_exit().connect(
@@ -282,6 +285,8 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 		// 一个频道不是空的，但不在播放也不在录制。肯定出错了.
 	}
 
+	parent->set_live_player(NULL);
+	delete lp;
 	delete live_player;
 
 	live_player = get_player(stream, page);

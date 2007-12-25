@@ -750,12 +750,9 @@ void MainWindow::set_live_player(LivePlayer* lp,
 	if (lp != NULL) {
 		if (!name.empty())
 			play_channel_name = name;
-		if (lp != live_player) {
-			delete live_player;
-			live_player = lp;
-			lp->signal_status().connect(sigc::mem_fun(
-						*this, &MainWindow::on_live_player_out));
-		}
+		live_player = lp;
+		lp->signal_status().connect(sigc::mem_fun(
+					*this, &MainWindow::on_live_player_out));
 		lp->start(*gmp);
 	} else {
 		live_player = NULL;
