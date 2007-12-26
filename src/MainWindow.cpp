@@ -46,6 +46,71 @@ using namespace std;
 //	}
 //};
 
+#define HEX_ESCAPE '%'
+int hex_to_int (gchar c)
+{
+	return  c >= '0' && c <= '9' ? c - '0'
+		: c >= 'A' && c <= 'F' ? c - 'A' + 10
+		: c >= 'a' && c <= 'f' ? c - 'a' + 10
+		: -1;
+}
+
+int unescape_character (const char *scanner)
+{
+	int first_digit;
+	int second_digit;
+
+	first_digit = hex_to_int (*scanner++);
+	if (first_digit < 0) {
+		return -1;
+	}
+
+	second_digit = hex_to_int (*scanner++);
+	if (second_digit < 0) {
+		return -1;
+	}
+
+	return (first_digit << 4) | second_digit;
+}
+
+std::string  wind_unescape_string (const char *escaped_string, 
+		const gchar *illegal_characters)
+{
+	const char *in;
+	char *out;
+	int character;
+
+	if (escaped_string == NULL) {
+		return std::string();
+	}
+
+	//result = g_malloc (strlen (escaped_string) + 1);
+	char result[strlen (escaped_string) + 1];
+
+	out = result;
+	for (in = escaped_string; *in != '\0'; in++) {
+		character = *in;
+		if (*in == HEX_ESCAPE) {
+			character = unescape_character (in + 1);
+
+			/* Check for an illegal character. We consider '\0' illegal here. */
+			if (character <= 0
+					|| (illegal_characters != NULL
+						&& strchr (illegal_characters, (char)character) != NULL)) {
+				return std::string();
+			}
+			in += 2;
+		}
+		*out++ = (char)character;
+	}
+
+	*out = '\0';
+	assert (out - result <= strlen (escaped_string));
+	return std::string(result);
+
+}
+
+
 Glib::ustring get_print_string(const char* buf, int len)
 {
 
@@ -171,7 +236,7 @@ void MainWindow::init_ui_manager()
 	action->set_tooltip(_("Play"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_play));
-	
+
 	action = Gtk::Action::create("FilePause", Gtk::Stock::MEDIA_PAUSE);
 	action->set_tooltip(_("Pause"));
 	action_group->add(action,
@@ -192,15 +257,15 @@ void MainWindow::init_ui_manager()
 
 	//View menu:
 	action_group->add(Gtk::Action::create("ViewMenu", _("_View")));
-	
+
 	action = Gtk::ToggleAction::create("ViewShowChannel", 
-				Gtk::StockID("HideChannels"));
+			Gtk::StockID("HideChannels"));
 	action->set_tooltip(_("Show or hide channels list"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_hide_channel));
 
 	action_group->add(Gtk::ToggleAction::create("ViewEmbedMplayer",
-			        _("_Embed Mplayer"), _("Embed or Separate mplayer play"), true), 
+				_("_Embed Mplayer"), _("Embed or Separate mplayer play"), true), 
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_embed_mplayer));
 
 	action_group->add(Gtk::Action::create("ViewPreferences", Gtk::Stock::PREFERENCES),
@@ -232,10 +297,10 @@ void MainWindow::init_ui_manager()
 void MainWindow::on_menu_open_file()
 {
 	Gtk::FileChooserDialog dlg(*this,
-		       	_("Choose File"), 
+			_("Choose File"), 
 			Gtk::FILE_CHOOSER_ACTION_SAVE);
 	dlg.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
-  	dlg.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_OK);
+	dlg.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_OK);
 
 	//Gtk::FileFilter filter_media;
 	//filter_media.set_name();
@@ -344,7 +409,7 @@ void MainWindow::on_menu_view_hide_channel()
 void MainWindow::on_menu_view_embed_mplayer()
 {
 	//cout << "on_menu_view_embed_mplayer" << endl;
-		// 这种写法太白痴了
+	// 这种写法太白痴了
 	Glib::RefPtr<Gtk::ToggleAction> embed = 
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
 	set_gmp_embed(embed->get_active());
@@ -535,15 +600,15 @@ MainWindow::MainWindow():
 
 	Glib::RefPtr<Gdk::Pixbuf> pix = Gdk::Pixbuf::create_from_file(DATA_DIR"/gmlive.png");
 	this->set_icon(pix);
-	
+
 	ui_xml->connect_clicked("bt_search_channel",
-		       sigc::mem_fun(*this, &MainWindow::on_search_channel));
+			sigc::mem_fun(*this, &MainWindow::on_search_channel));
 	this->show_all();
 	//channels->hide();
 	this->resize(1,1);
 	init();
 	((Gtk::Toolbar*)toolbar)->set_toolbar_style(Gtk::TOOLBAR_ICONS);
-	
+
 }
 
 void MainWindow::set_gmp_embed(bool embed)
@@ -585,7 +650,7 @@ void MainWindow::set_channels_hide(bool hide)
 	else{
 		channels_box->show();
 	}	
-		// 这种写法太白痴了
+	// 这种写法太白痴了
 	Glib::RefPtr<Gtk::ToggleAction> menu = 
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewShowChannel"));
 	menu->set_active(channels_hide);
@@ -775,13 +840,18 @@ void MainWindow::on_preview(const std::string& filename)
 }
 
 void MainWindow::on_drog_data_received(const Glib::RefPtr<Gdk::DragContext>& context,
-				int, int, const Gtk::SelectionData& selection_data,
-				guint,guint time)
+		int, int, const Gtk::SelectionData& selection_data,
+		guint,guint time)
 {
 	if((selection_data.get_length() >= 0)&&(selection_data.get_format()== 8))
 	{
-		std::cout<<"Received "<<selection_data.get_data_as_string()<<std::endl;
+		context->drag_finish(false,false,time);
+		std::string filename = wind_unescape_string(selection_data.get_text().c_str(), NULL);
+		std::cout << filename << std::endl;
+		size_t pos = filename.find('\r');
+		if (std::string::npos != pos)
+			filename = filename.substr(0, pos);
+		gmp->start(filename);
 	}
-	context->drag_finish(false,false,time);
-	gmp->start(selection_data.get_data_as_string());
 }
+
