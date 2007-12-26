@@ -63,6 +63,9 @@ class MainWindow : public Gtk::Window {
 
 		void on_search_channel();
 		void on_preview(const std::string& filename);
+		void on_drog_data_received(const Glib::RefPtr<Gdk::DragContext>& context,
+				int, int, const Gtk::SelectionData& selection_data,
+				guint,guint time);
 
 		void on_live_player_out(int percentage);
 		bool on_gmplayer_out(const Glib::IOCondition& condition);
