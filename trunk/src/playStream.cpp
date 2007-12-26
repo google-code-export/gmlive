@@ -99,6 +99,7 @@ void PlayStream::start()
 	initialize();
 	char cb[256];
 	int len = snprintf(cb, 256, "loadfile %s\n", file.c_str());
+	cb[len] = 0;
 	send_ctrl_command(cb);
 
 }
