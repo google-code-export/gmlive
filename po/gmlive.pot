@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-25 19:29+0800\n"
+"POT-Creation-Date: 2007-12-26 19:35+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,46 +38,46 @@ msgstr ""
 
 #. if ((live_player!=NULL)&&(live_player == lr)) { // 录制的时候再录制跳出警告并退出
 #. 录制的时候再录制跳出警告并退出
-#: ../src/channel.cpp:148
+#: ../src/channel.cpp:143
 msgid "Already Recorded"
 msgstr ""
 
-#: ../src/channel.cpp:150
+#: ../src/channel.cpp:145
 msgid "The Record had working now, you must stop it beforce"
 msgstr ""
 
-#: ../src/channel.cpp:168 ../src/MainWindow.cpp:235
+#: ../src/channel.cpp:163 ../src/MainWindow.cpp:303
 msgid "Choose File"
 msgstr ""
 
 #. 录制的时候
-#: ../src/channel.cpp:267
+#: ../src/channel.cpp:263
 msgid "Stop Recording"
 msgstr ""
 
-#: ../src/channel.cpp:271
+#: ../src/channel.cpp:267
 msgid ""
 "GMLive is recording,you can play channel after stop the record.\n"
 " Are you really to do this?"
 msgstr ""
 
-#: ../src/channel.cpp:361
+#: ../src/channel.cpp:351
 msgid "NSLive Stream"
 msgstr ""
 
-#: ../src/channel.cpp:363
+#: ../src/channel.cpp:353
 msgid "SopCast Stream"
 msgstr ""
 
-#: ../src/channel.cpp:365
+#: ../src/channel.cpp:355
 msgid "MMS stream"
 msgstr ""
 
-#: ../src/channel.cpp:374
+#: ../src/channel.cpp:364
 msgid "users:"
 msgstr ""
 
-#: ../src/channel.cpp:375
+#: ../src/channel.cpp:365
 msgid "Type:"
 msgstr ""
 
@@ -85,99 +85,91 @@ msgstr ""
 msgid "GMLive Conf Window"
 msgstr ""
 
-#: ../src/MainWindow.cpp:150
+#: ../src/MainWindow.cpp:216
 msgid "HideChannels"
 msgstr ""
 
 #. File menu:
-#: ../src/MainWindow.cpp:160
+#: ../src/MainWindow.cpp:226
 msgid "_File"
 msgstr ""
 
-#: ../src/MainWindow.cpp:162
+#: ../src/MainWindow.cpp:228
 msgid "Open local file"
 msgstr ""
 
-#: ../src/MainWindow.cpp:163
+#: ../src/MainWindow.cpp:229
 msgid "Open Local File"
 msgstr ""
 
-#: ../src/MainWindow.cpp:166
-msgid "Open URL"
-msgstr ""
-
-#: ../src/MainWindow.cpp:167
-msgid "Open Network Stream"
-msgstr ""
-
-#: ../src/MainWindow.cpp:171
+#: ../src/MainWindow.cpp:239
 msgid "Play"
 msgstr ""
 
-#: ../src/MainWindow.cpp:176
+#: ../src/MainWindow.cpp:244
 msgid "Pause"
 msgstr ""
 
-#: ../src/MainWindow.cpp:181
+#: ../src/MainWindow.cpp:249
 msgid "Record"
 msgstr ""
 
-#: ../src/MainWindow.cpp:186
+#: ../src/MainWindow.cpp:254
 msgid "Stop"
 msgstr ""
 
 #. View menu:
-#: ../src/MainWindow.cpp:194
+#: ../src/MainWindow.cpp:262
 msgid "_View"
 msgstr ""
 
-#: ../src/MainWindow.cpp:198
+#: ../src/MainWindow.cpp:266
 msgid "Show or hide channels list"
 msgstr ""
 
-#: ../src/MainWindow.cpp:203
+#: ../src/MainWindow.cpp:271
 msgid "_Embed Mplayer"
 msgstr ""
 
-#: ../src/MainWindow.cpp:203
+#: ../src/MainWindow.cpp:271
 msgid "Embed or Separate mplayer play"
 msgstr ""
 
 #. Help menu:
-#: ../src/MainWindow.cpp:210
+#: ../src/MainWindow.cpp:278
 msgid "_Help"
 msgstr ""
 
-#: ../src/MainWindow.cpp:216
+#: ../src/MainWindow.cpp:284
 msgid "_Refresh list"
 msgstr ""
 
-#: ../src/MainWindow.cpp:216
+#: ../src/MainWindow.cpp:284
 msgid "Refresh current channel list"
 msgstr ""
 
-#: ../src/MainWindow.cpp:219
+#: ../src/MainWindow.cpp:287
 msgid "Add to bookmark"
 msgstr ""
 
-#: ../src/MainWindow.cpp:219
+#: ../src/MainWindow.cpp:287
 msgid "Bookmark this channel"
 msgstr ""
 
-#: ../src/recordStream.cpp:73
+#: ../src/recordStream.cpp:74
 msgid "Record finial"
 msgstr ""
 
-#: ../src/recordStream.cpp:74
+#: ../src/recordStream.cpp:75
 msgid " record finial"
 msgstr ""
 
-#: ../src/recordStream.cpp:168
+#: ../src/recordStream.cpp:169
 #, c-format
 msgid "Recording %s To %s (%u Kb)"
 msgstr ""
 
-#: ../src/recordStream.cpp:173
+#: ../src/recordStream.cpp:174
 #, c-format
 msgid "Recording %s To %s (%u.%u Mb)"
 msgstr ""

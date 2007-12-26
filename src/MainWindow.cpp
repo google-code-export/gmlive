@@ -73,6 +73,7 @@ int unescape_character (const char *scanner)
 	return (first_digit << 4) | second_digit;
 }
 
+/** 用于在拖放时得到的文件名的转码*/
 std::string  wind_unescape_string (const char *escaped_string, 
 		const gchar *illegal_characters)
 {
@@ -161,7 +162,7 @@ Glib::ustring ui_info =
 "	<menubar name='MenuBar'>"
 "		<menu action='FileMenu'>"
 "			<menuitem action='OpenFile'/>"
-"			<menuitem action='OpenURL'/>"
+//"			<menuitem action='OpenURL'/>"
 "			<menuitem action='FilePlay'/>"
 "			<menuitem action='FilePause'/>"
 "			<menuitem action='FileRecord'/>"
@@ -228,10 +229,12 @@ void MainWindow::init_ui_manager()
 	action->set_tooltip(_("Open Local File"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_open_file));
+	/*
 	action = Gtk::Action::create("OpenURL", Gtk::Stock::OPEN,_("Open URL"));
 	action->set_tooltip(_("Open Network Stream"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_open_url));
+	*/
 	action = Gtk::Action::create("FilePlay", Gtk::Stock::MEDIA_PLAY);
 	action->set_tooltip(_("Play"));
 	action_group->add(action,
@@ -847,7 +850,7 @@ void MainWindow::on_drog_data_received(const Glib::RefPtr<Gdk::DragContext>& con
 	{
 		context->drag_finish(false,false,time);
 		std::string filename = wind_unescape_string(selection_data.get_text().c_str(), NULL);
-		std::cout << filename << std::endl;
+		//std::cout << filename << std::endl;
 		size_t pos = filename.find('\r');
 		if (std::string::npos != pos)
 			filename = filename.substr(0, pos);
