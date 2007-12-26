@@ -252,7 +252,6 @@ void MainWindow::on_menu_open_file()
 void MainWindow::on_menu_open_url()
 {
 
-
 }
 
 
@@ -451,6 +450,10 @@ MainWindow::MainWindow():
 	,window_width(1)
 	,window_height(1)
 {
+	std::list<Gtk::TargetEntry> listTargets;
+	listTargets.push_back(Gtk::TargetEntry("STRING"));
+	listTargets.push_back(Gtk::TargetEntry("text/plain"));
+
 	ui_xml = Gnome::Glade::Xml::create(main_ui, "mainFrame");
 	if (!ui_xml) 
 		exit(127);
@@ -522,6 +525,10 @@ MainWindow::MainWindow():
 	menu_tool_box->pack_start(*toolbar,false,false);
 
 	play_frame->pack_start(*backgroup, true, true);
+
+	play_frame->drag_dest_set(listTargets);
+	play_frame->signal_drag_data_received().connect(
+			sigc::mem_fun(*this, &MainWindow::on_drog_data_received));
 
 
 	this->add(*main_frame);
@@ -765,4 +772,16 @@ void MainWindow::set_live_player(LivePlayer* lp,
 void MainWindow::on_preview(const std::string& filename)
 {
 	gmp->start(filename);
+}
+
+void MainWindow::on_drog_data_received(const Glib::RefPtr<Gdk::DragContext>& context,
+				int, int, const Gtk::SelectionData& selection_data,
+				guint,guint time)
+{
+	if((selection_data.get_length() >= 0)&&(selection_data.get_format()== 8))
+	{
+		std::cout<<"Received "<<selection_data.get_data_as_string()<<std::endl;
+	}
+	context->drag_finish(false,false,time);
+	gmp->start(selection_data.get_data_as_string());
 }
