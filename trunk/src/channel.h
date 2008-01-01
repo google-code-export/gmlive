@@ -39,6 +39,7 @@ class Channel:public Gtk::TreeView
 		void play_selection();
 		void record_selection();
 		void store_selection();
+		std::string get_stream();
 		void search_channel(const Glib::ustring& name);
 		virtual void refresh_list(){};
 
