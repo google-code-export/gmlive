@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-26 19:35+0800\n"
-"PO-Revision-Date: 2007-12-25 19:29+0800\n"
+"POT-Creation-Date: 2008-01-01 11:58+0800\n"
+"PO-Revision-Date: 2008-01-01 11:30+0800\n"
 "Last-Translator: lerosua <lerosua@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -45,16 +45,16 @@ msgstr "已经录制中"
 msgid "The Record had working now, you must stop it beforce"
 msgstr "录制已经在工作中，您必须中止之前的录制。"
 
-#: ../src/channel.cpp:163 ../src/MainWindow.cpp:303
+#: ../src/channel.cpp:163 ../src/MainWindow.cpp:315
 msgid "Choose File"
 msgstr "选择文件"
 
 #. 录制的时候
-#: ../src/channel.cpp:263
+#: ../src/channel.cpp:273
 msgid "Stop Recording"
 msgstr "停止录制"
 
-#: ../src/channel.cpp:267
+#: ../src/channel.cpp:277
 msgid ""
 "GMLive is recording,you can play channel after stop the record.\n"
 " Are you really to do this?"
@@ -62,23 +62,23 @@ msgstr ""
 "GMLive 在录制中，您必须先停止录制才能使用播放功能\n"
 "你确定停止录制吗？"
 
-#: ../src/channel.cpp:351
+#: ../src/channel.cpp:361
 msgid "NSLive Stream"
 msgstr "NSLive 流"
 
-#: ../src/channel.cpp:353
+#: ../src/channel.cpp:363
 msgid "SopCast Stream"
 msgstr "SopCast 流"
 
-#: ../src/channel.cpp:355
+#: ../src/channel.cpp:365
 msgid "MMS stream"
 msgstr "MMS流"
 
-#: ../src/channel.cpp:364
+#: ../src/channel.cpp:374
 msgid "users:"
 msgstr "用户数："
 
-#: ../src/channel.cpp:365
+#: ../src/channel.cpp:375
 msgid "Type:"
 msgstr "类型："
 
@@ -86,76 +86,89 @@ msgstr "类型："
 msgid "GMLive Conf Window"
 msgstr "GMLive 配置"
 
-#: ../src/MainWindow.cpp:216
+#: ../src/MainWindow.cpp:220
 msgid "HideChannels"
 msgstr "隐藏列表"
 
 #. File menu:
-#: ../src/MainWindow.cpp:226
+#: ../src/MainWindow.cpp:230
 msgid "_File"
 msgstr "文件"
 
-#: ../src/MainWindow.cpp:228
+#: ../src/MainWindow.cpp:232
 msgid "Open local file"
 msgstr "打开本地文件"
 
-#: ../src/MainWindow.cpp:229
+#: ../src/MainWindow.cpp:233
 msgid "Open Local File"
 msgstr "打开本地文件"
 
-#: ../src/MainWindow.cpp:239
+#: ../src/MainWindow.cpp:243
 msgid "Play"
 msgstr "播放"
 
-#: ../src/MainWindow.cpp:244
+#: ../src/MainWindow.cpp:248
 msgid "Pause"
 msgstr "暂停"
 
-#: ../src/MainWindow.cpp:249
+#: ../src/MainWindow.cpp:253
 msgid "Record"
 msgstr "录制"
 
-#: ../src/MainWindow.cpp:254
+#: ../src/MainWindow.cpp:258
 msgid "Stop"
 msgstr "停止"
 
+#: ../src/MainWindow.cpp:264
+msgid "MUTE"
+msgstr "静音"
+
 #. View menu:
-#: ../src/MainWindow.cpp:262
+#: ../src/MainWindow.cpp:271
 msgid "_View"
 msgstr "查看"
 
-#: ../src/MainWindow.cpp:266
+#: ../src/MainWindow.cpp:275
 msgid "Show or hide channels list"
 msgstr "显示或隐藏频道列表"
 
-#: ../src/MainWindow.cpp:271
+#: ../src/MainWindow.cpp:280
 msgid "_Embed Mplayer"
 msgstr "嵌入播放器"
 
-#: ../src/MainWindow.cpp:271
+#: ../src/MainWindow.cpp:280
 msgid "Embed or Separate mplayer play"
 msgstr "嵌入或分离播放器"
 
 #. Help menu:
-#: ../src/MainWindow.cpp:278
+#: ../src/MainWindow.cpp:287
 msgid "_Help"
 msgstr "帮助"
 
-#: ../src/MainWindow.cpp:284
+#: ../src/MainWindow.cpp:293
 msgid "_Refresh list"
 msgstr "刷新列表"
 
-#: ../src/MainWindow.cpp:284
+#: ../src/MainWindow.cpp:293
 msgid "Refresh current channel list"
 msgstr "刷新当前频道列表"
 
-#: ../src/MainWindow.cpp:287
-msgid "Add to bookmark"
+#: ../src/MainWindow.cpp:296
+#, fuzzy
+msgid "_Add to bookmark"
 msgstr "添加到书签"
 
-#: ../src/MainWindow.cpp:287
+#: ../src/MainWindow.cpp:296
 msgid "Bookmark this channel"
 msgstr "收藏此频道"
+
+#: ../src/MainWindow.cpp:299
+msgid "_Copy url"
+msgstr "复制流地址"
+
+#: ../src/MainWindow.cpp:299
+msgid "Copy url to clipboard"
+msgstr "复制流地址至剪贴板"
 
 #: ../src/recordStream.cpp:74
 msgid "Record finial"

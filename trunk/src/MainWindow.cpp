@@ -167,6 +167,7 @@ Glib::ustring ui_info =
 "			<menuitem action='FilePause'/>"
 "			<menuitem action='FileRecord'/>"
 "			<menuitem action='FileStop'/>"
+"			<menuitem action='Mute'/>"
 "			<separator/>"
 "			<menuitem action='FileQuit'/>"
 "        	</menu>"
@@ -184,6 +185,7 @@ Glib::ustring ui_info =
 "		<menuitem action='FilePause'/>"
 "		<menuitem action='FileRecord'/>"
 "		<menuitem action='FileStop'/>"
+"		<menuitem action='Mute'/>"
 "		<separator/>"
 "		<menuitem action='PopCopyUrl'/>"
 "		<separator/>"
@@ -256,6 +258,11 @@ void MainWindow::init_ui_manager()
 	action->set_tooltip(_("Stop"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_stop));
+
+
+	action_group->add(Gtk::ToggleAction::create("Mute",
+				_("MUTE"), _("MUTE"), true), 
+			sigc::mem_fun(*this, &MainWindow::on_menu_file_mute));
 
 	action_group->add(Gtk::Action::create("FileQuit", Gtk::Stock::QUIT),
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_quit));
@@ -360,6 +367,15 @@ void MainWindow::on_menu_file_record()
 		channel->record_selection();
 	else
 		cout << "Error" << endl;
+}
+
+void MainWindow::on_menu_file_mute()
+{
+	Glib::RefPtr<Gtk::ToggleAction> mute = 
+		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("Mute"));
+	bool mute_=mute->get_active();
+
+	gmp->mute(mute_);
 }
 
 void MainWindow::on_menu_file_quit()
@@ -765,6 +781,9 @@ void MainWindow::init()
 
 	set_channels_hide(channels_hide);
 	set_gmp_embed(gmp_embed);
+	Glib::RefPtr<Gtk::ToggleAction> menu = 
+		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("Mute"));
+	menu->set_active(false);
 }
 
 void MainWindow::save_conf()

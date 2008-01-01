@@ -191,4 +191,11 @@ void GMplayer::pause()
 	send_ctrl_command("pause\n");
 }
 
+void GMplayer::mute(bool mute)
+{
+	if(mute)
+		send_ctrl_command("mute\n");
+	else
+		send_ctrl_command("mute\n");
+}
 

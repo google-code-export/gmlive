@@ -15,6 +15,7 @@ class GMplayer {
 		virtual void start(const std::string&) = 0;
 		virtual void start() = 0;
 		void pause(); 
+		void mute(bool);
 		virtual void stop();
 
 		bool running() const;
