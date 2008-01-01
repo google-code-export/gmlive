@@ -185,6 +185,8 @@ Glib::ustring ui_info =
 "		<menuitem action='FileRecord'/>"
 "		<menuitem action='FileStop'/>"
 "		<separator/>"
+"		<menuitem action='PopCopyUrl'/>"
+"		<separator/>"
 "		<menuitem action='PopRefreshList'/>"
 "		<menuitem action='PopAddToBookmark'/>"
 "	</popup>"
@@ -284,8 +286,11 @@ void MainWindow::init_ui_manager()
 				_("_Refresh list"), _("Refresh current channel list")),
 			sigc::mem_fun(*this, &MainWindow::on_menu_pop_refresh_list));
 	action_group->add(Gtk::Action::create("PopAddToBookmark", 
-				_("Add to bookmark"), _("Bookmark this channel")),
+				_("_Add to bookmark"), _("Bookmark this channel")),
 			sigc::mem_fun(*this, &MainWindow::on_menu_pop_add_to_bookmark));
+	action_group->add(Gtk::Action::create("PopCopyUrl", 
+				_("_Copy url"), _("Copy url to clipboard")),
+			sigc::mem_fun(*this, &MainWindow::on_menu_pop_copy_to_clipboard));
 
 	if (!ui_manager)
 		ui_manager = Gtk::UIManager::create();
@@ -382,6 +387,18 @@ void MainWindow::on_menu_pop_add_to_bookmark()
 		channel->store_selection();
 	else
 		cout << "Error" << endl;
+}
+
+void MainWindow::on_menu_pop_copy_to_clipboard()
+{
+	Channel* channel = get_cur_select_channel();
+	if (!channel) 
+		return;
+	Glib::ustring stream = channel->get_stream();
+	if (stream.empty())
+		return;
+	Glib::RefPtr<Gtk::Clipboard> clip = Gtk::Clipboard::get();
+	clip->set_text(stream);
 }
 
 bool MainWindow::on_delete_event(GdkEventAny* event)

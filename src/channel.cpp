@@ -209,6 +209,16 @@ void Channel::record_selection()
 	}
 }
 
+std::string Channel::get_stream()
+{
+	Glib::RefPtr < Gtk::TreeSelection > selection =
+		this->get_selection();
+	Gtk::TreeModel::iterator iter = selection->get_selected();
+	if (!selection->count_selected_rows())
+		return std::string();
+	return (*iter)[columns.stream];
+}
+
 void Channel::store_selection()
 {
 	Glib::RefPtr < Gtk::TreeSelection > selection =

@@ -60,6 +60,7 @@ class MainWindow : public Gtk::Window {
 		void on_menu_help_about();
 		void on_menu_pop_refresh_list();
 		void on_menu_pop_add_to_bookmark();
+		void on_menu_pop_copy_to_clipboard();
 
 		void on_search_channel();
 		void on_preview(const std::string& filename);
