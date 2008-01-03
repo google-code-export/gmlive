@@ -1,4 +1,4 @@
-SUBDIRS = src data po
+SUBDIRS = src data po plugins
 
 EXTRA_DIST =                    \
         ChangeLog               \

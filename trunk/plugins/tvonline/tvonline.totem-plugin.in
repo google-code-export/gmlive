@@ -1,0 +1,9 @@
+[Totem Plugin]
+Loader=python
+Module=tvonline
+IAge=1
+_Name=TV online
+_Description=watch TV plugin for totem
+Authors=yetist <yetist@gmail.com>
+Copyright=Copyright © 2007 yetist
+Website=http://gmlive.googlecode.com
