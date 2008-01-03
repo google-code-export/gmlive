@@ -17,6 +17,10 @@ AC_PROG_CXXCPP
 
 AC_LANG_CPLUSPLUS
 
+prefixdir="$(dirname $(dirname `which totem`))/lib"
+AC_SUBST(prefixdir)
+PLUGINDIR='${prefixdir}/totem/plugins'
+AC_SUBST(PLUGINDIR)
 
 # Checks for libraries.
 AC_CHECK_FUNCS([socket])

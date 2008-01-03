@@ -1,3 +1,15 @@
+2008-01-03  yetist  <yetist@gmail.com>
+
+	* plugins: 
+	* plugins/Makefile.am: 
+	* plugins/tvonline: 
+	* plugins/tvonline/tvonline.py: 
+	* plugins/tvonline/tvonline.totem-plugin.in: 
+	* plugins/tvonline/Makefile.am: 
+	* configure.in: 
+	* Makefile.am: 
+	add a test plugin for totem
+
 2007-12-24  yetist  <yetist@gmail.com>
 
 	* configure: remove
