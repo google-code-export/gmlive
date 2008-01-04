@@ -17,6 +17,8 @@ AC_PROG_CXXCPP
 
 AC_LANG_CPLUSPLUS
 
+AM_PATH_PYTHON
+
 prefixdir="$(dirname $(dirname `which totem`))/lib"
 AC_SUBST(prefixdir)
 PLUGINDIR='${prefixdir}/totem/plugins'
@@ -39,6 +41,8 @@ AM_GLIB_GNU_GETTEXT
 AC_CONFIG_FILES([Makefile
 	   src/Makefile
            po/Makefile.in
+	   plugins/Makefile
+	   plugins/tvonline/Makefile
            data/gmlive.desktop.in
 	   data/Makefile])
 AC_OUTPUT
