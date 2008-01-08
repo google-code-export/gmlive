@@ -7,7 +7,7 @@ plugin_in_files = tvonline.totem-plugin.in
 
 plugin_DATA = $(plugin_in_files:.totem-plugin.in=.totem-plugin) mms.lst
 
-EXTRA_DIST = $(plugin_in_files) $(plugin_PYTHON)
+EXTRA_DIST = $(plugin_in_files) $(plugin_PYTHON) mms.lst
 
 CLEANFILES = $(plugin_DATA)
 DISTCLEANFILES = $(plugin_DATA)
