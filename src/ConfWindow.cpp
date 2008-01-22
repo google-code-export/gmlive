@@ -35,6 +35,7 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	m_sopcast_cache = GMConf["sopcast_mplayer_cache"];
 	m_nslive_cache = GMConf["nslive_mplayer_cache"];
 	m_nslive_delay = GMConf["nslive_delay_time"];
+	m_sopcast_channel = GMConf["sopcast_channel_url"];
 
 
 	m_pVariablesMap = new Gnome::Glade::VariablesMap(vbox_xml);
@@ -44,6 +45,7 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	m_pVariablesMap->connect_widget("entry_nslive_cache",m_nslive_cache);
 	m_pVariablesMap->connect_widget("entry_nslive_delay", m_nslive_delay);
 	m_pVariablesMap->connect_widget("entry_sopcast_cache",m_sopcast_cache);
+	m_pVariablesMap->connect_widget("entry_sopcast_channel",m_sopcast_channel);
 
 
 
@@ -85,6 +87,7 @@ void ConfWindow::write_to_GMConf()
 	GMConf["sopcast_mplayer_cache"] =            m_sopcast_cache;
 	GMConf["nslive_mplayer_cache"]  =            m_nslive_cache ;
 	GMConf["nslive_delay_time"]     =            m_nslive_delay ;
+	GMConf["sopcast_channel_url"]    =            m_sopcast_channel;
 }
 
 
