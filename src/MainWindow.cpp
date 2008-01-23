@@ -730,7 +730,7 @@ void MainWindow::init()
 		GMConf["nslive_mplayer_cache"]  =       "64";
 		GMConf["nslive_delay_time"]     =       "2";
 		GMConf["channels_hide"]		=	"0";
-		GMConf["sopcast_channel_url"]		=	"http://www.sopcast.com/gchlxml";
+		GMConf["sopcast_channel_url"]		=	"http://channel.sopcast.com/gchlxml";
 		return;
 	}
 	std::string line;
