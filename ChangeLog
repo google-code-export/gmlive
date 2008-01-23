@@ -1,3 +1,9 @@
+2008-01-23  yetist  <yetist@gmail.com>
+
+	* configure.in: 
+	* Makefile.am: 
+	add enable-plugin args.
+
 2008-01-04  yetist  <yetist@gmail.com>
 
 	* plugins/tvonline/tvonline.py: 
