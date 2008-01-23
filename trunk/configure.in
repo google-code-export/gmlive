@@ -17,13 +17,6 @@ AC_PROG_CXXCPP
 
 AC_LANG_CPLUSPLUS
 
-AM_PATH_PYTHON
-
-prefixdir="$(dirname $(dirname `which totem`))/lib"
-AC_SUBST(prefixdir)
-PLUGINDIR='${prefixdir}/totem/plugins'
-AC_SUBST(PLUGINDIR)
-
 # Checks for libraries.
 AC_CHECK_FUNCS([socket])
 
@@ -31,6 +24,40 @@ pkg_modules="gtkmm-2.4 >= 2.6.0 libglademm-2.4 >= 2.4.0 libxml-2.0 >= 2.6.0"
 PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
 AC_SUBST(PACKAGE_CFLAGS)
 AC_SUBST(PACKAGE_LIBS)
+
+AC_MSG_CHECKING([whether Totem plugin support is requested])
+AC_ARG_ENABLE([plugin],
+        AS_HELP_STRING([--enable-plugin],[Enable totem plugin support]),
+        [enable_plugin=$enableval have_python=$enableval],
+        [enable_plugin=autodetect have_python=yes])
+AC_MSG_RESULT([$enable_plugin])
+
+if test "x$have_python" != "xno"; then
+        AM_PATH_PYTHON([2.4],[],[no])
+        if test "x$PYTHON" = "x:"; then
+                have_python=no
+        fi
+fi
+
+if test "x$have_python" != "xno"; then
+    AM_PATH_PROG_WITH_TEST(have_totem, totem, [yes],[no])
+    if test "x$have_totem" != "xno"; then
+        totem_version=`totem --version|awk -F. '{print $2}'` 
+        if test $totem_version -lt 20; then
+            have_totem=no
+        else
+            have_totem=yes
+            prefixdir="$(dirname $(dirname `which totem`))/lib"
+            AC_SUBST(prefixdir)
+            PLUGINDIR='${prefixdir}/totem/plugins'
+            AC_SUBST(PLUGINDIR)
+            ENABLE_PLUGIN=${have_totem}
+            AC_SUBST(ENABLE_PLUGIN)
+        fi
+    fi
+fi
+
+AM_CONDITIONAL([ENABLE_PLUGIN],[test "x$have_totem" = "xyes"])
 
 GETTEXT_PACKAGE=gmlive
 AC_SUBST(GETTEXT_PACKAGE)
