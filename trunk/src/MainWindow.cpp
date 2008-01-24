@@ -558,6 +558,8 @@ MainWindow::MainWindow():
 	ui_xml = Gnome::Glade::Xml::create(main_ui, "mainFrame");
 	if (!ui_xml) 
 		exit(127);
+
+
 	Gtk::VBox* main_frame = 
 		dynamic_cast < Gtk::VBox* >
 		(ui_xml->get_widget("mainFrame"));
@@ -578,14 +580,14 @@ MainWindow::MainWindow():
 		(ui_xml->get_widget("mmsChannelWnd"));
 	swnd->add(*channel);
 
-	channel = Gtk::manage(new class SopcastChannel(this));
-	swnd = dynamic_cast<Gtk::ScrolledWindow*>
-		(ui_xml->get_widget("sopcastChannelWnd"));
-	swnd->add(*channel);
-
 	channel = Gtk::manage(new class NSLiveChannel(this));
 	swnd = dynamic_cast<Gtk::ScrolledWindow*>
 		(ui_xml->get_widget("nsliveChannelWnd"));
+	swnd->add(*channel);
+
+	channel = Gtk::manage(new class SopcastChannel(this));
+	swnd = dynamic_cast<Gtk::ScrolledWindow*>
+		(ui_xml->get_widget("sopcastChannelWnd"));
 	swnd->add(*channel);
 
 	recent_channel = Gtk::manage(new class RecentChannel(this));
@@ -644,6 +646,7 @@ MainWindow::MainWindow():
 	this->resize(1,1);
 	init();
 	((Gtk::Toolbar*)toolbar)->set_toolbar_style(Gtk::TOOLBAR_ICONS);
+	channel->refresh_list();
 
 }
 
