@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-22 19:26+0800\n"
-"PO-Revision-Date: 2008-01-01 11:30+0800\n"
+"POT-Creation-Date: 2008-01-24 21:20+0800\n"
+"PO-Revision-Date: 2008-01-24 21:21+0800\n"
 "Last-Translator: lerosua <lerosua@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -154,7 +154,6 @@ msgid "Refresh current channel list"
 msgstr "刷新当前频道列表"
 
 #: ../src/MainWindow.cpp:296
-#, fuzzy
 msgid "_Add to bookmark"
 msgstr "添加到书签"
 
