@@ -40,7 +40,7 @@ if test "x$have_python" != "xno"; then
 fi
 
 if test "x$have_python" != "xno"; then
-    AM_PATH_PROG_WITH_TEST(have_totem, totem, [yes],[no])
+    AM_PATH_PROG_WITH_TEST(have_totem, totem, [have_totem=yes],[no])
     if test "x$have_totem" != "xno"; then
         totem_version=`totem --version|awk -F. '{print $2}'` 
         if test $totem_version -lt 20; then

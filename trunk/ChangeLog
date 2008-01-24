@@ -1,3 +1,8 @@
+2008-01-24  yetist  <yetist@gmail.com>
+
+	* configure.in: 
+	fixed autogen.sh error!
+
 2008-01-23  yetist  <yetist@gmail.com>
 
 	* configure.in: 
