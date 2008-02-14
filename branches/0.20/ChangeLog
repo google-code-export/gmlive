@@ -1,0 +1,65 @@
+2008-01-24  yetist  <yetist@gmail.com>
+
+	* configure.in: 
+	fixed autogen.sh error!
+
+2008-01-23  yetist  <yetist@gmail.com>
+
+	* configure.in: 
+	* Makefile.am: 
+	add enable-plugin args.
+
+2008-01-04  yetist  <yetist@gmail.com>
+
+	* plugins/tvonline/tvonline.py: 
+	* plugins/tvonline/Makefile.am: 
+	* plugins/tvonline/mms.lst: 
+	* configure.in: 
+	* po/POTFILES.in: 
+	the tvonline plugin for totem can work first.
+
+2008-01-03  yetist  <yetist@gmail.com>
+
+	* plugins: 
+	* plugins/Makefile.am: 
+	* plugins/tvonline: 
+	* plugins/tvonline/tvonline.py: 
+	* plugins/tvonline/tvonline.totem-plugin.in: 
+	* plugins/tvonline/Makefile.am: 
+	* configure.in: 
+	* Makefile.am: 
+	add a test plugin for totem
+
+2007-12-24  yetist  <yetist@gmail.com>
+
+	* configure: remove
+	* po/LINGUAS: It's lost!
+
+2007-12-18  yetist  <yetist@gmail.com>
+
+	* configure.in: 
+	* Makefile.am: 
+	* autogen.sh: 
+	添加autogen.sh到打包的文件中。
+
+2007-12-18  yetist  <yetist@gmail.com>
+
+	* depcomp: 
+	* stamp-h1: 
+	* config.h: 
+	* autoscan.log: 
+	* config.h.in~: 
+	* config.h.in: 
+	* Makefile.am: 
+	* missing: 
+	* install-sh: 
+	删除不需要的文件。
+
+2007-12-18  yetist  <yetist@gmail.com>
+
+	* Makefile.in: deleted.
+	* configure.in: 
+	* ChangeLog: 
+	* data/Makefile.in: deleted
+	* Makefile.am: 
+	修复打包时缺少文件的问题。
