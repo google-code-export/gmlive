@@ -35,6 +35,8 @@
 #include <functional>
 #include <algorithm>
 #include <glib/gi18n.h>
+#include <stdio.h>
+#include <string.h>
 
 using namespace std;
 
@@ -580,15 +582,24 @@ MainWindow::MainWindow():
 		(ui_xml->get_widget("mmsChannelWnd"));
 	swnd->add(*channel);
 
+	/** 检测是否支持nslive和sopcast */
+	check_support();
+
+	if(enable_nslive)
+	{
 	channel = Gtk::manage(new class NSLiveChannel(this));
 	swnd = dynamic_cast<Gtk::ScrolledWindow*>
 		(ui_xml->get_widget("nsliveChannelWnd"));
 	swnd->add(*channel);
+	}
 
+	if(enable_sopcast)
+	{
 	channel = Gtk::manage(new class SopcastChannel(this));
 	swnd = dynamic_cast<Gtk::ScrolledWindow*>
 		(ui_xml->get_widget("sopcastChannelWnd"));
 	swnd->add(*channel);
+	}
 
 	recent_channel = Gtk::manage(new class RecentChannel(this));
 	swnd = dynamic_cast<Gtk::ScrolledWindow*>
@@ -715,6 +726,54 @@ MainWindow::~MainWindow()
 	GMConf["mplayer_embed"] = buf;
 
 	save_conf();
+}
+bool MainWindow::check_file(const char* name)
+{
+	char filename[512]="/usr/bin/";
+	char filename_local[512]="/usr/local/bin/";
+	strcat(filename, name);
+	strcat(filename_local, name);
+	FILE* fp;
+	fp = fopen(filename,"r");
+	if(!fp)
+	{
+		fp=fopen(filename_local,"r");
+		if(!fp)
+		{
+			return false;
+		}
+		fclose(fp);
+		return true;
+	}
+	fclose(fp);
+	return true;
+
+}
+void MainWindow::check_support()
+{
+	std::string nslive_cmd("nslive");
+	std::string sopcast_cmd("sp-sc-auth");
+
+	enable_sopcast=check_file(sopcast_cmd.c_str());
+	enable_nslive=check_file(nslive_cmd.c_str());
+
+	if(!enable_nslive| !enable_sopcast)
+	{
+		Gtk::MessageDialog warnDialog(_("NO SUPPORT"),
+					false);
+		std::string msg="";
+		if(!enable_sopcast)
+			msg+=std::string(_("you have not install sopcast program,so GMLive can't support it now"))+"\n";
+		if(!enable_nslive)
+			msg+=std::string(_("you have not install nslive program,so GMLive can't support it now"))+"\n";
+		msg+=_(" So you can install the program first");
+		warnDialog.set_secondary_text(msg);
+
+		warnDialog.run();
+
+	}
+
+
 }
 
 void MainWindow::init()

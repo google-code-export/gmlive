@@ -1,3 +1,7 @@
+2008-02-19  lerosua <leroau@gmail.com>
+	修正自定义sopcast列表下载错误的BUG。
+	添加检测sopcast,nslive的函数。
+
 2008-01-24  yetist  <yetist@gmail.com>
 
 	* configure.in: 

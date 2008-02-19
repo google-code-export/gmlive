@@ -81,6 +81,8 @@ class MainWindow : public Gtk::Window {
 
 		void reorder_widget(bool is_running);
 		Channel* get_cur_select_channel();
+		bool check_file(const char* name);
+		void check_support();
 	private:
 		GlademmXML 			ui_xml;
 		Glib::RefPtr<Gtk::UIManager>	ui_manager;
@@ -103,6 +105,8 @@ class MainWindow : public Gtk::Window {
 		int				window_height;
 		bool				gmp_embed;
 		bool				channels_hide;
+		bool				enable_nslive;
+		bool				enable_sopcast;
 };
 
 #endif // _MAINWINDOW_HH 
