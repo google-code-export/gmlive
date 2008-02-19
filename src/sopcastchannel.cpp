@@ -123,8 +123,7 @@ void SopcastChannel::refresh_list()
 
 		const char* argv[5];
        		argv[0] = "wget";
-		argv[1] = "http://www.sopcast.com/gchlxml";
-		//argv[1] = GMConf["sopcast_channel_url"].c_str();
+		argv[1] = GMConf["sopcast_channel_url"].c_str();
 		argv[2] = "-O";
 		argv[3] = buf;
 		argv[4] = NULL;
