@@ -14,6 +14,28 @@ cctv9	#mms://live.cctv.com/live19 #CCTV
 cctv10	#mms://live.cctv.com/live20 #CCTV
 cctv11	#mms://live.cctv.com/live21 #CCTV
 cctv12	#mms://live.cctv.com/live22 #CCTV
+
+凤凰资讯 #mms://211.167.102.66/ch-01  #新频道
+凤凰卫视 #mms://211.167.102.66/ch-02 #新频道
+[V]音乐台 #mms://211.167.102.66/ch-03 #新频道
+Bloomberg #mms://211.167.102.66/ch-04 #新频道
+TVB8 #mms://211.167.102.66/ch-05 #新频道
+华娱卫视 #mms://211.167.102.66/ch-06 #新频道
+TVB星河 #mms://211.167.102.66/ch-07 #新频道
+贺曼电影 #mms://211.167.102.66/ch-08 #新频道
+FashionTV #mms://211.167.102.66/ch-09 #新频道
+TVBS-G娱乐 #mms://211.167.102.66/ch-10 #新频道
+Discovery #mms://211.167.102.66/ch-11 #新频道
+东风卫视 #mms://211.167.102.66/ch-12 #新频道
+东森综合 #mms://211.167.102.66/ch-13 #新频道
+AXN台湾 #mms://211.167.102.66/ch-14 #新频道
+东森娱乐 #mms://211.167.102.66/ch-15 #新频道
+中天综合 #mms://211.167.102.66/ch-16 #新频道
+中天娱乐 #mms://211.167.102.66/ch-17 #新频道
+东森电影 #mms://211.167.102.66/ch-18 #新频道
+国家地理 #mms://211.167.102.66/ch-19 #新频道
+AXN香港 #mms://211.167.102.66/ch-20 #新频道
+
 中国教育电视台	#mms://58.22.96.10/litv08 #中国
 凤凰资讯	#mmst://221.2.138.93/fenghuang #中国
 阳光卫视	#mms://61.139.37.135/ygws #中国
@@ -65,7 +87,7 @@ starmovies	#mms://61.139.37.135/starmovies #美国
 美国-地球频道			#mms://broadcast.ebahn.tv/earthChannel #美国
 美国-音乐		#mms://stream.nwez.net/nwez3  #美国
 CN8		#mms://68.87.109.4/cn8winmedia        #美国
-美国-Freespeech TV	#mms://209.90.224.6/scanlive?MSWMExt=.asf #美国
+美国-Freespeech TV	#mms://209.90.224.6/scanlive?MSWMExt #.asf #美国
 
 美国-Bloomberg 财经频道	#mms://media2.bloomberg.com/btv_US200.asf 	#美国
 
@@ -76,4 +98,4 @@ CN8		#mms://68.87.109.4/cn8winmedia        #美国
 法国-tele02		#mms://www.tele102.net/tele102	#国外
 意大利-那不勒斯体育台		#mms://live.wm.p1.str3.com/000999_bc_v365_telecaprisport_mi  #国外
 德国-N-tv       #mms://stream.n-tv.de/ntvlive		#国外
-西班牙-马德里	#mms://ikunamedia-esmadrid400.wm.llnwd.net/ikunamedia_ESMadrid400?MSWMExt=.asf	#国外
+西班牙-马德里	#mms://ikunamedia-esmadrid400.wm.llnwd.net/ikunamedia_ESMadrid400?MSWMExt #.asf	#国外
