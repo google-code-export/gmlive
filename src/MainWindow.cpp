@@ -582,6 +582,7 @@ MainWindow::MainWindow():
 		(ui_xml->get_widget("mmsChannelWnd"));
 	swnd->add(*channel);
 
+	init();
 	/** 检测是否支持nslive和sopcast */
 	check_support();
 
@@ -655,7 +656,24 @@ MainWindow::MainWindow():
 	this->show_all();
 	//channels->hide();
 	this->resize(1,1);
-	init();
+	//init();
+	
+	const std::string& wnd_width = GMConf["main_window_width"];
+	window_width = atoi(wnd_width.c_str());
+	window_width = window_width > 0 ? window_width : 1;
+
+	const std::string& wnd_height = GMConf["main_window_height"];
+	window_height = atoi(wnd_height.c_str());
+	window_height = window_height > 0 ? window_height : 1;
+
+	channels_hide = atoi(GMConf["channels_hide"].c_str());
+	gmp_embed     = atoi(GMConf["mplayer_embed"].c_str());
+
+	set_channels_hide(channels_hide);
+	set_gmp_embed(gmp_embed);
+	Glib::RefPtr<Gtk::ToggleAction> menu = 
+		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("Mute"));
+	menu->set_active(false);
 	((Gtk::Toolbar*)toolbar)->set_toolbar_style(Gtk::TOOLBAR_ICONS);
 	channel->refresh_list();
 
@@ -757,14 +775,17 @@ void MainWindow::check_support()
 	enable_sopcast=check_file(sopcast_cmd.c_str());
 	enable_nslive=check_file(nslive_cmd.c_str());
 
+	std::string& enablesopcast_ = GMConf["enable_sopcast"];
+	std::string& enablenslive_ = GMConf["enable_nslive"];
+	if(enablesopcast_[0]=='1'|enablenslive_[0]=='1')
 	if(!enable_nslive| !enable_sopcast)
 	{
 		Gtk::MessageDialog warnDialog(_("NO SUPPORT"),
 					false);
 		std::string msg="";
-		if(!enable_sopcast)
+		if(!enable_sopcast && (enablesopcast_[0]=='1'))
 			msg+=std::string(_("you have not install sopcast program,so GMLive can't support it now"))+"\n";
-		if(!enable_nslive)
+		if(!enable_nslive && (enablenslive_[0]=='1'))
 			msg+=std::string(_("you have not install nslive program,so GMLive can't support it now"))+"\n";
 		msg+=_(" So you can install the program first");
 		warnDialog.set_secondary_text(msg);
@@ -787,6 +808,8 @@ void MainWindow::init()
 		snprintf(homepath,512,"%s/.gmlive/",homedir);
 		mkdir(homepath,S_IRUSR|S_IWUSR|S_IXUSR);
 		GMConf["mplayer_embed"]		=	"1";
+		GMConf["enable_sopcast"] = "1";
+		GMConf["enable_nslive"]= "1";
 		GMConf["mms_mplayer_cache"]     =       "8192";
 		GMConf["sopcast_mplayer_cache"] =       "64";
 		GMConf["nslive_mplayer_cache"]  =       "64";
@@ -831,6 +854,7 @@ void MainWindow::init()
 	}
 	file.close();
 
+	/*
 	const std::string& wnd_width = GMConf["main_window_width"];
 	window_width = atoi(wnd_width.c_str());
 	window_width = window_width > 0 ? window_width : 1;
@@ -844,9 +868,7 @@ void MainWindow::init()
 
 	set_channels_hide(channels_hide);
 	set_gmp_embed(gmp_embed);
-	Glib::RefPtr<Gtk::ToggleAction> menu = 
-		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("Mute"));
-	menu->set_active(false);
+	*/
 }
 
 void MainWindow::save_conf()

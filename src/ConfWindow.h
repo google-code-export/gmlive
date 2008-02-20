@@ -50,6 +50,8 @@ class ConfWindow: public Gtk::Window
 		Glib::ustring m_nslive_cache;
 		Glib::ustring m_sopcast_channel;
 		bool		m_embed;
+		bool		m_enable_nslive;
+		bool		m_enable_sopcast;
 
 		/*
 		   Gtk::CheckButton* check_embed;

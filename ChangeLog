@@ -1,3 +1,8 @@
+
+2008年 02月 20日 星期三 20:34:51 CST lerosua<lerosua@gmail.com>
+	初步完成sopcast,nslive的检测。每次提示是否支持。如果在配置
+	里关了支持则不会检测了。
+
 2008-02-19  lerosua <leroau@gmail.com>
 	修正自定义sopcast列表下载错误的BUG。
 	添加检测sopcast,nslive的函数。
