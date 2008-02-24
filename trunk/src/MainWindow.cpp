@@ -541,7 +541,7 @@ bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 void MainWindow::on_live_player_out(int percentage)
 {
 	char buf[256];
-	sprintf(buf, "Connect...%%%d", percentage);
+	sprintf(buf, _("Caching... %d%%"), percentage);
 	show_msg(buf);
 }
 

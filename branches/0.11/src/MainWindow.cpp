@@ -261,7 +261,7 @@ void MainWindow::play(LivePlayer* lp)
 void MainWindow::on_live_player_status(int percentage)
 {
 	char buf[256];
-	sprintf(buf, "Connect...%%%d", percentage);
+	sprintf(buf, "Caching... %d%%", percentage);
 	show_msg(buf, sizeof (buf));
 }
 
