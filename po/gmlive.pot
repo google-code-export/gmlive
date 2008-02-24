@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-20 19:47+0800\n"
+"POT-Creation-Date: 2008-02-24 14:48+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -168,19 +168,24 @@ msgstr ""
 msgid "Copy url to clipboard"
 msgstr ""
 
-#: ../src/MainWindow.cpp:765
+#: ../src/MainWindow.cpp:544
+#, c-format
+msgid "Caching... %d%%"
+msgstr ""
+
+#: ../src/MainWindow.cpp:783
 msgid "NO SUPPORT"
 msgstr ""
 
-#: ../src/MainWindow.cpp:769
+#: ../src/MainWindow.cpp:787
 msgid "you have not install sopcast program,so GMLive can't support it now"
 msgstr ""
 
-#: ../src/MainWindow.cpp:771
+#: ../src/MainWindow.cpp:789
 msgid "you have not install nslive program,so GMLive can't support it now"
 msgstr ""
 
-#: ../src/MainWindow.cpp:772
+#: ../src/MainWindow.cpp:790
 msgid " So you can install the program first"
 msgstr ""
 
