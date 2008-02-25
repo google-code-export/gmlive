@@ -1,4 +1,8 @@
 
+2008年 02月 25日 星期一 19:49:58 CST lerosua<lerosua@gmail.com>
+	修正界面文件不能翻译的问题，不过在界面文件中的中文需要改成
+	英文才能合乎规范。
+
 2008年 02月 20日 星期三 20:34:51 CST lerosua<lerosua@gmail.com>
 	初步完成sopcast,nslive的检测。每次提示是否支持。如果在配置
 	里关了支持则不会检测了。
