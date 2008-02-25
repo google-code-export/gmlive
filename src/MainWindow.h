@@ -81,7 +81,9 @@ class MainWindow : public Gtk::Window {
 
 		void reorder_widget(bool is_running);
 		Channel* get_cur_select_channel();
+		/** 检测是否存在某文件 */
 		bool check_file(const char* name);
+		/** 检测是否支持第三方程序 */
 		void check_support();
 	private:
 		GlademmXML 			ui_xml;
