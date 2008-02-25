@@ -164,7 +164,7 @@ Glib::ustring ui_info =
 "	<menubar name='MenuBar'>"
 "		<menu action='FileMenu'>"
 "			<menuitem action='OpenFile'/>"
-//"			<menuitem action='OpenURL'/>"
+"			<menuitem action='OpenURL'/>"
 "			<menuitem action='FilePlay'/>"
 "			<menuitem action='FilePause'/>"
 "			<menuitem action='FileRecord'/>"
@@ -221,6 +221,20 @@ void register_stock_items()
 	factory->add(stock_id, icon_set);
 	Gtk::Stock::add(Gtk::StockItem(stock_id, _("HideChannels")));
 	factory->add_default();
+
+	//添加openURL图标进图标库
+	Glib::RefPtr<Gtk::IconFactory> factory_ = Gtk::IconFactory::create();
+	Gtk::IconSource source_openurl;
+	source_openurl.set_pixbuf( Gdk::Pixbuf::create_from_file(DATA_DIR"/OpenURL.png") );
+	source_openurl.set_size(Gtk::ICON_SIZE_SMALL_TOOLBAR);
+	source_openurl.set_size_wildcarded(); //Icon may be scaled.
+	Gtk::IconSet icon_set_openurl;
+	icon_set_openurl.add_source(source_openurl); //More than one source_open_url per set is allowed.
+
+	const Gtk::StockID stock_id_openurl("OpenURL");
+	factory->add(stock_id_openurl, icon_set_openurl);
+	Gtk::Stock::add(Gtk::StockItem(stock_id_openurl, _("OpenURL")));
+	factory_->add_default();
 }
 void MainWindow::init_ui_manager()
 {
@@ -235,12 +249,10 @@ void MainWindow::init_ui_manager()
 	action->set_tooltip(_("Open Local File"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_open_file));
-	/*
-	action = Gtk::Action::create("OpenURL", Gtk::Stock::OPEN,_("Open URL"));
+	action = Gtk::Action::create("OpenURL", Gtk::StockID("OpenURL"),_("OpenURL"));
 	action->set_tooltip(_("Open Network Stream"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_open_url));
-	*/
 	action = Gtk::Action::create("FilePlay", Gtk::Stock::MEDIA_PLAY);
 	action->set_tooltip(_("Play"));
 	action_group->add(action,
