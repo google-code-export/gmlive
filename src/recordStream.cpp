@@ -16,7 +16,7 @@
  * =====================================================================================
  */
 
-#define record_ui	    DATA_DIR"/record.xml"
+#define record_ui	    DATA_DIR"/record.glade"
 #include "recordStream.h"
 #include "gmlive.h"
 #include "ec_throw.h"
