@@ -3,7 +3,7 @@
  *
  *       Filename:  MainWindow.cpp
  *
- *    Description:   程序的主窗 
+ *    Description:  程序的主窗口
  *
  *        Version:  1.0
  *        Created:  2007年11月25日 13时00分30秒 CST
@@ -492,6 +492,14 @@ void MainWindow::on_search_channel()
 		channel->search_channel(search->get_text());
 }
 
+bool MainWindow::on_doubleclick_picture(GdkEventButton* ev)
+{
+
+	if (ev->type == GDK_2BUTTON_PRESS)
+	{
+		printf(" 双击画面 \n");
+	}
+}
 void MainWindow::on_conf_window_quit()
 {
 	//std::cout << "on_conf_window_quit" << std::endl;
@@ -625,7 +633,7 @@ MainWindow::MainWindow():
 	swnd->add(*bookmark_channel);
 
 
-	backgroup = new Gtk::Image(
+	background = new Gtk::Image(
 			Gdk::Pixbuf::create_from_file (
 				DATA_DIR"/gmlive_play.png"));
 
@@ -651,7 +659,13 @@ MainWindow::MainWindow():
 	menu_tool_box->pack_start(*menubar,true,true);
 	menu_tool_box->pack_start(*toolbar,false,false);
 
-	play_frame->pack_start(*backgroup, true, true);
+	play_eventbox = Gtk::manage(new Gtk::EventBox());
+	play_eventbox->set_events(Gdk::BUTTON_PRESS_MASK);
+	play_eventbox->signal_button_press_event().connect(sigc::
+			mem_fun(*this, &MainWindow::on_doubleclick_picture));
+	play_eventbox->add(*background);
+	play_frame->pack_start(*play_eventbox,true,true);
+	//play_frame->pack_start(*background, true, true);
 
 	play_frame->drag_dest_set(listTargets);
 	play_frame->signal_drag_data_received().connect(
@@ -739,7 +753,7 @@ void MainWindow::set_channels_hide(bool hide)
 
 MainWindow::~MainWindow()
 {
-	delete backgroup;
+	delete background;
 	delete live_player;
 	delete gmp;
 	char buf[32];
@@ -924,18 +938,26 @@ void MainWindow::reorder_widget(bool is_running)
 		play_frame->hide();
 	else {
 		if (is_running){
-			static int width = backgroup->get_width();
-			static int height = backgroup->get_height();
-			play_frame->remove(*backgroup);
-			play_frame->pack_start(*gmp, true, true);
+			static int width = background->get_width();
+			static int height = background->get_height();
+			//play_frame->remove(*background);
+			//play_frame->pack_start(*gmp, true, true);
+			//play_eventbox->remove(*background);
+			play_eventbox->remove();
+			play_eventbox->add(*gmp);
+
 			if (gmp_width != -1)
 				gmp->set_size_request(gmp_width, gmp_height);
 			else
 				gmp->set_size_request(width, height);
 		}
 		else {
-			play_frame->remove(*gmp);
-			play_frame->pack_start(*backgroup, true, true);
+			//play_frame->remove(*gmp);
+			//play_frame->pack_start(*background, true, true);
+			//play_eventbox->remove(*gmp);
+			play_eventbox->remove();
+			play_eventbox->add(*background);
+
 			set_gmp_size(-1, -1);
 		}
 		play_frame->show_all();

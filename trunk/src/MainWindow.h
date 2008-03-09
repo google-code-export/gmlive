@@ -74,6 +74,7 @@ class MainWindow : public Gtk::Window {
 		void on_gmplayer_start();
 		void on_gmplayer_stop();
 		void on_conf_window_quit();
+		bool on_doubleclick_picture(GdkEventButton* ev);
 
 		void set_gmp_size(int w, int h);
 		void set_gmp_embed(bool);
@@ -93,10 +94,11 @@ class MainWindow : public Gtk::Window {
 		PlayStream* 			gmp;
 		RecordStream* 			record_gmp;
 		Gtk::Box*			play_frame;
+		Gtk::EventBox*			play_eventbox;
 		Gtk::Notebook*			channels;
 		Gtk::Widget*			channels_box;
 		Gtk::Statusbar* 		statusbar;
-		Gtk::Image*			backgroup;
+		Gtk::Image*			background;
 		Channel* 			recent_channel;
 		Channel* 			bookmark_channel;
 		Gtk::Menu*			channels_pop_menu;
