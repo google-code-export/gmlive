@@ -69,6 +69,11 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	show_all();
 }
 
+ConfWindow::~ConfWindow()
+{
+	delete m_pVariablesMap;
+}
+
 void ConfWindow::on_button_save()
 {
 	write_to_GMConf();
@@ -79,8 +84,8 @@ void ConfWindow::on_button_save()
 
 void ConfWindow::on_button_cancel()
 {
-	delete m_pVariablesMap;
-	delete this;
+	//delete this;
+	parent->on_conf_window_close(this);
 }
 
 void ConfWindow::write_to_GMConf()

@@ -27,10 +27,12 @@
 
 class Channel;
 class LivePlayer;
+class ConfWindow;
 class MainWindow : public Gtk::Window {
 	public:
 		MainWindow();
 		~MainWindow();
+		void on_conf_window_close(ConfWindow* dlg);
 	protected:
 		bool on_delete_event(GdkEventAny* event);
 		void show_msg(const Glib::ustring& msg,unsigned int id=0);
@@ -103,6 +105,7 @@ class MainWindow : public Gtk::Window {
 		Channel* 			bookmark_channel;
 		Gtk::Menu*			channels_pop_menu;
 		LivePlayer* 			live_player;
+		ConfWindow*			confwindow;
 		int 				gmp_width;
 		int				gmp_height;
 		int				window_width;

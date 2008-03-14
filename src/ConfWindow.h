@@ -27,7 +27,7 @@ class ConfWindow: public Gtk::Window
 
 	public:
 		ConfWindow(MainWindow* parent_);
-		~ConfWindow(){}
+		~ConfWindow();
 
 		void on_button_save();
 		void on_button_cancel();
