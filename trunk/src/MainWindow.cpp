@@ -41,12 +41,6 @@
 using namespace std;
 
 
-//struct IsBlank : public std::unary_function <std::string::value_type, bool> {
-//	bool operator () (std::string::value_type val)
-//	{
-//		return (val == ' ') || (val == '\t');
-//	}
-//};
 
 #define HEX_ESCAPE '%'
 int hex_to_int (gchar c)
@@ -467,9 +461,13 @@ void MainWindow::on_menu_view_embed_mplayer()
 
 void MainWindow::on_menu_view_preferences()
 {
-	//cout << "on_menu_view_preferences" << endl;
-	ConfWindow* confwindow = new ConfWindow(this);
-	confwindow->signal_quit().connect(sigc::mem_fun(*this, &MainWindow::on_conf_window_quit));
+	if(NULL==confwindow)
+	{
+		confwindow = new ConfWindow(this);
+		confwindow->signal_quit().connect(sigc::mem_fun(*this, &MainWindow::on_conf_window_quit));
+	}
+	else
+		confwindow->raise();
 }
 
 void MainWindow::on_menu_help_about()
@@ -507,6 +505,12 @@ void MainWindow::on_conf_window_quit()
 	save_conf();
 }
 
+void MainWindow::on_conf_window_close(ConfWindow* dlg)
+{
+	g_assert(dlg == confwindow);
+	delete confwindow;
+	confwindow=NULL;
+}
 void MainWindow::on_gmplayer_start()
 {
 	reorder_widget(true);
