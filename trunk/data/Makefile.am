@@ -6,6 +6,7 @@ gmlive_ui = \
 	    gmlive_play.png \
 	    gmlive_big.png \
 	    OpenURL.png \
+	    volume.png  \
 	    show_channels.png
 
 desktopdir       = $(datadir)/applications
