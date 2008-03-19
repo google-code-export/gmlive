@@ -77,6 +77,8 @@ class MainWindow : public Gtk::Window {
 		void on_gmplayer_stop();
 		void on_conf_window_quit();
 		bool on_doubleclick_picture(GdkEventButton* ev);
+		void on_volume_change();
+		Glib::ustring on_volume_display(double);
 
 		void set_gmp_size(int w, int h);
 		void set_gmp_embed(bool);
@@ -101,6 +103,7 @@ class MainWindow : public Gtk::Window {
 		Gtk::Widget*			channels_box;
 		Gtk::Statusbar* 		statusbar;
 		Gtk::Image*			background;
+		Gtk::Adjustment*		adj_sound;
 		Channel* 			recent_channel;
 		Channel* 			bookmark_channel;
 		Gtk::Menu*			channels_pop_menu;

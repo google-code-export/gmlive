@@ -195,6 +195,7 @@ Glib::ustring ui_info =
 "		<toolitem action='FileStop'/>"
 "		<separator/>"
 "		<toolitem action='ViewShowChannel'/>"
+"		<separator/>"
 "	</toolbar>"
 "</ui>";
 
@@ -306,6 +307,7 @@ void MainWindow::init_ui_manager()
 	action_group->add(Gtk::Action::create("PopCopyUrl", 
 				_("_Copy url"), _("Copy url to clipboard")),
 			sigc::mem_fun(*this, &MainWindow::on_menu_pop_copy_to_clipboard));
+				
 
 	if (!ui_manager)
 		ui_manager = Gtk::UIManager::create();
@@ -472,7 +474,6 @@ void MainWindow::on_menu_view_preferences()
 
 void MainWindow::on_menu_help_about()
 {
-	//cout << "on_menu_help_about" << endl;
 	GlademmXML about_xml = Gnome::Glade::Xml::create(main_ui, "aboutwindow");
 	Gtk::Window* about = dynamic_cast<Gtk::Window*>
 		(about_xml->get_widget("aboutwindow"));
@@ -498,6 +499,20 @@ bool MainWindow::on_doubleclick_picture(GdkEventButton* ev)
 		printf(" 双击画面 \n");
 	}
 }
+
+void MainWindow::on_volume_change()
+{
+	int value= (int)adj_sound->get_value();
+	//printf("sound change to %d\n",value);
+}
+Glib::ustring MainWindow::on_volume_display(double value)
+{
+	char message[128];
+	sprintf(message,"%d%%",(int)value);
+
+	return Glib::ustring(message);
+}
+
 void MainWindow::on_conf_window_quit()
 {
 	//std::cout << "on_conf_window_quit" << std::endl;
@@ -662,6 +677,28 @@ MainWindow::MainWindow():
 		(ui_xml->get_widget("box_menu_toolbar"));
 	menu_tool_box->pack_start(*menubar,true,true);
 	menu_tool_box->pack_start(*toolbar,false,false);
+
+	//Gtk::HBox* tool_hbox=Gtk::manage(new Gtk::HBox());
+	Gtk::HBox* tool_hbox=dynamic_cast<Gtk::HBox*>
+		(ui_xml->get_widget("controlHbox"));
+	//menu_tool_box->pack_start(*tool_hbox);
+	//tool_hbox->pack_start(*toolbar,true,true);
+	//Gtk::VSeparator* vsparator=Gtk::manage(new Gtk::VSeparator());
+	//tool_hbox->pack_start(*vsparator,false,false);
+	//Gtk::Label* volume_label=Gtk::manage(new Gtk::Label(_("Volume")));
+	Glib::RefPtr<Gdk::Pixbuf> icon_ = Gdk::Pixbuf::create_from_file(DATA_DIR"/volume.png");
+	Gtk::Image* volume_icon= Gtk::manage(new Gtk::Image(icon_));
+	adj_sound = Gtk::manage(new Gtk::Adjustment(60,0,100,5,0,0));
+	Gtk::HScale* hscale=Gtk::manage(new Gtk::HScale(*adj_sound));
+	tool_hbox->pack_end(*hscale,false,false);
+	//tool_hbox->pack_end(*volume_label,false,false);
+	tool_hbox->pack_end(*volume_icon, false,false);
+	hscale->set_size_request(120,0);
+	hscale->signal_format_value().connect(sigc::
+			mem_fun(*this,&MainWindow::on_volume_display));
+
+	adj_sound->signal_value_changed().connect(sigc::
+			mem_fun(*this,&MainWindow::on_volume_change));
 
 	play_eventbox = Gtk::manage(new Gtk::EventBox());
 	play_eventbox->set_events(Gdk::BUTTON_PRESS_MASK);
