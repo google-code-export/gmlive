@@ -84,59 +84,55 @@ msgstr ""
 
 #: ../data/gmlive.glade.h:25
 msgid " Mplayer extend parameter "
-msgstr ""
+msgstr "Mplayer扩展参数"
 
 #: ../data/gmlive.glade.h:26
 msgid " sec"
-msgstr ""
+msgstr "秒"
 
 #: ../data/gmlive.glade.h:27
 msgid "About"
-msgstr ""
+msgstr "关于"
 
 #: ../data/gmlive.glade.h:28
 msgid "Author"
-msgstr ""
+msgstr "作者"
 
 #: ../data/gmlive.glade.h:29
-#, fuzzy
 msgid "Embed mplayer"
 msgstr "嵌入播放器"
 
 #: ../data/gmlive.glade.h:30
 msgid "Enable Nslive"
-msgstr ""
+msgstr "Nslive支持"
 
 #: ../data/gmlive.glade.h:31
 msgid "Enable Sopcast"
-msgstr ""
+msgstr "Sopcast支持"
 
 #: ../data/gmlive.glade.h:32
-#, fuzzy
 msgid "GMLive"
 msgstr "GMLive"
 
 #: ../data/gmlive.glade.h:33
-#, fuzzy
 msgid "GMLive config"
 msgstr "GMLive 配置"
 
 #: ../data/gmlive.glade.h:34
-#, fuzzy
 msgid "Help"
 msgstr "帮助"
 
 #: ../data/gmlive.glade.h:35
 msgid "Licence"
-msgstr ""
+msgstr "许可证"
 
 #: ../data/gmlive.glade.h:36
 msgid "Mplayer Cache "
-msgstr ""
+msgstr "Mplayer缓存"
 
 #: ../data/gmlive.glade.h:37
 msgid "Mplayer DelayTime "
-msgstr ""
+msgstr "Mplayer廷迟启动时间"
 
 #: ../data/gmlive.glade.h:38
 msgid ""
@@ -147,7 +143,7 @@ msgstr ""
 
 #: ../data/gmlive.glade.h:41
 msgid "Translation"
-msgstr ""
+msgstr "翻译"
 
 #: ../data/gmlive.glade.h:42
 msgid ""
@@ -266,7 +262,6 @@ msgid "Record Readying ..."
 msgstr ""
 
 #: ../data/record.glade.h:8
-#, fuzzy
 msgid "Recording"
 msgstr "录制"
 
