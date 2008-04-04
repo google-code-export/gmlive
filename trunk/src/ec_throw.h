@@ -21,6 +21,7 @@
 #include <cerrno>
 #include <stdexcept>
 #include <sstream>
+#include <string.h>
 
 std::runtime_error throw_except(const char* func, const char* file, long line, const char* var);
 
