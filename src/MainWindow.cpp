@@ -215,10 +215,8 @@ void register_stock_items()
 	const Gtk::StockID stock_id("HideChannels");
 	factory->add(stock_id, icon_set);
 	Gtk::Stock::add(Gtk::StockItem(stock_id, _("HideChannels")));
-	factory->add_default();
 
 	//添加openURL图标进图标库
-	Glib::RefPtr<Gtk::IconFactory> factory_ = Gtk::IconFactory::create();
 	Gtk::IconSource source_openurl;
 	source_openurl.set_pixbuf( Gdk::Pixbuf::create_from_file(DATA_DIR"/OpenURL.png") );
 	source_openurl.set_size(Gtk::ICON_SIZE_SMALL_TOOLBAR);
@@ -229,7 +227,7 @@ void register_stock_items()
 	const Gtk::StockID stock_id_openurl("OpenURL");
 	factory->add(stock_id_openurl, icon_set_openurl);
 	Gtk::Stock::add(Gtk::StockItem(stock_id_openurl, _("OpenURL")));
-	factory_->add_default();
+	factory->add_default();
 }
 void MainWindow::init_ui_manager()
 {
@@ -589,8 +587,12 @@ MainWindow::MainWindow():
 	,gmp_width(-1)
 	,gmp_height(-1)
 	,gmp_embed(true)
+	,channels_hide(false)
+	,enable_nslive(true)
+	,enable_sopcast(true)
 	,window_width(1)
 	,window_height(1)
+	,confwindow(NULL)
 {
 	std::list<Gtk::TargetEntry> listTargets;
 	listTargets.push_back(Gtk::TargetEntry("STRING"));
