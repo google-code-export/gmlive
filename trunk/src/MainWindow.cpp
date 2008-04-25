@@ -194,8 +194,8 @@ Glib::ustring ui_info =
 "		<toolitem action='FilePause'/>"
 "		<toolitem action='FileRecord'/>"
 "		<toolitem action='FileStop'/>"
-"		<toolitem action='FullScreen'/>"
 "		<separator/>"
+"		<toolitem action='FullScreen'/>"
 "		<toolitem action='ViewShowChannel'/>"
 "		<separator/>"
 "	</toolbar>"
@@ -268,7 +268,7 @@ void MainWindow::init_ui_manager()
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_stop));
 
-	action = Gtk::Action::create("FullScreen", Gtk::Stock::MEDIA_STOP);
+	action = Gtk::Action::create("FullScreen", Gtk::Stock::ZOOM_100);
 	action->set_tooltip(_("FullScreen"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_fullscreen));
@@ -367,13 +367,45 @@ void MainWindow::on_menu_file_stop()
 	gmp->stop();
 }
 
+void MainWindow::unzoom()
+{
+	 if(full_screen && gmp_embed)
+	{
+		menubar->show();
+		toolbar->show();
+		tool_hbox->show();
+		statusbar->show();
+		if(!channels_hide)
+			channels_box->show();
+		this->unfullscreen();
+		full_screen=false;
+	}
+
+
+}
 void MainWindow::on_fullscreen()
 {
+	if(!full_screen && gmp_embed)
+	{
 	menubar->hide();
 	toolbar->hide();
 	tool_hbox->hide();
 	statusbar->hide();
+	channels_box->hide();
 	this->fullscreen();
+	full_screen=true;
+	}
+	else if(full_screen && gmp_embed)
+	{
+		menubar->show();
+		toolbar->show();
+		tool_hbox->show();
+		statusbar->show();
+		if(!channels_hide)
+			channels_box->show();
+		this->unfullscreen();
+		full_screen=false;
+	}
 }
 void MainWindow::on_menu_file_pause()
 {
@@ -604,6 +636,7 @@ MainWindow::MainWindow():
 	,channels_hide(false)
 	,enable_nslive(true)
 	,enable_sopcast(true)
+	,full_screen(false)
 	,window_width(1)
 	,window_height(1)
 	,confwindow(NULL)
@@ -1072,5 +1105,25 @@ void MainWindow::on_drog_data_received(const Glib::RefPtr<Gdk::DragContext>& con
 			filename = filename.substr(0, pos);
 		gmp->start(filename);
 	}
+}
+
+
+bool MainWindow::on_key_press_event(GdkEventKey* ev)
+{
+	if(ev->type !=GDK_KEY_PRESS)
+		return Gtk::Window::on_key_press_event(ev);
+	
+	switch(ev->keyval){
+		case GDK_Escape:
+			unzoom();
+			break;
+		case GDK_F11:
+			on_fullscreen();
+			break;
+		default:
+			return Gtk::Window::on_key_press_event(ev);
+
+	}
+	return true;
 }
 

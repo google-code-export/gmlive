@@ -167,6 +167,7 @@ Glib::ustring ui_info =
 "			<menuitem action='FilePause'/>"
 "			<menuitem action='FileRecord'/>"
 "			<menuitem action='FileStop'/>"
+	"		<menuitem action='FullScreen'/>"
 "			<menuitem action='Mute'/>"
 "			<separator/>"
 "			<menuitem action='FileQuit'/>"
@@ -198,6 +199,7 @@ Glib::ustring ui_info =
 "		<toolitem action='FileRecord'/>"
 "		<toolitem action='FileStop'/>"
 "		<separator/>"
+"		<toolitem action='FullScreen'/>"
 "		<toolitem action='ViewShowChannel'/>"
 "	</toolbar>"
 "</ui>";
@@ -259,6 +261,10 @@ void MainWindow::init_ui_manager()
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_stop));
 
+	action = Gtk::Action::create("FullScreen", Gtk::Stock::ZOOM_100);
+	action->set_tooltip(_("FullScreen"));
+	action_group->add(action,
+			sigc::mem_fun(*this, &MainWindow::on_fullscreen));
 
 	action_group->add(Gtk::ToggleAction::create("Mute",
 				_("MUTE"), _("MUTE"), true), 
@@ -368,6 +374,45 @@ void MainWindow::on_menu_file_record()
 	else
 		cout << "Error" << endl;
 }
+
+void MainWindow::unzoom()
+{
+	if(full_screen && gmp_embed)
+	{
+		menubar->show();
+		toolbar->show();
+		statusbar->show();
+		if(!channels_hide)
+			channels_box->show();
+		this->unfullscreen();
+		full_screen=false;
+	}
+}
+
+
+void MainWindow::on_fullscreen()
+{
+	if(!full_screen && gmp_embed)
+	{
+	menubar->hide();
+	toolbar->hide();
+	statusbar->hide();
+	channels_box->hide();
+	this->fullscreen();
+	full_screen=true;
+	}
+	else if(full_screen && gmp_embed)
+	{
+		menubar->show();
+		toolbar->show();
+		statusbar->show();
+		if(!channels_hide)
+			channels_box->show();
+		this->unfullscreen();
+		full_screen=false;
+	}
+}
+
 
 void MainWindow::on_menu_file_mute()
 {
@@ -548,6 +593,7 @@ MainWindow::MainWindow():
 	,gmp_width(-1)
 	,gmp_height(-1)
 	,gmp_embed(true)
+	,full_screen(false)
 	,window_width(1)
 	,window_height(1)
 {
@@ -617,8 +663,8 @@ MainWindow::MainWindow():
 			sigc::mem_fun(*this,&MainWindow::on_preview));
 
 	init_ui_manager();
-	Gtk::Widget* menubar = ui_manager->get_widget("/MenuBar");
-	Gtk::Widget* toolbar = ui_manager->get_widget("/ToolBar");
+	menubar = ui_manager->get_widget("/MenuBar");
+	toolbar = ui_manager->get_widget("/ToolBar");
 	channels_pop_menu = dynamic_cast<Gtk::Menu*>(
 			ui_manager->get_widget("/PopupMenu"));
 
@@ -897,4 +943,21 @@ void MainWindow::on_drog_data_received(const Glib::RefPtr<Gdk::DragContext>& con
 		gmp->start(filename);
 	}
 }
+bool MainWindow::on_key_press_event(GdkEventKey* ev)
+{
+	if(ev->type !=GDK_KEY_PRESS)
+		return Gtk::Window::on_key_press_event(ev);
+	
+	switch(ev->keyval){
+		case GDK_Escape:
+			unzoom();
+			break;
+		case GDK_F11:
+			on_fullscreen();
+			break;
+		default:
+			return Gtk::Window::on_key_press_event(ev);
 
+	}
+	return true;
+}
