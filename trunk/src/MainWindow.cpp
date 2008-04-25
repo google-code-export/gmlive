@@ -163,6 +163,7 @@ Glib::ustring ui_info =
 "			<menuitem action='FilePause'/>"
 "			<menuitem action='FileRecord'/>"
 "			<menuitem action='FileStop'/>"
+	"		<menuitem action='FullScreen'/>"
 "			<menuitem action='Mute'/>"
 "			<separator/>"
 "			<menuitem action='FileQuit'/>"
@@ -193,6 +194,7 @@ Glib::ustring ui_info =
 "		<toolitem action='FilePause'/>"
 "		<toolitem action='FileRecord'/>"
 "		<toolitem action='FileStop'/>"
+"		<toolitem action='FullScreen'/>"
 "		<separator/>"
 "		<toolitem action='ViewShowChannel'/>"
 "		<separator/>"
@@ -266,6 +268,10 @@ void MainWindow::init_ui_manager()
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_stop));
 
+	action = Gtk::Action::create("FullScreen", Gtk::Stock::MEDIA_STOP);
+	action->set_tooltip(_("FullScreen"));
+	action_group->add(action,
+			sigc::mem_fun(*this, &MainWindow::on_fullscreen));
 
 	action_group->add(Gtk::ToggleAction::create("Mute",
 				_("MUTE"), _("MUTE"), true), 
@@ -361,6 +367,14 @@ void MainWindow::on_menu_file_stop()
 	gmp->stop();
 }
 
+void MainWindow::on_fullscreen()
+{
+	menubar->hide();
+	toolbar->hide();
+	tool_hbox->hide();
+	statusbar->hide();
+	this->fullscreen();
+}
 void MainWindow::on_menu_file_pause()
 {
 	//cout << "on_menu_pause" << endl;
@@ -593,6 +607,8 @@ MainWindow::MainWindow():
 	,window_width(1)
 	,window_height(1)
 	,confwindow(NULL)
+	,menubar(NULL)
+        ,toolbar(NULL)
 {
 	std::list<Gtk::TargetEntry> listTargets;
 	listTargets.push_back(Gtk::TargetEntry("STRING"));
@@ -670,8 +686,10 @@ MainWindow::MainWindow():
 			sigc::mem_fun(*this,&MainWindow::on_preview));
 
 	init_ui_manager();
-	Gtk::Widget* menubar = ui_manager->get_widget("/MenuBar");
-	Gtk::Widget* toolbar = ui_manager->get_widget("/ToolBar");
+	 menubar = ui_manager->get_widget("/MenuBar");
+	 toolbar = ui_manager->get_widget("/ToolBar");
+	//Gtk::Widget* menubar = ui_manager->get_widget("/MenuBar");
+	//Gtk::Widget* toolbar = ui_manager->get_widget("/ToolBar");
 	channels_pop_menu = dynamic_cast<Gtk::Menu*>(
 			ui_manager->get_widget("/PopupMenu"));
 
@@ -681,7 +699,7 @@ MainWindow::MainWindow():
 	menu_tool_box->pack_start(*toolbar,false,false);
 
 	//Gtk::HBox* tool_hbox=Gtk::manage(new Gtk::HBox());
-	Gtk::HBox* tool_hbox=dynamic_cast<Gtk::HBox*>
+	 tool_hbox=dynamic_cast<Gtk::HBox*>
 		(ui_xml->get_widget("controlHbox"));
 	//menu_tool_box->pack_start(*tool_hbox);
 	//tool_hbox->pack_start(*toolbar,true,true);
