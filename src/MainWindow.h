@@ -33,6 +33,7 @@ class MainWindow : public Gtk::Window {
 		~MainWindow();
 	protected:
 		bool on_delete_event(GdkEventAny* event);
+		bool on_key_press_event(GdkEventKey* ev);
 		void show_msg(const Glib::ustring& msg,unsigned int id=0);
 		void init_ui_manager();
 		void save_conf();
@@ -74,6 +75,8 @@ class MainWindow : public Gtk::Window {
 		void on_gmplayer_start();
 		void on_gmplayer_stop();
 		void on_conf_window_quit();
+		void on_fullscreen();
+		void unzoom(); //解除全屏
 
 		void set_gmp_size(int w, int h);
 		void set_gmp_embed(bool);
@@ -91,6 +94,8 @@ class MainWindow : public Gtk::Window {
 		Gtk::Box*			play_frame;
 		Gtk::Notebook*			channels;
 		Gtk::Widget*			channels_box;
+		Gtk::Widget*			menubar;
+		Gtk::Widget*			toolbar;
 		Gtk::Statusbar* 		statusbar;
 		Gtk::Image*			backgroup;
 		Channel* 			recent_channel;
@@ -103,6 +108,7 @@ class MainWindow : public Gtk::Window {
 		int				window_height;
 		bool				gmp_embed;
 		bool				channels_hide;
+		bool				full_screen;
 };
 
 #endif // _MAINWINDOW_HH 
