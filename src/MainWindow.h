@@ -79,6 +79,7 @@ class MainWindow : public Gtk::Window {
 		bool on_doubleclick_picture(GdkEventButton* ev);
 		void on_volume_change();
 		Glib::ustring on_volume_display(double);
+		void on_fullscreen();
 
 		void set_gmp_size(int w, int h);
 		void set_gmp_embed(bool);
@@ -101,7 +102,10 @@ class MainWindow : public Gtk::Window {
 		Gtk::EventBox*			play_eventbox;
 		Gtk::Notebook*			channels;
 		Gtk::Widget*			channels_box;
+		Gtk::Widget* menubar;
+		Gtk::Widget* toolbar;
 		Gtk::Statusbar* 		statusbar;
+		Gtk::HBox* tool_hbox;
 		Gtk::Image*			background;
 		Gtk::Adjustment*		adj_sound;
 		Channel* 			recent_channel;
