@@ -35,6 +35,7 @@
 #include <functional>
 #include <algorithm>
 #include <glib/gi18n.h>
+#include <string.h>
 
 using namespace std;
 
