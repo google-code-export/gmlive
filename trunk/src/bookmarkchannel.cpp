@@ -87,20 +87,31 @@ void BookMarkChannel::init()
 
 void  BookMarkChannel::addLine(const int num,const Glib::ustring& name,const std::string& stream_,const Glib::ustring& type)
 {
-	Gtk::TreeModel::iterator iter = m_liststore->prepend();
-	(*iter)[columns.name] = name;
-	(*iter)[columns.freq] = 100;
-	(*iter)[columns.stream]=stream_;
 
 	TypeChannel type_;
 	if("mms"==type)
 		type_ = MMS_CHANNEL;
 	else if("nslive" == type)
-		type_ = NSLIVE_CHANNEL;
+	{
+		if(!parent->support_nslive())
+			return;
+		else
+			type_ = NSLIVE_CHANNEL;
+	}
 	else if("sopcast" == type)
-		type_ = SOPCAST_CHANNEL;
+	{
+		if(!parent->support_sopcast())
+			return;
+		else
+			type_ = SOPCAST_CHANNEL;
+	}
 	else
 		type_ = NONE;
+
+	Gtk::TreeModel::iterator iter = m_liststore->prepend();
+	(*iter)[columns.name] = name;
+	(*iter)[columns.freq] = 100;
+	(*iter)[columns.stream]=stream_;
 	(*iter)[columns.type]=type_ ;
 
 }

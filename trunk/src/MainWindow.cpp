@@ -373,7 +373,7 @@ void MainWindow::unzoom()
 	{
 		menubar->show();
 		toolbar->show();
-		tool_hbox->show();
+		//tool_hbox->show();
 		statusbar->show();
 		if(!channels_hide)
 			channels_box->show();
@@ -389,7 +389,7 @@ void MainWindow::on_fullscreen()
 	{
 	menubar->hide();
 	toolbar->hide();
-	tool_hbox->hide();
+	//tool_hbox->hide();
 	statusbar->hide();
 	channels_box->hide();
 	this->fullscreen();
@@ -399,7 +399,7 @@ void MainWindow::on_fullscreen()
 	{
 		menubar->show();
 		toolbar->show();
-		tool_hbox->show();
+		//tool_hbox->show();
 		statusbar->show();
 		if(!channels_hide)
 			channels_box->show();
@@ -544,6 +544,7 @@ bool MainWindow::on_doubleclick_picture(GdkEventButton* ev)
 	}
 }
 
+#if 0
 void MainWindow::on_volume_change()
 {
 	int value= (int)adj_sound->get_value();
@@ -556,6 +557,7 @@ Glib::ustring MainWindow::on_volume_display(double value)
 
 	return Glib::ustring(message);
 }
+#endif
 
 void MainWindow::on_conf_window_quit()
 {
@@ -676,21 +678,33 @@ MainWindow::MainWindow():
 	/** 检测是否支持nslive和sopcast */
 	check_support();
 
-	if(enable_nslive)
-	{
-	channel = Gtk::manage(new class NSLiveChannel(this));
-	swnd = dynamic_cast<Gtk::ScrolledWindow*>
-		(ui_xml->get_widget("nsliveChannelWnd"));
-	swnd->add(*channel);
-	}
-
 	if(enable_sopcast)
 	{
 	channel = Gtk::manage(new class SopcastChannel(this));
 	swnd = dynamic_cast<Gtk::ScrolledWindow*>
 		(ui_xml->get_widget("sopcastChannelWnd"));
 	swnd->add(*channel);
+	printf("support sopcast\n");
 	}
+	else
+		channels->remove_page(1);
+
+	if(enable_nslive)
+	{
+	channel = Gtk::manage(new class NSLiveChannel(this));
+	swnd = dynamic_cast<Gtk::ScrolledWindow*>
+		(ui_xml->get_widget("nsliveChannelWnd"));
+	swnd->add(*channel);
+	printf("support nslive\n");
+	}
+	else
+	{
+		if(enable_sopcast)
+			channels->remove_page(2);
+		else
+			channels->remove_page(1);
+	}
+
 
 	recent_channel = Gtk::manage(new class RecentChannel(this));
 	swnd = dynamic_cast<Gtk::ScrolledWindow*>
@@ -731,20 +745,14 @@ MainWindow::MainWindow():
 	menu_tool_box->pack_start(*menubar,true,true);
 	menu_tool_box->pack_start(*toolbar,false,false);
 
-	//Gtk::HBox* tool_hbox=Gtk::manage(new Gtk::HBox());
+#if  0
 	 tool_hbox=dynamic_cast<Gtk::HBox*>
 		(ui_xml->get_widget("controlHbox"));
-	//menu_tool_box->pack_start(*tool_hbox);
-	//tool_hbox->pack_start(*toolbar,true,true);
-	//Gtk::VSeparator* vsparator=Gtk::manage(new Gtk::VSeparator());
-	//tool_hbox->pack_start(*vsparator,false,false);
-	//Gtk::Label* volume_label=Gtk::manage(new Gtk::Label(_("Volume")));
 	Glib::RefPtr<Gdk::Pixbuf> icon_ = Gdk::Pixbuf::create_from_file(DATA_DIR"/volume.png");
 	Gtk::Image* volume_icon= Gtk::manage(new Gtk::Image(icon_));
 	adj_sound = Gtk::manage(new Gtk::Adjustment(60,0,100,5,0,0));
 	Gtk::HScale* hscale=Gtk::manage(new Gtk::HScale(*adj_sound));
 	tool_hbox->pack_end(*hscale,false,false);
-	//tool_hbox->pack_end(*volume_label,false,false);
 	tool_hbox->pack_end(*volume_icon, false,false);
 	hscale->set_size_request(120,0);
 	hscale->signal_format_value().connect(sigc::
@@ -752,6 +760,7 @@ MainWindow::MainWindow():
 
 	adj_sound->signal_value_changed().connect(sigc::
 			mem_fun(*this,&MainWindow::on_volume_change));
+#endif
 
 	play_eventbox = Gtk::manage(new Gtk::EventBox());
 	play_eventbox->set_events(Gdk::BUTTON_PRESS_MASK);
@@ -905,14 +914,20 @@ void MainWindow::check_support()
 		std::string msg="";
 		if(!enable_sopcast && (enablesopcast_[0]=='1'))
 			msg+=std::string(_("you have not install sopcast program,so GMLive can't support it now"))+"\n";
-		if(!enable_nslive && (enablenslive_[0]=='1'))
+		else if(!enable_nslive && (enablenslive_[0]=='1'))
 			msg+=std::string(_("you have not install nslive program,so GMLive can't support it now"))+"\n";
+		else
+			return;
 		msg+=_(" So you can install the program first");
 		warnDialog.set_secondary_text(msg);
 
 		warnDialog.run();
 
 	}
+	if(enablenslive_[0]=='0')
+		enable_nslive =0;
+	if(enablesopcast_[0]=='0')
+		enable_sopcast=0;
 
 
 }

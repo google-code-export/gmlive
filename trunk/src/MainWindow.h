@@ -34,6 +34,8 @@ class MainWindow : public Gtk::Window {
 		~MainWindow();
 		void on_conf_window_close(ConfWindow* dlg);
 		bool on_key_press_event(GdkEventKey* ev);
+		bool support_nslive()const {return enable_nslive;}
+		bool support_sopcast()const {return enable_sopcast;}
 	protected:
 		bool on_delete_event(GdkEventAny* event);
 		void show_msg(const Glib::ustring& msg,unsigned int id=0);
@@ -78,8 +80,10 @@ class MainWindow : public Gtk::Window {
 		void on_gmplayer_stop();
 		void on_conf_window_quit();
 		bool on_doubleclick_picture(GdkEventButton* ev);
+		/*
 		void on_volume_change();
 		Glib::ustring on_volume_display(double);
+		*/
 		void on_fullscreen();
 		void unzoom(); //解除全屏
 
@@ -107,9 +111,9 @@ class MainWindow : public Gtk::Window {
 		Gtk::Widget* menubar;
 		Gtk::Widget* toolbar;
 		Gtk::Statusbar* 		statusbar;
-		Gtk::HBox* tool_hbox;
+		//Gtk::HBox* tool_hbox;
 		Gtk::Image*			background;
-		Gtk::Adjustment*		adj_sound;
+		//Gtk::Adjustment*		adj_sound;
 		Channel* 			recent_channel;
 		Channel* 			bookmark_channel;
 		Gtk::Menu*			channels_pop_menu;
