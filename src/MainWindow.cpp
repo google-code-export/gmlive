@@ -673,6 +673,7 @@ MainWindow::MainWindow():
 	Gtk::ScrolledWindow* swnd = dynamic_cast<Gtk::ScrolledWindow*>
 		(ui_xml->get_widget("mmsChannelWnd"));
 	swnd->add(*channel);
+	//channel->refresh_list();
 
 	init();
 	/** 检测是否支持nslive和sopcast */
@@ -685,6 +686,7 @@ MainWindow::MainWindow():
 		(ui_xml->get_widget("sopcastChannelWnd"));
 	swnd->add(*channel);
 	printf("support sopcast\n");
+	channel->refresh_list();
 	}
 	else
 		channels->remove_page(1);
@@ -804,7 +806,7 @@ MainWindow::MainWindow():
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("Mute"));
 	menu->set_active(false);
 	((Gtk::Toolbar*)toolbar)->set_toolbar_style(Gtk::TOOLBAR_ICONS);
-	channel->refresh_list();
+	//channel->refresh_list();
 
 }
 
