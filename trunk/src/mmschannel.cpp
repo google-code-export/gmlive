@@ -20,12 +20,16 @@
 #include <stdlib.h>
 #include <fstream>
 #include <iostream>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include "gmlive.h"
 #include "mmschannel.h"
 #include "MainWindow.h"
 #include "mmsLivePlayer.h"
 
 MMSChannel::MMSChannel(MainWindow* parent_):Channel(parent_)
+					    ,wget_pid(-1)
+					    ,refresh(false)
 {
 	init();
 }
@@ -88,4 +92,51 @@ void MMSChannel::addLine(const int num, const Glib::ustring & name,const std::st
 	(*iter)[columns.type]=MMS_CHANNEL;
 
 }
+void MMSChannel::wait_wget_exit(GPid pid, int)
+{
+	if (wget_pid != -1) {
+		waitpid(wget_pid, NULL, 0);
+		wget_pid = -1;
 
+		refresh = false;
+	}
+	
+	init();
+	signal_stop_refresh_.emit();
+}
+
+
+
+void MMSChannel::refresh_list()
+{
+	if (refresh)
+		return;
+	refresh = true;
+	signal_start_refresh_.emit();
+
+	int pid = fork();
+	if (pid == -1)
+		return ;
+	if (pid == 0) {
+		close(STDOUT_FILENO);
+		close(STDERR_FILENO);
+		char buf[512];
+		char* homedir = getenv("HOME");
+		snprintf(buf, 512,"%s/.gmlive/mms.lst",homedir);
+
+		const char* argv[5];
+       		argv[0] = "wget";
+		argv[1] = "http://gmlive.googlecode.com/files/mms.lst";
+		//argv[1] = GMConf["mms_channel_url"].c_str();
+		argv[2] = "-O";
+		argv[3] = buf;
+		argv[4] = NULL;
+
+		execvp("wget", (char* const *)argv);
+		perror("wget execvp:");
+		exit(127);
+	} 
+	Glib::signal_child_watch().connect
+		(sigc::mem_fun(*this, &MMSChannel::wait_wget_exit), pid);
+
+}
