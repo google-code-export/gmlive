@@ -24,6 +24,7 @@
                 <property name="visible">True</property>
               </widget>
               <packing>
+                <property name="expand">False</property>
                 <property name="position">2</property>
               </packing>
             </child>
@@ -84,15 +85,7 @@
                       <placeholder/>
                     </child>
                     <child>
-                      <widget class="GtkLabel" id="label81">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">button-hide</property>
-                      </widget>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">1</property>
-                      </packing>
+                      <placeholder/>
                     </child>
                   </widget>
                   <packing>
@@ -656,46 +649,6 @@ http://www.newseetv.com/soft/nslive-0.1.0.tar.gz
                   <placeholder/>
                 </child>
                 <child>
-                  <widget class="GtkLabel" id="label24">
-                    <property name="visible">True</property>
-                    <property name="label" translatable="yes"> Mplayer extend parameter </property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">3</property>
-                    <property name="bottom_attach">4</property>
-                    <property name="x_options"></property>
-                    <property name="y_options"></property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkEntry" id="entry_parameter">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">2</property>
-                    <property name="right_attach">3</property>
-                    <property name="top_attach">3</property>
-                    <property name="bottom_attach">4</property>
-                    <property name="y_options"></property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkLabel" id="label73">
-                    <property name="visible">True</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">    </property>
-                  </widget>
-                  <packing>
-                    <property name="top_attach">3</property>
-                    <property name="bottom_attach">4</property>
-                    <property name="x_options"></property>
-                    <property name="y_options"></property>
-                  </packing>
-                </child>
-                <child>
                   <widget class="GtkVBox" id="vbox1">
                     <property name="visible">True</property>
                     <child>
@@ -740,6 +693,46 @@ http://www.newseetv.com/soft/nslive-0.1.0.tar.gz
                     <property name="right_attach">3</property>
                     <property name="top_attach">2</property>
                     <property name="bottom_attach">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkLabel" id="label73">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">    </property>
+                  </widget>
+                  <packing>
+                    <property name="top_attach">3</property>
+                    <property name="bottom_attach">4</property>
+                    <property name="x_options"></property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkEntry" id="entry_parameter">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </widget>
+                  <packing>
+                    <property name="left_attach">2</property>
+                    <property name="right_attach">3</property>
+                    <property name="top_attach">3</property>
+                    <property name="bottom_attach">4</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkLabel" id="label24">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes"> Mplayer extend parameter </property>
+                  </widget>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">3</property>
+                    <property name="bottom_attach">4</property>
+                    <property name="x_options"></property>
+                    <property name="y_options"></property>
                   </packing>
                 </child>
               </widget>
@@ -857,18 +850,6 @@ http://www.newseetv.com/soft/nslive-0.1.0.tar.gz
                       <placeholder/>
                     </child>
                     <child>
-                      <widget class="GtkLabel" id="label67">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">Mplayer Cache </property>
-                      </widget>
-                      <packing>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="x_options"></property>
-                        <property name="y_options"></property>
-                      </packing>
-                    </child>
-                    <child>
                       <widget class="GtkHBox" id="hbox12">
                         <property name="visible">True</property>
                         <child>
@@ -897,6 +878,18 @@ http://www.newseetv.com/soft/nslive-0.1.0.tar.gz
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="right_attach">2</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkLabel" id="label67">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Mplayer Cache </property>
+                      </widget>
+                      <packing>
                         <property name="top_attach">1</property>
                         <property name="bottom_attach">2</property>
                         <property name="x_options"></property>
@@ -1076,38 +1069,34 @@ http://www.newseetv.com/soft/nslive-0.1.0.tar.gz
                   <placeholder/>
                 </child>
                 <child>
-                  <widget class="GtkLabel" id="label74">
+                  <widget class="GtkHBox" id="hbox14">
                     <property name="visible">True</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">   </property>
+                    <child>
+                      <widget class="GtkEntry" id="entry_nslive_delay">
+                        <property name="width_request">60</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                      </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkLabel" id="label78">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes"> sec</property>
+                      </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </widget>
                   <packing>
-                    <property name="x_options"></property>
-                    <property name="y_options"></property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkLabel" id="label68">
-                    <property name="visible">True</property>
-                    <property name="label" translatable="yes">Mplayer Cache </property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">1</property>
-                    <property name="bottom_attach">2</property>
-                    <property name="x_options"></property>
-                    <property name="y_options"></property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkLabel" id="label70">
-                    <property name="visible">True</property>
-                    <property name="label" translatable="yes">Mplayer DelayTime </property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
+                    <property name="left_attach">2</property>
+                    <property name="right_attach">3</property>
                     <property name="top_attach">2</property>
                     <property name="bottom_attach">3</property>
                     <property name="x_options"></property>
@@ -1150,36 +1139,40 @@ http://www.newseetv.com/soft/nslive-0.1.0.tar.gz
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkHBox" id="hbox14">
+                  <widget class="GtkLabel" id="label70">
                     <property name="visible">True</property>
-                    <child>
-                      <widget class="GtkEntry" id="entry_nslive_delay">
-                        <property name="width_request">60</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                      </widget>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkLabel" id="label78">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes"> sec</property>
-                      </widget>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
+                    <property name="label" translatable="yes">Mplayer DelayTime </property>
                   </widget>
                   <packing>
-                    <property name="left_attach">2</property>
-                    <property name="right_attach">3</property>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
                     <property name="top_attach">2</property>
                     <property name="bottom_attach">3</property>
+                    <property name="x_options"></property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkLabel" id="label68">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">Mplayer Cache </property>
+                  </widget>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
+                    <property name="x_options"></property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkLabel" id="label74">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">   </property>
+                  </widget>
+                  <packing>
                     <property name="x_options"></property>
                     <property name="y_options"></property>
                   </packing>
@@ -1297,44 +1290,6 @@ http://www.newseetv.com/soft/nslive-0.1.0.tar.gz
                       <placeholder/>
                     </child>
                     <child>
-                      <widget class="GtkEntry" id="entry_sopcast_channel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                      </widget>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="top_attach">2</property>
-                        <property name="bottom_attach">3</property>
-                        <property name="y_options"></property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkLabel" id="label80">
-                        <property name="visible">True</property>
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">channel url</property>
-                      </widget>
-                      <packing>
-                        <property name="top_attach">2</property>
-                        <property name="bottom_attach">3</property>
-                        <property name="x_options"></property>
-                        <property name="y_options"></property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkLabel" id="label69">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">Mplayer Cache </property>
-                      </widget>
-                      <packing>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="x_options"></property>
-                        <property name="y_options"></property>
-                      </packing>
-                    </child>
-                    <child>
                       <widget class="GtkHBox" id="hbox15">
                         <property name="visible">True</property>
                         <child>
@@ -1365,6 +1320,44 @@ http://www.newseetv.com/soft/nslive-0.1.0.tar.gz
                         <property name="right_attach">2</property>
                         <property name="top_attach">1</property>
                         <property name="bottom_attach">2</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkLabel" id="label69">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Mplayer Cache </property>
+                      </widget>
+                      <packing>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkLabel" id="label80">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">channel url</property>
+                      </widget>
+                      <packing>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkEntry" id="entry_sopcast_channel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                      </widget>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
                         <property name="y_options"></property>
                       </packing>
                     </child>
