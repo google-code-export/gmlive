@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-25 19:37+0800\n"
-"PO-Revision-Date: 2008-02-24 14:49+0800\n"
+"POT-Creation-Date: 2008-06-17 22:23+0800\n"
+"PO-Revision-Date: 2008-06-17 22:27+0800\n"
 "Last-Translator: lerosua <lerosua@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,13 +28,10 @@ msgid ""
 "\t\t\t                  \n"
 "                                             gmlive 0.21 release\n"
 "\n"
-"    GMLive 尝试成为一款通用型的流媒体播放外壳。它以全能的Mplayer播放器为引"
-"擎。目标是\n"
-" 支持Linux下多种类型的P2P广播视频流。提供一种方便快捷的观看网络视频流的方"
-"案。\n"
+"    GMLive 尝试成为一款通用型的流媒体播放外壳。它以全能的Mplayer播放器为引擎。目标是\n"
+" 支持Linux下多种类型的P2P广播视频流。提供一种方便快捷的观看网络视频流的方案。\n"
 "\n"
-"                                                                                              cyclone "
-"Team\n"
+"                                                                                              cyclone Team\n"
 "\n"
 "  "
 msgstr ""
@@ -65,12 +62,10 @@ msgstr ""
 
 #: ../data/gmlive.glade.h:18
 msgid ""
-"    此程序是自由软件；您可以按照自由软件基金会所发表的 GNU GPL 协议自由发放"
-"和/或修改它；\n"
+"    此程序是自由软件；您可以按照自由软件基金会所发表的 GNU GPL 协议自由发放和/或修改它；\n"
 "GPL 协议应该采用第二版或您所喜欢的第二版之后的任何版本。\n"
 "\n"
-"此程序发表的目的是希望它能够对您有用，但我们没有任何保证；对于以任何用途使用"
-"它所\n"
+"此程序发表的目的是希望它能够对您有用，但我们没有任何保证；对于以任何用途使用它所\n"
 "造成的任何直接或间接后果都不承担任何责任。请参看 GNU GPL 协议中的细节。"
 msgstr ""
 
@@ -159,9 +154,8 @@ msgid "button-hide"
 msgstr ""
 
 #: ../data/gmlive.glade.h:48
-#, fuzzy
 msgid "channel url"
-msgstr "频道"
+msgstr "频道地址"
 
 #: ../data/gmlive.glade.h:49
 msgid "mms"
@@ -169,16 +163,15 @@ msgstr ""
 
 #: ../data/gmlive.glade.h:50
 msgid "mms help"
-msgstr ""
+msgstr "mms帮助"
 
 #: ../data/gmlive.glade.h:51
-#, fuzzy
 msgid "nslive"
-msgstr "GMLive"
+msgstr ""
 
 #: ../data/gmlive.glade.h:52
 msgid "nslive help"
-msgstr ""
+msgstr "nslive帮助"
 
 #: ../data/gmlive.glade.h:53
 msgid "sopcast"
@@ -186,7 +179,7 @@ msgstr ""
 
 #: ../data/gmlive.glade.h:54
 msgid "sopcast help"
-msgstr ""
+msgstr "sopcast帮助"
 
 #: ../data/gmlive.glade.h:55
 msgid "书签"
@@ -259,7 +252,7 @@ msgstr ""
 
 #: ../data/record.glade.h:7
 msgid "Record Readying ..."
-msgstr ""
+msgstr "准备录制...."
 
 #: ../data/record.glade.h:8
 msgid "Recording"
@@ -267,7 +260,7 @@ msgstr "录制"
 
 #: ../data/record.glade.h:9
 msgid "preview"
-msgstr ""
+msgstr "预览"
 
 #: ../src/channel.cpp:39
 msgid "channels"
@@ -291,7 +284,8 @@ msgstr "已经录制中"
 msgid "The Record had working now, you must stop it beforce"
 msgstr "录制已经在工作中，您必须中止之前的录制。"
 
-#: ../src/channel.cpp:163 ../src/MainWindow.cpp:317
+#: ../src/channel.cpp:163
+#: ../src/MainWindow.cpp:341
 msgid "Choose File"
 msgstr "选择文件"
 
@@ -332,107 +326,123 @@ msgstr "类型："
 msgid "GMLive Conf Window"
 msgstr "GMLive 配置"
 
-#: ../src/MainWindow.cpp:222
+#: ../src/MainWindow.cpp:219
 msgid "HideChannels"
 msgstr "隐藏列表"
 
+#: ../src/MainWindow.cpp:231
+#: ../src/MainWindow.cpp:283
+#: ../src/MainWindow.cpp:284
+msgid "FullScreen"
+msgstr "全屏"
+
+#: ../src/MainWindow.cpp:243
+#: ../src/MainWindow.cpp:259
+#, fuzzy
+msgid "OpenURL"
+msgstr "打开网络流"
+
 #. File menu:
-#: ../src/MainWindow.cpp:232
+#: ../src/MainWindow.cpp:253
 msgid "_File"
 msgstr "文件"
 
-#: ../src/MainWindow.cpp:234
+#: ../src/MainWindow.cpp:255
 msgid "Open local file"
 msgstr "打开本地文件"
 
-#: ../src/MainWindow.cpp:235
+#: ../src/MainWindow.cpp:256
 msgid "Open Local File"
 msgstr "打开本地文件"
 
-#: ../src/MainWindow.cpp:245
+#: ../src/MainWindow.cpp:260
+msgid "Open Network Stream"
+msgstr "打开网络流"
+
+#: ../src/MainWindow.cpp:264
 msgid "Play"
 msgstr "播放"
 
-#: ../src/MainWindow.cpp:250
+#: ../src/MainWindow.cpp:269
 msgid "Pause"
 msgstr "暂停"
 
-#: ../src/MainWindow.cpp:255
+#: ../src/MainWindow.cpp:274
 msgid "Record"
 msgstr "录制"
 
-#: ../src/MainWindow.cpp:260
+#: ../src/MainWindow.cpp:279
 msgid "Stop"
 msgstr "停止"
 
-#: ../src/MainWindow.cpp:266
+#: ../src/MainWindow.cpp:289
 msgid "MUTE"
 msgstr "静音"
 
 #. View menu:
-#: ../src/MainWindow.cpp:273
+#: ../src/MainWindow.cpp:296
 msgid "_View"
 msgstr "查看"
 
-#: ../src/MainWindow.cpp:277
+#: ../src/MainWindow.cpp:300
 msgid "Show or hide channels list"
 msgstr "显示或隐藏频道列表"
 
-#: ../src/MainWindow.cpp:282
+#: ../src/MainWindow.cpp:305
 msgid "_Embed Mplayer"
 msgstr "嵌入播放器"
 
-#: ../src/MainWindow.cpp:282
+#: ../src/MainWindow.cpp:305
 msgid "Embed or Separate mplayer play"
 msgstr "嵌入或分离播放器"
 
 #. Help menu:
-#: ../src/MainWindow.cpp:289
+#: ../src/MainWindow.cpp:312
 msgid "_Help"
 msgstr "帮助"
 
-#: ../src/MainWindow.cpp:295
+#: ../src/MainWindow.cpp:318
 msgid "_Refresh list"
 msgstr "刷新列表"
 
-#: ../src/MainWindow.cpp:295
+#: ../src/MainWindow.cpp:318
 msgid "Refresh current channel list"
 msgstr "刷新当前频道列表"
 
-#: ../src/MainWindow.cpp:298
+#: ../src/MainWindow.cpp:321
 msgid "_Add to bookmark"
 msgstr "添加到书签"
 
-#: ../src/MainWindow.cpp:298
+#: ../src/MainWindow.cpp:321
 msgid "Bookmark this channel"
 msgstr "收藏此频道"
 
-#: ../src/MainWindow.cpp:301
+#: ../src/MainWindow.cpp:324
 msgid "_Copy url"
 msgstr "复制流地址"
 
-#: ../src/MainWindow.cpp:301
+#: ../src/MainWindow.cpp:324
 msgid "Copy url to clipboard"
 msgstr "复制流地址至剪贴板"
 
-#: ../src/MainWindow.cpp:544
+#: ../src/MainWindow.cpp:641
 #, c-format
 msgid "Caching... %d%%"
 msgstr "缓冲中... %d%%"
 
-#: ../src/MainWindow.cpp:783
+#: ../src/MainWindow.cpp:926
 msgid "NO SUPPORT"
 msgstr "未支持"
 
-#: ../src/MainWindow.cpp:787
+#: ../src/MainWindow.cpp:930
 msgid "you have not install sopcast program,so GMLive can't support it now"
 msgstr "您还未安装sopcast程序，所以GMLive还不能支持它。"
 
-#: ../src/MainWindow.cpp:789
+#: ../src/MainWindow.cpp:932
 msgid "you have not install nslive program,so GMLive can't support it now"
 msgstr "您还未安装nslive程序，所以GMLive还不能支持它。"
 
-#: ../src/MainWindow.cpp:790
+#: ../src/MainWindow.cpp:935
 msgid " So you can install the program first"
 msgstr "请您安装以上程序。谢谢。"
 
@@ -454,8 +464,3 @@ msgstr "录制 %s 至 %s (%u Kb)"
 msgid "Recording %s To %s (%u.%u Mb)"
 msgstr "录制 %s 至 %s (%u.%u Mb)"
 
-#~ msgid "Open URL"
-#~ msgstr "打开网络流"
-
-#~ msgid "Open Network Stream"
-#~ msgstr "打开网络流"
