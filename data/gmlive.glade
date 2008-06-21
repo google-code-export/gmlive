@@ -193,7 +193,7 @@
                     <child>
                       <widget class="GtkLabel" id="label4">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">最近播放</property>
+                        <property name="label" translatable="yes">recent</property>
                         <property name="single_line_mode">True</property>
                         <property name="angle">270</property>
                       </widget>
@@ -220,7 +220,7 @@
                     <child>
                       <widget class="GtkLabel" id="label5">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">书签</property>
+                        <property name="label" translatable="yes">bookmarks</property>
                         <property name="single_line_mode">True</property>
                         <property name="angle">270</property>
                       </widget>
@@ -306,8 +306,11 @@
             <property name="label" translatable="yes">			                  
                                              gmlive 0.21 release
 
-    GMLive 尝试成为一款通用型的流媒体播放外壳。它以全能的Mplayer播放器为引擎。目标是
- 支持Linux下多种类型的P2P广播视频流。提供一种方便快捷的观看网络视频流的方案。
+              GMLive try to became a universal streaming media player case.
+         it use Almighty Mplayer for its engine. the Goal is to support  a 
+         variety of types of P2P broadcasting video streaming for Linux. 
+         Provide a convenient and efficient network to watch video streaming 
+         of the programme
 
                                                                                               cyclone Team
 
@@ -366,11 +369,7 @@
                     <property name="can_focus">True</property>
                     <property name="editable">False</property>
                     <property name="wrap_mode">GTK_WRAP_WORD_CHAR</property>
-                    <property name="text" translatable="yes">    此程序是自由软件；您可以按照自由软件基金会所发表的 GNU GPL 协议自由发放和/或修改它；
-GPL 协议应该采用第二版或您所喜欢的第二版之后的任何版本。
-
-此程序发表的目的是希望它能够对您有用，但我们没有任何保证；对于以任何用途使用它所
-造成的任何直接或间接后果都不承担任何责任。请参看 GNU GPL 协议中的细节。</property>
+                    <property name="text" translatable="yes"> You may modify and redistribute the program under the terms of the GPL (version 2 or later).  A copy of the GPL is contained in the 'COPYING' file distributed with Pidgin.  Pidgin is copyrighted by its contributors.  See the 'COPYRIGHT' file for the complete list of contributors.  We provide no warranty for this program.</property>
                   </widget>
                 </child>
               </widget>
@@ -398,7 +397,8 @@ GPL 协议应该采用第二版或您所喜欢的第二版之后的任何版本�
                 <property name="cursor_visible">False</property>
                 <property name="text" translatable="yes">Thanks follow people translate the program:
 
-中文: lerosua@gmail.com</property>
+Chinese(zh_CN): lerosua@gmail.com
+Spanish(es_ES):   jjgnomera@gmail.com</property>
               </widget>
               <packing>
                 <property name="position">2</property>
@@ -450,13 +450,11 @@ GPL 协议应该采用第二版或您所喜欢的第二版之后的任何版本�
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="editable">False</property>
-                    <property name="text" translatable="yes">关于MMS流
-此列表中的流服务并不是基于p2p形式的。只是网络上散落的各种网络电视
-的mms地址。例如，mms://xxx. 我们将它收集起来，以方便您观看。当然您
-也可以将收集到的mms流地址发给我们。在以后的版本中将会支持你自己添加
-地址。但在当前，如需要，您可以自己手工编辑源码中的mms.lst文件。并将
-它拷贝到您的目录下面~/.gmlive/
-</property>
+                    <property name="text" translatable="yes">about MMS streaming
+this channel is not base on P2P streaming. it just base on 
+mms:// url channel from the internet. we just collection it.
+you can add your mms channel for yourself. just edit the 
+mms.list and put it in your home dir like ~/.gmlive</property>
                   </widget>
                 </child>
               </widget>
@@ -487,17 +485,15 @@ GPL 协议应该采用第二版或您所喜欢的第二版之后的任何版本�
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="editable">False</property>
-                    <property name="text" translatable="yes">关于sopcast流。
-sopcast流提供的服务请访问http://www.sopcast.org以获得详细信息。
-另外，我们获取sopcast播放列表的方式用的是wget这个程序，请保证您的
-系统中存在这个命令。
-现在您已经可以在配置界面找到sopcast的配置选项，动态设置列表下载的地址。
-
-添加sopcast流支持请下载
-http://download.sopcast.com/download/sp-auth.tgz (如果下载失效请自行
-查找软件)
-下载后，将它们的二进制文件拷贝到/usr/local/bin/或/usr/bin
-</property>
+                    <property name="text" translatable="yes">about sopcast streaming
+please access the http://www.sopcast.org for sopcast help.
+another thing, we use the wget to get the sopcast channel,
+so please insure your system have the program wget.
+add you can configure the sopacst ' channel file in menu 
+preference.
+to add the sopcast streaming,download the 
+ http://download.sopcast.com/download/sp-auth.tgz 
+file.  unzip it and put it to /usr/local/bin/ or /usr/bin</property>
                   </widget>
                 </child>
               </widget>
@@ -528,19 +524,20 @@ http://download.sopcast.com/download/sp-auth.tgz (如果下载失效请自行
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="editable">False</property>
-                    <property name="text" translatable="yes">关于nslive流。
-nslive是一款Linux下的p2p的网络直播软件,由andycl98@163.com所开发。
-关于此软件的支持请访问http://andycl98.blog.163.com/以获得详细信息。
-nslive流本身会调用mplayer，所以为了让它更好与gmlive一起工作，请将
-nslive的配置文件中的播放器选项注释。
+		    <property name="text" translatable="yes">about nslive streaming
+nslive is a native program in linux about p2p streaming.
+it be developed by andycl98@163.com. so please access
+the http://andycl98.blog.163.com/ for his help.
+nslive ' program will call mplayer , so it will conflict
+with gmlive. so you need fix the nslive's config file like
+following.
 ~/.ulive/ulive.conf
 #mplayer install path
 #mplayer=/usr/bin/mplayer
 
-添加nslive流支持请下载
+to add nslive support , download
 http://www.newseetv.com/soft/nslive-0.1.0.tar.gz
-
-下载后，将它们的二进制文件拷贝到/usr/local/bin/或/usr/bin</property>
+untar it and put it to /usr/local/bin/ or /usr/bin</property>
                   </widget>
                 </child>
               </widget>

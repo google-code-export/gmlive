@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-17 22:23+0800\n"
+"POT-Creation-Date: 2008-06-21 13:13+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,10 +29,12 @@ msgid ""
 "\t\t\t                  \n"
 "                                             gmlive 0.21 release\n"
 "\n"
-"    GMLive 尝试成为一款通用型的流媒体播放外壳。它以全能的Mplayer播放器为引"
-"擎。目标是\n"
-" 支持Linux下多种类型的P2P广播视频流。提供一种方便快捷的观看网络视频流的方"
-"案。\n"
+"              GMLive try to became a universal streaming media player case.\n"
+"         it use Almighty Mplayer for its engine. the Goal is to support  a \n"
+"         variety of types of P2P broadcasting video streaming for Linux. \n"
+"         Provide a convenient and efficient network to watch video "
+"streaming \n"
+"         of the programme\n"
 "\n"
 "                                                                                              cyclone "
 "Team\n"
@@ -40,15 +42,15 @@ msgid ""
 "  "
 msgstr ""
 
-#: ../data/gmlive.glade.h:10
+#: ../data/gmlive.glade.h:13
 msgid "   "
 msgstr ""
 
-#: ../data/gmlive.glade.h:11
+#: ../data/gmlive.glade.h:14
 msgid "    "
 msgstr ""
 
-#: ../data/gmlive.glade.h:12
+#: ../data/gmlive.glade.h:15
 msgid ""
 "    \n"
 "    lerosua@gmail.com\n"
@@ -56,90 +58,89 @@ msgid ""
 "    yetist@gmail.com"
 msgstr ""
 
-#: ../data/gmlive.glade.h:16
+#: ../data/gmlive.glade.h:19
 msgid "        "
 msgstr ""
 
-#: ../data/gmlive.glade.h:17
+#: ../data/gmlive.glade.h:20
 msgid "                                                                                                   "
 msgstr ""
 
-#: ../data/gmlive.glade.h:18
-msgid ""
-"    此程序是自由软件；您可以按照自由软件基金会所发表的 GNU GPL 协议自由发放"
-"和/或修改它；\n"
-"GPL 协议应该采用第二版或您所喜欢的第二版之后的任何版本。\n"
-"\n"
-"此程序发表的目的是希望它能够对您有用，但我们没有任何保证；对于以任何用途使用"
-"它所\n"
-"造成的任何直接或间接后果都不承担任何责任。请参看 GNU GPL 协议中的细节。"
-msgstr ""
-
-#: ../data/gmlive.glade.h:23
+#: ../data/gmlive.glade.h:21
 msgid " Kbs"
 msgstr ""
 
-#: ../data/gmlive.glade.h:24
+#: ../data/gmlive.glade.h:22
 msgid " Kbs "
 msgstr ""
 
-#: ../data/gmlive.glade.h:25
+#: ../data/gmlive.glade.h:23
 msgid " Mplayer extend parameter "
 msgstr ""
 
-#: ../data/gmlive.glade.h:26
+#: ../data/gmlive.glade.h:24
+msgid ""
+" You may modify and redistribute the program under the terms of the GPL "
+"(version 2 or later).  A copy of the GPL is contained in the 'COPYING' file "
+"distributed with Pidgin.  Pidgin is copyrighted by its contributors.  See "
+"the 'COPYRIGHT' file for the complete list of contributors.  We provide no "
+"warranty for this program."
+msgstr ""
+
+#: ../data/gmlive.glade.h:25
 msgid " sec"
 msgstr ""
 
-#: ../data/gmlive.glade.h:27
+#: ../data/gmlive.glade.h:26
 msgid "About"
 msgstr ""
 
-#: ../data/gmlive.glade.h:28
+#: ../data/gmlive.glade.h:27
 msgid "Author"
 msgstr ""
 
-#: ../data/gmlive.glade.h:29
+#: ../data/gmlive.glade.h:28
 msgid "Embed mplayer"
 msgstr ""
 
-#: ../data/gmlive.glade.h:30
+#: ../data/gmlive.glade.h:29
 msgid "Enable Nslive"
 msgstr ""
 
-#: ../data/gmlive.glade.h:31
+#: ../data/gmlive.glade.h:30
 msgid "Enable Sopcast"
 msgstr ""
 
-#: ../data/gmlive.glade.h:32
+#: ../data/gmlive.glade.h:31
 msgid "GMLive"
 msgstr ""
 
-#: ../data/gmlive.glade.h:33
+#: ../data/gmlive.glade.h:32
 msgid "GMLive config"
 msgstr ""
 
-#: ../data/gmlive.glade.h:34
+#: ../data/gmlive.glade.h:33
 msgid "Help"
 msgstr ""
 
-#: ../data/gmlive.glade.h:35
+#: ../data/gmlive.glade.h:34
 msgid "Licence"
 msgstr ""
 
-#: ../data/gmlive.glade.h:36
+#: ../data/gmlive.glade.h:35
 msgid "Mplayer Cache "
 msgstr ""
 
-#: ../data/gmlive.glade.h:37
+#: ../data/gmlive.glade.h:36
 msgid "Mplayer DelayTime "
 msgstr ""
 
-#: ../data/gmlive.glade.h:38
+#: ../data/gmlive.glade.h:37
 msgid ""
 "Thanks follow people translate the program:\n"
 "\n"
-"中文: lerosua@gmail.com"
+"Chinese(zh_CN): lerosua@gmail.com\n"
+"Spanish(es_ES):   jjgnomera@gmail.com"
 msgstr ""
 
 #: ../data/gmlive.glade.h:41
@@ -156,84 +157,79 @@ msgid ""
 msgstr ""
 
 #: ../data/gmlive.glade.h:47
-msgid "button-hide"
-msgstr ""
-
-#: ../data/gmlive.glade.h:48
-msgid "channel url"
-msgstr ""
-
-#: ../data/gmlive.glade.h:49
-msgid "mms"
-msgstr ""
-
-#: ../data/gmlive.glade.h:50
-msgid "mms help"
-msgstr ""
-
-#: ../data/gmlive.glade.h:51
-msgid "nslive"
+msgid ""
+"about MMS streaming\n"
+"this channel is not base on P2P streaming. it just base on \n"
+"mms:// url channel from the internet. we just collection it.\n"
+"you can add your mms channel for yourself. just edit the \n"
+"mms.list and put it in your home dir like ~/.gmlive"
 msgstr ""
 
 #: ../data/gmlive.glade.h:52
-msgid "nslive help"
-msgstr ""
-
-#: ../data/gmlive.glade.h:53
-msgid "sopcast"
-msgstr ""
-
-#: ../data/gmlive.glade.h:54
-msgid "sopcast help"
-msgstr ""
-
-#: ../data/gmlive.glade.h:55
-msgid "书签"
-msgstr ""
-
-#: ../data/gmlive.glade.h:56
 msgid ""
-"关于MMS流\n"
-"此列表中的流服务并不是基于p2p形式的。只是网络上散落的各种网络电视\n"
-"的mms地址。例如，mms://xxx. 我们将它收集起来，以方便您观看。当然您\n"
-"也可以将收集到的mms流地址发给我们。在以后的版本中将会支持你自己添加\n"
-"地址。但在当前，如需要，您可以自己手工编辑源码中的mms.lst文件。并将\n"
-"它拷贝到您的目录下面~/.gmlive/\n"
-msgstr ""
-
-#: ../data/gmlive.glade.h:63
-msgid ""
-"关于nslive流。\n"
-"nslive是一款Linux下的p2p的网络直播软件,由andycl98@163.com所开发。\n"
-"关于此软件的支持请访问http://andycl98.blog.163.com/以获得详细信息。\n"
-"nslive流本身会调用mplayer，所以为了让它更好与gmlive一起工作，请将\n"
-"nslive的配置文件中的播放器选项注释。\n"
+"about nslive streaming\n"
+"nslive is a native program in linux about p2p streaming.\n"
+"it be developed by andycl98@163.com. so please access\n"
+"the http://andycl98.blog.163.com/ for his help.\n"
+"nslive ' program will call mplayer , so it will conflict\n"
+"with gmlive. so you need fix the nslive's config file like\n"
+"following.\n"
 "~/.ulive/ulive.conf\n"
 "#mplayer install path\n"
 "#mplayer=/usr/bin/mplayer\n"
 "\n"
-"添加nslive流支持请下载\n"
+"to add nslive support , download\n"
 "http://www.newseetv.com/soft/nslive-0.1.0.tar.gz\n"
-"\n"
-"下载后，将它们的二进制文件拷贝到/usr/local/bin/或/usr/bin"
+"untar it and put it to /usr/local/bin/ or /usr/bin"
+msgstr ""
+
+#: ../data/gmlive.glade.h:66
+msgid ""
+"about sopcast streaming\n"
+"please access the http://www.sopcast.org for sopcast help.\n"
+"another thing, we use the wget to get the sopcast channel,\n"
+"so please insure your system have the program wget.\n"
+"add you can configure the sopacst ' channel file in menu \n"
+"preference.\n"
+"to add the sopcast streaming,download the \n"
+" http://download.sopcast.com/download/sp-auth.tgz \n"
+"file.  unzip it and put it to /usr/local/bin/ or /usr/bin"
+msgstr ""
+
+#: ../data/gmlive.glade.h:75
+msgid "bookmarks"
 msgstr ""
 
 #: ../data/gmlive.glade.h:76
-msgid ""
-"关于sopcast流。\n"
-"sopcast流提供的服务请访问http://www.sopcast.org以获得详细信息。\n"
-"另外，我们获取sopcast播放列表的方式用的是wget这个程序，请保证您的\n"
-"系统中存在这个命令。\n"
-"现在您已经可以在配置界面找到sopcast的配置选项，动态设置列表下载的地址。\n"
-"\n"
-"添加sopcast流支持请下载\n"
-"http://download.sopcast.com/download/sp-auth.tgz (如果下载失效请自行\n"
-"查找软件)\n"
-"下载后，将它们的二进制文件拷贝到/usr/local/bin/或/usr/bin\n"
+msgid "channel url"
 msgstr ""
 
-#: ../data/gmlive.glade.h:87
-msgid "最近播放"
+#: ../data/gmlive.glade.h:77
+msgid "mms"
+msgstr ""
+
+#: ../data/gmlive.glade.h:78
+msgid "mms help"
+msgstr ""
+
+#: ../data/gmlive.glade.h:79
+msgid "nslive"
+msgstr ""
+
+#: ../data/gmlive.glade.h:80
+msgid "nslive help"
+msgstr ""
+
+#: ../data/gmlive.glade.h:81
+msgid "recent"
+msgstr ""
+
+#: ../data/gmlive.glade.h:82
+msgid "sopcast"
+msgstr ""
+
+#: ../data/gmlive.glade.h:83
+msgid "sopcast help"
 msgstr ""
 
 #: ../data/record.glade.h:1
