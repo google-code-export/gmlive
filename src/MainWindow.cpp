@@ -3,7 +3,7 @@
  *
  *       Filename:  MainWindow.cpp
  *
- *    Description:   程序的主窗 
+ *    Description:  程序的主窗口
  *
  *        Version:  1.0
  *        Created:  2007年11月25日 13时00分30秒 CST
@@ -35,6 +35,7 @@
 #include <functional>
 #include <algorithm>
 #include <glib/gi18n.h>
+#include <stdio.h>
 #include <string.h>
 
 using namespace std;
@@ -221,6 +222,20 @@ void register_stock_items()
 	const Gtk::StockID stock_id("HideChannels");
 	factory->add(stock_id, icon_set);
 	Gtk::Stock::add(Gtk::StockItem(stock_id, _("HideChannels")));
+
+	//add fullscreen icons to iconset
+	Gtk::IconSource source_fullscreen;
+	source_fullscreen.set_pixbuf( Gdk::Pixbuf::create_from_file(DATA_DIR"/fullscreen.png"));
+	source_fullscreen.set_size(Gtk::ICON_SIZE_SMALL_TOOLBAR);
+	source_fullscreen.set_size_wildcarded(); // Icon may be scaled.
+	Gtk::IconSet icon_set_fullscreen;
+	icon_set_fullscreen.add_source(source_fullscreen);
+
+	const Gtk::StockID stock_id_fullscreen("FullScreen");
+	factory->add(stock_id_fullscreen,icon_set_fullscreen);
+	Gtk::Stock::add(Gtk::StockItem(stock_id_fullscreen,_("FullScreen")));
+
+
 	factory->add_default();
 }
 void MainWindow::init_ui_manager()
@@ -262,7 +277,7 @@ void MainWindow::init_ui_manager()
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_stop));
 
-	action = Gtk::Action::create("FullScreen", Gtk::Stock::ZOOM_100);
+	action = Gtk::Action::create("FullScreen", Gtk::StockID("FullScreen"),_("FullScreen"));
 	action->set_tooltip(_("FullScreen"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_fullscreen));
@@ -499,9 +514,13 @@ void MainWindow::on_menu_view_embed_mplayer()
 
 void MainWindow::on_menu_view_preferences()
 {
-	//cout << "on_menu_view_preferences" << endl;
-	ConfWindow* confwindow = new ConfWindow(this);
-	confwindow->signal_quit().connect(sigc::mem_fun(*this, &MainWindow::on_conf_window_quit));
+	if(NULL==confwindow)
+	{
+		confwindow = new ConfWindow(this);
+		confwindow->signal_quit().connect(sigc::mem_fun(*this, &MainWindow::on_conf_window_quit));
+	}
+	else
+		confwindow->raise();
 }
 
 void MainWindow::on_menu_help_about()
@@ -585,7 +604,8 @@ bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 void MainWindow::on_live_player_out(int percentage)
 {
 	char buf[256];
-	sprintf(buf, "Caching... %d%%", percentage);
+	//sprintf(buf, "Caching... %d%%", percentage);
+	sprintf(buf, _("Caching... %d%%"), percentage);
 	show_msg(buf);
 }
 
@@ -597,6 +617,7 @@ MainWindow::MainWindow():
 	,full_screen(false)
 	,window_width(1)
 	,window_height(1)
+	,confwindow(NULL)
 {
 	std::list<Gtk::TargetEntry> listTargets;
 	listTargets.push_back(Gtk::TargetEntry("STRING"));
@@ -648,7 +669,7 @@ MainWindow::MainWindow():
 	swnd->add(*bookmark_channel);
 
 
-	backgroup = new Gtk::Image(
+	background = new Gtk::Image(
 			Gdk::Pixbuf::create_from_file (
 				DATA_DIR"/gmlive_play.png"));
 
@@ -674,7 +695,7 @@ MainWindow::MainWindow():
 	menu_tool_box->pack_start(*menubar,true,true);
 	menu_tool_box->pack_start(*toolbar,false,false);
 
-	play_frame->pack_start(*backgroup, true, true);
+	play_frame->pack_start(*background, true, true);
 
 	play_frame->drag_dest_set(listTargets);
 	play_frame->signal_drag_data_received().connect(
@@ -745,7 +766,7 @@ void MainWindow::set_channels_hide(bool hide)
 
 MainWindow::~MainWindow()
 {
-	delete backgroup;
+	delete background;
 	delete live_player;
 	delete gmp;
 	char buf[32];
@@ -878,9 +899,9 @@ void MainWindow::reorder_widget(bool is_running)
 		play_frame->hide();
 	else {
 		if (is_running){
-			static int width = backgroup->get_width();
-			static int height = backgroup->get_height();
-			play_frame->remove(*backgroup);
+			static int width = background->get_width();
+			static int height = background->get_height();
+			play_frame->remove(*background);
 			play_frame->pack_start(*gmp, true, true);
 			if (gmp_width != -1)
 				gmp->set_size_request(gmp_width, gmp_height);
@@ -889,7 +910,7 @@ void MainWindow::reorder_widget(bool is_running)
 		}
 		else {
 			play_frame->remove(*gmp);
-			play_frame->pack_start(*backgroup, true, true);
+			play_frame->pack_start(*background, true, true);
 			set_gmp_size(-1, -1);
 		}
 		play_frame->show_all();

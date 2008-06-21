@@ -13,7 +13,7 @@
 #define SOPCASTSTREAM "http://127.0.0.1:8908/tv.asf"
 
 
-#define main_ui	    DATA_DIR"/gmlive.xml"
+#define main_ui	    DATA_DIR"/gmlive.glade"
 typedef Glib::RefPtr < Gnome::Glade::Xml > GlademmXML;
 
 enum TypeChannel{

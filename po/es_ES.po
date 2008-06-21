@@ -1,19 +1,20 @@
-# SOME DESCRIPTIVE TITLE.
+# translation of es_ES.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: es_ES\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-06-21 12:09+0800\n"
-"PO-Revision-Date: 2008-06-21 12:07+0800\n"
-"Last-Translator: lerosua <lerosua@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2008-06-19 23:50+0200\n"
+"Last-Translator: \n"
+"Language-Team:  <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../data/gmlive.desktop.in.in.h:1
 msgid "Gmlive"
@@ -21,7 +22,7 @@ msgstr "GMLive"
 
 #: ../data/gmlive.desktop.in.in.h:2
 msgid "Streaming Direct Broadcast System based on P2P"
-msgstr ""
+msgstr "Sistema de streaming directo y basado en P2P"
 
 #: ../data/gmlive.glade.h:1
 msgid ""
@@ -38,14 +39,6 @@ msgid ""
 "                                                                                              cyclone "
 "Team  "
 msgstr ""
-"\t\t\t                  \n"
-"                                             gmlive 0.20.3 release\n"
-"\n"
-"   GMLive 尝试成为一款通用型的流媒体播放外壳。它以全能的Mplayer播放器为引擎。"
-"目标是 支持Linux下多种类型的P2P广播视频流。提供一种方便快捷的观看网络视频流的"
-"方"
-"案。                                                                                              "
-"cyclone Team  "
 
 #: ../data/gmlive.glade.h:11
 msgid "   "
@@ -91,10 +84,6 @@ msgid ""
 "the 'COPYRIGHT' file for the complete list of contributors.  We provide no "
 "warranty for this program."
 msgstr ""
-"此程序是自由软件；您可以按照自由软件基金会所发表的 GNU GPL 协议自由发放和/或"
-"修改它；GPL 协议应该采用第二版或您所喜欢的第二版之后的任何版本。此程序发表的"
-"目的是希望它能够对您有用，但我们没有任何保证；对于以任何用途使用它所造成的任"
-"何直接或间接后果都不承担任何责任。请参看 GNU GPL 协议中的细节。"
 
 #: ../data/gmlive.glade.h:23
 msgid " sec"
@@ -102,32 +91,36 @@ msgstr ""
 
 #: ../data/gmlive.glade.h:24
 msgid "About"
-msgstr "关于"
+msgstr ""
 
 #: ../data/gmlive.glade.h:25
 msgid "Author"
-msgstr "作者"
+msgstr ""
 
 #. embed mplayer
 #: ../data/gmlive.glade.h:27
+#, fuzzy
 msgid "Embed mplayer"
-msgstr "嵌入播放器"
+msgstr "Mplayer embebido"
 
 #: ../data/gmlive.glade.h:28
+#, fuzzy
 msgid "GMLive"
 msgstr "GMLive"
 
 #: ../data/gmlive.glade.h:29
+#, fuzzy
 msgid "GMLive config"
-msgstr "GMLive 配置"
+msgstr "Configuración de GMLive"
 
 #: ../data/gmlive.glade.h:30
+#, fuzzy
 msgid "Help"
-msgstr "帮助"
+msgstr "Ayuda"
 
 #: ../data/gmlive.glade.h:31
 msgid "Licence"
-msgstr "版权"
+msgstr ""
 
 #: ../data/gmlive.glade.h:32
 msgid "Mplayer Cache "
@@ -147,7 +140,7 @@ msgstr ""
 
 #: ../data/gmlive.glade.h:38
 msgid "Translation"
-msgstr "翻译"
+msgstr ""
 
 #: ../data/gmlive.glade.h:39
 msgid ""
@@ -157,11 +150,6 @@ msgid ""
 "  URL:   http://code.google.com/p/gmlive\n"
 "  IRC:    #cyclone@irc.oftc.net"
 msgstr ""
-"您可以在以下地址找到我们\n"
-"\n"
-"  BLOG: http://cyclone.blog.ubuntu.org.cn\n"
-"  URL:   http://code.google.com/p/gmlive\n"
-"  IRC:    #cyclone@irc.oftc.net"
 
 #: ../data/gmlive.glade.h:44
 msgid ""
@@ -171,10 +159,6 @@ msgid ""
 "you can add your mms channel for yourself. just edit the \n"
 "mms.list and put it in your home dir like ~/.gmlive"
 msgstr ""
-"关于MMS流此列表中的流服务并不是基于p2p形式的。只是网络上散落的各种网络电视的"
-"mms地址。例如，mms://xxx. 我们将它收集起来，以方便您观看。当然您也可以将收集"
-"到的mms流地址发给我们。在以后的版本中将会支持你自己添加地址。但在当前，如需"
-"要，您可以自己手工编辑源码中的mms.lst文件。并将它拷贝到您的目录下面~/.gmlive/"
 
 #: ../data/gmlive.glade.h:49
 msgid ""
@@ -193,12 +177,6 @@ msgid ""
 "http://www.newseetv.com/soft/nslive-0.1.0.tar.gz\n"
 "untar it and put it to /usr/local/bin/ or /usr/bin"
 msgstr ""
-"关于nslive流。nslive是一款Linux下的p2p的网络直播软件,由andycl98@163.com所开"
-"发。关于此软件的支持请访问http://andycl98.blog.163.com/以获得详细信息。nslive"
-"流本身会调用mplayer，所以为了让它更好与gmlive一起工作，请将nslive的配置文件中"
-"的播放器选项注释。~/.ulive/ulive.conf#mplayer install path#mplayer=/usr/bin/"
-"mplayer添加nslive流支持请下载http://www.newseetv.com/soft/nslive-0.1.0.tar.gz"
-"下载后，将它们的二进制文件拷贝到/usr/local/bin/或/usr/bin"
 
 #: ../data/gmlive.glade.h:63
 msgid ""
@@ -212,20 +190,16 @@ msgid ""
 " http://download.sopcast.com/download/sp-auth.tgz \n"
 "file.  unzip it and put it to /usr/local/bin/ or /usr/bin"
 msgstr ""
-"关于sopcast流。sopcast流提供的服务请访问http://www.sopcast.org以获得详细信"
-"息。另外，我们获取sopcast播放列表的方式用的是wget这个程序，请保证您的系统中存"
-"在这个命令。现在您已经可以在配置界面找到sopcast的配置选项，动态设置列表下载的"
-"地址。添加sopcast流支持请下载http://download.sopcast.com/download/sp-auth."
-"tgz (如果下载失效请自行查找软件)下载后，将它们的二进制文件拷贝到/usr/local/"
-"bin/或/usr/bin"
 
 #: ../data/gmlive.glade.h:72
+#, fuzzy
 msgid "bookmarks"
-msgstr "书签"
+msgstr "Añade a favoritos"
 
 #: ../data/gmlive.glade.h:73
+#, fuzzy
 msgid "channel url"
-msgstr "频道"
+msgstr "Canales"
 
 #: ../data/gmlive.glade.h:74
 msgid "mms"
@@ -236,8 +210,9 @@ msgid "mms help"
 msgstr ""
 
 #: ../data/gmlive.glade.h:76
+#, fuzzy
 msgid "nslive"
-msgstr "nslive"
+msgstr "GMLive"
 
 #: ../data/gmlive.glade.h:77
 msgid "nslive help"
@@ -245,7 +220,7 @@ msgstr ""
 
 #: ../data/gmlive.glade.h:78
 msgid "recent"
-msgstr "最近播放"
+msgstr ""
 
 #: ../data/gmlive.glade.h:79
 msgid "sopcast"
@@ -277,193 +252,188 @@ msgstr ""
 
 #: ../data/record.glade.h:7
 msgid "Record Readying ..."
-msgstr "准备录制中 ..."
+msgstr ""
 
 #: ../data/record.glade.h:8
+#, fuzzy
 msgid "Recording"
-msgstr "录制"
+msgstr "Grabar"
 
 #: ../data/record.glade.h:9
 msgid "preview"
-msgstr "预览"
+msgstr ""
 
 #: ../src/channel.cpp:39
 msgid "channels"
-msgstr "频道"
+msgstr "Canales"
 
 #: ../src/channel.cpp:40
 msgid "bitrate"
-msgstr "位率"
+msgstr "bitrate"
 
 #: ../src/channel.cpp:41
 msgid "user"
-msgstr "用户"
+msgstr "usuarios"
 
 #. if ((live_player!=NULL)&&(live_player == lr)) { // 录制的时候再录制跳出警告并退出
 #. 录制的时候再录制跳出警告并退出
 #: ../src/channel.cpp:143
 msgid "Already Recorded"
-msgstr "已经录制中"
+msgstr "Grabado"
 
 #: ../src/channel.cpp:145
 msgid "The Record had working now, you must stop it beforce"
-msgstr "录制已经在工作中，您必须中止之前的录制。"
+msgstr "La grabación ha comenzado, para pararla hazlo manualmente"
 
 #: ../src/channel.cpp:163 ../src/MainWindow.cpp:337
 msgid "Choose File"
-msgstr "选择文件"
+msgstr "Elige archivo"
 
 #. 录制的时候
 #: ../src/channel.cpp:273
 msgid "Stop Recording"
-msgstr "停止录制"
+msgstr "Parar grabación"
 
 #: ../src/channel.cpp:277
 msgid ""
 "GMLive is recording,you can play channel after stop the record.\n"
 " Are you really to do this?"
 msgstr ""
-"GMLive 在录制中，您必须先停止录制才能使用播放功能\n"
-"你确定停止录制吗？"
+"GMLive esta grabando, podrás reproducir el canal cuando detengas la "
+"grabación. ¿Realmente quieres hacer esto?"
 
 #: ../src/channel.cpp:361
 msgid "NSLive Stream"
-msgstr "NSLive 流"
+msgstr "NSlive Stream"
 
 #: ../src/channel.cpp:363
 msgid "SopCast Stream"
-msgstr "SopCast 流"
+msgstr "Sopcast stream"
 
 #: ../src/channel.cpp:365
 msgid "MMS stream"
-msgstr "MMS流"
+msgstr "MMS stream "
 
 #: ../src/channel.cpp:374
 msgid "users:"
-msgstr "用户数："
+msgstr "usuarios:"
 
 #: ../src/channel.cpp:375
 msgid "Type:"
-msgstr "类型："
+msgstr "Tipo:"
 
 #: ../src/ConfWindow.cpp:61
 msgid "GMLive Conf Window"
-msgstr "GMLive 配置"
+msgstr "Configuración de GMLive"
 
 #: ../src/MainWindow.cpp:224
 msgid "HideChannels"
-msgstr "隐藏列表"
+msgstr "Ocultar canales"
 
 #: ../src/MainWindow.cpp:236 ../src/MainWindow.cpp:280
 #: ../src/MainWindow.cpp:281
 msgid "FullScreen"
-msgstr "全屏"
+msgstr ""
 
 #. File menu:
 #: ../src/MainWindow.cpp:248
 msgid "_File"
-msgstr "文件"
+msgstr "Archivo"
 
 #: ../src/MainWindow.cpp:250
 msgid "Open local file"
-msgstr "打开本地文件"
+msgstr "Abrir archivo local"
 
 #: ../src/MainWindow.cpp:251
 msgid "Open Local File"
-msgstr "打开本地文件"
+msgstr "Abrir archivo local"
 
 #: ../src/MainWindow.cpp:261
 msgid "Play"
-msgstr "播放"
+msgstr "Reproducir"
 
 #: ../src/MainWindow.cpp:266
 msgid "Pause"
-msgstr "暂停"
+msgstr "Pausa"
 
 #: ../src/MainWindow.cpp:271
 msgid "Record"
-msgstr "录制"
+msgstr "Grabar"
 
 #: ../src/MainWindow.cpp:276
 msgid "Stop"
-msgstr "停止"
+msgstr "Parar"
 
 #: ../src/MainWindow.cpp:286
 msgid "MUTE"
-msgstr "静音"
+msgstr "MUTE"
 
 #. View menu:
 #: ../src/MainWindow.cpp:293
 msgid "_View"
-msgstr "查看"
+msgstr "Ver"
 
 #: ../src/MainWindow.cpp:297
 msgid "Show or hide channels list"
-msgstr "显示或隐藏频道列表"
+msgstr "Mostrar/Esconder lista de canales"
 
 #: ../src/MainWindow.cpp:302
 msgid "_Embed Mplayer"
-msgstr "嵌入播放器"
+msgstr "Mplayer embebido"
 
 #: ../src/MainWindow.cpp:302
 msgid "Embed or Separate mplayer play"
-msgstr "嵌入或分离播放器"
+msgstr "Reproductor mplayer embebido o separado"
 
 #. Help menu:
 #: ../src/MainWindow.cpp:309
 msgid "_Help"
-msgstr "帮助"
+msgstr "Ayuda"
 
 #: ../src/MainWindow.cpp:315
 msgid "_Refresh list"
-msgstr "刷新列表"
+msgstr "Actualiza lista"
 
 #: ../src/MainWindow.cpp:315
 msgid "Refresh current channel list"
-msgstr "刷新当前频道列表"
+msgstr "Actualiza lista de canales actuales"
 
 #: ../src/MainWindow.cpp:318
 msgid "_Add to bookmark"
-msgstr "添加到书签"
+msgstr "Añade a favoritos"
 
 #: ../src/MainWindow.cpp:318
 msgid "Bookmark this channel"
-msgstr "收藏此频道"
+msgstr "Añade este canal a los favoritos"
 
 #: ../src/MainWindow.cpp:321
 msgid "_Copy url"
-msgstr "复制流地址"
+msgstr "Copia url"
 
 #: ../src/MainWindow.cpp:321
 msgid "Copy url to clipboard"
-msgstr "复制流地址至剪贴板"
+msgstr "Copia enlace al portapapeles"
 
 #. sprintf(buf, "Caching... %d%%", percentage);
 #: ../src/MainWindow.cpp:608
 #, c-format
 msgid "Caching... %d%%"
-msgstr "缓冲... %d%%"
+msgstr ""
 
 #: ../src/recordStream.cpp:74
 msgid "Record finial"
-msgstr "录制完成"
+msgstr "Final de grabación"
 
 #: ../src/recordStream.cpp:75
 msgid " record finial"
-msgstr "录制完成"
+msgstr "final de grabación"
 
 #: ../src/recordStream.cpp:169
 #, c-format
 msgid "Recording %s To %s (%u Kb)"
-msgstr "录制 %s 至 %s (%u Kb)"
+msgstr "Grabando de %s a %s (%u Kb)"
 
 #: ../src/recordStream.cpp:174
 #, c-format
 msgid "Recording %s To %s (%u.%u Mb)"
-msgstr "录制 %s 至 %s (%u.%u Mb)"
-
-#~ msgid "Open URL"
-#~ msgstr "打开网络流"
-
-#~ msgid "Open Network Stream"
-#~ msgstr "打开网络流"
+msgstr "Grabando de %s a %s (%u.%u Mb)"

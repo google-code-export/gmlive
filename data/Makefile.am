@@ -1,10 +1,11 @@
 gmlive_ui = \
-	    gmlive.xml \
-	    record.xml \
+	    gmlive.glade \
+	    record.glade \
 	    mms.lst 	\
 	    gmlive.png  \
 	    gmlive_play.png \
 	    gmlive_big.png \
+	    fullscreen.png \
 	    show_channels.png
 
 desktopdir       = $(datadir)/applications
