@@ -27,6 +27,7 @@
 
 class Channel;
 class LivePlayer;
+class ConfWindow;
 class MainWindow : public Gtk::Window {
 	public:
 		MainWindow();
@@ -97,10 +98,11 @@ class MainWindow : public Gtk::Window {
 		Gtk::Widget*			menubar;
 		Gtk::Widget*			toolbar;
 		Gtk::Statusbar* 		statusbar;
-		Gtk::Image*			backgroup;
+		Gtk::Image*			background;
 		Channel* 			recent_channel;
 		Channel* 			bookmark_channel;
 		Gtk::Menu*			channels_pop_menu;
+		ConfWindow*			confwindow;
 		LivePlayer* 			live_player;
 		int 				gmp_width;
 		int				gmp_height;

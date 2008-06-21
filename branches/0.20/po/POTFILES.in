@@ -1,7 +1,7 @@
 [encoding: UTF-8]
 data/gmlive.desktop.in.in
-data/gmlive.xml
-data/record.xml
+data/gmlive.glade
+data/record.glade
 src/bookmarkchannel.cpp
 src/channel.cpp
 src/ChannelsTooltips.cpp
