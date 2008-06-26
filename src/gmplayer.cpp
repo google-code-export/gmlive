@@ -119,10 +119,12 @@ int GMplayer::my_system(char* const argv[])
 	extern char **environ;
 	create_pipe();
 	assert(!out_slot.empty());
+	printf("%s:%d\n",__func__,__LINE__);
 	ptm_conn = Glib::signal_io().connect(
 			out_slot,
 			child_tem, Glib::IO_IN);
 
+	printf("%s:%d\n",__func__,__LINE__);
 
 	pid_t pid = fork();
 	if (pid == -1)

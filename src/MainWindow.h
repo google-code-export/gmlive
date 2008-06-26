@@ -90,6 +90,7 @@ class MainWindow : public Gtk::Window {
 		void set_gmp_size(int w, int h);
 		void set_gmp_embed(bool);
 		void set_channels_hide(bool);
+		void set_other_player(bool oplayer);
 
 		void reorder_widget(bool is_running);
 		Channel* get_cur_select_channel();

@@ -27,6 +27,9 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	Gtk::VBox * vBox = dynamic_cast < Gtk::VBox * >
 	    (vbox_xml->get_widget("vbox_conf"));
 
+	std::string& oplayer = GMConf["player_type"];
+	m_oplayer = (!oplayer.empty())&&(oplayer[0]=='1');
+	m_oplayer_cmd = GMConf["other_player_cmd"];
 
 	std::string& embed = GMConf["mplayer_embed"];
 	m_embed = (!embed.empty()) && (embed[0] == '1');
@@ -44,6 +47,8 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 
 
 	m_pVariablesMap = new Gnome::Glade::VariablesMap(vbox_xml);
+	m_pVariablesMap->connect_widget("rbtn_oplayer",m_oplayer);
+	m_pVariablesMap->connect_widget("entry_oplayer_cmd",m_oplayer_cmd);
 	m_pVariablesMap->connect_widget("check_embed",m_embed);
 	m_pVariablesMap->connect_widget("enable_sopcast", m_enable_sopcast);
 	m_pVariablesMap->connect_widget("enable_nslive", m_enable_nslive);
@@ -92,6 +97,7 @@ void ConfWindow::write_to_GMConf()
 {
 	m_pVariablesMap->transfer_widgets_to_variables();
 	
+	GMConf["player_type"] = m_oplayer ? "1" : "0";
 	GMConf["mplayer_embed"] = m_embed ? "1" : "0";
 	GMConf["enable_nslive"] = m_enable_nslive ? "1" : "0";
 	GMConf["enable_sopcast"] = m_enable_sopcast ? "1" : "0";
@@ -101,6 +107,7 @@ void ConfWindow::write_to_GMConf()
 	GMConf["nslive_mplayer_cache"]  =            m_nslive_cache ;
 	GMConf["nslive_delay_time"]     =            m_nslive_delay ;
 	GMConf["sopcast_channel_url"]    =            m_sopcast_channel;
+	GMConf["other_player_cmd"]  = m_oplayer_cmd;
 }
 
 

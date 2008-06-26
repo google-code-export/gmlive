@@ -32,13 +32,15 @@ class PlayStream : public GMplayer, public Gtk::Socket {
 		void start(const std::string&);
 		void start();
 		void full_screen();
-		void set_embed(bool embed_);
+		void set_embed(bool f_embed);
+		void set_other_player(bool f_oplayer);
 	private:
 		void on_mplayer_exit();
 		void initialize();
 		std::string	file;		/* filename (internal)*/
 		guint32		xid;		/* X window handle (internal)*/
-		bool		is_embed;
+		bool		is_embed;      /* identify the mplayer is embed the main window */
+		bool		is_oplayer;    /* identify the default player is mplayer or the other player . 0 = mplayer , 1 = other player */
 };
 
 
