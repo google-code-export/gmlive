@@ -574,7 +574,8 @@ Glib::ustring MainWindow::on_volume_display(double value)
 void MainWindow::on_conf_window_quit()
 {
 	//std::cout << "on_conf_window_quit" << std::endl;
-	set_gmp_embed(atoi(GMConf["mplayer_embed"].c_str()));
+	//set_gmp_embed(atoi(GMConf["mplayer_embed"].c_str()));
+	set_other_player(atoi(GMConf["player_type"].c_str()));
 	save_conf();
 }
 
@@ -813,7 +814,8 @@ MainWindow::MainWindow():
 	gmp_embed     = atoi(GMConf["mplayer_embed"].c_str());
 
 	set_channels_hide(channels_hide);
-	set_gmp_embed(gmp_embed);
+	//set_gmp_embed(gmp_embed);
+	set_other_player(atoi(GMConf["player_type"].c_str()));
 	Glib::RefPtr<Gtk::ToggleAction> menu = 
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("Mute"));
 	menu->set_active(false);
@@ -822,6 +824,25 @@ MainWindow::MainWindow():
 
 }
 
+void MainWindow::set_other_player(bool oplayer)
+{
+	if(oplayer){
+		//使用其它播放器的情况，需要把界面设置成不嵌入模式的
+		action_group->get_action("ViewEmbedMplayer")->set_sensitive(false);
+		action_group->get_action("FilePause")->set_sensitive(false);
+		set_gmp_embed(false);
+		printf("set the other player\n");
+
+	}
+	else{
+		action_group->get_action("ViewEmbedMplayer")->set_sensitive(true);
+		action_group->get_action("FilePause")->set_sensitive(true);
+		set_gmp_embed(atoi(GMConf["mplayer_embed"].c_str()));
+
+	}
+	gmp->set_other_player(oplayer);
+
+}
 void MainWindow::set_gmp_embed(bool embed)
 {
 	//std::string& embed = GMConf["mplayer_embed"];
@@ -836,6 +857,7 @@ void MainWindow::set_gmp_embed(bool embed)
 		play_frame->hide();
 		channels_box->show();
 		action_group->get_action("ViewShowChannel")->set_sensitive(false);
+		action_group->get_action("FullScreen")->set_sensitive(false);
 		this->resize(window_width, window_height);
 	}
 	else {
@@ -844,6 +866,7 @@ void MainWindow::set_gmp_embed(bool embed)
 		this->get_size( window_width, window_height);
 		play_frame->show_all();
 		action_group->get_action("ViewShowChannel")->set_sensitive(true);
+		action_group->get_action("FullScreen")->set_sensitive(true);
 		set_channels_hide(channels_hide);
 		this->resize(1, 1);
 	}
@@ -956,6 +979,8 @@ void MainWindow::init()
 		char homepath[512];
 		snprintf(homepath,512,"%s/.gmlive/",homedir);
 		mkdir(homepath,S_IRUSR|S_IWUSR|S_IXUSR);
+		GMConf["player_type"]="0"; //0--mplayer, 1--other player
+		GMConf["other_player_cmd"]="";
 		GMConf["mplayer_embed"]		=	"1";
 		GMConf["enable_sopcast"] = "1";
 		GMConf["enable_nslive"]= "1";

@@ -123,7 +123,7 @@ void Channel::play_selection()
 		this->get_selection();
 	Gtk::TreeModel::iterator iter = selection->get_selected();
 	if (!selection->count_selected_rows()) {
-		parent->set_live_player(parent->get_live_player() ,"");
+		//parent->set_live_player(parent->get_live_player() ,"");
 		return ;
 	}
 

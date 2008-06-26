@@ -49,6 +49,8 @@ class ConfWindow: public Gtk::Window
 		Glib::ustring m_nslive_delay;
 		Glib::ustring m_nslive_cache;
 		Glib::ustring m_sopcast_channel;
+		Glib::ustring m_oplayer_cmd;
+		bool		m_oplayer;
 		bool		m_embed;
 		bool		m_enable_nslive;
 		bool		m_enable_sopcast;

@@ -32,6 +32,7 @@
 PlayStream::PlayStream()
 	:xid(-1)
 	,is_embed(true)
+       ,is_oplayer(false)
 {
 }
 
@@ -48,11 +49,51 @@ void PlayStream::initialize()
 
 	Glib::RefPtr<Gdk::Window> gwin = this->get_window();
 
+	std::list<std::string> pars;
+	std::list<std::string>::iterator iter;
+	if(is_oplayer){  //other player handle
+		std::string& oplayer_cmd = GMConf["other_player_cmd"];
+		if(!oplayer_cmd.empty()){
+		size_t pose1 = 0;
+		size_t pose2 = 0;
+		for(;;) {
+			pose2 = oplayer_cmd.find_first_of(" \t", pose1);
+			pars.push_back(oplayer_cmd.substr(pose1, pose2 - pose1));
+			if (pose2 == std::string::npos)
+				break;
+			pose1 = pose2 + 1;
+		}
+	}
+		else
+		{
+		printf("%s:%d\n",__func__,__LINE__);
+			//handle here
+			return;
+		}
+
+	int argv_len = 512 + pars.size();
+	const char* argv[argv_len];
+	int i = 0;
+	iter = pars.begin();
+	for (; i < argv_len && iter != pars.end(); i++, ++iter) {
+		argv[i] = (*iter).c_str();
+	}
+
+	strcpy((char*)argv[i],file.c_str());
+	argv[++i] = NULL;
+
+	printf("%s:%d\n",__func__,__LINE__);
+	my_system((char* const *) argv);
+	printf("%s:%d\n",__func__,__LINE__);
+
+	}
+	else{  //mplayer handle
+
 	char cache_buf[32];
 	snprintf(cache_buf, 32, "%d", cache);
 
 	std::string& paramter = GMConf["mplayer_paramter"];
-	std::list<std::string> pars;
+	//std::list<std::string> pars;
 	if (!paramter.empty()) {
 		size_t pos1 = 0;
 		size_t pos2 = 0;
@@ -73,7 +114,8 @@ void PlayStream::initialize()
 	argv[3] = "-quiet";
 	argv[4] = "-cache";
 	argv[5] = cache_buf;
-	std::list<std::string>::iterator iter = pars.begin();
+	//std::list<std::string>::iterator iter = pars.begin();
+	iter = pars.begin();
 	int i = 6;
 	for (; i < argv_len && iter != pars.end(); i++, ++iter) {
 		argv[i] = (*iter).c_str();
@@ -88,15 +130,18 @@ void PlayStream::initialize()
 	argv[i] = NULL;
 
 	my_system((char* const *) argv);
+	}
 }
 
 void PlayStream::start()
 {
 	if (pausing())
 		return pause();
-	if (running())
+	if (running()||(is_oplayer))
 		stop();
+	printf("%s:%d\n",__func__,__LINE__);
 	initialize();
+	printf("%s:%d\n",__func__,__LINE__);
 	char cb[256];
 	int len = snprintf(cb, 256, "loadfile %s\n", file.c_str());
 	cb[len] = 0;
@@ -124,6 +169,11 @@ void PlayStream::set_embed(bool embed_)
 	is_embed = embed_;
 	if (running()) 
 		start();
+}
+void PlayStream::set_other_player(bool f_oplayer)
+{
+	is_oplayer = f_oplayer;
+
 }
 
 void PlayStream::on_mplayer_exit()
