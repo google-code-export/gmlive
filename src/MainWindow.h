@@ -76,6 +76,7 @@ class MainWindow : public Gtk::Window {
 		void on_gmplayer_start();
 		void on_gmplayer_stop();
 		void on_conf_window_quit();
+		bool on_doubleclick_picture(GdkEventButton* ev);
 		void on_fullscreen();
 		void unzoom(); //解除全屏
 
@@ -93,6 +94,7 @@ class MainWindow : public Gtk::Window {
 		PlayStream* 			gmp;
 		RecordStream* 			record_gmp;
 		Gtk::Box*			play_frame;
+		Gtk::EventBox*			play_eventbox;
 		Gtk::Notebook*			channels;
 		Gtk::Widget*			channels_box;
 		Gtk::Widget*			menubar;
