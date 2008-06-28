@@ -126,8 +126,8 @@ void Channel::play_selection()
 		//parent->set_live_player(parent->get_live_player() ,"");
 		return ;
 	}
-
-	play_selection_iter(iter);
+	if(GROUP_CHANNEL != (*iter)[columns.type])
+		play_selection_iter(iter);
 
 }
 

@@ -72,6 +72,7 @@ void PlayStream::initialize()
 		}
 
 	int argv_len = 512 + pars.size();
+	printf("%s:%d :argv_len = %d\n",__func__,__LINE__,argv_len);
 	const char* argv[argv_len];
 	int i = 0;
 	iter = pars.begin();
@@ -80,7 +81,8 @@ void PlayStream::initialize()
 	}
 
 	strcpy((char*)argv[i],file.c_str());
-	argv[++i] = NULL;
+	i++;
+	argv[i] = NULL;
 
 	printf("%s:%d\n",__func__,__LINE__);
 	my_system((char* const *) argv);
@@ -112,11 +114,13 @@ void PlayStream::initialize()
 	argv[1] = "-slave";
 	argv[2] = "-idle";
 	argv[3] = "-quiet";
-	argv[4] = "-cache";
-	argv[5] = cache_buf;
+	argv[4] = "-nomouseinput";
+	argv[5] = "-noconsolecontrols";
+	argv[6] = "-cache";
+	argv[7] = cache_buf;
 	//std::list<std::string>::iterator iter = pars.begin();
 	iter = pars.begin();
-	int i = 6;
+	int i = 8;
 	for (; i < argv_len && iter != pars.end(); i++, ++iter) {
 		argv[i] = (*iter).c_str();
 	}

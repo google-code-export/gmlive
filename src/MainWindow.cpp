@@ -552,7 +552,7 @@ bool MainWindow::on_doubleclick_picture(GdkEventButton* ev)
 
 	if (ev->type == GDK_2BUTTON_PRESS)
 	{
-		printf(" 双击画面 \n");
+		on_fullscreen();
 	}
 }
 
@@ -831,7 +831,6 @@ void MainWindow::set_other_player(bool oplayer)
 		action_group->get_action("ViewEmbedMplayer")->set_sensitive(false);
 		action_group->get_action("FilePause")->set_sensitive(false);
 		set_gmp_embed(false);
-		printf("set the other player\n");
 
 	}
 	else{
