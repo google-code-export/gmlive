@@ -543,6 +543,15 @@ void MainWindow::on_search_channel()
 		channel->search_channel(search->get_text());
 }
 
+bool MainWindow::on_doubleclick_picture(GdkEventButton* ev)
+{
+
+	if (ev->type == GDK_2BUTTON_PRESS)
+	{
+		on_fullscreen();
+	}
+}
+
 void MainWindow::on_conf_window_quit()
 {
 	//std::cout << "on_conf_window_quit" << std::endl;
@@ -618,6 +627,8 @@ MainWindow::MainWindow():
 	,window_width(1)
 	,window_height(1)
 	,confwindow(NULL)
+	,menubar(NULL)
+        ,toolbar(NULL)
 {
 	std::list<Gtk::TargetEntry> listTargets;
 	listTargets.push_back(Gtk::TargetEntry("STRING"));
@@ -695,8 +706,14 @@ MainWindow::MainWindow():
 	menu_tool_box->pack_start(*menubar,true,true);
 	menu_tool_box->pack_start(*toolbar,false,false);
 
-	play_frame->pack_start(*background, true, true);
 
+	play_eventbox = Gtk::manage(new Gtk::EventBox());
+	play_eventbox->set_events(Gdk::BUTTON_PRESS_MASK);
+	play_eventbox->signal_button_press_event().connect(sigc::
+			mem_fun(*this, &MainWindow::on_doubleclick_picture));
+	play_eventbox->add(*background);
+	play_frame->pack_start(*play_eventbox,true,true);
+	//play_frame->pack_start(*background, true, true);
 	play_frame->drag_dest_set(listTargets);
 	play_frame->signal_drag_data_received().connect(
 			sigc::mem_fun(*this, &MainWindow::on_drog_data_received));
@@ -720,8 +737,6 @@ MainWindow::MainWindow():
 
 void MainWindow::set_gmp_embed(bool embed)
 {
-	//std::string& embed = GMConf["mplayer_embed"];
-	//bool bembed = (!embed.empty()) && (embed[0] == '1');
 	gmp_embed = embed;
 
 	// 这种写法太白痴了
@@ -732,6 +747,7 @@ void MainWindow::set_gmp_embed(bool embed)
 		play_frame->hide();
 		channels_box->show();
 		action_group->get_action("ViewShowChannel")->set_sensitive(false);
+		action_group->get_action("FullScreen")->set_sensitive(false);
 		this->resize(window_width, window_height);
 	}
 	else {
@@ -740,6 +756,7 @@ void MainWindow::set_gmp_embed(bool embed)
 		this->get_size( window_width, window_height);
 		play_frame->show_all();
 		action_group->get_action("ViewShowChannel")->set_sensitive(true);
+		action_group->get_action("FullScreen")->set_sensitive(true);
 		set_channels_hide(channels_hide);
 		this->resize(1, 1);
 	}
@@ -901,16 +918,20 @@ void MainWindow::reorder_widget(bool is_running)
 		if (is_running){
 			static int width = background->get_width();
 			static int height = background->get_height();
-			play_frame->remove(*background);
-			play_frame->pack_start(*gmp, true, true);
+			//play_frame->remove(*background);
+			//play_frame->pack_start(*gmp, true, true);
+			play_eventbox->remove();
+			play_eventbox->add(*gmp);
 			if (gmp_width != -1)
 				gmp->set_size_request(gmp_width, gmp_height);
 			else
 				gmp->set_size_request(width, height);
 		}
 		else {
-			play_frame->remove(*gmp);
-			play_frame->pack_start(*background, true, true);
+			//play_frame->remove(*gmp);
+			//play_frame->pack_start(*background, true, true);
+			play_eventbox->remove();
+			play_eventbox->add(*background);
 			set_gmp_size(-1, -1);
 		}
 		play_frame->show_all();

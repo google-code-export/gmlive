@@ -71,10 +71,11 @@ void PlayStream::initialize()
 	argv[1] = "-slave";
 	argv[2] = "-idle";
 	argv[3] = "-quiet";
-	argv[4] = "-cache";
-	argv[5] = cache_buf;
+	argv[4] = "-nomouseinput";
+	argv[5] = "-cache";
+	argv[6] = cache_buf;
 	std::list<std::string>::iterator iter = pars.begin();
-	int i = 6;
+	int i = 7;
 	for (; i < argv_len && iter != pars.end(); i++, ++iter) {
 		argv[i] = (*iter).c_str();
 	}
