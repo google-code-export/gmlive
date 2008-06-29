@@ -1,3 +1,8 @@
+
+2008年 06月 29日 星期日 10:59:11 CST lerosua<lerosua@gmail.com>
+	添加在嵌入模式下双击mplayer画面全屏功能。
+	修正bug --issues 5
+	修正bug --issues 16
 2008-01-24  yetist  <yetist@gmail.com>
 
 	* configure.in: 
