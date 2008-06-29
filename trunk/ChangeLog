@@ -1,4 +1,9 @@
 
+2008年 06月 29日 星期日 10:59:11 CST lerosua<lerosua@gmail.com>
+	添加在嵌入模式下双击mplayer画面全屏功能。
+	修正bug --issues 5
+	修正bug --issues 16
+
 2008年 02月 25日 星期一 19:49:58 CST lerosua<lerosua@gmail.com>
 	修正界面文件不能翻译的问题，不过在界面文件中的中文需要改成
 	英文才能合乎规范。

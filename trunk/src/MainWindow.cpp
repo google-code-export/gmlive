@@ -286,7 +286,7 @@ void MainWindow::init_ui_manager()
 			sigc::mem_fun(*this, &MainWindow::on_fullscreen));
 
 	action_group->add(Gtk::ToggleAction::create("Mute",
-				_("MUTE"), _("MUTE"), true), 
+				_("MUTE"), _("MUTE"), false), 
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_mute));
 
 	action_group->add(Gtk::Action::create("FileQuit", Gtk::Stock::QUIT),
@@ -575,8 +575,8 @@ void MainWindow::on_conf_window_quit()
 {
 	//std::cout << "on_conf_window_quit" << std::endl;
 	//set_gmp_embed(atoi(GMConf["mplayer_embed"].c_str()));
-	set_other_player(atoi(GMConf["player_type"].c_str()));
 	save_conf();
+	set_other_player(atoi(GMConf["player_type"].c_str()));
 }
 
 void MainWindow::on_conf_window_close(ConfWindow* dlg)
@@ -816,9 +816,9 @@ MainWindow::MainWindow():
 	set_channels_hide(channels_hide);
 	//set_gmp_embed(gmp_embed);
 	set_other_player(atoi(GMConf["player_type"].c_str()));
-	Glib::RefPtr<Gtk::ToggleAction> menu = 
-		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("Mute"));
-	menu->set_active(false);
+//	Glib::RefPtr<Gtk::ToggleAction> menu = 
+//		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("Mute"));
+//	menu->set_active(false);
 	((Gtk::Toolbar*)toolbar)->set_toolbar_style(Gtk::TOOLBAR_ICONS);
 	//channel->refresh_list();
 
@@ -848,6 +848,10 @@ void MainWindow::set_gmp_embed(bool embed)
 	//bool bembed = (!embed.empty()) && (embed[0] == '1');
 	gmp_embed = embed;
 
+	// 回写进配置中
+	char buf[32];
+	sprintf(buf, "%d", gmp_embed);
+	GMConf["mplayer_embed"] = buf;
 	// 这种写法太白痴了
 	Glib::RefPtr<Gtk::ToggleAction> menu = 
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
@@ -857,6 +861,7 @@ void MainWindow::set_gmp_embed(bool embed)
 		channels_box->show();
 		action_group->get_action("ViewShowChannel")->set_sensitive(false);
 		action_group->get_action("FullScreen")->set_sensitive(false);
+		action_group->get_action("Mute")->set_sensitive(false);
 		this->resize(window_width, window_height);
 	}
 	else {
@@ -866,7 +871,8 @@ void MainWindow::set_gmp_embed(bool embed)
 		play_frame->show_all();
 		action_group->get_action("ViewShowChannel")->set_sensitive(true);
 		action_group->get_action("FullScreen")->set_sensitive(true);
-		set_channels_hide(channels_hide);
+		action_group->get_action("Mute")->set_sensitive(true);
+		set_channels_hide(atoi(GMConf["channels_hide"].c_str()));
 		this->resize(1, 1);
 	}
 	gmp->set_embed(gmp_embed);
@@ -902,11 +908,11 @@ MainWindow::~MainWindow()
 	sprintf(buf, "%d", window_height);
 	GMConf["main_window_height"] = buf;
 
-	sprintf(buf, "%d", channels_hide);
-	GMConf["channels_hide"] = buf;
+	//sprintf(buf, "%d", channels_hide);
+	//GMConf["channels_hide"] = buf;
 
-	sprintf(buf, "%d", gmp_embed);
-	GMConf["mplayer_embed"] = buf;
+	//sprintf(buf, "%d", gmp_embed);
+	//GMConf["mplayer_embed"] = buf;
 
 	save_conf();
 }
@@ -1046,6 +1052,10 @@ void MainWindow::init()
 
 void MainWindow::save_conf()
 {
+
+	GMConf["channels_hide"] = channels_hide?"1":"0";
+	GMConf["mplayer_embed"] = gmp_embed?"1":"0";
+
 	char buf[512];
 	char* homedir = getenv("HOME");
 	snprintf(buf, 512,"%s/.gmlive/config",homedir);

@@ -32,6 +32,7 @@ class MainWindow : public Gtk::Window {
 	public:
 		MainWindow();
 		~MainWindow();
+		void on_conf_window_close(ConfWindow* dlg);
 	protected:
 		bool on_delete_event(GdkEventAny* event);
 		bool on_key_press_event(GdkEventKey* ev);
