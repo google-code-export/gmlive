@@ -264,6 +264,7 @@
          of the programme
 
                                                                                               cyclone Team  </property>
+            <property name="wrap">True</property>
           </widget>
           <packing>
             <property name="expand">False</property>
@@ -595,34 +596,12 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                   <placeholder/>
                 </child>
                 <child>
-                  <widget class="GtkCheckButton" id="check_embed">
+                  <widget class="GtkLabel" id="label73">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="label" translatable="yes">Embed mplayer</property>
-                    <property name="use_underline">True</property>
-                    <property name="response_id">0</property>
-                    <property name="draw_indicator">True</property>
-                    <accessibility>
-                      <atkproperty name="AtkObject::accessible_name" translatable="yes" comments="embed mplayer">Embed mplayer</atkproperty>
-                    </accessibility>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">    </property>
                   </widget>
                   <packing>
-                    <property name="left_attach">2</property>
-                    <property name="right_attach">3</property>
-                    <property name="top_attach">1</property>
-                    <property name="bottom_attach">2</property>
-                    <property name="x_options"></property>
-                    <property name="y_options"></property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkLabel" id="label24">
-                    <property name="visible">True</property>
-                    <property name="label" translatable="yes"> Mplayer extend parameter </property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
                     <property name="top_attach">3</property>
                     <property name="bottom_attach">4</property>
                     <property name="x_options"></property>
@@ -644,14 +623,36 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkLabel" id="label73">
+                  <widget class="GtkLabel" id="label24">
                     <property name="visible">True</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">    </property>
+                    <property name="label" translatable="yes"> Mplayer extend parameter </property>
                   </widget>
                   <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
                     <property name="top_attach">3</property>
                     <property name="bottom_attach">4</property>
+                    <property name="x_options"></property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkCheckButton" id="check_embed">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="label" translatable="yes">Embed mplayer</property>
+                    <property name="use_underline">True</property>
+                    <property name="response_id">0</property>
+                    <property name="draw_indicator">True</property>
+                    <accessibility>
+                      <atkproperty name="AtkObject::accessible_name" translatable="yes" comments="embed mplayer">Embed mplayer</atkproperty>
+                    </accessibility>
+                  </widget>
+                  <packing>
+                    <property name="left_attach">2</property>
+                    <property name="right_attach">3</property>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
                     <property name="x_options"></property>
                     <property name="y_options"></property>
                   </packing>
@@ -771,18 +772,6 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                       <placeholder/>
                     </child>
                     <child>
-                      <widget class="GtkLabel" id="label67">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">Mplayer Cache </property>
-                      </widget>
-                      <packing>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="x_options"></property>
-                        <property name="y_options"></property>
-                      </packing>
-                    </child>
-                    <child>
                       <widget class="GtkHBox" id="hbox12">
                         <property name="visible">True</property>
                         <child>
@@ -812,6 +801,18 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="right_attach">2</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkLabel" id="label67">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Mplayer Cache </property>
+                      </widget>
+                      <packing>
                         <property name="top_attach">1</property>
                         <property name="bottom_attach">2</property>
                         <property name="x_options"></property>
@@ -991,38 +992,35 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                   <placeholder/>
                 </child>
                 <child>
-                  <widget class="GtkLabel" id="label74">
+                  <widget class="GtkHBox" id="hbox14">
                     <property name="visible">True</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">   </property>
+                    <child>
+                      <widget class="GtkEntry" id="entry_nslive_delay">
+                        <property name="width_request">60</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="invisible_char">●</property>
+                      </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkLabel" id="label78">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes"> sec</property>
+                      </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </widget>
                   <packing>
-                    <property name="x_options"></property>
-                    <property name="y_options"></property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkLabel" id="label68">
-                    <property name="visible">True</property>
-                    <property name="label" translatable="yes">Mplayer Cache </property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">1</property>
-                    <property name="bottom_attach">2</property>
-                    <property name="x_options"></property>
-                    <property name="y_options"></property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkLabel" id="label70">
-                    <property name="visible">True</property>
-                    <property name="label" translatable="yes">Mplayer DelayTime </property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
+                    <property name="left_attach">2</property>
+                    <property name="right_attach">3</property>
                     <property name="top_attach">2</property>
                     <property name="bottom_attach">3</property>
                     <property name="x_options"></property>
@@ -1066,37 +1064,40 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkHBox" id="hbox14">
+                  <widget class="GtkLabel" id="label70">
                     <property name="visible">True</property>
-                    <child>
-                      <widget class="GtkEntry" id="entry_nslive_delay">
-                        <property name="width_request">60</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="invisible_char">●</property>
-                      </widget>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkLabel" id="label78">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes"> sec</property>
-                      </widget>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
+                    <property name="label" translatable="yes">Mplayer DelayTime </property>
                   </widget>
                   <packing>
-                    <property name="left_attach">2</property>
-                    <property name="right_attach">3</property>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
                     <property name="top_attach">2</property>
                     <property name="bottom_attach">3</property>
+                    <property name="x_options"></property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkLabel" id="label68">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">Mplayer Cache </property>
+                  </widget>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
+                    <property name="x_options"></property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkLabel" id="label74">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">   </property>
+                  </widget>
+                  <packing>
                     <property name="x_options"></property>
                     <property name="y_options"></property>
                   </packing>
@@ -1214,45 +1215,6 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                       <placeholder/>
                     </child>
                     <child>
-                      <widget class="GtkEntry" id="entry_sopcast_channel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="invisible_char">●</property>
-                      </widget>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="top_attach">2</property>
-                        <property name="bottom_attach">3</property>
-                        <property name="y_options"></property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkLabel" id="label80">
-                        <property name="visible">True</property>
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">channel url</property>
-                      </widget>
-                      <packing>
-                        <property name="top_attach">2</property>
-                        <property name="bottom_attach">3</property>
-                        <property name="x_options"></property>
-                        <property name="y_options"></property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkLabel" id="label69">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">Mplayer Cache </property>
-                      </widget>
-                      <packing>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="x_options"></property>
-                        <property name="y_options"></property>
-                      </packing>
-                    </child>
-                    <child>
                       <widget class="GtkHBox" id="hbox15">
                         <property name="visible">True</property>
                         <child>
@@ -1284,6 +1246,45 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                         <property name="right_attach">2</property>
                         <property name="top_attach">1</property>
                         <property name="bottom_attach">2</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkLabel" id="label69">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Mplayer Cache </property>
+                      </widget>
+                      <packing>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkLabel" id="label80">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">channel url</property>
+                      </widget>
+                      <packing>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkEntry" id="entry_sopcast_channel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="invisible_char">●</property>
+                      </widget>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
                         <property name="y_options"></property>
                       </packing>
                     </child>
