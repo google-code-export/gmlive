@@ -1,15 +1,15 @@
 # translation of es_ES.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# Juanjo <jjgomera@gmail.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: es_ES\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-06-21 12:09+0800\n"
-"PO-Revision-Date: 2008-06-19 23:50+0200\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2008-07-14 20:39+0200\n"
+"Last-Translator: Juanjo <jjgomera@gmail.com>\n"
 "Language-Team:  <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,6 +39,19 @@ msgid ""
 "                                                                                              cyclone "
 "Team  "
 msgstr ""
+"\t\t\t                  \n"
+"                                                       gmlive 0.21 "
+"\n"
+"                GMLive se propone ser un reproductor de streaming universal.\n"
+"                 Usa como reproductor el potente mplayer. \n"
+"                 El objetivo es soportar varios tipos de streaming  P2P para linux, \n"
+"                 permitiendo estas \n"
+"                 tecnologias P2P usar más eficientemente las redes disponibles\n"
+"\n"
+"                                                                                                   cyclone "
+"Team\n"
+"\n"
+"  "
 
 #: ../data/gmlive.glade.h:11
 msgid "   "
@@ -74,7 +87,7 @@ msgstr ""
 
 #: ../data/gmlive.glade.h:21
 msgid " Mplayer extend parameter "
-msgstr ""
+msgstr "Parametros Mplayer"
 
 #: ../data/gmlive.glade.h:22
 msgid ""
@@ -84,18 +97,22 @@ msgid ""
 "the 'COPYRIGHT' file for the complete list of contributors.  We provide no "
 "warranty for this program."
 msgstr ""
+"Puedes modificar y redistribuir el programa bajo\n"
+"los terminos de la licencia GPL (versión 2 o superior)\n"
+"Una copia de la licencia GPL se adjunta en el archivo COPYING.\n"
+"No se probee ninguna garantia con el programa"
 
 #: ../data/gmlive.glade.h:23
 msgid " sec"
-msgstr ""
+msgstr "segundos"
 
 #: ../data/gmlive.glade.h:24
 msgid "About"
-msgstr ""
+msgstr "Acerca de"
 
 #: ../data/gmlive.glade.h:25
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #. embed mplayer
 #: ../data/gmlive.glade.h:27
@@ -120,15 +137,15 @@ msgstr "Ayuda"
 
 #: ../data/gmlive.glade.h:31
 msgid "Licence"
-msgstr ""
+msgstr "Licencia"
 
 #: ../data/gmlive.glade.h:32
 msgid "Mplayer Cache "
-msgstr ""
+msgstr "Mplayer Cache "
 
 #: ../data/gmlive.glade.h:33
 msgid "Mplayer DelayTime "
-msgstr ""
+msgstr "Desfase Mplayer"
 
 #: ../data/gmlive.glade.h:34
 msgid ""
@@ -137,10 +154,14 @@ msgid ""
 "Chinese(zh_CN): lerosua@gmail.com\n"
 "Spanish(es_ES):   jjgnomera@gmail.com"
 msgstr ""
+"Gracias a los usuarios por traducir el programa: "
+"\n"
+"Chinese(zh_CN):   lerosua@gmail.com\n"
+"Spanish(es_ES):   jjgomera@gmail.com"
 
 #: ../data/gmlive.glade.h:38
 msgid "Translation"
-msgstr ""
+msgstr "Traducción"
 
 #: ../data/gmlive.glade.h:39
 msgid ""
@@ -150,6 +171,11 @@ msgid ""
 "  URL:   http://code.google.com/p/gmlive\n"
 "  IRC:    #cyclone@irc.oftc.net"
 msgstr ""
+"Nos puedes encontrar en las siguientes direcciones web:\n"
+"\n"
+"  BLOG: http://cyclone.blog.ubuntu.org.cn\n"
+"  URL:   http://code.google.com/p/gmlive\n"
+"  IRC:    #cyclone@irc.oftc.net"
 
 #: ../data/gmlive.glade.h:44
 msgid ""
@@ -159,6 +185,14 @@ msgid ""
 "you can add your mms channel for yourself. just edit the \n"
 "mms.list and put it in your home dir like ~/.gmlive"
 msgstr ""
+"Sobre los enlaces MMS\n"
+"\n"
+"Estos canales no están basados en tegnologias P2P.\n"
+"Se basan simplemente en enlaces mms://url de internet.\n"
+"Nosotros solo los recolectamos.\n"
+"Puedes añadir tus propios mms, para ello edita\n"
+"el archivo mms.list y ponlo en tu home:\n"
+"~/.gmlive/mms.list"
 
 #: ../data/gmlive.glade.h:49
 msgid ""
@@ -177,6 +211,24 @@ msgid ""
 "http://www.newseetv.com/soft/nslive-0.1.0.tar.gz\n"
 "untar it and put it to /usr/local/bin/ or /usr/bin"
 msgstr ""
+"Sobre los enlaces nslive \n"
+"\n"
+"nslive es un programa nativo de linux de streaming por P2P.\n"
+"Esta desarrollado por  andycl98@163.com, así que por favor \n"
+"accede a la dirección http://andycl98.blog.163.com/\n"
+"para cualquier ayuda. \n"
+"\n"
+"El programa nslive ejecutara mplayer por si mismo\n"
+"por lo que entra en conflicto con gmlive,\n"
+"por tanto necesitas corregir la configuración de nslive, \n "
+"para ello crea el archivo ~/.ulive/ulive.conf\n"
+"con estas dos líneas:\n"
+"\n"
+"#mplayer install path\n"
+"#mplayer=/usr/bin/mplayer\n"
+"\n"
+"Para añadir soporte nslive, descarga\n http://www.newseetv.com/soft/nslive-0.1.0.tar.gz,\n"
+"descomprimelo y ponlo en /usr/bin o /usr/local/bin"
 
 #: ../data/gmlive.glade.h:63
 msgid ""
@@ -190,6 +242,15 @@ msgid ""
 " http://download.sopcast.com/download/sp-auth.tgz \n"
 "file.  unzip it and put it to /usr/local/bin/ or /usr/bin"
 msgstr ""
+"Sobre los enlaces sopcast \n"
+"\n"
+"Pueder acceder a su página: http://www.sopcast.org  para cualquier ayuda\n"
+"Gmlive utiliza wget para obtener la lista de canales,\n"
+" por lo que asegurate de tenerlo instalado,así como también\n"
+"puedes configurar la reproducción de sopcast en las preferencias,\n"
+"Para añadir soporte para sopcast descarga el archivo\n"
+"http://download.sopcast.com/download/sp-auth.tgz,\n"
+"descomprimelo y ponlo en /usr/bin o /usr/local/bin "
 
 #: ../data/gmlive.glade.h:72
 #, fuzzy
@@ -207,28 +268,27 @@ msgstr ""
 
 #: ../data/gmlive.glade.h:75
 msgid "mms help"
-msgstr ""
+msgstr "Ayuda mms"
 
 #: ../data/gmlive.glade.h:76
-#, fuzzy
 msgid "nslive"
-msgstr "GMLive"
+msgstr "nslive"
 
 #: ../data/gmlive.glade.h:77
 msgid "nslive help"
-msgstr ""
+msgstr "Ayuda nslive"
 
 #: ../data/gmlive.glade.h:78
 msgid "recent"
-msgstr ""
+msgstr "Recientes"
 
 #: ../data/gmlive.glade.h:79
 msgid "sopcast"
-msgstr ""
+msgstr "sopcast"
 
 #: ../data/gmlive.glade.h:80
 msgid "sopcast help"
-msgstr ""
+msgstr "Ayuda sopcast"
 
 #: ../data/record.glade.h:1
 msgid "\n"
@@ -252,7 +312,7 @@ msgstr ""
 
 #: ../data/record.glade.h:7
 msgid "Record Readying ..."
-msgstr ""
+msgstr "Preparando grabación"
 
 #: ../data/record.glade.h:8
 #, fuzzy
@@ -261,7 +321,7 @@ msgstr "Grabar"
 
 #: ../data/record.glade.h:9
 msgid "preview"
-msgstr ""
+msgstr "Previsualizar"
 
 #: ../src/channel.cpp:39
 msgid "channels"
@@ -333,12 +393,12 @@ msgstr "Ocultar canales"
 #: ../src/MainWindow.cpp:236 ../src/MainWindow.cpp:280
 #: ../src/MainWindow.cpp:281
 msgid "FullScreen"
-msgstr ""
+msgstr "Pantalla completa"
 
 #. File menu:
 #: ../src/MainWindow.cpp:248
 msgid "_File"
-msgstr "Archivo"
+msgstr "_Archivo"
 
 #: ../src/MainWindow.cpp:250
 msgid "Open local file"
@@ -366,12 +426,12 @@ msgstr "Parar"
 
 #: ../src/MainWindow.cpp:286
 msgid "MUTE"
-msgstr "MUTE"
+msgstr "Silencio"
 
 #. View menu:
 #: ../src/MainWindow.cpp:293
 msgid "_View"
-msgstr "Ver"
+msgstr "_Ver"
 
 #: ../src/MainWindow.cpp:297
 msgid "Show or hide channels list"
@@ -388,11 +448,11 @@ msgstr "Reproductor mplayer embebido o separado"
 #. Help menu:
 #: ../src/MainWindow.cpp:309
 msgid "_Help"
-msgstr "Ayuda"
+msgstr "_Ayuda"
 
 #: ../src/MainWindow.cpp:315
 msgid "_Refresh list"
-msgstr "Actualiza lista"
+msgstr "_Actualiza lista"
 
 #: ../src/MainWindow.cpp:315
 msgid "Refresh current channel list"
@@ -400,7 +460,7 @@ msgstr "Actualiza lista de canales actuales"
 
 #: ../src/MainWindow.cpp:318
 msgid "_Add to bookmark"
-msgstr "Añade a favoritos"
+msgstr "_Añadir a favoritos"
 
 #: ../src/MainWindow.cpp:318
 msgid "Bookmark this channel"
@@ -408,7 +468,7 @@ msgstr "Añade este canal a los favoritos"
 
 #: ../src/MainWindow.cpp:321
 msgid "_Copy url"
-msgstr "Copia url"
+msgstr "_Copia url"
 
 #: ../src/MainWindow.cpp:321
 msgid "Copy url to clipboard"
@@ -418,7 +478,7 @@ msgstr "Copia enlace al portapapeles"
 #: ../src/MainWindow.cpp:608
 #, c-format
 msgid "Caching... %d%%"
-msgstr ""
+msgstr "Cargando buffer... %d%%"
 
 #: ../src/recordStream.cpp:74
 msgid "Record finial"
@@ -431,9 +491,10 @@ msgstr "final de grabación"
 #: ../src/recordStream.cpp:169
 #, c-format
 msgid "Recording %s To %s (%u Kb)"
-msgstr "Grabando de %s a %s (%u Kb)"
+msgstr "Grabando de %s a %s (%u Kb) "
 
 #: ../src/recordStream.cpp:174
 #, c-format
 msgid "Recording %s To %s (%u.%u Mb)"
 msgstr "Grabando de %s a %s (%u.%u Mb)"
+
