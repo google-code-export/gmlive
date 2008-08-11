@@ -78,9 +78,11 @@ void PlayStream::initialize()
 	iter = pars.begin();
 	for (; i < argv_len && iter != pars.end(); i++, ++iter) {
 		argv[i] = (*iter).c_str();
+		printf("argv[%d]=%s\n",i,argv[i]);
 	}
 
-	strcpy((char*)argv[i],file.c_str());
+	//strcpy((char*)argv[i],file.c_str());
+	argv[i]=file.c_str();
 	i++;
 	argv[i] = NULL;
 
