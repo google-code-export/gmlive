@@ -86,9 +86,7 @@ void PlayStream::initialize()
 	i++;
 	argv[i] = NULL;
 
-	printf("%s:%d\n",__func__,__LINE__);
 	my_system((char* const *) argv);
-	printf("%s:%d\n",__func__,__LINE__);
 
 	}
 	else{  //mplayer handle
@@ -143,7 +141,8 @@ void PlayStream::start()
 {
 	if (pausing())
 		return pause();
-	if (running()||(is_oplayer))
+	//if (running()||(is_oplayer))
+	if (running())
 		stop();
 	printf("%s:%d\n",__func__,__LINE__);
 	initialize();
