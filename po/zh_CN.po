@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-21 13:13+0800\n"
+"POT-Creation-Date: 2008-10-28 15:15+0800\n"
 "PO-Revision-Date: 2008-06-17 22:27+0800\n"
 "Last-Translator: lerosua <lerosua@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,18 +66,22 @@ msgid "                                                                         
 msgstr ""
 
 #: ../data/gmlive.glade.h:21
-msgid " Kbs"
+msgid "    Other player cmd "
 msgstr ""
 
 #: ../data/gmlive.glade.h:22
-msgid " Kbs "
+msgid " Kbs"
 msgstr ""
 
 #: ../data/gmlive.glade.h:23
+msgid " Kbs "
+msgstr ""
+
+#: ../data/gmlive.glade.h:24
 msgid " Mplayer extend parameter "
 msgstr "Mplayer扩展参数"
 
-#: ../data/gmlive.glade.h:24
+#: ../data/gmlive.glade.h:25
 msgid ""
 " You may modify and redistribute the program under the terms of the GPL "
 "(version 2 or later).  A copy of the GPL is contained in the 'COPYING' file "
@@ -86,55 +90,59 @@ msgid ""
 "warranty for this program."
 msgstr ""
 
-#: ../data/gmlive.glade.h:25
+#: ../data/gmlive.glade.h:26
 msgid " sec"
 msgstr "秒"
 
-#: ../data/gmlive.glade.h:26
+#: ../data/gmlive.glade.h:27
+msgid " select the player"
+msgstr ""
+
+#: ../data/gmlive.glade.h:28
 msgid "About"
 msgstr "关于"
 
-#: ../data/gmlive.glade.h:27
+#: ../data/gmlive.glade.h:29
 msgid "Author"
 msgstr "作者"
 
-#: ../data/gmlive.glade.h:28
+#: ../data/gmlive.glade.h:30
 msgid "Embed mplayer"
 msgstr "嵌入播放器"
 
-#: ../data/gmlive.glade.h:29
+#: ../data/gmlive.glade.h:31
 msgid "Enable Nslive"
 msgstr "Nslive支持"
 
-#: ../data/gmlive.glade.h:30
+#: ../data/gmlive.glade.h:32
 msgid "Enable Sopcast"
 msgstr "Sopcast支持"
 
-#: ../data/gmlive.glade.h:31
+#: ../data/gmlive.glade.h:33
 msgid "GMLive"
 msgstr "GMLive"
 
-#: ../data/gmlive.glade.h:32
+#: ../data/gmlive.glade.h:34
 msgid "GMLive config"
 msgstr "GMLive 配置"
 
-#: ../data/gmlive.glade.h:33
+#: ../data/gmlive.glade.h:35
 msgid "Help"
 msgstr "帮助"
 
-#: ../data/gmlive.glade.h:34
+#: ../data/gmlive.glade.h:36
 msgid "Licence"
 msgstr "许可证"
 
-#: ../data/gmlive.glade.h:35
+#: ../data/gmlive.glade.h:37
 msgid "Mplayer Cache "
 msgstr "Mplayer缓存"
 
-#: ../data/gmlive.glade.h:36
+#: ../data/gmlive.glade.h:38
 msgid "Mplayer DelayTime "
 msgstr "Mplayer廷迟启动时间"
 
-#: ../data/gmlive.glade.h:37
+#: ../data/gmlive.glade.h:39
 msgid ""
 "Thanks follow people translate the program:\n"
 "\n"
@@ -142,11 +150,11 @@ msgid ""
 "Spanish(es_ES):   jjgnomera@gmail.com"
 msgstr ""
 
-#: ../data/gmlive.glade.h:41
+#: ../data/gmlive.glade.h:43
 msgid "Translation"
 msgstr "翻译"
 
-#: ../data/gmlive.glade.h:42
+#: ../data/gmlive.glade.h:44
 msgid ""
 "You can find us in follow URL:\n"
 "\n"
@@ -155,7 +163,7 @@ msgid ""
 "  IRC:    #cyclone@irc.oftc.net"
 msgstr ""
 
-#: ../data/gmlive.glade.h:47
+#: ../data/gmlive.glade.h:49
 msgid ""
 "about MMS streaming\n"
 "this channel is not base on P2P streaming. it just base on \n"
@@ -164,7 +172,7 @@ msgid ""
 "mms.list and put it in your home dir like ~/.gmlive"
 msgstr ""
 
-#: ../data/gmlive.glade.h:52
+#: ../data/gmlive.glade.h:54
 msgid ""
 "about nslive streaming\n"
 "nslive is a native program in linux about p2p streaming.\n"
@@ -182,7 +190,7 @@ msgid ""
 "untar it and put it to /usr/local/bin/ or /usr/bin"
 msgstr ""
 
-#: ../data/gmlive.glade.h:66
+#: ../data/gmlive.glade.h:68
 msgid ""
 "about sopcast streaming\n"
 "please access the http://www.sopcast.org for sopcast help.\n"
@@ -195,40 +203,50 @@ msgid ""
 "file.  unzip it and put it to /usr/local/bin/ or /usr/bin"
 msgstr ""
 
-#: ../data/gmlive.glade.h:75
+#: ../data/gmlive.glade.h:77
 #, fuzzy
 msgid "bookmarks"
 msgstr "添加到书签"
 
-#: ../data/gmlive.glade.h:76
+#: ../data/gmlive.glade.h:78
 msgid "channel url"
 msgstr "频道地址"
 
-#: ../data/gmlive.glade.h:77
+#: ../data/gmlive.glade.h:79
 msgid "mms"
 msgstr ""
 
-#: ../data/gmlive.glade.h:78
+#: ../data/gmlive.glade.h:80
 msgid "mms help"
 msgstr "mms帮助"
 
-#: ../data/gmlive.glade.h:79
+#: ../data/gmlive.glade.h:81
+#, fuzzy
+msgid "mplayer"
+msgstr "嵌入播放器"
+
+#: ../data/gmlive.glade.h:82
 msgid "nslive"
 msgstr ""
 
-#: ../data/gmlive.glade.h:80
+#: ../data/gmlive.glade.h:83
 msgid "nslive help"
 msgstr "nslive帮助"
 
-#: ../data/gmlive.glade.h:81
+#: ../data/gmlive.glade.h:84
+#, fuzzy
+msgid "other player"
+msgstr "嵌入播放器"
+
+#: ../data/gmlive.glade.h:85
 msgid "recent"
 msgstr ""
 
-#: ../data/gmlive.glade.h:82
+#: ../data/gmlive.glade.h:86
 msgid "sopcast"
 msgstr ""
 
-#: ../data/gmlive.glade.h:83
+#: ../data/gmlive.glade.h:87
 msgid "sopcast help"
 msgstr "sopcast帮助"
 
@@ -323,7 +341,7 @@ msgstr "用户数："
 msgid "Type:"
 msgstr "类型："
 
-#: ../src/ConfWindow.cpp:68
+#: ../src/ConfWindow.cpp:73
 msgid "GMLive Conf Window"
 msgstr "GMLive 配置"
 
@@ -337,7 +355,6 @@ msgid "FullScreen"
 msgstr "全屏"
 
 #: ../src/MainWindow.cpp:243 ../src/MainWindow.cpp:259
-#, fuzzy
 msgid "OpenURL"
 msgstr "打开网络流"
 
@@ -424,24 +441,28 @@ msgstr "复制流地址"
 msgid "Copy url to clipboard"
 msgstr "复制流地址至剪贴板"
 
-#: ../src/MainWindow.cpp:641
+#: ../src/MainWindow.cpp:361
+msgid "Open URL"
+msgstr "打开网络流"
+
+#: ../src/MainWindow.cpp:663
 #, c-format
 msgid "Caching... %d%%"
 msgstr "缓冲中... %d%%"
 
-#: ../src/MainWindow.cpp:926
+#: ../src/MainWindow.cpp:975
 msgid "NO SUPPORT"
 msgstr "未支持"
 
-#: ../src/MainWindow.cpp:930
+#: ../src/MainWindow.cpp:979
 msgid "you have not install sopcast program,so GMLive can't support it now"
 msgstr "您还未安装sopcast程序，所以GMLive还不能支持它。"
 
-#: ../src/MainWindow.cpp:932
+#: ../src/MainWindow.cpp:981
 msgid "you have not install nslive program,so GMLive can't support it now"
 msgstr "您还未安装nslive程序，所以GMLive还不能支持它。"
 
-#: ../src/MainWindow.cpp:935
+#: ../src/MainWindow.cpp:984
 msgid " So you can install the program first"
 msgstr "请您安装以上程序。谢谢。"
 
