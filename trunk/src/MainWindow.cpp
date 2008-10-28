@@ -975,7 +975,9 @@ void MainWindow::check_support()
 		Gtk::MessageDialog warnDialog(_("NO SUPPORT"),
 					false);
 		std::string msg="";
-		if(!enable_sopcast && (enablesopcast_[0]=='1'))
+		if((!enable_sopcast && (enablesopcast_[0]=='1'))&&(!enable_nslive && (enablenslive_[0]=='1')))
+			msg+=std::string(_("you have not install sopcast and nslive program, so GMLive can't support them now"))+"\n";
+		else if(!enable_sopcast && (enablesopcast_[0]=='1'))
 			msg+=std::string(_("you have not install sopcast program,so GMLive can't support it now"))+"\n";
 		else if(!enable_nslive && (enablenslive_[0]=='1'))
 			msg+=std::string(_("you have not install nslive program,so GMLive can't support it now"))+"\n";
