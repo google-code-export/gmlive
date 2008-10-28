@@ -357,6 +357,26 @@ void MainWindow::on_menu_open_file()
 
 void MainWindow::on_menu_open_url()
 {
+	Gtk::Dialog dlg(_("Open URL"),*this,true);
+	dlg.set_size_request(300,90);
+	dlg.set_resizable(false);
+	Gtk::VBox* m_vbox=dlg.get_vbox();
+	Gtk::Entry m_entry;
+	m_vbox->pack_start(m_entry);
+
+	dlg.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+	dlg.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_OK);
+
+	dlg.show_all_children();
+
+	if (Gtk::RESPONSE_OK == dlg.run()) {
+		Glib::ustring filename = m_entry.get_text();
+		if (filename.empty())
+			return;
+		std::cout<<"播放 "<<filename<<std::endl;
+		gmp->start(filename);
+	}
+
 
 }
 
