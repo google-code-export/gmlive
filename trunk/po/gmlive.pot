@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-21 13:13+0800\n"
+"POT-Creation-Date: 2008-10-28 15:15+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,18 +67,22 @@ msgid "                                                                         
 msgstr ""
 
 #: ../data/gmlive.glade.h:21
-msgid " Kbs"
+msgid "    Other player cmd "
 msgstr ""
 
 #: ../data/gmlive.glade.h:22
-msgid " Kbs "
+msgid " Kbs"
 msgstr ""
 
 #: ../data/gmlive.glade.h:23
-msgid " Mplayer extend parameter "
+msgid " Kbs "
 msgstr ""
 
 #: ../data/gmlive.glade.h:24
+msgid " Mplayer extend parameter "
+msgstr ""
+
+#: ../data/gmlive.glade.h:25
 msgid ""
 " You may modify and redistribute the program under the terms of the GPL "
 "(version 2 or later).  A copy of the GPL is contained in the 'COPYING' file "
@@ -87,55 +91,59 @@ msgid ""
 "warranty for this program."
 msgstr ""
 
-#: ../data/gmlive.glade.h:25
+#: ../data/gmlive.glade.h:26
 msgid " sec"
 msgstr ""
 
-#: ../data/gmlive.glade.h:26
-msgid "About"
-msgstr ""
-
 #: ../data/gmlive.glade.h:27
-msgid "Author"
+msgid " select the player"
 msgstr ""
 
 #: ../data/gmlive.glade.h:28
-msgid "Embed mplayer"
+msgid "About"
 msgstr ""
 
 #: ../data/gmlive.glade.h:29
-msgid "Enable Nslive"
+msgid "Author"
 msgstr ""
 
 #: ../data/gmlive.glade.h:30
-msgid "Enable Sopcast"
+msgid "Embed mplayer"
 msgstr ""
 
 #: ../data/gmlive.glade.h:31
-msgid "GMLive"
+msgid "Enable Nslive"
 msgstr ""
 
 #: ../data/gmlive.glade.h:32
-msgid "GMLive config"
+msgid "Enable Sopcast"
 msgstr ""
 
 #: ../data/gmlive.glade.h:33
-msgid "Help"
+msgid "GMLive"
 msgstr ""
 
 #: ../data/gmlive.glade.h:34
-msgid "Licence"
+msgid "GMLive config"
 msgstr ""
 
 #: ../data/gmlive.glade.h:35
-msgid "Mplayer Cache "
+msgid "Help"
 msgstr ""
 
 #: ../data/gmlive.glade.h:36
-msgid "Mplayer DelayTime "
+msgid "Licence"
 msgstr ""
 
 #: ../data/gmlive.glade.h:37
+msgid "Mplayer Cache "
+msgstr ""
+
+#: ../data/gmlive.glade.h:38
+msgid "Mplayer DelayTime "
+msgstr ""
+
+#: ../data/gmlive.glade.h:39
 msgid ""
 "Thanks follow people translate the program:\n"
 "\n"
@@ -143,11 +151,11 @@ msgid ""
 "Spanish(es_ES):   jjgnomera@gmail.com"
 msgstr ""
 
-#: ../data/gmlive.glade.h:41
+#: ../data/gmlive.glade.h:43
 msgid "Translation"
 msgstr ""
 
-#: ../data/gmlive.glade.h:42
+#: ../data/gmlive.glade.h:44
 msgid ""
 "You can find us in follow URL:\n"
 "\n"
@@ -156,7 +164,7 @@ msgid ""
 "  IRC:    #cyclone@irc.oftc.net"
 msgstr ""
 
-#: ../data/gmlive.glade.h:47
+#: ../data/gmlive.glade.h:49
 msgid ""
 "about MMS streaming\n"
 "this channel is not base on P2P streaming. it just base on \n"
@@ -165,7 +173,7 @@ msgid ""
 "mms.list and put it in your home dir like ~/.gmlive"
 msgstr ""
 
-#: ../data/gmlive.glade.h:52
+#: ../data/gmlive.glade.h:54
 msgid ""
 "about nslive streaming\n"
 "nslive is a native program in linux about p2p streaming.\n"
@@ -183,7 +191,7 @@ msgid ""
 "untar it and put it to /usr/local/bin/ or /usr/bin"
 msgstr ""
 
-#: ../data/gmlive.glade.h:66
+#: ../data/gmlive.glade.h:68
 msgid ""
 "about sopcast streaming\n"
 "please access the http://www.sopcast.org for sopcast help.\n"
@@ -196,39 +204,47 @@ msgid ""
 "file.  unzip it and put it to /usr/local/bin/ or /usr/bin"
 msgstr ""
 
-#: ../data/gmlive.glade.h:75
+#: ../data/gmlive.glade.h:77
 msgid "bookmarks"
 msgstr ""
 
-#: ../data/gmlive.glade.h:76
+#: ../data/gmlive.glade.h:78
 msgid "channel url"
 msgstr ""
 
-#: ../data/gmlive.glade.h:77
+#: ../data/gmlive.glade.h:79
 msgid "mms"
 msgstr ""
 
-#: ../data/gmlive.glade.h:78
+#: ../data/gmlive.glade.h:80
 msgid "mms help"
 msgstr ""
 
-#: ../data/gmlive.glade.h:79
-msgid "nslive"
-msgstr ""
-
-#: ../data/gmlive.glade.h:80
-msgid "nslive help"
-msgstr ""
-
 #: ../data/gmlive.glade.h:81
-msgid "recent"
+msgid "mplayer"
 msgstr ""
 
 #: ../data/gmlive.glade.h:82
-msgid "sopcast"
+msgid "nslive"
 msgstr ""
 
 #: ../data/gmlive.glade.h:83
+msgid "nslive help"
+msgstr ""
+
+#: ../data/gmlive.glade.h:84
+msgid "other player"
+msgstr ""
+
+#: ../data/gmlive.glade.h:85
+msgid "recent"
+msgstr ""
+
+#: ../data/gmlive.glade.h:86
+msgid "sopcast"
+msgstr ""
+
+#: ../data/gmlive.glade.h:87
 msgid "sopcast help"
 msgstr ""
 
@@ -321,7 +337,7 @@ msgstr ""
 msgid "Type:"
 msgstr ""
 
-#: ../src/ConfWindow.cpp:68
+#: ../src/ConfWindow.cpp:73
 msgid "GMLive Conf Window"
 msgstr ""
 
@@ -421,24 +437,28 @@ msgstr ""
 msgid "Copy url to clipboard"
 msgstr ""
 
-#: ../src/MainWindow.cpp:641
+#: ../src/MainWindow.cpp:361
+msgid "Open URL"
+msgstr ""
+
+#: ../src/MainWindow.cpp:663
 #, c-format
 msgid "Caching... %d%%"
 msgstr ""
 
-#: ../src/MainWindow.cpp:926
+#: ../src/MainWindow.cpp:975
 msgid "NO SUPPORT"
 msgstr ""
 
-#: ../src/MainWindow.cpp:930
+#: ../src/MainWindow.cpp:979
 msgid "you have not install sopcast program,so GMLive can't support it now"
 msgstr ""
 
-#: ../src/MainWindow.cpp:932
+#: ../src/MainWindow.cpp:981
 msgid "you have not install nslive program,so GMLive can't support it now"
 msgstr ""
 
-#: ../src/MainWindow.cpp:935
+#: ../src/MainWindow.cpp:984
 msgid " So you can install the program first"
 msgstr ""
 

@@ -349,8 +349,9 @@ void MainWindow::on_menu_open_file()
 		Glib::ustring filename = dlg.get_filename();
 		if (filename.empty())
 			return;
-		std::cout<<"播放 "<<filename<<std::endl;
-		gmp->start(filename);
+		Glib::ustring filtername = Glib::ustring("\"")+filename+"\"";
+		std::cout<<"播放 "<<filtername<<std::endl;
+		gmp->start(filtername);
 
 	}
 }
