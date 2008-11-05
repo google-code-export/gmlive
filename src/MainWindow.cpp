@@ -857,7 +857,8 @@ void MainWindow::set_other_player(bool oplayer)
 	else{
 		action_group->get_action("ViewEmbedMplayer")->set_sensitive(true);
 		action_group->get_action("FilePause")->set_sensitive(true);
-		set_gmp_embed(atoi(GMConf["mplayer_embed"].c_str()));
+		//set_gmp_embed(atoi(GMConf["mplayer_embed"].c_str()));
+		set_gmp_embed(true);
 
 	}
 	gmp->set_other_player(oplayer);
