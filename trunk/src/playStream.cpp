@@ -114,7 +114,8 @@ void PlayStream::initialize()
 	argv[1] = "-slave";
 	argv[2] = "-idle";
 	argv[3] = "-quiet";
-	argv[4] = "-nomouseinput";
+	//argv[4] = "-nomouseinput";
+	argv[4] = "-keepaspect";
 	argv[5] = "-noconsolecontrols";
 	argv[6] = "-cache";
 	argv[7] = cache_buf;
