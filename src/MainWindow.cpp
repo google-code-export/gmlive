@@ -374,8 +374,12 @@ void MainWindow::on_menu_open_url()
 		Glib::ustring filename = m_entry.get_text();
 		if (filename.empty())
 			return;
-		std::cout<<"播放 "<<filename<<std::endl;
-		gmp->start(filename);
+		//std::cout<<"播放 "<<filename<<std::endl;
+		//gmp->start(filename);
+		Glib::ustring filtername = Glib::ustring("\"")+filename+"\"";
+		std::cout<<"播放 "<<filtername<<std::endl;
+		gmp->start(filtername);
+
 	}
 
 
@@ -936,6 +940,8 @@ MainWindow::~MainWindow()
 	//sprintf(buf, "%d", gmp_embed);
 	//GMConf["mplayer_embed"] = buf;
 
+	//GMConf["enable_sopcast"] = enable_sopcast;
+	//GMConf["enable_nslive"]= enable_nslive;
 	save_conf();
 }
 bool MainWindow::check_file(const char* name)
@@ -1190,7 +1196,11 @@ void MainWindow::on_drog_data_received(const Glib::RefPtr<Gdk::DragContext>& con
 		size_t pos = filename.find('\r');
 		if (std::string::npos != pos)
 			filename = filename.substr(0, pos);
-		gmp->start(filename);
+		//gmp->start(filename);
+		Glib::ustring filtername = Glib::ustring("\"")+filename+"\"";
+		std::cout<<"播放 "<<filtername<<std::endl;
+		gmp->start(filtername);
+
 	}
 }
 

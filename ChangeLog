@@ -1,3 +1,6 @@
+2008年 11月 06日 星期四 17:15:42 CST lerosua<lerosua@gmail.com>
+	修正播放文件的文件名中有空格不能播放的bug，打开网络流一样。
+
 2008年 10月 28日 星期二 11:20:35 CST lerosua<lerosua@gmail.com>
 	添加了播放url的对话窗口，并基本能工作
 	修正bug --issues 19
