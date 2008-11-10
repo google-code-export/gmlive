@@ -1,5 +1,13 @@
-2008年 11月 06日 星期四 17:15:42 CST lerosua<xihelsgmail.com>
+
+2008年 11月 10日 星期一 17:31:03 CST lerosua<lerosua@gmail.com>
+	添加了窗口改变大小的信号，用于处理mplayer的画面改变大小后的
+	宽高比，目前能自动适应，不过比例不完美，因为浮点数的比例被改变
+	成了整型的原因，需要继续完善。
+
+2008年 11月 06日 星期四 17:15:42 CST wind<xihelsgmail.com>
 	合并了 From: 蔡瀛 <alonesniper@gmail.com> 的补丁.
+	为添加置顶功能与修正检测nslive和sopcast的程序路径问题（从PATH里
+	检测）
 
 2008年 11月 06日 星期四 17:15:42 CST lerosua<lerosua@gmail.com>
 	修正播放文件的文件名中有空格不能播放的bug，打开网络流一样。

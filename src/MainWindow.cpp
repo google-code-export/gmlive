@@ -394,8 +394,6 @@ void MainWindow::on_menu_open_url()
 
 void MainWindow::on_menu_file_play()
 {
-	//cout << "on_menu_file_play" << endl;
-	//gmp->start("mms://61.139.37.135/star");
 	Channel* channel = get_cur_select_channel();
 	if (channel)
 		channel->play_selection();
@@ -406,7 +404,6 @@ void MainWindow::on_menu_file_play()
 
 void MainWindow::on_menu_file_stop()
 {
-	//cout << "on_menu_stop" << endl;
 	gmp->stop();
 }
 
@@ -430,6 +427,7 @@ void MainWindow::on_fullscreen()
 {
 	if(!full_screen && gmp_embed)
 	{
+		/** 设置全屏状态*/
 	menubar->hide();
 	toolbar->hide();
 	//tool_hbox->hide();
@@ -440,6 +438,8 @@ void MainWindow::on_fullscreen()
 	}
 	else if(full_screen && gmp_embed)
 	{
+
+		/**解除全屏状态*/
 		menubar->show();
 		toolbar->show();
 		//tool_hbox->show();
@@ -620,8 +620,8 @@ void MainWindow::on_conf_window_quit()
 {
 	//std::cout << "on_conf_window_quit" << std::endl;
 	//set_gmp_embed(atoi(GMConf["mplayer_embed"].c_str()));
-	save_conf();
 	set_other_player(atoi(GMConf["player_type"].c_str()));
+	save_conf();
 }
 
 void MainWindow::on_conf_window_close(ConfWindow* dlg)
@@ -726,6 +726,7 @@ MainWindow::MainWindow():
 		(ui_xml->get_widget("channels"));
 
 	channels_box = ui_xml->get_widget("channels_box");
+	//channels_box->set_size_request(120,100); //set channels box size
 
 	Channel* channel = Gtk::manage(new class MMSChannel(this));
 	Gtk::ScrolledWindow* swnd = dynamic_cast<Gtk::ScrolledWindow*>
@@ -827,12 +828,17 @@ MainWindow::MainWindow():
 	play_eventbox->signal_button_press_event().connect(sigc::
 			mem_fun(*this, &MainWindow::on_doubleclick_picture));
 	play_eventbox->add(*background);
+	play_eventbox->modify_bg(Gtk::STATE_NORMAL,Gdk::Color("black"));
+
 	play_frame->pack_start(*play_eventbox,true,true);
-	//play_frame->pack_start(*background, true, true);
 
 	play_frame->drag_dest_set(listTargets);
 	play_frame->signal_drag_data_received().connect(
 			sigc::mem_fun(*this, &MainWindow::on_drog_data_received));
+	this->signal_check_resize().connect(
+			sigc::mem_fun(*this,&MainWindow::on_update_video_widget));
+
+			
 
 
 	this->add(*main_frame);
@@ -879,10 +885,15 @@ void MainWindow::set_other_player(bool oplayer)
 
 	}
 	else{
-		action_group->get_action("ViewEmbedMplayer")->set_sensitive(true);
+	//	action_group->get_action("ViewEmbedMplayer")->set_sensitive(true);
+
+	Glib::RefPtr<Gtk::ToggleAction> menu = 
+		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
+	menu->set_sensitive(true);
+	menu->set_active(atoi(GMConf["mplayer_embed"].c_str()));
+
 		action_group->get_action("FilePause")->set_sensitive(true);
-		//set_gmp_embed(atoi(GMConf["mplayer_embed"].c_str()));
-		set_gmp_embed(true);
+		set_gmp_embed(atoi(GMConf["mplayer_embed"].c_str()));
 
 	}
 	gmp->set_other_player(oplayer);
@@ -1211,6 +1222,29 @@ void MainWindow::set_live_player(LivePlayer* lp,
 void MainWindow::on_preview(const std::string& filename)
 {
 	gmp->start(filename);
+}
+
+void MainWindow::on_update_video_widget()
+{
+
+	if(!full_screen && gmp_embed && gmp->running())
+	{
+		int n_width;
+		int n_height;
+		n_width=play_frame->get_width();
+		if(n_width == gmp_width)
+		{
+			printf("skip width\n");
+			return;
+		}
+		n_height = n_width *(gmp_height / gmp_width);
+		int win_width=this->get_width();
+		printf("update video width: %d , height: %d, win width :%d,win height : %d\n",play_frame->get_width(),play_frame->get_height(),this->get_width(),this->get_height());
+		//gmp->set_size_request(n_width,n_height);
+		set_gmp_size(n_width,n_height);
+		this->resize(1,1);
+
+	}
 }
 
 void MainWindow::on_drog_data_received(const Glib::RefPtr<Gdk::DragContext>& context,
