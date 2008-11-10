@@ -171,6 +171,7 @@ Glib::ustring ui_info =
 "		<menu action='ViewMenu'>"
 "			<menuitem action='ViewEmbedMplayer'/>"
 "			<menuitem action='ViewShowChannel'/>"
+"			<menuitem action='AlwaysOnTop'/>"
 "			<menuitem action='ViewPreferences'/>"
 "		</menu>"
 "		<menu action='HelpMenu'>"
@@ -300,6 +301,11 @@ void MainWindow::init_ui_manager()
 	action->set_tooltip(_("Show or hide channels list"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_hide_channel));
+
+	action_group->add(Gtk::ToggleAction::create("AlwaysOnTop",
+				_("_AlwaysOnTop"), _("Make GMlive ontop of other windows"), false), 
+			sigc::mem_fun(*this, &MainWindow::on_menu_view_always_on_top));
+
 
 	action_group->add(Gtk::ToggleAction::create("ViewEmbedMplayer",
 				_("_Embed Mplayer"), _("Embed or Separate mplayer play"), true), 
@@ -532,6 +538,20 @@ void MainWindow::on_menu_view_hide_channel()
 	}
 	this->resize(1, 1);
 }
+
+void MainWindow::on_menu_view_always_on_top()
+{
+	Glib::RefPtr<Gtk::ToggleAction> show = 
+		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("AlwaysOnTop"));
+
+	if (show->get_active()){
+		this->set_keep_above(true);
+	} else {
+		this->set_keep_above(false);
+	}
+}
+
+
 
 void MainWindow::on_menu_view_embed_mplayer()
 {
@@ -946,25 +966,34 @@ MainWindow::~MainWindow()
 }
 bool MainWindow::check_file(const char* name)
 {
-	char filename[512]="/usr/bin/";
-	char filename_local[512]="/usr/local/bin/";
-	strcat(filename, name);
-	strcat(filename_local, name);
-	FILE* fp;
-	fp = fopen(filename,"r");
-	if(!fp)
-	{
-		fp=fopen(filename_local,"r");
-		if(!fp)
-		{
-			return false;
-		}
-		fclose(fp);
-		return true;
-	}
-	fclose(fp);
-	return true;
+	char *env = getenv("PATH");
+	char buf[512];
+	
+	char *start=env, *end=env;
 
+	// iterator over $PATH to find the program	
+	while (*end != '\0'){
+		memset(buf, '\0', 512);
+		if (*(end +1) == ':' || *(end + 1) == '\0'){
+			strncpy ( buf, start, end - start+1);
+			if (buf[strlen(buf)-1] != '/')
+				buf[strlen(buf)] = '/';
+			
+			strcat(buf, name);
+			FILE* fp;
+			fp = fopen(buf,"r");
+			if(fp)
+			{
+				fclose(fp);
+				return true;
+			}
+
+			start = end+2;
+ 		}
+
+		end++;
+	}
+	return false;
 }
 void MainWindow::check_support()
 {

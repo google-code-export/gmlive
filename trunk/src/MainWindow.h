@@ -61,6 +61,7 @@ class MainWindow : public Gtk::Window {
 		void on_menu_file_mute();
 		void on_menu_file_quit();
 		void on_menu_view_hide_channel();
+		void on_menu_view_always_on_top();
 		void on_menu_view_embed_mplayer();
 		void on_menu_view_preferences();
 		void on_menu_help_about();
