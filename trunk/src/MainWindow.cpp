@@ -1229,20 +1229,19 @@ void MainWindow::on_update_video_widget()
 		int n_width;
 		int n_height;
 		n_width=play_frame->get_width();
-		if(n_width == gmp_width)
+		int reqw;
+		int reqh;
+		gmp->get_size_request(reqw, reqh);
+		if (n_width == reqw)
+		//if(n_width == gmp_width)
 		{
 			printf("skip height\n");
 			return;
 		}
 		n_height = (int)n_width *((double)gmp_height / gmp_width);
-		int win_width=this->get_width();
-		printf("%d\n", win_width);
-		printf("update video width: %d , height: %d, win width :%d,win height : %d\n",play_frame->get_width(),play_frame->get_height(),this->get_width(),this->get_height());
 		resize_conn.block();
-		gmp->set_size_request(n_width,n_height);
-		//set_gmp_size(n_width,n_height);
+		set_gmp_size(n_width,n_height);
 		resize_conn.block(false);
-		//this->resize(1,1);
 
 	}
 }
