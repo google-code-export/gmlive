@@ -47,7 +47,7 @@ void PlayStream::initialize()
 {
 	signal_start().emit();
 
-	Glib::RefPtr<Gdk::Window> gwin = this->get_window();
+	//Glib::RefPtr<Gdk::Window> gwin = this->get_window();
 
 	std::list<std::string> pars;
 	std::list<std::string>::iterator iter;
@@ -95,7 +95,6 @@ void PlayStream::initialize()
 	snprintf(cache_buf, 32, "%d", cache);
 
 	std::string& paramter = GMConf["mplayer_paramter"];
-	//std::list<std::string> pars;
 	if (!paramter.empty()) {
 		size_t pos1 = 0;
 		size_t pos2 = 0;
@@ -114,14 +113,10 @@ void PlayStream::initialize()
 	argv[1] = "-slave";
 	argv[2] = "-idle";
 	argv[3] = "-quiet";
-	//argv[4] = "-nomouseinput";
-	argv[4] = "-keepaspect";
-	argv[5] = "-noconsolecontrols";
-	argv[6] = "-cache";
-	argv[7] = cache_buf;
-	//std::list<std::string>::iterator iter = pars.begin();
+	argv[4] = "-cache";
+	argv[5] = cache_buf;
 	iter = pars.begin();
-	int i = 8;
+	int i = 6;
 	for (; i < argv_len && iter != pars.end(); i++, ++iter) {
 		argv[i] = (*iter).c_str();
 	}
@@ -129,6 +124,8 @@ void PlayStream::initialize()
 		char wid_buf[32];
 		snprintf(wid_buf, 32, "%d", this->get_id());
 		printf("%s\n", wid_buf);
+		argv[i++] = "-nomouseinput";
+		argv[i++] = "-noconsolecontrols";
 		argv[i++] = "-wid";
 		argv[i++] = wid_buf;
 	}
