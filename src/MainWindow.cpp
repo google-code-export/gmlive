@@ -663,6 +663,7 @@ bool MainWindow::on_gmplayer_out(const Glib::IOCondition& condition)
 					int w,h;
 					if (get_video_resolution(p2, w, h)) {
 						set_gmp_size(w, h);
+						gmp_rate = (double)h/w;
 						show_msg(play_channel_name);
 						return false;
 					}
@@ -692,6 +693,7 @@ MainWindow::MainWindow():
 	live_player(NULL)
 	,gmp_width(-1)
 	,gmp_height(-1)
+	,gmp_rate(-1)
 	,gmp_embed(true)
 	,channels_hide(false)
 	,enable_nslive(true)
@@ -835,7 +837,7 @@ MainWindow::MainWindow():
 	play_frame->drag_dest_set(listTargets);
 	play_frame->signal_drag_data_received().connect(
 			sigc::mem_fun(*this, &MainWindow::on_drog_data_received));
-	resize_conn = signal_check_resize().connect(
+	this->signal_check_resize().connect(
 			sigc::mem_fun(*this,&MainWindow::on_update_video_widget));
 
 
@@ -1235,13 +1237,12 @@ void MainWindow::on_update_video_widget()
 		if (n_width == reqw)
 		//if(n_width == gmp_width)
 		{
-			printf("skip height\n");
+			//printf("skip width\n");
 			return;
 		}
-		n_height = (int)n_width *((double)gmp_height / gmp_width);
-		resize_conn.block();
+		//n_height = (int)n_width *((double)gmp_height / gmp_width);
+		n_height = (int)n_width *gmp_rate;
 		set_gmp_size(n_width,n_height);
-		resize_conn.block(false);
 
 	}
 }

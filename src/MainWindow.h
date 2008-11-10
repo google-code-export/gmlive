@@ -123,9 +123,9 @@ class MainWindow : public Gtk::Window {
 		Gtk::Menu*			channels_pop_menu;
 		LivePlayer* 			live_player;
 		ConfWindow*			confwindow;
-		sigc::connection	resize_conn;
 		int 				gmp_width;
 		int				gmp_height;
+		double				gmp_rate;
 		int				window_width;
 		int				window_height;
 		bool				gmp_embed;
