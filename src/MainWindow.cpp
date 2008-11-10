@@ -835,10 +835,8 @@ MainWindow::MainWindow():
 	play_frame->drag_dest_set(listTargets);
 	play_frame->signal_drag_data_received().connect(
 			sigc::mem_fun(*this, &MainWindow::on_drog_data_received));
-	this->signal_check_resize().connect(
+	resize_conn = signal_check_resize().connect(
 			sigc::mem_fun(*this,&MainWindow::on_update_video_widget));
-
-			
 
 
 	this->add(*main_frame);
@@ -1226,23 +1224,25 @@ void MainWindow::on_preview(const std::string& filename)
 
 void MainWindow::on_update_video_widget()
 {
-
 	if(!full_screen && gmp_embed && gmp->running())
 	{
 		int n_width;
 		int n_height;
-		n_width=play_frame->get_width();
-		if(n_width == gmp_width)
+		n_height=play_frame->get_height();
+		if(n_width == gmp_height)
 		{
-			printf("skip width\n");
+			printf("skip height\n");
 			return;
 		}
-		n_height = n_width *(gmp_height / gmp_width);
+		n_width = (int)n_height *((double)gmp_width / gmp_height);
 		int win_width=this->get_width();
+		printf("%d\n", win_width);
 		printf("update video width: %d , height: %d, win width :%d,win height : %d\n",play_frame->get_width(),play_frame->get_height(),this->get_width(),this->get_height());
-		//gmp->set_size_request(n_width,n_height);
-		set_gmp_size(n_width,n_height);
-		this->resize(1,1);
+		resize_conn.block();
+		gmp->set_size_request(n_width,n_height);
+		//set_gmp_size(n_width,n_height);
+		resize_conn.block(false);
+		//this->resize(1,1);
 
 	}
 }
