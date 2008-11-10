@@ -1,3 +1,6 @@
+2008年 11月 06日 星期四 17:15:42 CST lerosua<xihelsgmail.com>
+	合并了 From: 蔡瀛 <alonesniper@gmail.com> 的补丁.
+
 2008年 11月 06日 星期四 17:15:42 CST lerosua<lerosua@gmail.com>
 	修正播放文件的文件名中有空格不能播放的bug，打开网络流一样。
 
