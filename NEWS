@@ -1,0 +1,48 @@
+
+GMLive 0.21
+
+1. add check the sopcast and nslive program fuction.
+2. it can support other video player work now, example totem.
+3. it can open networkstream with URL.
+4. bug fixed.
+
+GMLive 0.20.3
+
+1. add double-click to change the status with fullscreen/un-fullscreen
+2. add the spanish language support
+3. bug fixed.
+
+GMLive 0.20.2
+
+1. add the fullscreen function
+2. fixed compile with gcc 4.3
+3. bug fixed.
+
+GMLive 0.20.1
+
+1. fixed the 0.20 bug with download sopcast channels
+
+
+GMLive 0.20 release
+
+1. bug fixed.
+2. add a plugins with totem play mms channels.
+
+GMLive 0.20 beta 3
+
+1. add record the stream.
+2. it can play the local video file, and support drag file to play
+3. add i18n support(english , chinese)
+4. bug fixed.
+
+GMLive 0.20 beta 2
+
+1. optimize the mplayer called.
+2. add the mplayer option cmd.
+
+GMLive 0.11
+
+1. play the mms:// network stream with mplayer
+2. play the sopcast network stream with mplayer , find help from http://www.sopcast.org
+3. play the nslive network stream with mplayer. find help from http://www.newseetv.com
+4. make your favor channels to your bookmarks.
