@@ -1,0 +1,39 @@
+GMLive try to became a universal streaming media player case.
+it use Almighty Mplayer for its engine. the Goal is to support  a 
+variety of types of P2P broadcasting video streaming for Linux. 
+Provide a convenient and efficient network to watch video streaming 
+of the programme                                                                                              
+			CYCLONE TEAM
+
+
+About MMS streaming
+this channel is not base on P2P streaming. it just base on 
+mms:// url channel from the internet. we just collection it.
+you can add your mms channel for yourself. just edit the 
+mms.list and put it in your home dir like ~/.gmlive
+
+About sopcast streaming
+please access the http://www.sopcast.org for sopcast help.
+another thing, we use the wget to get the sopcast channel,
+so please insure your system have the program wget.
+add you can configure the sopacst ' channel file in menu 
+preference.
+to add the sopcast streaming,download the 
+ http://download.sopcast.com/download/sp-auth.tgz 
+ unzip it and put it to /usr/local/bin/ or /usr/bin
+
+About nslive streaming
+nslive is a native program in linux about p2p streaming.
+it be developed by andycl98@163.com. so please access
+the http://andycl98.blog.163.com/ for his help.
+nslive ' program will call mplayer , so it will conflict
+with gmlive. so you need fix the nslive's config file like
+following.
+~/.ulive/ulive.conf
+#mplayer install path
+#mplayer=/usr/bin/mplayer
+
+to add nslive support , download
+http://www.newseetv.com/soft/nslive-0.1.0.tar.gz
+untar it and put it to /usr/local/bin/ or /usr/bin
+  

@@ -81,18 +81,24 @@ class MainWindow : public Gtk::Window {
 		bool on_gmplayer_out(const Glib::IOCondition& condition);
 		void on_gmplayer_start();
 		void on_gmplayer_stop();
+		/** 属性窗口退出处理*/
 		void on_conf_window_quit();
+		/** 双击画面事件*/
 		bool on_doubleclick_picture(GdkEventButton* ev);
 		/*
 		void on_volume_change();
 		Glib::ustring on_volume_display(double);
 		*/
+		/** 切换全屏状态,嵌入播放器时有效*/
 		void on_fullscreen();
 		void unzoom(); //解除全屏
 
+		/**设置画面的大小，嵌入播放器时有效*/
 		void set_gmp_size(int w, int h);
+		/** 设置是否为嵌入播放器*/
 		void set_gmp_embed(bool);
 		void set_channels_hide(bool);
+		/** 设置是否使用其它播放器*/
 		void set_other_player(bool oplayer);
 
 		void reorder_widget(bool is_running);
@@ -125,10 +131,10 @@ class MainWindow : public Gtk::Window {
 		ConfWindow*			confwindow;
 		int 				gmp_width;
 		int				gmp_height;
-		double				gmp_rate;
+		double				gmp_rate;	//mplayer画面比例
 		int				window_width;
 		int				window_height;
-		bool				gmp_embed;
+		bool				gmp_embed;	//是否嵌入mplayer
 		bool				channels_hide;
 		bool				enable_nslive;
 		bool				enable_sopcast;

@@ -28,15 +28,18 @@ enum TypeChannel{
 typedef std::map<std::string,std::string> TGMConf;
 extern TGMConf GMConf;
 
-/*
-typedef struct{
-	bool embed;
-	std::string mplayer_extend_param;
-	guint  mms_mplayer_cache;
-	guint  sopcast_mplayer_cache;
-	guint  nslive_mplayer_cache;
-	guint  nslive_delay_time;
-}GMConf;
-*/
+#ifndef DEBUG
+#define DLOG(fmt, ...) \
+    { \
+        fprintf(stderr, "%s|%d| " fmt, \
+                 __FILE__, __LINE__, ##__VA_ARGS__); \
+    }
+#else
+#define DLOG(fmt, ...) \
+	;
+#endif
+
+
+
 
 #endif

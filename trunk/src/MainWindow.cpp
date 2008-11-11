@@ -146,7 +146,7 @@ bool get_video_resolution(const char* buf, int& w, int& h)
 			return false;
 		h = atoi(ph);
 
-		printf("w = %d, h = %d\n", w, h);
+		DLOG("w = %d, h = %d\n", w, h);
 		return true;
 	}
 	return false;
@@ -356,7 +356,7 @@ void MainWindow::on_menu_open_file()
 		if (filename.empty())
 			return;
 		Glib::ustring filtername = Glib::ustring("\"")+filename+"\"";
-		std::cout<<"播放 "<<filtername<<std::endl;
+		DLOG("播放 %s\n",filtername.c_str());
 		gmp->start(filtername);
 
 	}
@@ -380,14 +380,11 @@ void MainWindow::on_menu_open_url()
 		Glib::ustring filename = m_entry.get_text();
 		if (filename.empty())
 			return;
-		//std::cout<<"播放 "<<filename<<std::endl;
-		//gmp->start(filename);
 		Glib::ustring filtername = Glib::ustring("\"")+filename+"\"";
-		std::cout<<"播放 "<<filtername<<std::endl;
+		DLOG("播放 %s\n",filtername.c_str());
 		gmp->start(filtername);
 
 	}
-
 
 }
 
@@ -398,7 +395,7 @@ void MainWindow::on_menu_file_play()
 	if (channel)
 		channel->play_selection();
 	else
-		cout << "Error" << endl;
+		DLOG("Error");
 
 }
 
@@ -452,18 +449,18 @@ void MainWindow::on_fullscreen()
 }
 void MainWindow::on_menu_file_pause()
 {
-	//cout << "on_menu_pause" << endl;
+	DLOG("on_menu_pause\n");
 	gmp->pause();
 }
 
 void MainWindow::on_menu_file_record()
 {
-	//cout << "on_menu_file_record" << endl;
+	DLOG("on_menu_file_record");
 	Channel* channel = get_cur_select_channel();
 	if (channel)
 		channel->record_selection();
 	else
-		cout << "Error" << endl;
+		DLOG("Error");
 }
 
 void MainWindow::on_menu_file_mute()
@@ -477,8 +474,8 @@ void MainWindow::on_menu_file_mute()
 
 void MainWindow::on_menu_file_quit()
 {
+		DLOG("on_menu_file_quit");
 	this->get_size( window_width, window_height);
-	//cout << "on_menu_file_quit" << endl;
 	gmp->stop();
 	Gtk::Main::quit();
 }
@@ -489,7 +486,7 @@ void MainWindow::on_menu_pop_refresh_list()
 	if (channel)
 		channel->refresh_list();
 	else
-		cout << "Error" << endl;
+		DLOG("Error");
 
 }
 
@@ -499,7 +496,7 @@ void MainWindow::on_menu_pop_add_to_bookmark()
 	if (channel)
 		channel->store_selection();
 	else
-		cout << "Error" << endl;
+		DLOG("Error");
 }
 
 void MainWindow::on_menu_pop_copy_to_clipboard()
@@ -585,7 +582,7 @@ void MainWindow::on_search_channel()
 {
 	Channel* channel = get_cur_select_channel();
 	if (!channel) 
-		cout << "Error" << endl;
+		DLOG("Error");
 	Gtk::Entry* search = dynamic_cast<Gtk::Entry*>(
 			ui_xml->get_widget("entry_find_channel"));
 	if (search)
@@ -605,7 +602,7 @@ bool MainWindow::on_doubleclick_picture(GdkEventButton* ev)
 void MainWindow::on_volume_change()
 {
 	int value= (int)adj_sound->get_value();
-	//printf("sound change to %d\n",value);
+	//DLOG("sound change to %d\n",value);
 }
 Glib::ustring MainWindow::on_volume_display(double value)
 {
@@ -746,7 +743,7 @@ MainWindow::MainWindow():
 	swnd = dynamic_cast<Gtk::ScrolledWindow*>
 		(ui_xml->get_widget("sopcastChannelWnd"));
 	swnd->add(*channel);
-	printf("support sopcast\n");
+	DLOG("support sopcast\n");
 	channel->refresh_list();
 	}
 	else
@@ -758,7 +755,7 @@ MainWindow::MainWindow():
 	swnd = dynamic_cast<Gtk::ScrolledWindow*>
 		(ui_xml->get_widget("nsliveChannelWnd"));
 	swnd->add(*channel);
-	printf("support nslive\n");
+	DLOG("support nslive\n");
 	}
 	else
 	{
@@ -965,14 +962,6 @@ MainWindow::~MainWindow()
 	sprintf(buf, "%d", window_height);
 	GMConf["main_window_height"] = buf;
 
-	//sprintf(buf, "%d", channels_hide);
-	//GMConf["channels_hide"] = buf;
-
-	//sprintf(buf, "%d", gmp_embed);
-	//GMConf["mplayer_embed"] = buf;
-
-	//GMConf["enable_sopcast"] = enable_sopcast;
-	//GMConf["enable_nslive"]= enable_nslive;
 	save_conf();
 }
 bool MainWindow::check_file(const char* name)
@@ -1167,9 +1156,6 @@ void MainWindow::reorder_widget(bool is_running)
 		if (is_running){
 			static int width = background->get_width();
 			static int height = background->get_height();
-			//play_frame->remove(*background);
-			//play_frame->pack_start(*gmp, true, true);
-			//play_eventbox->remove(*background);
 			play_eventbox->remove();
 			play_eventbox->add(*gmp);
 
@@ -1179,9 +1165,6 @@ void MainWindow::reorder_widget(bool is_running)
 				gmp->set_size_request(width, height);
 		}
 		else {
-			//play_frame->remove(*gmp);
-			//play_frame->pack_start(*background, true, true);
-			//play_eventbox->remove(*gmp);
 			play_eventbox->remove();
 			play_eventbox->add(*background);
 
@@ -1235,12 +1218,10 @@ void MainWindow::on_update_video_widget()
 		int reqh;
 		gmp->get_size_request(reqw, reqh);
 		if (n_width == reqw)
-		//if(n_width == gmp_width)
 		{
 			//printf("skip width\n");
 			return;
 		}
-		//n_height = (int)n_width *((double)gmp_height / gmp_width);
 		n_height = (int)n_width *gmp_rate;
 		set_gmp_size(n_width,n_height);
 
@@ -1255,13 +1236,11 @@ void MainWindow::on_drog_data_received(const Glib::RefPtr<Gdk::DragContext>& con
 	{
 		context->drag_finish(false,false,time);
 		std::string filename = wind_unescape_string(selection_data.get_text().c_str(), NULL);
-		//std::cout << filename << std::endl;
 		size_t pos = filename.find('\r');
 		if (std::string::npos != pos)
 			filename = filename.substr(0, pos);
-		//gmp->start(filename);
 		Glib::ustring filtername = Glib::ustring("\"")+filename+"\"";
-		std::cout<<"播放 "<<filtername<<std::endl;
+		DLOG("播放 %s\n",filtername.c_str());
 		gmp->start(filtername);
 
 	}
