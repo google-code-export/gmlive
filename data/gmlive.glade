@@ -846,7 +846,7 @@ so please insure your system have the program wget.
 add you can configure the sopacst ' channel file in menu 
 preference.
 to add the sopcast streaming,download the 
- http://download.sopcast.com/download/sp-auth.tgz 
+ http://download.sopcast.cn/download/sp-auth.tgz 
 file.  unzip it and put it to /usr/local/bin/ or /usr/bin</property>
 		</widget>
 	      </child>

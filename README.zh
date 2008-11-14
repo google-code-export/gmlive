@@ -6,7 +6,7 @@ GMLive并不直接提供P2P直播服务。因为我们并不能对提供的服�
 添加nslive流支持请下载
 http://www.newseetv.com/soft/nslive-0.1.0.tar.gz
 添加sopcast流支持请下载
-http://download.sopcast.com/download/sp-auth.tgz 
+http://download.sopcast.cn/download/sp-auth.tgz 
 
 下载后，将它们的二进制文件拷贝到/usr/local/bin/或/usr/bin/
 即可
