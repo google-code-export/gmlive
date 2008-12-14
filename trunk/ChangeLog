@@ -1,4 +1,8 @@
 
+
+2008年 12月 14日 星期日 18:56:28 UTC lerosua<lerosua@gmail.com>
+	补进tualatrix@gmail.com 的补丁，是修正界面排版的
+
 2008年 11月 10日 星期一 17:31:03 CST lerosua<lerosua@gmail.com>
 	添加了窗口改变大小的信号，用于处理mplayer的画面改变大小后的
 	宽高比，目前能自动适应，不过比例不完美，因为浮点数的比例被改变
