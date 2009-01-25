@@ -736,6 +736,7 @@ MainWindow::MainWindow():
 	init();
 	/** 检测是否支持nslive和sopcast */
 	check_support();
+	refresh_sopcast_channels = atoi(GMConf["check_refresh_sopcast_channels"].c_str());
 
 	if(enable_sopcast)
 	{
@@ -861,7 +862,6 @@ MainWindow::MainWindow():
 
 	channels_hide = atoi(GMConf["channels_hide"].c_str());
 	gmp_embed     = atoi(GMConf["mplayer_embed"].c_str());
-	refresh_sopcast_channels = atoi(GMConf["check_refresh_sopcast_channels"].c_str());
 
 	set_channels_hide(channels_hide);
 	//set_gmp_embed(gmp_embed);
@@ -1055,6 +1055,7 @@ void MainWindow::init()
 		GMConf["nslive_delay_time"]     =       "2";
 		GMConf["channels_hide"]		=	"0";
 		GMConf["sopcast_channel_url"]		=	"http://channel.sopcast.com/gchlxml";
+		GMConf["check_refresh_sopcast_channels"] = "1";
 		return;
 	}
 	std::string line;
@@ -1115,7 +1116,7 @@ void MainWindow::save_conf()
 
 	GMConf["channels_hide"] = channels_hide?"1":"0";
 	GMConf["mplayer_embed"] = gmp_embed?"1":"0";
-	GMConf["check_refresh_sopcast_channels"] = refresh_sopcast_channels?"1":"0";
+	//GMConf["check_refresh_sopcast_channels"] = refresh_sopcast_channels?"1":"0";
 
 	char buf[512];
 	char* homedir = getenv("HOME");
