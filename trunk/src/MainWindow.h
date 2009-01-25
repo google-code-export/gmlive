@@ -139,6 +139,7 @@ class MainWindow : public Gtk::Window {
 		bool				enable_nslive;
 		bool				enable_sopcast;
 		bool				full_screen;
+		bool				refresh_sopcast_channels; //是否每次启动程序都去下载sopcast的频道列表
 };
 
 #endif // _MAINWINDOW_HH 

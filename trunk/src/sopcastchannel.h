@@ -28,6 +28,12 @@ class SopcastChannel:public Channel
 	public:
 		SopcastChannel(MainWindow* parent_);
 		void init();
+		/**
+		 * @brief 读取频道列表
+		 * @param filename 残疾列表
+		 * @return 返回真则读取顺利，返回假则文件读取遇到错误
+		 */
+		bool read_channels(const std::string& filename);
 		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
 		void refresh_list();
 		typedef sigc::signal<void> type_signal_stop;

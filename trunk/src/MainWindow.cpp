@@ -693,6 +693,7 @@ MainWindow::MainWindow():
 	,gmp_rate(-1)
 	,gmp_embed(true)
 	,channels_hide(false)
+	,refresh_sopcast_channels(true)
 	,enable_nslive(true)
 	,enable_sopcast(true)
 	,full_screen(false)
@@ -731,7 +732,6 @@ MainWindow::MainWindow():
 	Gtk::ScrolledWindow* swnd = dynamic_cast<Gtk::ScrolledWindow*>
 		(ui_xml->get_widget("mmsChannelWnd"));
 	swnd->add(*channel);
-	//channel->refresh_list();
 
 	init();
 	/** 检测是否支持nslive和sopcast */
@@ -744,7 +744,8 @@ MainWindow::MainWindow():
 		(ui_xml->get_widget("sopcastChannelWnd"));
 	swnd->add(*channel);
 	DLOG("support sopcast\n");
-	channel->refresh_list();
+	if(refresh_sopcast_channels)
+		channel->refresh_list();
 	}
 	else
 		channels->remove_page(1);
@@ -860,6 +861,7 @@ MainWindow::MainWindow():
 
 	channels_hide = atoi(GMConf["channels_hide"].c_str());
 	gmp_embed     = atoi(GMConf["mplayer_embed"].c_str());
+	refresh_sopcast_channels = atoi(GMConf["check_refresh_sopcast_channels"].c_str());
 
 	set_channels_hide(channels_hide);
 	//set_gmp_embed(gmp_embed);
@@ -868,7 +870,6 @@ MainWindow::MainWindow():
 //		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("Mute"));
 //	menu->set_active(false);
 	((Gtk::Toolbar*)toolbar)->set_toolbar_style(Gtk::TOOLBAR_ICONS);
-	//channel->refresh_list();
 
 }
 
@@ -1114,6 +1115,7 @@ void MainWindow::save_conf()
 
 	GMConf["channels_hide"] = channels_hide?"1":"0";
 	GMConf["mplayer_embed"] = gmp_embed?"1":"0";
+	GMConf["check_refresh_sopcast_channels"] = refresh_sopcast_channels?"1":"0";
 
 	char buf[512];
 	char* homedir = getenv("HOME");

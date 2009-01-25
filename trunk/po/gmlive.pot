@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-14 22:09+0000\n"
+"POT-Creation-Date: 2009-01-24 22:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -233,38 +233,44 @@ msgid "bookmarks"
 msgstr ""
 
 #: ../data/gmlive.glade.h:84
-msgid "gtk-cancel"
-msgstr ""
-
-#: ../data/gmlive.glade.h:85
-msgid "gtk-save"
+msgid ""
+"download the channels when\n"
+"program start every time"
 msgstr ""
 
 #: ../data/gmlive.glade.h:86
-msgid "mms"
+msgid "gtk-cancel"
 msgstr ""
 
 #: ../data/gmlive.glade.h:87
-msgid "mms help"
+msgid "gtk-save"
 msgstr ""
 
 #: ../data/gmlive.glade.h:88
-msgid "nslive"
+msgid "mms"
 msgstr ""
 
 #: ../data/gmlive.glade.h:89
-msgid "nslive help"
+msgid "mms help"
 msgstr ""
 
 #: ../data/gmlive.glade.h:90
-msgid "recent"
+msgid "nslive"
 msgstr ""
 
 #: ../data/gmlive.glade.h:91
-msgid "sopcast"
+msgid "nslive help"
 msgstr ""
 
 #: ../data/gmlive.glade.h:92
+msgid "recent"
+msgstr ""
+
+#: ../data/gmlive.glade.h:93
+msgid "sopcast"
+msgstr ""
+
+#: ../data/gmlive.glade.h:94
 msgid "sopcast help"
 msgstr ""
 
@@ -454,25 +460,25 @@ msgstr ""
 msgid "Caching... %d%%"
 msgstr ""
 
-#: ../src/MainWindow.cpp:1011
+#: ../src/MainWindow.cpp:1012
 msgid "NO SUPPORT"
 msgstr ""
 
-#: ../src/MainWindow.cpp:1015
+#: ../src/MainWindow.cpp:1016
 msgid ""
 "you have not install sopcast and nslive program, so GMLive can't support "
 "them now"
 msgstr ""
 
-#: ../src/MainWindow.cpp:1017
+#: ../src/MainWindow.cpp:1018
 msgid "you have not install sopcast program,so GMLive can't support it now"
 msgstr ""
 
-#: ../src/MainWindow.cpp:1019
+#: ../src/MainWindow.cpp:1020
 msgid "you have not install nslive program,so GMLive can't support it now"
 msgstr ""
 
-#: ../src/MainWindow.cpp:1022
+#: ../src/MainWindow.cpp:1023
 msgid " So you can install the program first"
 msgstr ""
 
@@ -492,4 +498,26 @@ msgstr ""
 #: ../src/recordStream.cpp:174
 #, c-format
 msgid "Recording %s To %s (%u.%u Mb)"
+msgstr ""
+
+#: ../src/sopcastchannel.cpp:210
+msgid "Please select a channel list file"
+msgstr ""
+
+#: ../src/sopcastchannel.cpp:211
+msgid "open channles error"
+msgstr ""
+
+#: ../src/sopcastchannel.cpp:216
+msgid ""
+"open the sopcast channel error,will you select a local file to instead the "
+"broken channel list?"
+msgstr ""
+
+#: ../src/sopcastchannel.cpp:232
+msgid "File error"
+msgstr ""
+
+#: ../src/sopcastchannel.cpp:234
+msgid "the local channles list file has wrong formats"
 msgstr ""
