@@ -1,4 +1,8 @@
 
+2009年 01月 24日 星期六 20:32:05 UTC lerosua<lerosua@gmail.com>
+	添加一个参数，让可以设置启动时不自动更新sopcast的频道列表，这是因为
+	sopcast的频道列表经常性不能访问的原因。还加了打开sopcast列表错误后
+	可以手工选择一个文件来替代sopcast的频道列表.
 
 2008年 12月 14日 星期日 18:56:28 UTC lerosua<lerosua@gmail.com>
 	补进tualatrix@gmail.com 的补丁，是修正界面排版的
