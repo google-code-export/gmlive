@@ -104,6 +104,14 @@ void SopcastChannel::wait_wget_exit(GPid pid, int)
 		refresh = false;
 	}
 	
+	char buf[512];
+	char buf2[512];
+	char* homedir = getenv("HOME");
+	snprintf(buf, 512,"%s/.gmlive/sopcast.lst.tmp",homedir);
+	snprintf(buf2, 512,"%s/.gmlive/sopcast.lst",homedir);
+
+	rename(buf, buf2);
+
 	init();
 	signal_stop_refresh_.emit();
 }
@@ -118,19 +126,20 @@ void SopcastChannel::refresh_list()
 	if (pid == -1)
 		return ;
 	if (pid == 0) {
-		close(STDOUT_FILENO);
-		close(STDERR_FILENO);
+		//close(STDOUT_FILENO);
+		//close(STDERR_FILENO);
 		char buf[512];
 		char* homedir = getenv("HOME");
-		snprintf(buf, 512,"%s/.gmlive/sopcast.lst",homedir);
+		snprintf(buf, 512,"%s/.gmlive/sopcast.lst.tmp",homedir);
 
-		const char* argv[5];
+		const char* argv[6];
        		argv[0] = "wget";
 		//argv[1] = "http://www.sopcast.com/gchlxml";
 		argv[1] = GMConf["sopcast_channel_url"].c_str();
 		argv[2] = "-O";
 		argv[3] = buf;
-		argv[4] = NULL;
+		argv[4] = "-q";
+		argv[5] = NULL;
 
 		execvp("wget", (char* const *)argv);
 		perror("wget execvp:");
