@@ -61,6 +61,7 @@ class MainWindow : public Gtk::Window {
 		void on_menu_file_mute();
 		void on_menu_file_quit();
 		void on_menu_view_hide_channel();
+		void on_menu_view_hide_toolbar();
 		void on_menu_view_always_on_top();
 		void on_menu_view_embed_mplayer();
 		void on_menu_view_preferences();
@@ -98,6 +99,7 @@ class MainWindow : public Gtk::Window {
 		/** 设置是否为嵌入播放器*/
 		void set_gmp_embed(bool);
 		void set_channels_hide(bool);
+		void set_toolbar_hide(bool);
 		/** 设置是否使用其它播放器*/
 		void set_other_player(bool oplayer);
 
@@ -136,6 +138,7 @@ class MainWindow : public Gtk::Window {
 		int				window_height;
 		bool				gmp_embed;	//是否嵌入mplayer
 		bool				channels_hide;
+		bool				toolbar_hide;
 		bool				enable_nslive;
 		bool				enable_sopcast;
 		bool				full_screen;
