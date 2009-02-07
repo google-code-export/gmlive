@@ -171,6 +171,7 @@ Glib::ustring ui_info =
 "		<menu action='ViewMenu'>"
 "			<menuitem action='ViewEmbedMplayer'/>"
 "			<menuitem action='ViewShowChannel'/>"
+"			<menuitem action='ViewShowToolbar'/>"
 "			<menuitem action='AlwaysOnTop'/>"
 "			<menuitem action='ViewPreferences'/>"
 "		</menu>"
@@ -302,6 +303,11 @@ void MainWindow::init_ui_manager()
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_hide_channel));
 
+	action = Gtk::ToggleAction::create("ViewShowToolbar", 
+			_("_HideToolbar"), _("Show or hide Toolbar"), false);
+	action_group->add(action,
+			sigc::mem_fun(*this, &MainWindow::on_menu_view_hide_toolbar));
+	
 	action_group->add(Gtk::ToggleAction::create("AlwaysOnTop",
 				_("_AlwaysOnTop"), _("Make GMlive ontop of other windows"), false), 
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_always_on_top));
@@ -536,6 +542,23 @@ void MainWindow::on_menu_view_hide_channel()
 	this->resize(1, 1);
 }
 
+void MainWindow::on_menu_view_hide_toolbar()
+{
+	//cout << "on_menu_view_hide_toolbar" << endl;
+
+	Glib::RefPtr<Gtk::ToggleAction> show = 
+		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewShowToolbar"));
+
+	if (show->get_active()){
+		toolbar_hide = true;
+		toolbar->hide();
+	} else {
+		toolbar_hide = false;
+		toolbar->show();
+	}
+	this->resize(1, 1);
+}
+
 void MainWindow::on_menu_view_always_on_top()
 {
 	Glib::RefPtr<Gtk::ToggleAction> show = 
@@ -693,6 +716,7 @@ MainWindow::MainWindow():
 	,gmp_rate(-1)
 	,gmp_embed(true)
 	,channels_hide(false)
+	,toolbar_hide(false)
 	,refresh_sopcast_channels(true)
 	,enable_nslive(true)
 	,enable_sopcast(true)
@@ -861,9 +885,11 @@ MainWindow::MainWindow():
 	window_height = window_height > 0 ? window_height : 1;
 
 	channels_hide = atoi(GMConf["channels_hide"].c_str());
+	toolbar_hide = atoi(GMConf["toolbar_hide"].c_str());
 	gmp_embed     = atoi(GMConf["mplayer_embed"].c_str());
 
 	set_channels_hide(channels_hide);
+	set_toolbar_hide(toolbar_hide);
 	//set_gmp_embed(gmp_embed);
 	set_other_player(atoi(GMConf["player_type"].c_str()));
 //	Glib::RefPtr<Gtk::ToggleAction> menu = 
@@ -948,6 +974,20 @@ void MainWindow::set_channels_hide(bool hide)
 	Glib::RefPtr<Gtk::ToggleAction> menu = 
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewShowChannel"));
 	menu->set_active(channels_hide);
+
+}
+void MainWindow::set_toolbar_hide(bool hide)
+{
+	toolbar_hide = hide;
+	if(toolbar_hide){
+		toolbar->hide();
+	}
+	else{
+		toolbar->show();
+	}	
+	Glib::RefPtr<Gtk::ToggleAction> menu = 
+		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewShowToolbar"));
+	menu->set_active(toolbar_hide);
 
 }
 
@@ -1054,6 +1094,7 @@ void MainWindow::init()
 		GMConf["nslive_mplayer_cache"]  =       "64";
 		GMConf["nslive_delay_time"]     =       "2";
 		GMConf["channels_hide"]		=	"0";
+		GMConf["toolbar_hide"]		=	"0";
 		GMConf["sopcast_channel_url"]		=	"http://channel.sopcast.com/gchlxml";
 		GMConf["check_refresh_sopcast_channels"] = "1";
 		return;
@@ -1115,6 +1156,7 @@ void MainWindow::save_conf()
 {
 
 	GMConf["channels_hide"] = channels_hide?"1":"0";
+	GMConf["toolbar_hide"] = toolbar_hide?"1":"0";
 	GMConf["mplayer_embed"] = gmp_embed?"1":"0";
 	//GMConf["check_refresh_sopcast_channels"] = refresh_sopcast_channels?"1":"0";
 
