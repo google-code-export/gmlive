@@ -191,6 +191,17 @@ Glib::ustring ui_info =
 "		<menuitem action='PopRefreshList'/>"
 "		<menuitem action='PopAddToBookmark'/>"
 "	</popup>"
+"	<popup name='TryPopupMenu'>"
+"		<menuitem action='FilePlay'/>"
+"		<menuitem action='FilePause'/>"
+"		<menuitem action='FileRecord'/>"
+"		<menuitem action='FileStop'/>"
+"		<menuitem action='Mute'/>"
+"		<separator/>"
+"		<menuitem action='ViewPreferences'/>"
+"		<separator/>"
+"		<menuitem action='FileQuit'/>"
+"	</popup>"
 "	<toolbar name='ToolBar'>"
 "		<toolitem action='FilePlay'/>"
 "		<toolitem action='FilePause'/>"
@@ -517,10 +528,26 @@ void MainWindow::on_menu_pop_copy_to_clipboard()
 	clip->set_text(stream);
 }
 
+void MainWindow::show_window()
+{
+	show();
+}
+
+void MainWindow::hide_window()
+{
+	if (gmp_embed || !atoi(GMConf["close_to_systray"].c_str())) {
+		gmp->stop();
+	}
+	hide();
+}
+
 bool MainWindow::on_delete_event(GdkEventAny* event)
 {
 	this->get_size( window_width, window_height);
-	gmp->stop();
+	if (!atoi(GMConf["close_to_systray"].c_str()))
+		Gtk::Main::quit();
+	else if (gmp_embed)
+			gmp->stop();
 	return Gtk::Window::on_delete_event(event);
 }
 
@@ -725,7 +752,8 @@ MainWindow::MainWindow():
 	,window_height(1)
 	,confwindow(NULL)
 	,menubar(NULL)
-        ,toolbar(NULL)
+    ,toolbar(NULL)
+	, try_icon(*this)
 {
 	std::list<Gtk::TargetEntry> listTargets;
 	listTargets.push_back(Gtk::TargetEntry("STRING"));
@@ -825,6 +853,9 @@ MainWindow::MainWindow():
 	//Gtk::Widget* toolbar = ui_manager->get_widget("/ToolBar");
 	channels_pop_menu = dynamic_cast<Gtk::Menu*>(
 			ui_manager->get_widget("/PopupMenu"));
+
+	try_pop_menu = dynamic_cast<Gtk::Menu*>(
+			ui_manager->get_widget("/TryPopupMenu"));
 
 	Gtk::VBox* menu_tool_box = dynamic_cast<Gtk::VBox*>
 		(ui_xml->get_widget("box_menu_toolbar"));

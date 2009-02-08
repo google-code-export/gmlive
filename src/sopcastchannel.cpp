@@ -110,7 +110,8 @@ void SopcastChannel::wait_wget_exit(GPid pid, int)
 	snprintf(buf, 512,"%s/.gmlive/sopcast.lst.tmp",homedir);
 	snprintf(buf2, 512,"%s/.gmlive/sopcast.lst",homedir);
 
-	rename(buf, buf2);
+	if (rename(buf, buf2))
+		return;
 
 	init();
 	signal_stop_refresh_.emit();

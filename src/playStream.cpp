@@ -54,84 +54,84 @@ void PlayStream::initialize()
 	if(is_oplayer){  //other player handle
 		std::string& oplayer_cmd = GMConf["other_player_cmd"];
 		if(!oplayer_cmd.empty()){
-		size_t pose1 = 0;
-		size_t pose2 = 0;
-		for(;;) {
-			pose2 = oplayer_cmd.find_first_of(" \t", pose1);
-			pars.push_back(oplayer_cmd.substr(pose1, pose2 - pose1));
-			if (pose2 == std::string::npos)
-				break;
-			pose1 = pose2 + 1;
+			size_t pose1 = 0;
+			size_t pose2 = 0;
+			for(;;) {
+				pose2 = oplayer_cmd.find_first_of(" \t", pose1);
+				pars.push_back(oplayer_cmd.substr(pose1, pose2 - pose1));
+				if (pose2 == std::string::npos)
+					break;
+				pose1 = pose2 + 1;
+			}
 		}
-	}
 		else
 		{
-		printf("%s:%d\n",__func__,__LINE__);
+			printf("%s:%d\n",__func__,__LINE__);
 			//handle here
 			return;
 		}
 
-	int argv_len = 512 + pars.size();
-	printf("%s:%d :argv_len = %d\n",__func__,__LINE__,argv_len);
-	const char* argv[argv_len];
-	int i = 0;
-	iter = pars.begin();
-	for (; i < argv_len && iter != pars.end(); i++, ++iter) {
-		argv[i] = (*iter).c_str();
-		printf("argv[%d]=%s\n",i,argv[i]);
-	}
+		int argv_len = 512 + pars.size();
+		printf("%s:%d :argv_len = %d\n",__func__,__LINE__,argv_len);
+		const char* argv[argv_len];
+		int i = 0;
+		iter = pars.begin();
+		for (; i < argv_len && iter != pars.end(); i++, ++iter) {
+			argv[i] = (*iter).c_str();
+			printf("argv[%d]=%s\n",i,argv[i]);
+		}
 
-	//strcpy((char*)argv[i],file.c_str());
-	argv[i]=file.c_str();
-	i++;
-	argv[i] = NULL;
+		//strcpy((char*)argv[i],file.c_str());
+		argv[i]=file.c_str();
+		i++;
+		argv[i] = NULL;
 
-	my_system((char* const *) argv);
+		my_system((char* const *) argv);
 
 	}
 	else{  //mplayer handle
 
-	char cache_buf[32];
-	snprintf(cache_buf, 32, "%d", cache);
+		char cache_buf[32];
+		snprintf(cache_buf, 32, "%d", cache);
 
-	std::string& paramter = GMConf["mplayer_paramter"];
-	if (!paramter.empty()) {
-		size_t pos1 = 0;
-		size_t pos2 = 0;
-		for(;;) {
-			pos2 = paramter.find_first_of(" \t", pos1);
-			pars.push_back(paramter.substr(pos1, pos2 - pos1));
-			if (pos2 == std::string::npos)
-				break;
-			pos1 = pos2 + 1;
+		std::string& paramter = GMConf["mplayer_paramter"];
+		if (!paramter.empty()) {
+			size_t pos1 = 0;
+			size_t pos2 = 0;
+			for(;;) {
+				pos2 = paramter.find_first_of(" \t", pos1);
+				pars.push_back(paramter.substr(pos1, pos2 - pos1));
+				if (pos2 == std::string::npos)
+					break;
+				pos1 = pos2 + 1;
+			}
 		}
-	}
 
-	int argv_len = 10 + pars.size();
-	const char* argv[argv_len];
-	argv[0] = "mplayer";
-	argv[1] = "-slave";
-	argv[2] = "-idle";
-	argv[3] = "-quiet";
-	argv[4] = "-cache";
-	argv[5] = cache_buf;
-	iter = pars.begin();
-	int i = 6;
-	for (; i < argv_len && iter != pars.end(); i++, ++iter) {
-		argv[i] = (*iter).c_str();
-	}
-	if (is_embed) {
-		char wid_buf[32];
-		snprintf(wid_buf, 32, "%d", this->get_id());
-		printf("%s\n", wid_buf);
-		argv[i++] = "-nomouseinput";
-		argv[i++] = "-noconsolecontrols";
-		argv[i++] = "-wid";
-		argv[i++] = wid_buf;
-	}
-	argv[i] = NULL;
+		int argv_len = 10 + pars.size();
+		const char* argv[argv_len];
+		argv[0] = "mplayer";
+		argv[1] = "-slave";
+		argv[2] = "-idle";
+		argv[3] = "-quiet";
+		argv[4] = "-cache";
+		argv[5] = cache_buf;
+		iter = pars.begin();
+		int i = 6;
+		for (; i < argv_len && iter != pars.end(); i++, ++iter) {
+			argv[i] = (*iter).c_str();
+		}
+		if (is_embed) {
+			char wid_buf[32];
+			snprintf(wid_buf, 32, "%d", this->get_id());
+			printf("%s\n", wid_buf);
+			argv[i++] = "-nomouseinput";
+			argv[i++] = "-noconsolecontrols";
+			argv[i++] = "-wid";
+			argv[i++] = wid_buf;
+		}
+		argv[i] = NULL;
 
-	my_system((char* const *) argv);
+		my_system((char* const *) argv);
 	}
 }
 

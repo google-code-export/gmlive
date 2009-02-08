@@ -100,7 +100,16 @@ void MMSChannel::wait_wget_exit(GPid pid, int)
 
 		refresh = false;
 	}
-	
+
+	char buf[512];
+	char buf2[512];
+	char* homedir = getenv("HOME");
+	snprintf(buf, 512,"%s/.gmlive/mms.lst.tmp",homedir);
+	snprintf(buf2, 512,"%s/.gmlive/mms.lst",homedir);
+
+	if (rename(buf, buf2))
+		return;
+
 	init();
 	signal_stop_refresh_.emit();
 }
@@ -118,19 +127,20 @@ void MMSChannel::refresh_list()
 	if (pid == -1)
 		return ;
 	if (pid == 0) {
-		close(STDOUT_FILENO);
-		close(STDERR_FILENO);
+		//close(STDOUT_FILENO);
+		//close(STDERR_FILENO);
 		char buf[512];
 		char* homedir = getenv("HOME");
-		snprintf(buf, 512,"%s/.gmlive/mms.lst",homedir);
+		snprintf(buf, 512,"%s/.gmlive/mms.lst.tmp",homedir);
 
-		const char* argv[5];
-       		argv[0] = "wget";
-		argv[1] = "http://gmlive.googlecode.com/files/mms.lst";
+		const char* argv[6];
+		argv[0] = "wget";
+		argv[1] = "http://www.gooth.cn/mms.lst";
 		//argv[1] = GMConf["mms_channel_url"].c_str();
 		argv[2] = "-O";
 		argv[3] = buf;
-		argv[4] = NULL;
+		argv[4] = "-q";
+		argv[5] = NULL;
 
 		execvp("wget", (char* const *)argv);
 		perror("wget execvp:");
