@@ -55,6 +55,7 @@ void MMSChannel::init()
 	std::string groupname;
 	std::string last;
 	int users=0;
+	m_liststore->clear(); //先清空列表
 	if(file){
 		while(std::getline(file,line)){
 			size_t pos = line.find_first_of("#");
@@ -135,8 +136,8 @@ void MMSChannel::refresh_list()
 
 		const char* argv[6];
 		argv[0] = "wget";
-		argv[1] = "http://www.gooth.cn/mms.lst";
-		//argv[1] = GMConf["mms_channel_url"].c_str();
+		//argv[1] = "http://www.gooth.cn/mms.lst";
+		argv[1] = GMConf["mms_channel_url"].c_str();
 		argv[2] = "-O";
 		argv[3] = buf;
 		argv[4] = "-q";

@@ -136,13 +136,13 @@ class MainWindow : public Gtk::Window {
 		Channel* 			bookmark_channel;
 		Gtk::Menu*			channels_pop_menu;
 		Gtk::Menu*			try_pop_menu;
-		LivePlayer* 		live_player;
+		LivePlayer* 		        live_player;
 		ConfWindow*			confwindow;
 		int 				gmp_width;
-		int					gmp_height;
+		int				gmp_height;
 		double				gmp_rate;	//mplayer画面比例
-		int					window_width;
-		int					window_height;
+		int				window_width;
+		int				window_height;
 		bool				gmp_embed;	//是否嵌入mplayer
 		bool				channels_hide;
 		bool				toolbar_hide;
