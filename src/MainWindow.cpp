@@ -1126,7 +1126,8 @@ void MainWindow::init()
 		GMConf["nslive_delay_time"]     =       "2";
 		GMConf["channels_hide"]		=	"0";
 		GMConf["toolbar_hide"]		=	"0";
-		GMConf["sopcast_channel_url"]		=	"http://channel.sopcast.com/gchlxml";
+		GMConf["sopcast_channel_url"]	=	"http://channel.sopcast.com/gchlxml";
+		GMConf["mms_channel_url"]    	=       "http://www.gooth.cn/mms.lst";
 		GMConf["check_refresh_sopcast_channels"] = "1";
 		return;
 	}
