@@ -23,6 +23,7 @@
 #include "gmlive.h"
 #include "playStream.h"
 #include "recordStream.h"
+#include "TryIcon.h"
 
 
 class Channel;
@@ -36,6 +37,10 @@ class MainWindow : public Gtk::Window {
 		bool on_key_press_event(GdkEventKey* ev);
 		bool support_nslive()const {return enable_nslive;}
 		bool support_sopcast()const {return enable_sopcast;}
+		void hide_window();
+		void show_window();
+		Gtk::Menu* get_try_pop_menu() { return try_pop_menu; }
+
 	protected:
 		bool on_delete_event(GdkEventAny* event);
 		void show_msg(const Glib::ustring& msg,unsigned int id=0);
@@ -110,6 +115,7 @@ class MainWindow : public Gtk::Window {
 		/** 检测是否支持第三方程序 */
 		void check_support();
 	private:
+		TryIcon				try_icon;
 		GlademmXML 			ui_xml;
 		Glib::RefPtr<Gtk::UIManager>	ui_manager;
 		Glib::RefPtr<Gtk::ActionGroup> 	action_group;
@@ -129,13 +135,14 @@ class MainWindow : public Gtk::Window {
 		Channel* 			recent_channel;
 		Channel* 			bookmark_channel;
 		Gtk::Menu*			channels_pop_menu;
-		LivePlayer* 			live_player;
+		Gtk::Menu*			try_pop_menu;
+		LivePlayer* 		live_player;
 		ConfWindow*			confwindow;
 		int 				gmp_width;
-		int				gmp_height;
+		int					gmp_height;
 		double				gmp_rate;	//mplayer画面比例
-		int				window_width;
-		int				window_height;
+		int					window_width;
+		int					window_height;
 		bool				gmp_embed;	//是否嵌入mplayer
 		bool				channels_hide;
 		bool				toolbar_hide;

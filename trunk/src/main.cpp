@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 	Gtk::Main kit(argc, argv);
 
 	MainWindow wnd; 
-	kit.run(wnd);
+	kit.run();
 
 	return 0;
 }

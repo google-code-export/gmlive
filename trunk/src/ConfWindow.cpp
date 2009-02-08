@@ -33,13 +33,17 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 
 	std::string& embed = GMConf["mplayer_embed"];
 	m_embed = (!embed.empty()) && (embed[0] == '1');
-	std::string enable = GMConf["enable_nslive"];
+	std::string& enable = GMConf["enable_nslive"];
 	m_enable_nslive = (!enable.empty())&&(enable[0] == '1' );
 		enable = GMConf["enable_sopcast"];
 	m_enable_sopcast = (!enable.empty())&&(enable[0] == '1' );
 
 	std::string& check_sop_list = GMConf["check_refresh_sopcast_channels"];
 	m_check_refresh_sopcast_channels = (!check_sop_list.empty())&&(check_sop_list[0] == '1');
+
+	GMConf["close_to_systray"] = m_close_try ? "1" : "0";
+	std::string& close_try = GMConf["close_to_systray"];
+	m_close_try = (!close_try.empty()) && (close_try[0] == '1');
 
 	m_paramter=GMConf["mplayer_paramter"];
 	m_mms_cache=GMConf["mms_mplayer_cache"];
@@ -61,6 +65,7 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	m_pVariablesMap->connect_widget("entry_nslive_delay", m_nslive_delay);
 	m_pVariablesMap->connect_widget("entry_sopcast_cache",m_sopcast_cache);
 	m_pVariablesMap->connect_widget("entry_sopcast_channel",m_sopcast_channel);
+	m_pVariablesMap->connect_widget("check_close_try",m_close_try);
 	m_pVariablesMap->connect_widget("check_refresh_sopcast_channels",m_check_refresh_sopcast_channels);
 
 
@@ -113,6 +118,7 @@ void ConfWindow::write_to_GMConf()
 	GMConf["sopcast_channel_url"]    =            m_sopcast_channel;
 	GMConf["other_player_cmd"]  = m_oplayer_cmd;
 	GMConf["check_refresh_sopcast_channels"] = m_check_refresh_sopcast_channels ? "1" : "0";
+	GMConf["close_to_systray"] = m_close_try ? "1" : "0";
 }
 
 
