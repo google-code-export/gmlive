@@ -45,6 +45,9 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	std::string& close_try = GMConf["close_to_systray"];
 	m_close_try = (!close_try.empty()) && (close_try[0] == '1');
 
+	std::string& enable_try =GMConf["enable_tray"];
+	m_enable_try = (!enable_try.empty())&&(enable_try[0]=='1');
+
 	m_paramter=GMConf["mplayer_paramter"];
 	m_mms_cache=GMConf["mms_mplayer_cache"];
 	m_sopcast_cache = GMConf["sopcast_mplayer_cache"];
@@ -68,6 +71,7 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	m_pVariablesMap->connect_widget("entry_sopcast_channel",m_sopcast_channel);
 	m_pVariablesMap->connect_widget("entry_mms_channel",m_mms_channel);
 	m_pVariablesMap->connect_widget("check_close_try",m_close_try);
+	m_pVariablesMap->connect_widget("enable_tray",m_enable_try);
 	m_pVariablesMap->connect_widget("check_refresh_sopcast_channels",m_check_refresh_sopcast_channels);
 
 
@@ -122,6 +126,7 @@ void ConfWindow::write_to_GMConf()
 	GMConf["other_player_cmd"]  = m_oplayer_cmd;
 	GMConf["check_refresh_sopcast_channels"] = m_check_refresh_sopcast_channels ? "1" : "0";
 	GMConf["close_to_systray"] = m_close_try ? "1" : "0";
+	GMConf["enable_tray"] = m_enable_try?"1":"0";
 }
 
 
