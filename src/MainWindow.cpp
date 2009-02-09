@@ -544,7 +544,9 @@ void MainWindow::hide_window()
 bool MainWindow::on_delete_event(GdkEventAny* event)
 {
 	this->get_size( window_width, window_height);
-	if (!atoi(GMConf["close_to_systray"].c_str()))
+	if(!atoi(GMConf["close_to_systray"].c_str()))
+		Gtk::Main::quit();
+	else if (!atoi(GMConf["enable_tray"].c_str())) 
 		Gtk::Main::quit();
 	else if (gmp_embed)
 			gmp->stop();
@@ -752,8 +754,10 @@ MainWindow::MainWindow():
 	,window_height(1)
 	,confwindow(NULL)
 	,menubar(NULL)
-    ,toolbar(NULL)
-	, try_icon(*this)
+	,toolbar(NULL)
+	,enable_tray(false)
+	,try_icon(NULL)
+	//,try_icon(*this)
 {
 	std::list<Gtk::TargetEntry> listTargets;
 	listTargets.push_back(Gtk::TargetEntry("STRING"));
@@ -907,6 +911,9 @@ MainWindow::MainWindow():
 	this->resize(1,1);
 	//init();
 	
+	if (atoi(GMConf["enable_tray"].c_str()))
+		try_icon = new TryIcon(*this);
+
 	const std::string& wnd_width = GMConf["main_window_width"];
 	window_width = atoi(wnd_width.c_str());
 	window_width = window_width > 0 ? window_width : 1;
@@ -1129,6 +1136,7 @@ void MainWindow::init()
 		GMConf["sopcast_channel_url"]	=	"http://channel.sopcast.com/gchlxml";
 		GMConf["mms_channel_url"]    	=       "http://www.gooth.cn/mms.lst";
 		GMConf["check_refresh_sopcast_channels"] = "1";
+		GMConf["enable_tray"]		= "1";
 		return;
 	}
 	std::string line;
@@ -1204,6 +1212,19 @@ void MainWindow::save_conf()
 		file << line << std::endl;
 	}
 	file.close();
+
+	if (atoi(GMConf["enable_tray"].c_str()))
+	{
+		if(!try_icon)
+			try_icon = new TryIcon(*this);
+	}else
+	{
+		if(try_icon)
+		{
+			delete try_icon;
+			try_icon=NULL;
+		}
+	}
 
 }
 

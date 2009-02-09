@@ -115,7 +115,7 @@ class MainWindow : public Gtk::Window {
 		/** 检测是否支持第三方程序 */
 		void check_support();
 	private:
-		TryIcon				try_icon;
+		TryIcon				*try_icon;
 		GlademmXML 			ui_xml;
 		Glib::RefPtr<Gtk::UIManager>	ui_manager;
 		Glib::RefPtr<Gtk::ActionGroup> 	action_group;
@@ -148,6 +148,7 @@ class MainWindow : public Gtk::Window {
 		bool				toolbar_hide;
 		bool				enable_nslive;
 		bool				enable_sopcast;
+		bool				enable_tray;
 		bool				full_screen;
 		bool				refresh_sopcast_channels; //是否每次启动程序都去下载sopcast的频道列表
 };

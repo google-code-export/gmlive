@@ -753,8 +753,8 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkCheckButton" id="check_close_try">
-                                <property name="label" translatable="yes">On close button: minimize to systray</property>
+                              <widget class="GtkCheckButton" id="enable_tray">
+                                <property name="label" translatable="yes">Enable Systray</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -765,11 +765,23 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkHBox" id="hbox9">
+                              <widget class="GtkCheckButton" id="check_close_try">
+                                <property name="label" translatable="yes">On close button: minimize to systray</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="draw_indicator">True</property>
+                              </widget>
+                              <packing>
+                                <property name="position">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkHBox" id="hbox3">
                                 <property name="visible">True</property>
                                 <property name="spacing">12</property>
                                 <child>
-                                  <widget class="GtkLabel" id="label27">
+                                  <widget class="GtkLabel" id="label2">
                                     <property name="visible">True</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Mplayer extend parameter:</property>
@@ -794,7 +806,7 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="position">4</property>
+                                <property name="position">5</property>
                               </packing>
                             </child>
                           </widget>

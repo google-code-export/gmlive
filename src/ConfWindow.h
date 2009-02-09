@@ -57,6 +57,7 @@ class ConfWindow: public Gtk::Window
 		bool		m_enable_sopcast;
 		bool		m_check_refresh_sopcast_channels;
 		bool		m_close_try;
+		bool		m_enable_try;
 
 		/*
 		   Gtk::CheckButton* check_embed;
