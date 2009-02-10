@@ -24,7 +24,7 @@ gmlive_SOURCES = \
 		 nsLivePlayer.cpp \
 		 playStream.cpp \
 		 recordStream.cpp \
-		 TryIcon.cpp
+		 TrayIcon.cpp
 
 noinst_HEADERS = \
 		 ec_throw.h \
@@ -47,6 +47,6 @@ noinst_HEADERS = \
 		 nsLivePlayer.h \
 		 playStream.h \
 		 recordStream.h \
-		 TryIcon.h
+		 TrayIcon.h
 
 gmlive_LDADD = @LIBS@ @PACKAGE_LIBS@

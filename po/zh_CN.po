@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-10 00:20+0000\n"
-"PO-Revision-Date: 2009-02-10 00:26+0000\n"
+"PO-Revision-Date: 2009-02-10 21:05+0000\n"
 "Last-Translator: lerosua <lerosua@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -116,7 +116,7 @@ msgstr "Sopcast支持"
 
 #: ../data/gmlive.glade.h:32
 msgid "Enable Systray"
-msgstr "托盘支持"
+msgstr "通知区域支持"
 
 #: ../data/gmlive.glade.h:33
 msgid "GMLive"
@@ -164,7 +164,7 @@ msgstr "NSLive"
 
 #: ../data/gmlive.glade.h:44
 msgid "On close button: minimize to systray"
-msgstr "关闭按钮：最小化至托盘"
+msgstr "关闭按钮：最小化至通知区域"
 
 #: ../data/gmlive.glade.h:45
 msgid "Other Player"

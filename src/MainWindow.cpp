@@ -756,8 +756,8 @@ MainWindow::MainWindow():
 	,menubar(NULL)
 	,toolbar(NULL)
 	,enable_tray(false)
-	,try_icon(NULL)
-	//,try_icon(*this)
+	,tray_icon(NULL)
+	//,tray_icon(*this)
 {
 	std::list<Gtk::TargetEntry> listTargets;
 	listTargets.push_back(Gtk::TargetEntry("STRING"));
@@ -912,7 +912,7 @@ MainWindow::MainWindow():
 	//init();
 	
 	if (atoi(GMConf["enable_tray"].c_str()))
-		try_icon = new TryIcon(*this);
+		tray_icon = new TrayIcon(*this);
 
 	const std::string& wnd_width = GMConf["main_window_width"];
 	window_width = atoi(wnd_width.c_str());
@@ -1215,14 +1215,14 @@ void MainWindow::save_conf()
 
 	if (atoi(GMConf["enable_tray"].c_str()))
 	{
-		if(!try_icon)
-			try_icon = new TryIcon(*this);
+		if(!tray_icon)
+			tray_icon = new TrayIcon(*this);
 	}else
 	{
-		if(try_icon)
+		if(tray_icon)
 		{
-			delete try_icon;
-			try_icon=NULL;
+			delete tray_icon;
+			tray_icon=NULL;
 		}
 	}
 

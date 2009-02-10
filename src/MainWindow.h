@@ -23,7 +23,7 @@
 #include "gmlive.h"
 #include "playStream.h"
 #include "recordStream.h"
-#include "TryIcon.h"
+#include "TrayIcon.h"
 
 
 class Channel;
@@ -115,7 +115,7 @@ class MainWindow : public Gtk::Window {
 		/** 检测是否支持第三方程序 */
 		void check_support();
 	private:
-		TryIcon				*try_icon;
+		TrayIcon				*tray_icon;
 		GlademmXML 			ui_xml;
 		Glib::RefPtr<Gtk::UIManager>	ui_manager;
 		Glib::RefPtr<Gtk::ActionGroup> 	action_group;

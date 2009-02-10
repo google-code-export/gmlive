@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  *
- *       Filename:  TryIcon.cpp
+ *       Filename:  TrayIcon.cpp
  *
  *
  *        Version:  1.0
@@ -15,28 +15,28 @@
  * =====================================================================================
  */
 
-#include "TryIcon.h"
+#include "TrayIcon.h"
 #include "MainWindow.h"
 
-TryIcon::TryIcon(MainWindow& wnd) :
+TrayIcon::TrayIcon(MainWindow& wnd) :
 	main_wnd_(wnd)
 {
 	stat_ = Gtk::StatusIcon::create_from_file(DATA_DIR"/gmlive.png");
 	if (!stat_)
 		return;
 
-	stat_->signal_activate ().connect(sigc::mem_fun(*this, &TryIcon::active_main_wnd));
-	stat_->signal_popup_menu().connect(sigc::mem_fun(*this, &TryIcon::on_popup_menu));
+	stat_->signal_activate ().connect(sigc::mem_fun(*this, &TrayIcon::active_main_wnd));
+	stat_->signal_popup_menu().connect(sigc::mem_fun(*this, &TrayIcon::on_popup_menu));
 
 	stat_->set_tooltip("gmlive");
 }
 
-TryIcon::~TryIcon()
+TrayIcon::~TrayIcon()
 {
 
 }
 
-void TryIcon::on_popup_menu(guint button, guint32 activate_time)
+void TrayIcon::on_popup_menu(guint button, guint32 activate_time)
 {
 	Gtk::Menu* pop_menu = 
 			main_wnd_.get_try_pop_menu();
@@ -44,7 +44,7 @@ void TryIcon::on_popup_menu(guint button, guint32 activate_time)
 			pop_menu->popup(button, activate_time);
 }
 
-void TryIcon::active_main_wnd()
+void TrayIcon::active_main_wnd()
 {
 	if (main_wnd_.is_visible()) 
 		main_wnd_.hide_window();
