@@ -23,9 +23,9 @@
 ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 {
 	GlademmXML vbox_xml =
-	    Gnome::Glade::Xml::create(main_ui, "vbox_conf");
+		Gnome::Glade::Xml::create(main_ui, "vbox_conf");
 	Gtk::VBox * vBox = dynamic_cast < Gtk::VBox * >
-	    (vbox_xml->get_widget("vbox_conf"));
+		(vbox_xml->get_widget("vbox_conf"));
 	Gtk::Notebook* notebook = dynamic_cast<Gtk::Notebook*>
 		(vbox_xml->get_widget("notebook_conf"));
 
@@ -38,7 +38,7 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	m_embed = (!embed.empty()) && (embed[0] == '1');
 	std::string& enable = GMConf["enable_nslive"];
 	m_enable_nslive = (!enable.empty())&&(enable[0] == '1' );
-		enable = GMConf["enable_sopcast"];
+	enable = GMConf["enable_sopcast"];
 	m_enable_sopcast = (!enable.empty())&&(enable[0] == '1' );
 
 	std::string& check_sop_list = GMConf["check_refresh_sopcast_channels"];
@@ -68,17 +68,17 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	m_pVariablesMap->connect_widget("enable_nslive", m_enable_nslive);
 	m_pVariablesMap->connect_widget("entry_parameter", m_paramter);
 	m_pVariablesMap->connect_widget("entry_mms_cache", m_mms_cache);
-	
+
 	if(m_enable_nslive)
 	{
-	m_pVariablesMap->connect_widget("entry_nslive_cache",m_nslive_cache);
-	m_pVariablesMap->connect_widget("entry_nslive_delay", m_nslive_delay);
+		m_pVariablesMap->connect_widget("entry_nslive_cache",m_nslive_cache);
+		m_pVariablesMap->connect_widget("entry_nslive_delay", m_nslive_delay);
 	}
 	if(m_enable_sopcast)
 	{
-	m_pVariablesMap->connect_widget("entry_sopcast_cache",m_sopcast_cache);
-	m_pVariablesMap->connect_widget("entry_sopcast_channel",m_sopcast_channel);
-	m_pVariablesMap->connect_widget("check_refresh_sopcast_channels",m_check_refresh_sopcast_channels);
+		m_pVariablesMap->connect_widget("entry_sopcast_cache",m_sopcast_cache);
+		m_pVariablesMap->connect_widget("entry_sopcast_channel",m_sopcast_channel);
+		m_pVariablesMap->connect_widget("check_refresh_sopcast_channels",m_check_refresh_sopcast_channels);
 	}
 	m_pVariablesMap->connect_widget("entry_mms_channel",m_mms_channel);
 	m_pVariablesMap->connect_widget("check_close_try",m_close_try);
@@ -88,6 +88,16 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 
 	vbox_xml->connect_clicked("button_save", sigc::mem_fun(*this,&ConfWindow::on_button_save));
 	vbox_xml->connect_clicked("button_cancel", sigc::mem_fun(*this, &ConfWindow::on_button_cancel));
+
+
+	enable_tray = dynamic_cast<Gtk::ToggleButton*>
+		(vbox_xml->get_widget("enable_tray"));
+
+	check_close_tray = dynamic_cast<Gtk::ToggleButton*>
+		(vbox_xml->get_widget("check_close_try"));
+
+	enable_tray->signal_clicked().connect(sigc::mem_fun(*this, &ConfWindow::on_enable_tray_toggle));
+	on_enable_tray_toggle();
 
 	m_pVariablesMap->transfer_variables_to_widgets();
 	add(*vBox);
@@ -125,7 +135,7 @@ void ConfWindow::on_button_cancel()
 void ConfWindow::write_to_GMConf()
 {
 	m_pVariablesMap->transfer_widgets_to_variables();
-	
+
 	GMConf["player_type"] = m_oplayer ? "1" : "0";
 	GMConf["mplayer_embed"] = m_embed ? "1" : "0";
 	GMConf["enable_nslive"] = m_enable_nslive ? "1" : "0";
@@ -162,5 +172,10 @@ bool ConfWindow::on_delete_event(GdkEventAny* ev)
 {
 	on_button_cancel();
 	return true;
+}
+
+void ConfWindow::on_enable_tray_toggle()
+{
+	check_close_tray->set_sensitive(enable_tray->get_active());
 }
 
