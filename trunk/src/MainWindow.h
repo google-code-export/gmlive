@@ -139,10 +139,12 @@ class MainWindow : public Gtk::Window {
 		LivePlayer* 		        live_player;
 		ConfWindow*			confwindow;
 		int 				gmp_width;
-		int				gmp_height;
+		int					gmp_height;
 		double				gmp_rate;	//mplayer画面比例
-		int				window_width;
-		int				window_height;
+		int					window_width;
+		int					window_height;
+		int					window_x;
+		int					window_y;
 		bool				gmp_embed;	//是否嵌入mplayer
 		bool				channels_hide;
 		bool				toolbar_hide;
