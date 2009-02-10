@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  *
- *       Filename:  TryIcon.h
+ *       Filename:  TrayIcon.h
  *
  *
  *        Version:  1.0
@@ -14,16 +14,16 @@
  *
  * =====================================================================================
  */
-#ifndef _TRY_ICON_H_
-#define _TRY_ICON_H_
+#ifndef _TRAY_ICON_H_
+#define _TRAY_ICON_H_
 #include <gtkmm.h>
 
 class MainWindow;
 
-class TryIcon {
+class TrayIcon {
 	public:
-		TryIcon(MainWindow& wnd);
-		~TryIcon();
+		TrayIcon(MainWindow& wnd);
+		~TrayIcon();
 	private:
 		void on_popup_menu(guint button, guint32 activate_time);
 		void active_main_wnd();
