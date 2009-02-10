@@ -44,7 +44,6 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	std::string& check_sop_list = GMConf["check_refresh_sopcast_channels"];
 	m_check_refresh_sopcast_channels = (!check_sop_list.empty())&&(check_sop_list[0] == '1');
 
-	//GMConf["close_to_systray"] = m_close_try ? "1" : "0";
 	std::string& close_try = GMConf["close_to_systray"];
 	m_close_try = (!close_try.empty()) && (close_try[0] == '1');
 
@@ -98,6 +97,13 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 
 	enable_tray->signal_clicked().connect(sigc::mem_fun(*this, &ConfWindow::on_enable_tray_toggle));
 	on_enable_tray_toggle();
+
+	radio_player = dynamic_cast<Gtk::RadioButton*>
+		(vbox_xml->get_widget("rbtn_mplayer"));
+	hbox2 = dynamic_cast<Gtk::HBox*>
+		(vbox_xml->get_widget("hbox2"));
+	radio_player->signal_clicked().connect(sigc::mem_fun(*this, &ConfWindow::on_select_mplayer));
+	on_select_mplayer();
 
 	m_pVariablesMap->transfer_variables_to_widgets();
 	add(*vBox);
@@ -179,3 +185,9 @@ void ConfWindow::on_enable_tray_toggle()
 	check_close_tray->set_sensitive(enable_tray->get_active());
 }
 
+void ConfWindow::on_select_mplayer()
+{
+
+	hbox2->set_sensitive(!radio_player->get_active());
+
+}
