@@ -530,7 +530,8 @@ void MainWindow::on_menu_pop_copy_to_clipboard()
 
 void MainWindow::show_window()
 {
-	show();
+	this->show();
+	this->move(window_x, window_y);
 }
 
 void MainWindow::hide_window()
@@ -538,7 +539,8 @@ void MainWindow::hide_window()
 	if (gmp_embed || !atoi(GMConf["close_to_systray"].c_str())) {
 		gmp->stop();
 	}
-	hide();
+	this->get_position(window_x, window_y);
+	this->hide();
 }
 
 bool MainWindow::on_delete_event(GdkEventAny* event)
@@ -550,6 +552,7 @@ bool MainWindow::on_delete_event(GdkEventAny* event)
 		Gtk::Main::quit();
 	else if (gmp_embed)
 			gmp->stop();
+	this->get_position(window_x, window_y);
 	return Gtk::Window::on_delete_event(event);
 }
 
