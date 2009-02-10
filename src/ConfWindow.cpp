@@ -26,6 +26,9 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	    Gnome::Glade::Xml::create(main_ui, "vbox_conf");
 	Gtk::VBox * vBox = dynamic_cast < Gtk::VBox * >
 	    (vbox_xml->get_widget("vbox_conf"));
+	Gtk::Notebook* notebook = dynamic_cast<Gtk::Notebook*>
+		(vbox_xml->get_widget("notebook_conf"));
+
 
 	std::string& oplayer = GMConf["player_type"];
 	m_oplayer = (!oplayer.empty())&&(oplayer[0]=='1');
@@ -65,14 +68,21 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	m_pVariablesMap->connect_widget("enable_nslive", m_enable_nslive);
 	m_pVariablesMap->connect_widget("entry_parameter", m_paramter);
 	m_pVariablesMap->connect_widget("entry_mms_cache", m_mms_cache);
+	
+	if(m_enable_nslive)
+	{
 	m_pVariablesMap->connect_widget("entry_nslive_cache",m_nslive_cache);
 	m_pVariablesMap->connect_widget("entry_nslive_delay", m_nslive_delay);
+	}
+	if(m_enable_sopcast)
+	{
 	m_pVariablesMap->connect_widget("entry_sopcast_cache",m_sopcast_cache);
 	m_pVariablesMap->connect_widget("entry_sopcast_channel",m_sopcast_channel);
+	m_pVariablesMap->connect_widget("check_refresh_sopcast_channels",m_check_refresh_sopcast_channels);
+	}
 	m_pVariablesMap->connect_widget("entry_mms_channel",m_mms_channel);
 	m_pVariablesMap->connect_widget("check_close_try",m_close_try);
 	m_pVariablesMap->connect_widget("enable_tray",m_enable_try);
-	m_pVariablesMap->connect_widget("check_refresh_sopcast_channels",m_check_refresh_sopcast_channels);
 
 
 
@@ -83,6 +93,10 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	add(*vBox);
 	set_transient_for(*parent);
 
+	if(!m_enable_sopcast)
+		notebook->remove_page(3);
+	if(!m_enable_nslive)
+		notebook->remove_page(2);
 
 	set_default_size(600, 400);
 	set_title(_("GMLive Conf Window"));
