@@ -59,16 +59,6 @@ class ConfWindow: public Gtk::Window
 		bool		m_close_try;
 		bool		m_enable_try;
 
-		/*
-		   Gtk::CheckButton* check_embed;
-		   Gtk::Entry* mplayer_param;
-		   Gtk::Entry* mms_mplayer_cache;
-		   Gtk::Entry* nslive_mplayer_cache;
-		   Gtk::Entry* sopcast_mplayer_cache;
-		   Gtk::Entry* nslive_delay_time;
-		   */
-
-
 };
 #endif   /* ----- #ifndef CONFWINDOW_FILE_HEADER_INC  ----- */
 
