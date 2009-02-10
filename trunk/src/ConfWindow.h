@@ -33,6 +33,7 @@ class ConfWindow: public Gtk::Window
 		void on_button_cancel();
 		bool on_key_press_event(GdkEventKey* ev);
 		bool on_delete_event(GdkEventAny* event);
+		void on_enable_tray_toggle();
 
 		typedef sigc::signal<void> type_signal_quit;
 		type_signal_quit signal_quit()
@@ -51,6 +52,9 @@ class ConfWindow: public Gtk::Window
 		Glib::ustring m_sopcast_channel;
 		Glib::ustring m_mms_channel;
 		Glib::ustring m_oplayer_cmd;
+		Gtk::ToggleButton* enable_tray;
+		Gtk::ToggleButton* check_close_tray; 
+
 		bool		m_oplayer;
 		bool		m_embed;
 		bool		m_enable_nslive;
