@@ -1,0 +1,543 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-10 00:20+0000\n"
+"PO-Revision-Date: 2009-04-02 22:21+0100\n"
+"Last-Translator: Dariusz Jakoniuk <pipaceliny@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../data/gmlive.desktop.in.in.h:1
+msgid "Gmlive"
+msgstr "Gmlive"
+
+#: ../data/gmlive.desktop.in.in.h:2
+msgid "Streaming Direct Broadcast System based on P2P"
+msgstr "Streaming Direct Broadcast System based on P2P"
+
+#: ../data/gmlive.glade.h:1
+msgid ""
+"\t\t\t                  \n"
+"                                             gmlive 0.21.2 release\n"
+"\n"
+"              GMLive try to became a universal streaming media player case.\n"
+"         it use Almighty Mplayer for its engine. the Goal is to support  a \n"
+"         variety of types of P2P broadcasting video streaming for Linux. \n"
+"         Provide a convenient and efficient network to watch video streaming \n"
+"         of the programme\n"
+"\n"
+"                                                                                              cyclone Team\n"
+"\n"
+"  "
+msgstr ""
+
+#: ../data/gmlive.glade.h:13
+msgid "   "
+msgstr ""
+
+#: ../data/gmlive.glade.h:14
+msgid "    "
+msgstr ""
+
+#: ../data/gmlive.glade.h:15
+msgid ""
+"    \n"
+"    lerosua@gmail.com\n"
+"    wind(xihels@gmail.com)\n"
+"    yetist@gmail.com"
+msgstr ""
+
+#: ../data/gmlive.glade.h:19
+msgid " <b>MMS</b>"
+msgstr " <b>MMS</b>"
+
+#: ../data/gmlive.glade.h:20
+msgid " <b>Nslive</b>"
+msgstr " <b>Nslive</b>"
+
+#: ../data/gmlive.glade.h:21
+msgid " <b>Select the Player</b>"
+msgstr " <b>Wybierz odtwarzacz</b>"
+
+#: ../data/gmlive.glade.h:22
+msgid " <b>Sopcast</b>"
+msgstr " <b>Sopcast</b>"
+
+#: ../data/gmlive.glade.h:23
+msgid " Kbs"
+msgstr " Kbs"
+
+#: ../data/gmlive.glade.h:24
+msgid " You may modify and redistribute the program under the terms of the GPL (version 2 or later).  A copy of the GPL is contained in the 'COPYING' file distributed with Pidgin.  Pidgin is copyrighted by its contributors.  See the 'COPYRIGHT' file for the complete list of contributors.  We provide no warranty for this program."
+msgstr ""
+
+#: ../data/gmlive.glade.h:25
+msgid "<b>Features</b>"
+msgstr "<b>Możliwości</b>"
+
+#: ../data/gmlive.glade.h:26
+msgid "About"
+msgstr "O programie"
+
+#: ../data/gmlive.glade.h:27
+msgid "Author"
+msgstr "Autor"
+
+#: ../data/gmlive.glade.h:28
+msgid "Channel URL:"
+msgstr "URL kanału:"
+
+#: ../data/gmlive.glade.h:29
+msgid "Embed Mplayer"
+msgstr "Osadź okno mplayera"
+
+#: ../data/gmlive.glade.h:30
+msgid "Enable Nslive"
+msgstr "Włącz Nslive"
+
+#: ../data/gmlive.glade.h:31
+msgid "Enable Sopcast"
+msgstr "Włącz Sopcast"
+
+#: ../data/gmlive.glade.h:32
+msgid "Enable Systray"
+msgstr "Włącz ikonę w tacce systemowej"
+
+#: ../data/gmlive.glade.h:33
+msgid "GMLive"
+msgstr "GMLive"
+
+#: ../data/gmlive.glade.h:34
+msgid "Help"
+msgstr "Pomoc"
+
+#: ../data/gmlive.glade.h:35
+msgid "Kbs"
+msgstr "Kbs"
+
+#: ../data/gmlive.glade.h:36
+msgid "Kbs "
+msgstr "Kbs "
+
+#: ../data/gmlive.glade.h:37
+msgid "Licence"
+msgstr "Licencja"
+
+#: ../data/gmlive.glade.h:38
+msgid "MMS"
+msgstr "MMS"
+
+#: ../data/gmlive.glade.h:39
+msgid "Mplayer"
+msgstr "Mplayer"
+
+#: ../data/gmlive.glade.h:40
+msgid "Mplayer Cache:"
+msgstr "Bufor Mplayera:"
+
+#: ../data/gmlive.glade.h:41
+msgid "Mplayer Delay Time:"
+msgstr "Czas opóźnienia Mplayera"
+
+#: ../data/gmlive.glade.h:42
+msgid "Mplayer extend parameter:"
+msgstr "Dodatkowe komendy Mplayera:"
+
+#: ../data/gmlive.glade.h:43
+msgid "Nslive"
+msgstr "Nslive"
+
+#: ../data/gmlive.glade.h:44
+msgid "On close button: minimize to systray"
+msgstr "Po zamknięciu okna: minimalizuj do tacki systemowej"
+
+#: ../data/gmlive.glade.h:45
+msgid "Other Player"
+msgstr "Inny odtwarzacz"
+
+#: ../data/gmlive.glade.h:46
+msgid "Other Player Command:"
+msgstr "Komenda alternatywnego odtwarzacza:"
+
+#: ../data/gmlive.glade.h:47
+msgid "Sec"
+msgstr "Sec"
+
+#: ../data/gmlive.glade.h:48
+msgid "Sopcast"
+msgstr "Sopcast"
+
+#: ../data/gmlive.glade.h:49
+msgid ""
+"Thanks follow people translate the program:\n"
+"\n"
+"Chinese(zh_CN): lerosua@gmail.com\n"
+"Spanish(es_ES):   jjgnomera@gmail.com"
+msgstr ""
+"Program tłumaczą:\n"
+"\n"
+"Chinese(zh_CN): lerosua@gmail.com\n"
+"Spanish(es_ES):   jjgnomera@gmail.comPolish(pl): pipaceliny@gmail.com"
+
+#: ../data/gmlive.glade.h:53
+msgid "Translation"
+msgstr "Tłumaczenie"
+
+#: ../data/gmlive.glade.h:54
+msgid ""
+"You can find us in follow URL:\n"
+"\n"
+"  BLOG: http://cyclone.blog.ubuntu.org.cn\n"
+"  URL:   http://code.google.com/p/gmlive\n"
+"  IRC:    #cyclone@irc.oftc.net"
+msgstr ""
+
+#: ../data/gmlive.glade.h:59
+msgid ""
+"about MMS streaming\n"
+"this channel is not base on P2P streaming. it just base on \n"
+"mms:// url channel from the internet. we just collection it.\n"
+"you can add your mms channel for yourself. just edit the \n"
+"mms.list and put it in your home dir like ~/.gmlive"
+msgstr ""
+
+#: ../data/gmlive.glade.h:64
+msgid ""
+"about nslive streaming\n"
+"nslive is a native program in linux about p2p streaming.\n"
+"it be developed by andycl98@163.com. so please access\n"
+"the http://andycl98.blog.163.com/ for his help.\n"
+"nslive ' program will call mplayer , so it will conflict\n"
+"with gmlive. so you need fix the nslive's config file like\n"
+"following.\n"
+"~/.ulive/ulive.conf\n"
+"#mplayer install path\n"
+"#mplayer=/usr/bin/mplayer\n"
+"\n"
+"to add nslive support , download\n"
+"http://www.newseetv.com/soft/nslive-0.1.0.tar.gz\n"
+"untar it and put it to /usr/local/bin/ or /usr/bin"
+msgstr ""
+
+#: ../data/gmlive.glade.h:78
+msgid ""
+"about sopcast streaming\n"
+"please access the http://www.sopcast.org for sopcast help.\n"
+"another thing, we use the wget to get the sopcast channel,\n"
+"so please insure your system have the program wget.\n"
+"add you can configure the sopacst ' channel file in menu \n"
+"preference.\n"
+"to add the sopcast streaming,download the \n"
+" http://download.sopcast.cn/download/sp-auth.tgz \n"
+"file.  unzip it and put it to /usr/local/bin/ or /usr/bin"
+msgstr ""
+
+#: ../data/gmlive.glade.h:87
+msgid "bookmarks"
+msgstr "ulubione"
+
+#: ../data/gmlive.glade.h:88
+msgid "download the channels when program start every time"
+msgstr "pobierz kanały przy każdym uruchomieniu programu"
+
+#: ../data/gmlive.glade.h:89
+msgid "gtk-cancel"
+msgstr ""
+
+#: ../data/gmlive.glade.h:90
+msgid "gtk-save"
+msgstr ""
+
+#: ../data/gmlive.glade.h:91
+msgid "mms"
+msgstr "mms"
+
+#: ../data/gmlive.glade.h:92
+msgid "mms help"
+msgstr "pomoc mms"
+
+#: ../data/gmlive.glade.h:93
+msgid "nslive"
+msgstr "nslive"
+
+#: ../data/gmlive.glade.h:94
+msgid "nslive help"
+msgstr "pomoc nslive"
+
+#: ../data/gmlive.glade.h:95
+msgid "recent"
+msgstr "ostatnie"
+
+#: ../data/gmlive.glade.h:96
+msgid "sopcast"
+msgstr "sopcast"
+
+#: ../data/gmlive.glade.h:97
+msgid "sopcast help"
+msgstr "pomoc sopcast"
+
+#: ../data/record.glade.h:1
+msgid "Record Readying ..."
+msgstr "Gotowość nagrywania"
+
+#: ../data/record.glade.h:2
+msgid "Recording"
+msgstr "Nagraj"
+
+#: ../data/record.glade.h:3
+msgid "_Preview"
+msgstr "_Pokaz"
+
+#: ../src/channel.cpp:39
+msgid "channels"
+msgstr "kanały"
+
+#: ../src/channel.cpp:40
+msgid "bitrate"
+msgstr "prędkość"
+
+#: ../src/channel.cpp:41
+msgid "user"
+msgstr "użytkownik"
+
+#. if ((live_player!=NULL)&&(live_player == lr)) { // 录制的时候再录制跳出警告并退出
+#. 录制的时候再录制跳出警告并退出
+#: ../src/channel.cpp:143
+msgid "Already Recorded"
+msgstr "Właśnie nagrano"
+
+#: ../src/channel.cpp:145
+msgid "The Record had working now, you must stop it beforce"
+msgstr "Nagrywanie w trakcie, wcześniej należy je zatrzymać"
+
+#: ../src/channel.cpp:163
+#: ../src/MainWindow.cpp:364
+msgid "Choose File"
+msgstr "Wybierz plik"
+
+#. 录制的时候
+#: ../src/channel.cpp:273
+msgid "Stop Recording"
+msgstr "Zatzrymaj nagrywanie"
+
+#: ../src/channel.cpp:277
+msgid ""
+"GMLive is recording,you can play channel after stop the record.\n"
+" Are you really to do this?"
+msgstr ""
+"Gmlive nagrywa, można ogladać nowy kanał po zatrzymaniu nagrywania.\n"
+"Czy przerwać nagrywanie?"
+
+#: ../src/channel.cpp:361
+msgid "NSLive Stream"
+msgstr "Strumień NSLive"
+
+#: ../src/channel.cpp:363
+msgid "SopCast Stream"
+msgstr "Strumień SopCast"
+
+#: ../src/channel.cpp:365
+msgid "MMS stream"
+msgstr "Strumień MMS"
+
+#: ../src/channel.cpp:374
+msgid "users:"
+msgstr "użytkownicy:"
+
+#: ../src/channel.cpp:375
+msgid "Type:"
+msgstr "Typ:"
+
+#: ../src/ConfWindow.cpp:88
+msgid "GMLive Conf Window"
+msgstr "Okno ustawień gmlive"
+
+#: ../src/MainWindow.cpp:232
+msgid "HideChannels"
+msgstr "Ukryj kanały"
+
+#: ../src/MainWindow.cpp:244
+#: ../src/MainWindow.cpp:296
+#: ../src/MainWindow.cpp:297
+msgid "FullScreen"
+msgstr "Pełen ekran"
+
+#: ../src/MainWindow.cpp:256
+#: ../src/MainWindow.cpp:272
+msgid "OpenURL"
+msgstr "Otwórz URL"
+
+#. File menu:
+#: ../src/MainWindow.cpp:266
+msgid "_File"
+msgstr "_Plik"
+
+#: ../src/MainWindow.cpp:268
+msgid "Open local file"
+msgstr "Otwórz lokalny plik"
+
+#: ../src/MainWindow.cpp:269
+msgid "Open Local File"
+msgstr "Otwórz lokalny plik"
+
+#: ../src/MainWindow.cpp:273
+msgid "Open Network Stream"
+msgstr "Otwórz strumień z sieci"
+
+#: ../src/MainWindow.cpp:277
+msgid "Play"
+msgstr "Odtwórz"
+
+#: ../src/MainWindow.cpp:282
+msgid "Pause"
+msgstr "Wstrzymaj"
+
+#: ../src/MainWindow.cpp:287
+msgid "Record"
+msgstr "Nagraj"
+
+#: ../src/MainWindow.cpp:292
+msgid "Stop"
+msgstr "Zatrzymaj"
+
+#: ../src/MainWindow.cpp:302
+msgid "MUTE"
+msgstr "Wyciszenie"
+
+#. View menu:
+#: ../src/MainWindow.cpp:309
+msgid "_View"
+msgstr "_Widok"
+
+#: ../src/MainWindow.cpp:313
+msgid "Show or hide channels list"
+msgstr "Pokaż lub ukryj kanały"
+
+#: ../src/MainWindow.cpp:318
+msgid "_HideToolbar"
+msgstr "_Nie pokazuj Paska narzędzi"
+
+#: ../src/MainWindow.cpp:318
+msgid "Show or hide Toolbar"
+msgstr "Pokaż lub schowaj Pasek narzędzi"
+
+#: ../src/MainWindow.cpp:323
+msgid "_AlwaysOnTop"
+msgstr "_Zawsze na wierzchu"
+
+#: ../src/MainWindow.cpp:323
+msgid "Make GMlive ontop of other windows"
+msgstr "Okno gmlive zawsze na wierzchu"
+
+#: ../src/MainWindow.cpp:328
+msgid "_Embed Mplayer"
+msgstr "_Osadź okno Mplayera"
+
+#: ../src/MainWindow.cpp:328
+msgid "Embed or Separate mplayer play"
+msgstr "Osadź lub oddziel okno mplayera"
+
+#. Help menu:
+#: ../src/MainWindow.cpp:335
+msgid "_Help"
+msgstr "_Pomoc"
+
+#: ../src/MainWindow.cpp:341
+msgid "_Refresh list"
+msgstr "_Odśwież listę"
+
+#: ../src/MainWindow.cpp:341
+msgid "Refresh current channel list"
+msgstr "Odśwież bieżącą listę kanałów"
+
+#: ../src/MainWindow.cpp:344
+msgid "_Add to bookmark"
+msgstr "_Dodaj do ulubionych"
+
+#: ../src/MainWindow.cpp:344
+msgid "Bookmark this channel"
+msgstr "Dodaj kanał do ulubionych"
+
+#: ../src/MainWindow.cpp:347
+msgid "_Copy url"
+msgstr "_Kopiuj url"
+
+#: ../src/MainWindow.cpp:347
+msgid "Copy url to clipboard"
+msgstr "Kopiuj url do schowka"
+
+#: ../src/MainWindow.cpp:384
+msgid "Open URL"
+msgstr "Otwórz URL"
+
+#: ../src/MainWindow.cpp:737
+#, c-format
+msgid "Caching... %d%%"
+msgstr "Buforowanie... %d%%"
+
+#: ../src/MainWindow.cpp:1090
+msgid "NO SUPPORT"
+msgstr "BRAK WSPARCIA"
+
+#: ../src/MainWindow.cpp:1094
+msgid "you have not install sopcast and nslive program, so GMLive can't support them now"
+msgstr "nie zainstalowałeś programów sopcast and nslive, więc gmlive nie moze ich teraz wspierać"
+
+#: ../src/MainWindow.cpp:1096
+msgid "you have not install sopcast program,so GMLive can't support it now"
+msgstr "nie zainstalowałeś programu sopcast, więc gmlive nie moze go teraz wspierać"
+
+#: ../src/MainWindow.cpp:1098
+msgid "you have not install nslive program,so GMLive can't support it now"
+msgstr "nie zainstalowałeś programu nslive, więc gmlive nie moze go teraz wspierać"
+
+#: ../src/MainWindow.cpp:1101
+msgid " So you can install the program first"
+msgstr "Zainstaluj wpierw ten program"
+
+#: ../src/recordStream.cpp:74
+msgid "Record finial"
+msgstr "Koniec nagrywania"
+
+#: ../src/recordStream.cpp:75
+msgid " record finial"
+msgstr "fianł nagrywania"
+
+#: ../src/recordStream.cpp:169
+#, c-format
+msgid "Recording %s To %s (%u Kb)"
+msgstr "Nagrywanie %s do %s (%u Kb)"
+
+#: ../src/recordStream.cpp:174
+#, c-format
+msgid "Recording %s To %s (%u.%u Mb)"
+msgstr "Nagrywanie %s do %s (%u.%u Mb)"
+
+#: ../src/sopcastchannel.cpp:220
+msgid "Please select a channel list file"
+msgstr "Proszę wybierz plik listy kanałów"
+
+#: ../src/sopcastchannel.cpp:221
+msgid "open channles error"
+msgstr "błąd otwarcia kanałów"
+
+#: ../src/sopcastchannel.cpp:226
+msgid "open the sopcast channel error,will you select a local file to instead the broken channel list?"
+msgstr "Błąd otwarcia kanału sopcast, czy chcesz wybrać lokalny plik zamiast błędnej listy kanałów?"
+
+#: ../src/sopcastchannel.cpp:242
+msgid "File error"
+msgstr "Bład pliku"
+
+#: ../src/sopcastchannel.cpp:244
+msgid "the local channles list file has wrong formats"
+msgstr "Lokalna lista kanałów ma zły format"
+
