@@ -23,8 +23,8 @@
 #include <gtkmm/treeview.h>
 #include <gtkmm/treestore.h>
 #include <gtkmm/treeselection.h>
+#include <gtkmm/tooltips.h>
 #include "gmlive.h"
-#include "ChannelsTooltips.h"
 #include <functional>
 
 class MainWindow;
@@ -48,6 +48,7 @@ class Channel:public Gtk::TreeView
 		
 		Gtk::TreeModel::iterator addGroup(const Glib::ustring& group);
 
+		bool on_tooltip_show(int x, int y, bool key_mode, const Glib::RefPtr<Gtk::Tooltip>& tooltip);
 	public:
 		class ChannelColumns:public Gtk::TreeModel::ColumnRecord{
 			public:
@@ -90,7 +91,6 @@ class Channel:public Gtk::TreeView
 		//bool on_motion_event(GdkEventMotion* ev);
 		//bool on_leave_event(GdkEventCrossing * ev);
 		//bool tooltip_timeout(GdkEventMotion* ev);
-		bool on_tooltip_show(int x, int y, bool key_mode, const Glib::RefPtr<Gtk::Tooltip>& tooltip);
 	private:
 		struct CompareChannel:public std::binary_function 
 				      < Gtk::TreeModel::Row,

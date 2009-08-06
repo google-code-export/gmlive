@@ -19,7 +19,6 @@
 #ifndef  CHANNELSTOOLTIPS_FILE_HEADER_INC
 #define  CHANNELSTOOLTIPS_FILE_HEADER_INC
 #include <gtkmm.h>
-#include "channel.h"
 /**
  * @brief 用于显示好友信息提示。
  * @note gtkmm2.10开始才为TreeView添加了Tooltips功能。而之前的版本则需要

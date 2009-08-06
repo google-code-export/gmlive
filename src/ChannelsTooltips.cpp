@@ -17,6 +17,7 @@
  */
 
 #include "ChannelsTooltips.h"
+#include "channel.h"
 //#include "pixmaps.h"
 
 ChannelsTooltips::ChannelsTooltips(Channel* view):channel(view)
