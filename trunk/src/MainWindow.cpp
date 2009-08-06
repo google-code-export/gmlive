@@ -163,7 +163,7 @@ Glib::ustring ui_info =
 "			<menuitem action='FilePause'/>"
 "			<menuitem action='FileRecord'/>"
 "			<menuitem action='FileStop'/>"
-	"		<menuitem action='FullScreen'/>"
+"   		<menuitem action='FullScreen'/>"
 "			<menuitem action='Mute'/>"
 "			<separator/>"
 "			<menuitem action='FileQuit'/>"
