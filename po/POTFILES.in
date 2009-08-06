@@ -12,8 +12,8 @@ src/main.cpp
 src/MainWindow.cpp
 src/mmschannel.cpp
 src/mmsLivePlayer.cpp
-src/nslivechannel.cpp
-src/nsLivePlayer.cpp
+src/pplivechannel.cpp
+src/pplivePlayer.cpp
 src/recentchannel.cpp
 src/recordStream.cpp
 src/sopcastchannel.cpp
