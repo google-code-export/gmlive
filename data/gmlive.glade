@@ -305,7 +305,7 @@
           <widget class="GtkLabel" id="label6">
             <property name="visible">True</property>
             <property name="label" translatable="yes">			                  
-                                             gmlive 0.22 release
+                                             gmlive 0.22 Beta 
 
               GMLive try to became a universal streaming media player case.
          it use Almighty Mplayer for its engine. the Goal is to support  a 
