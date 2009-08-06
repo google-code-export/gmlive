@@ -39,12 +39,19 @@ Channel::Channel(MainWindow* parent_):parent( parent_)
 	channel->append_column(_("channels"), columns.name);
 	channel->append_column(_("bitrate"), columns.freq);
 	channel->append_column(_("user"), columns.users);
+
+	this->set_has_tooltip();
+	this->set_tooltip_window(*tooltips);
+	this->signal_query_tooltip().connect(sigc::mem_fun(*this,
+				&Channel::on_tooltip_show));
+	/*
 	this->signal_motion_notify_event().
 		connect(sigc::mem_fun(*this, &Channel::on_motion_event),
 				false);
 	this->signal_leave_notify_event().
 		connect(sigc::mem_fun(*this, &Channel::on_leave_event),
 				false);
+	*/
 
 	channel->show();
 }
@@ -335,6 +342,7 @@ bool Channel::on_clean_foreach(const Gtk::TreeModel::iterator& iter)
 	(*iter)[columns.searched] = false;
 	return false;
 }
+/*
 bool Channel::on_leave_event(GdkEventCrossing * ev)
 {
 	if (tipTimeout.connected()) {
@@ -357,7 +365,7 @@ bool Channel::tooltip_timeout(GdkEventMotion * ev)
 			return false;
 		TypeChannel type = (*iter)[columns.type];
 		Glib::ustring type_;
-		//if(NSLIVE_CHANNEL == type)
+		//if(PPLIVE_CHANNEL == type)
 			//type_  = _("NSLive Stream");
 		if(SOPCAST_CHANNEL == type)
 			type_ = _("SopCast Stream");
@@ -416,4 +424,48 @@ bool Channel::on_motion_event(GdkEventMotion * ev)
 
 	return true;
 }
+*/
 
+
+bool Channel::on_tooltip_show(int x, int y, bool key_mode, const Glib::RefPtr<Gtk::Tooltip>& tooltip)
+{
+	Gtk::TreeModel::Path path;
+	Gtk::TreeViewColumn * column;
+	int cell_x, cell_y;
+	if (this->
+			get_path_at_pos(x, y-5, path, column, cell_x,
+				cell_y)) {
+		Gtk::TreeModel::iterator iter =
+			this->get_model()->get_iter(path);
+		if (!iter){
+			tooltips->hideTooltip();
+			return false;
+		}
+		TypeChannel type = (*iter)[columns.type];
+		Glib::ustring type_;
+		if(PPLIVE_CHANNEL == type)
+			type_  = _("PPLive Stream");
+		else if(SOPCAST_CHANNEL == type)
+			type_ = _("SopCast Stream");
+		else if(MMS_CHANNEL == type)
+			type_ = _("MMS stream");
+		Glib::ustring name = (*iter)[columns.name];
+		int num = (*iter)[columns.users];
+		std::stringstream ss;
+		ss<<num;
+		std::string user=ss.str();
+		std::string stream = (*iter)[columns.stream];
+		Glib::ustring text;
+
+		text = "<span weight='bold'>" +name +"\n" + _("users:")+user+
+			"\nURL:</span> " + stream +"\n<span weight='bold'>"+_("Type:")+type_+"\n</span>";
+		//Glib::RefPtr<Gdk::Pixbuf> logo= Gdk::Pixbuf::create_from_file(DATA_DIR"/gmlive.png");
+
+		//tooltips->setImage(logo);
+		tooltips->setLabel(text);
+		//tooltips->showTooltip(ev);
+		return true;
+
+	}
+	return false;
+}

@@ -305,7 +305,7 @@
           <widget class="GtkLabel" id="label6">
             <property name="visible">True</property>
             <property name="label" translatable="yes">			                  
-                                             gmlive 0.21.2 release
+                                             gmlive 0.21.3 release
 
               GMLive try to became a universal streaming media player case.
          it use Almighty Mplayer for its engine. the Goal is to support  a 
@@ -525,19 +525,19 @@ file.  unzip it and put it to /usr/local/bin/ or /usr/bin</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="editable">False</property>
-                    <property name="text" translatable="yes">about nslive streaming
-nslive is a native program in linux about p2p streaming.
+                    <property name="text" translatable="yes">about pplive streaming
+pplive is a native program in linux about p2p streaming.
 it be developed by andycl98@163.com. so please access
 the http://andycl98.blog.163.com/ for his help.
-nslive ' program will call mplayer , so it will conflict
-with gmlive. so you need fix the nslive's config file like
+pplive ' program will call mplayer , so it will conflict
+with gmlive. so you need fix the pplive's config file like
 following.
 ~/.ulive/ulive.conf
 #mplayer install path
 #mplayer=/usr/bin/mplayer
 
-to add nslive support , download
-http://www.newseetv.com/soft/nslive-0.1.0.tar.gz
+to add pplive support , download
+http://www.newseetv.com/soft/pplive-0.1.0.tar.gz
 untar it and put it to /usr/local/bin/ or /usr/bin</property>
                   </widget>
                 </child>
@@ -549,7 +549,7 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
             <child>
               <widget class="GtkLabel" id="label20">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">nslive help</property>
+                <property name="label" translatable="yes">pplive help</property>
               </widget>
               <packing>
                 <property name="position">6</property>
@@ -739,8 +739,8 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkCheckButton" id="enable_nslive">
-                                <property name="label" translatable="yes">Enable Nslive</property>
+                              <widget class="GtkCheckButton" id="enable_pplive">
+                                <property name="label" translatable="yes">Enable PPLive</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -972,7 +972,7 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                       <widget class="GtkLabel" id="label26">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes"> &lt;b&gt;Nslive&lt;/b&gt;</property>
+                        <property name="label" translatable="yes"> &lt;b&gt;PPLive&lt;/b&gt;</property>
                         <property name="use_markup">True</property>
                       </widget>
                       <packing>
@@ -988,7 +988,7 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                         <child>
                           <widget class="GtkTable" id="table2">
                             <property name="visible">True</property>
-                            <property name="n_rows">2</property>
+                            <property name="n_rows">4</property>
                             <property name="n_columns">3</property>
                             <property name="column_spacing">6</property>
                             <property name="row_spacing">6</property>
@@ -1017,7 +1017,7 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkEntry" id="entry_nslive_cache">
+                              <widget class="GtkEntry" id="entry_pplive_cache">
                                 <property name="width_request">60</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -1029,7 +1029,7 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkEntry" id="entry_nslive_delay">
+                              <widget class="GtkEntry" id="entry_pplive_delay">
                                 <property name="width_request">60</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -1068,6 +1068,65 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                                 <property name="y_options"></property>
                               </packing>
                             </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="label3">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Channel URL:</property>
+                              </widget>
+                              <packing>
+                                <property name="top_attach">2</property>
+                                <property name="bottom_attach">3</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkEntry" id="entry_pplive_channel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="invisible_char">&#x25CF;</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="top_attach">2</property>
+                                <property name="bottom_attach">3</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkCheckButton" id="check_refresh_pplive_channels">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="relief">none</property>
+                                <property name="draw_indicator">True</property>
+                              </widget>
+                              <packing>
+                                <property name="top_attach">3</property>
+                                <property name="bottom_attach">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="label4">
+                                <property name="visible">True</property>
+                                <property name="ypad">1</property>
+                                <property name="label" translatable="yes">download the channels when program start every time</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="top_attach">3</property>
+                                <property name="bottom_attach">4</property>
+                              </packing>
+                            </child>
                           </widget>
                         </child>
                       </widget>
@@ -1089,7 +1148,7 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
             <child>
               <widget class="GtkLabel" id="label37">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">Nslive</property>
+                <property name="label" translatable="yes">PPLive</property>
               </widget>
               <packing>
                 <property name="position">2</property>

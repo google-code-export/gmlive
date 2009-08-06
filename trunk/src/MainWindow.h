@@ -35,7 +35,7 @@ class MainWindow : public Gtk::Window {
 		~MainWindow();
 		void on_conf_window_close(ConfWindow* dlg);
 		bool on_key_press_event(GdkEventKey* ev);
-		bool support_nslive()const {return enable_nslive;}
+		bool support_pplive()const {return enable_pplive;}
 		bool support_sopcast()const {return enable_sopcast;}
 		void hide_window();
 		void show_window();
@@ -139,20 +139,21 @@ class MainWindow : public Gtk::Window {
 		LivePlayer* 		        live_player;
 		ConfWindow*			confwindow;
 		int 				gmp_width;
-		int					gmp_height;
+		int				gmp_height;
 		double				gmp_rate;	//mplayer画面比例
-		int					window_width;
-		int					window_height;
-		int					window_x;
-		int					window_y;
+		int				window_width;
+		int				window_height;
+		int				window_x;
+		int				window_y;
 		bool				gmp_embed;	//是否嵌入mplayer
 		bool				channels_hide;
 		bool				toolbar_hide;
-		bool				enable_nslive;
+		bool				enable_pplive;
 		bool				enable_sopcast;
 		bool				enable_tray;
 		bool				full_screen;
 		bool				refresh_sopcast_channels; //是否每次启动程序都去下载sopcast的频道列表
+		bool				refresh_pplive_channels; //是否每次启动程序都去下载pplive 的频道列表
 };
 
 #endif // _MAINWINDOW_HH 

@@ -86,9 +86,10 @@ class Channel:public Gtk::TreeView
 		ChannelsTooltips* tooltips;
 		MainWindow* parent;
 	protected:
-		bool on_motion_event(GdkEventMotion* ev);
-		bool on_leave_event(GdkEventCrossing * ev);
-		bool tooltip_timeout(GdkEventMotion* ev);
+		//bool on_motion_event(GdkEventMotion* ev);
+		//bool on_leave_event(GdkEventCrossing * ev);
+		//bool tooltip_timeout(GdkEventMotion* ev);
+		bool on_tooltip_show(int x, int y, bool key_mode, const Glib::RefPtr<Gtk::Tooltip>& tooltip);
 	private:
 		struct CompareChannel:public std::binary_function 
 				      < Gtk::TreeModel::Row,

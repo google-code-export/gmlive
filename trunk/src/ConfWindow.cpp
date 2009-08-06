@@ -36,13 +36,16 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 
 	std::string& embed = GMConf["mplayer_embed"];
 	m_embed = (!embed.empty()) && (embed[0] == '1');
-	std::string& enable = GMConf["enable_nslive"];
-	m_enable_nslive = (!enable.empty())&&(enable[0] == '1' );
+	std::string& enable = GMConf["enable_pplive"];
+	m_enable_pplive = (!enable.empty())&&(enable[0] == '1' );
 	enable = GMConf["enable_sopcast"];
 	m_enable_sopcast = (!enable.empty())&&(enable[0] == '1' );
 
 	std::string& check_sop_list = GMConf["check_refresh_sopcast_channels"];
 	m_check_refresh_sopcast_channels = (!check_sop_list.empty())&&(check_sop_list[0] == '1');
+
+	std::string& check_pplive_list = GMConf["check_refresh_pplive_channels"];
+	m_check_refresh_pplive_channels = (!check_pplive_list.empty())&&(check_pplive_list[0] == '1');
 
 	std::string& close_try = GMConf["close_to_systray"];
 	m_close_try = (!close_try.empty()) && (close_try[0] == '1');
@@ -53,10 +56,11 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	m_paramter=GMConf["mplayer_paramter"];
 	m_mms_cache=GMConf["mms_mplayer_cache"];
 	m_sopcast_cache = GMConf["sopcast_mplayer_cache"];
-	m_nslive_cache = GMConf["nslive_mplayer_cache"];
-	m_nslive_delay = GMConf["nslive_delay_time"];
+	m_pplive_cache = GMConf["pplive_mplayer_cache"];
+	m_pplive_delay = GMConf["pplive_delay_time"];
 	m_sopcast_channel = GMConf["sopcast_channel_url"];
 	m_mms_channel   =   GMConf["mms_channel_url"];
+	m_pplive_channel =  GMConf["pplive_channel_url"];
 
 
 	m_pVariablesMap = new Gnome::Glade::VariablesMap(vbox_xml);
@@ -64,14 +68,16 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	m_pVariablesMap->connect_widget("entry_oplayer_cmd",m_oplayer_cmd);
 	m_pVariablesMap->connect_widget("check_embed",m_embed);
 	m_pVariablesMap->connect_widget("enable_sopcast", m_enable_sopcast);
-	m_pVariablesMap->connect_widget("enable_nslive", m_enable_nslive);
+	m_pVariablesMap->connect_widget("enable_pplive", m_enable_pplive);
 	m_pVariablesMap->connect_widget("entry_parameter", m_paramter);
 	m_pVariablesMap->connect_widget("entry_mms_cache", m_mms_cache);
 
-	if(m_enable_nslive)
+	if(m_enable_pplive)
 	{
-		m_pVariablesMap->connect_widget("entry_nslive_cache",m_nslive_cache);
-		m_pVariablesMap->connect_widget("entry_nslive_delay", m_nslive_delay);
+		m_pVariablesMap->connect_widget("entry_pplive_cache",m_pplive_cache);
+		m_pVariablesMap->connect_widget("entry_pplive_delay", m_pplive_delay);
+		m_pVariablesMap->connect_widget("entry_pplive_channel",m_pplive_channel);
+		m_pVariablesMap->connect_widget("check_refresh_pplive_channels",m_check_refresh_pplive_channels);
 	}
 	if(m_enable_sopcast)
 	{
@@ -111,7 +117,7 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 
 	if(!m_enable_sopcast)
 		notebook->remove_page(3);
-	if(!m_enable_nslive)
+	if(!m_enable_pplive)
 		notebook->remove_page(2);
 
 	set_default_size(600, 400);
@@ -144,17 +150,19 @@ void ConfWindow::write_to_GMConf()
 
 	GMConf["player_type"] = m_oplayer ? "1" : "0";
 	GMConf["mplayer_embed"] = m_embed ? "1" : "0";
-	GMConf["enable_nslive"] = m_enable_nslive ? "1" : "0";
+	GMConf["enable_pplive"] = m_enable_pplive ? "1" : "0";
 	GMConf["enable_sopcast"] = m_enable_sopcast ? "1" : "0";
 	GMConf["mplayer_paramter"]      =            m_paramter   ; 
 	GMConf["mms_mplayer_cache"]     =            m_mms_cache  ;
 	GMConf["sopcast_mplayer_cache"] =            m_sopcast_cache;
-	GMConf["nslive_mplayer_cache"]  =            m_nslive_cache ;
-	GMConf["nslive_delay_time"]     =            m_nslive_delay ;
+	GMConf["pplive_mplayer_cache"]  =            m_pplive_cache ;
+	GMConf["pplive_delay_time"]     =            m_pplive_delay ;
+	GMConf["pplive_channel_url"]    =	     m_pplive_channel;
 	GMConf["sopcast_channel_url"]   =            m_sopcast_channel;
 	GMConf["mms_channel_url"]       =            m_mms_channel; 
 	GMConf["other_player_cmd"]  = m_oplayer_cmd;
 	GMConf["check_refresh_sopcast_channels"] = m_check_refresh_sopcast_channels ? "1" : "0";
+	GMConf["check_refresh_pplive_channels"] = m_check_refresh_pplive_channels ? "1" : "0";
 	GMConf["close_to_systray"] = m_close_try ? "1" : "0";
 	GMConf["enable_tray"] = m_enable_try?"1":"0";
 }

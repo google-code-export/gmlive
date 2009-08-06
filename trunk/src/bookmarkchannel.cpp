@@ -88,9 +88,9 @@ void  BookMarkChannel::addLine(int num,const Glib::ustring& name,const std::stri
 	TypeChannel type_;
 	if("mms"==type)
 		type_ = MMS_CHANNEL;
-	else if("nslive" == type)
+	else if("pplive" == type)
 	{
-		if(!parent->support_nslive())
+		if(!parent->support_pplive())
 			return;
 		//else
 			//type_ = NSLIVE_CHANNEL;
@@ -138,8 +138,8 @@ void BookMarkChannel::saveLine(const Glib::ustring & name,const std::string& str
 			strtype = "sopcast";
 			break;
 		default:
-			stream = name +"\t#"+stream_+"\t#nslive";
-			strtype = "nslive";
+			stream = name +"\t#"+stream_+"\t#pplive";
+			strtype = "pplive";
 			break;
 	}
 	file<<stream<<std::endl;

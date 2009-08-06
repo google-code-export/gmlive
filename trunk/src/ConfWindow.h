@@ -48,9 +48,10 @@ class ConfWindow: public Gtk::Window
 		Glib::ustring m_paramter;
 		Glib::ustring m_sopcast_cache;
 		Glib::ustring m_mms_cache;
-		Glib::ustring m_nslive_delay;
-		Glib::ustring m_nslive_cache;
+		Glib::ustring m_pplive_delay;
+		Glib::ustring m_pplive_cache;
 		Glib::ustring m_sopcast_channel;
+		Glib::ustring m_pplive_channel;
 		Glib::ustring m_mms_channel;
 		Glib::ustring m_oplayer_cmd;
 		Gtk::ToggleButton* enable_tray;
@@ -60,9 +61,10 @@ class ConfWindow: public Gtk::Window
 
 		bool		m_oplayer;
 		bool		m_embed;
-		bool		m_enable_nslive;
+		bool		m_enable_pplive;
 		bool		m_enable_sopcast;
 		bool		m_check_refresh_sopcast_channels;
+		bool		m_check_refresh_pplive_channels;
 		bool		m_close_try;
 		bool		m_enable_try;
 
