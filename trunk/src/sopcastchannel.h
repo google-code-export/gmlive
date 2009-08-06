@@ -27,7 +27,7 @@ class SopcastChannel:public Channel
 {
 	public:
 		SopcastChannel(MainWindow* parent_);
-		void init();
+		bool init();
 		/**
 		 * @brief 读取频道列表
 		 * @param filename 残疾列表

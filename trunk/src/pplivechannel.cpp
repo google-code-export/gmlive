@@ -127,67 +127,12 @@ bool PpliveChannel::read_channels(const char* filename)
 	return true;
 }
 
-void PpliveChannel::init()
+bool PpliveChannel::init()
 {
 	char buf[512];
 	snprintf(buf, 512, "%s/.gmlive/pplive.lst", getenv("HOME") );
 
-	if (read_channels(buf))
-		return;
-
-	//属于读取默认列表不正确的处理
-	int result;
-	std::string filename;
-	Gtk::FileChooserDialog dialog(_("Please select a channel list file"),Gtk::FILE_CHOOSER_ACTION_OPEN);
-	Gtk::MessageDialog askDialog(_("open channles error")
-			,false
-			,Gtk::MESSAGE_QUESTION
-			,Gtk::BUTTONS_OK_CANCEL
-			);
-	askDialog.set_secondary_text(_("open the sopcast channel error,will you select a local file to instead the broken channel list?"));
-	result = askDialog.run();
-	switch(result){
-		case(Gtk::RESPONSE_OK):
-			//open a file select window
-			int f_result;
-			dialog.add_button(Gtk::Stock::CANCEL,Gtk::RESPONSE_CANCEL);
-			dialog.add_button(Gtk::Stock::OPEN,Gtk::RESPONSE_OK);
-			f_result = dialog.run();
-			switch(f_result){
-				case(Gtk::RESPONSE_OK):
-					filename = dialog.get_filename();
-					int out;
-					out = read_channels(filename.c_str());
-					if(!out) //本地的频道列表打开错误处理
-					{
-					Gtk::MessageDialog warnDialog(_("File error"),
-							false);
-					warnDialog.set_secondary_text(_("the local channles list file has wrong formats"));
-					warnDialog.run();
-					}
-					else
-					{
-						//这里处理把选择的文件替换成~/.gmlive/pplive.lst
-
-					}
-
-					break;
-				case(Gtk::RESPONSE_CANCEL):
-					break;
-				default:
-					break;
-			}
-
-			break;
-		case(Gtk::RESPONSE_CANCEL):
-			break;
-		default:
-			break;
-	}
-	return;
-
-	
-
+	return read_channels(buf);
 }
 
 LivePlayer* PpliveChannel::get_player(const std::string& stream, TypeChannel page)
@@ -214,8 +159,8 @@ void PpliveChannel::refresh_list()
 
 		const char* argv[6];
        		argv[0] = "wget";
-		argv[1] = "http://list.pplive.com/zh-cn/xml/new.xml";
-		//argv[1] = GMConf["pplive_channel_url"].c_str();
+		//argv[1] = "http://list.pplive.com/zh-cn/xml/new.xml";
+		argv[1] = GMConf["pplive_channel_url"].c_str();
 		argv[2] = "-O";
 		argv[3] = buf;
 		argv[4] = "-q";
@@ -244,10 +189,19 @@ void PpliveChannel::wait_wget_exit(GPid pid, int)
 	snprintf(buf, 512,"%s/.gmlive/pplive.lst.tmp",homedir);
 	snprintf(buf2, 512,"%s/.gmlive/pplive.lst",homedir);
 
-	if (rename(buf, buf2))
-		return;
+	rename(buf, buf2);
+	while (!init()) {
+		Glib::ustring filename = user_select_list(
+				_("open the pplive channel error,will you select a local file to instead the broken channel list?"));
+		if (filename.empty())
+			break;
+		else {
+			char command[512];
+			snprintf(command, 512, "cp \"%s\" \"%s\"", filename.c_str(), buf2);
+			system(command);
+		}
+	}
 
-	init();
 	signal_stop_refresh_.emit();
 }
 

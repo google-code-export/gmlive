@@ -111,10 +111,20 @@ void SopcastChannel::wait_wget_exit(GPid pid, int)
 	snprintf(buf, 512,"%s/.gmlive/sopcast.lst.tmp",homedir);
 	snprintf(buf2, 512,"%s/.gmlive/sopcast.lst",homedir);
 
-	if (rename(buf, buf2))
-		return;
+	rename(buf, buf2);
+	while (!init()) {
+		Glib::ustring filename = user_select_list(
+				_("open the sopcast channel error,will you select a local file to instead the broken channel list?"));
+		if (filename.empty())
+			break;
+		else {
+			char command[512];
+			snprintf(command, 512, "cp \"%s\" \"%s\"", filename.c_str(), buf2);
+			system(command);
+		}
+	}
 
-	init();
+
 	signal_stop_refresh_.emit();
 }
 void SopcastChannel::refresh_list()
@@ -184,89 +194,14 @@ void SopcastChannel::parse_channels(xmlNode* a_node)
 }
 					    
 
-void SopcastChannel::init()
+bool SopcastChannel::init()
 {
 	char buf[512];
 	char* homedir = getenv("HOME");
 	snprintf(buf, 512,"%s/.gmlive/sopcast.lst",homedir);
-	
-#if 0
-	m_liststore->clear();
-	xmlDoc* doc = xmlReadFile(buf, NULL, 0);
-	if (!doc) {
-		std::cout <<"file error: " << buf << std::endl;
-		goto backup_handle;
-	}
-
-	xmlNode* root_element = xmlDocGetRootElement(doc);
-	if (!root_element) {
-		xmlCleanupParser();
-		std::cout << "file is empty\n";
-		goto backup_handle;
-	}
-
-	parse_channels(root_element);
-	
-	xmlCleanupParser();
-	return;
-#endif
-
+	//
 	//如果读取默认列表正确则退出
-	if(read_channels(buf))
-		return;
-
-	//属于读取默认列表不正确的处理
-	int result;
-	std::string filename;
-	Gtk::FileChooserDialog dialog(_("Please select a channel list file"),Gtk::FILE_CHOOSER_ACTION_OPEN);
-	Gtk::MessageDialog askDialog(_("open channles error")
-			,false
-			,Gtk::MESSAGE_QUESTION
-			,Gtk::BUTTONS_OK_CANCEL
-			);
-	askDialog.set_secondary_text(_("open the sopcast channel error,will you select a local file to instead the broken channel list?"));
-	result = askDialog.run();
-	switch(result){
-		case(Gtk::RESPONSE_OK):
-			//open a file select window
-			int f_result;
-			dialog.add_button(Gtk::Stock::CANCEL,Gtk::RESPONSE_CANCEL);
-			dialog.add_button(Gtk::Stock::OPEN,Gtk::RESPONSE_OK);
-			f_result = dialog.run();
-			switch(f_result){
-				case(Gtk::RESPONSE_OK):
-					filename = dialog.get_filename();
-					int out;
-					out = read_channels(filename.c_str());
-					if(!out) //本地的频道列表打开错误处理
-					{
-					Gtk::MessageDialog warnDialog(_("File error"),
-							false);
-					warnDialog.set_secondary_text(_("the local channles list file has wrong formats"));
-					warnDialog.run();
-					}
-					else
-					{
-						//这里处理把选择的文件替换成~/.gmlive/sopcast.lst
-
-					}
-
-					break;
-				case(Gtk::RESPONSE_CANCEL):
-					break;
-				default:
-					break;
-			}
-
-			break;
-		case(Gtk::RESPONSE_CANCEL):
-			break;
-		default:
-			break;
-	}
-	return;
-
-	
+	return read_channels(buf);
 }
 bool SopcastChannel::read_channels(const char* filename)
 {

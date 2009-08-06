@@ -469,3 +469,26 @@ bool Channel::on_tooltip_show(int x, int y, bool key_mode, const Glib::RefPtr<Gt
 	}
 	return false;
 }
+
+Glib::ustring Channel::user_select_list(const char* title)
+{
+	//属于读取默认列表不正确的处理
+	std::string filename;
+	Gtk::FileChooserDialog dialog(_("Please select a channel list file"),Gtk::FILE_CHOOSER_ACTION_OPEN);
+	Gtk::MessageDialog askDialog(_("open channles error")
+			,false
+			,Gtk::MESSAGE_QUESTION
+			,Gtk::BUTTONS_OK_CANCEL
+			);
+	askDialog.set_secondary_text(title);
+	if (askDialog.run() == Gtk::RESPONSE_OK) {
+		//open a file select window
+		dialog.add_button(Gtk::Stock::CANCEL,Gtk::RESPONSE_CANCEL);
+		dialog.add_button(Gtk::Stock::OPEN,Gtk::RESPONSE_OK);
+		if ( dialog.run() == Gtk::RESPONSE_OK)
+			return dialog.get_filename();
+
+	}
+	return "";
+}
+
