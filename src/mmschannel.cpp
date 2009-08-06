@@ -77,7 +77,7 @@ void MMSChannel::init()
 
 }
 
-void MMSChannel::addLine(const int num, const Glib::ustring & name,const std::string& stream,const Glib::ustring& groupname)
+void MMSChannel::addLine(int num, const Glib::ustring & name,const std::string& stream,const Glib::ustring& groupname)
 {
 	Gtk::TreeModel::Children children = m_liststore->children();
 	Gtk::TreeModel::iterator listiter;

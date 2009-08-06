@@ -31,7 +31,7 @@ class RecentChannel:public Channel
 		void saveLine(const Glib::ustring& name,const std::string& sream,TypeChannel type);
 	protected:
 		/** 只添加进列表中*/
-		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& type);
+		void  addLine(int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& type);
 	protected:
 		LivePlayer* get_player(const std::string& stream,TypeChannel page);
 };

@@ -12,21 +12,21 @@ gmlive_SOURCES = \
 		 MainWindow.cpp \
 		 ConfWindow.cpp \
 		 channel.cpp \
-		 nslivechannel.cpp \
 		 ChannelsTooltips.cpp \
 		 mmschannel.cpp \
 		 sopcastchannel.cpp \
+		 pplivechannel.cpp \
 		 recentchannel.cpp \
 		 bookmarkchannel.cpp \
 		 gmplayer.cpp \
 		 sopcastLivePlayer.cpp \
 		 mmsLivePlayer.cpp \
-		 nsLivePlayer.cpp \
 		 playStream.cpp \
 		 recordStream.cpp \
 		 TrayIcon.cpp
 
 noinst_HEADERS = \
+	     scope_gruard.h \
 		 ec_throw.h \
 		 CodeConverter.h \
 		 scope_gruard.h \
@@ -35,7 +35,7 @@ noinst_HEADERS = \
 		 channel.h \
 		 ChannelsTooltips.h \
 		 sopcastchannel.h \
-		 nslivechannel.h \
+		 pplivechannel.h \
 		 mmschannel.h \
 		 recentchannel.h \
 		 bookmarkchannel.h \
@@ -44,7 +44,6 @@ noinst_HEADERS = \
 		 livePlayer.h \
 		 sopcastLivePlayer.h \
 		 mmsLivePlayer.h \
-		 nsLivePlayer.h \
 		 playStream.h \
 		 recordStream.h \
 		 TrayIcon.h

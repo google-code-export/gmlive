@@ -37,7 +37,7 @@ class MMSChannel:public Channel
 		{ return signal_start_refresh_; }	
 	protected:
 		LivePlayer* get_player(const std::string& stream,TypeChannel page);
-		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
+		void  addLine(int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
 	private:
 
 		void wait_wget_exit(GPid pid, int);

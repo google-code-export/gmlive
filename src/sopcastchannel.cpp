@@ -12,6 +12,7 @@
 #include "sopcastchannel.h"
 #include "MainWindow.h"
 #include "sopcastLivePlayer.h"
+#include "scope_gruard.h"
 
 
 xmlNode* get_sop_address(xmlNode* a_node,
@@ -236,7 +237,7 @@ void SopcastChannel::init()
 				case(Gtk::RESPONSE_OK):
 					filename = dialog.get_filename();
 					int out;
-					out = read_channels(filename);
+					out = read_channels(filename.c_str());
 					if(!out) //本地的频道列表打开错误处理
 					{
 					Gtk::MessageDialog warnDialog(_("File error"),
@@ -267,25 +268,26 @@ void SopcastChannel::init()
 
 	
 }
-bool SopcastChannel::read_channels(const std::string& filename)
+bool SopcastChannel::read_channels(const char* filename)
 {
 	m_liststore->clear();
-	xmlDoc* doc = xmlReadFile(filename.c_str(), NULL, 0);
+	xmlDoc* doc = xmlReadFile(filename, NULL, 0);
 	if (!doc) {
-		std::cout <<"file error: " << filename << std::endl;
+		std::cerr <<"file error: " << filename << std::endl;
 		return false;
 	}
 
 	xmlNode* root_element = xmlDocGetRootElement(doc);
+	ScopeGuard a = MakeGuard(&xmlCleanupParser);
 	if (!root_element) {
-		xmlCleanupParser();
-		std::cout << "file is empty\n";
+		//xmlCleanupParser();
+		std::cerr << "file is empty" << std::endl;
 		return false;
 	}
 
 	parse_channels(root_element);
 	
-	xmlCleanupParser();
+	//xmlCleanupParser();
 	return true;
 }
 

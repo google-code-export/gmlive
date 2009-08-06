@@ -23,7 +23,6 @@
 #include "MainWindow.h"
 #include "mmsLivePlayer.h"
 #include "sopcastLivePlayer.h"
-#include "nsLivePlayer.h"
 
 BookMarkChannel::BookMarkChannel(MainWindow* parent_):Channel( parent_)
 {
@@ -34,10 +33,8 @@ LivePlayer* BookMarkChannel::get_player(const std::string& stream,TypeChannel pa
 	switch( page ) {
 		case MMS_CHANNEL:
 			return MmsLivePlayer::create(stream);
-		case NSLIVE_CHANNEL:
-			{
-				return NsLivePlayer::create(stream);
-			}
+		//case NSLIVE_CHANNEL:
+				//return NsLivePlayer::create(stream);
 		case SOPCAST_CHANNEL:
 			return SopcastLivePlayer::create(stream);
 	}
@@ -85,7 +82,7 @@ void BookMarkChannel::init()
 }
 
 
-void  BookMarkChannel::addLine(const int num,const Glib::ustring& name,const std::string& stream_,const Glib::ustring& type)
+void  BookMarkChannel::addLine(int num,const Glib::ustring& name,const std::string& stream_,const Glib::ustring& type)
 {
 
 	TypeChannel type_;
@@ -95,8 +92,8 @@ void  BookMarkChannel::addLine(const int num,const Glib::ustring& name,const std
 	{
 		if(!parent->support_nslive())
 			return;
-		else
-			type_ = NSLIVE_CHANNEL;
+		//else
+			//type_ = NSLIVE_CHANNEL;
 	}
 	else if("sopcast" == type)
 	{
