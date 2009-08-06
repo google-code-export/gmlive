@@ -305,7 +305,7 @@
           <widget class="GtkLabel" id="label6">
             <property name="visible">True</property>
             <property name="label" translatable="yes">			                  
-                                             gmlive 0.21.3 release
+                                             gmlive 0.22 release
 
               GMLive try to became a universal streaming media player case.
          it use Almighty Mplayer for its engine. the Goal is to support  a 
@@ -526,19 +526,10 @@ file.  unzip it and put it to /usr/local/bin/ or /usr/bin</property>
                     <property name="can_focus">True</property>
                     <property name="editable">False</property>
                     <property name="text" translatable="yes">about pplive streaming
-pplive is a native program in linux about p2p streaming.
-it be developed by andycl98@163.com. so please access
-the http://andycl98.blog.163.com/ for his help.
-pplive ' program will call mplayer , so it will conflict
-with gmlive. so you need fix the pplive's config file like
-following.
-~/.ulive/ulive.conf
-#mplayer install path
-#mplayer=/usr/bin/mplayer
-
-to add pplive support , download
-http://www.newseetv.com/soft/pplive-0.1.0.tar.gz
-untar it and put it to /usr/local/bin/ or /usr/bin</property>
+pplive is famous  p2p streaming.
+so please access the http://www.pplive.com for his help.
+To add pplive support , download
+the xpplive  and put it to /usr/local/bin/ or /usr/bin</property>
                   </widget>
                 </child>
               </widget>
@@ -1069,12 +1060,6 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                               </packing>
                             </child>
                             <child>
-                              <placeholder/>
-                            </child>
-                            <child>
-                              <placeholder/>
-                            </child>
-                            <child>
                               <widget class="GtkLabel" id="label3">
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
@@ -1126,6 +1111,12 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
                                 <property name="top_attach">3</property>
                                 <property name="bottom_attach">4</property>
                               </packing>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
                             </child>
                           </widget>
                         </child>

@@ -41,18 +41,18 @@ Channel::Channel(MainWindow* parent_):parent( parent_)
 	channel->append_column(_("bitrate"), columns.freq);
 	channel->append_column(_("user"), columns.users);
 
+	/*
 	this->set_has_tooltip();
 	this->set_tooltip_window(*tooltips);
 	this->signal_query_tooltip().connect(sigc::mem_fun(*this,
 				&Channel::on_tooltip_show));
-	/*
+	*/
 	this->signal_motion_notify_event().
 		connect(sigc::mem_fun(*this, &Channel::on_motion_event),
 				false);
 	this->signal_leave_notify_event().
 		connect(sigc::mem_fun(*this, &Channel::on_leave_event),
 				false);
-	*/
 
 	channel->show();
 }
@@ -343,7 +343,6 @@ bool Channel::on_clean_foreach(const Gtk::TreeModel::iterator& iter)
 	(*iter)[columns.searched] = false;
 	return false;
 }
-/*
 bool Channel::on_leave_event(GdkEventCrossing * ev)
 {
 	if (tipTimeout.connected()) {
@@ -366,8 +365,8 @@ bool Channel::tooltip_timeout(GdkEventMotion * ev)
 			return false;
 		TypeChannel type = (*iter)[columns.type];
 		Glib::ustring type_;
-		//if(PPLIVE_CHANNEL == type)
-			//type_  = _("NSLive Stream");
+		if(PPLIVE_CHANNEL == type)
+			type_  = _("PPLive Stream");
 		if(SOPCAST_CHANNEL == type)
 			type_ = _("SopCast Stream");
 		else if(MMS_CHANNEL == type)
@@ -380,7 +379,11 @@ bool Channel::tooltip_timeout(GdkEventMotion * ev)
 		std::string stream = (*iter)[columns.stream];
 		Glib::ustring text;
 
-		text = "<span weight='bold'>" +name +"\n" + _("users:")+user+
+		if(PPLIVE_CHANNEL == type)
+			text = "<span weight='bold'>" +name +"\n" + _("users:")+user+
+			"\n<span weight='bold'></span>"+_("Type:")+type_+"\n</span>";
+		else
+			text = "<span weight='bold'>" +name +"\n" + _("users:")+user+
 			"\nURL:</span> " + stream +"\n<span weight='bold'>"+_("Type:")+type_+"\n</span>";
 		//Glib::RefPtr<Gdk::Pixbuf> logo= Gdk::Pixbuf::create_from_file(DATA_DIR"/gmlive.png");
 
@@ -425,7 +428,6 @@ bool Channel::on_motion_event(GdkEventMotion * ev)
 
 	return true;
 }
-*/
 
 
 bool Channel::on_tooltip_show(int x, int y, bool key_mode, const Glib::RefPtr<Gtk::Tooltip>& tooltip)
