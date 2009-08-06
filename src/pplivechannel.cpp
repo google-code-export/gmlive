@@ -29,6 +29,7 @@
 #include "pplivechannel.h"
 #include "MainWindow.h"
 #include "scope_gruard.h"
+#include "pplivePlayer.h"
 
 xmlNode* get_pplive_address(xmlNode* a_node,
 		Glib::ustring& str)
@@ -123,6 +124,7 @@ bool PpliveChannel::read_channels(const char* filename)
 	}
 
 	parse_channels(root_element);
+	return true;
 }
 
 void PpliveChannel::init()
@@ -132,20 +134,128 @@ void PpliveChannel::init()
 
 	if (read_channels(buf))
 		return;
+
+	//属于读取默认列表不正确的处理
+	int result;
+	std::string filename;
+	Gtk::FileChooserDialog dialog(_("Please select a channel list file"),Gtk::FILE_CHOOSER_ACTION_OPEN);
+	Gtk::MessageDialog askDialog(_("open channles error")
+			,false
+			,Gtk::MESSAGE_QUESTION
+			,Gtk::BUTTONS_OK_CANCEL
+			);
+	askDialog.set_secondary_text(_("open the sopcast channel error,will you select a local file to instead the broken channel list?"));
+	result = askDialog.run();
+	switch(result){
+		case(Gtk::RESPONSE_OK):
+			//open a file select window
+			int f_result;
+			dialog.add_button(Gtk::Stock::CANCEL,Gtk::RESPONSE_CANCEL);
+			dialog.add_button(Gtk::Stock::OPEN,Gtk::RESPONSE_OK);
+			f_result = dialog.run();
+			switch(f_result){
+				case(Gtk::RESPONSE_OK):
+					filename = dialog.get_filename();
+					int out;
+					out = read_channels(filename.c_str());
+					if(!out) //本地的频道列表打开错误处理
+					{
+					Gtk::MessageDialog warnDialog(_("File error"),
+							false);
+					warnDialog.set_secondary_text(_("the local channles list file has wrong formats"));
+					warnDialog.run();
+					}
+					else
+					{
+						//这里处理把选择的文件替换成~/.gmlive/pplive.lst
+
+					}
+
+					break;
+				case(Gtk::RESPONSE_CANCEL):
+					break;
+				default:
+					break;
+			}
+
+			break;
+		case(Gtk::RESPONSE_CANCEL):
+			break;
+		default:
+			break;
+	}
+	return;
+
+	
+
 }
 
 LivePlayer* PpliveChannel::get_player(const std::string& stream, TypeChannel page)
 {
-	return NULL;
+	return PpLivePlayer::create(stream);
 }
 
 void PpliveChannel::refresh_list()
 {
-	init();
+	if (refresh)
+		return;
+	refresh = true;
+	signal_start_refresh_.emit();
+
+	int pid = fork();
+	if (pid == -1)
+		return ;
+	if (pid == 0) {
+		//close(STDOUT_FILENO);
+		//close(STDERR_FILENO);
+		char buf[512];
+		char* homedir = getenv("HOME");
+		snprintf(buf, 512,"%s/.gmlive/pplive.lst.tmp",homedir);
+
+		const char* argv[6];
+       		argv[0] = "wget";
+		argv[1] = "http://list.pplive.com/zh-cn/xml/new.xml";
+		//argv[1] = GMConf["pplive_channel_url"].c_str();
+		argv[2] = "-O";
+		argv[3] = buf;
+		argv[4] = "-q";
+		argv[5] = NULL;
+
+		execvp("wget", (char* const *)argv);
+		perror("wget execvp:");
+		exit(127);
+	} 
+	Glib::signal_child_watch().connect
+		(sigc::mem_fun(*this, &PpliveChannel::wait_wget_exit), pid);
 }
 
-PpliveChannel::PpliveChannel(MainWindow* parent_) :
-	Channel(parent_)
+void PpliveChannel::wait_wget_exit(GPid pid, int)
 {
+	if (wget_pid != -1) {
+		waitpid(wget_pid, NULL, 0);
+		wget_pid = -1;
 
+		refresh = false;
+	}
+	
+	char buf[512];
+	char buf2[512];
+	char* homedir = getenv("HOME");
+	snprintf(buf, 512,"%s/.gmlive/pplive.lst.tmp",homedir);
+	snprintf(buf2, 512,"%s/.gmlive/pplive.lst",homedir);
+
+	if (rename(buf, buf2))
+		return;
+
+	init();
+	signal_stop_refresh_.emit();
+}
+
+
+PpliveChannel::PpliveChannel(MainWindow* parent_) :
+	Channel( parent_)
+	,wget_pid(-1)
+	,refresh(false)
+{
+	init();
 }
