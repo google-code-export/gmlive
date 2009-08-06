@@ -71,7 +71,7 @@ void PpLivePlayer::start(GMplayer& gmp)
 		return ;
 	if (pid == 0) {
 		close(STDOUT_FILENO);
-
+		chdir("/tmp");
 		const char* argv[5];
 
 		argv[0] = "xpplive";
@@ -91,7 +91,9 @@ void PpLivePlayer::start(GMplayer& gmp)
 
 	signal_status_.emit(0);
 
-	sop_time_conn = Glib::signal_timeout().connect(sigc::mem_fun(*this, &PpLivePlayer::on_sop_time_status), 5000);
+	std::string& delay = GMConf["pplive_delay_time"];
+	int idelay = atoi(delay.c_str());
+	sop_time_conn = Glib::signal_timeout().connect(sigc::mem_fun(*this, &PpLivePlayer::on_sop_time_status), idelay * 1000);
 
 }
 
