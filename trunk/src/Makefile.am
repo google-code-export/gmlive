@@ -20,6 +20,7 @@ gmlive_SOURCES = \
 		 bookmarkchannel.cpp \
 		 gmplayer.cpp \
 		 sopcastLivePlayer.cpp \
+		 pplivePlayer.cpp \
 		 mmsLivePlayer.cpp \
 		 playStream.cpp \
 		 recordStream.cpp \
@@ -43,6 +44,7 @@ noinst_HEADERS = \
 		 gmlive.h 	\
 		 livePlayer.h \
 		 sopcastLivePlayer.h \
+		 pplivePlayer.h \
 		 mmsLivePlayer.h \
 		 playStream.h \
 		 recordStream.h \
