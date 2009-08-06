@@ -172,6 +172,7 @@ Glib::ustring ui_info =
 "			<menuitem action='ViewEmbedMplayer'/>"
 "			<menuitem action='ViewShowChannel'/>"
 "			<menuitem action='ViewShowToolbar'/>"
+"			<menuitem action='FullScreen'/>"
 "			<menuitem action='AlwaysOnTop'/>"
 "			<menuitem action='ViewPreferences'/>"
 "		</menu>"
@@ -229,7 +230,7 @@ void register_stock_items()
 
 	const Gtk::StockID stock_id("HideChannels");
 	factory->add(stock_id, icon_set);
-	Gtk::Stock::add(Gtk::StockItem(stock_id, _("HideChannels")));
+	Gtk::Stock::add(Gtk::StockItem(stock_id, _("_HideChannels")));
 
 	//add fullscreen icons to iconset
 	//Gtk::IconSource source_fullscreen;
@@ -253,7 +254,7 @@ void register_stock_items()
 
 	const Gtk::StockID stock_id_openurl("OpenURL");
 	factory->add(stock_id_openurl, icon_set_openurl);
-	Gtk::Stock::add(Gtk::StockItem(stock_id_openurl, _("OpenURL")));
+	Gtk::Stock::add(Gtk::StockItem(stock_id_openurl, _("_OpenURL")));
 	factory->add_default();
 }
 void MainWindow::init_ui_manager()
@@ -265,11 +266,11 @@ void MainWindow::init_ui_manager()
 	//File menu:
 	action_group->add(Gtk::Action::create("FileMenu", _("_File")));
 
-	action = Gtk::Action::create("OpenFile", Gtk::Stock::OPEN,_("Open local file"));
+	action = Gtk::Action::create("OpenFile", Gtk::Stock::OPEN,_("_Open local file"));
 	action->set_tooltip(_("Open Local File"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_open_file));
-	action = Gtk::Action::create("OpenURL", Gtk::StockID("OpenURL"),_("OpenURL"));
+	action = Gtk::Action::create("OpenURL", Gtk::StockID("OpenURL"),_("Open_URL"));
 	action->set_tooltip(_("Open Network Stream"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_open_url));
@@ -300,7 +301,7 @@ void MainWindow::init_ui_manager()
 			sigc::mem_fun(*this, &MainWindow::on_fullscreen));
 
 	action_group->add(Gtk::ToggleAction::create("Mute",
-				_("MUTE"), _("MUTE"), false), 
+				_("_Mute"), _("Mute"), false), 
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_mute));
 
 	action_group->add(Gtk::Action::create("FileQuit", Gtk::Stock::QUIT),
