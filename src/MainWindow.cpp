@@ -491,7 +491,7 @@ void MainWindow::on_menu_file_mute()
 
 void MainWindow::on_menu_file_quit()
 {
-		DLOG("on_menu_file_quit");
+	DLOG("on_menu_file_quit");
 	this->get_size( window_width, window_height);
 	gmp->stop();
 	Gtk::Main::quit();
@@ -547,9 +547,9 @@ bool MainWindow::on_delete_event(GdkEventAny* event)
 {
 	this->get_size( window_width, window_height);
 	if(!atoi(GMConf["close_to_systray"].c_str()))
-		Gtk::Main::quit();
+		on_menu_file_quit();
 	else if (!atoi(GMConf["enable_tray"].c_str())) 
-		Gtk::Main::quit();
+		on_menu_file_quit();
 	else if (gmp_embed)
 			gmp->stop();
 	this->get_position(window_x, window_y);
@@ -799,38 +799,34 @@ MainWindow::MainWindow():
 
 	if(enable_sopcast)
 	{
-	channel = Gtk::manage(new SopcastChannel(this));
-	swnd = dynamic_cast<Gtk::ScrolledWindow*>
-		(ui_xml->get_widget("sopcastChannelWnd"));
-	swnd->add(*channel);
-	DLOG("support sopcast\n");
-	if(refresh_sopcast_channels)
-		channel->refresh_list();
+		channel = Gtk::manage(new SopcastChannel(this));
+		swnd = dynamic_cast<Gtk::ScrolledWindow*>
+			(ui_xml->get_widget("sopcastChannelWnd"));
+		swnd->add(*channel);
+		DLOG("support sopcast\n");
+		if(refresh_sopcast_channels)
+			channel->refresh_list();
 	}
 	else
 		channels->remove_page(1);
 
-	channel = Gtk::manage(new PpliveChannel(this));
-	swnd = dynamic_cast<Gtk::ScrolledWindow*>
-		(ui_xml->get_widget("ppliveChannelWnd"));
-	swnd->add(*channel);
-	channel->refresh_list();
-
-	//if(enable_pplive)
-	//{
-	//channel = Gtk::manage(new class NSLiveChannel(this));
-	//swnd = dynamic_cast<Gtk::ScrolledWindow*>
-	//(ui_xml->get_widget("ppliveChannelWnd"));
-	//swnd->add(*channel);
-	//DLOG("support pplive\n");
-	//}
-	//else
-	//{
-	//if(enable_sopcast)
-	//channels->remove_page(2);
-	//else
-	//channels->remove_page(1);
-	//}
+	if(enable_pplive)
+	{
+		channel = Gtk::manage(new class PpliveChannel(this));
+		swnd = dynamic_cast<Gtk::ScrolledWindow*>
+			(ui_xml->get_widget("ppliveChannelWnd"));
+		swnd->add(*channel);
+		DLOG("support pplive\n");
+		if (refresh_pplive_channels)
+			channel->refresh_list();
+	}
+	else
+	{
+		if(enable_sopcast)
+			channels->remove_page(2);
+		else
+			channels->remove_page(1);
+	}
 
 
 	recent_channel = Gtk::manage(new class RecentChannel(this));

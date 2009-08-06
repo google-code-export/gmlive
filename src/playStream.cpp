@@ -111,12 +111,12 @@ void PlayStream::initialize()
 		const char* argv[argv_len];
 		argv[0] = "mplayer";
 		argv[1] = "-slave";
-		argv[2] = "-idle";
-		argv[3] = "-quiet";
-		argv[4] = "-cache";
-		argv[5] = cache_buf;
+		//argv[2] = "-idle";
+		argv[2] = "-quiet";
+		argv[3] = "-cache";
+		argv[4] = cache_buf;
 		iter = pars.begin();
-		int i = 6;
+		int i = 5;
 		for (; i < argv_len && iter != pars.end(); i++, ++iter) {
 			argv[i] = (*iter).c_str();
 		}
@@ -129,7 +129,9 @@ void PlayStream::initialize()
 			argv[i++] = "-wid";
 			argv[i++] = wid_buf;
 		}
+		argv[i++]=file.c_str();
 		argv[i] = NULL;
+
 
 		my_system((char* const *) argv);
 	}
@@ -142,13 +144,12 @@ void PlayStream::start()
 	//if (running()||(is_oplayer))
 	if (running())
 		stop();
-	printf("%s:%d\n",__func__,__LINE__);
 	initialize();
 	printf("%s:%d\n",__func__,__LINE__);
-	char cb[256];
-	int len = snprintf(cb, 256, "loadfile %s\n", file.c_str());
-	cb[len] = 0;
-	send_ctrl_command(cb);
+	//char cb[256];
+	//int len = snprintf(cb, 256, "loadfile %s\n", file.c_str());
+	//cb[len] = 0;
+	//send_ctrl_command(cb);
 
 }
 

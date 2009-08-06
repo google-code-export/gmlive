@@ -103,12 +103,16 @@ GMplayer::~GMplayer()
 void GMplayer::wait_mplayer_exit(GPid pid, int)
 {
 	if (child_pid != -1) {
+		if (is_running) {
+			sleep(1);
+			start();
+			return;
+		}
 		ptm_conn.disconnect();
 
 		waitpid(child_pid, NULL, 0);
 		child_pid = -1;
 
-		is_running = false;
 		on_mplayer_exit();
 	}
 
@@ -169,6 +173,7 @@ void GMplayer::send_ctrl_command(const char* c)
 
 void GMplayer::stop()
 {
+	is_running = false;
 	if (child_pid != -1) {
 		ptm_conn.disconnect();
 		wait_conn.disconnect();
@@ -183,7 +188,6 @@ void GMplayer::stop()
 
 		child_pid = -1;	
 	}
-	is_running = false;
 }
 
 
