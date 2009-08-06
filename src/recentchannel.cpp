@@ -91,9 +91,9 @@ void  RecentChannel::addLine(int num,const Glib::ustring& name,const std::string
 	TypeChannel type_;
 	if("mms"==type)
 		type_ = MMS_CHANNEL;
-	else if("nslive" == type)
+	else if("pplive" == type)
 	{
-		if(!parent->support_nslive())
+		if(!parent->support_pplive())
 			return;
 		//else
 			//type_ = NSLIVE_CHANNEL;
@@ -157,8 +157,8 @@ void RecentChannel::saveLine(const Glib::ustring & name,const std::string& strea
 	}
 	else
 	{
-		stream = name +"\t#"+stream_+"\t#nslive";
-		strtype = "nslive";
+		stream = name +"\t#"+stream_+"\t#pplive";
+		strtype = "pplive";
 	}
 	std::vector<std::string>::iterator iter = std::find(list.begin(),list.end(),stream);
 	if(iter == list.end())

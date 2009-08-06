@@ -750,7 +750,7 @@ MainWindow::MainWindow():
 	,channels_hide(false)
 	,toolbar_hide(false)
 	,refresh_sopcast_channels(true)
-	,enable_nslive(true)
+	,enable_pplive(true)
 	,enable_sopcast(true)
 	,full_screen(false)
 	,window_width(1)
@@ -793,7 +793,7 @@ MainWindow::MainWindow():
 	swnd->add(*channel);
 
 	init();
-	/** 检测是否支持nslive和sopcast */
+	/** 检测是否支持pplive和sopcast */
 	check_support();
 	refresh_sopcast_channels = atoi(GMConf["check_refresh_sopcast_channels"].c_str());
 
@@ -816,13 +816,13 @@ MainWindow::MainWindow():
 	swnd->add(*channel);
 	channel->refresh_list();
 
-	//if(enable_nslive)
+	//if(enable_pplive)
 	//{
 	//channel = Gtk::manage(new class NSLiveChannel(this));
 	//swnd = dynamic_cast<Gtk::ScrolledWindow*>
-	//(ui_xml->get_widget("nsliveChannelWnd"));
+	//(ui_xml->get_widget("ppliveChannelWnd"));
 	//swnd->add(*channel);
-	//DLOG("support nslive\n");
+	//DLOG("support pplive\n");
 	//}
 	//else
 	//{
@@ -1085,26 +1085,26 @@ bool MainWindow::check_file(const char* name)
 }
 void MainWindow::check_support()
 {
-	std::string nslive_cmd("nslive");
+	std::string pplive_cmd("xpplive");
 	std::string sopcast_cmd("sp-sc-auth");
 
 	enable_sopcast=check_file(sopcast_cmd.c_str());
-	enable_nslive=check_file(nslive_cmd.c_str());
+	enable_pplive=check_file(pplive_cmd.c_str());
 
 	std::string& enablesopcast_ = GMConf["enable_sopcast"];
-	std::string& enablenslive_ = GMConf["enable_nslive"];
-	if(enablesopcast_[0]=='1'|enablenslive_[0]=='1')
-		if(!enable_nslive| !enable_sopcast)
+	std::string& enablepplive_ = GMConf["enable_pplive"];
+	if(enablesopcast_[0]=='1'|enablepplive_[0]=='1')
+		if(!enable_pplive| !enable_sopcast)
 		{
 			Gtk::MessageDialog warnDialog(_("NO SUPPORT"),
 					false);
 			std::string msg="";
-			if((!enable_sopcast && (enablesopcast_[0]=='1'))&&(!enable_nslive && (enablenslive_[0]=='1')))
-				msg+=std::string(_("you have not install sopcast and nslive program, so GMLive can't support them now"))+"\n";
+			if((!enable_sopcast && (enablesopcast_[0]=='1'))&&(!enable_pplive && (enablepplive_[0]=='1')))
+				msg+=std::string(_("you have not install sopcast and pplive program, so GMLive can't support them now"))+"\n";
 			else if(!enable_sopcast && (enablesopcast_[0]=='1'))
 				msg+=std::string(_("you have not install sopcast program,so GMLive can't support it now"))+"\n";
-			else if(!enable_nslive && (enablenslive_[0]=='1'))
-				msg+=std::string(_("you have not install nslive program,so GMLive can't support it now"))+"\n";
+			else if(!enable_pplive && (enablepplive_[0]=='1'))
+				msg+=std::string(_("you have not install pplive program,so GMLive can't support it now"))+"\n";
 			else
 				return;
 			msg+=_(" So you can install the program first");
@@ -1113,8 +1113,8 @@ void MainWindow::check_support()
 			warnDialog.run();
 
 		}
-	if(enablenslive_[0]=='0')
-		enable_nslive =0;
+	if(enablepplive_[0]=='0')
+		enable_pplive =0;
 	if(enablesopcast_[0]=='0')
 		enable_sopcast=0;
 
@@ -1135,16 +1135,18 @@ void MainWindow::init()
 		GMConf["other_player_cmd"]="";
 		GMConf["mplayer_embed"]		=	"1";
 		GMConf["enable_sopcast"] = "1";
-		GMConf["enable_nslive"]= "1";
+		GMConf["enable_pplive"]= "1";
 		GMConf["mms_mplayer_cache"]     =       "8192";
 		GMConf["sopcast_mplayer_cache"] =       "64";
-		GMConf["nslive_mplayer_cache"]  =       "64";
-		GMConf["nslive_delay_time"]     =       "2";
+		GMConf["pplive_mplayer_cache"]  =       "64";
+		GMConf["pplive_delay_time"]     =       "2";
 		GMConf["channels_hide"]		=	"0";
 		GMConf["toolbar_hide"]		=	"0";
 		GMConf["sopcast_channel_url"]	=	"http://channel.sopcast.com/gchlxml";
 		GMConf["mms_channel_url"]    	=       "http://www.gooth.cn/mms.lst";
+		GMConf["pplive_channel_url"]    =       "http://list.pplive.com/zh-cn/xml/new.xml";
 		GMConf["check_refresh_sopcast_channels"] = "1";
+		GMConf["check_refresh_pplive_channels"] = "1";
 		GMConf["enable_tray"]		= "1";
 		return;
 	}
