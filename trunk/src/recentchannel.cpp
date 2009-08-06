@@ -95,8 +95,8 @@ void  RecentChannel::addLine(int num,const Glib::ustring& name,const std::string
 	{
 		if(!parent->support_pplive())
 			return;
-		//else
-			//type_ = NSLIVE_CHANNEL;
+		else
+			type_ = PPLIVE_CHANNEL;
 	}
 	else if("sopcast" == type)
 	{
