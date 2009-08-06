@@ -23,6 +23,7 @@
 #include "livePlayer.h"
 #include "recentchannel.h"
 #include "bookmarkchannel.h"
+#include "ChannelsTooltips.h"
 #include "recordStream.h"
 #include <cassert>
 #include <glib/gi18n.h>
@@ -433,12 +434,11 @@ bool Channel::on_tooltip_show(int x, int y, bool key_mode, const Glib::RefPtr<Gt
 	Gtk::TreeViewColumn * column;
 	int cell_x, cell_y;
 	if (this->
-			get_path_at_pos(x, y-5, path, column, cell_x,
+			get_path_at_pos(x, y, path, column, cell_x,
 				cell_y)) {
 		Gtk::TreeModel::iterator iter =
 			this->get_model()->get_iter(path);
 		if (!iter){
-			tooltips->hideTooltip();
 			return false;
 		}
 		TypeChannel type = (*iter)[columns.type];
@@ -457,7 +457,13 @@ bool Channel::on_tooltip_show(int x, int y, bool key_mode, const Glib::RefPtr<Gt
 		std::string stream = (*iter)[columns.stream];
 		Glib::ustring text;
 
-		text = "<span weight='bold'>" +name +"\n" + _("users:")+user+
+		if(PPLIVE_CHANNEL == type){
+			text = "<span weight='bold'>" +name +"\n" + _("users:")+user+
+			"\n<span weight='bold'></span>"+_("Type:")+type_+"\n</span>";
+
+		}
+		else
+			text = "<span weight='bold'>" +name +"\n" + _("users:")+user+
 			"\nURL:</span> " + stream +"\n<span weight='bold'>"+_("Type:")+type_+"\n</span>";
 		//Glib::RefPtr<Gdk::Pixbuf> logo= Gdk::Pixbuf::create_from_file(DATA_DIR"/gmlive.png");
 
