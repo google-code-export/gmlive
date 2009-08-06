@@ -232,16 +232,16 @@ void register_stock_items()
 	Gtk::Stock::add(Gtk::StockItem(stock_id, _("HideChannels")));
 
 	//add fullscreen icons to iconset
-	Gtk::IconSource source_fullscreen;
-	source_fullscreen.set_pixbuf( Gdk::Pixbuf::create_from_file(DATA_DIR"/fullscreen.png"));
-	source_fullscreen.set_size(Gtk::ICON_SIZE_SMALL_TOOLBAR);
-	source_fullscreen.set_size_wildcarded(); // Icon may be scaled.
-	Gtk::IconSet icon_set_fullscreen;
-	icon_set_fullscreen.add_source(source_fullscreen);
+	//Gtk::IconSource source_fullscreen;
+	//source_fullscreen.set_pixbuf( Gdk::Pixbuf::create_from_file(DATA_DIR"/fullscreen.png"));
+	//source_fullscreen.set_size(Gtk::ICON_SIZE_SMALL_TOOLBAR);
+	//source_fullscreen.set_size_wildcarded(); // Icon may be scaled.
+	//Gtk::IconSet icon_set_fullscreen;
+	//icon_set_fullscreen.add_source(source_fullscreen);
 
-	const Gtk::StockID stock_id_fullscreen("FullScreen");
-	factory->add(stock_id_fullscreen,icon_set_fullscreen);
-	Gtk::Stock::add(Gtk::StockItem(stock_id_fullscreen,_("FullScreen")));
+	//const Gtk::StockID stock_id_fullscreen("FullScreen");
+	//factory->add(stock_id_fullscreen,icon_set_fullscreen);
+	//Gtk::Stock::add(Gtk::StockItem(stock_id_fullscreen,_("FullScreen")));
 
 	//添加openURL图标进图标库
 	Gtk::IconSource source_openurl;
@@ -293,7 +293,8 @@ void MainWindow::init_ui_manager()
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_stop));
 
-	action = Gtk::Action::create("FullScreen", Gtk::StockID("FullScreen"),_("FullScreen"));
+	//action = Gtk::Action::create("FullScreen", Gtk::StockID("FullScreen"),_("FullScreen"));
+	action = Gtk::Action::create("FullScreen", Gtk::Stock::FULLSCREEN);
 	action->set_tooltip(_("FullScreen"));
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_fullscreen));
