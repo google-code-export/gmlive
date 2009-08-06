@@ -79,13 +79,15 @@ void PpliveChannel::parse_channel(xmlNode* a_node)
 	Glib::ustring bitrate = get_channel_item(cur_node, (const xmlChar*)"Bitrate");
 	Glib::ustring play_link = get_channel_item(cur_node, (const xmlChar*)"PlayLink");
 
-	Gtk::TreeModel::iterator iter = get_group_iter(catalog.c_str());
-	iter = m_liststore->append(iter->children());
+	Gtk::TreeModel::iterator piter = get_group_iter(catalog.c_str());
+	Gtk::TreeModel::iterator iter = m_liststore->append(piter->children());
 
 	(*iter)[columns.name] = channel_name;
 
 	int users = atoi(peer_count.c_str());
 	(*iter)[columns.users] = users;
+	int users_total = (*piter)[columns.users] + users;
+	(*piter)[columns.users] = users_total;
 
 	int freq = atoi(bitrate.c_str());
 	(*iter)[columns.freq] = freq;
