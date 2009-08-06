@@ -19,8 +19,8 @@
 #include <config.h>
 #endif
 #include "mmschannel.h"
-#include "nslivechannel.h"
 #include "sopcastchannel.h"
+#include "pplivechannel.h"
 #include "recentchannel.h"
 #include "bookmarkchannel.h"
 #include "livePlayer.h"
@@ -799,7 +799,7 @@ MainWindow::MainWindow():
 
 	if(enable_sopcast)
 	{
-	channel = Gtk::manage(new class SopcastChannel(this));
+	channel = Gtk::manage(new SopcastChannel(this));
 	swnd = dynamic_cast<Gtk::ScrolledWindow*>
 		(ui_xml->get_widget("sopcastChannelWnd"));
 	swnd->add(*channel);
@@ -810,21 +810,27 @@ MainWindow::MainWindow():
 	else
 		channels->remove_page(1);
 
-	if(enable_nslive)
-	{
-	channel = Gtk::manage(new class NSLiveChannel(this));
+	channel = Gtk::manage(new PpliveChannel(this));
 	swnd = dynamic_cast<Gtk::ScrolledWindow*>
-		(ui_xml->get_widget("nsliveChannelWnd"));
+		(ui_xml->get_widget("ppliveChannelWnd"));
 	swnd->add(*channel);
-	DLOG("support nslive\n");
-	}
-	else
-	{
-		if(enable_sopcast)
-			channels->remove_page(2);
-		else
-			channels->remove_page(1);
-	}
+	channel->refresh_list();
+
+	//if(enable_nslive)
+	//{
+	//channel = Gtk::manage(new class NSLiveChannel(this));
+	//swnd = dynamic_cast<Gtk::ScrolledWindow*>
+	//(ui_xml->get_widget("nsliveChannelWnd"));
+	//swnd->add(*channel);
+	//DLOG("support nslive\n");
+	//}
+	//else
+	//{
+	//if(enable_sopcast)
+	//channels->remove_page(2);
+	//else
+	//channels->remove_page(1);
+	//}
 
 
 	recent_channel = Gtk::manage(new class RecentChannel(this));
@@ -854,8 +860,8 @@ MainWindow::MainWindow():
 			sigc::mem_fun(*this,&MainWindow::on_preview));
 
 	init_ui_manager();
-	 menubar = ui_manager->get_widget("/MenuBar");
-	 toolbar = ui_manager->get_widget("/ToolBar");
+	menubar = ui_manager->get_widget("/MenuBar");
+	toolbar = ui_manager->get_widget("/ToolBar");
 	//Gtk::Widget* menubar = ui_manager->get_widget("/MenuBar");
 	//Gtk::Widget* toolbar = ui_manager->get_widget("/ToolBar");
 	channels_pop_menu = dynamic_cast<Gtk::Menu*>(
@@ -870,7 +876,7 @@ MainWindow::MainWindow():
 	menu_tool_box->pack_start(*toolbar,false,false);
 
 #if  0
-	 tool_hbox=dynamic_cast<Gtk::HBox*>
+	tool_hbox=dynamic_cast<Gtk::HBox*>
 		(ui_xml->get_widget("controlHbox"));
 	Glib::RefPtr<Gdk::Pixbuf> icon_ = Gdk::Pixbuf::create_from_file(DATA_DIR"/volume.png");
 	Gtk::Image* volume_icon= Gtk::manage(new Gtk::Image(icon_));
@@ -913,7 +919,7 @@ MainWindow::MainWindow():
 	//channels->hide();
 	this->resize(1,1);
 	//init();
-	
+
 	if (atoi(GMConf["enable_tray"].c_str()))
 		tray_icon = new TrayIcon(*this);
 
@@ -933,9 +939,9 @@ MainWindow::MainWindow():
 	set_toolbar_hide(toolbar_hide);
 	//set_gmp_embed(gmp_embed);
 	set_other_player(atoi(GMConf["player_type"].c_str()));
-//	Glib::RefPtr<Gtk::ToggleAction> menu = 
-//		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("Mute"));
-//	menu->set_active(false);
+	//	Glib::RefPtr<Gtk::ToggleAction> menu = 
+	//		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("Mute"));
+	//	menu->set_active(false);
 	((Gtk::Toolbar*)toolbar)->set_toolbar_style(Gtk::TOOLBAR_ICONS);
 
 }
@@ -950,12 +956,12 @@ void MainWindow::set_other_player(bool oplayer)
 
 	}
 	else{
-	//	action_group->get_action("ViewEmbedMplayer")->set_sensitive(true);
+		//	action_group->get_action("ViewEmbedMplayer")->set_sensitive(true);
 
-	Glib::RefPtr<Gtk::ToggleAction> menu = 
-		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
-	menu->set_sensitive(true);
-	menu->set_active(atoi(GMConf["mplayer_embed"].c_str()));
+		Glib::RefPtr<Gtk::ToggleAction> menu = 
+			Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
+		menu->set_sensitive(true);
+		menu->set_active(atoi(GMConf["mplayer_embed"].c_str()));
 
 		action_group->get_action("FilePause")->set_sensitive(true);
 		set_gmp_embed(atoi(GMConf["mplayer_embed"].c_str()));
@@ -1050,7 +1056,7 @@ bool MainWindow::check_file(const char* name)
 {
 	char *env = getenv("PATH");
 	char buf[512];
-	
+
 	char *start=env, *end=env;
 
 	// iterator over $PATH to find the program	
@@ -1060,7 +1066,7 @@ bool MainWindow::check_file(const char* name)
 			strncpy ( buf, start, end - start+1);
 			if (buf[strlen(buf)-1] != '/')
 				buf[strlen(buf)] = '/';
-			
+
 			strcat(buf, name);
 			FILE* fp;
 			fp = fopen(buf,"r");
@@ -1071,7 +1077,7 @@ bool MainWindow::check_file(const char* name)
 			}
 
 			start = end+2;
- 		}
+		}
 
 		end++;
 	}
@@ -1088,25 +1094,25 @@ void MainWindow::check_support()
 	std::string& enablesopcast_ = GMConf["enable_sopcast"];
 	std::string& enablenslive_ = GMConf["enable_nslive"];
 	if(enablesopcast_[0]=='1'|enablenslive_[0]=='1')
-	if(!enable_nslive| !enable_sopcast)
-	{
-		Gtk::MessageDialog warnDialog(_("NO SUPPORT"),
+		if(!enable_nslive| !enable_sopcast)
+		{
+			Gtk::MessageDialog warnDialog(_("NO SUPPORT"),
 					false);
-		std::string msg="";
-		if((!enable_sopcast && (enablesopcast_[0]=='1'))&&(!enable_nslive && (enablenslive_[0]=='1')))
-			msg+=std::string(_("you have not install sopcast and nslive program, so GMLive can't support them now"))+"\n";
-		else if(!enable_sopcast && (enablesopcast_[0]=='1'))
-			msg+=std::string(_("you have not install sopcast program,so GMLive can't support it now"))+"\n";
-		else if(!enable_nslive && (enablenslive_[0]=='1'))
-			msg+=std::string(_("you have not install nslive program,so GMLive can't support it now"))+"\n";
-		else
-			return;
-		msg+=_(" So you can install the program first");
-		warnDialog.set_secondary_text(msg);
+			std::string msg="";
+			if((!enable_sopcast && (enablesopcast_[0]=='1'))&&(!enable_nslive && (enablenslive_[0]=='1')))
+				msg+=std::string(_("you have not install sopcast and nslive program, so GMLive can't support them now"))+"\n";
+			else if(!enable_sopcast && (enablesopcast_[0]=='1'))
+				msg+=std::string(_("you have not install sopcast program,so GMLive can't support it now"))+"\n";
+			else if(!enable_nslive && (enablenslive_[0]=='1'))
+				msg+=std::string(_("you have not install nslive program,so GMLive can't support it now"))+"\n";
+			else
+				return;
+			msg+=_(" So you can install the program first");
+			warnDialog.set_secondary_text(msg);
 
-		warnDialog.run();
+			warnDialog.run();
 
-	}
+		}
 	if(enablenslive_[0]=='0')
 		enable_nslive =0;
 	if(enablesopcast_[0]=='0')
@@ -1179,20 +1185,20 @@ void MainWindow::init()
 	file.close();
 
 	/*
-	const std::string& wnd_width = GMConf["main_window_width"];
-	window_width = atoi(wnd_width.c_str());
-	window_width = window_width > 0 ? window_width : 1;
+	   const std::string& wnd_width = GMConf["main_window_width"];
+	   window_width = atoi(wnd_width.c_str());
+	   window_width = window_width > 0 ? window_width : 1;
 
-	const std::string& wnd_height = GMConf["main_window_height"];
-	window_height = atoi(wnd_height.c_str());
-	window_height = window_height > 0 ? window_height : 1;
+	   const std::string& wnd_height = GMConf["main_window_height"];
+	   window_height = atoi(wnd_height.c_str());
+	   window_height = window_height > 0 ? window_height : 1;
 
-	channels_hide = atoi(GMConf["channels_hide"].c_str());
-	gmp_embed     = atoi(GMConf["mplayer_embed"].c_str());
+	   channels_hide = atoi(GMConf["channels_hide"].c_str());
+	   gmp_embed     = atoi(GMConf["mplayer_embed"].c_str());
 
-	set_channels_hide(channels_hide);
-	set_gmp_embed(gmp_embed);
-	*/
+	   set_channels_hide(channels_hide);
+	   set_gmp_embed(gmp_embed);
+	   */
 }
 
 void MainWindow::save_conf()
@@ -1352,7 +1358,7 @@ bool MainWindow::on_key_press_event(GdkEventKey* ev)
 {
 	if(ev->type !=GDK_KEY_PRESS)
 		return Gtk::Window::on_key_press_event(ev);
-	
+
 	switch(ev->keyval){
 		case GDK_Escape:
 			unzoom();

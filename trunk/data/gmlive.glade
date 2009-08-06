@@ -143,7 +143,7 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkScrolledWindow" id="nsliveChannelWnd">
+                      <widget class="GtkScrolledWindow" id="ppliveChannelWnd">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hscrollbar_policy">automatic</property>
@@ -159,7 +159,7 @@
                     <child>
                       <widget class="GtkLabel" id="label3">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">nslive</property>
+                        <property name="label" translatable="yes">pplive</property>
                         <property name="single_line_mode">True</property>
                         <property name="angle">270</property>
                       </widget>
@@ -1285,7 +1285,7 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
             <property name="spacing">6</property>
             <child>
               <widget class="GtkButton" id="button_save">
-                <property name="label" translatable="yes">gtk-save</property>
+                <property name="label">gtk-save</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -1300,7 +1300,7 @@ untar it and put it to /usr/local/bin/ or /usr/bin</property>
             </child>
             <child>
               <widget class="GtkButton" id="button_cancel">
-                <property name="label" translatable="yes">gtk-cancel</property>
+                <property name="label">gtk-cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>

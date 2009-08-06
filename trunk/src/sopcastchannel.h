@@ -33,8 +33,8 @@ class SopcastChannel:public Channel
 		 * @param filename 残疾列表
 		 * @return 返回真则读取顺利，返回假则文件读取遇到错误
 		 */
-		bool read_channels(const std::string& filename);
-		void  addLine(const int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
+		bool read_channels(const char* filename);
+		void  addLine(int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
 		void refresh_list();
 		typedef sigc::signal<void> type_signal_stop;
 		type_signal_stop signal_stop_refresh()

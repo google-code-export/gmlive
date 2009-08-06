@@ -24,7 +24,6 @@
 #include "MainWindow.h"
 #include "mmsLivePlayer.h"
 #include "sopcastLivePlayer.h"
-#include "nsLivePlayer.h"
 
 RecentChannel::RecentChannel(MainWindow* parent_):Channel( parent_)
 {
@@ -39,10 +38,8 @@ LivePlayer* RecentChannel::get_player( const std::string& stream,TypeChannel pag
 	switch(page) {
 		case MMS_CHANNEL:
 			return MmsLivePlayer::create(stream);
-		case NSLIVE_CHANNEL:
-			{
-				return NsLivePlayer::create(stream);
-			}
+		//case NSLIVE_CHANNEL:
+				//return NsLivePlayer::create(stream);
 		case SOPCAST_CHANNEL:
 			return SopcastLivePlayer::create(stream);
 	}
@@ -89,7 +86,7 @@ void RecentChannel::init()
 
 }
 
-void  RecentChannel::addLine(const int num,const Glib::ustring& name,const std::string& stream_,const Glib::ustring& type)
+void  RecentChannel::addLine(int num,const Glib::ustring& name,const std::string& stream_,const Glib::ustring& type)
 {
 	TypeChannel type_;
 	if("mms"==type)
@@ -98,8 +95,8 @@ void  RecentChannel::addLine(const int num,const Glib::ustring& name,const std::
 	{
 		if(!parent->support_nslive())
 			return;
-		else
-			type_ = NSLIVE_CHANNEL;
+		//else
+			//type_ = NSLIVE_CHANNEL;
 	}
 	else if("sopcast" == type)
 	{

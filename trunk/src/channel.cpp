@@ -357,9 +357,9 @@ bool Channel::tooltip_timeout(GdkEventMotion * ev)
 			return false;
 		TypeChannel type = (*iter)[columns.type];
 		Glib::ustring type_;
-		if(NSLIVE_CHANNEL == type)
-			type_  = _("NSLive Stream");
-		else if(SOPCAST_CHANNEL == type)
+		//if(NSLIVE_CHANNEL == type)
+			//type_  = _("NSLive Stream");
+		if(SOPCAST_CHANNEL == type)
 			type_ = _("SopCast Stream");
 		else if(MMS_CHANNEL == type)
 			type_ = _("MMS stream");

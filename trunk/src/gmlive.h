@@ -17,7 +17,7 @@
 typedef Glib::RefPtr < Gnome::Glade::Xml > GlademmXML;
 
 enum TypeChannel{
-	NSLIVE_CHANNEL,
+	PPLIVE_CHANNEL,
 	MMS_CHANNEL,
 	SOPCAST_CHANNEL,
 	GROUP_CHANNEL,
