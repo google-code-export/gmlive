@@ -26,7 +26,7 @@ class MMSChannel:public Channel
 	public:
 		MMSChannel(MainWindow* parent_);
 		~MMSChannel(){}
-		void init();
+		bool init();
 		void refresh_list();
 		typedef sigc::signal<void> type_signal_stop;
 		type_signal_stop signal_stop_refresh()

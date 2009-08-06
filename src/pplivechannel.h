@@ -26,7 +26,7 @@ class GMplayer;
 class PpliveChannel : public Channel {
 	public:
 		PpliveChannel(MainWindow* parent_);
-		void init();
+		bool init();
 
 		bool read_channels(const char* filename);
 		void addLine(int users, const Glib::ustring& name,

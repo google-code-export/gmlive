@@ -86,6 +86,7 @@ class Channel:public Gtk::TreeView
 		ChannelsTooltips* tooltips;
 		MainWindow* parent;
 	protected:
+		Glib::ustring user_select_list(const char* title);
 		//bool on_motion_event(GdkEventMotion* ev);
 		//bool on_leave_event(GdkEventCrossing * ev);
 		//bool tooltip_timeout(GdkEventMotion* ev);

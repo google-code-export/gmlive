@@ -39,7 +39,7 @@ LivePlayer* MMSChannel::get_player(const std::string& stream,TypeChannel page)
 	return MmsLivePlayer::create(stream);
 }
 
-void MMSChannel::init()
+bool MMSChannel::init()
 {
 	char buf[512];
 	char* homedir = getenv("HOME");
@@ -74,7 +74,7 @@ void MMSChannel::init()
 	}
 
 	file.close();
-
+	return true;
 }
 
 void MMSChannel::addLine(int num, const Glib::ustring & name,const std::string& stream,const Glib::ustring& groupname)
