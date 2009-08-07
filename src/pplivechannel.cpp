@@ -202,7 +202,7 @@ void PpliveChannel::refresh_list()
 	const std::string& url =  GMConf["pplive_channel_url"];
 
 	memcpy(url_buf, url.c_str(), MIN(url.size(), 1024));
-	url_buf_cur = strtok(url_buf, "|");
+	url_buf_cur = strtok(url_buf, " ");
 	start_wget(url_buf_cur);
 }
 
@@ -234,7 +234,7 @@ void PpliveChannel::wait_wget_exit(GPid pid, int)
 		}
 	}
 
-	url_buf_cur = strtok(NULL, "|");
+	url_buf_cur = strtok(NULL, " ");
 	start_wget(url_buf_cur);
 }
 
