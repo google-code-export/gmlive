@@ -44,8 +44,11 @@ class PpliveChannel : public Channel {
 	protected:
 		LivePlayer* get_player(const std::string& stream, TypeChannel page);
 		void wait_wget_exit(GPid pid, int);
+		void start_wget(const char* url);
 
 	private:
+		char url_buf[1024];
+		char* url_buf_cur;
 		Gtk::TreeModel::iterator get_group_iter(const char* name);
 		void parse_channel(xmlNode* a_node);
 		void parse_channels(xmlNode* a_node);
