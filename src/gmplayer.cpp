@@ -100,12 +100,27 @@ GMplayer::~GMplayer()
 {
 }
 
+bool GMplayer::on_delay_reboot()
+{
+	if (is_running)
+		start();
+	return false;
+}
+
 void GMplayer::wait_mplayer_exit(GPid pid, int)
 {
 	if (child_pid != -1) {
 		if (is_running) {
-			sleep(1);
-			start();
+			ptm_conn.disconnect();
+			wait_conn.disconnect();
+
+			for (;;) {
+				kill(-child_pid, SIGKILL);
+				int ret = (waitpid( -child_pid, NULL, WNOHANG));
+				if (-1 == ret)
+					break;
+			}
+			Glib::signal_timeout().connect(sigc::mem_fun(*this, &GMplayer::on_delay_reboot), 2000);
 			return;
 		}
 		ptm_conn.disconnect();

@@ -37,6 +37,7 @@ class GMplayer {
 		int my_system(char* const argv[]);
 		int 		cache;
 	private:
+		bool on_delay_reboot();
 		void wait_mplayer_exit(GPid, int);
 		virtual void on_mplayer_exit() {};
 		void set_s_pipe();
