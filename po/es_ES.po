@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es_ES\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-06 22:30+0800\n"
+"POT-Creation-Date: 2009-08-08 11:30+0800\n"
 "PO-Revision-Date: 2008-12-14 22:30+0000\n"
 "Last-Translator: \n"
 "Language-Team:  <es@li.org>\n"
@@ -27,7 +27,7 @@ msgstr "Sistema de streaming directo y basado en P2P"
 #: ../data/gmlive.glade.h:1
 msgid ""
 "\t\t\t                  \n"
-"                                             gmlive 0.22 release\n"
+"                                             gmlive 0.22 Beta \n"
 "\n"
 "              GMLive try to became a universal streaming media player case.\n"
 "         it use Almighty Mplayer for its engine. the Goal is to support  a \n"
@@ -315,7 +315,7 @@ msgstr "Grabado"
 msgid "The Record had working now, you must stop it beforce"
 msgstr "La grabación ha comenzado, para pararla hazlo manualmente"
 
-#: ../src/channel.cpp:171 ../src/MainWindow.cpp:364
+#: ../src/channel.cpp:171 ../src/MainWindow.cpp:366
 msgid "Choose File"
 msgstr "Elige archivo"
 
@@ -367,151 +367,153 @@ msgstr ""
 msgid "GMLive Conf Window"
 msgstr "Configuración de GMLive"
 
-#: ../src/MainWindow.cpp:232
-msgid "HideChannels"
+#: ../src/MainWindow.cpp:233
+#, fuzzy
+msgid "_HideChannels"
 msgstr "Ocultar canales"
 
-#: ../src/MainWindow.cpp:244 ../src/MainWindow.cpp:296
-#: ../src/MainWindow.cpp:297
-msgid "FullScreen"
-msgstr ""
-
-#: ../src/MainWindow.cpp:256 ../src/MainWindow.cpp:272
-msgid "OpenURL"
+#: ../src/MainWindow.cpp:257 ../src/MainWindow.cpp:273
+msgid "Open_URL"
 msgstr ""
 
 #. File menu:
-#: ../src/MainWindow.cpp:266
+#: ../src/MainWindow.cpp:267
 msgid "_File"
 msgstr "Archivo"
 
-#: ../src/MainWindow.cpp:268
-msgid "Open local file"
+#: ../src/MainWindow.cpp:269
+#, fuzzy
+msgid "_Open local file"
 msgstr "Abrir archivo local"
 
-#: ../src/MainWindow.cpp:269
+#: ../src/MainWindow.cpp:270
 msgid "Open Local File"
 msgstr "Abrir archivo local"
 
-#: ../src/MainWindow.cpp:273
+#: ../src/MainWindow.cpp:274
 msgid "Open Network Stream"
 msgstr ""
 
-#: ../src/MainWindow.cpp:277
+#: ../src/MainWindow.cpp:278
 msgid "Play"
 msgstr "Reproducir"
 
-#: ../src/MainWindow.cpp:282
+#: ../src/MainWindow.cpp:283
 msgid "Pause"
 msgstr "Pausa"
 
-#: ../src/MainWindow.cpp:287
+#: ../src/MainWindow.cpp:288
 msgid "Record"
 msgstr "Grabar"
 
-#: ../src/MainWindow.cpp:292
+#: ../src/MainWindow.cpp:293
 msgid "Stop"
 msgstr "Parar"
 
-#: ../src/MainWindow.cpp:302
-msgid "MUTE"
-msgstr "MUTE"
+#: ../src/MainWindow.cpp:299
+msgid "FullScreen"
+msgstr ""
+
+#: ../src/MainWindow.cpp:304
+msgid "_Mute"
+msgstr ""
 
 #. View menu:
-#: ../src/MainWindow.cpp:309
+#: ../src/MainWindow.cpp:311
 msgid "_View"
 msgstr "Ver"
 
-#: ../src/MainWindow.cpp:313
+#: ../src/MainWindow.cpp:315
 msgid "Show or hide channels list"
 msgstr "Mostrar/Esconder lista de canales"
 
-#: ../src/MainWindow.cpp:318
-msgid "_HideToolbar"
-msgstr ""
+#: ../src/MainWindow.cpp:320
+#, fuzzy
+msgid "Hide_Toolbar"
+msgstr "Mostrar/Esconder lista de canales"
 
-#: ../src/MainWindow.cpp:318
+#: ../src/MainWindow.cpp:320
 #, fuzzy
 msgid "Show or hide Toolbar"
 msgstr "Mostrar/Esconder lista de canales"
 
-#: ../src/MainWindow.cpp:323
+#: ../src/MainWindow.cpp:325
 msgid "_AlwaysOnTop"
 msgstr ""
 
-#: ../src/MainWindow.cpp:323
+#: ../src/MainWindow.cpp:325
 msgid "Make GMlive ontop of other windows"
 msgstr ""
 
-#: ../src/MainWindow.cpp:328
+#: ../src/MainWindow.cpp:330
 msgid "_Embed Mplayer"
 msgstr "Mplayer embebido"
 
-#: ../src/MainWindow.cpp:328
+#: ../src/MainWindow.cpp:330
 msgid "Embed or Separate mplayer play"
 msgstr "Reproductor mplayer embebido o separado"
 
 #. Help menu:
-#: ../src/MainWindow.cpp:335
+#: ../src/MainWindow.cpp:337
 msgid "_Help"
 msgstr "Ayuda"
 
-#: ../src/MainWindow.cpp:341
+#: ../src/MainWindow.cpp:343
 msgid "_Refresh list"
 msgstr "Actualiza lista"
 
-#: ../src/MainWindow.cpp:341
+#: ../src/MainWindow.cpp:343
 msgid "Refresh current channel list"
 msgstr "Actualiza lista de canales actuales"
 
-#: ../src/MainWindow.cpp:344
+#: ../src/MainWindow.cpp:346
 msgid "_Add to bookmark"
 msgstr "Añade a favoritos"
 
-#: ../src/MainWindow.cpp:344
+#: ../src/MainWindow.cpp:346
 msgid "Bookmark this channel"
 msgstr "Añade este canal a los favoritos"
 
-#: ../src/MainWindow.cpp:347
+#: ../src/MainWindow.cpp:349
 msgid "_Copy url"
 msgstr "Copia url"
 
-#: ../src/MainWindow.cpp:347
+#: ../src/MainWindow.cpp:349
 msgid "Copy url to clipboard"
 msgstr "Copia enlace al portapapeles"
 
-#: ../src/MainWindow.cpp:384
+#: ../src/MainWindow.cpp:386
 msgid "Open URL"
 msgstr ""
 
-#: ../src/MainWindow.cpp:740
+#: ../src/MainWindow.cpp:752
 #, c-format
 msgid "Caching... %d%%"
 msgstr ""
 
-#: ../src/MainWindow.cpp:1099
+#: ../src/MainWindow.cpp:1109
 msgid "NO SUPPORT"
 msgstr ""
 
-#: ../src/MainWindow.cpp:1103
+#: ../src/MainWindow.cpp:1113
 msgid ""
 "you have not install sopcast and pplive program, so GMLive can't support "
 "them now"
 msgstr ""
 
-#: ../src/MainWindow.cpp:1105
+#: ../src/MainWindow.cpp:1115
 msgid "you have not install sopcast program,so GMLive can't support it now"
 msgstr ""
 
-#: ../src/MainWindow.cpp:1107
+#: ../src/MainWindow.cpp:1117
 msgid "you have not install pplive program,so GMLive can't support it now"
 msgstr ""
 
-#: ../src/MainWindow.cpp:1110
+#: ../src/MainWindow.cpp:1120
 msgid " So you can install the program first"
 msgstr ""
 
-#: ../src/pplivechannel.cpp:195
+#: ../src/pplivechannel.cpp:227
 msgid ""
 "open the pplive channel error,will you select a local file to instead the "
 "broken channel list?"
@@ -540,6 +542,9 @@ msgid ""
 "open the sopcast channel error,will you select a local file to instead the "
 "broken channel list?"
 msgstr ""
+
+#~ msgid "MUTE"
+#~ msgstr "MUTE"
 
 #, fuzzy
 #~ msgid "Nslive"

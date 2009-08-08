@@ -254,7 +254,7 @@ void register_stock_items()
 
 	const Gtk::StockID stock_id_openurl("OpenURL");
 	factory->add(stock_id_openurl, icon_set_openurl);
-	Gtk::Stock::add(Gtk::StockItem(stock_id_openurl, _("_OpenURL")));
+	Gtk::Stock::add(Gtk::StockItem(stock_id_openurl, _("Open_URL")));
 	factory->add_default();
 }
 void MainWindow::init_ui_manager()
@@ -301,7 +301,7 @@ void MainWindow::init_ui_manager()
 			sigc::mem_fun(*this, &MainWindow::on_fullscreen));
 
 	action_group->add(Gtk::ToggleAction::create("Mute",
-				_("_Mute"), _("Mute"), false), 
+				_("_Mute"), _("_Mute"), false), 
 			sigc::mem_fun(*this, &MainWindow::on_menu_file_mute));
 
 	action_group->add(Gtk::Action::create("FileQuit", Gtk::Stock::QUIT),
@@ -317,7 +317,7 @@ void MainWindow::init_ui_manager()
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_hide_channel));
 
 	action = Gtk::ToggleAction::create("ViewShowToolbar", 
-			_("_HideToolbar"), _("Show or hide Toolbar"), false);
+			_("Hide_Toolbar"), _("Show or hide Toolbar"), false);
 	action_group->add(action,
 			sigc::mem_fun(*this, &MainWindow::on_menu_view_hide_toolbar));
 	

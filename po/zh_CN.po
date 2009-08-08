@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-06 22:30+0800\n"
-"PO-Revision-Date: 2009-08-06 22:33+0700\n"
+"POT-Creation-Date: 2009-08-08 11:30+0800\n"
+"PO-Revision-Date: 2009-08-08 11:30+0800\n"
 "Last-Translator: lerosua <lerosua@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -26,15 +26,17 @@ msgstr ""
 #: ../data/gmlive.glade.h:1
 msgid ""
 "\t\t\t                  \n"
-"                                             gmlive 0.22 release\n"
+"                                             gmlive 0.22 Beta \n"
 "\n"
 "              GMLive try to became a universal streaming media player case.\n"
 "         it use Almighty Mplayer for its engine. the Goal is to support  a \n"
 "         variety of types of P2P broadcasting video streaming for Linux. \n"
-"         Provide a convenient and efficient network to watch video streaming \n"
+"         Provide a convenient and efficient network to watch video "
+"streaming \n"
 "         of the programme\n"
 "\n"
-"                                                                                              cyclone Team\n"
+"                                                                                              cyclone "
+"Team\n"
 "\n"
 "  "
 msgstr ""
@@ -76,7 +78,12 @@ msgid " Kbs"
 msgstr ""
 
 #: ../data/gmlive.glade.h:24
-msgid " You may modify and redistribute the program under the terms of the GPL (version 2 or later).  A copy of the GPL is contained in the 'COPYING' file distributed with Pidgin.  Pidgin is copyrighted by its contributors.  See the 'COPYRIGHT' file for the complete list of contributors.  We provide no warranty for this program."
+msgid ""
+" You may modify and redistribute the program under the terms of the GPL "
+"(version 2 or later).  A copy of the GPL is contained in the 'COPYING' file "
+"distributed with Pidgin.  Pidgin is copyrighted by its contributors.  See "
+"the 'COPYRIGHT' file for the complete list of contributors.  We provide no "
+"warranty for this program."
 msgstr ""
 
 #: ../data/gmlive.glade.h:25
@@ -274,7 +281,7 @@ msgstr "录制"
 
 #: ../data/record.glade.h:3
 msgid "_Preview"
-msgstr "预览"
+msgstr "预览(_P)"
 
 #: ../src/channel.cpp:40
 msgid "channels"
@@ -298,8 +305,7 @@ msgstr "已经录制中"
 msgid "The Record had working now, you must stop it beforce"
 msgstr "录制已经在工作中，您必须中止之前的录制。"
 
-#: ../src/channel.cpp:171
-#: ../src/MainWindow.cpp:364
+#: ../src/channel.cpp:171 ../src/MainWindow.cpp:366
 msgid "Choose File"
 msgstr "选择文件"
 
@@ -316,31 +322,24 @@ msgstr ""
 "GMLive 在录制中，您必须先停止录制才能使用播放功能\n"
 "你确定停止录制吗？"
 
-#: ../src/channel.cpp:369
-#: ../src/channel.cpp:449
+#: ../src/channel.cpp:369 ../src/channel.cpp:449
 msgid "PPLive Stream"
 msgstr "PPLive 流"
 
-#: ../src/channel.cpp:371
-#: ../src/channel.cpp:451
+#: ../src/channel.cpp:371 ../src/channel.cpp:451
 msgid "SopCast Stream"
 msgstr "SopCast 流"
 
-#: ../src/channel.cpp:373
-#: ../src/channel.cpp:453
+#: ../src/channel.cpp:373 ../src/channel.cpp:453
 msgid "MMS stream"
 msgstr "MMS流"
 
-#: ../src/channel.cpp:383
-#: ../src/channel.cpp:386
-#: ../src/channel.cpp:463
+#: ../src/channel.cpp:383 ../src/channel.cpp:386 ../src/channel.cpp:463
 #: ../src/channel.cpp:468
 msgid "users:"
 msgstr "用户数："
 
-#: ../src/channel.cpp:384
-#: ../src/channel.cpp:387
-#: ../src/channel.cpp:464
+#: ../src/channel.cpp:384 ../src/channel.cpp:387 ../src/channel.cpp:464
 #: ../src/channel.cpp:469
 msgid "Type:"
 msgstr "类型："
@@ -357,151 +356,152 @@ msgstr "打开频道列表错误"
 msgid "GMLive Conf Window"
 msgstr "GMLive 配置"
 
-#: ../src/MainWindow.cpp:232
-msgid "HideChannels"
-msgstr "隐藏列表"
+#: ../src/MainWindow.cpp:233
+msgid "_HideChannels"
+msgstr "隐藏列表(_H)"
 
-#: ../src/MainWindow.cpp:244
-#: ../src/MainWindow.cpp:296
-#: ../src/MainWindow.cpp:297
-msgid "FullScreen"
-msgstr "全屏"
-
-#: ../src/MainWindow.cpp:256
-#: ../src/MainWindow.cpp:272
-msgid "OpenURL"
-msgstr "打开网络流"
+#: ../src/MainWindow.cpp:257 ../src/MainWindow.cpp:273
+msgid "Open_URL"
+msgstr "打开网络流(_U)"
 
 #. File menu:
-#: ../src/MainWindow.cpp:266
+#: ../src/MainWindow.cpp:267
 msgid "_File"
-msgstr "文件"
-
-#: ../src/MainWindow.cpp:268
-msgid "Open local file"
-msgstr "打开本地文件"
+msgstr "文件(_F)"
 
 #: ../src/MainWindow.cpp:269
+msgid "_Open local file"
+msgstr "打开本地文件(_O)"
+
+#: ../src/MainWindow.cpp:270
 msgid "Open Local File"
 msgstr "打开本地文件"
 
-#: ../src/MainWindow.cpp:273
+#: ../src/MainWindow.cpp:274
 msgid "Open Network Stream"
 msgstr "打开网络流"
 
-#: ../src/MainWindow.cpp:277
+#: ../src/MainWindow.cpp:278
 msgid "Play"
 msgstr "播放"
 
-#: ../src/MainWindow.cpp:282
+#: ../src/MainWindow.cpp:283
 msgid "Pause"
 msgstr "暂停"
 
-#: ../src/MainWindow.cpp:287
+#: ../src/MainWindow.cpp:288
 msgid "Record"
 msgstr "录制"
 
-#: ../src/MainWindow.cpp:292
+#: ../src/MainWindow.cpp:293
 msgid "Stop"
 msgstr "停止"
 
-#: ../src/MainWindow.cpp:302
-msgid "MUTE"
-msgstr "静音"
+#: ../src/MainWindow.cpp:299
+msgid "FullScreen"
+msgstr "全屏"
+
+#: ../src/MainWindow.cpp:304
+msgid "_Mute"
+msgstr "静音(_M)"
 
 #. View menu:
-#: ../src/MainWindow.cpp:309
+#: ../src/MainWindow.cpp:311
 msgid "_View"
-msgstr "查看"
+msgstr "查看(_V)"
 
-#: ../src/MainWindow.cpp:313
+#: ../src/MainWindow.cpp:315
 msgid "Show or hide channels list"
 msgstr "显示或隐藏频道列表"
 
-#: ../src/MainWindow.cpp:318
-msgid "_HideToolbar"
-msgstr "隐藏工具栏"
+#: ../src/MainWindow.cpp:320
+msgid "Hide_Toolbar"
+msgstr "隐藏工具栏(_T)"
 
-#: ../src/MainWindow.cpp:318
+#: ../src/MainWindow.cpp:320
 msgid "Show or hide Toolbar"
 msgstr "显示或隐藏工具栏"
 
-#: ../src/MainWindow.cpp:323
+#: ../src/MainWindow.cpp:325
 msgid "_AlwaysOnTop"
-msgstr "置顶"
+msgstr "置顶(_A)"
 
-#: ../src/MainWindow.cpp:323
+#: ../src/MainWindow.cpp:325
 msgid "Make GMlive ontop of other windows"
 msgstr "使GMlive的窗口置顶"
 
-#: ../src/MainWindow.cpp:328
+#: ../src/MainWindow.cpp:330
 msgid "_Embed Mplayer"
-msgstr "嵌入播放器"
+msgstr "嵌入播放器(_E)"
 
-#: ../src/MainWindow.cpp:328
+#: ../src/MainWindow.cpp:330
 msgid "Embed or Separate mplayer play"
 msgstr "嵌入或分离播放器"
 
 #. Help menu:
-#: ../src/MainWindow.cpp:335
+#: ../src/MainWindow.cpp:337
 msgid "_Help"
-msgstr "帮助"
+msgstr "帮助(_H)"
 
-#: ../src/MainWindow.cpp:341
+#: ../src/MainWindow.cpp:343
 msgid "_Refresh list"
-msgstr "刷新列表"
+msgstr "刷新列表(_R)"
 
-#: ../src/MainWindow.cpp:341
+#: ../src/MainWindow.cpp:343
 msgid "Refresh current channel list"
 msgstr "刷新当前频道列表"
 
-#: ../src/MainWindow.cpp:344
+#: ../src/MainWindow.cpp:346
 msgid "_Add to bookmark"
-msgstr "添加到书签"
+msgstr "添加到书签(_A)"
 
-#: ../src/MainWindow.cpp:344
+#: ../src/MainWindow.cpp:346
 msgid "Bookmark this channel"
 msgstr "收藏此频道"
 
-#: ../src/MainWindow.cpp:347
+#: ../src/MainWindow.cpp:349
 msgid "_Copy url"
-msgstr "复制流地址"
+msgstr "复制流地址(_C)"
 
-#: ../src/MainWindow.cpp:347
+#: ../src/MainWindow.cpp:349
 msgid "Copy url to clipboard"
 msgstr "复制流地址至剪贴板"
 
-#: ../src/MainWindow.cpp:384
+#: ../src/MainWindow.cpp:386
 msgid "Open URL"
 msgstr "打开网络流"
 
-#: ../src/MainWindow.cpp:740
+#: ../src/MainWindow.cpp:752
 #, c-format
 msgid "Caching... %d%%"
 msgstr "缓冲中... %d%%"
 
-#: ../src/MainWindow.cpp:1099
+#: ../src/MainWindow.cpp:1109
 msgid "NO SUPPORT"
 msgstr "未支持"
 
-#: ../src/MainWindow.cpp:1103
-msgid "you have not install sopcast and pplive program, so GMLive can't support them now"
+#: ../src/MainWindow.cpp:1113
+msgid ""
+"you have not install sopcast and pplive program, so GMLive can't support "
+"them now"
 msgstr "您还未安装sopcast和PPLive 程序，所以GMLive还不能支持它们。"
 
-#: ../src/MainWindow.cpp:1105
+#: ../src/MainWindow.cpp:1115
 msgid "you have not install sopcast program,so GMLive can't support it now"
 msgstr "您还未安装sopcast程序，所以GMLive还不能支持它。"
 
-#: ../src/MainWindow.cpp:1107
+#: ../src/MainWindow.cpp:1117
 msgid "you have not install pplive program,so GMLive can't support it now"
 msgstr "您还未安装pplive程序，所以GMLive还不能支持它。"
 
-#: ../src/MainWindow.cpp:1110
+#: ../src/MainWindow.cpp:1120
 msgid " So you can install the program first"
 msgstr "请您安装以上程序。谢谢。"
 
-#: ../src/pplivechannel.cpp:195
-msgid "open the pplive channel error,will you select a local file to instead the broken channel list?"
+#: ../src/pplivechannel.cpp:227
+msgid ""
+"open the pplive channel error,will you select a local file to instead the "
+"broken channel list?"
 msgstr "打开频道列表文件错误，请选择一个本地的频道列表文件来代替损坏的文件"
 
 #: ../src/recordStream.cpp:74
@@ -523,13 +523,22 @@ msgid "Recording %s To %s (%u.%u Mb)"
 msgstr "录制 %s 至 %s (%u.%u Mb)"
 
 #: ../src/sopcastchannel.cpp:117
-msgid "open the sopcast channel error,will you select a local file to instead the broken channel list?"
+msgid ""
+"open the sopcast channel error,will you select a local file to instead the "
+"broken channel list?"
 msgstr "打开频道列表文件错误，请选择一个本地的频道列表文件来代替损坏的文件"
+
+#~ msgid "_OpenURL"
+#~ msgstr "打开网络流(_O)"
+
+#~ msgid "MUTE"
+#~ msgstr "静音"
 
 #~ msgid "Nslive"
 #~ msgstr "NSLive"
+
 #~ msgid "File error"
 #~ msgstr "文件错误"
+
 #~ msgid "the local channles list file has wrong formats"
 #~ msgstr "本地的频道列表文件格式错误"
-
