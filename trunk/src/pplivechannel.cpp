@@ -244,5 +244,5 @@ PpliveChannel::PpliveChannel(MainWindow* parent_) :
 	,wget_pid(-1)
 	,refresh(false)
 {
-	//init();
+	init();
 }
