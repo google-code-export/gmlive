@@ -10,6 +10,7 @@
 #include "ec_throw.h"
 #include "scope_gruard.h"
 #include <gmplayer.h>
+#include <fcntl.h>
 
 int connect_to_server(const char *host, int portnum)
 {
@@ -32,8 +33,8 @@ int connect_to_server(const char *host, int portnum)
 				(struct sockaddr *) &serv_addr,
 			       	sizeof(serv_addr)));
 	sg.dismiss();
+	fcntl( sock, F_SETFL, O_NONBLOCK);
 	return sock;
-
 }
 
 SopcastLivePlayer* SopcastLivePlayer::self = NULL;
@@ -115,6 +116,8 @@ bool SopcastLivePlayer::on_sop_time_status()
 			sop_sock_conn = Glib::signal_io().connect(
 					sigc::mem_fun(*this, &SopcastLivePlayer::on_sop_sock),
 					sop_sock, Glib::IO_IN);	
+			//memset(state_buf, 0, sizeof(state_buf));
+			state_buf_pos = state_buf;
 		} catch (...)
 		{}
 	}
@@ -131,16 +134,20 @@ bool SopcastLivePlayer::on_sop_sock(const Glib::IOCondition& condition)
 	char *pstr = NULL;
 	memset(buf, 0, sizeof(buf));
 
-	while (byte_read < buf_size) {
-		byte_read += read(sop_sock, buf + byte_read, buf_size - byte_read);
-		if ((pstr = strstr(buf, "\n")) != 0) {
-			pstr++;
-			*pstr = 0;
+	while (state_buf_pos < state_buf + sizeof(state_buf)) {
+		if ( -1 == read(sop_sock, state_buf_pos, 1))
+			return true;
+
+		if (*state_buf_pos == '\n') {
+			*state_buf_pos = 0;
+			state_buf_pos = state_buf;
 			break;
 		}
+		state_buf_pos++;
 	}
+	printf("%s\n", state_buf);
 
-	int i = atoi(buf);
+	int i = atoi(state_buf);
 	if (i > 70){
 		std::string& cache = GMConf["sopcast_mplayer_cache"];
 		int icache = atoi(cache.c_str());

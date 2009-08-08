@@ -120,6 +120,7 @@ void GMplayer::wait_mplayer_exit(GPid pid, int)
 				if (-1 == ret)
 					break;
 			}
+			child_pid = -1;
 			Glib::signal_timeout().connect(sigc::mem_fun(*this, &GMplayer::on_delay_reboot), 2000);
 			return;
 		}
