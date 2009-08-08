@@ -71,11 +71,14 @@ class MainWindow : public Gtk::Window {
 		void on_menu_view_embed_mplayer();
 		void on_menu_view_preferences();
 		void on_menu_help_about();
-		void on_menu_pop_refresh_list();
+		//void on_menu_pop_refresh_list();
 		void on_menu_pop_add_to_bookmark();
 		void on_menu_pop_copy_to_clipboard();
 
+		/** 查找列表按钮回调*/
 		void on_search_channel();
+		/** 更新频道列表回调*/
+		void on_refresh_channel();
 		void on_preview(const std::string& filename);
 		/** 根据界面大小更新mplayer画面的大小*/
 		void on_update_video_widget();
