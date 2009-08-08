@@ -341,7 +341,7 @@ void MainWindow::init_ui_manager()
 	//Pop menu:
 	action_group->add(Gtk::Action::create("PopRefreshList", 
 				_("_Refresh list"), _("Refresh current channel list")),
-			sigc::mem_fun(*this, &MainWindow::on_menu_pop_refresh_list));
+			sigc::mem_fun(*this, &MainWindow::on_refresh_channel));
 	action_group->add(Gtk::Action::create("PopAddToBookmark", 
 				_("_Add to bookmark"), _("Bookmark this channel")),
 			sigc::mem_fun(*this, &MainWindow::on_menu_pop_add_to_bookmark));
@@ -498,7 +498,7 @@ void MainWindow::on_menu_file_quit()
 	gmp->stop();
 	Gtk::Main::quit();
 }
-
+/*
 void MainWindow::on_menu_pop_refresh_list()
 {
 	Channel* channel = get_cur_select_channel();
@@ -508,6 +508,7 @@ void MainWindow::on_menu_pop_refresh_list()
 		DLOG("Error");
 
 }
+*/
 
 void MainWindow::on_menu_pop_add_to_bookmark()
 {
@@ -644,6 +645,15 @@ void MainWindow::on_search_channel()
 			ui_xml->get_widget("entry_find_channel"));
 	if (search)
 		channel->search_channel(search->get_text());
+}
+
+void MainWindow::on_refresh_channel()
+{
+	Channel* channel = get_cur_select_channel();
+	if (channel)
+		channel->refresh_list();
+	else
+		DLOG("Error");
 }
 
 bool MainWindow::on_doubleclick_picture(GdkEventButton* ev)
@@ -913,6 +923,8 @@ MainWindow::MainWindow():
 
 	ui_xml->connect_clicked("bt_search_channel",
 			sigc::mem_fun(*this, &MainWindow::on_search_channel));
+	ui_xml->connect_clicked("bt_refresh_channel",
+			sigc::mem_fun(*this, &MainWindow::on_refresh_channel));
 	this->show_all();
 	//channels->hide();
 	this->resize(1,1);
