@@ -24,7 +24,6 @@
 #include "recentchannel.h"
 #include "bookmarkchannel.h"
 #include "livePlayer.h"
-#include "playStream.h"
 
 #include "MainWindow.h"
 #include "ConfWindow.h"
@@ -376,6 +375,13 @@ void MainWindow::on_menu_open_file()
 			return;
 		Glib::ustring filtername = Glib::ustring("\"")+filename+"\"";
 		DLOG("播放 %s\n",filtername.c_str());
+
+		std::string& cache = GMConf["mms_mplayer_cache"];
+		int icache = atoi(cache.c_str());
+		icache = icache > 64 ? icache : 64;
+
+		gmp->set_cache(icache);
+		gmp->set_record(false);
 		gmp->start(filtername);
 
 	}
@@ -401,8 +407,13 @@ void MainWindow::on_menu_open_url()
 			return;
 		Glib::ustring filtername = Glib::ustring("\"")+filename+"\"";
 		DLOG("播放 %s\n",filtername.c_str());
-		gmp->start(filtername);
+		std::string& cache = GMConf["mms_mplayer_cache"];
+		int icache = atoi(cache.c_str());
+		icache = icache > 64 ? icache : 8192;
 
+		gmp->set_cache(icache);
+		gmp->set_record(false);
+		gmp->start(filtername);
 	}
 
 }
@@ -425,7 +436,7 @@ void MainWindow::on_menu_file_stop()
 
 void MainWindow::unzoom()
 {
-	 if(full_screen && gmp_embed)
+	if(full_screen && gmp_embed)
 	{
 		menubar->show();
 		toolbar->show();
@@ -444,13 +455,13 @@ void MainWindow::on_fullscreen()
 	if(!full_screen && gmp_embed)
 	{
 		/** 设置全屏状态*/
-	menubar->hide();
-	toolbar->hide();
-	//tool_hbox->hide();
-	statusbar->hide();
-	channels_box->hide();
-	this->fullscreen();
-	full_screen=true;
+		menubar->hide();
+		toolbar->hide();
+		//tool_hbox->hide();
+		statusbar->hide();
+		channels_box->hide();
+		this->fullscreen();
+		full_screen=true;
 	}
 	else if(full_screen && gmp_embed)
 	{
@@ -499,16 +510,16 @@ void MainWindow::on_menu_file_quit()
 	Gtk::Main::quit();
 }
 /*
-void MainWindow::on_menu_pop_refresh_list()
-{
-	Channel* channel = get_cur_select_channel();
-	if (channel)
-		channel->refresh_list();
-	else
-		DLOG("Error");
+   void MainWindow::on_menu_pop_refresh_list()
+   {
+   Channel* channel = get_cur_select_channel();
+   if (channel)
+   channel->refresh_list();
+   else
+   DLOG("Error");
 
-}
-*/
+   }
+   */
 
 void MainWindow::on_menu_pop_add_to_bookmark()
 {
@@ -554,7 +565,7 @@ bool MainWindow::on_delete_event(GdkEventAny* event)
 	else if (!atoi(GMConf["enable_tray"].c_str())) 
 		on_menu_file_quit();
 	else if (gmp_embed)
-			gmp->stop();
+		gmp->stop();
 	this->get_position(window_x, window_y);
 	return Gtk::Window::on_delete_event(event);
 }
@@ -856,16 +867,12 @@ MainWindow::MainWindow():
 			Gdk::Pixbuf::create_from_file (
 				DATA_DIR"/gmlive_play.png"));
 
-	gmp = new PlayStream();	
+	gmp = new GMplayer();	
 	gmp->set_out_slot(sigc::mem_fun(*this, &MainWindow::on_gmplayer_out));
 	gmp->signal_start().connect(
 			sigc::mem_fun(*this, &MainWindow::on_gmplayer_start));
 	gmp->signal_stop().connect(
 			sigc::mem_fun(*this, &MainWindow::on_gmplayer_stop));
-
-	record_gmp = new RecordStream();
-	record_gmp->signal_preview().connect(
-			sigc::mem_fun(*this,&MainWindow::on_preview));
 
 	init_ui_manager();
 	menubar = ui_manager->get_widget("/MenuBar");
@@ -977,7 +984,8 @@ void MainWindow::set_other_player(bool oplayer)
 		set_gmp_embed(atoi(GMConf["mplayer_embed"].c_str()));
 
 	}
-	gmp->set_other_player(oplayer);
+	if (gmp->running())
+		gmp->restart();
 
 }
 void MainWindow::set_gmp_embed(bool embed)
@@ -1013,7 +1021,8 @@ void MainWindow::set_gmp_embed(bool embed)
 		set_channels_hide(atoi(GMConf["channels_hide"].c_str()));
 		this->resize(1, 1);
 	}
-	gmp->set_embed(gmp_embed);
+	if (gmp->running())
+		gmp->restart();
 }
 
 void MainWindow::set_channels_hide(bool hide)
@@ -1307,6 +1316,17 @@ Channel* MainWindow::get_cur_select_channel()
 void MainWindow::set_live_player(LivePlayer* lp, 
 		const Glib::ustring& name)
 {
+	if (lp == live_player && lp != NULL) {	// 同一个频道
+		if (!gmp->running())
+			gmp->start();
+		return;
+	}
+	else {
+		gmp->stop();
+		delete live_player;
+		live_player = NULL;
+	}
+
 	if (lp != NULL) {
 		if (!name.empty())
 			play_channel_name = name;
@@ -1314,17 +1334,10 @@ void MainWindow::set_live_player(LivePlayer* lp,
 		lp->signal_status().connect(sigc::mem_fun(
 					*this, &MainWindow::on_live_player_out));
 		lp->start(*gmp);
-	} else {
-		live_player = NULL;
-		gmp->stop();
-	}
+	} 
 }
 
 
-void MainWindow::on_preview(const std::string& filename)
-{
-	gmp->start(filename);
-}
 
 void MainWindow::on_update_video_widget()
 {

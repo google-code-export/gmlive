@@ -41,13 +41,15 @@ SopcastLivePlayer* SopcastLivePlayer::self = NULL;
 
 SopcastLivePlayer* SopcastLivePlayer::create(const std::string& stream_)
 {
-	if (!self)
-		self = new SopcastLivePlayer(stream_);
+	if (self && self->filename == stream_)
+		return self;
+
+	self = new SopcastLivePlayer(stream_);
 	return self;
 }
 
 SopcastLivePlayer::SopcastLivePlayer(const std::string& stream_) : 
-	stream(stream_),
+	LivePlayer(stream_),
 	sop_pid(-1),
 	sop_sock(-1),
 	gmplayer(NULL),
@@ -84,7 +86,7 @@ void SopcastLivePlayer::start(GMplayer& gmp)
 		const char* argv[5];
 
 		argv[0] = "sp-sc-auth";
-		argv[1] = stream.c_str();
+		argv[1] = filename.c_str();
 		argv[2] = "3908";
 		argv[3] = "8908";
 		argv[4] = NULL;
@@ -154,7 +156,6 @@ bool SopcastLivePlayer::on_sop_sock(const Glib::IOCondition& condition)
 		int icache = atoi(cache.c_str());
 		icache = icache > 64 ? icache : 64;
 
-		gmplayer->set_cache(icache);
 		gmplayer->start(SOPCASTSTREAM);
 
 		sop_time_conn.disconnect(); // 启动mpaleyr，停掉显示缓冲状态

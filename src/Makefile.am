@@ -22,8 +22,6 @@ gmlive_SOURCES = \
 		 sopcastLivePlayer.cpp \
 		 pplivePlayer.cpp \
 		 mmsLivePlayer.cpp \
-		 playStream.cpp \
-		 recordStream.cpp \
 		 TrayIcon.cpp
 
 noinst_HEADERS = \
@@ -46,8 +44,6 @@ noinst_HEADERS = \
 		 sopcastLivePlayer.h \
 		 pplivePlayer.h \
 		 mmsLivePlayer.h \
-		 playStream.h \
-		 recordStream.h \
 		 TrayIcon.h
 
 gmlive_LDADD = @LIBS@ @PACKAGE_LIBS@

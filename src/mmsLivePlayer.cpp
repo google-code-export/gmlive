@@ -23,13 +23,15 @@ MmsLivePlayer* MmsLivePlayer::self = NULL;
 
 MmsLivePlayer* MmsLivePlayer::create(const std::string& fname)
 {
-	if (!self)
-		self = new MmsLivePlayer(fname);
+	if (self && self->filename == fname)
+		return self;
+
+	self = new MmsLivePlayer(fname);
 	return self;
 }
 
 MmsLivePlayer::MmsLivePlayer(const std::string& fname) :
-	filename(fname)
+	LivePlayer(fname)
 {
 }
 

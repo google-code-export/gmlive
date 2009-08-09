@@ -27,7 +27,6 @@ class LivePlayer {
 		virtual ~LivePlayer() {signal_exit_.emit();} 
 		virtual void start(GMplayer&) = 0;
 		virtual void stop() = 0;
-		virtual const std::string& get_stream() = 0;
 
 		typedef sigc::signal<void, int> type_signal_status;
 		type_signal_status signal_status()
@@ -37,7 +36,8 @@ class LivePlayer {
 		type_signal_exit signal_exit()
 		{ return signal_exit_; }
 	protected:
-		LivePlayer() {}
+		LivePlayer(const std::string& fname) : filename(fname) {}
+		std::string filename;
 		type_signal_status  			signal_status_;
 		type_signal_exit  			signal_exit_;
 };
