@@ -27,7 +27,6 @@ class PpLivePlayer : public LivePlayer {
 		~PpLivePlayer();
 		void start(GMplayer&);
 		void stop();
-		const std::string& get_stream() { return stream; }
 
 	protected:
 		PpLivePlayer(const std::string& stream_);
@@ -37,7 +36,6 @@ class PpLivePlayer : public LivePlayer {
 	private:
 		sigc::connection sop_time_conn;
 		sigc::connection sop_sock_conn;
-		std::string stream;
 		GMplayer* gmplayer;
 		static PpLivePlayer* self;
 		int pplive_pid;

@@ -31,8 +31,8 @@ extern TGMConf GMConf;
 #ifndef DEBUG
 #define DLOG(fmt, ...) \
     { \
-        fprintf(stderr, "%s|%d| " fmt, \
-                 __FILE__, __LINE__, ##__VA_ARGS__); \
+        fprintf(stderr, "%s|%s|%d| " fmt, \
+                 __FILE__, __func__, __LINE__, ##__VA_ARGS__); \
     }
 #else
 #define DLOG(fmt, ...) \

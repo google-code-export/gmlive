@@ -27,7 +27,6 @@ class SopcastLivePlayer : public LivePlayer {
 		~SopcastLivePlayer();
 		void start(GMplayer&);
 		void stop();
-		const std::string& get_stream() { return stream; }
 
 	protected:
 		SopcastLivePlayer(const std::string& stream_);
@@ -39,7 +38,6 @@ class SopcastLivePlayer : public LivePlayer {
 		char* state_buf_pos;
 		sigc::connection sop_time_conn;
 		sigc::connection sop_sock_conn;
-		std::string stream;
 		GMplayer* gmplayer;
 		static SopcastLivePlayer* self;
 		int sop_pid;

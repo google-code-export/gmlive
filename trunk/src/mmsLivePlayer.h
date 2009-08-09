@@ -32,7 +32,6 @@ class MmsLivePlayer : public LivePlayer {
 	protected:
 		MmsLivePlayer(const std::string& fname);
 	private:
-		std::string filename;
 		static MmsLivePlayer* self;
 };
 

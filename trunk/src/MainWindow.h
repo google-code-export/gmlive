@@ -21,13 +21,13 @@
 #define _MAINWINDOW_HH
 
 #include "gmlive.h"
-#include "playStream.h"
-#include "recordStream.h"
+#include "gmplayer.h"
 #include "TrayIcon.h"
 
 
 class Channel;
 class LivePlayer;
+class GMplayer;
 class ConfWindow;
 class MainWindow : public Gtk::Window {
 	public:
@@ -51,8 +51,7 @@ class MainWindow : public Gtk::Window {
 		friend class Channel;
 		void set_live_player(LivePlayer*, const Glib::ustring& name = "");
 		LivePlayer* get_live_player() { return live_player; }
-		RecordStream* get_record_gmp() { return record_gmp; }
-		PlayStream* get_play_gmp() { return gmp; }
+		GMplayer*   get_gmplayer() { return gmp; }
 		Gtk::Menu* get_channels_pop_menu() { return channels_pop_menu; }
 		Channel* get_recent_channel() { return recent_channel; }
 		Channel* get_bookmark_channel() { return bookmark_channel; }
@@ -79,7 +78,6 @@ class MainWindow : public Gtk::Window {
 		void on_search_channel();
 		/** 更新频道列表回调*/
 		void on_refresh_channel();
-		void on_preview(const std::string& filename);
 		/** 根据界面大小更新mplayer画面的大小*/
 		void on_update_video_widget();
 		void on_drog_data_received(const Glib::RefPtr<Gdk::DragContext>& context,
@@ -123,8 +121,6 @@ class MainWindow : public Gtk::Window {
 		Glib::RefPtr<Gtk::UIManager>	ui_manager;
 		Glib::RefPtr<Gtk::ActionGroup> 	action_group;
 		Glib::ustring			play_channel_name;
-		PlayStream* 			gmp;
-		RecordStream* 			record_gmp;
 		Gtk::Box*			play_frame;
 		Gtk::EventBox*			play_eventbox;
 		Gtk::Notebook*			channels;
@@ -139,15 +135,16 @@ class MainWindow : public Gtk::Window {
 		Channel* 			bookmark_channel;
 		Gtk::Menu*			channels_pop_menu;
 		Gtk::Menu*			try_pop_menu;
-		LivePlayer* 		        live_player;
+		LivePlayer* 		live_player;
+		GMplayer*			gmp;
 		ConfWindow*			confwindow;
 		int 				gmp_width;
-		int				gmp_height;
+		int					gmp_height;
 		double				gmp_rate;	//mplayer画面比例
-		int				window_width;
-		int				window_height;
-		int				window_x;
-		int				window_y;
+		int					window_width;
+		int					window_height;
+		int					window_x;
+		int					window_y;
 		bool				gmp_embed;	//是否嵌入mplayer
 		bool				channels_hide;
 		bool				toolbar_hide;

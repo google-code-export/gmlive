@@ -23,6 +23,7 @@
 #include "MainWindow.h"
 #include "mmsLivePlayer.h"
 #include "sopcastLivePlayer.h"
+#include "pplivePlayer.h"
 
 BookMarkChannel::BookMarkChannel(MainWindow* parent_):Channel( parent_)
 {
@@ -33,8 +34,8 @@ LivePlayer* BookMarkChannel::get_player(const std::string& stream,TypeChannel pa
 	switch( page ) {
 		case MMS_CHANNEL:
 			return MmsLivePlayer::create(stream);
-		//case NSLIVE_CHANNEL:
-				//return NsLivePlayer::create(stream);
+		case PPLIVE_CHANNEL:
+				return PpLivePlayer::create(stream);
 		case SOPCAST_CHANNEL:
 			return SopcastLivePlayer::create(stream);
 	}

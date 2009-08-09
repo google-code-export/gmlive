@@ -33,13 +33,16 @@ PpLivePlayer* PpLivePlayer::self = NULL;
 
 PpLivePlayer* PpLivePlayer::create(const std::string& stream_)
 {
-	if (!self)
-		self = new PpLivePlayer(stream_);
+	if (self && self->filename == stream_)
+		return self;
+
+	self = new PpLivePlayer(stream_);
 	return self;
+
 }
 
 PpLivePlayer::PpLivePlayer(const std::string& stream_) : 
-	stream(stream_),
+	LivePlayer(stream_),
 	pplive_pid(-1),
 	sop_sock(-1),
 	gmplayer(NULL),
@@ -75,7 +78,7 @@ void PpLivePlayer::start(GMplayer& gmp)
 		const char* argv[5];
 
 		argv[0] = "xpplive";
-		argv[1] = stream.c_str();
+		argv[1] = filename.c_str();
 		argv[2] = NULL;
 
 		// 设置 这个子进程为进程组头，
@@ -99,11 +102,12 @@ void PpLivePlayer::start(GMplayer& gmp)
 
 bool PpLivePlayer::on_sop_time_status()
 {
-	std::string& cache = GMConf["sopcast_mplayer_cache"];
+	std::string& cache = GMConf["pplive_mplayer_cache"];
 	int icache = atoi(cache.c_str());
 	icache = icache > 64 ? icache : 64;
 
 	gmplayer->set_cache(icache);
+
 	gmplayer->start(PPLIVESTREAM);
 
 	return false;
