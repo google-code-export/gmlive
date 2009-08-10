@@ -58,21 +58,26 @@ class MainWindow : public Gtk::Window {
 		// 菜单回调
 		void on_menu_open_file();
 		void on_menu_open_url();
-		void on_menu_file_play();
-		void on_menu_file_pause();
-		void on_menu_file_record();
-		void on_menu_file_stop();
-		void on_menu_file_mute();
-		void on_menu_file_quit();
-		void on_menu_view_hide_channel();
-		void on_menu_view_hide_toolbar();
-		void on_menu_view_always_on_top();
-		void on_menu_view_embed_mplayer();
-		void on_menu_view_preferences();
+		void on_menu_play();
+		void on_menu_pause();
+		void on_menu_record();
+		void on_menu_stop();
+		void on_menu_mute();
+		void on_menu_quit();
+		void on_menu_hide_channel();
+		void on_menu_hide_toolbar();
+		void on_menu_always_on_top();
+		void on_menu_embed_mplayer();
+		void on_menu_preferences();
 		void on_menu_help_about();
 		//void on_menu_pop_refresh_list();
 		void on_menu_pop_add_to_bookmark();
 		void on_menu_pop_copy_to_clipboard();
+
+		void on_menu_volume_increase();
+		void on_menu_volume_decrease();
+		void on_menu_audio_delay_increase();
+		void on_menu_audio_delay_decrease();
 
 		/** 查找列表按钮回调*/
 		void on_search_channel();
@@ -93,8 +98,8 @@ class MainWindow : public Gtk::Window {
 		/** 双击画面事件*/
 		bool on_doubleclick_picture(GdkEventButton* ev);
 		/*
-		Glib::ustring on_volume_display(double);
-		*/
+		   Glib::ustring on_volume_display(double);
+		   */
 		/** 切换全屏状态,嵌入播放器时有效*/
 		void on_fullscreen();
 		void unzoom(); //解除全屏

@@ -163,8 +163,6 @@ Glib::ustring ui_info =
 "			<menuitem action='FilePause'/>"
 "			<menuitem action='FileRecord'/>"
 "			<menuitem action='FileStop'/>"
-"   		<menuitem action='FullScreen'/>"
-"			<menuitem action='Mute'/>"
 "			<separator/>"
 "			<menuitem action='FileQuit'/>"
 "        	</menu>"
@@ -174,7 +172,14 @@ Glib::ustring ui_info =
 "			<menuitem action='ViewShowToolbar'/>"
 "			<menuitem action='FullScreen'/>"
 "			<menuitem action='AlwaysOnTop'/>"
-"			<menuitem action='ViewPreferences'/>"
+"		</menu>"
+"		<menu action='ToolMenu'>"
+"			<menuitem action='ToolVolumeIncrease'/>"
+"			<menuitem action='ToolVolumeDecrease'/>"
+"			<menuitem action='ToolAudioDelayIncrease'/>"
+"			<menuitem action='ToolAudioDelayDecrease'/>"
+"			<menuitem action='ToolMute'/>"
+"			<menuitem action='ToolPreferences'/>"
 "		</menu>"
 "		<menu action='HelpMenu'>"
 "			<menuitem action='HelpAbout'/>"
@@ -185,7 +190,7 @@ Glib::ustring ui_info =
 "		<menuitem action='FilePause'/>"
 "		<menuitem action='FileRecord'/>"
 "		<menuitem action='FileStop'/>"
-"		<menuitem action='Mute'/>"
+"		<menuitem action='ToolMute'/>"
 "		<separator/>"
 "		<menuitem action='PopCopyUrl'/>"
 "		<separator/>"
@@ -197,9 +202,9 @@ Glib::ustring ui_info =
 "		<menuitem action='FilePause'/>"
 "		<menuitem action='FileRecord'/>"
 "		<menuitem action='FileStop'/>"
-"		<menuitem action='Mute'/>"
+"		<menuitem action='ToolMute'/>"
 "		<separator/>"
-"		<menuitem action='ViewPreferences'/>"
+"		<menuitem action='ToolPreferences'/>"
 "		<separator/>"
 "		<menuitem action='FileQuit'/>"
 "	</popup>"
@@ -277,35 +282,25 @@ void MainWindow::init_ui_manager()
 	action = Gtk::Action::create("FilePlay", Gtk::Stock::MEDIA_PLAY);
 	action->set_tooltip(_("Play"));
 	action_group->add(action,
-			sigc::mem_fun(*this, &MainWindow::on_menu_file_play));
+			sigc::mem_fun(*this, &MainWindow::on_menu_play));
 
 	action = Gtk::Action::create("FilePause", Gtk::Stock::MEDIA_PAUSE);
 	action->set_tooltip(_("Pause"));
 	action_group->add(action,
-			sigc::mem_fun(*this, &MainWindow::on_menu_file_pause));
+			sigc::mem_fun(*this, &MainWindow::on_menu_pause));
 
 	action = Gtk::Action::create("FileRecord", Gtk::Stock::MEDIA_RECORD);
 	action->set_tooltip(_("Record"));
 	action_group->add(action,
-			sigc::mem_fun(*this, &MainWindow::on_menu_file_record));
+			sigc::mem_fun(*this, &MainWindow::on_menu_record));
 
 	action = Gtk::Action::create("FileStop", Gtk::Stock::MEDIA_STOP);
 	action->set_tooltip(_("Stop"));
 	action_group->add(action,
-			sigc::mem_fun(*this, &MainWindow::on_menu_file_stop));
-
-	//action = Gtk::Action::create("FullScreen", Gtk::StockID("FullScreen"),_("FullScreen"));
-	action = Gtk::Action::create("FullScreen", Gtk::Stock::FULLSCREEN);
-	action->set_tooltip(_("FullScreen"));
-	action_group->add(action,
-			sigc::mem_fun(*this, &MainWindow::on_fullscreen));
-
-	action_group->add(Gtk::ToggleAction::create("Mute",
-				_("_Mute"), _("_Mute"), false), 
-			sigc::mem_fun(*this, &MainWindow::on_menu_file_mute));
+			sigc::mem_fun(*this, &MainWindow::on_menu_stop));
 
 	action_group->add(Gtk::Action::create("FileQuit", Gtk::Stock::QUIT),
-			sigc::mem_fun(*this, &MainWindow::on_menu_file_quit));
+			sigc::mem_fun(*this, &MainWindow::on_menu_quit));
 
 	//View menu:
 	action_group->add(Gtk::Action::create("ViewMenu", _("_View")));
@@ -314,24 +309,55 @@ void MainWindow::init_ui_manager()
 			Gtk::StockID("HideChannels"));
 	action->set_tooltip(_("Show or hide channels list"));
 	action_group->add(action,
-			sigc::mem_fun(*this, &MainWindow::on_menu_view_hide_channel));
+			sigc::mem_fun(*this, &MainWindow::on_menu_hide_channel));
 
 	action = Gtk::ToggleAction::create("ViewShowToolbar", 
 			_("Hide_Toolbar"), _("Show or hide Toolbar"), false);
 	action_group->add(action,
-			sigc::mem_fun(*this, &MainWindow::on_menu_view_hide_toolbar));
-	
+			sigc::mem_fun(*this, &MainWindow::on_menu_hide_toolbar));
+
 	action_group->add(Gtk::ToggleAction::create("AlwaysOnTop",
 				_("_AlwaysOnTop"), _("Make GMlive ontop of other windows"), false), 
-			sigc::mem_fun(*this, &MainWindow::on_menu_view_always_on_top));
+			sigc::mem_fun(*this, &MainWindow::on_menu_always_on_top));
 
+	action = Gtk::Action::create("FullScreen", Gtk::Stock::FULLSCREEN);
+	action->set_tooltip(_("FullScreen"));
+	action_group->add(action,
+			sigc::mem_fun(*this, &MainWindow::on_fullscreen));
 
 	action_group->add(Gtk::ToggleAction::create("ViewEmbedMplayer",
 				_("_Embed Mplayer"), _("Embed or Separate mplayer play"), true), 
-			sigc::mem_fun(*this, &MainWindow::on_menu_view_embed_mplayer));
+			sigc::mem_fun(*this, &MainWindow::on_menu_embed_mplayer));
 
-	action_group->add(Gtk::Action::create("ViewPreferences", Gtk::Stock::PREFERENCES),
-			sigc::mem_fun(*this, &MainWindow::on_menu_view_preferences));
+	//Tool menu:
+	action_group->add(Gtk::Action::create("ToolMenu", _("_Tool")));
+
+	action_group->add(Gtk::Action::create("ToolVolumeIncrease", Gtk::Stock::GO_UP,
+				_("Volume_Increase"), _("Volume Increase")), 
+			sigc::mem_fun(*this, &MainWindow::on_menu_volume_increase));
+
+	action_group->add(Gtk::Action::create("ToolVolumeDecrease", Gtk::Stock::GO_DOWN,
+				_("Volume_Decrease"), _("Volume Decrease")), 
+			sigc::mem_fun(*this, &MainWindow::on_menu_volume_decrease));
+
+	action_group->add(Gtk::Action::create("ToolAudioDelayIncrease", Gtk::Stock::GO_UP,
+				_("AudioDelay_Increase"), _("AudioDelay Increase")), 
+			sigc::mem_fun(*this, &MainWindow::on_menu_audio_delay_increase));
+
+	action_group->add(Gtk::Action::create("ToolAudioDelayDecrease", Gtk::Stock::GO_DOWN,
+				_("AudioDelay_Decrease"), _("AudioDelay Decrease")), 
+			sigc::mem_fun(*this, &MainWindow::on_menu_audio_delay_decrease));
+
+
+	action_group->add(Gtk::ToggleAction::create("ToolMute",
+				_("_Mute"), _("Mute"), false), 
+			sigc::mem_fun(*this, &MainWindow::on_menu_mute));
+
+	action_group->add(Gtk::Action::create("ToolPreferences", Gtk::Stock::PREFERENCES),
+			sigc::mem_fun(*this, &MainWindow::on_menu_preferences));
+
+
+
 
 	//Help menu:
 	action_group->add(Gtk::Action::create("HelpMenu", _("_Help")));
@@ -348,7 +374,7 @@ void MainWindow::init_ui_manager()
 	action_group->add(Gtk::Action::create("PopCopyUrl", 
 				_("_Copy url"), _("Copy url to clipboard")),
 			sigc::mem_fun(*this, &MainWindow::on_menu_pop_copy_to_clipboard));
-				
+
 
 	if (!ui_manager)
 		ui_manager = Gtk::UIManager::create();
@@ -414,7 +440,7 @@ void MainWindow::on_menu_open_url()
 }
 
 
-void MainWindow::on_menu_file_play()
+void MainWindow::on_menu_play()
 {
 	Channel* channel = get_cur_select_channel();
 	if (channel)
@@ -424,7 +450,7 @@ void MainWindow::on_menu_file_play()
 
 }
 
-void MainWindow::on_menu_file_stop()
+void MainWindow::on_menu_stop()
 {
 	gmp->stop();
 }
@@ -472,15 +498,15 @@ void MainWindow::on_fullscreen()
 		full_screen=false;
 	}
 }
-void MainWindow::on_menu_file_pause()
+void MainWindow::on_menu_pause()
 {
 	DLOG("on_menu_pause\n");
 	gmp->pause();
 }
 
-void MainWindow::on_menu_file_record()
+void MainWindow::on_menu_record()
 {
-	DLOG("on_menu_file_record");
+	DLOG("on_menu_record");
 	Channel* channel = get_cur_select_channel();
 	if (channel)
 		channel->record_selection();
@@ -488,18 +514,18 @@ void MainWindow::on_menu_file_record()
 		DLOG("Error");
 }
 
-void MainWindow::on_menu_file_mute()
+void MainWindow::on_menu_mute()
 {
-	Glib::RefPtr<Gtk::ToggleAction> mute = 
-		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("Mute"));
-	bool mute_=mute->get_active();
+	Glib::RefPtr<Gtk::ToggleAction> ToolMute = 
+		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ToolMute"));
+	bool mute_=ToolMute->get_active();
 
 	gmp->mute(mute_);
 }
 
-void MainWindow::on_menu_file_quit()
+void MainWindow::on_menu_quit()
 {
-	DLOG("on_menu_file_quit");
+	DLOG("on_menu_quit");
 	this->get_size( window_width, window_height);
 	gmp->stop();
 	Gtk::Main::quit();
@@ -556,18 +582,18 @@ bool MainWindow::on_delete_event(GdkEventAny* event)
 {
 	this->get_size( window_width, window_height);
 	if(!atoi(GMConf["close_to_systray"].c_str()))
-		on_menu_file_quit();
+		on_menu_quit();
 	else if (!atoi(GMConf["enable_tray"].c_str())) 
-		on_menu_file_quit();
+		on_menu_quit();
 	else if (gmp_embed)
 		gmp->stop();
 	this->get_position(window_x, window_y);
 	return Gtk::Window::on_delete_event(event);
 }
 
-void MainWindow::on_menu_view_hide_channel()
+void MainWindow::on_menu_hide_channel()
 {
-	//cout << "on_menu_view_hide_channel" << endl;
+	//cout << "on_menu_hide_channel" << endl;
 
 	// 这种写法太白痴了
 	Glib::RefPtr<Gtk::ToggleAction> show = 
@@ -583,9 +609,9 @@ void MainWindow::on_menu_view_hide_channel()
 	this->resize(1, 1);
 }
 
-void MainWindow::on_menu_view_hide_toolbar()
+void MainWindow::on_menu_hide_toolbar()
 {
-	//cout << "on_menu_view_hide_toolbar" << endl;
+	//cout << "on_menu_hide_toolbar" << endl;
 
 	Glib::RefPtr<Gtk::ToggleAction> show = 
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewShowToolbar"));
@@ -600,7 +626,7 @@ void MainWindow::on_menu_view_hide_toolbar()
 	this->resize(1, 1);
 }
 
-void MainWindow::on_menu_view_always_on_top()
+void MainWindow::on_menu_always_on_top()
 {
 	Glib::RefPtr<Gtk::ToggleAction> show = 
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("AlwaysOnTop"));
@@ -614,16 +640,16 @@ void MainWindow::on_menu_view_always_on_top()
 
 
 
-void MainWindow::on_menu_view_embed_mplayer()
+void MainWindow::on_menu_embed_mplayer()
 {
-	//cout << "on_menu_view_embed_mplayer" << endl;
+	//cout << "on_menu_embed_mplayer" << endl;
 	// 这种写法太白痴了
 	Glib::RefPtr<Gtk::ToggleAction> embed = 
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
 	set_gmp_embed(embed->get_active());
 }
 
-void MainWindow::on_menu_view_preferences()
+void MainWindow::on_menu_preferences()
 {
 	if(NULL==confwindow)
 	{
@@ -798,7 +824,7 @@ MainWindow::MainWindow():
 	ui_xml->get_widget("channels", channels);
 
 	channels_box = 0;
-   	ui_xml->get_widget("channels_box", channels_box);
+	ui_xml->get_widget("channels_box", channels_box);
 	//channels_box->set_size_request(120,100); //set channels box size
 
 	Channel* channel = Gtk::manage(new class MMSChannel(this));
@@ -938,7 +964,7 @@ MainWindow::MainWindow():
 	//channels->hide();
 	this->resize(1,1);
 	//init();
-		
+
 	Gtk::ScaleButton* vbt = 0;
 	//ui_xml->get_widget("av_sync_button", vbt);
 	//vbt->signal_value_changed().connect(sigc::mem_fun(*this, &MainWindow::on_av_sync_change));
@@ -967,10 +993,28 @@ MainWindow::MainWindow():
 	//set_gmp_embed(gmp_embed);
 	set_other_player(atoi(GMConf["player_type"].c_str()));
 	//	Glib::RefPtr<Gtk::ToggleAction> menu = 
-	//		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("Mute"));
+	//		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ToolMute"));
 	//	menu->set_active(false);
 	((Gtk::Toolbar*)toolbar)->set_toolbar_style(Gtk::TOOLBAR_ICONS);
 
+
+}
+
+
+void MainWindow::on_menu_volume_increase()
+{
+
+}
+void MainWindow::on_menu_volume_decrease()
+{
+
+}
+void MainWindow::on_menu_audio_delay_increase()
+{
+
+}
+void MainWindow::on_menu_audio_delay_decrease()
+{
 
 }
 
@@ -1032,7 +1076,7 @@ void MainWindow::set_gmp_embed(bool embed)
 		channels_box->show();
 		action_group->get_action("ViewShowChannel")->set_sensitive(false);
 		action_group->get_action("FullScreen")->set_sensitive(false);
-		action_group->get_action("Mute")->set_sensitive(false);
+		action_group->get_action("ToolMute")->set_sensitive(false);
 		this->resize(window_width, window_height);
 	}
 	else {
@@ -1042,7 +1086,7 @@ void MainWindow::set_gmp_embed(bool embed)
 		play_frame->show_all();
 		action_group->get_action("ViewShowChannel")->set_sensitive(true);
 		action_group->get_action("FullScreen")->set_sensitive(true);
-		action_group->get_action("Mute")->set_sensitive(true);
+		action_group->get_action("ToolMute")->set_sensitive(true);
 		set_channels_hide(atoi(GMConf["channels_hide"].c_str()));
 		this->resize(1, 1);
 	}
