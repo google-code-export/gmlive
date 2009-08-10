@@ -374,16 +374,11 @@ void MainWindow::on_menu_open_file()
 		Glib::ustring filename = dlg.get_filename();
 		if (filename.empty())
 			return;
-		Glib::ustring filtername = Glib::ustring("\"")+filename+"\"";
-		DLOG("播放 %s\n",filtername.c_str());
+		DLOG("播放 %s\n",filename.c_str());
 
-		std::string& cache = GMConf["mms_mplayer_cache"];
-		int icache = atoi(cache.c_str());
-		icache = icache > 64 ? icache : 64;
-
-		gmp->set_cache(icache);
+		gmp->set_cache(64);
 		gmp->set_record(false);
-		gmp->start(filtername);
+		gmp->start(filename);
 
 	}
 }
@@ -406,15 +401,14 @@ void MainWindow::on_menu_open_url()
 		Glib::ustring filename = m_entry.get_text();
 		if (filename.empty())
 			return;
-		Glib::ustring filtername = Glib::ustring("\"")+filename+"\"";
-		DLOG("播放 %s\n",filtername.c_str());
+		DLOG("播放 %s\n",filename.c_str());
 		std::string& cache = GMConf["mms_mplayer_cache"];
 		int icache = atoi(cache.c_str());
 		icache = icache > 64 ? icache : 8192;
 
 		gmp->set_cache(icache);
 		gmp->set_record(false);
-		gmp->start(filtername);
+		gmp->start(filename);
 	}
 
 }
