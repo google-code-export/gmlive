@@ -886,7 +886,7 @@ MainWindow::MainWindow():
 	try_pop_menu = dynamic_cast<Gtk::Menu*>(
 			ui_manager->get_widget("/TryPopupMenu"));
 
-	Gtk::VBox* menu_tool_box = 0;
+	Gtk::HBox* menu_tool_box = 0;
 	ui_xml->get_widget("box_menu_toolbar", menu_tool_box);
 	menu_tool_box->pack_start(*menubar,true,true);
 	menu_tool_box->pack_start(*toolbar,false,false);
