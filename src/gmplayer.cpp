@@ -161,6 +161,13 @@ void GMplayer::wait_mplayer_exit(GPid pid, int)
 
 int GMplayer::my_system(char* const argv[])
 {
+
+	const char* p = argv[0];
+	for (int i = 1 ; p ; p = argv[i++]   ){
+		printf("%s ", p);
+	}
+	printf("\n");
+
 	extern char **environ;
 	create_pipe();
 	assert(!out_slot.empty());
@@ -283,7 +290,7 @@ void GMplayer::start_play()
 			}
 		}
 
-		int argv_len = 10 + pars.size();
+		int argv_len = 12 + pars.size();
 		const char* argv[argv_len];
 		argv[0] = "mplayer";
 		argv[1] = "-slave";
