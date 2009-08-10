@@ -22,13 +22,13 @@
 
 ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 {
-	GlademmXML vbox_xml =
-		Gnome::Glade::Xml::create(main_ui, "vbox_conf");
-	Gtk::VBox * vBox = dynamic_cast < Gtk::VBox * >
-		(vbox_xml->get_widget("vbox_conf"));
-	Gtk::Notebook* notebook = dynamic_cast<Gtk::Notebook*>
-		(vbox_xml->get_widget("notebook_conf"));
+	BuilderXML vbox_xml =
+		Gtk::Builder::create_from_file(main_ui, "vbox_conf");
+	Gtk::VBox * vBox = 0;
+	vbox_xml->get_widget("vbox_conf", vBox);
 
+	Gtk::Notebook* notebook = 0;
+	vbox_xml->get_widget("notebook_conf", notebook);
 
 	std::string& oplayer = GMConf["player_type"];
 	m_oplayer = (!oplayer.empty())&&(oplayer[0]=='1');
@@ -63,7 +63,7 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	m_pplive_channel =  GMConf["pplive_channel_url"];
 
 
-	m_pVariablesMap = new Gnome::Glade::VariablesMap(vbox_xml);
+	m_pVariablesMap = new VariablesMap(vbox_xml);
 	m_pVariablesMap->connect_widget("rbtn_oplayer",m_oplayer);
 	m_pVariablesMap->connect_widget("entry_oplayer_cmd",m_oplayer_cmd);
 	m_pVariablesMap->connect_widget("check_embed",m_embed);
@@ -91,23 +91,30 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 
 
 
-	vbox_xml->connect_clicked("button_save", sigc::mem_fun(*this,&ConfWindow::on_button_save));
-	vbox_xml->connect_clicked("button_cancel", sigc::mem_fun(*this, &ConfWindow::on_button_cancel));
+	Gtk::Button* bt = 0;
+	vbox_xml->get_widget("button_save", bt);
+	bt->signal_clicked().connect(sigc::mem_fun(*this,&ConfWindow::on_button_save));
+
+	bt = 0;
+	vbox_xml->get_widget("button_cancel", bt);
+	bt->signal_clicked().connect(sigc::mem_fun(*this,&ConfWindow::on_button_cancel));
+	//vbox_xml->connect_clicked("button_save", sigc::mem_fun(*this,&ConfWindow::on_button_save));
+	//vbox_xml->connect_clicked("button_cancel", sigc::mem_fun(*this, &ConfWindow::on_button_cancel));
 
 
-	enable_tray = dynamic_cast<Gtk::ToggleButton*>
-		(vbox_xml->get_widget("enable_tray"));
+	enable_tray = 0;
+	vbox_xml->get_widget("enable_tray", enable_tray);
 
-	check_close_tray = dynamic_cast<Gtk::ToggleButton*>
-		(vbox_xml->get_widget("check_close_try"));
+	check_close_tray = 	0;
+	vbox_xml->get_widget("check_close_try",check_close_tray);
 
 	enable_tray->signal_clicked().connect(sigc::mem_fun(*this, &ConfWindow::on_enable_tray_toggle));
 	on_enable_tray_toggle();
 
-	radio_player = dynamic_cast<Gtk::RadioButton*>
-		(vbox_xml->get_widget("rbtn_mplayer"));
-	hbox2 = dynamic_cast<Gtk::HBox*>
-		(vbox_xml->get_widget("hbox2"));
+	radio_player = 0;
+	vbox_xml->get_widget("rbtn_mplayer", radio_player);
+	hbox2 = 0;
+	vbox_xml->get_widget("hbox2", hbox2);
 	radio_player->signal_clicked().connect(sigc::mem_fun(*this, &ConfWindow::on_select_mplayer));
 	on_select_mplayer();
 

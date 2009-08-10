@@ -8,6 +8,7 @@ INCLUDES = \
 bin_PROGRAMS = gmlive
 gmlive_SOURCES = \
 		 ec_throw.cpp \
+		 variablesmap.cpp \
 		 main.cpp \
 		 MainWindow.cpp \
 		 ConfWindow.cpp \
@@ -27,6 +28,7 @@ gmlive_SOURCES = \
 noinst_HEADERS = \
 	     scope_gruard.h \
 		 ec_throw.h \
+		 variablesmap.h \
 		 CodeConverter.h \
 		 scope_gruard.h \
 		 MainWindow.h \

@@ -1,31 +1,32 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--*- mode: xml -*-->
-<glade-interface>
-  <widget class="GtkWindow" id="recordwindow">
+<?xml version="1.0"?>
+<interface>
+  <!-- interface-requires gtk+ 2.6 -->
+  <!-- interface-naming-policy toplevel-contextual -->
+  <object class="GtkWindow" id="recordwindow">
     <property name="visible">True</property>
     <property name="border_width">12</property>
     <property name="title" translatable="yes">Recording</property>
     <child>
-      <widget class="GtkVBox" id="main_frame">
+      <object class="GtkVBox" id="main_frame">
         <property name="visible">True</property>
         <property name="border_width">12</property>
         <property name="spacing">6</property>
         <child>
-          <widget class="GtkLabel" id="label_info">
+          <object class="GtkLabel" id="label_info">
             <property name="visible">True</property>
             <property name="label" translatable="yes">Record Readying ...</property>
-          </widget>
+          </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
+            <property name="position">0</property>
           </packing>
         </child>
         <child>
-          <widget class="GtkProgressBar" id="progressbar">
+          <object class="GtkProgressBar" id="progressbar">
             <property name="visible">True</property>
             <property name="pulse_step">0.10000000149</property>
-          </widget>
+          </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
@@ -33,74 +34,76 @@
           </packing>
         </child>
         <child>
-          <widget class="GtkHBox" id="hbox17">
+          <object class="GtkHBox" id="hbox17">
             <property name="visible">True</property>
             <child>
-              <widget class="GtkButton" id="bt_preview">
+              <object class="GtkButton" id="bt_preview">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="response_id">0</property>
+                <property name="receives_default">False</property>
                 <child>
-                  <widget class="GtkAlignment" id="alignment1">
+                  <object class="GtkAlignment" id="alignment1">
                     <property name="visible">True</property>
                     <property name="xscale">0</property>
                     <property name="yscale">0</property>
                     <child>
-                      <widget class="GtkHBox" id="hbox18">
+                      <object class="GtkHBox" id="hbox18">
                         <property name="visible">True</property>
                         <property name="spacing">2</property>
                         <child>
-                          <widget class="GtkImage" id="image2">
+                          <object class="GtkImage" id="image2">
                             <property name="visible">True</property>
                             <property name="stock">gtk-media-play</property>
-                          </widget>
+                          </object>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
+                            <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkLabel" id="label82">
+                          <object class="GtkLabel" id="label82">
                             <property name="visible">True</property>
                             <property name="label" translatable="yes">_Preview</property>
                             <property name="use_underline">True</property>
-                          </widget>
+                          </object>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
-                      </widget>
+                      </object>
                     </child>
-                  </widget>
+                  </object>
                 </child>
-              </widget>
+              </object>
               <packing>
                 <property name="fill">False</property>
+                <property name="position">0</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkButton" id="bt_stop">
+              <object class="GtkButton" id="bt_stop">
+                <property name="label">gtk-media-stop</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="label">gtk-media-stop</property>
+                <property name="receives_default">False</property>
                 <property name="use_stock">True</property>
-                <property name="response_id">0</property>
-              </widget>
+              </object>
               <packing>
                 <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
             </child>
-          </widget>
+          </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
             <property name="position">2</property>
           </packing>
         </child>
-      </widget>
+      </object>
     </child>
-  </widget>
-</glade-interface>
+  </object>
+</interface>

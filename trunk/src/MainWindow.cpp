@@ -641,9 +641,9 @@ void MainWindow::on_menu_view_preferences()
 
 void MainWindow::on_menu_help_about()
 {
-	GlademmXML about_xml = Gnome::Glade::Xml::create(main_ui, "aboutwindow");
-	Gtk::Window* about = dynamic_cast<Gtk::Window*>
-		(about_xml->get_widget("aboutwindow"));
+	BuilderXML about_xml = Gtk::Builder::create_from_file(main_ui, "aboutwindow");
+	Gtk::Window* about = 0;
+	about_xml->get_widget("aboutwindow", about);
 	about->show();
 }
 
@@ -652,8 +652,9 @@ void MainWindow::on_search_channel()
 	Channel* channel = get_cur_select_channel();
 	if (!channel) 
 		DLOG("Error");
-	Gtk::Entry* search = dynamic_cast<Gtk::Entry*>(
-			ui_xml->get_widget("entry_find_channel"));
+	Gtk::Entry* search = 0;
+	ui_xml->get_widget("entry_find_channel", search);
+
 	if (search)
 		channel->search_channel(search->get_text());
 }
@@ -789,30 +790,30 @@ MainWindow::MainWindow():
 	listTargets.push_back(Gtk::TargetEntry("STRING"));
 	listTargets.push_back(Gtk::TargetEntry("text/plain"));
 
-	ui_xml = Gnome::Glade::Xml::create(main_ui, "mainFrame");
+	ui_xml = Gtk::Builder::create_from_file(main_ui, "mainFrame");
 	if (!ui_xml) 
 		exit(127);
 
 
-	Gtk::VBox* main_frame = 
-		dynamic_cast < Gtk::VBox* >
-		(ui_xml->get_widget("mainFrame"));
+	Gtk::VBox* main_frame = 0;
+	ui_xml->get_widget("mainFrame", main_frame);
 
-	statusbar = dynamic_cast<Gtk::Statusbar*>
-		(ui_xml->get_widget("statusbar"));
+	statusbar = 0;
+	ui_xml->get_widget("statusbar", statusbar);
 
-	play_frame = dynamic_cast<Gtk::Box*>
-		(ui_xml->get_widget("playFrame"));
+	play_frame = 0;
+	ui_xml->get_widget("playFrame", play_frame);
 
-	channels = dynamic_cast<Gtk::Notebook*>
-		(ui_xml->get_widget("channels"));
+	channels = 0;
+	ui_xml->get_widget("channels", channels);
 
-	channels_box = ui_xml->get_widget("channels_box");
+	channels_box = 0;
+   	ui_xml->get_widget("channels_box", channels_box);
 	//channels_box->set_size_request(120,100); //set channels box size
 
 	Channel* channel = Gtk::manage(new class MMSChannel(this));
-	Gtk::ScrolledWindow* swnd = dynamic_cast<Gtk::ScrolledWindow*>
-		(ui_xml->get_widget("mmsChannelWnd"));
+	Gtk::ScrolledWindow* swnd = 0;
+	ui_xml->get_widget("mmsChannelWnd", swnd);
 	swnd->add(*channel);
 
 	init();
@@ -823,8 +824,8 @@ MainWindow::MainWindow():
 	if(enable_sopcast)
 	{
 		channel = Gtk::manage(new SopcastChannel(this));
-		swnd = dynamic_cast<Gtk::ScrolledWindow*>
-			(ui_xml->get_widget("sopcastChannelWnd"));
+		swnd = 0;
+		ui_xml->get_widget("sopcastChannelWnd", swnd);
 		swnd->add(*channel);
 		DLOG("support sopcast\n");
 		if(refresh_sopcast_channels)
@@ -836,8 +837,8 @@ MainWindow::MainWindow():
 	if(enable_pplive)
 	{
 		channel = Gtk::manage(new class PpliveChannel(this));
-		swnd = dynamic_cast<Gtk::ScrolledWindow*>
-			(ui_xml->get_widget("ppliveChannelWnd"));
+		swnd = 0;
+		ui_xml->get_widget("ppliveChannelWnd", swnd);
 		swnd->add(*channel);
 		DLOG("support pplive\n");
 		if (refresh_pplive_channels)
@@ -853,13 +854,13 @@ MainWindow::MainWindow():
 
 
 	recent_channel = Gtk::manage(new class RecentChannel(this));
-	swnd = dynamic_cast<Gtk::ScrolledWindow*>
-		(ui_xml->get_widget("recentChannelWnd"));
+	swnd = 0;
+	ui_xml->get_widget("recentChannelWnd", swnd);
 	swnd->add(*recent_channel);
 
 	bookmark_channel = Gtk::manage(new class BookMarkChannel(this));
-	swnd = dynamic_cast<Gtk::ScrolledWindow*>
-		(ui_xml->get_widget("bookmarkChannelWnd"));
+	swnd = 0;
+	ui_xml->get_widget("bookmarkChannelWnd", swnd);
 	swnd->add(*bookmark_channel);
 
 
@@ -885,8 +886,8 @@ MainWindow::MainWindow():
 	try_pop_menu = dynamic_cast<Gtk::Menu*>(
 			ui_manager->get_widget("/TryPopupMenu"));
 
-	Gtk::VBox* menu_tool_box = dynamic_cast<Gtk::VBox*>
-		(ui_xml->get_widget("box_menu_toolbar"));
+	Gtk::VBox* menu_tool_box = 0;
+	ui_xml->get_widget("box_menu_toolbar", menu_tool_box);
 	menu_tool_box->pack_start(*menubar,true,true);
 	menu_tool_box->pack_start(*toolbar,false,false);
 
@@ -928,10 +929,14 @@ MainWindow::MainWindow():
 	Glib::RefPtr<Gdk::Pixbuf> pix = Gdk::Pixbuf::create_from_file(DATA_DIR"/gmlive.png");
 	this->set_icon(pix);
 
-	ui_xml->connect_clicked("bt_search_channel",
-			sigc::mem_fun(*this, &MainWindow::on_search_channel));
-	ui_xml->connect_clicked("bt_refresh_channel",
-			sigc::mem_fun(*this, &MainWindow::on_refresh_channel));
+	Gtk::Button* bt = 0;
+	ui_xml->get_widget("bt_search_channel", bt);
+	bt->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_search_channel));
+
+	bt = 0;
+	ui_xml->get_widget("bt_refresh_channel", bt);
+	bt->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_refresh_channel));
+
 	this->show_all();
 	//channels->hide();
 	this->resize(1,1);
