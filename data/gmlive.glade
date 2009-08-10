@@ -15,6 +15,7 @@
         <child>
           <object class="GtkVBox" id="box_menu_toolbar">
             <property name="visible">True</property>
+            <property name="orientation">vertical</property>
             <child>
               <placeholder/>
             </child>
@@ -25,20 +26,31 @@
                   <placeholder/>
                 </child>
                 <child>
-                  <object class="GtkVolumeButton" id="av_sync_button">
+                  <object class="GtkVBox" id="vbox1">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="has_tooltip">True</property>
-                    <property name="relief">none</property>
-                    <property name="focus_on_click">False</property>
-                    <property name="value">0.5</property>
-                    <property name="icons"></property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkArrow" id="arrow1">
+                        <property name="visible">True</property>
+                        <property name="arrow_type">none</property>
+                      </object>
+                      <packing>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkArrow" id="arrow2">
+                        <property name="visible">True</property>
+                        <property name="arrow_type">down</property>
+                      </object>
+                      <packing>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
-                    <property name="pack_type">end</property>
                     <property name="position">2</property>
                   </packing>
                 </child>
@@ -52,7 +64,10 @@
                     <property name="focus_on_click">False</property>
                     <property name="orientation">vertical</property>
                     <property name="value">1</property>
-                    <property name="icons"></property>
+                    <property name="icons">audio-volume-muted
+audio-volume-high
+audio-volume-low
+audio-volume-medium</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
