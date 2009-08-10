@@ -121,7 +121,6 @@ class MainWindow : public Gtk::Window {
 		void check_support();
 
 		void on_volume_change(double var);
-		void on_av_sync_change(double sync);
 	private:
 		TrayIcon				*tray_icon;
 		BuilderXML 				ui_xml;
