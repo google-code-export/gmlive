@@ -32,13 +32,8 @@
                     <property name="has_tooltip">True</property>
                     <property name="relief">none</property>
                     <property name="focus_on_click">False</property>
+                    <property name="value">0.5</property>
                     <property name="icons"></property>
-                    <child>
-                      <object class="GtkImage" id="image1">
-                        <property name="visible">True</property>
-                        <property name="icon_name">applications-engineering</property>
-                      </object>
-                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -56,13 +51,8 @@
                     <property name="relief">none</property>
                     <property name="focus_on_click">False</property>
                     <property name="orientation">vertical</property>
+                    <property name="value">1</property>
                     <property name="icons"></property>
-                    <child>
-                      <object class="GtkImage" id="image4">
-                        <property name="visible">True</property>
-                        <property name="icon_name">multimedia-volume-control</property>
-                      </object>
-                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
