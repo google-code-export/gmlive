@@ -940,8 +940,8 @@ MainWindow::MainWindow():
 	//init();
 		
 	Gtk::ScaleButton* vbt = 0;
-	ui_xml->get_widget("av_sync_button", vbt);
-	vbt->signal_value_changed().connect(sigc::mem_fun(*this, &MainWindow::on_av_sync_change));
+	//ui_xml->get_widget("av_sync_button", vbt);
+	//vbt->signal_value_changed().connect(sigc::mem_fun(*this, &MainWindow::on_av_sync_change));
 
 	vbt = 0;
 	ui_xml->get_widget("volume_button", vbt);
