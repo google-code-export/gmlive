@@ -237,18 +237,6 @@ void register_stock_items()
 	factory->add(stock_id, icon_set);
 	Gtk::Stock::add(Gtk::StockItem(stock_id, _("_HideChannels")));
 
-	//add fullscreen icons to iconset
-	//Gtk::IconSource source_fullscreen;
-	//source_fullscreen.set_pixbuf( Gdk::Pixbuf::create_from_file(DATA_DIR"/fullscreen.png"));
-	//source_fullscreen.set_size(Gtk::ICON_SIZE_SMALL_TOOLBAR);
-	//source_fullscreen.set_size_wildcarded(); // Icon may be scaled.
-	//Gtk::IconSet icon_set_fullscreen;
-	//icon_set_fullscreen.add_source(source_fullscreen);
-
-	//const Gtk::StockID stock_id_fullscreen("FullScreen");
-	//factory->add(stock_id_fullscreen,icon_set_fullscreen);
-	//Gtk::Stock::add(Gtk::StockItem(stock_id_fullscreen,_("FullScreen")));
-
 	//添加openURL图标进图标库
 	Gtk::IconSource source_openurl;
 	source_openurl.set_pixbuf( Gdk::Pixbuf::create_from_file(DATA_DIR"/OpenURL.png") );
@@ -1003,32 +991,25 @@ MainWindow::MainWindow():
 
 void MainWindow::on_menu_volume_increase()
 {
-
+	gmp->send_ctrl_command("volume +1\n"); 
 }
 void MainWindow::on_menu_volume_decrease()
 {
-
+	gmp->send_ctrl_command("volume -1\n"); 
 }
 void MainWindow::on_menu_audio_delay_increase()
 {
-
+	gmp->send_ctrl_command("audio_delay +0.5\n"); 
 }
 void MainWindow::on_menu_audio_delay_decrease()
 {
-
+	gmp->send_ctrl_command("audio_delay -0.51\n"); 
 }
 
 void MainWindow::on_volume_change(double var)
 {
 	char buf[64];
 	snprintf(buf, 64, "volume %f 1\n", var * 100);
-	gmp->send_ctrl_command(buf);
-}
-
-void MainWindow::on_av_sync_change(double sync)
-{
-	char buf[64];
-	snprintf(buf, 64, "audio_delay %f 1\n", sync * 10 - 5);
 	gmp->send_ctrl_command(buf);
 }
 

@@ -138,10 +138,10 @@ GMplayer::~GMplayer()
 
 bool GMplayer::on_delay_reboot()
 {
-	if (is_running)
-		start_play();
-	else if (is_recording)
+	if (is_recording)
 		on_preview();
+	else if (is_running)
+		start_play();
 	return false;
 }
 
@@ -230,7 +230,7 @@ void GMplayer::start_play()
 	DLOG("\n");
 	if (pausing())
 		return pause();
-	if (running())
+	if (player_pid != -1)
 		stop();
 
 	signal_start().emit();
