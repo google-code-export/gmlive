@@ -13,42 +13,42 @@
         <property name="orientation">vertical</property>
         <property name="spacing">6</property>
         <child>
-          <object class="GtkHBox" id="box_menu_toolbar">
+          <object class="GtkVBox" id="box_menu_toolbar">
             <property name="visible">True</property>
             <child>
               <placeholder/>
             </child>
             <child>
-              <object class="GtkHBox" id="hbox1">
+              <object class="GtkHBox" id="hbox_la">
                 <property name="visible">True</property>
-                <property name="homogeneous">True</property>
                 <child>
                   <placeholder/>
                 </child>
                 <child>
                   <object class="GtkVolumeButton" id="av_sync_button">
-                    <property name="label" translatable="yes">button</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="has_tooltip">True</property>
                     <property name="relief">none</property>
                     <property name="focus_on_click">False</property>
-                    <property name="orientation">vertical</property>
-                    <property name="icons">audio-volume-muted
-audio-volume-high
-audio-volume-low
-audio-volume-medium</property>
+                    <property name="icons"></property>
+                    <child>
+                      <object class="GtkImage" id="image1">
+                        <property name="visible">True</property>
+                        <property name="icon_name">applications-engineering</property>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
-                    <property name="position">1</property>
+                    <property name="pack_type">end</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkVolumeButton" id="volume_button">
-                    <property name="label" translatable="yes">button</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
@@ -56,15 +56,19 @@ audio-volume-medium</property>
                     <property name="relief">none</property>
                     <property name="focus_on_click">False</property>
                     <property name="orientation">vertical</property>
-                    <property name="icons">audio-volume-muted
-audio-volume-high
-audio-volume-low
-audio-volume-medium</property>
+                    <property name="icons"></property>
+                    <child>
+                      <object class="GtkImage" id="image4">
+                        <property name="visible">True</property>
+                        <property name="icon_name">multimedia-volume-control</property>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
-                    <property name="position">2</property>
+                    <property name="pack_type">end</property>
+                    <property name="position">1</property>
                   </packing>
                 </child>
               </object>
