@@ -36,6 +36,7 @@
 #include <glib/gi18n.h>
 #include <stdio.h>
 #include <string.h>
+#include <gtkmm/scalebutton.h>
 
 using namespace std;
 
@@ -678,11 +679,6 @@ bool MainWindow::on_doubleclick_picture(GdkEventButton* ev)
 }
 
 #if 0
-void MainWindow::on_volume_change()
-{
-	int value= (int)adj_sound->get_value();
-	//DLOG("sound change to %d\n",value);
-}
 Glib::ustring MainWindow::on_volume_display(double value)
 {
 	char message[128];
@@ -948,6 +944,14 @@ MainWindow::MainWindow():
 	//channels->hide();
 	this->resize(1,1);
 	//init();
+		
+	Gtk::ScaleButton* vbt = 0;
+	ui_xml->get_widget("av_sync_button", vbt);
+	vbt->signal_value_changed().connect(sigc::mem_fun(*this, &MainWindow::on_av_sync_change));
+
+	vbt = 0;
+	ui_xml->get_widget("volume_button", vbt);
+	vbt->signal_value_changed().connect(sigc::mem_fun(*this, &MainWindow::on_volume_change));
 
 	if (atoi(GMConf["enable_tray"].c_str()))
 		tray_icon = new TrayIcon(*this);
@@ -973,6 +977,21 @@ MainWindow::MainWindow():
 	//	menu->set_active(false);
 	((Gtk::Toolbar*)toolbar)->set_toolbar_style(Gtk::TOOLBAR_ICONS);
 
+
+}
+
+void MainWindow::on_volume_change(double var)
+{
+	char buf[64];
+	snprintf(buf, 64, "volume %f 1\n", var * 100);
+	gmp->send_ctrl_command(buf);
+}
+
+void MainWindow::on_av_sync_change(double sync)
+{
+	char buf[64];
+	snprintf(buf, 64, "audio_delay %f 1\n", sync * 10 - 5);
+	gmp->send_ctrl_command(buf);
 }
 
 void MainWindow::set_other_player(bool oplayer)

@@ -93,7 +93,6 @@ class MainWindow : public Gtk::Window {
 		/** 双击画面事件*/
 		bool on_doubleclick_picture(GdkEventButton* ev);
 		/*
-		void on_volume_change();
 		Glib::ustring on_volume_display(double);
 		*/
 		/** 切换全屏状态,嵌入播放器时有效*/
@@ -115,6 +114,9 @@ class MainWindow : public Gtk::Window {
 		bool check_file(const char* name);
 		/** 检测是否支持第三方程序 */
 		void check_support();
+
+		void on_volume_change(double var);
+		void on_av_sync_change(double sync);
 	private:
 		TrayIcon				*tray_icon;
 		BuilderXML 				ui_xml;
