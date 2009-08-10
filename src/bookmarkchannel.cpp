@@ -49,8 +49,8 @@ void BookMarkChannel::init()
 	snprintf(buf, 512,"%s/.gmlive/bookmark.lst",homedir);
 	std::ifstream file(buf);
 	if(!file){
-		printf("buf is %s\n",buf);
-		std::cout<<"file error\n";
+		//printf("buf is %s\n",buf);
+		//std::cout<<"file error\n";
 		return;
 	}
 	std::string line;

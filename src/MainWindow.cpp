@@ -899,7 +899,7 @@ MainWindow::MainWindow():
 	ui_xml->get_widget("hbox_la",hbox_la);
 
 
-	menu_tool_box->pack_start(*hbox_la,false,false);
+	//menu_tool_box->pack_start(*hbox_la,false,false);
 	hbox_la->pack_start(*toolbar,true,true);
 
 #if  0
