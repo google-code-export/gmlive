@@ -78,8 +78,7 @@ class Channel:public Gtk::TreeView
 				TypeChannel page = NONE ) = 0;
 
 		bool on_button_press_event(GdkEventButton *);
-		bool on_foreach_iter(const Gtk::TreeModel::iterator& iter);
-		bool on_clean_foreach(const Gtk::TreeModel::iterator& iter);
+		bool on_visible_func(const Gtk::TreeModel::iterator& iter);
 		void play_selection_iter(Gtk::TreeModel::iterator& iter);
 
 		Glib::ustring search_channel_name;

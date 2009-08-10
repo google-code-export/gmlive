@@ -148,7 +148,6 @@ bool SopcastLivePlayer::on_sop_sock(const Glib::IOCondition& condition)
 		}
 		state_buf_pos++;
 	}
-	printf("%s\n", state_buf);
 
 	int i = atoi(state_buf);
 	if (i > 70){

@@ -55,8 +55,7 @@ void RecentChannel::init()
 		std::ofstream out(buf);
 		out.close();
 		file.open(buf);
-		printf("buf is %s\n",buf);
-		std::cout<<"file error\n";
+		//std::cout<<"file error\n";
 		//return;
 	}
 	std::string line;

@@ -29,31 +29,37 @@
 
 Channel::Channel(MainWindow* parent_):parent( parent_)
 {
-	Channel* channel = this;
-	channel->set_flags(Gtk::CAN_FOCUS);
-	channel->set_rules_hint(false);
+	set_flags(Gtk::CAN_FOCUS);
+	set_rules_hint(false);
 
 	tooltips = new ChannelsTooltips(this);
+
 	m_liststore = Gtk::TreeStore::create(columns);
-	channel->set_model( m_liststore);
-	channel->append_column(_("channels"), columns.name);
-	channel->append_column(_("bitrate"), columns.freq);
-	channel->append_column(_("user"), columns.users);
+	Glib::RefPtr<Gtk::TreeModelFilter> filter = 
+		Gtk::TreeModelFilter::create(m_liststore);
+	//filter->set_visible_column(1);
+	set_model(filter);
+
+	append_column(_("channels"), columns.name);
+	append_column(_("bitrate"), columns.freq);
+	append_column(_("user"), columns.users);
 
 	/*
-	this->set_has_tooltip();
-	this->set_tooltip_window(*tooltips);
-	this->signal_query_tooltip().connect(sigc::mem_fun(*this,
+	set_has_tooltip();
+	set_tooltip_window(*tooltips);
+	signal_query_tooltip().connect(sigc::mem_fun(*this,
 				&Channel::on_tooltip_show));
 	*/
-	this->signal_motion_notify_event().
+	signal_motion_notify_event().
 		connect(sigc::mem_fun(*this, &Channel::on_motion_event),
 				false);
-	this->signal_leave_notify_event().
+	signal_leave_notify_event().
 		connect(sigc::mem_fun(*this, &Channel::on_leave_event),
 				false);
 
-	channel->show();
+	filter->set_visible_func(sigc::mem_fun(*this, &Channel::on_visible_func));
+
+	show();
 }
 
 Channel::~Channel()
@@ -94,8 +100,6 @@ bool Channel::on_button_press_event(GdkEventButton * ev)
 	if (!this->
 			get_path_at_pos((int) ev->x, (int) ev->y, path, tvc, cx, cy))
 		return false;
-	// 这是为了可以正常搜索，把搜索文本清空才行，该死的Gtk团队，太笨了.
-	search_channel_name.clear();
 
 	if ((ev->type == GDK_2BUTTON_PRESS ||
 				ev->type == GDK_3BUTTON_PRESS) && ev->button != 3) {
@@ -227,38 +231,24 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 
 void Channel::search_channel(const Glib::ustring& name_)
 {
-	if (name_.empty())
-		return;
-	Glib::RefPtr<Gtk::TreeModel> model = this->get_model();
-	if (search_channel_name != name_)
-		model->foreach_iter(sigc::mem_fun(*this, &Channel::on_clean_foreach));
 	search_channel_name = name_;
-	model->foreach_iter(sigc::mem_fun(*this, &Channel::on_foreach_iter));
+	Glib::RefPtr<Gtk::TreeModelFilter> filter = 
+		Glib::RefPtr<Gtk::TreeModelFilter>::cast_dynamic(get_model());
+	filter->refilter();
+	if (!name_.empty())
+		expand_all();
 }
 
-bool Channel::on_foreach_iter(const Gtk::TreeModel::iterator& iter)
+
+bool Channel::on_visible_func(const Gtk::TreeModel::iterator& iter)
 {
-	const Glib::ustring& name = (*iter)[columns.name];
-	size_t pos = name.find(search_channel_name, 0);
-	if (Glib::ustring::npos != pos) {
-		Glib::RefPtr<Gtk::TreeSelection> sel = this->get_selection();
-		if ((*iter)[columns.searched])
-			return false;
-		Gtk::TreeModel::Path path(iter);
-		this->expand_to_path(path);
-		this->scroll_to_row (path);
-		sel->select(iter);
-		(*iter)[columns.searched] = true;
+	if ((*iter)[columns.type] == GROUP_CHANNEL) {
 		return true;
 	}
-	return false;
+	const Glib::ustring& name = (*iter)[columns.name];
+	return name.find(search_channel_name, 0) != Glib::ustring::npos;
 }
 
-bool Channel::on_clean_foreach(const Gtk::TreeModel::iterator& iter)
-{
-	(*iter)[columns.searched] = false;
-	return false;
-}
 bool Channel::on_leave_event(GdkEventCrossing * ev)
 {
 	if (tipTimeout.connected()) {
