@@ -321,19 +321,19 @@ void MainWindow::init_ui_manager()
 	action_group->add(Gtk::Action::create("ToolMenu", _("_Tool")));
 
 	action_group->add(Gtk::Action::create("ToolVolumeIncrease", Gtk::Stock::GO_UP,
-				_("Volume_Increase"), _("Volume Increase")), 
+				_("Volume _increase"), _("Volume Increase")), 
 			sigc::mem_fun(*this, &MainWindow::on_menu_volume_increase));
 
 	action_group->add(Gtk::Action::create("ToolVolumeDecrease", Gtk::Stock::GO_DOWN,
-				_("Volume_Decrease"), _("Volume Decrease")), 
+				_("Volume _decrease"), _("Volume Decrease")), 
 			sigc::mem_fun(*this, &MainWindow::on_menu_volume_decrease));
 
 	action_group->add(Gtk::Action::create("ToolAudioDelayIncrease", Gtk::Stock::GO_UP,
-				_("AudioDelay_Increase"), _("AudioDelay Increase")), 
+				_("Audio delay i_ncrease"), _("AudioDelay Increase")), 
 			sigc::mem_fun(*this, &MainWindow::on_menu_audio_delay_increase));
 
 	action_group->add(Gtk::Action::create("ToolAudioDelayDecrease", Gtk::Stock::GO_DOWN,
-				_("AudioDelay_Decrease"), _("AudioDelay Decrease")), 
+				_("Audio delay d_ecrease"), _("AudioDelay Decrease")), 
 			sigc::mem_fun(*this, &MainWindow::on_menu_audio_delay_decrease));
 
 
