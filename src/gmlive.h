@@ -2,7 +2,6 @@
 #define GMLIVE_H_
 
 #include <gtkmm.h>
-#include <libglademm/xml.h>
 #include <glib/gi18n.h>
 #include <iostream>
 #include <map>
@@ -14,7 +13,7 @@
 
 
 #define main_ui	    DATA_DIR"/gmlive.glade"
-typedef Glib::RefPtr < Gnome::Glade::Xml > GlademmXML;
+typedef Glib::RefPtr < Gtk::Builder > BuilderXML;
 
 enum TypeChannel{
 	PPLIVE_CHANNEL,

@@ -101,27 +101,35 @@ GMplayer::GMplayer() :
 	,outfile(-1)
 	,icache(64)
 {
-	GlademmXML ui_xml = Gnome::Glade::Xml::create(record_ui);
+	BuilderXML ui_xml = Gtk::Builder::create_from_file(record_ui);
 	if (!ui_xml) 
 		exit(127);
 
-	record_window = dynamic_cast<Gtk::Window*>
-		(ui_xml->get_widget("recordwindow"));
-	record_name = dynamic_cast <Gtk::Label*>
-		(ui_xml->get_widget("label_info"));
+	record_window = 0;
+	ui_xml->get_widget("recordwindow", record_window);
+	record_name = 0;
+	ui_xml->get_widget("label_info", record_name);
 
-	progress_bar = dynamic_cast<Gtk::ProgressBar*>
-		(ui_xml->get_widget("progressbar"));
+	progress_bar = 0;
+	ui_xml->get_widget("progressbar", progress_bar);
 
 	char buf[512];
 	char* homedir = getenv("HOME");
 	snprintf(buf, 512,"%s/gmlive_default_out_file", homedir);
 	outfilename.assign(buf);
 
-	ui_xml->connect_clicked("bt_stop", sigc::mem_fun(*this, &GMplayer::on_stop_record));
-	record_window->hide();
-	ui_xml->connect_clicked("bt_preview", sigc::mem_fun(*this, &GMplayer::on_preview));
+	Gtk::Button* bt = 0;
+	ui_xml->get_widget("bt_stop", bt);
+	bt->signal_clicked().connect(sigc::mem_fun(*this, &GMplayer::on_stop_record));
 
+	bt = 0;
+	ui_xml->get_widget("bt_preview", bt);
+	bt->signal_clicked().connect(sigc::mem_fun(*this, &GMplayer::on_preview));
+
+	//ui_xml->connect_clicked("bt_stop", sigc::mem_fun(*this, &GMplayer::on_stop_record));
+	//ui_xml->connect_clicked("bt_preview", sigc::mem_fun(*this, &GMplayer::on_preview));
+
+	record_window->hide();
 }
 
 GMplayer::~GMplayer()

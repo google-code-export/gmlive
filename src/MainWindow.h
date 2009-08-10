@@ -117,7 +117,7 @@ class MainWindow : public Gtk::Window {
 		void check_support();
 	private:
 		TrayIcon				*tray_icon;
-		GlademmXML 			ui_xml;
+		BuilderXML 				ui_xml;
 		Glib::RefPtr<Gtk::UIManager>	ui_manager;
 		Glib::RefPtr<Gtk::ActionGroup> 	action_group;
 		Glib::ustring			play_channel_name;

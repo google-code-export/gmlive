@@ -19,8 +19,8 @@
 #ifndef  CONFWINDOW_FILE_HEADER_INC
 #define  CONFWINDOW_FILE_HEADER_INC
 
-#include <libglademm/variablesmap.h>
 #include "gmlive.h"
+#include "variablesmap.h"
 class MainWindow;
 class ConfWindow: public Gtk::Window
 {
@@ -44,7 +44,7 @@ class ConfWindow: public Gtk::Window
 		void write_to_GMConf();
 		type_signal_quit signal_quit_;
 		MainWindow* parent;
-		Gnome::Glade::VariablesMap* m_pVariablesMap;
+		VariablesMap* m_pVariablesMap;
 		Glib::ustring m_paramter;
 		Glib::ustring m_sopcast_cache;
 		Glib::ustring m_mms_cache;
