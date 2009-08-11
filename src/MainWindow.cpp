@@ -931,7 +931,7 @@ MainWindow::MainWindow():
 	play_frame->drag_dest_set(listTargets);
 	play_frame->signal_drag_data_received().connect(
 			sigc::mem_fun(*this, &MainWindow::on_drog_data_received));
-	this->signal_check_resize().connect(
+	signal_check_resize().connect(
 			sigc::mem_fun(*this,&MainWindow::on_update_video_widget));
 
 
@@ -1317,13 +1317,15 @@ void MainWindow::show_msg(const Glib::ustring& msg, unsigned int id)
 
 void MainWindow::set_gmp_size(int w, int h)
 {
-	gmp_width = w;
-	gmp_height = h;
 	if (w != -1) {
+		gmp->get_size_request(gmp_width, gmp_height);
 		gmp->set_size_request(w, h);
-		if (gmp_embed)
-			this->resize(1, 1);
+		if (gmp_embed) {
+			resize(1, 1);
+		}
 	}
+	//gmp_width = w;
+	//gmp_height = h;
 }
 
 void MainWindow::reorder_widget(bool is_running)
@@ -1393,20 +1395,25 @@ void MainWindow::on_update_video_widget()
 {
 	if(!full_screen && gmp_embed && gmp->running())
 	{
-		int n_width;
-		int n_height;
-		n_width=play_frame->get_width();
-		int reqw;
-		int reqh;
-		gmp->get_size_request(reqw, reqh);
-		if (n_width == reqw)
-		{
-			//printf("skip width\n");
-			return;
-		}
-		n_height = (int)n_width *gmp_rate;
-		set_gmp_size(n_width,n_height);
+		int n_width = play_frame->get_width();
 
+		int w, h;
+		gmp->get_size_request(w, h);
+
+		int n_height = (int)n_width *gmp_rate;
+		if (w + channels_box->get_width() > gdk_screen_width() - 20)  {
+			channels_box->set_size_request(gdk_screen_width() - 20 - w, 0);
+			if (n_height > h)
+				n_height = h;
+		}
+
+		if (n_height == h)
+			return;
+
+		if (n_height < 0)
+			return ;
+
+		set_gmp_size(n_width,n_height);
 	}
 }
 
