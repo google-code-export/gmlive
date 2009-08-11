@@ -450,7 +450,8 @@ void MainWindow::unzoom()
 		menubar->show();
 		toolbar->show();
 		//tool_hbox->show();
-		statusbar->show();
+		//statusbar->show();
+		menu_tool_box->show();
 		if(!channels_hide)
 			channels_box->show();
 		this->unfullscreen();
@@ -468,6 +469,7 @@ void MainWindow::on_fullscreen()
 		toolbar->hide();
 		//tool_hbox->hide();
 		statusbar->hide();
+		menu_tool_box->hide();
 		channels_box->hide();
 		this->fullscreen();
 		full_screen=true;
@@ -480,6 +482,7 @@ void MainWindow::on_fullscreen()
 		toolbar->show();
 		//tool_hbox->show();
 		statusbar->show();
+		menu_tool_box->show();
 		if(!channels_hide)
 			channels_box->show();
 		this->unfullscreen();
@@ -890,7 +893,7 @@ MainWindow::MainWindow():
 	try_pop_menu = dynamic_cast<Gtk::Menu*>(
 			ui_manager->get_widget("/TryPopupMenu"));
 
-	Gtk::VBox* menu_tool_box = 0;
+	//Gtk::VBox* menu_tool_box = 0;
 	ui_xml->get_widget("box_menu_toolbar", menu_tool_box);
 	menu_tool_box->pack_start(*menubar,true,true);
 	//menu_tool_box->pack_start(*toolbar,false,false);
@@ -1431,11 +1434,13 @@ void MainWindow::on_drog_data_received(const Glib::RefPtr<Gdk::DragContext>& con
 		context->drag_finish(false,false,time);
 		std::string filename = wind_unescape_string(selection_data.get_text().c_str(), NULL);
 		size_t pos = filename.find('\r');
-		if (std::string::npos != pos)
+		if (std::string::npos != pos){
 			filename = filename.substr(0, pos);
-		Glib::ustring filtername = Glib::ustring("\"")+filename+"\"";
-		DLOG("播放 %s\n",filtername.c_str());
-		gmp->start(filtername);
+		//Glib::ustring filtername = Glib::ustring("\"")+filename+"\"";
+		//DLOG("播放 %s\n",filtername.c_str());
+		//gmp->start(filtername);
+			gmp->start(filename);
+		}
 
 	}
 }
