@@ -8,12 +8,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-08 11:30+0800\n"
+"POT-Creation-Date: 2009-08-11 11:40+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../data/gmlive.desktop.in.in.h:1
@@ -92,98 +92,94 @@ msgid "<b>Features</b>"
 msgstr ""
 
 #: ../data/gmlive.glade.h:26
-msgid "About"
-msgstr ""
-
-#: ../data/gmlive.glade.h:27
 msgid "Author"
 msgstr ""
 
-#: ../data/gmlive.glade.h:28
+#: ../data/gmlive.glade.h:27
 msgid "Channel URL:"
 msgstr ""
 
-#: ../data/gmlive.glade.h:29
+#: ../data/gmlive.glade.h:28
 msgid "Embed Mplayer"
 msgstr ""
 
-#: ../data/gmlive.glade.h:30
+#: ../data/gmlive.glade.h:29
 msgid "Enable PPLive"
 msgstr ""
 
-#: ../data/gmlive.glade.h:31
+#: ../data/gmlive.glade.h:30
 msgid "Enable Sopcast"
 msgstr ""
 
-#: ../data/gmlive.glade.h:32
+#: ../data/gmlive.glade.h:31
 msgid "Enable Systray"
 msgstr ""
 
-#: ../data/gmlive.glade.h:33
+#: ../data/gmlive.glade.h:32
 msgid "GMLive"
 msgstr ""
 
-#: ../data/gmlive.glade.h:34
+#: ../data/gmlive.glade.h:33
 msgid "Help"
 msgstr ""
 
-#: ../data/gmlive.glade.h:35
+#: ../data/gmlive.glade.h:34
 msgid "Kbs"
 msgstr ""
 
-#: ../data/gmlive.glade.h:36
+#: ../data/gmlive.glade.h:35
 msgid "Kbs "
 msgstr ""
 
-#: ../data/gmlive.glade.h:37
+#: ../data/gmlive.glade.h:36
 msgid "Licence"
 msgstr ""
 
-#: ../data/gmlive.glade.h:38
+#: ../data/gmlive.glade.h:37
 msgid "MMS"
 msgstr ""
 
-#: ../data/gmlive.glade.h:39
+#: ../data/gmlive.glade.h:38
 msgid "Mplayer"
 msgstr ""
 
-#: ../data/gmlive.glade.h:40
+#: ../data/gmlive.glade.h:39
 msgid "Mplayer Cache:"
 msgstr ""
 
-#: ../data/gmlive.glade.h:41
+#: ../data/gmlive.glade.h:40
 msgid "Mplayer Delay Time:"
 msgstr ""
 
-#: ../data/gmlive.glade.h:42
+#: ../data/gmlive.glade.h:41
 msgid "Mplayer extend parameter:"
 msgstr ""
 
-#: ../data/gmlive.glade.h:43
+#: ../data/gmlive.glade.h:42
 msgid "On close button: minimize to systray"
 msgstr ""
 
-#: ../data/gmlive.glade.h:44
+#: ../data/gmlive.glade.h:43
 msgid "Other Player"
 msgstr ""
 
-#: ../data/gmlive.glade.h:45
+#: ../data/gmlive.glade.h:44
 msgid "Other Player Command:"
 msgstr ""
 
-#: ../data/gmlive.glade.h:46
+#: ../data/gmlive.glade.h:45
 msgid "PPLive"
 msgstr ""
 
-#: ../data/gmlive.glade.h:47
+#: ../data/gmlive.glade.h:46
 msgid "Sec"
 msgstr ""
 
-#: ../data/gmlive.glade.h:48
+#: ../data/gmlive.glade.h:47
 msgid "Sopcast"
 msgstr ""
 
-#: ../data/gmlive.glade.h:49
+#: ../data/gmlive.glade.h:48
 msgid ""
 "Thanks follow people translate the program:\n"
 "\n"
@@ -191,11 +187,11 @@ msgid ""
 "Spanish(es_ES):   jjgnomera@gmail.com"
 msgstr ""
 
-#: ../data/gmlive.glade.h:53
+#: ../data/gmlive.glade.h:52
 msgid "Translation"
 msgstr ""
 
-#: ../data/gmlive.glade.h:54
+#: ../data/gmlive.glade.h:53
 msgid ""
 "You can find us in follow URL:\n"
 "\n"
@@ -204,7 +200,7 @@ msgid ""
 "  IRC:    #cyclone@irc.oftc.net"
 msgstr ""
 
-#: ../data/gmlive.glade.h:59
+#: ../data/gmlive.glade.h:58
 msgid ""
 "about MMS streaming\n"
 "this channel is not base on P2P streaming. it just base on \n"
@@ -213,7 +209,7 @@ msgid ""
 "mms.list and put it in your home dir like ~/.gmlive"
 msgstr ""
 
-#: ../data/gmlive.glade.h:64
+#: ../data/gmlive.glade.h:63
 msgid ""
 "about pplive streaming\n"
 "pplive is famous  p2p streaming.\n"
@@ -222,7 +218,7 @@ msgid ""
 "the xpplive  and put it to /usr/local/bin/ or /usr/bin"
 msgstr ""
 
-#: ../data/gmlive.glade.h:69
+#: ../data/gmlive.glade.h:68
 msgid ""
 "about sopcast streaming\n"
 "please access the http://www.sopcast.org for sopcast help.\n"
@@ -235,39 +231,39 @@ msgid ""
 "file.  unzip it and put it to /usr/local/bin/ or /usr/bin"
 msgstr ""
 
-#: ../data/gmlive.glade.h:78
+#: ../data/gmlive.glade.h:77
 msgid "bookmarks"
 msgstr ""
 
-#: ../data/gmlive.glade.h:79
+#: ../data/gmlive.glade.h:78
 msgid "download the channels when program start every time"
 msgstr ""
 
-#: ../data/gmlive.glade.h:80
+#: ../data/gmlive.glade.h:79
 msgid "mms"
 msgstr ""
 
-#: ../data/gmlive.glade.h:81
+#: ../data/gmlive.glade.h:80
 msgid "mms help"
 msgstr ""
 
-#: ../data/gmlive.glade.h:82
+#: ../data/gmlive.glade.h:81
 msgid "pplive"
 msgstr ""
 
-#: ../data/gmlive.glade.h:83
+#: ../data/gmlive.glade.h:82
 msgid "pplive help"
 msgstr ""
 
-#: ../data/gmlive.glade.h:84
+#: ../data/gmlive.glade.h:83
 msgid "recent"
 msgstr ""
 
-#: ../data/gmlive.glade.h:85
+#: ../data/gmlive.glade.h:84
 msgid "sopcast"
 msgstr ""
 
-#: ../data/gmlive.glade.h:86
+#: ../data/gmlive.glade.h:85
 msgid "sopcast help"
 msgstr ""
 
@@ -283,216 +279,254 @@ msgstr ""
 msgid "_Preview"
 msgstr ""
 
-#: ../src/channel.cpp:40
+#: ../src/channel.cpp:43
 msgid "channels"
 msgstr ""
 
-#: ../src/channel.cpp:41
+#: ../src/channel.cpp:44
 msgid "bitrate"
 msgstr ""
 
-#: ../src/channel.cpp:42
+#: ../src/channel.cpp:45
 msgid "user"
 msgstr ""
 
-#. if ((live_player!=NULL)&&(live_player == lr)) { // 录制的时候再录制跳出警告并退出
-#. 录制的时候再录制跳出警告并退出
-#: ../src/channel.cpp:151
-msgid "Already Recorded"
-msgstr ""
-
-#: ../src/channel.cpp:153
-msgid "The Record had working now, you must stop it beforce"
-msgstr ""
-
-#: ../src/channel.cpp:171 ../src/MainWindow.cpp:366
+#: ../src/channel.cpp:159 ../src/MainWindow.cpp:380
 msgid "Choose File"
 msgstr ""
 
-#. 录制的时候
-#: ../src/channel.cpp:281
-msgid "Stop Recording"
-msgstr ""
-
-#: ../src/channel.cpp:285
-msgid ""
-"GMLive is recording,you can play channel after stop the record.\n"
-" Are you really to do this?"
-msgstr ""
-
-#: ../src/channel.cpp:369 ../src/channel.cpp:449
+#: ../src/channel.cpp:275 ../src/channel.cpp:355
 msgid "PPLive Stream"
 msgstr ""
 
-#: ../src/channel.cpp:371 ../src/channel.cpp:451
+#: ../src/channel.cpp:277 ../src/channel.cpp:357
 msgid "SopCast Stream"
 msgstr ""
 
-#: ../src/channel.cpp:373 ../src/channel.cpp:453
+#: ../src/channel.cpp:279 ../src/channel.cpp:359
 msgid "MMS stream"
 msgstr ""
 
-#: ../src/channel.cpp:383 ../src/channel.cpp:386 ../src/channel.cpp:463
-#: ../src/channel.cpp:468
+#: ../src/channel.cpp:289 ../src/channel.cpp:292 ../src/channel.cpp:369
+#: ../src/channel.cpp:374
 msgid "users:"
 msgstr ""
 
-#: ../src/channel.cpp:384 ../src/channel.cpp:387 ../src/channel.cpp:464
-#: ../src/channel.cpp:469
+#: ../src/channel.cpp:290 ../src/channel.cpp:293 ../src/channel.cpp:370
+#: ../src/channel.cpp:375
 msgid "Type:"
 msgstr ""
 
-#: ../src/channel.cpp:485
+#: ../src/channel.cpp:391
 msgid "Please select a channel list file"
 msgstr ""
 
-#: ../src/channel.cpp:486
+#: ../src/channel.cpp:392
 msgid "open channles error"
 msgstr ""
 
-#: ../src/ConfWindow.cpp:124
+#: ../src/ConfWindow.cpp:132
 msgid "GMLive Conf Window"
 msgstr ""
 
-#: ../src/MainWindow.cpp:233
+#: ../src/gmplayer.cpp:438
+msgid "Record finial"
+msgstr ""
+
+#: ../src/gmplayer.cpp:439
+msgid " record finial"
+msgstr ""
+
+#: ../src/gmplayer.cpp:487
+#, c-format
+msgid "Recording %s To %s (%u Kb)"
+msgstr ""
+
+#: ../src/gmplayer.cpp:492
+#, c-format
+msgid "Recording %s To %s (%u.%u Mb)"
+msgstr ""
+
+#: ../src/MainWindow.cpp:238
 msgid "_HideChannels"
 msgstr ""
 
-#: ../src/MainWindow.cpp:257 ../src/MainWindow.cpp:273
+#: ../src/MainWindow.cpp:250 ../src/MainWindow.cpp:266
 msgid "Open_URL"
 msgstr ""
 
 #. File menu:
-#: ../src/MainWindow.cpp:267
+#: ../src/MainWindow.cpp:260
 msgid "_File"
 msgstr ""
 
-#: ../src/MainWindow.cpp:269
+#: ../src/MainWindow.cpp:262
 msgid "_Open local file"
 msgstr ""
 
-#: ../src/MainWindow.cpp:270
+#: ../src/MainWindow.cpp:263
 msgid "Open Local File"
 msgstr ""
 
-#: ../src/MainWindow.cpp:274
+#: ../src/MainWindow.cpp:267
 msgid "Open Network Stream"
 msgstr ""
 
-#: ../src/MainWindow.cpp:278
+#: ../src/MainWindow.cpp:271
 msgid "Play"
 msgstr ""
 
-#: ../src/MainWindow.cpp:283
+#: ../src/MainWindow.cpp:276
 msgid "Pause"
 msgstr ""
 
-#: ../src/MainWindow.cpp:288
+#: ../src/MainWindow.cpp:281
 msgid "Record"
 msgstr ""
 
-#: ../src/MainWindow.cpp:293
+#: ../src/MainWindow.cpp:286
 msgid "Stop"
 msgstr ""
 
-#: ../src/MainWindow.cpp:299
-msgid "FullScreen"
-msgstr ""
-
-#: ../src/MainWindow.cpp:304
-msgid "_Mute"
-msgstr ""
-
 #. View menu:
-#: ../src/MainWindow.cpp:311
+#: ../src/MainWindow.cpp:294
 msgid "_View"
 msgstr ""
 
-#: ../src/MainWindow.cpp:315
+#: ../src/MainWindow.cpp:298
 msgid "Show or hide channels list"
 msgstr ""
 
-#: ../src/MainWindow.cpp:320
+#: ../src/MainWindow.cpp:303
 msgid "Hide_Toolbar"
 msgstr ""
 
-#: ../src/MainWindow.cpp:320
+#: ../src/MainWindow.cpp:303
 msgid "Show or hide Toolbar"
 msgstr ""
 
-#: ../src/MainWindow.cpp:325
+#: ../src/MainWindow.cpp:308
 msgid "_AlwaysOnTop"
 msgstr ""
 
-#: ../src/MainWindow.cpp:325
+#: ../src/MainWindow.cpp:308
 msgid "Make GMlive ontop of other windows"
 msgstr ""
 
-#: ../src/MainWindow.cpp:330
+#: ../src/MainWindow.cpp:312
+msgid "FullScreen"
+msgstr ""
+
+#: ../src/MainWindow.cpp:317
 msgid "_Embed Mplayer"
 msgstr ""
 
-#: ../src/MainWindow.cpp:330
+#: ../src/MainWindow.cpp:317
 msgid "Embed or Separate mplayer play"
 msgstr ""
 
+#. Tool menu:
+#: ../src/MainWindow.cpp:321
+msgid "_Tool"
+msgstr ""
+
+#: ../src/MainWindow.cpp:324
+msgid "Volume _increase"
+msgstr ""
+
+#: ../src/MainWindow.cpp:324
+msgid "Volume Increase"
+msgstr ""
+
+#: ../src/MainWindow.cpp:328
+msgid "Volume _decrease"
+msgstr ""
+
+#: ../src/MainWindow.cpp:328
+msgid "Volume Decrease"
+msgstr ""
+
+#: ../src/MainWindow.cpp:332
+msgid "Audio delay i_ncrease"
+msgstr ""
+
+#: ../src/MainWindow.cpp:332
+msgid "AudioDelay Increase"
+msgstr ""
+
+#: ../src/MainWindow.cpp:336
+msgid "Audio delay d_ecrease"
+msgstr ""
+
+#: ../src/MainWindow.cpp:336
+msgid "AudioDelay Decrease"
+msgstr ""
+
+#: ../src/MainWindow.cpp:341
+msgid "_Mute"
+msgstr ""
+
+#: ../src/MainWindow.cpp:341
+msgid "Mute"
+msgstr ""
+
 #. Help menu:
-#: ../src/MainWindow.cpp:337
+#: ../src/MainWindow.cpp:351
 msgid "_Help"
 msgstr ""
 
-#: ../src/MainWindow.cpp:343
+#: ../src/MainWindow.cpp:357
 msgid "_Refresh list"
 msgstr ""
 
-#: ../src/MainWindow.cpp:343
+#: ../src/MainWindow.cpp:357
 msgid "Refresh current channel list"
 msgstr ""
 
-#: ../src/MainWindow.cpp:346
+#: ../src/MainWindow.cpp:360
 msgid "_Add to bookmark"
 msgstr ""
 
-#: ../src/MainWindow.cpp:346
+#: ../src/MainWindow.cpp:360
 msgid "Bookmark this channel"
 msgstr ""
 
-#: ../src/MainWindow.cpp:349
+#: ../src/MainWindow.cpp:363
 msgid "_Copy url"
 msgstr ""
 
-#: ../src/MainWindow.cpp:349
+#: ../src/MainWindow.cpp:363
 msgid "Copy url to clipboard"
 msgstr ""
 
-#: ../src/MainWindow.cpp:386
+#: ../src/MainWindow.cpp:402
 msgid "Open URL"
 msgstr ""
 
-#: ../src/MainWindow.cpp:752
+#: ../src/MainWindow.cpp:769
 #, c-format
 msgid "Caching... %d%%"
 msgstr ""
 
-#: ../src/MainWindow.cpp:1109
+#: ../src/MainWindow.cpp:1170
 msgid "NO SUPPORT"
 msgstr ""
 
-#: ../src/MainWindow.cpp:1113
+#: ../src/MainWindow.cpp:1174
 msgid ""
 "you have not install sopcast and pplive program, so GMLive can't support "
 "them now"
 msgstr ""
 
-#: ../src/MainWindow.cpp:1115
+#: ../src/MainWindow.cpp:1176
 msgid "you have not install sopcast program,so GMLive can't support it now"
 msgstr ""
 
-#: ../src/MainWindow.cpp:1117
+#: ../src/MainWindow.cpp:1178
 msgid "you have not install pplive program,so GMLive can't support it now"
 msgstr ""
 
-#: ../src/MainWindow.cpp:1120
+#: ../src/MainWindow.cpp:1181
 msgid " So you can install the program first"
 msgstr ""
 
@@ -500,24 +534,6 @@ msgstr ""
 msgid ""
 "open the pplive channel error,will you select a local file to instead the "
 "broken channel list?"
-msgstr ""
-
-#: ../src/recordStream.cpp:74
-msgid "Record finial"
-msgstr ""
-
-#: ../src/recordStream.cpp:75
-msgid " record finial"
-msgstr ""
-
-#: ../src/recordStream.cpp:169
-#, c-format
-msgid "Recording %s To %s (%u Kb)"
-msgstr ""
-
-#: ../src/recordStream.cpp:174
-#, c-format
-msgid "Recording %s To %s (%u.%u Mb)"
 msgstr ""
 
 #: ../src/sopcastchannel.cpp:117

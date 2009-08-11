@@ -15,7 +15,6 @@ src/mmsLivePlayer.cpp
 src/pplivechannel.cpp
 src/pplivePlayer.cpp
 src/recentchannel.cpp
-src/recordStream.cpp
 src/sopcastchannel.cpp
 src/sopcastLivePlayer.cpp
 plugins/tvonline/tvonline.totem-plugin.in
