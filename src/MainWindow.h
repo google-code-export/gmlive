@@ -127,6 +127,7 @@ class MainWindow : public Gtk::Window {
 		Glib::RefPtr<Gtk::UIManager>	ui_manager;
 		Glib::RefPtr<Gtk::ActionGroup> 	action_group;
 		Glib::ustring			play_channel_name;
+		Gtk::VBox*			menu_tool_box;
 		Gtk::Box*			play_frame;
 		Gtk::EventBox*			play_eventbox;
 		Gtk::Notebook*			channels;
