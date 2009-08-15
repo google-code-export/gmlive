@@ -1409,10 +1409,12 @@ void MainWindow::on_update_video_widget()
 				n_height = h;	
 			if (w > gdk_screen_width() - 20) {
 				n_width = gdk_screen_width() - 40;
-				channels_box->set_size_request(20, 0);
+				//channels_box->set_size_request(20, 0);
 				set_gmp_size(n_width,n_height);
-			} else
-				channels_box->set_size_request(gdk_screen_width() - 20 - w, 0);
+			} else{
+				;
+				//channels_box->set_size_request(gdk_screen_width() - 20 - w, 0);
+				}
 		}
 
 		if (n_height == h)
