@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-11 11:40+0800\n"
-"PO-Revision-Date: 2009-08-08 11:30+0800\n"
+"POT-Creation-Date: 2009-08-20 00:09+0800\n"
+"PO-Revision-Date: 2009-08-21 21:21+0800\n"
 "Last-Translator: lerosua <lerosua@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr ""
 #: ../data/gmlive.glade.h:1
 msgid ""
 "\t\t\t                  \n"
-"                                             gmlive 0.22 Beta \n"
+"                                             gmlive 0.22 \n"
 "\n"
 "              GMLive try to became a universal streaming media player case.\n"
 "         it use Almighty Mplayer for its engine. the Goal is to support  a \n"
@@ -40,6 +40,12 @@ msgid ""
 "\n"
 "  "
 msgstr ""
+"		GMLive 0.22 \n"
+"    GMLive 尝试成为一款通用型的串流媒体播放外壳.\n"
+"  它以全能的Mplayer播放器为引擎.目标是支持Linux下\n"
+"  多种类型的P2P广播视频串流.提供一种方便快捷的观看\n"
+"  网络视频的方案.\n"
+"					cyclone"
 
 #: ../data/gmlive.glade.h:13
 msgid "   "
@@ -91,95 +97,99 @@ msgid "<b>Features</b>"
 msgstr "<b>特点</b>"
 
 #: ../data/gmlive.glade.h:26
+msgid "About"
+msgstr "关于"
+
+#: ../data/gmlive.glade.h:27
 msgid "Author"
 msgstr "作者"
 
-#: ../data/gmlive.glade.h:27
+#: ../data/gmlive.glade.h:28
 msgid "Channel URL:"
 msgstr "频道地址:"
 
-#: ../data/gmlive.glade.h:28
+#: ../data/gmlive.glade.h:29
 msgid "Embed Mplayer"
 msgstr "嵌入播放器"
 
-#: ../data/gmlive.glade.h:29
+#: ../data/gmlive.glade.h:30
 msgid "Enable PPLive"
 msgstr "PPlive支持"
 
-#: ../data/gmlive.glade.h:30
+#: ../data/gmlive.glade.h:31
 msgid "Enable Sopcast"
 msgstr "Sopcast支持"
 
-#: ../data/gmlive.glade.h:31
+#: ../data/gmlive.glade.h:32
 msgid "Enable Systray"
 msgstr "通知区域支持"
 
-#: ../data/gmlive.glade.h:32
+#: ../data/gmlive.glade.h:33
 msgid "GMLive"
 msgstr "GMLive"
 
-#: ../data/gmlive.glade.h:33
+#: ../data/gmlive.glade.h:34
 msgid "Help"
 msgstr "帮助"
 
-#: ../data/gmlive.glade.h:34
+#: ../data/gmlive.glade.h:35
 msgid "Kbs"
 msgstr ""
 
-#: ../data/gmlive.glade.h:35
+#: ../data/gmlive.glade.h:36
 msgid "Kbs "
 msgstr ""
 
-#: ../data/gmlive.glade.h:36
+#: ../data/gmlive.glade.h:37
 msgid "Licence"
 msgstr "许可证"
 
-#: ../data/gmlive.glade.h:37
+#: ../data/gmlive.glade.h:38
 msgid "MMS"
 msgstr ""
 
-#: ../data/gmlive.glade.h:38
+#: ../data/gmlive.glade.h:39
 msgid "Mplayer"
 msgstr "MPlayer"
 
-#: ../data/gmlive.glade.h:39
+#: ../data/gmlive.glade.h:40
 msgid "Mplayer Cache:"
 msgstr "Mplayer缓存:"
 
-#: ../data/gmlive.glade.h:40
+#: ../data/gmlive.glade.h:41
 msgid "Mplayer Delay Time:"
 msgstr "Mplayer廷迟启动时间:"
 
-#: ../data/gmlive.glade.h:41
+#: ../data/gmlive.glade.h:42
 msgid "Mplayer extend parameter:"
 msgstr "Mplayer扩展参数:"
 
-#: ../data/gmlive.glade.h:42
+#: ../data/gmlive.glade.h:43
 msgid "On close button: minimize to systray"
 msgstr "关闭按钮：最小化至通知区域"
 
-#: ../data/gmlive.glade.h:43
+#: ../data/gmlive.glade.h:44
 msgid "Other Player"
 msgstr "其它播放器"
 
-#: ../data/gmlive.glade.h:44
+#: ../data/gmlive.glade.h:45
 msgid "Other Player Command:"
 msgstr "其它播放器程序的名字"
 
-#: ../data/gmlive.glade.h:45
+#: ../data/gmlive.glade.h:46
 msgid "PPLive"
 msgstr ""
 
-#: ../data/gmlive.glade.h:46
+#: ../data/gmlive.glade.h:47
 msgid "Sec"
 msgstr ""
 
-#: ../data/gmlive.glade.h:47
+#: ../data/gmlive.glade.h:48
 #, fuzzy
 msgid "Sopcast"
 msgstr "Sopcast支持"
 
-#: ../data/gmlive.glade.h:48
+#: ../data/gmlive.glade.h:49
 msgid ""
 "Thanks follow people translate the program:\n"
 "\n"
@@ -187,11 +197,11 @@ msgid ""
 "Spanish(es_ES):   jjgnomera@gmail.com"
 msgstr ""
 
-#: ../data/gmlive.glade.h:52
+#: ../data/gmlive.glade.h:53
 msgid "Translation"
 msgstr "翻译"
 
-#: ../data/gmlive.glade.h:53
+#: ../data/gmlive.glade.h:54
 msgid ""
 "You can find us in follow URL:\n"
 "\n"
@@ -200,7 +210,7 @@ msgid ""
 "  IRC:    #cyclone@irc.oftc.net"
 msgstr ""
 
-#: ../data/gmlive.glade.h:58
+#: ../data/gmlive.glade.h:59
 msgid ""
 "about MMS streaming\n"
 "this channel is not base on P2P streaming. it just base on \n"
@@ -209,7 +219,7 @@ msgid ""
 "mms.list and put it in your home dir like ~/.gmlive"
 msgstr ""
 
-#: ../data/gmlive.glade.h:63
+#: ../data/gmlive.glade.h:64
 msgid ""
 "about pplive streaming\n"
 "pplive is famous  p2p streaming.\n"
@@ -218,7 +228,7 @@ msgid ""
 "the xpplive  and put it to /usr/local/bin/ or /usr/bin"
 msgstr ""
 
-#: ../data/gmlive.glade.h:68
+#: ../data/gmlive.glade.h:69
 msgid ""
 "about sopcast streaming\n"
 "please access the http://www.sopcast.org for sopcast help.\n"
@@ -231,39 +241,39 @@ msgid ""
 "file.  unzip it and put it to /usr/local/bin/ or /usr/bin"
 msgstr ""
 
-#: ../data/gmlive.glade.h:77
+#: ../data/gmlive.glade.h:78
 msgid "bookmarks"
 msgstr "书签"
 
-#: ../data/gmlive.glade.h:78
+#: ../data/gmlive.glade.h:79
 msgid "download the channels when program start every time"
 msgstr "当程序启动时就下载频道列表"
 
-#: ../data/gmlive.glade.h:79
+#: ../data/gmlive.glade.h:80
 msgid "mms"
 msgstr ""
 
-#: ../data/gmlive.glade.h:80
+#: ../data/gmlive.glade.h:81
 msgid "mms help"
 msgstr "mms帮助"
 
-#: ../data/gmlive.glade.h:81
+#: ../data/gmlive.glade.h:82
 msgid "pplive"
 msgstr ""
 
-#: ../data/gmlive.glade.h:82
+#: ../data/gmlive.glade.h:83
 msgid "pplive help"
 msgstr "pplive帮助"
 
-#: ../data/gmlive.glade.h:83
+#: ../data/gmlive.glade.h:84
 msgid "recent"
 msgstr ""
 
-#: ../data/gmlive.glade.h:84
+#: ../data/gmlive.glade.h:85
 msgid "sopcast"
 msgstr ""
 
-#: ../data/gmlive.glade.h:85
+#: ../data/gmlive.glade.h:86
 msgid "sopcast help"
 msgstr "sopcast帮助"
 
@@ -325,7 +335,7 @@ msgstr "请选择一个频道列表文件"
 msgid "open channles error"
 msgstr "打开频道列表错误"
 
-#: ../src/ConfWindow.cpp:132
+#: ../src/ConfWindow.cpp:131
 msgid "GMLive Conf Window"
 msgstr "GMLive 配置"
 
@@ -503,30 +513,30 @@ msgstr "复制流地址至剪贴板"
 msgid "Open URL"
 msgstr "打开网络流"
 
-#: ../src/MainWindow.cpp:769
+#: ../src/MainWindow.cpp:771
 #, c-format
 msgid "Caching... %d%%"
 msgstr "缓冲中... %d%%"
 
-#: ../src/MainWindow.cpp:1170
+#: ../src/MainWindow.cpp:1171
 msgid "NO SUPPORT"
 msgstr "未支持"
 
-#: ../src/MainWindow.cpp:1174
+#: ../src/MainWindow.cpp:1175
 msgid ""
 "you have not install sopcast and pplive program, so GMLive can't support "
 "them now"
 msgstr "您还未安装sopcast和PPLive 程序，所以GMLive还不能支持它们。"
 
-#: ../src/MainWindow.cpp:1176
+#: ../src/MainWindow.cpp:1177
 msgid "you have not install sopcast program,so GMLive can't support it now"
 msgstr "您还未安装sopcast程序，所以GMLive还不能支持它。"
 
-#: ../src/MainWindow.cpp:1178
+#: ../src/MainWindow.cpp:1179
 msgid "you have not install pplive program,so GMLive can't support it now"
 msgstr "您还未安装pplive程序，所以GMLive还不能支持它。"
 
-#: ../src/MainWindow.cpp:1181
+#: ../src/MainWindow.cpp:1182
 msgid " So you can install the program first"
 msgstr "请您安装以上程序。谢谢。"
 
@@ -541,9 +551,6 @@ msgid ""
 "open the sopcast channel error,will you select a local file to instead the "
 "broken channel list?"
 msgstr "打开频道列表文件错误，请选择一个本地的频道列表文件来代替损坏的文件"
-
-#~ msgid "About"
-#~ msgstr "关于"
 
 #~ msgid "Already Recorded"
 #~ msgstr "已经录制中"

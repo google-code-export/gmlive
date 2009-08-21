@@ -1,20 +1,21 @@
-# Chinese/Traditional translation of PACKAGE.
-# Copyright (C) 2009 THE PACKAGE'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# lerosua <lerosua@gmail.com>, 2009.
-#
-#
+# Liu, Shuyuan <victorangus@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-11 11:40+0800\n"
-"PO-Revision-Date: 2009-02-11 22:55+0800\n"
+"POT-Creation-Date: 2009-08-20 00:09+0800\n"
+"PO-Revision-Date: 2009-08-21 21:21+0800\n"
 "Last-Translator: Liu, Shuyuan <victorangus@gmail.com>\n"
 "Language-Team: Chinese/Traditional\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Virtaal 0.4.0\n"
 
 #: ../data/gmlive.desktop.in.in.h:1
 msgid "Gmlive"
@@ -22,12 +23,13 @@ msgstr "GMLive"
 
 #: ../data/gmlive.desktop.in.in.h:2
 msgid "Streaming Direct Broadcast System based on P2P"
-msgstr "基於P2P的串流廣播系統"
+msgstr "基於 P2P 的串流廣播系統"
 
 #: ../data/gmlive.glade.h:1
+#, fuzzy
 msgid ""
 "\t\t\t                  \n"
-"                                             gmlive 0.22 Beta \n"
+"                                             gmlive 0.22 \n"
 "\n"
 "              GMLive try to became a universal streaming media player case.\n"
 "         it use Almighty Mplayer for its engine. the Goal is to support  a \n"
@@ -41,14 +43,26 @@ msgid ""
 "\n"
 "  "
 msgstr ""
+"\t\t\t                  \n"
+"                                             gmlive 0.22 \n"
+"\n"
+"              GMLive 嘗試成為一款通用型的串流媒體播放外殼。\n"
+"         它以全能的 Mplayer 播放器為引擎。目標是支援 Linux 下\n"
+"         多種類型的 P2P 廣播視訊串流，提供一種方便快捷的觀看\n"
+"         網路視訊的方案。\n"
+"\n"
+"                                                                                              cyclone "
+"Team\n"
+"\n"
+"  "
 
 #: ../data/gmlive.glade.h:13
 msgid "   "
-msgstr ""
+msgstr "   "
 
 #: ../data/gmlive.glade.h:14
 msgid "    "
-msgstr ""
+msgstr "    "
 
 #: ../data/gmlive.glade.h:15
 msgid ""
@@ -92,108 +106,116 @@ msgid "<b>Features</b>"
 msgstr "<b>特點</b>"
 
 #: ../data/gmlive.glade.h:26
+msgid "About"
+msgstr "關於"
+
+#: ../data/gmlive.glade.h:27
 msgid "Author"
 msgstr "作者"
 
-#: ../data/gmlive.glade.h:27
+#: ../data/gmlive.glade.h:28
 msgid "Channel URL:"
 msgstr "頻道位址:"
 
-#: ../data/gmlive.glade.h:28
+#: ../data/gmlive.glade.h:29
 msgid "Embed Mplayer"
 msgstr "嵌入播放器"
 
-#: ../data/gmlive.glade.h:29
-#, fuzzy
-msgid "Enable PPLive"
-msgstr "Nslive 支援"
-
 #: ../data/gmlive.glade.h:30
-msgid "Enable Sopcast"
-msgstr "Sopcast 支援"
+msgid "Enable PPLive"
+msgstr "PPlive支援"
 
 #: ../data/gmlive.glade.h:31
+msgid "Enable Sopcast"
+msgstr "Sopcast支援"
+
+#: ../data/gmlive.glade.h:32
 msgid "Enable Systray"
 msgstr "通知區域支援"
 
-#: ../data/gmlive.glade.h:32
+#: ../data/gmlive.glade.h:33
 msgid "GMLive"
 msgstr "GMLive"
 
-#: ../data/gmlive.glade.h:33
-msgid "Help"
-msgstr "幫助"
-
 #: ../data/gmlive.glade.h:34
+msgid "Help"
+msgstr "說明"
+
+#: ../data/gmlive.glade.h:35
 msgid "Kbs"
 msgstr ""
 
-#: ../data/gmlive.glade.h:35
+#: ../data/gmlive.glade.h:36
 msgid "Kbs "
 msgstr ""
 
-#: ../data/gmlive.glade.h:36
+#: ../data/gmlive.glade.h:37
 msgid "Licence"
 msgstr "許可證"
 
-#: ../data/gmlive.glade.h:37
+#: ../data/gmlive.glade.h:38
 msgid "MMS"
 msgstr ""
 
-#: ../data/gmlive.glade.h:38
+#: ../data/gmlive.glade.h:39
 msgid "Mplayer"
 msgstr "MPlayer"
 
-#: ../data/gmlive.glade.h:39
-msgid "Mplayer Cache:"
-msgstr "Mplayer 快取:"
-
 #: ../data/gmlive.glade.h:40
-msgid "Mplayer Delay Time:"
-msgstr "Mplayer 廷遲啟動時間:"
+msgid "Mplayer Cache:"
+msgstr "Mplayer快取:"
 
 #: ../data/gmlive.glade.h:41
-msgid "Mplayer extend parameter:"
-msgstr "Mplayer 額外參數:"
+msgid "Mplayer Delay Time:"
+msgstr "Mplayer廷遲啟動時間:"
 
 #: ../data/gmlive.glade.h:42
+msgid "Mplayer extend parameter:"
+msgstr "Mplayer延伸參數:"
+
+#: ../data/gmlive.glade.h:43
 msgid "On close button: minimize to systray"
 msgstr "關閉按鈕：最小化至通知區域"
 
-#: ../data/gmlive.glade.h:43
+#: ../data/gmlive.glade.h:44
 msgid "Other Player"
 msgstr "其它播放器"
 
-#: ../data/gmlive.glade.h:44
+#: ../data/gmlive.glade.h:45
 msgid "Other Player Command:"
 msgstr "其它播放器程式的名字"
 
-#: ../data/gmlive.glade.h:45
-#, fuzzy
-msgid "PPLive"
-msgstr "GMLive"
-
 #: ../data/gmlive.glade.h:46
-msgid "Sec"
+msgid "PPLive"
 msgstr ""
 
 #: ../data/gmlive.glade.h:47
-msgid "Sopcast"
-msgstr "Sopcast"
+msgid "Sec"
+msgstr ""
 
 #: ../data/gmlive.glade.h:48
+#, fuzzy
+msgid "Sopcast"
+msgstr "Sopcast支援"
+
+#: ../data/gmlive.glade.h:49
 msgid ""
 "Thanks follow people translate the program:\n"
 "\n"
 "Chinese(zh_CN): lerosua@gmail.com\n"
 "Spanish(es_ES):   jjgnomera@gmail.com"
 msgstr ""
+"感謝下列人士協助翻譯程式：\n"
+"\n"
+"Chinese(zh_CN): lerosua@gmail.com\n"
+"Spanish(es_ES):   jjgnomera@gmail.com\n"
+"Chinese(zh_TW): victorangus@gmail.com"
 
-#: ../data/gmlive.glade.h:52
+#: ../data/gmlive.glade.h:53
 msgid "Translation"
 msgstr "翻譯"
 
-#: ../data/gmlive.glade.h:53
+#: ../data/gmlive.glade.h:54
 msgid ""
 "You can find us in follow URL:\n"
 "\n"
@@ -201,8 +223,13 @@ msgid ""
 "  URL:   http://code.google.com/p/gmlive\n"
 "  IRC:    #cyclone@irc.oftc.net"
 msgstr ""
+"您可以在以下位址找到我們：\n"
+"\n"
+"  BLOG: http://cyclone.blog.ubuntu.org.cn\n"
+"  URL:   http://code.google.com/p/gmlive\n"
+"  IRC:    #cyclone@irc.oftc.net"
 
-#: ../data/gmlive.glade.h:58
+#: ../data/gmlive.glade.h:59
 msgid ""
 "about MMS streaming\n"
 "this channel is not base on P2P streaming. it just base on \n"
@@ -210,8 +237,12 @@ msgid ""
 "you can add your mms channel for yourself. just edit the \n"
 "mms.list and put it in your home dir like ~/.gmlive"
 msgstr ""
+"關於 MMS 串流\n"
+"本頻道並非 P2P 串流，僅是收集網路上的 mms:// 網址而已。\n"
+"您可以自行編輯位在 ~/.gmlive 目錄下的 mms.list 檔案，加入\n"
+"您要的 MMS 頻道。"
 
-#: ../data/gmlive.glade.h:63
+#: ../data/gmlive.glade.h:64
 msgid ""
 "about pplive streaming\n"
 "pplive is famous  p2p streaming.\n"
@@ -219,8 +250,13 @@ msgid ""
 "To add pplive support , download\n"
 "the xpplive  and put it to /usr/local/bin/ or /usr/bin"
 msgstr ""
+"關於t PPLive 串流\n"
+"PPLive 是一種 P2P 串流。\n"
+"請到 http://www.pplive.com 尋找相關說明。\n"
+"要增加 PPLive 播放支援，請下載 xpplive 並\n"
+"置於 /usr/local/bin/ 或 /usr/bin 目錄。"
 
-#: ../data/gmlive.glade.h:68
+#: ../data/gmlive.glade.h:69
 msgid ""
 "about sopcast streaming\n"
 "please access the http://www.sopcast.org for sopcast help.\n"
@@ -232,48 +268,54 @@ msgid ""
 " http://download.sopcast.cn/download/sp-auth.tgz \n"
 "file.  unzip it and put it to /usr/local/bin/ or /usr/bin"
 msgstr ""
+"關於 sopcast 串流\n"
+"請到 http://www.sopcast.org 尋找 sopcast 說明。\n"
+"我們使用 wget 來取得 sopcast 頻道清單，因此請確\n"
+"保您的系統中有安裝 wget 程式。\n"
+"您可以到偏好選單設定 sopacst 頻道檔案。 \n"
+"要增加 sopcast 串流播放支援，請下載 \n"
+" http://download.sopcast.cn/download/sp-auth.tgz \n"
+"檔案。  解壓縮後置於 /usr/local/bin/ 或 /usr/bin 目錄。"
 
-#: ../data/gmlive.glade.h:77
+#: ../data/gmlive.glade.h:78
 msgid "bookmarks"
 msgstr "書籤"
 
-#: ../data/gmlive.glade.h:78
-msgid "download the channels when program start every time"
-msgstr "當程式啟動時就下載頻道列表"
-
 #: ../data/gmlive.glade.h:79
+msgid "download the channels when program start every time"
+msgstr "當程式啟動時就下載頻道清單"
+
+#: ../data/gmlive.glade.h:80
 msgid "mms"
 msgstr ""
 
-#: ../data/gmlive.glade.h:80
-msgid "mms help"
-msgstr "mms 幫助"
-
 #: ../data/gmlive.glade.h:81
-#, fuzzy
-msgid "pplive"
-msgstr "GMLive"
+msgid "mms help"
+msgstr "MMS說明"
 
 #: ../data/gmlive.glade.h:82
-#, fuzzy
-msgid "pplive help"
-msgstr "nslive 幫助"
+msgid "pplive"
+msgstr ""
 
 #: ../data/gmlive.glade.h:83
-msgid "recent"
-msgstr "最近播放"
+msgid "pplive help"
+msgstr "PPLive說明"
 
 #: ../data/gmlive.glade.h:84
+msgid "recent"
+msgstr "最近"
+
+#: ../data/gmlive.glade.h:85
 msgid "sopcast"
 msgstr ""
 
-#: ../data/gmlive.glade.h:85
+#: ../data/gmlive.glade.h:86
 msgid "sopcast help"
-msgstr "sopcast 幫助"
+msgstr "sopcast說明"
 
 #: ../data/record.glade.h:1
 msgid "Record Readying ..."
-msgstr "準備錄製...."
+msgstr "准備錄製...."
 
 #: ../data/record.glade.h:2
 msgid "Recording"
@@ -281,7 +323,7 @@ msgstr "錄製"
 
 #: ../data/record.glade.h:3
 msgid "_Preview"
-msgstr "預覽"
+msgstr "預覽(_P)"
 
 #: ../src/channel.cpp:43
 msgid "channels"
@@ -293,29 +335,28 @@ msgstr "位元率"
 
 #: ../src/channel.cpp:45
 msgid "user"
-msgstr "線上人數"
+msgstr "使用者"
 
 #: ../src/channel.cpp:159 ../src/MainWindow.cpp:380
 msgid "Choose File"
 msgstr "選擇檔案"
 
 #: ../src/channel.cpp:275 ../src/channel.cpp:355
-#, fuzzy
 msgid "PPLive Stream"
-msgstr "NSLive 串流"
+msgstr "PPLive 串流"
 
 #: ../src/channel.cpp:277 ../src/channel.cpp:357
 msgid "SopCast Stream"
-msgstr "SopCast 串流"
+msgstr "SopCast 流"
 
 #: ../src/channel.cpp:279 ../src/channel.cpp:359
 msgid "MMS stream"
-msgstr "MMS 串流"
+msgstr "MMS流"
 
 #: ../src/channel.cpp:289 ../src/channel.cpp:292 ../src/channel.cpp:369
 #: ../src/channel.cpp:374
 msgid "users:"
-msgstr "線上人數："
+msgstr "使用者數："
 
 #: ../src/channel.cpp:290 ../src/channel.cpp:293 ../src/channel.cpp:370
 #: ../src/channel.cpp:375
@@ -324,13 +365,13 @@ msgstr "類型："
 
 #: ../src/channel.cpp:391
 msgid "Please select a channel list file"
-msgstr "請選擇一個頻道列表檔案"
+msgstr "請選擇一個頻道清單檔案"
 
 #: ../src/channel.cpp:392
 msgid "open channles error"
-msgstr "打開頻道列表錯誤"
+msgstr "打開頻道清單錯誤"
 
-#: ../src/ConfWindow.cpp:132
+#: ../src/ConfWindow.cpp:131
 msgid "GMLive Conf Window"
 msgstr "GMLive 設定"
 
@@ -353,32 +394,29 @@ msgid "Recording %s To %s (%u.%u Mb)"
 msgstr "錄製 %s 至 %s (%u.%u Mb)"
 
 #: ../src/MainWindow.cpp:238
-#, fuzzy
 msgid "_HideChannels"
-msgstr "隱藏列表"
+msgstr "隱藏清單(_H)"
 
 #: ../src/MainWindow.cpp:250 ../src/MainWindow.cpp:266
-#, fuzzy
 msgid "Open_URL"
-msgstr "打開網絡串流"
+msgstr "打開網路串流(_U)"
 
 #. File menu:
 #: ../src/MainWindow.cpp:260
 msgid "_File"
-msgstr "檔案"
+msgstr "檔案(_F)"
 
 #: ../src/MainWindow.cpp:262
-#, fuzzy
 msgid "_Open local file"
-msgstr "打開本機檔案"
+msgstr "打開本地檔案(_O)"
 
 #: ../src/MainWindow.cpp:263
 msgid "Open Local File"
-msgstr "打開本機檔案"
+msgstr "打開本地檔案"
 
 #: ../src/MainWindow.cpp:267
 msgid "Open Network Stream"
-msgstr "打開網絡串流"
+msgstr "打開網路串流"
 
 #: ../src/MainWindow.cpp:271
 msgid "Play"
@@ -399,16 +437,15 @@ msgstr "停止"
 #. View menu:
 #: ../src/MainWindow.cpp:294
 msgid "_View"
-msgstr "檢視"
+msgstr "檢視(_V)"
 
 #: ../src/MainWindow.cpp:298
 msgid "Show or hide channels list"
-msgstr "顯示或隱藏頻道列表"
+msgstr "顯示或隱藏頻道清單"
 
 #: ../src/MainWindow.cpp:303
-#, fuzzy
 msgid "Hide_Toolbar"
-msgstr "隱藏工具列"
+msgstr "隱藏工具列(_T)"
 
 #: ../src/MainWindow.cpp:303
 msgid "Show or hide Toolbar"
@@ -416,11 +453,11 @@ msgstr "顯示或隱藏工具列"
 
 #: ../src/MainWindow.cpp:308
 msgid "_AlwaysOnTop"
-msgstr "置頂"
+msgstr "置頂(_A)"
 
 #: ../src/MainWindow.cpp:308
 msgid "Make GMlive ontop of other windows"
-msgstr "使 GMlive 的視窗置頂"
+msgstr "使GMlive的視窗置頂"
 
 #: ../src/MainWindow.cpp:312
 msgid "FullScreen"
@@ -428,7 +465,7 @@ msgstr "全螢幕"
 
 #: ../src/MainWindow.cpp:317
 msgid "_Embed Mplayer"
-msgstr "嵌入播放器"
+msgstr "嵌入播放器(_E)"
 
 #: ../src/MainWindow.cpp:317
 msgid "Embed or Separate mplayer play"
@@ -437,64 +474,64 @@ msgstr "嵌入或分離播放器"
 #. Tool menu:
 #: ../src/MainWindow.cpp:321
 msgid "_Tool"
-msgstr ""
+msgstr "工具(_T)"
 
 #: ../src/MainWindow.cpp:324
 msgid "Volume _increase"
-msgstr ""
+msgstr "音量增加(_i)"
 
 #: ../src/MainWindow.cpp:324
 msgid "Volume Increase"
-msgstr ""
+msgstr "增加音量"
 
 #: ../src/MainWindow.cpp:328
 msgid "Volume _decrease"
-msgstr ""
+msgstr "音量降低(_d)"
 
 #: ../src/MainWindow.cpp:328
 msgid "Volume Decrease"
-msgstr ""
+msgstr "降低音量"
 
 #: ../src/MainWindow.cpp:332
 msgid "Audio delay i_ncrease"
-msgstr ""
+msgstr "音頻延時前進(_N)"
 
 #: ../src/MainWindow.cpp:332
 msgid "AudioDelay Increase"
-msgstr ""
+msgstr "音頻延時前進"
 
 #: ../src/MainWindow.cpp:336
 msgid "Audio delay d_ecrease"
-msgstr ""
+msgstr "音頻延時後退(_E)"
 
 #: ../src/MainWindow.cpp:336
 msgid "AudioDelay Decrease"
-msgstr ""
+msgstr "音頻延時後退"
 
 #: ../src/MainWindow.cpp:341
 msgid "_Mute"
-msgstr ""
+msgstr "靜音(_M)"
 
 #: ../src/MainWindow.cpp:341
 msgid "Mute"
-msgstr ""
+msgstr "靜音"
 
 #. Help menu:
 #: ../src/MainWindow.cpp:351
 msgid "_Help"
-msgstr "幫助"
+msgstr "說明(_H)"
 
 #: ../src/MainWindow.cpp:357
 msgid "_Refresh list"
-msgstr "更新列表"
+msgstr "更新清單(_R)"
 
 #: ../src/MainWindow.cpp:357
 msgid "Refresh current channel list"
-msgstr "更新目前的頻道列表"
+msgstr "更新目前頻道清單"
 
 #: ../src/MainWindow.cpp:360
 msgid "_Add to bookmark"
-msgstr "添加到書籤"
+msgstr "添加到書簽(_A)"
 
 #: ../src/MainWindow.cpp:360
 msgid "Bookmark this channel"
@@ -502,7 +539,7 @@ msgstr "收藏此頻道"
 
 #: ../src/MainWindow.cpp:363
 msgid "_Copy url"
-msgstr "複製串流位址"
+msgstr "複製串流位址(_C)"
 
 #: ../src/MainWindow.cpp:363
 msgid "Copy url to clipboard"
@@ -510,55 +547,49 @@ msgstr "複製串流位址至剪貼簿"
 
 #: ../src/MainWindow.cpp:402
 msgid "Open URL"
-msgstr "打開網絡串流"
+msgstr "打開網路串流"
 
-#: ../src/MainWindow.cpp:769
+#: ../src/MainWindow.cpp:771
 #, c-format
 msgid "Caching... %d%%"
-msgstr "緩衝中... %d%%"
+msgstr "快取中... %d%%"
 
-#: ../src/MainWindow.cpp:1170
+#: ../src/MainWindow.cpp:1171
 msgid "NO SUPPORT"
 msgstr "未支援"
 
-#: ../src/MainWindow.cpp:1174
-#, fuzzy
+#: ../src/MainWindow.cpp:1175
 msgid ""
 "you have not install sopcast and pplive program, so GMLive can't support "
 "them now"
-msgstr "您還未安裝sopcast程式，所以GMLive還不能支援它。"
+msgstr "您還未安裝 sopcast 和 PPLive 程式，所以 GMLive 還不能支援它們。"
 
-#: ../src/MainWindow.cpp:1176
+#: ../src/MainWindow.cpp:1177
 msgid "you have not install sopcast program,so GMLive can't support it now"
-msgstr "您還未安裝sopcast程式，所以GMLive還不能支援它。"
+msgstr "您還未安裝 sopcast 程式，所以 GMLive 還不能支援它。"
 
-#: ../src/MainWindow.cpp:1178
-#, fuzzy
+#: ../src/MainWindow.cpp:1179
 msgid "you have not install pplive program,so GMLive can't support it now"
-msgstr "您還未安裝nslive程式，所以GMLive還不能支援它。"
+msgstr "您還未安裝 PPLive 程式，所以 GMLive 還不能支援它。"
 
-#: ../src/MainWindow.cpp:1181
+#: ../src/MainWindow.cpp:1182
 msgid " So you can install the program first"
-msgstr "請您先安裝以上程式。謝謝。"
+msgstr "請您安裝以上程式。謝謝。"
 
 #: ../src/pplivechannel.cpp:227
-#, fuzzy
 msgid ""
 "open the pplive channel error,will you select a local file to instead the "
 "broken channel list?"
-msgstr "打開頻道列表檔案錯誤，請選擇一個本機的頻道列表檔案來代替損壞的檔案"
+msgstr "打開頻道清單檔案錯誤，請選擇一個本地的頻道清單檔案來代替損壞的檔案"
 
 #: ../src/sopcastchannel.cpp:117
 msgid ""
 "open the sopcast channel error,will you select a local file to instead the "
 "broken channel list?"
-msgstr "打開頻道列表檔案錯誤，請選擇一個本機的頻道列表檔案來代替損壞的檔案"
-
-#~ msgid "About"
-#~ msgstr "關於"
+msgstr "打開頻道清單檔案錯誤，請選擇一個本地的頻道清單檔案來代替損壞的檔案"
 
 #~ msgid "Already Recorded"
-#~ msgstr "已經錄製中"
+#~ msgstr "正在錄製中"
 
 #~ msgid "The Record had working now, you must stop it beforce"
 #~ msgstr "錄製已經在工作中，您必須中止之前的錄製。"
@@ -573,9 +604,8 @@ msgstr "打開頻道列表檔案錯誤，請選擇一個本機的頻道列表檔
 #~ "GMLive 在錄製中，您必須先停止錄製才能使用播放功能\n"
 #~ "你確定停止錄製嗎？"
 
-#, fuzzy
 #~ msgid "_OpenURL"
-#~ msgstr "打開網絡串流"
+#~ msgstr "打開網路流(_O)"
 
 #~ msgid "MUTE"
 #~ msgstr "靜音"
@@ -587,4 +617,4 @@ msgstr "打開頻道列表檔案錯誤，請選擇一個本機的頻道列表檔
 #~ msgstr "檔案錯誤"
 
 #~ msgid "the local channles list file has wrong formats"
-#~ msgstr "本機的頻道列表檔案格式錯誤"
+#~ msgstr "本地的頻道清單檔案格式錯誤"
