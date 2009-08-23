@@ -38,6 +38,8 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	m_embed = (!embed.empty()) && (embed[0] == '1');
 	std::string& enable = GMConf["enable_pplive"];
 	m_enable_pplive = (!enable.empty())&&(enable[0] == '1' );
+	enable = GMConf["enable_pps"];
+	m_enable_pps = (!enable.empty())&&(enable[0] == '1' );
 	enable = GMConf["enable_sopcast"];
 	m_enable_sopcast = (!enable.empty())&&(enable[0] == '1' );
 
@@ -69,6 +71,7 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	m_pVariablesMap->connect_widget("check_embed",m_embed);
 	m_pVariablesMap->connect_widget("enable_sopcast", m_enable_sopcast);
 	m_pVariablesMap->connect_widget("enable_pplive", m_enable_pplive);
+	m_pVariablesMap->connect_widget("enable_pps", m_enable_pps);
 	m_pVariablesMap->connect_widget("entry_parameter", m_paramter);
 	m_pVariablesMap->connect_widget("entry_mms_cache", m_mms_cache);
 
@@ -158,6 +161,7 @@ void ConfWindow::write_to_GMConf()
 	GMConf["player_type"] = m_oplayer ? "1" : "0";
 	GMConf["mplayer_embed"] = m_embed ? "1" : "0";
 	GMConf["enable_pplive"] = m_enable_pplive ? "1" : "0";
+	GMConf["enable_pps"] = m_enable_pps ? "1" : "0" ;
 	GMConf["enable_sopcast"] = m_enable_sopcast ? "1" : "0";
 	GMConf["mplayer_paramter"]      =            m_paramter   ; 
 	GMConf["mms_mplayer_cache"]     =            m_mms_cache  ;

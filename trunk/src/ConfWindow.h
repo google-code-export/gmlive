@@ -63,6 +63,7 @@ class ConfWindow: public Gtk::Window
 		bool		m_embed;
 		bool		m_enable_pplive;
 		bool		m_enable_sopcast;
+		bool		m_enable_pps;
 		bool		m_check_refresh_sopcast_channels;
 		bool		m_check_refresh_pplive_channels;
 		bool		m_close_try;
