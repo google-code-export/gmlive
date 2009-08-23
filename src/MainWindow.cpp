@@ -782,6 +782,7 @@ MainWindow::MainWindow():
 	,toolbar_hide(false)
 	,refresh_sopcast_channels(true)
 	,enable_pplive(true)
+	,enable_pps(false)
 	,enable_sopcast(true)
 	,full_screen(false)
 	,window_width(1)

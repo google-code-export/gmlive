@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-20 00:09+0800\n"
+"POT-Creation-Date: 2009-08-23 22:05+0800\n"
 "PO-Revision-Date: 2009-08-21 21:21+0800\n"
 "Last-Translator: Liu, Shuyuan <victorangus@gmail.com>\n"
 "Language-Team: Chinese/Traditional\n"
@@ -29,7 +29,7 @@ msgstr "基於 P2P 的串流廣播系統"
 #, fuzzy
 msgid ""
 "\t\t\t                  \n"
-"                                             gmlive 0.22 \n"
+"                                             gmlive 0.22.1 \n"
 "\n"
 "              GMLive try to became a universal streaming media player case.\n"
 "         it use Almighty Mplayer for its engine. the Goal is to support  a \n"
@@ -126,79 +126,84 @@ msgid "Enable PPLive"
 msgstr "PPlive支援"
 
 #: ../data/gmlive.glade.h:31
+#, fuzzy
+msgid "Enable PPStream"
+msgstr "通知區域支援"
+
+#: ../data/gmlive.glade.h:32
 msgid "Enable Sopcast"
 msgstr "Sopcast支援"
 
-#: ../data/gmlive.glade.h:32
+#: ../data/gmlive.glade.h:33
 msgid "Enable Systray"
 msgstr "通知區域支援"
 
-#: ../data/gmlive.glade.h:33
+#: ../data/gmlive.glade.h:34
 msgid "GMLive"
 msgstr "GMLive"
 
-#: ../data/gmlive.glade.h:34
+#: ../data/gmlive.glade.h:35
 msgid "Help"
 msgstr "說明"
 
-#: ../data/gmlive.glade.h:35
+#: ../data/gmlive.glade.h:36
 msgid "Kbs"
 msgstr ""
 
-#: ../data/gmlive.glade.h:36
+#: ../data/gmlive.glade.h:37
 msgid "Kbs "
 msgstr ""
 
-#: ../data/gmlive.glade.h:37
+#: ../data/gmlive.glade.h:38
 msgid "Licence"
 msgstr "許可證"
 
-#: ../data/gmlive.glade.h:38
+#: ../data/gmlive.glade.h:39
 msgid "MMS"
 msgstr ""
 
-#: ../data/gmlive.glade.h:39
+#: ../data/gmlive.glade.h:40
 msgid "Mplayer"
 msgstr "MPlayer"
 
-#: ../data/gmlive.glade.h:40
+#: ../data/gmlive.glade.h:41
 msgid "Mplayer Cache:"
 msgstr "Mplayer快取:"
 
-#: ../data/gmlive.glade.h:41
+#: ../data/gmlive.glade.h:42
 msgid "Mplayer Delay Time:"
 msgstr "Mplayer廷遲啟動時間:"
 
-#: ../data/gmlive.glade.h:42
+#: ../data/gmlive.glade.h:43
 msgid "Mplayer extend parameter:"
 msgstr "Mplayer延伸參數:"
 
-#: ../data/gmlive.glade.h:43
+#: ../data/gmlive.glade.h:44
 msgid "On close button: minimize to systray"
 msgstr "關閉按鈕：最小化至通知區域"
 
-#: ../data/gmlive.glade.h:44
+#: ../data/gmlive.glade.h:45
 msgid "Other Player"
 msgstr "其它播放器"
 
-#: ../data/gmlive.glade.h:45
+#: ../data/gmlive.glade.h:46
 msgid "Other Player Command:"
 msgstr "其它播放器程式的名字"
 
-#: ../data/gmlive.glade.h:46
+#: ../data/gmlive.glade.h:47
 msgid "PPLive"
 msgstr ""
 
-#: ../data/gmlive.glade.h:47
+#: ../data/gmlive.glade.h:48
 msgid "Sec"
 msgstr ""
 
-#: ../data/gmlive.glade.h:48
+#: ../data/gmlive.glade.h:49
 #, fuzzy
 msgid "Sopcast"
 msgstr "Sopcast支援"
 
-#: ../data/gmlive.glade.h:49
+#: ../data/gmlive.glade.h:50
 msgid ""
 "Thanks follow people translate the program:\n"
 "\n"
@@ -211,11 +216,11 @@ msgstr ""
 "Spanish(es_ES):   jjgnomera@gmail.com\n"
 "Chinese(zh_TW): victorangus@gmail.com"
 
-#: ../data/gmlive.glade.h:53
+#: ../data/gmlive.glade.h:54
 msgid "Translation"
 msgstr "翻譯"
 
-#: ../data/gmlive.glade.h:54
+#: ../data/gmlive.glade.h:55
 msgid ""
 "You can find us in follow URL:\n"
 "\n"
@@ -229,7 +234,7 @@ msgstr ""
 "  URL:   http://code.google.com/p/gmlive\n"
 "  IRC:    #cyclone@irc.oftc.net"
 
-#: ../data/gmlive.glade.h:59
+#: ../data/gmlive.glade.h:60
 msgid ""
 "about MMS streaming\n"
 "this channel is not base on P2P streaming. it just base on \n"
@@ -242,7 +247,7 @@ msgstr ""
 "您可以自行編輯位在 ~/.gmlive 目錄下的 mms.list 檔案，加入\n"
 "您要的 MMS 頻道。"
 
-#: ../data/gmlive.glade.h:64
+#: ../data/gmlive.glade.h:65
 msgid ""
 "about pplive streaming\n"
 "pplive is famous  p2p streaming.\n"
@@ -256,7 +261,7 @@ msgstr ""
 "要增加 PPLive 播放支援，請下載 xpplive 並\n"
 "置於 /usr/local/bin/ 或 /usr/bin 目錄。"
 
-#: ../data/gmlive.glade.h:69
+#: ../data/gmlive.glade.h:70
 msgid ""
 "about sopcast streaming\n"
 "please access the http://www.sopcast.org for sopcast help.\n"
@@ -277,39 +282,39 @@ msgstr ""
 " http://download.sopcast.cn/download/sp-auth.tgz \n"
 "檔案。  解壓縮後置於 /usr/local/bin/ 或 /usr/bin 目錄。"
 
-#: ../data/gmlive.glade.h:78
+#: ../data/gmlive.glade.h:79
 msgid "bookmarks"
 msgstr "書籤"
 
-#: ../data/gmlive.glade.h:79
+#: ../data/gmlive.glade.h:80
 msgid "download the channels when program start every time"
 msgstr "當程式啟動時就下載頻道清單"
 
-#: ../data/gmlive.glade.h:80
+#: ../data/gmlive.glade.h:81
 msgid "mms"
 msgstr ""
 
-#: ../data/gmlive.glade.h:81
+#: ../data/gmlive.glade.h:82
 msgid "mms help"
 msgstr "MMS說明"
 
-#: ../data/gmlive.glade.h:82
+#: ../data/gmlive.glade.h:83
 msgid "pplive"
 msgstr ""
 
-#: ../data/gmlive.glade.h:83
+#: ../data/gmlive.glade.h:84
 msgid "pplive help"
 msgstr "PPLive說明"
 
-#: ../data/gmlive.glade.h:84
+#: ../data/gmlive.glade.h:85
 msgid "recent"
 msgstr "最近"
 
-#: ../data/gmlive.glade.h:85
+#: ../data/gmlive.glade.h:86
 msgid "sopcast"
 msgstr ""
 
-#: ../data/gmlive.glade.h:86
+#: ../data/gmlive.glade.h:87
 msgid "sopcast help"
 msgstr "sopcast說明"
 
@@ -371,7 +376,7 @@ msgstr "請選擇一個頻道清單檔案"
 msgid "open channles error"
 msgstr "打開頻道清單錯誤"
 
-#: ../src/ConfWindow.cpp:131
+#: ../src/ConfWindow.cpp:134
 msgid "GMLive Conf Window"
 msgstr "GMLive 設定"
 

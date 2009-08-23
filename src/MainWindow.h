@@ -157,6 +157,7 @@ class MainWindow : public Gtk::Window {
 		bool				toolbar_hide;
 		bool				enable_pplive;
 		bool				enable_sopcast;
+		bool				enable_pps;
 		bool				enable_tray;
 		bool				full_screen;
 		bool				refresh_sopcast_channels; //是否每次启动程序都去下载sopcast的频道列表

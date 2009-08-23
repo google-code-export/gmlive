@@ -600,6 +600,7 @@ audio-volume-medium</property>
       <object class="GtkVBox" id="vbox_conf">
         <property name="visible">True</property>
         <property name="border_width">8</property>
+        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <object class="GtkNotebook" id="notebook_conf">
@@ -610,10 +611,12 @@ audio-volume-medium</property>
               <object class="GtkVBox" id="vbox6">
                 <property name="visible">True</property>
                 <property name="border_width">12</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">18</property>
                 <child>
                   <object class="GtkVBox" id="vbox7">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkLabel" id="label21">
@@ -635,6 +638,7 @@ audio-volume-medium</property>
                         <child>
                           <object class="GtkVBox" id="vbox8">
                             <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkRadioButton" id="rbtn_mplayer">
@@ -715,6 +719,7 @@ audio-volume-medium</property>
                 <child>
                   <object class="GtkVBox" id="vbox11">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkLabel" id="label44">
@@ -736,7 +741,8 @@ audio-volume-medium</property>
                         <child>
                           <object class="GtkVBox" id="vbox12">
                             <property name="visible">True</property>
-                            <property name="spacing">6</property>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">5</property>
                             <child>
                               <object class="GtkCheckButton" id="check_embed">
                                 <property name="label" translatable="yes">Embed Mplayer</property>
@@ -780,6 +786,20 @@ audio-volume-medium</property>
                               </packing>
                             </child>
                             <child>
+                              <object class="GtkCheckButton" id="enable_pps">
+                                <property name="label" translatable="yes">Enable PPStream</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="use_underline">True</property>
+                                <property name="draw_indicator">True</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="position">3</property>
+                              </packing>
+                            </child>
+                            <child>
                               <object class="GtkCheckButton" id="enable_tray">
                                 <property name="label" translatable="yes">Enable Systray</property>
                                 <property name="visible">True</property>
@@ -788,7 +808,7 @@ audio-volume-medium</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                               <packing>
-                                <property name="position">3</property>
+                                <property name="position">4</property>
                               </packing>
                             </child>
                             <child>
@@ -800,7 +820,7 @@ audio-volume-medium</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                               <packing>
-                                <property name="position">4</property>
+                                <property name="position">5</property>
                               </packing>
                             </child>
                             <child>
@@ -824,6 +844,7 @@ audio-volume-medium</property>
                                   <object class="GtkEntry" id="entry_parameter">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
+                                    <property name="invisible_char">&#x25CF;</property>
                                   </object>
                                   <packing>
                                     <property name="position">1</property>
@@ -832,7 +853,7 @@ audio-volume-medium</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="position">5</property>
+                                <property name="position">6</property>
                               </packing>
                             </child>
                           </object>
