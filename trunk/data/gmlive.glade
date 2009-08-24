@@ -153,7 +153,6 @@ audio-volume-medium</property>
                         <property name="label" translatable="yes">mms</property>
                         <property name="use_markup">True</property>
                         <property name="single_line_mode">True</property>
-                        <property name="angle">270</property>
                       </object>
                       <packing>
                         <property name="tab_fill">False</property>
@@ -178,7 +177,6 @@ audio-volume-medium</property>
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">sopcast</property>
                         <property name="single_line_mode">True</property>
-                        <property name="angle">270</property>
                       </object>
                       <packing>
                         <property name="position">1</property>
@@ -204,7 +202,6 @@ audio-volume-medium</property>
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">pplive</property>
                         <property name="single_line_mode">True</property>
-                        <property name="angle">270</property>
                       </object>
                       <packing>
                         <property name="position">2</property>
@@ -230,7 +227,6 @@ audio-volume-medium</property>
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">recent</property>
                         <property name="single_line_mode">True</property>
-                        <property name="angle">270</property>
                       </object>
                       <packing>
                         <property name="position">3</property>
@@ -256,7 +252,6 @@ audio-volume-medium</property>
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">bookmarks</property>
                         <property name="single_line_mode">True</property>
-                        <property name="angle">270</property>
                       </object>
                       <packing>
                         <property name="position">4</property>
