@@ -782,7 +782,7 @@ MainWindow::MainWindow():
 	,toolbar_hide(false)
 	,refresh_sopcast_channels(true)
 	,enable_pplive(true)
-	,enable_pps(false)
+	,enable_pps(true)
 	,enable_sopcast(true)
 	,full_screen(false)
 	,window_width(1)
@@ -858,6 +858,17 @@ MainWindow::MainWindow():
 			channels->remove_page(2);
 		else
 			channels->remove_page(1);
+	}
+	if(enable_pps){
+		//for test 
+		Gtk::Label* _pps = Gtk::manage(new Gtk::Label("PPStream"));
+		int num=1;
+		if(enable_pplive)
+			num++;
+		if(enable_sopcast)
+			num++;
+		channels->insert_page(*_pps,"PPStream",num);
+
 	}
 
 
@@ -1169,6 +1180,7 @@ void MainWindow::check_support()
 
 	std::string& enablesopcast_ = GMConf["enable_sopcast"];
 	std::string& enablepplive_ = GMConf["enable_pplive"];
+	std::string& enablepps_ =    GMConf["enable_pps"];
 	if(enablesopcast_[0]=='1'|enablepplive_[0]=='1')
 		if(!enable_pplive| !enable_sopcast)
 		{
@@ -1193,6 +1205,8 @@ void MainWindow::check_support()
 		enable_pplive =0;
 	if(enablesopcast_[0]=='0')
 		enable_sopcast=0;
+	if(enablepps_[0]=='0')
+		enable_pps=0;
 
 
 }
