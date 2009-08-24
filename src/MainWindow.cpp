@@ -1057,17 +1057,20 @@ void MainWindow::set_gmp_embed(bool embed)
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewEmbedMplayer"));
 	menu->set_active(gmp_embed);
 	if (!gmp_embed) {
+		//不嵌入播放器的情况
 		play_frame->hide();
 		channels_box->show();
 		action_group->get_action("ViewShowChannel")->set_sensitive(false);
 		action_group->get_action("FullScreen")->set_sensitive(false);
 		action_group->get_action("ToolMute")->set_sensitive(false);
+		channels->set_tab_pos(Gtk::POS_TOP);
 		this->resize(window_width, window_height);
 	}
 	else {
 		// 这里保存好channels的尺寸
 		// 用于在不嵌入的时候恢复
 		this->get_size( window_width, window_height);
+		channels->set_tab_pos(Gtk::POS_RIGHT);
 		play_frame->show_all();
 		action_group->get_action("ViewShowChannel")->set_sensitive(true);
 		action_group->get_action("FullScreen")->set_sensitive(true);
