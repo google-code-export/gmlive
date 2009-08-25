@@ -77,10 +77,9 @@ void PPSPlayer::start(GMplayer& gmp)
 		chdir("/tmp");
 		const char* argv[5];
 
-		argv[0] = "nohup";
-		argv[1] = "xpps";
-		argv[2] = filename.c_str();
-		argv[3] = NULL;
+		argv[0] = "xpps";
+		argv[1] = filename.c_str();
+		argv[2] = NULL;
 
 		printf("play cmd %s\n",argv);
 		// 设置 这个子进程为进程组头，

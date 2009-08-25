@@ -25,6 +25,7 @@
 #include "mmsLivePlayer.h"
 #include "sopcastLivePlayer.h"
 #include "pplivePlayer.h"
+#include "ppsPlayer.h"
 
 RecentChannel::RecentChannel(MainWindow* parent_):Channel( parent_)
 {
@@ -40,9 +41,11 @@ LivePlayer* RecentChannel::get_player( const std::string& stream,TypeChannel pag
 		case MMS_CHANNEL:
 			return MmsLivePlayer::create(stream);
 		case PPLIVE_CHANNEL:
-				return PpLivePlayer::create(stream);
+			return PpLivePlayer::create(stream);
 		case SOPCAST_CHANNEL:
 			return SopcastLivePlayer::create(stream);
+		case PPS_CHANNEL:
+			return PPSPlayer::create(stream);
 	}
 }
 void RecentChannel::init()
@@ -105,6 +108,11 @@ void  RecentChannel::addLine(int num,const Glib::ustring& name,const std::string
 		else
 			type_ = SOPCAST_CHANNEL;
 	}
+	else if("ppstream" == type)
+	{
+		type_ = PPS_CHANNEL;
+
+	}
 	else
 		type_ = NONE;
 
@@ -155,10 +163,16 @@ void RecentChannel::saveLine(const Glib::ustring & name,const std::string& strea
 		stream = name +"\t#"+stream_+"\t#sopcast";
 		strtype = "sopcast";
 	}
-	else
+	else if(type == PPLIVE_CHANNEL)
 	{
 		stream = name +"\t#"+stream_+"\t#pplive";
 		strtype = "pplive";
+	}
+	else if(type ==PPS_CHANNEL)
+	{
+		stream = name +"\t#"+stream_+"\t#ppstream";
+		strtype = "ppstream";
+
 	}
 	std::vector<std::string>::iterator iter = std::find(list.begin(),list.end(),stream);
 	if(iter == list.end())

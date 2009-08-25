@@ -16,8 +16,8 @@
  * =====================================================================================
  */
 
-#ifndef PPLIVE_PLAYER_H_
-#define PPLIVE_PLAYER_H_
+#ifndef PPSTREAM_PLAYER_H_
+#define PPSTREAM_PLAYER_H_
 #include "livePlayer.h"
 
 class GMplayer;
@@ -44,5 +44,5 @@ class PPSPlayer : public LivePlayer {
 };
 
 
-#endif // PPLIVE_PLAYER_H_
+#endif // PPSTREAM_PLAYER_H_
 
