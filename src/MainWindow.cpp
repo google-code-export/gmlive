@@ -21,6 +21,7 @@
 #include "mmschannel.h"
 #include "sopcastchannel.h"
 #include "pplivechannel.h"
+#include "ppschannel.h"
 #include "recentchannel.h"
 #include "bookmarkchannel.h"
 #include "livePlayer.h"
@@ -861,13 +862,16 @@ MainWindow::MainWindow():
 	}
 	if(enable_pps){
 		//for test 
-		Gtk::Label* _pps = Gtk::manage(new Gtk::Label("PPStream"));
+		Gtk::ScrolledWindow* scroll_pps = Gtk::manage(new Gtk::ScrolledWindow());
+		scroll_pps->set_policy(Gtk::POLICY_AUTOMATIC,Gtk::POLICY_AUTOMATIC);
+		channel = Gtk::manage(new class PPSChannel(this));
+		scroll_pps->add(*channel);
 		int num=1;
 		if(enable_pplive)
 			num++;
 		if(enable_sopcast)
 			num++;
-		channels->insert_page(*_pps,"PPStream",num);
+		channels->insert_page(*scroll_pps,"PPStream",num);
 
 	}
 

@@ -17,12 +17,14 @@ gmlive_SOURCES = \
 		 mmschannel.cpp \
 		 sopcastchannel.cpp \
 		 pplivechannel.cpp \
+		 ppschannel.cpp \
 		 recentchannel.cpp \
 		 bookmarkchannel.cpp \
 		 gmplayer.cpp \
 		 sopcastLivePlayer.cpp \
 		 pplivePlayer.cpp \
 		 mmsLivePlayer.cpp \
+		 ppsPlayer.cpp \
 		 TrayIcon.cpp
 
 noinst_HEADERS = \
@@ -37,6 +39,7 @@ noinst_HEADERS = \
 		 ChannelsTooltips.h \
 		 sopcastchannel.h \
 		 pplivechannel.h \
+		 ppschannel.h \
 		 mmschannel.h \
 		 recentchannel.h \
 		 bookmarkchannel.h \
@@ -46,6 +49,7 @@ noinst_HEADERS = \
 		 sopcastLivePlayer.h \
 		 pplivePlayer.h \
 		 mmsLivePlayer.h \
+		 ppsPlayer.h \
 		 TrayIcon.h
 
 gmlive_LDADD = @LIBS@ @PACKAGE_LIBS@

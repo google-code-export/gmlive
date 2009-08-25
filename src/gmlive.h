@@ -10,6 +10,7 @@
 #define PAGE_MPLAYER 1
 #define PPLIVESTREAM "http://127.0.0.1:1024/1.asf"
 #define SOPCASTSTREAM "http://127.0.0.1:8908/tv.asf"
+#define PPSSTREAM "/tmp/xpps.out"
 
 
 #define main_ui	    DATA_DIR"/gmlive.glade"
@@ -19,6 +20,7 @@ enum TypeChannel{
 	PPLIVE_CHANNEL,
 	MMS_CHANNEL,
 	SOPCAST_CHANNEL,
+	PPS_CHANNEL,
 	GROUP_CHANNEL,
 	NONE
 };

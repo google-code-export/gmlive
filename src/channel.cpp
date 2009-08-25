@@ -273,10 +273,12 @@ bool Channel::tooltip_timeout(GdkEventMotion * ev)
 		Glib::ustring type_;
 		if(PPLIVE_CHANNEL == type)
 			type_  = _("PPLive Stream");
-		if(SOPCAST_CHANNEL == type)
+		else if(SOPCAST_CHANNEL == type)
 			type_ = _("SopCast Stream");
 		else if(MMS_CHANNEL == type)
 			type_ = _("MMS stream");
+		else if(PPS_CHANNEL == type)
+			type_ = _("PPS stream");
 		Glib::ustring name = (*iter)[columns.name];
 		int num = (*iter)[columns.users];
 		std::stringstream ss;
