@@ -8,6 +8,7 @@
 
 #define PAGE_PICTURE 0
 #define PAGE_MPLAYER 1
+#define GMPORT 3490
 #define PPLIVESTREAM "http://127.0.0.1:1024/1.asf"
 #define SOPCASTSTREAM "http://127.0.0.1:8908/tv.asf"
 #define PPSSTREAM "/tmp/xpps.out"
