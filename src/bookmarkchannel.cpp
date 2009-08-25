@@ -103,6 +103,11 @@ void  BookMarkChannel::addLine(int num,const Glib::ustring& name,const std::stri
 		else
 			type_ = SOPCAST_CHANNEL;
 	}
+	else if("ppstream" == type)
+	{
+		type_ = PPS_CHANNEL;
+
+	}
 	else
 		type_ = NONE;
 
@@ -138,9 +143,13 @@ void BookMarkChannel::saveLine(const Glib::ustring & name,const std::string& str
 			stream = name +"\t#"+stream_+"\t#sopcast";
 			strtype = "sopcast";
 			break;
-		default:
+		case PPLIVE_CHANNEL:
 			stream = name +"\t#"+stream_+"\t#pplive";
 			strtype = "pplive";
+			break;
+		case PPS_CHANNEL:
+			stream = name +"\t#"+stream_+"\t#ppstream";
+			strtype = "ppstream";
 			break;
 	}
 	file<<stream<<std::endl;
