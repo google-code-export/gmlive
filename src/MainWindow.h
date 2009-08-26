@@ -40,6 +40,8 @@ class MainWindow : public Gtk::Window {
 		void hide_window();
 		void show_window();
 		Gtk::Menu* get_try_pop_menu() { return try_pop_menu; }
+		void watch_socket(int fd);
+		bool on_sock_io(const Glib::IOCondition&);
 
 	protected:
 		bool on_delete_event(GdkEventAny* event);
@@ -122,6 +124,8 @@ class MainWindow : public Gtk::Window {
 
 		void on_volume_change(double var);
 	private:
+		//socket 值
+		int fd_skt;
 		TrayIcon				*tray_icon;
 		BuilderXML 				ui_xml;
 		Glib::RefPtr<Gtk::UIManager>	ui_manager;

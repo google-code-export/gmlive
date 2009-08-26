@@ -1,6 +1,11 @@
-<?xml version="1.0"?>
-<gtodo>
-  <category title="Personal" place="0"/>
-  <category title="Business" place="1"/>
-  <category title="Unfiled" place="2"/>
-</gtodo>
+TODO:
+
+1.书签编辑功能
+2.定时录制的功能
+3.mms列表下载功能
+4.sopcast列表下载失败处理
+5.继续优化查找列表功能
+6.频道列表编辑，导入导出功能？
+
+
+

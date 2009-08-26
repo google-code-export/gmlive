@@ -27,6 +27,7 @@
 #include <sys/wait.h>
 #include <iostream>
 #include "MainWindow.h"
+#include "ec_throw.h"
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -35,17 +36,15 @@
 using namespace std;
 TGMConf GMConf;
 
-void singleon()
+int singleon(const std::string& url)
 {
 	int sockfd,nbytes;
 	char buf[1024];
 	struct hostent *he;
 	struct sockaddr_in srvaddr;
 
-	if((sockfd=socket(AF_INET,SOCK_STREAM,0))==-1){
-		perror("socket error");
-		exit(1);
-	}
+	EC_THROW(-1 == (sockfd=socket(AF_INET,SOCK_STREAM,0)));
+
 	bzero(&srvaddr,sizeof(srvaddr));
 	srvaddr.sin_family=AF_INET;
 	srvaddr.sin_port=htons(GMPORT);
@@ -54,16 +53,39 @@ void singleon()
 	if(bind(sockfd,(struct sockaddr*)&srvaddr,
 			sizeof(struct sockaddr))==-1){
 		printf("there has another gmlive running\n");
-		exit(1);
+		if("NONE" == url)
+			exit(0);
+		else{
+			//把网址发送给另一个gmlive再退出
+			std::cout<<"send url to "<<url<<std::endl;
+			if( 0 == connect(sockfd,(struct sockaddr*)&srvaddr,sizeof(srvaddr))){
+				write(sockfd,url.c_str(),url.size());
+				close(sockfd);
+				exit(0);
+
+			}
+			exit(1);
+		}
 	}
+	EC_THROW(-1 == listen(sockfd,128));
+	return sockfd;
 }
 
 int main(int argc, char* argv[])
 {
 	setlocale (LC_ALL, "");
 
+	std::string url;
+
+	if(2==argc){
+		url = std::string(argv[1]);
+	}
+	else{
+		url=std::string("NONE");
+
+	}
 	//保持只有一个gmlive实例
-	singleon();
+	int fd_io = singleon(url);
 
 	bindtextdomain (GETTEXT_PACKAGE, GMLIVE_LOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, NULL);
@@ -72,6 +94,7 @@ int main(int argc, char* argv[])
 	Gtk::Main kit(argc, argv);
 
 	MainWindow wnd; 
+	wnd.watch_socket(fd_io);
 	kit.run();
 
 	return 0;

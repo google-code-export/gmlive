@@ -25,6 +25,7 @@
 #include "recentchannel.h"
 #include "bookmarkchannel.h"
 #include "livePlayer.h"
+#include "ec_throw.h"
 
 #include "MainWindow.h"
 #include "ConfWindow.h"
@@ -38,6 +39,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <gtkmm/scalebutton.h>
+
+#include <stdlib.h>
+#include <errno.h>
+#include <netdb.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <sys/wait.h>
 
 using namespace std;
 
@@ -690,16 +699,6 @@ bool MainWindow::on_doubleclick_picture(GdkEventButton* ev)
 	}
 }
 
-#if 0
-Glib::ustring MainWindow::on_volume_display(double value)
-{
-	char message[128];
-	sprintf(message,"%d%%",(int)value);
-
-	return Glib::ustring(message);
-}
-#endif
-
 void MainWindow::on_conf_window_quit()
 {
 	//std::cout << "on_conf_window_quit" << std::endl;
@@ -793,7 +792,7 @@ MainWindow::MainWindow():
 	,toolbar(NULL)
 	,enable_tray(false)
 	,tray_icon(NULL)
-	//,tray_icon(*this)
+	,fd_skt(-1)
 {
 	std::list<Gtk::TargetEntry> listTargets;
 	listTargets.push_back(Gtk::TargetEntry("STRING"));
@@ -901,8 +900,6 @@ MainWindow::MainWindow():
 	init_ui_manager();
 	menubar = ui_manager->get_widget("/MenuBar");
 	toolbar = ui_manager->get_widget("/ToolBar");
-	//Gtk::Widget* menubar = ui_manager->get_widget("/MenuBar");
-	//Gtk::Widget* toolbar = ui_manager->get_widget("/ToolBar");
 	channels_pop_menu = dynamic_cast<Gtk::Menu*>(
 			ui_manager->get_widget("/PopupMenu"));
 
@@ -920,23 +917,6 @@ MainWindow::MainWindow():
 
 	//menu_tool_box->pack_start(*hbox_la,false,false);
 	hbox_la->pack_start(*toolbar,true,true);
-
-#if  0
-	tool_hbox=dynamic_cast<Gtk::HBox*>
-		(ui_xml->get_widget("controlHbox"));
-	Glib::RefPtr<Gdk::Pixbuf> icon_ = Gdk::Pixbuf::create_from_file(DATA_DIR"/volume.png");
-	Gtk::Image* volume_icon= Gtk::manage(new Gtk::Image(icon_));
-	adj_sound = Gtk::manage(new Gtk::Adjustment(60,0,100,5,0,0));
-	Gtk::HScale* hscale=Gtk::manage(new Gtk::HScale(*adj_sound));
-	tool_hbox->pack_end(*hscale,false,false);
-	tool_hbox->pack_end(*volume_icon, false,false);
-	hscale->set_size_request(120,0);
-	hscale->signal_format_value().connect(sigc::
-			mem_fun(*this,&MainWindow::on_volume_display));
-
-	adj_sound->signal_value_changed().connect(sigc::
-			mem_fun(*this,&MainWindow::on_volume_change));
-#endif
 
 	play_eventbox = Gtk::manage(new Gtk::EventBox());
 	play_eventbox->set_events(Gdk::BUTTON_PRESS_MASK);
@@ -1230,6 +1210,7 @@ void MainWindow::init()
 		GMConf["mplayer_embed"]		=	"1";
 		GMConf["enable_sopcast"] = "1";
 		GMConf["enable_pplive"]= "1";
+		GMConf["enable_pps"] ="1";
 		GMConf["mms_mplayer_cache"]     =       "8192";
 		GMConf["sopcast_mplayer_cache"] =       "64";
 		GMConf["pplive_mplayer_cache"]  =       "64";
@@ -1489,3 +1470,44 @@ bool MainWindow::on_key_press_event(GdkEventKey* ev)
 	return true;
 }
 
+void MainWindow::watch_socket(int fd)
+{
+
+	fd_skt=fd;
+	Glib::signal_io().connect(sigc::mem_fun(*this,&MainWindow::on_sock_io),
+			fd_skt, Glib::IO_IN);
+
+}
+
+bool MainWindow::on_sock_io(const Glib::IOCondition&)
+{
+	int fd_cli = -1;
+	EC_THROW(-1 == (fd_cli = accept(fd_skt, NULL, 0)));
+	char buf[1024];
+	size_t len = read(fd_cli, &buf[0], 1023);
+	buf[len]=0;
+	if (len > 0) {
+		printf("receive message %s\n",buf);
+		if((0==strncmp("tvod://",buf,7))||(0 == strncmp("pps://",buf,6))){
+			printf("play ppstream\n");
+			recent_channel->play_stream(buf,PPS_CHANNEL,"ppstream kankan");
+		}
+		else if((0==strncmp("synacast://",buf,11))){
+			printf("pplive stream\n");
+			recent_channel->play_stream(buf,PPLIVE_CHANNEL,"pplive");
+		}
+		else if((0==strncmp("sop://",buf,6))){
+			printf("sopcast stream\n");
+			recent_channel->play_stream(buf,SOPCAST_CHANNEL,"sopcast");
+		}
+		else if((0 == strncmp("mms://",buf,6))||(0 == strncmp("rtsp://",buf,7))){
+			printf("mms/rtsp stream\n");
+			recent_channel->play_stream(buf,MMS_CHANNEL,"mms stream");
+
+		}
+
+	}
+	close(fd_cli);
+	return true;
+
+}
