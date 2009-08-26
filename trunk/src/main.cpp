@@ -36,6 +36,7 @@
 using namespace std;
 TGMConf GMConf;
 
+//检测单一实例并发送网址
 int singleon(const std::string& url)
 {
 	int sockfd,nbytes;
@@ -53,7 +54,7 @@ int singleon(const std::string& url)
 	if(bind(sockfd,(struct sockaddr*)&srvaddr,
 			sizeof(struct sockaddr))==-1){
 		printf("there has another gmlive running\n");
-		if("NONE" == url)
+		if(url.empty())
 			exit(0);
 		else{
 			//把网址发送给另一个gmlive再退出
@@ -81,7 +82,7 @@ int main(int argc, char* argv[])
 		url = std::string(argv[1]);
 	}
 	else{
-		url=std::string("NONE");
+		url=std::string("");
 
 	}
 	//保持只有一个gmlive实例
@@ -95,6 +96,7 @@ int main(int argc, char* argv[])
 
 	MainWindow wnd; 
 	wnd.watch_socket(fd_io);
+		
 	kit.run();
 
 	return 0;
