@@ -229,6 +229,21 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 		rc->saveLine(name,stream,page);
 }
 
+void Channel::play_stream(const std::string& stream_url, TypeChannel stream_type,const std::string& name)
+{
+
+	LivePlayer* lp = parent->get_live_player();
+	LivePlayer* live_player = get_player(stream_url, stream_type);
+
+	parent->set_live_player(live_player, name);
+	//RecentChannel* rc =
+	//	dynamic_cast<RecentChannel*>(parent->get_recent_channel());
+	//if (this != rc)
+	//	rc->saveLine(name,stream,page);
+
+
+}
+
 void Channel::search_channel(const Glib::ustring& name_)
 {
 	search_channel_name = name_;

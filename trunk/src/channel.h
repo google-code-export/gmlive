@@ -43,6 +43,8 @@ class Channel:public Gtk::TreeView
 		void search_channel(const Glib::ustring& name);
 		virtual void refresh_list(){};
 
+		//用于打开另外发送过来的流地址
+		void play_stream(const std::string& stream_url, TypeChannel stream_type,const std::string& name="webview");
 		Gtk::TreeModel::iterator getListIter(Gtk::TreeModel::
 				Children children, const std::string& groupname);
 		
@@ -61,11 +63,11 @@ class Channel:public Gtk::TreeView
 					add(users);
 					add(searched);
 				}
-				Gtk::TreeModelColumn<Glib::ustring> name;
-				Gtk::TreeModelColumn<std::string> stream;
-				Gtk::TreeModelColumn<int> freq;
-				Gtk::TreeModelColumn<int> users;
-				Gtk::TreeModelColumn<TypeChannel> type;
+				Gtk::TreeModelColumn<Glib::ustring> name; //频道的显示名
+				Gtk::TreeModelColumn<std::string> stream; //频道的流地址
+				Gtk::TreeModelColumn<int> freq;           //频道的码率?
+				Gtk::TreeModelColumn<int> users;	  //观看频道的用户
+				Gtk::TreeModelColumn<TypeChannel> type;   //频道的类型
 				Gtk::TreeModelColumn<bool> searched;
 		};
 
