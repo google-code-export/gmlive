@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-08-23 22:05+0800\n"
-"PO-Revision-Date: 2009-04-02 22:21+0100\n"
+"PO-Revision-Date: 2009-08-27 09:21+0100\n"
 "Last-Translator: Dariusz Jakoniuk <pipaceliny@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -31,12 +31,10 @@ msgid ""
 "              GMLive try to became a universal streaming media player case.\n"
 "         it use Almighty Mplayer for its engine. the Goal is to support  a \n"
 "         variety of types of P2P broadcasting video streaming for Linux. \n"
-"         Provide a convenient and efficient network to watch video "
-"streaming \n"
+"         Provide a convenient and efficient network to watch video streaming \n"
 "         of the programme\n"
 "\n"
-"                                                                                              cyclone "
-"Team\n"
+"                                                                                              cyclone Team\n"
 "\n"
 "  "
 msgstr ""
@@ -62,9 +60,8 @@ msgid " <b>MMS</b>"
 msgstr " <b>MMS</b>"
 
 #: ../data/gmlive.glade.h:20
-#, fuzzy
 msgid " <b>PPLive</b>"
-msgstr " <b>Nslive</b>"
+msgstr " <b>PPLive</b>"
 
 #: ../data/gmlive.glade.h:21
 msgid " <b>Select the Player</b>"
@@ -79,12 +76,7 @@ msgid " Kbs"
 msgstr " Kbs"
 
 #: ../data/gmlive.glade.h:24
-msgid ""
-" You may modify and redistribute the program under the terms of the GPL "
-"(version 2 or later).  A copy of the GPL is contained in the 'COPYING' file "
-"distributed with Pidgin.  Pidgin is copyrighted by its contributors.  See "
-"the 'COPYRIGHT' file for the complete list of contributors.  We provide no "
-"warranty for this program."
+msgid " You may modify and redistribute the program under the terms of the GPL (version 2 or later).  A copy of the GPL is contained in the 'COPYING' file distributed with Pidgin.  Pidgin is copyrighted by its contributors.  See the 'COPYRIGHT' file for the complete list of contributors.  We provide no warranty for this program."
 msgstr ""
 
 #: ../data/gmlive.glade.h:25
@@ -108,14 +100,12 @@ msgid "Embed Mplayer"
 msgstr "Osadź okno mplayera"
 
 #: ../data/gmlive.glade.h:30
-#, fuzzy
 msgid "Enable PPLive"
-msgstr "Włącz Nslive"
+msgstr "Włącz PPlive"
 
 #: ../data/gmlive.glade.h:31
-#, fuzzy
 msgid "Enable PPStream"
-msgstr "Włącz ikonę w tacce systemowej"
+msgstr "Włącz strumień PPStream"
 
 #: ../data/gmlive.glade.h:32
 msgid "Enable Sopcast"
@@ -178,9 +168,8 @@ msgid "Other Player Command:"
 msgstr "Komenda alternatywnego odtwarzacza:"
 
 #: ../data/gmlive.glade.h:47
-#, fuzzy
 msgid "PPLive"
-msgstr "GMLive"
+msgstr "PPLive"
 
 #: ../data/gmlive.glade.h:48
 msgid "Sec"
@@ -263,14 +252,12 @@ msgid "mms help"
 msgstr "pomoc mms"
 
 #: ../data/gmlive.glade.h:83
-#, fuzzy
 msgid "pplive"
-msgstr "Gmlive"
+msgstr "pplive"
 
 #: ../data/gmlive.glade.h:84
-#, fuzzy
 msgid "pplive help"
-msgstr "pomoc nslive"
+msgstr "pomoc pplive"
 
 #: ../data/gmlive.glade.h:85
 msgid "recent"
@@ -308,29 +295,36 @@ msgstr "prędkość"
 msgid "user"
 msgstr "użytkownik"
 
-#: ../src/channel.cpp:159 ../src/MainWindow.cpp:380
+#: ../src/channel.cpp:159
+#: ../src/MainWindow.cpp:380
 msgid "Choose File"
 msgstr "Wybierz plik"
 
-#: ../src/channel.cpp:275 ../src/channel.cpp:355
-#, fuzzy
+#: ../src/channel.cpp:275
+#: ../src/channel.cpp:355
 msgid "PPLive Stream"
-msgstr "Strumień NSLive"
+msgstr "Strumień PPLive"
 
-#: ../src/channel.cpp:277 ../src/channel.cpp:357
+#: ../src/channel.cpp:277
+#: ../src/channel.cpp:357
 msgid "SopCast Stream"
 msgstr "Strumień SopCast"
 
-#: ../src/channel.cpp:279 ../src/channel.cpp:359
+#: ../src/channel.cpp:279
+#: ../src/channel.cpp:359
 msgid "MMS stream"
 msgstr "Strumień MMS"
 
-#: ../src/channel.cpp:289 ../src/channel.cpp:292 ../src/channel.cpp:369
+#: ../src/channel.cpp:289
+#: ../src/channel.cpp:292
+#: ../src/channel.cpp:369
 #: ../src/channel.cpp:374
 msgid "users:"
 msgstr "użytkownicy:"
 
-#: ../src/channel.cpp:290 ../src/channel.cpp:293 ../src/channel.cpp:370
+#: ../src/channel.cpp:290
+#: ../src/channel.cpp:293
+#: ../src/channel.cpp:370
 #: ../src/channel.cpp:375
 msgid "Type:"
 msgstr "Typ:"
@@ -366,14 +360,13 @@ msgid "Recording %s To %s (%u.%u Mb)"
 msgstr "Nagrywanie %s do %s (%u.%u Mb)"
 
 #: ../src/MainWindow.cpp:238
-#, fuzzy
 msgid "_HideChannels"
-msgstr "Ukryj kanały"
+msgstr "_Schowaj kanały"
 
-#: ../src/MainWindow.cpp:250 ../src/MainWindow.cpp:266
-#, fuzzy
+#: ../src/MainWindow.cpp:250
+#: ../src/MainWindow.cpp:266
 msgid "Open_URL"
-msgstr "Otwórz URL"
+msgstr "Otwórz  _URL"
 
 #. File menu:
 #: ../src/MainWindow.cpp:260
@@ -381,9 +374,8 @@ msgid "_File"
 msgstr "_Plik"
 
 #: ../src/MainWindow.cpp:262
-#, fuzzy
 msgid "_Open local file"
-msgstr "Otwórz lokalny plik"
+msgstr "_Otwórz lokalny plik"
 
 #: ../src/MainWindow.cpp:263
 msgid "Open Local File"
@@ -419,9 +411,8 @@ msgid "Show or hide channels list"
 msgstr "Pokaż lub ukryj kanały"
 
 #: ../src/MainWindow.cpp:303
-#, fuzzy
 msgid "Hide_Toolbar"
-msgstr "_Nie pokazuj Paska narzędzi"
+msgstr "_Ukryj pasek narzędzi"
 
 #: ../src/MainWindow.cpp:303
 msgid "Show or hide Toolbar"
@@ -441,7 +432,7 @@ msgstr "Pełen ekran"
 
 #: ../src/MainWindow.cpp:317
 msgid "_Embed Mplayer"
-msgstr "_Osadź okno Mplayera"
+msgstr "_Osadź okno mplayera"
 
 #: ../src/MainWindow.cpp:317
 msgid "Embed or Separate mplayer play"
@@ -450,47 +441,47 @@ msgstr "Osadź lub oddziel okno mplayera"
 #. Tool menu:
 #: ../src/MainWindow.cpp:321
 msgid "_Tool"
-msgstr ""
+msgstr "_Narzędzia"
 
 #: ../src/MainWindow.cpp:324
 msgid "Volume _increase"
-msgstr ""
+msgstr "Zw_iększ głośność"
 
 #: ../src/MainWindow.cpp:324
 msgid "Volume Increase"
-msgstr ""
+msgstr "Zwiększ głośność"
 
 #: ../src/MainWindow.cpp:328
 msgid "Volume _decrease"
-msgstr ""
+msgstr "Z_mniejsz głośność"
 
 #: ../src/MainWindow.cpp:328
 msgid "Volume Decrease"
-msgstr ""
+msgstr "Zmniejsz głośność"
 
 #: ../src/MainWindow.cpp:332
 msgid "Audio delay i_ncrease"
-msgstr ""
+msgstr "Zwiększ opóź_nienie audio"
 
 #: ../src/MainWindow.cpp:332
 msgid "AudioDelay Increase"
-msgstr ""
+msgstr "Zwiększ opóźnienie audio"
 
 #: ../src/MainWindow.cpp:336
 msgid "Audio delay d_ecrease"
-msgstr ""
+msgstr "Zmniejsz opóźni_enie audio"
 
 #: ../src/MainWindow.cpp:336
 msgid "AudioDelay Decrease"
-msgstr ""
+msgstr "Zmniejsz opóźnienie audio"
 
 #: ../src/MainWindow.cpp:341
 msgid "_Mute"
-msgstr ""
+msgstr "_Wycisz"
 
 #: ../src/MainWindow.cpp:341
 msgid "Mute"
-msgstr ""
+msgstr "Wycisz"
 
 #. Help menu:
 #: ../src/MainWindow.cpp:351
@@ -535,55 +526,35 @@ msgid "NO SUPPORT"
 msgstr "BRAK WSPARCIA"
 
 #: ../src/MainWindow.cpp:1175
-#, fuzzy
-msgid ""
-"you have not install sopcast and pplive program, so GMLive can't support "
-"them now"
-msgstr ""
-"nie zainstalowałeś programów sopcast and nslive, więc gmlive nie moze ich "
-"teraz wspierać"
+msgid "you have not install sopcast and pplive program, so GMLive can't support them now"
+msgstr "nie zainstalowałeś programów sopcast and ppllive, więc gmlive nie może ich teraz wspierać"
 
 #: ../src/MainWindow.cpp:1177
 msgid "you have not install sopcast program,so GMLive can't support it now"
-msgstr ""
-"nie zainstalowałeś programu sopcast, więc gmlive nie moze go teraz wspierać"
+msgstr "nie zainstalowałeś programu sopcast, więc gmlive nie moze go teraz wspierać"
 
 #: ../src/MainWindow.cpp:1179
-#, fuzzy
 msgid "you have not install pplive program,so GMLive can't support it now"
-msgstr ""
-"nie zainstalowałeś programu nslive, więc gmlive nie moze go teraz wspierać"
+msgstr "nie zainstalowałeś programu pplive, więc gmlive nie może go teraz wspierać"
 
 #: ../src/MainWindow.cpp:1182
 msgid " So you can install the program first"
 msgstr "Zainstaluj wpierw ten program"
 
 #: ../src/pplivechannel.cpp:227
-#, fuzzy
-msgid ""
-"open the pplive channel error,will you select a local file to instead the "
-"broken channel list?"
-msgstr ""
-"Błąd otwarcia kanału sopcast, czy chcesz wybrać lokalny plik zamiast błędnej "
-"listy kanałów?"
+msgid "open the pplive channel error,will you select a local file to instead the broken channel list?"
+msgstr "błąd otwarcia kanału pplive, czy chcesz wybrać lokalny plik zamiast błędnej listy kanałów?"
 
 #: ../src/sopcastchannel.cpp:117
-msgid ""
-"open the sopcast channel error,will you select a local file to instead the "
-"broken channel list?"
-msgstr ""
-"Błąd otwarcia kanału sopcast, czy chcesz wybrać lokalny plik zamiast błędnej "
-"listy kanałów?"
+msgid "open the sopcast channel error,will you select a local file to instead the broken channel list?"
+msgstr "Błąd otwarcia kanału sopcast, czy chcesz wybrać lokalny plik zamiast błędnej listy kanałów?"
 
 #~ msgid "Already Recorded"
 #~ msgstr "Właśnie nagrano"
-
 #~ msgid "The Record had working now, you must stop it beforce"
 #~ msgstr "Nagrywanie w trakcie, wcześniej należy je zatrzymać"
-
 #~ msgid "Stop Recording"
 #~ msgstr "Zatzrymaj nagrywanie"
-
 #~ msgid ""
 #~ "GMLive is recording,you can play channel after stop the record.\n"
 #~ " Are you really to do this?"
@@ -594,18 +565,14 @@ msgstr ""
 #, fuzzy
 #~ msgid "_OpenURL"
 #~ msgstr "Otwórz URL"
-
 #~ msgid "MUTE"
 #~ msgstr "Wyciszenie"
-
 #~ msgid "Nslive"
 #~ msgstr "Nslive"
-
 #~ msgid "nslive"
 #~ msgstr "nslive"
-
 #~ msgid "File error"
 #~ msgstr "Bład pliku"
-
 #~ msgid "the local channles list file has wrong formats"
 #~ msgstr "Lokalna lista kanałów ma zły format"
+
