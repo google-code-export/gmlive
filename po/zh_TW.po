@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-23 22:05+0800\n"
+"POT-Creation-Date: 2009-08-30 14:15+0800\n"
 "PO-Revision-Date: 2009-08-21 21:21+0800\n"
 "Last-Translator: Liu, Shuyuan <victorangus@gmail.com>\n"
 "Language-Team: Chinese/Traditional\n"
@@ -342,37 +342,42 @@ msgstr "位元率"
 msgid "user"
 msgstr "使用者"
 
-#: ../src/channel.cpp:159 ../src/MainWindow.cpp:380
+#: ../src/channel.cpp:159 ../src/MainWindow.cpp:390
 msgid "Choose File"
 msgstr "選擇檔案"
 
-#: ../src/channel.cpp:275 ../src/channel.cpp:355
+#: ../src/channel.cpp:290 ../src/channel.cpp:372
 msgid "PPLive Stream"
 msgstr "PPLive 串流"
 
-#: ../src/channel.cpp:277 ../src/channel.cpp:357
+#: ../src/channel.cpp:292 ../src/channel.cpp:374
 msgid "SopCast Stream"
 msgstr "SopCast 流"
 
-#: ../src/channel.cpp:279 ../src/channel.cpp:359
+#: ../src/channel.cpp:294 ../src/channel.cpp:376
 msgid "MMS stream"
 msgstr "MMS流"
 
-#: ../src/channel.cpp:289 ../src/channel.cpp:292 ../src/channel.cpp:369
-#: ../src/channel.cpp:374
+#: ../src/channel.cpp:296 ../src/channel.cpp:378
+#, fuzzy
+msgid "PPS stream"
+msgstr "MMS流"
+
+#: ../src/channel.cpp:306 ../src/channel.cpp:309 ../src/channel.cpp:388
+#: ../src/channel.cpp:393
 msgid "users:"
 msgstr "使用者數："
 
-#: ../src/channel.cpp:290 ../src/channel.cpp:293 ../src/channel.cpp:370
-#: ../src/channel.cpp:375
+#: ../src/channel.cpp:307 ../src/channel.cpp:310 ../src/channel.cpp:389
+#: ../src/channel.cpp:394
 msgid "Type:"
 msgstr "類型："
 
-#: ../src/channel.cpp:391
+#: ../src/channel.cpp:410
 msgid "Please select a channel list file"
 msgstr "請選擇一個頻道清單檔案"
 
-#: ../src/channel.cpp:392
+#: ../src/channel.cpp:411
 msgid "open channles error"
 msgstr "打開頻道清單錯誤"
 
@@ -398,159 +403,159 @@ msgstr "錄製 %s 至 %s (%u Kb)"
 msgid "Recording %s To %s (%u.%u Mb)"
 msgstr "錄製 %s 至 %s (%u.%u Mb)"
 
-#: ../src/MainWindow.cpp:238
+#: ../src/MainWindow.cpp:248
 msgid "_HideChannels"
 msgstr "隱藏清單(_H)"
 
-#: ../src/MainWindow.cpp:250 ../src/MainWindow.cpp:266
+#: ../src/MainWindow.cpp:260 ../src/MainWindow.cpp:276
 msgid "Open_URL"
 msgstr "打開網路串流(_U)"
 
 #. File menu:
-#: ../src/MainWindow.cpp:260
+#: ../src/MainWindow.cpp:270
 msgid "_File"
 msgstr "檔案(_F)"
 
-#: ../src/MainWindow.cpp:262
+#: ../src/MainWindow.cpp:272
 msgid "_Open local file"
 msgstr "打開本地檔案(_O)"
 
-#: ../src/MainWindow.cpp:263
+#: ../src/MainWindow.cpp:273
 msgid "Open Local File"
 msgstr "打開本地檔案"
 
-#: ../src/MainWindow.cpp:267
+#: ../src/MainWindow.cpp:277
 msgid "Open Network Stream"
 msgstr "打開網路串流"
 
-#: ../src/MainWindow.cpp:271
+#: ../src/MainWindow.cpp:281
 msgid "Play"
 msgstr "播放"
 
-#: ../src/MainWindow.cpp:276
+#: ../src/MainWindow.cpp:286
 msgid "Pause"
 msgstr "暫停"
 
-#: ../src/MainWindow.cpp:281
+#: ../src/MainWindow.cpp:291
 msgid "Record"
 msgstr "錄製"
 
-#: ../src/MainWindow.cpp:286
+#: ../src/MainWindow.cpp:296
 msgid "Stop"
 msgstr "停止"
 
 #. View menu:
-#: ../src/MainWindow.cpp:294
+#: ../src/MainWindow.cpp:304
 msgid "_View"
 msgstr "檢視(_V)"
 
-#: ../src/MainWindow.cpp:298
+#: ../src/MainWindow.cpp:308
 msgid "Show or hide channels list"
 msgstr "顯示或隱藏頻道清單"
 
-#: ../src/MainWindow.cpp:303
+#: ../src/MainWindow.cpp:313
 msgid "Hide_Toolbar"
 msgstr "隱藏工具列(_T)"
 
-#: ../src/MainWindow.cpp:303
+#: ../src/MainWindow.cpp:313
 msgid "Show or hide Toolbar"
 msgstr "顯示或隱藏工具列"
 
-#: ../src/MainWindow.cpp:308
+#: ../src/MainWindow.cpp:318
 msgid "_AlwaysOnTop"
 msgstr "置頂(_A)"
 
-#: ../src/MainWindow.cpp:308
+#: ../src/MainWindow.cpp:318
 msgid "Make GMlive ontop of other windows"
 msgstr "使GMlive的視窗置頂"
 
-#: ../src/MainWindow.cpp:312
+#: ../src/MainWindow.cpp:322
 msgid "FullScreen"
 msgstr "全螢幕"
 
-#: ../src/MainWindow.cpp:317
+#: ../src/MainWindow.cpp:327
 msgid "_Embed Mplayer"
 msgstr "嵌入播放器(_E)"
 
-#: ../src/MainWindow.cpp:317
+#: ../src/MainWindow.cpp:327
 msgid "Embed or Separate mplayer play"
 msgstr "嵌入或分離播放器"
 
 #. Tool menu:
-#: ../src/MainWindow.cpp:321
+#: ../src/MainWindow.cpp:331
 msgid "_Tool"
 msgstr "工具(_T)"
 
-#: ../src/MainWindow.cpp:324
+#: ../src/MainWindow.cpp:334
 msgid "Volume _increase"
 msgstr "音量增加(_i)"
 
-#: ../src/MainWindow.cpp:324
+#: ../src/MainWindow.cpp:334
 msgid "Volume Increase"
 msgstr "增加音量"
 
-#: ../src/MainWindow.cpp:328
+#: ../src/MainWindow.cpp:338
 msgid "Volume _decrease"
 msgstr "音量降低(_d)"
 
-#: ../src/MainWindow.cpp:328
+#: ../src/MainWindow.cpp:338
 msgid "Volume Decrease"
 msgstr "降低音量"
 
-#: ../src/MainWindow.cpp:332
+#: ../src/MainWindow.cpp:342
 msgid "Audio delay i_ncrease"
 msgstr "音頻延時前進(_N)"
 
-#: ../src/MainWindow.cpp:332
+#: ../src/MainWindow.cpp:342
 msgid "AudioDelay Increase"
 msgstr "音頻延時前進"
 
-#: ../src/MainWindow.cpp:336
+#: ../src/MainWindow.cpp:346
 msgid "Audio delay d_ecrease"
 msgstr "音頻延時後退(_E)"
 
-#: ../src/MainWindow.cpp:336
+#: ../src/MainWindow.cpp:346
 msgid "AudioDelay Decrease"
 msgstr "音頻延時後退"
 
-#: ../src/MainWindow.cpp:341
+#: ../src/MainWindow.cpp:351
 msgid "_Mute"
 msgstr "靜音(_M)"
 
-#: ../src/MainWindow.cpp:341
+#: ../src/MainWindow.cpp:351
 msgid "Mute"
 msgstr "靜音"
 
 #. Help menu:
-#: ../src/MainWindow.cpp:351
+#: ../src/MainWindow.cpp:361
 msgid "_Help"
 msgstr "說明(_H)"
 
-#: ../src/MainWindow.cpp:357
+#: ../src/MainWindow.cpp:367
 msgid "_Refresh list"
 msgstr "更新清單(_R)"
 
-#: ../src/MainWindow.cpp:357
+#: ../src/MainWindow.cpp:367
 msgid "Refresh current channel list"
 msgstr "更新目前頻道清單"
 
-#: ../src/MainWindow.cpp:360
+#: ../src/MainWindow.cpp:370
 msgid "_Add to bookmark"
 msgstr "添加到書簽(_A)"
 
-#: ../src/MainWindow.cpp:360
+#: ../src/MainWindow.cpp:370
 msgid "Bookmark this channel"
 msgstr "收藏此頻道"
 
-#: ../src/MainWindow.cpp:363
+#: ../src/MainWindow.cpp:373
 msgid "_Copy url"
 msgstr "複製串流位址(_C)"
 
-#: ../src/MainWindow.cpp:363
+#: ../src/MainWindow.cpp:373
 msgid "Copy url to clipboard"
 msgstr "複製串流位址至剪貼簿"
 
-#: ../src/MainWindow.cpp:402
+#: ../src/MainWindow.cpp:412
 msgid "Open URL"
 msgstr "打開網路串流"
 
