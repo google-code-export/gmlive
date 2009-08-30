@@ -19,7 +19,21 @@
 #ifndef  PPSCHANNEL_FILE_HEADER_INC
 #define  PPSCHANNEL_FILE_HEADER_INC
 
+#include <stdlib.h>
+#include <fstream>
+#include <iostream>
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <gtkmm.h>
+#include <gtkmm/dialog.h>
+#include <glib/gi18n.h>
+#include "pplivechannel.h"
+#include "MainWindow.h"
+#include "scope_gruard.h"
 #include "channel.h"
+
 class GMplayer;
 class PPSChannel:public Channel
 {
@@ -37,13 +51,23 @@ class PPSChannel:public Channel
 		{ return signal_start_refresh_; }	
 	protected:
 		LivePlayer* get_player(const std::string& stream,TypeChannel page);
-		void  addLine(int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
 	private:
+		void parse_channels(xmlNode* a_node);
+		bool read_channels(const char* filename);
+		void refresh_channel();
+		void refresh_film_url();
 
 		void wait_wget_exit(GPid pid, int);
+		void wait_wget_channel_exit(GPid pid, int);
+		void wait_wget_film_url_exit(GPid pid, int);
+		bool step_iterator();
+
 		type_signal_stop  signal_stop_refresh_;
 		type_signal_start signal_start_refresh_;
 
+		Gtk::TreeModel::iterator cur_refresh_iter;
+		Gtk::TreeModel::iterator cur_refresh_iter2;
+		int cur_refresh_page;
 		int wget_pid;
 		bool refresh;
 

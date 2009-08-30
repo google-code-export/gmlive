@@ -52,4 +52,4 @@ noinst_HEADERS = \
 		 ppsPlayer.h \
 		 TrayIcon.h
 
-gmlive_LDADD = @LIBS@ @PACKAGE_LIBS@
+gmlive_LDADD = @LIBS@ @PACKAGE_LIBS@ 
