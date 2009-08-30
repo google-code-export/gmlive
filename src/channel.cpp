@@ -374,6 +374,8 @@ bool Channel::on_tooltip_show(int x, int y, bool key_mode, const Glib::RefPtr<Gt
 			type_ = _("SopCast Stream");
 		else if(MMS_CHANNEL == type)
 			type_ = _("MMS stream");
+		else if(PPS_CHANNEL == type)
+			type_ = _("PPS stream");
 		Glib::ustring name = (*iter)[columns.name];
 		int num = (*iter)[columns.users];
 		std::stringstream ss;

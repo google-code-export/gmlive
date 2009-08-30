@@ -11,7 +11,7 @@
 #define GMPORT 20124
 #define PPLIVESTREAM "http://127.0.0.1:1024/1.asf"
 #define SOPCASTSTREAM "http://127.0.0.1:8908/tv.asf"
-#define PPSSTREAM "/tmp/xpps.out"
+#define PPSSTREAM "http://127.0.0.1:8098"
 
 
 #define main_ui	    DATA_DIR"/gmlive.glade"
