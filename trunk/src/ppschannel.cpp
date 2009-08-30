@@ -154,10 +154,12 @@ void PPSChannel::refresh_film_url()
 		char buf2[512];
 		int classid = (*cur_refresh_iter)[columns.pps_id];
 		int subclassid = (*cur_refresh_iter2)[columns.pps_id];
+		std::cout << (*cur_refresh_iter)[columns.name] << '\t' << (*cur_refresh_iter2)[columns.name] << std::endl;
 		if ((*cur_refresh_iter)[columns.pps_type] == 1)
 			snprintf(buf2, 512, "http://playlist.pps.tv/channelsfortv.php?class=%d&page=%d", classid, cur_refresh_page);
 		else
 			snprintf(buf2, 512, "http://playlist.pps.tv/channelsfortv.php?class=%d&subclass=%d&page=%d", classid, subclassid, cur_refresh_page);
+		std::cout << buf2 << std::endl;
 
 		const char* argv[6];
 		argv[0] = "wget";
@@ -198,15 +200,24 @@ void PPSChannel::wait_wget_channel_exit(GPid pid, int)
 			Gtk::TreeModel::iterator iter = m_liststore->append(cur_refresh_iter->children());
 
 			xmlNode* cur_node = a_node->children;
-			cur_node = cur_node->next;
 
+			std::cout << cur_node->name << std::endl;
 			xmlChar* p =  xmlNodeListGetString(cur_node->doc, cur_node->xmlChildrenNode, 1);
 			(*iter)[columns.pps_id] = atoi((const char*)p);
 			xmlFree(p);
 
+			cur_node = cur_node->next;
 			p =  xmlNodeListGetString(cur_node->doc, cur_node->xmlChildrenNode, 1);
 			(*iter)[columns.name] = (const char*)p;
 			xmlFree(p);
+			for (cur_node = cur_node->next; cur_node; cur_node = cur_node->next)  {
+				if (xmlStrcmp(cur_node->name, (const xmlChar*)"ContentNum") == 0) {
+					p =  xmlNodeListGetString(cur_node->doc, cur_node->xmlChildrenNode, 1);
+					(*iter)[columns.pps_num] = atoi((const char*)p);
+					(*iter)[columns.users] = atoi((const char*)p);
+					xmlFree(p);
+				}
+			}
 		}
 
 	}
@@ -298,6 +309,7 @@ void PPSChannel::parse_channels(xmlNode* a_node)
 			cur_node = cur_node->next;
 			p =  xmlNodeListGetString(cur_node->doc, cur_node->xmlChildrenNode, 1);
 			(*iter)[columns.pps_type] = atoi((const char*)p);
+			(*iter)[columns.freq] = atoi((const char*)p);
 			xmlFree(p);
 
 			// ContentNum
@@ -305,6 +317,7 @@ void PPSChannel::parse_channels(xmlNode* a_node)
 			cur_node = cur_node->next;
 			p =  xmlNodeListGetString(cur_node->doc, cur_node->xmlChildrenNode, 1);
 			(*iter)[columns.pps_num] = atoi((const char*)p);
+			(*iter)[columns.users] = atoi((const char*)p);
 			xmlFree(p);
 			(*iter)[columns.type]= GROUP_CHANNEL;
 
