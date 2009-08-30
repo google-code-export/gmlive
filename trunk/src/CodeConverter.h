@@ -44,27 +44,27 @@ class CodeConverter {
 
 	// 转换输出
 	string convert(const string& inbuf) {
-	    return convert(inbuf.c_str(), inbuf.size());
+		return convert(inbuf.c_str(), inbuf.size());
 	}
 
 	string convert(const char* inbuf, size_t inlen) {
-	    size_t outlen = inlen * 3;
-	    char *pin = (char*)inbuf;
-	    char outbuf[outlen];
+		size_t outlen = inlen * 3;
+		char *pin = (char*)inbuf;
+		char outbuf[outlen];
 
-	    char *pout = &outbuf[0];
-	    //bzero(pout, outbuf);
-	    size_t oldoutlen = outlen;
+		char *pout = &outbuf[0];
+		//bzero(pout, outbuf);
+		size_t oldoutlen = outlen;
 
-	    if(-1 == iconv(cd,&pin,(size_t *)&inlen
-			, &pout,(size_t *)&outlen) ) {
-		    //perror("iconv:");
-		return string();
-	    } else {
-		outlen = oldoutlen - outlen;
-		outbuf[outlen] = '\0';
-		return string(outbuf, outbuf + outlen);
-	    }
+		if(-1 == iconv(cd,&pin,(size_t *)&inlen
+					, &pout,(size_t *)&outlen) ) {
+			//perror("iconv:");
+			return string();
+		} else {
+			outlen = oldoutlen - outlen;
+			outbuf[outlen] = '\0';
+			return string(outbuf, outbuf + outlen);
+		}
 	}
 
 };

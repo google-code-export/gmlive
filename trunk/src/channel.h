@@ -62,6 +62,9 @@ class Channel:public Gtk::TreeView
 					add(type);
 					add(users);
 					add(searched);
+					add(pps_id);
+					add(pps_type);
+					add(pps_num);
 				}
 				Gtk::TreeModelColumn<Glib::ustring> name; //频道的显示名
 				Gtk::TreeModelColumn<std::string> stream; //频道的流地址
@@ -69,6 +72,9 @@ class Channel:public Gtk::TreeView
 				Gtk::TreeModelColumn<int> users;	  //观看频道的用户
 				Gtk::TreeModelColumn<TypeChannel> type;   //频道的类型
 				Gtk::TreeModelColumn<bool> searched;
+				Gtk::TreeModelColumn<int> pps_id;
+				Gtk::TreeModelColumn<int> pps_type;
+				Gtk::TreeModelColumn<int> pps_num;
 		};
 
 		ChannelColumns columns;
