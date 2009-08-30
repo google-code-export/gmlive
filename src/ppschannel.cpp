@@ -79,16 +79,32 @@ void PPSChannel::wait_wget_film_url_exit(GPid pid, int)
 			cur_node = cur_node->next;
 			xmlChar* p =  xmlNodeListGetString(cur_node->doc, cur_node->xmlChildrenNode, 1);
 			(*iter)[columns.name] = (const char*)p;
-			std::cout << p << std::endl;
 			xmlFree(p);
 
-			//p =  xmlNodeListGetString(cur_node->doc, cur_node->xmlChildrenNode, 1);
-			//(*iter)[columns.name] = (const char*)p;
-			//xmlFree(p);
-		}
+			(*iter)[columns.type] = PPS_CHANNEL;
 
+			for (; cur_node; cur_node = cur_node->next) {
+				if (xmlStrcmp(cur_node->name, (const xmlChar*)"Down") == 0) {
+					for (xmlNode* x_node = cur_node->children; x_node; x_node = x_node->next) {
+						if (xmlStrcmp(x_node->name, (const xmlChar*)"Url") == 0) {
+							for (xmlNode* y_node = x_node->children; y_node; y_node = y_node->next) {
+								if (xmlStrcmp(y_node->name, (const xmlChar*)"DUrl") == 0) {
+									xmlChar* p =  xmlNodeListGetString(y_node->doc, y_node->xmlChildrenNode, 1);
+									(*iter)[columns.stream] = (const char*)p;
+									//std::cout << p << std::endl;
+									xmlFree(p);
+									goto exit_url_get;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+exit_url_get:
+		NULL;
 	}
-	
+
 	if ((*cur_refresh_iter2)[columns.pps_num] > cur_refresh_iter2->children().size())
 		cur_refresh_page++;
 	else {
@@ -154,12 +170,10 @@ void PPSChannel::refresh_film_url()
 		char buf2[512];
 		int classid = (*cur_refresh_iter)[columns.pps_id];
 		int subclassid = (*cur_refresh_iter2)[columns.pps_id];
-		std::cout << (*cur_refresh_iter)[columns.name] << '\t' << (*cur_refresh_iter2)[columns.name] << std::endl;
 		if ((*cur_refresh_iter)[columns.pps_type] == 1)
 			snprintf(buf2, 512, "http://playlist.pps.tv/channelsfortv.php?class=%d&page=%d", classid, cur_refresh_page);
 		else
 			snprintf(buf2, 512, "http://playlist.pps.tv/channelsfortv.php?class=%d&subclass=%d&page=%d", classid, subclassid, cur_refresh_page);
-		std::cout << buf2 << std::endl;
 
 		const char* argv[6];
 		argv[0] = "wget";
@@ -201,7 +215,6 @@ void PPSChannel::wait_wget_channel_exit(GPid pid, int)
 
 			xmlNode* cur_node = a_node->children;
 
-			std::cout << cur_node->name << std::endl;
 			xmlChar* p =  xmlNodeListGetString(cur_node->doc, cur_node->xmlChildrenNode, 1);
 			(*iter)[columns.pps_id] = atoi((const char*)p);
 			xmlFree(p);
@@ -214,10 +227,10 @@ void PPSChannel::wait_wget_channel_exit(GPid pid, int)
 				if (xmlStrcmp(cur_node->name, (const xmlChar*)"ContentNum") == 0) {
 					p =  xmlNodeListGetString(cur_node->doc, cur_node->xmlChildrenNode, 1);
 					(*iter)[columns.pps_num] = atoi((const char*)p);
-					(*iter)[columns.users] = atoi((const char*)p);
 					xmlFree(p);
 				}
 			}
+			(*iter)[columns.type]= GROUP_CHANNEL;
 		}
 
 	}
@@ -309,7 +322,6 @@ void PPSChannel::parse_channels(xmlNode* a_node)
 			cur_node = cur_node->next;
 			p =  xmlNodeListGetString(cur_node->doc, cur_node->xmlChildrenNode, 1);
 			(*iter)[columns.pps_type] = atoi((const char*)p);
-			(*iter)[columns.freq] = atoi((const char*)p);
 			xmlFree(p);
 
 			// ContentNum
@@ -317,7 +329,6 @@ void PPSChannel::parse_channels(xmlNode* a_node)
 			cur_node = cur_node->next;
 			p =  xmlNodeListGetString(cur_node->doc, cur_node->xmlChildrenNode, 1);
 			(*iter)[columns.pps_num] = atoi((const char*)p);
-			(*iter)[columns.users] = atoi((const char*)p);
 			xmlFree(p);
 			(*iter)[columns.type]= GROUP_CHANNEL;
 
