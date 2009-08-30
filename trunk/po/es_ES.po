@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es_ES\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-23 22:05+0800\n"
+"POT-Creation-Date: 2009-08-30 14:15+0800\n"
 "PO-Revision-Date: 2008-12-14 22:30+0000\n"
 "Last-Translator: \n"
 "Language-Team:  <es@li.org>\n"
@@ -310,38 +310,43 @@ msgstr "bitrate"
 msgid "user"
 msgstr "usuarios"
 
-#: ../src/channel.cpp:159 ../src/MainWindow.cpp:380
+#: ../src/channel.cpp:159 ../src/MainWindow.cpp:390
 msgid "Choose File"
 msgstr "Elige archivo"
 
-#: ../src/channel.cpp:275 ../src/channel.cpp:355
+#: ../src/channel.cpp:290 ../src/channel.cpp:372
 #, fuzzy
 msgid "PPLive Stream"
 msgstr "NSlive Stream"
 
-#: ../src/channel.cpp:277 ../src/channel.cpp:357
+#: ../src/channel.cpp:292 ../src/channel.cpp:374
 msgid "SopCast Stream"
 msgstr "Sopcast stream"
 
-#: ../src/channel.cpp:279 ../src/channel.cpp:359
+#: ../src/channel.cpp:294 ../src/channel.cpp:376
 msgid "MMS stream"
 msgstr "MMS stream "
 
-#: ../src/channel.cpp:289 ../src/channel.cpp:292 ../src/channel.cpp:369
-#: ../src/channel.cpp:374
+#: ../src/channel.cpp:296 ../src/channel.cpp:378
+#, fuzzy
+msgid "PPS stream"
+msgstr "MMS stream "
+
+#: ../src/channel.cpp:306 ../src/channel.cpp:309 ../src/channel.cpp:388
+#: ../src/channel.cpp:393
 msgid "users:"
 msgstr "usuarios:"
 
-#: ../src/channel.cpp:290 ../src/channel.cpp:293 ../src/channel.cpp:370
-#: ../src/channel.cpp:375
+#: ../src/channel.cpp:307 ../src/channel.cpp:310 ../src/channel.cpp:389
+#: ../src/channel.cpp:394
 msgid "Type:"
 msgstr "Tipo:"
 
-#: ../src/channel.cpp:391
+#: ../src/channel.cpp:410
 msgid "Please select a channel list file"
 msgstr ""
 
-#: ../src/channel.cpp:392
+#: ../src/channel.cpp:411
 msgid "open channles error"
 msgstr ""
 
@@ -367,163 +372,163 @@ msgstr "Grabando de %s a %s (%u Kb)"
 msgid "Recording %s To %s (%u.%u Mb)"
 msgstr "Grabando de %s a %s (%u.%u Mb)"
 
-#: ../src/MainWindow.cpp:238
+#: ../src/MainWindow.cpp:248
 #, fuzzy
 msgid "_HideChannels"
 msgstr "Ocultar canales"
 
-#: ../src/MainWindow.cpp:250 ../src/MainWindow.cpp:266
+#: ../src/MainWindow.cpp:260 ../src/MainWindow.cpp:276
 msgid "Open_URL"
 msgstr ""
 
 #. File menu:
-#: ../src/MainWindow.cpp:260
+#: ../src/MainWindow.cpp:270
 msgid "_File"
 msgstr "Archivo"
 
-#: ../src/MainWindow.cpp:262
+#: ../src/MainWindow.cpp:272
 #, fuzzy
 msgid "_Open local file"
 msgstr "Abrir archivo local"
 
-#: ../src/MainWindow.cpp:263
+#: ../src/MainWindow.cpp:273
 msgid "Open Local File"
 msgstr "Abrir archivo local"
 
-#: ../src/MainWindow.cpp:267
+#: ../src/MainWindow.cpp:277
 msgid "Open Network Stream"
 msgstr ""
 
-#: ../src/MainWindow.cpp:271
+#: ../src/MainWindow.cpp:281
 msgid "Play"
 msgstr "Reproducir"
 
-#: ../src/MainWindow.cpp:276
+#: ../src/MainWindow.cpp:286
 msgid "Pause"
 msgstr "Pausa"
 
-#: ../src/MainWindow.cpp:281
+#: ../src/MainWindow.cpp:291
 msgid "Record"
 msgstr "Grabar"
 
-#: ../src/MainWindow.cpp:286
+#: ../src/MainWindow.cpp:296
 msgid "Stop"
 msgstr "Parar"
 
 #. View menu:
-#: ../src/MainWindow.cpp:294
+#: ../src/MainWindow.cpp:304
 msgid "_View"
 msgstr "Ver"
 
-#: ../src/MainWindow.cpp:298
+#: ../src/MainWindow.cpp:308
 msgid "Show or hide channels list"
 msgstr "Mostrar/Esconder lista de canales"
 
-#: ../src/MainWindow.cpp:303
+#: ../src/MainWindow.cpp:313
 #, fuzzy
 msgid "Hide_Toolbar"
 msgstr "Mostrar/Esconder lista de canales"
 
-#: ../src/MainWindow.cpp:303
+#: ../src/MainWindow.cpp:313
 #, fuzzy
 msgid "Show or hide Toolbar"
 msgstr "Mostrar/Esconder lista de canales"
 
-#: ../src/MainWindow.cpp:308
+#: ../src/MainWindow.cpp:318
 msgid "_AlwaysOnTop"
 msgstr ""
 
-#: ../src/MainWindow.cpp:308
+#: ../src/MainWindow.cpp:318
 msgid "Make GMlive ontop of other windows"
 msgstr ""
 
-#: ../src/MainWindow.cpp:312
+#: ../src/MainWindow.cpp:322
 msgid "FullScreen"
 msgstr ""
 
-#: ../src/MainWindow.cpp:317
+#: ../src/MainWindow.cpp:327
 msgid "_Embed Mplayer"
 msgstr "Mplayer embebido"
 
-#: ../src/MainWindow.cpp:317
+#: ../src/MainWindow.cpp:327
 msgid "Embed or Separate mplayer play"
 msgstr "Reproductor mplayer embebido o separado"
 
 #. Tool menu:
-#: ../src/MainWindow.cpp:321
+#: ../src/MainWindow.cpp:331
 msgid "_Tool"
 msgstr ""
 
-#: ../src/MainWindow.cpp:324
+#: ../src/MainWindow.cpp:334
 msgid "Volume _increase"
 msgstr ""
 
-#: ../src/MainWindow.cpp:324
+#: ../src/MainWindow.cpp:334
 msgid "Volume Increase"
 msgstr ""
 
-#: ../src/MainWindow.cpp:328
+#: ../src/MainWindow.cpp:338
 msgid "Volume _decrease"
 msgstr ""
 
-#: ../src/MainWindow.cpp:328
+#: ../src/MainWindow.cpp:338
 msgid "Volume Decrease"
 msgstr ""
 
-#: ../src/MainWindow.cpp:332
+#: ../src/MainWindow.cpp:342
 msgid "Audio delay i_ncrease"
 msgstr ""
 
-#: ../src/MainWindow.cpp:332
+#: ../src/MainWindow.cpp:342
 msgid "AudioDelay Increase"
 msgstr ""
 
-#: ../src/MainWindow.cpp:336
+#: ../src/MainWindow.cpp:346
 msgid "Audio delay d_ecrease"
 msgstr ""
 
-#: ../src/MainWindow.cpp:336
+#: ../src/MainWindow.cpp:346
 msgid "AudioDelay Decrease"
 msgstr ""
 
-#: ../src/MainWindow.cpp:341
+#: ../src/MainWindow.cpp:351
 msgid "_Mute"
 msgstr ""
 
-#: ../src/MainWindow.cpp:341
+#: ../src/MainWindow.cpp:351
 msgid "Mute"
 msgstr ""
 
 #. Help menu:
-#: ../src/MainWindow.cpp:351
+#: ../src/MainWindow.cpp:361
 msgid "_Help"
 msgstr "Ayuda"
 
-#: ../src/MainWindow.cpp:357
+#: ../src/MainWindow.cpp:367
 msgid "_Refresh list"
 msgstr "Actualiza lista"
 
-#: ../src/MainWindow.cpp:357
+#: ../src/MainWindow.cpp:367
 msgid "Refresh current channel list"
 msgstr "Actualiza lista de canales actuales"
 
-#: ../src/MainWindow.cpp:360
+#: ../src/MainWindow.cpp:370
 msgid "_Add to bookmark"
 msgstr "Añade a favoritos"
 
-#: ../src/MainWindow.cpp:360
+#: ../src/MainWindow.cpp:370
 msgid "Bookmark this channel"
 msgstr "Añade este canal a los favoritos"
 
-#: ../src/MainWindow.cpp:363
+#: ../src/MainWindow.cpp:373
 msgid "_Copy url"
 msgstr "Copia url"
 
-#: ../src/MainWindow.cpp:363
+#: ../src/MainWindow.cpp:373
 msgid "Copy url to clipboard"
 msgstr "Copia enlace al portapapeles"
 
-#: ../src/MainWindow.cpp:402
+#: ../src/MainWindow.cpp:412
 msgid "Open URL"
 msgstr ""
 
