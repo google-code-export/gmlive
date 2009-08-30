@@ -73,7 +73,7 @@ class Channel:public Gtk::TreeView
 				Gtk::TreeModelColumn<TypeChannel> type;   //频道的类型
 				Gtk::TreeModelColumn<bool> searched;
 				Gtk::TreeModelColumn<int> pps_id;
-				Gtk::TreeModelColumn<int> pps_type;
+				Gtk::TreeModelColumn<int> pps_type;  //pps 的类型,1,下一级是频道的列表，0，还有次一级目录
 				Gtk::TreeModelColumn<int> pps_num;
 		};
 
