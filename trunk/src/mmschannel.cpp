@@ -42,8 +42,8 @@ LivePlayer* MMSChannel::get_player(const std::string& stream,TypeChannel page)
 bool MMSChannel::init()
 {
 	char buf[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/mms.lst",homedir);
+	std::string homedir=Glib::get_user_config_dir();
+	snprintf(buf, 512,"%s/gmlive/mms.lst",homedir.c_str());
 	std::ifstream file(buf);
 	if(!file){
 		snprintf(buf,512,"%s/mms.lst",DATA_DIR);
@@ -104,9 +104,9 @@ void MMSChannel::wait_wget_exit(GPid pid, int)
 
 	char buf[512];
 	char buf2[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/mms.lst.tmp",homedir);
-	snprintf(buf2, 512,"%s/.gmlive/mms.lst",homedir);
+	std::string homedir=Glib::get_user_config_dir();
+	snprintf(buf, 512,"%s/gmlive/mms.lst.tmp",homedir.c_str());
+	snprintf(buf2, 512,"%s/gmlive/mms.lst",homedir.c_str());
 
 	if (rename(buf, buf2))
 		return;
@@ -131,8 +131,8 @@ void MMSChannel::refresh_list()
 		//close(STDOUT_FILENO);
 		//close(STDERR_FILENO);
 		char buf[512];
-		char* homedir = getenv("HOME");
-		snprintf(buf, 512,"%s/.gmlive/mms.lst.tmp",homedir);
+		std::string homedir=Glib::get_user_config_dir();
+		snprintf(buf, 512,"%s/gmlive/mms.lst.tmp",homedir.c_str());
 
 		const char* argv[6];
 		argv[0] = "wget";

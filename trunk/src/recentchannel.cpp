@@ -51,8 +51,8 @@ LivePlayer* RecentChannel::get_player( const std::string& stream,TypeChannel pag
 void RecentChannel::init()
 {
 	char buf[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/recent.lst",homedir);
+	std::string homedir=Glib::get_user_config_dir();
+	snprintf(buf, 512,"%s/gmlive/recent.lst",homedir.c_str());
 	std::ifstream file(buf);
 	if(!file){
 		std::ofstream out(buf);
@@ -130,8 +130,8 @@ void RecentChannel::saveLine(const Glib::ustring & name,const std::string& strea
 {
 
 	char buf[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/recent.lst",homedir);
+	std::string homedir=Glib::get_user_config_dir();
+	snprintf(buf, 512,"%s/gmlive/recent.lst",homedir.c_str());
 	std::ifstream file(buf);
 	std::vector<std::string> list;
 	if(!file){

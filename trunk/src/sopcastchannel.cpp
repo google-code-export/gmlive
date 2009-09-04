@@ -106,10 +106,10 @@ void SopcastChannel::wait_wget_exit(GPid pid, int)
 	}
 	
 	char buf[512];
+	std::string homedir=Glib::get_user_config_dir();
 	char buf2[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/sopcast.lst.tmp",homedir);
-	snprintf(buf2, 512,"%s/.gmlive/sopcast.lst",homedir);
+	snprintf(buf, 512,"%s/gmlive/sopcast.lst.tmp",homedir.c_str());
+	snprintf(buf2, 512,"%s/gmlive/sopcast.lst",homedir.c_str());
 
 	rename(buf, buf2);
 	while (!init()) {
@@ -141,8 +141,8 @@ void SopcastChannel::refresh_list()
 		//close(STDOUT_FILENO);
 		//close(STDERR_FILENO);
 		char buf[512];
-		char* homedir = getenv("HOME");
-		snprintf(buf, 512,"%s/.gmlive/sopcast.lst.tmp",homedir);
+		std::string homedir=Glib::get_user_config_dir();
+		snprintf(buf, 512,"%s/gmlive/sopcast.lst.tmp",homedir.c_str());
 
 		const char* argv[6];
        		argv[0] = "wget";
@@ -197,8 +197,8 @@ void SopcastChannel::parse_channels(xmlNode* a_node)
 bool SopcastChannel::init()
 {
 	char buf[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/sopcast.lst",homedir);
+	std::string homedir=Glib::get_user_config_dir();
+	snprintf(buf, 512,"%s/gmlive/sopcast.lst",homedir.c_str());
 	//
 	//如果读取默认列表正确则退出
 	return read_channels(buf);

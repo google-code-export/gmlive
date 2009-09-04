@@ -45,8 +45,8 @@ LivePlayer* BookMarkChannel::get_player(const std::string& stream,TypeChannel pa
 void BookMarkChannel::init()
 {
 	char buf[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/bookmark.lst",homedir);
+	std::string homedir=Glib::get_user_config_dir();
+	snprintf(buf, 512,"%s/gmlive/bookmark.lst",homedir.c_str());
 	std::ifstream file(buf);
 	if(!file){
 		//printf("buf is %s\n",buf);
@@ -122,8 +122,14 @@ void BookMarkChannel::saveLine(const Glib::ustring & name,const std::string& str
 {
 
 	char buf[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/bookmark.lst",homedir);
+	//char* homedir = getenv("HOME");
+	char homedir[512] ;//= getenv("HOME");
+	if( getenv("XDG_CONFIG_HOME") != NULL ) 
+		//homedir = getenv("XDG_CONFIG_HOME");
+		snprintf(homedir,512,"%s",getenv("XDG_CONFIG_HOME"));
+	else 
+		snprintf(homedir, 512, "%s/.config/", getenv("HOME"));
+	snprintf(buf, 512,"%s/gmlive/bookmark.lst",homedir);
 	std::ofstream file(buf,std::fstream::app);
 	if(!file){
 		printf("buf is %s\n",buf);
