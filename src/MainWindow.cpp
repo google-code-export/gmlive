@@ -1198,12 +1198,12 @@ void MainWindow::check_support()
 void MainWindow::init()
 {
 	char buf[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/config",homedir);
+	std::string homedir=Glib::get_user_config_dir();
+	snprintf(buf, 512,"%s/gmlive/config",homedir.c_str());
 	std::ifstream file(buf);
 	if(!file){
 		char homepath[512];
-		snprintf(homepath,512,"%s/.gmlive/",homedir);
+		snprintf(homepath,512,"%s/gmlive/",homedir.c_str());
 		mkdir(homepath,S_IRUSR|S_IWUSR|S_IXUSR);
 		GMConf["player_type"]="0"; //0--mplayer, 1--other player
 		GMConf["other_player_cmd"]="";
@@ -1287,8 +1287,8 @@ void MainWindow::save_conf()
 	//GMConf["check_refresh_sopcast_channels"] = refresh_sopcast_channels?"1":"0";
 
 	char buf[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/config",homedir);
+	std::string homedir=Glib::get_user_config_dir();
+	snprintf(buf, 512,"%s/gmlive/config",homedir.c_str());
 	std::ofstream file(buf);
 	std::string line;
 	std::map<std::string,std::string>::iterator iter=GMConf.begin();

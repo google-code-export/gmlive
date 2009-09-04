@@ -142,7 +142,8 @@ bool PpliveChannel::read_channels(const char* filename)
 bool PpliveChannel::init()
 {
 	char buf[512];
-	snprintf(buf, 512, "%s/.gmlive/pplive.lst", getenv("HOME") );
+	std::string homedir=Glib::get_user_config_dir();
+	snprintf(buf, 512, "%s/gmlive/pplive.lst", homedir.c_str());
 
 	return read_channels(buf);
 }
@@ -169,8 +170,8 @@ void PpliveChannel::start_wget(const char* url)
 		//close(STDOUT_FILENO);
 		//close(STDERR_FILENO);
 		char buf[512];
-		char* homedir = getenv("HOME");
-		snprintf(buf, 512,"%s/.gmlive/pplive.lst.tmp",homedir);
+		std::string homedir=Glib::get_user_config_dir();
+		snprintf(buf, 512,"%s/gmlive/pplive.lst.tmp",homedir.c_str());
 
 		const char* argv[6];
 		argv[0] = "wget";
@@ -217,9 +218,9 @@ void PpliveChannel::wait_wget_exit(GPid pid, int)
 
 	char buf[512];
 	char buf2[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/pplive.lst.tmp",homedir);
-	snprintf(buf2, 512,"%s/.gmlive/pplive.lst",homedir);
+	std::string homedir=Glib::get_user_config_dir();
+	snprintf(buf, 512,"%s/gmlive/pplive.lst.tmp",homedir.c_str());
+	snprintf(buf2, 512,"%s/gmlive/pplive.lst",homedir.c_str());
 
 	rename(buf, buf2);
 	while (!init()) {

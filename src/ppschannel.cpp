@@ -43,8 +43,8 @@ LivePlayer* PPSChannel::get_player(const std::string& stream,TypeChannel page)
 bool PPSChannel::init()
 {
 	char buf[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/pps.lst",homedir);
+	std::string homedir=Glib::get_user_config_dir();
+	snprintf(buf, 512,"%s/gmlive/pps.lst",homedir.c_str());
 
 	m_liststore->clear(); //先清空列表
 	read_channels(buf);
@@ -57,8 +57,8 @@ bool PPSChannel::init()
 void PPSChannel::wait_wget_film_url_exit(GPid pid, int)
 {
 	char buf[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/pps_url.lst",homedir);
+	std::string homedir=Glib::get_user_config_dir();
+	snprintf(buf, 512,"%s/gmlive/pps_url.lst",homedir.c_str());
 
 	xmlDoc* doc = xmlReadFile(buf, NULL, 0);
 	xmlNode* root_element = xmlDocGetRootElement(doc);
@@ -164,8 +164,8 @@ void PPSChannel::refresh_film_url()
 		//close(STDOUT_FILENO);
 		//close(STDERR_FILENO);
 		char buf[512];
-		char* homedir = getenv("HOME");
-		snprintf(buf, 512,"%s/.gmlive/pps_url.lst",homedir);
+		std::string homedir=Glib::get_user_config_dir();
+		snprintf(buf, 512,"%s/gmlive/pps_url.lst",homedir.c_str());
 
 		char buf2[512];
 		int classid = (*cur_refresh_iter)[columns.pps_id];
@@ -195,8 +195,8 @@ void PPSChannel::refresh_film_url()
 void PPSChannel::wait_wget_channel_exit(GPid pid, int)
 {
 	char buf[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/pps_channel.lst",homedir);
+	std::string homedir=Glib::get_user_config_dir();
+	snprintf(buf, 512,"%s/gmlive/pps_channel.lst",homedir.c_str());
 
 	xmlDoc* doc = xmlReadFile(buf, NULL, 0);
 	xmlNode* root_element = xmlDocGetRootElement(doc);
@@ -267,8 +267,8 @@ void PPSChannel::refresh_channel()
 		//close(STDOUT_FILENO);
 		//close(STDERR_FILENO);
 		char buf[512];
-		char* homedir = getenv("HOME");
-		snprintf(buf, 512,"%s/.gmlive/pps_channel.lst",homedir);
+		std::string homedir=Glib::get_user_config_dir();
+		snprintf(buf, 512,"%s/gmlive/pps_channel.lst",homedir.c_str());
 
 		char buf2[512];
 		int id = (*cur_refresh_iter)[columns.pps_id];
@@ -372,9 +372,9 @@ void PPSChannel::wait_wget_exit(GPid pid, int)
 
 	char buf[512];
 	char buf2[512];
-	char* homedir = getenv("HOME");
-	snprintf(buf, 512,"%s/.gmlive/pps.lst.tmp",homedir);
-	snprintf(buf2, 512,"%s/.gmlive/pps.lst",homedir);
+	std::string homedir=Glib::get_user_config_dir();
+	snprintf(buf, 512,"%s/gmlive/pps.lst.tmp",homedir.c_str());
+	snprintf(buf2, 512,"%s/gmlive/pps.lst",homedir.c_str());
 
 	if (rename(buf, buf2))
 		return;
@@ -398,8 +398,8 @@ void PPSChannel::refresh_list()
 		//close(STDOUT_FILENO);
 		//close(STDERR_FILENO);
 		char buf[512];
-		char* homedir = getenv("HOME");
-		snprintf(buf, 512,"%s/.gmlive/pps.lst.tmp",homedir);
+		std::string homedir=Glib::get_user_config_dir();
+		snprintf(buf, 512,"%s/gmlive/pps.lst.tmp",homedir.c_str());
 
 		const char* argv[6];
 		argv[0] = "wget";
