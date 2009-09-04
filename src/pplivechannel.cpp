@@ -117,7 +117,7 @@ bool PpliveChannel::read_channels(const char* filename)
 	xmlDoc* doc = xmlReadFile(filename, NULL, 0); 
 	if (!doc) {
 		char command[1024];
-		snprintf(command, 1024, "iconv -f gbk -t utf8 %s | sed 's/encoding=\"gb2312\"/encoding=\"utf-8\"/' > /tmp/gmlive.xml.encode", filename);
+		snprintf(command, 1024, "iconv -f gb18030 -t utf8 %s | sed 's/encoding=\"gb2312\"/encoding=\"utf-8\"/' > /tmp/gmlive.xml.encode", filename);
 		printf("%s\n", command);
 		system(command);
 		doc= xmlReadFile("/tmp/gmlive.xml.encode", NULL, 0);
