@@ -102,18 +102,49 @@ void PPSPlayer::start(GMplayer& gmp)
 
 }
 
+int connect_to_server(const char *host, int portnum);
 bool PPSPlayer::on_sop_time_status()
 {
-	//std::string& cache = GMConf["pps_mplayer_cache"];
-	//int icache = atoi(cache.c_str());
-	//icache = icache > 64 ? icache : 64;
-	int icache=512;
+	if (-1 == sop_sock) {
+		try {
+			sop_sock = connect_to_server("127.0.0.1", 8098);
+			for (int i = 0; i < 2; i++)
+				EC_THROW( -1 == write(sop_sock, "state\ns\n", sizeof("state\ns\n")));
 
-	gmplayer->set_cache(icache);
+			sop_sock_conn = Glib::signal_io().connect(
+					sigc::mem_fun(*this, &PPSPlayer::on_sop_sock),
+					sop_sock, Glib::IO_IN);	
+		} catch (...)
+		{}
+	}
 
-	gmplayer->start(PPSSTREAM);
+	sop_file = fdopen(sop_sock, "r");
+	return true;
+}
 
-	return false;
+bool PPSPlayer::on_sop_sock(const Glib::IOCondition& condition)
+{
+	char *p = NULL;
+	
+	getline(&p, 0, sop_file);
+
+	int i = atoi(p ? p : "0");
+	free(p);
+
+	if (i = 100){
+
+		gmplayer->start(PPSSTREAM);
+
+		sop_time_conn.disconnect(); // 启动mpaleyr，停掉显示缓冲状态
+		fclose(sop_file);
+		sop_file = NULL;
+		close(sop_sock);	   // 关掉状态查询端口
+		sop_sock = -1;
+		return false;
+	}
+	signal_status_.emit(i);
+	return true;
+
 }
 
 void PPSPlayer::stop()

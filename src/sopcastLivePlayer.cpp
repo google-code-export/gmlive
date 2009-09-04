@@ -120,36 +120,24 @@ bool SopcastLivePlayer::on_sop_time_status()
 					sigc::mem_fun(*this, &SopcastLivePlayer::on_sop_sock),
 					sop_sock, Glib::IO_IN);	
 			//memset(state_buf, 0, sizeof(state_buf));
-			state_buf_pos = state_buf;
 		} catch (...)
 		{}
 	}
 
 	write(sop_sock, "s\n", sizeof("s\n"));
+	sop_file = fdopen(sop_sock, "r");
 	return true;
 }
 
 bool SopcastLivePlayer::on_sop_sock(const Glib::IOCondition& condition)
 {
-	int byte_read = 0;
-	int buf_size = 255;
-	char buf[buf_size + 1] ;
-	char *pstr = NULL;
-	memset(buf, 0, sizeof(buf));
+	char *p = NULL;
+	
+	getline(&p, 0, sop_file);
 
-	while (state_buf_pos < state_buf + sizeof(state_buf)) {
-		if ( -1 == read(sop_sock, state_buf_pos, 1))
-			return true;
+	int i = atoi(p ? p : "0");
+	free(p);	
 
-		if (*state_buf_pos == '\n') {
-			*state_buf_pos = 0;
-			state_buf_pos = state_buf;
-			break;
-		}
-		state_buf_pos++;
-	}
-
-	int i = atoi(state_buf);
 	if (i > 70){
 		std::string& cache = GMConf["sopcast_mplayer_cache"];
 		int icache = atoi(cache.c_str());
@@ -158,6 +146,8 @@ bool SopcastLivePlayer::on_sop_sock(const Glib::IOCondition& condition)
 		gmplayer->start(SOPCASTSTREAM);
 
 		sop_time_conn.disconnect(); // 启动mpaleyr，停掉显示缓冲状态
+		fclose(sop_file);
+		sop_file = 0;
 		close(sop_sock);	   // 关掉状态查询端口
 		sop_sock = -1;
 		return false;

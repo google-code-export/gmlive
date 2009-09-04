@@ -34,14 +34,13 @@ class SopcastLivePlayer : public LivePlayer {
 		bool on_sop_time_status();
 		
 	private:
-		char state_buf[128];
-		char* state_buf_pos;
 		sigc::connection sop_time_conn;
 		sigc::connection sop_sock_conn;
 		GMplayer* gmplayer;
 		static SopcastLivePlayer* self;
 		int sop_pid;
 		int sop_sock;
+		FILE* sop_file;
 		bool is_running;
 };
 

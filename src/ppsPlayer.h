@@ -40,6 +40,7 @@ class PPSPlayer : public LivePlayer {
 		static PPSPlayer* self;
 		int pps_pid;
 		int sop_sock;
+		FILE* sop_file;
 		bool is_running;
 };
 
