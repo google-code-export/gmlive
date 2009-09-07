@@ -1,3 +1,9 @@
+2009-09-07  yetist  <yetist@gmail.com>
+
+	*  configure.in: 
+	*  Makefile.am: 
+	*  INSTALL: 不小心把它给更新了...
+	移除 totem-plugin 的支持。
 
 2009年 08月 26日 星期三 13:55:28 CST
 	加入使用gmlive发送网址给正在运行的gmlive播放的功能，此功能用用于扩展浏览器解释pps://之类的操作
