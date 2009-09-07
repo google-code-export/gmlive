@@ -426,13 +426,24 @@ void MainWindow::on_menu_open_url()
 		if (filename.empty())
 			return;
 		DLOG("播放 %s\n",filename.c_str());
-		std::string& cache = GMConf["mms_mplayer_cache"];
-		int icache = atoi(cache.c_str());
-		icache = icache > 64 ? icache : 8192;
+		
+		if((0==strncmp("tvod://",filename.c_str(),7))||(0 == strncmp("pps://",filename.c_str(),6))){
+			printf("play ppstream\n");
+			recent_channel->play_stream(filename.c_str(),PPS_CHANNEL,"ppstream kankan");
+		}
+		else if((0==strncmp("synacast://",filename.c_str(),11))){
+			printf("pplive stream\n");
+			recent_channel->play_stream(filename.c_str(),PPLIVE_CHANNEL,"pplive");
+		}
+		else if((0==strncmp("sop://",filename.c_str(),6))){
+			printf("sopcast stream\n");
+			recent_channel->play_stream(filename.c_str(),SOPCAST_CHANNEL,"sopcast");
+		}
+		else if((0 == strncmp("mms://",filename.c_str(),6))||(0 == strncmp("rtsp://",filename.c_str(),7))){
+			printf("mms/rtsp stream\n");
+			recent_channel->play_stream(filename.c_str(),MMS_CHANNEL,"mms stream");
 
-		gmp->set_cache(icache);
-		gmp->set_record(false);
-		gmp->start(filename);
+		}
 	}
 
 }

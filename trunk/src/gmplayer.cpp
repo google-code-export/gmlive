@@ -222,7 +222,7 @@ void GMplayer::mute(bool mute)
 	if(mute)
 		send_ctrl_command("mute\n");
 	else
-		send_ctrl_command("mute\n");
+		send_ctrl_command("unmute\n");
 }
 
 void GMplayer::start_play()
