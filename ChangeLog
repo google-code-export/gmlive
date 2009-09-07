@@ -5,16 +5,16 @@
 	*  INSTALL: 不小心把它给更新了...
 	移除 totem-plugin 的支持。
 
-2009年 08月 26日 星期三 13:55:28 CST
+2009年 08月 26日 星期三 13:55:28 CST lerosua<lerosua@gmail.com>
 	加入使用gmlive发送网址给正在运行的gmlive播放的功能，此功能用用于扩展浏览器解释pps://之类的操作
 	试验mms成功
 
-2009年 08月 25日 星期二 21:51:48 CST
+2009年 08月 25日 星期二 21:51:48 CST lerosua<lerosua@gmail.com>
 	开始加入ppstream支持，框架已成，列表用的是mms方式，播放器复制pplive
 	不会未成功。
 	开始加入单一实例检测功能。
 
-2009年 08月 08日 星期六 15:03:34 CST
+2009年 08月 08日 星期六 15:03:34 CST lerosua<lerosua@gmail.com>
 	更新了sopcast刚启动时可能会卡死的bug。
 	更新了快捷键翻译的简体中文po。
 	去除了nslive,以pplive替代之。
