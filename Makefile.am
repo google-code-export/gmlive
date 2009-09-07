@@ -1,7 +1,7 @@
 SUBDIRS = src data po
-if ENABLE_PLUGIN
-SUBDIRS+=plugins
-endif
+#if ENABLE_PLUGIN
+#SUBDIRS+=plugins
+#endif
 
 EXTRA_DIST =                    \
         ChangeLog               \
