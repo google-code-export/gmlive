@@ -75,7 +75,12 @@ void PPSPlayer::start(GMplayer& gmp)
 	if (pid == 0) {
 		close(STDOUT_FILENO);
 		chdir("/tmp");
+		gchar* cmdv[]={"ipcrm","-Q","0x00000fb5","-Q","0x00000908",NULL,NULL};
+		g_spawn_async(NULL,cmdv,NULL,G_SPAWN_SEARCH_PATH,NULL,NULL,NULL,NULL);
+
+		g_setenv("LD_PRELOAD","libppswrapper-preload.so.0.0.0",TRUE);
 		const char* argv[5];
+
 
 		argv[0] = "xpps";
 		argv[1] = filename.c_str();

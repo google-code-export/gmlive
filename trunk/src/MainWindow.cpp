@@ -542,17 +542,6 @@ void MainWindow::on_menu_quit()
 	gmp->stop();
 	Gtk::Main::quit();
 }
-/*
-   void MainWindow::on_menu_pop_refresh_list()
-   {
-   Channel* channel = get_cur_select_channel();
-   if (channel)
-   channel->refresh_list();
-   else
-   DLOG("Error");
-
-   }
-   */
 
 void MainWindow::on_menu_pop_add_to_bookmark()
 {
