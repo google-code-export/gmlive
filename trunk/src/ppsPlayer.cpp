@@ -113,8 +113,7 @@ bool PPSPlayer::on_sop_time_status()
 	if (-1 == sop_sock) {
 		try {
 			sop_sock = connect_to_server("127.0.0.1", 8098);
-			for (int i = 0; i < 2; i++)
-				EC_THROW( -1 == write(sop_sock, "state\ns\n", sizeof("state\ns\n")));
+			EC_THROW( -1 == write(sop_sock, "state\ns\n", sizeof("state\ns\n")));
 
 			sop_sock_conn = Glib::signal_io().connect(
 					sigc::mem_fun(*this, &PPSPlayer::on_sop_sock),
@@ -138,6 +137,7 @@ bool PPSPlayer::on_sop_sock(const Glib::IOCondition& condition)
 
 	if (i = 100){
 
+		EC_THROW( -1 == write(sop_sock, "quit\ns\n", sizeof("quit\ns\n")));
 		gmplayer->start(PPSSTREAM);
 
 		sop_time_conn.disconnect(); // 启动mpaleyr，停掉显示缓冲状态
@@ -146,6 +146,8 @@ bool PPSPlayer::on_sop_sock(const Glib::IOCondition& condition)
 		close(sop_sock);	   // 关掉状态查询端口
 		sop_sock = -1;
 		return false;
+	} else {
+		EC_THROW( -1 == write(sop_sock, "state\ns\n", sizeof("state\ns\n")));
 	}
 	signal_status_.emit(i);
 	return true;
