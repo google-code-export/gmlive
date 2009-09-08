@@ -461,7 +461,8 @@ void MainWindow::on_menu_play()
 
 void MainWindow::on_menu_stop()
 {
-	gmp->stop();
+	set_live_player(NULL, "");
+	//gmp->stop();
 }
 
 void MainWindow::unzoom()
@@ -539,7 +540,8 @@ void MainWindow::on_menu_quit()
 {
 	DLOG("on_menu_quit");
 	this->get_size( window_width, window_height);
-	gmp->stop();
+	set_live_player(NULL, "");
+	//gmp->stop();
 	Gtk::Main::quit();
 }
 
@@ -573,6 +575,8 @@ void MainWindow::show_window()
 void MainWindow::hide_window()
 {
 	if (gmp_embed || !atoi(GMConf["close_to_systray"].c_str())) {
+		//(21时17分06秒) wind: 缩小到托盘的时候要不要把xpps 关掉？
+		//(21时17分17秒) 广陵散: 不要
 		gmp->stop();
 	}
 	this->get_position(window_x, window_y);
@@ -587,7 +591,8 @@ bool MainWindow::on_delete_event(GdkEventAny* event)
 	else if (!atoi(GMConf["enable_tray"].c_str())) 
 		on_menu_quit();
 	else if (gmp_embed)
-		gmp->stop();
+		//gmp->stop();
+		set_live_player(NULL, "");
 	this->get_position(window_x, window_y);
 	return Gtk::Window::on_delete_event(event);
 }

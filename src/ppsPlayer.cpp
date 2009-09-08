@@ -73,7 +73,7 @@ void PPSPlayer::start(GMplayer& gmp)
 	if (pid == -1)
 		return ;
 	if (pid == 0) {
-		close(STDOUT_FILENO);
+		//close(STDOUT_FILENO);
 		chdir("/tmp");
 		gchar* cmdv[]={"ipcrm","-Q","0x00000fb5","-Q","0x00000908",NULL,NULL};
 		g_spawn_async(NULL,cmdv,NULL,G_SPAWN_SEARCH_PATH,NULL,NULL,NULL,NULL);
