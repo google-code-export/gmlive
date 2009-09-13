@@ -1510,6 +1510,15 @@ bool MainWindow::on_sock_io(const Glib::IOCondition&)
 			recent_channel->play_stream(buf,MMS_CHANNEL,"mms stream");
 
 		}
+		/*
+		else if((0 == strncmp("xppsplay",buf,8))){
+			g_log("gmlive",G_LOG_LEVEL_INFO,"start play xpps");
+			gmp->play(PPSSTREAM);
+		}
+		*/
+		else{
+			g_log("gmlive",G_LOG_LEVEL_CRITICAL,"wrong command");
+		}
 
 	}
 	close(fd_cli);
