@@ -5,7 +5,7 @@
  *
  *    Description:  网络电视图形外壳
  *
- *        Version:  1.0
+ *        Version:  0.22.x
  *        Created:  2007年11月25日 12时13分02秒 CST
  *       Revision:  none
  *       Compiler:  gcc
@@ -45,8 +45,6 @@ int singleon(const std::string& url)
 	struct sockaddr_in srvaddr;
 
 	EC_THROW(-1 == (sockfd=socket(AF_INET,SOCK_STREAM,0)));
-	//int on = 1;
-	//EC_THROW( -1 == (setsockopt( sockfd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on) )));
 	bzero(&srvaddr,sizeof(srvaddr));
 	srvaddr.sin_family=AF_INET;
 	srvaddr.sin_port=htons(GMPORT);

@@ -30,12 +30,12 @@ class PPSPlayer : public LivePlayer {
 
 	protected:
 		PPSPlayer(const std::string& stream_);
-		bool on_sop_sock(const Glib::IOCondition& condition);
-		bool on_sop_time_status();
+		bool on_pps_sock(const Glib::IOCondition& condition);
+		bool on_pps_time_status();
 		
 	private:
-		sigc::connection sop_time_conn;
-		sigc::connection sop_sock_conn;
+		sigc::connection pps_time_conn;
+		sigc::connection pps_sock_conn;
 		GMplayer* gmplayer;
 		static PPSPlayer* self;
 		int pps_pid;

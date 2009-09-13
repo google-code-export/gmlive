@@ -22,6 +22,8 @@
 #include <signal.h>
 #include <sys/wait.h>
 #include <sys/socket.h>
+#include <glib.h>
+#include <glib/gstdio.h>
 #include <netdb.h>
 #include "ppsPlayer.h"
 #include "gmlive.h"
@@ -79,14 +81,14 @@ void PPSPlayer::start(GMplayer& gmp)
 		g_spawn_async(NULL, (gchar**)cmdv, NULL,G_SPAWN_SEARCH_PATH,NULL,NULL,NULL,NULL);
 
 		g_setenv("LD_PRELOAD","libppswrapper-preload.so.0.0.0",TRUE);
-		const char* argv[5];
+		const char* argv[3];
 
 
 		argv[0] = "xpps";
 		argv[1] = filename.c_str();
 		argv[2] = NULL;
 
-		printf("play cmd %s\n",argv);
+		printf("play cmd %s\n",argv[0]);
 		// 设置 这个子进程为进程组头，
 		// 这样，只要杀掉这个进程，他的子进程也会退出
 		EC_THROW(-1 == setpgid(0, 0));
@@ -103,20 +105,21 @@ void PPSPlayer::start(GMplayer& gmp)
 	//std::string& delay = GMConf["pps_delay_time"];
 	//int idelay = atoi(delay.c_str());
 	int idelay = 9;
-	sop_time_conn = Glib::signal_timeout().connect(sigc::mem_fun(*this, &PPSPlayer::on_sop_time_status), idelay * 1000);
+	pps_time_conn = Glib::signal_timeout().connect(sigc::mem_fun(*this, &PPSPlayer::on_pps_time_status), idelay * 1000);
 
 }
 
 int connect_to_server(const char *host, int portnum);
-bool PPSPlayer::on_sop_time_status()
+bool PPSPlayer::on_pps_time_status()
 {
+#if 0
 	if (-1 == sop_sock) {
 		try {
 			sop_sock = connect_to_server("127.0.0.1", 8098);
 			EC_THROW( -1 == write(sop_sock, "state\ns\n", sizeof("state\ns\n")));
 
-			sop_sock_conn = Glib::signal_io().connect(
-					sigc::mem_fun(*this, &PPSPlayer::on_sop_sock),
+			pps_sock_conn = Glib::signal_io().connect(
+					sigc::mem_fun(*this, &PPSPlayer::on_pps_sock),
 					sop_sock, Glib::IO_IN);	
 		} catch (...)
 		{}
@@ -124,9 +127,18 @@ bool PPSPlayer::on_sop_time_status()
 
 	sop_file = fdopen(sop_sock, "r");
 	return true;
+#endif
+	/** 检测pps的文件大于cache时才开始播放*/
+	struct stat statbuf;
+	if(0== g_stat(PPSSTREAM, &statbuf)){
+
+		if(statbuf.st_size >1024)
+			gmplayer->start(PPSSTREAM);
+	}
+	return false;
 }
 
-bool PPSPlayer::on_sop_sock(const Glib::IOCondition& condition)
+bool PPSPlayer::on_pps_sock(const Glib::IOCondition& condition)
 {
 	char *p = NULL;
 	
@@ -140,7 +152,7 @@ bool PPSPlayer::on_sop_sock(const Glib::IOCondition& condition)
 		EC_THROW( -1 == write(sop_sock, "quit\ns\n", sizeof("quit\ns\n")));
 		gmplayer->start(PPSSTREAM);
 
-		sop_time_conn.disconnect(); // 启动mpaleyr，停掉显示缓冲状态
+		pps_time_conn.disconnect(); // 启动mpaleyr，停掉显示缓冲状态
 		fclose(sop_file);
 		sop_file = NULL;
 		close(sop_sock);	   // 关掉状态查询端口
