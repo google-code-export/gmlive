@@ -133,9 +133,13 @@ bool PPSPlayer::on_pps_time_status()
 	if(0== g_stat(PPSSTREAM, &statbuf)){
 
 		if(statbuf.st_size >1024)
+		{
 			gmplayer->start(PPSSTREAM);
+			return false;
+		}
 	}
-	return false;
+	//return false;
+	return true;
 }
 
 bool PPSPlayer::on_pps_sock(const Glib::IOCondition& condition)
