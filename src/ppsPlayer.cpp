@@ -55,6 +55,7 @@ PPSPlayer::PPSPlayer(const std::string& stream_) :
 PPSPlayer::~PPSPlayer()
 {
 	stop();
+	pps_time_conn.disconnect();
 	close(sop_sock);
 	printf("pps exit\n");
 	self = NULL;
@@ -138,7 +139,6 @@ bool PPSPlayer::on_pps_time_status()
 			return false;
 		}
 	}
-	//return false;
 	return true;
 }
 

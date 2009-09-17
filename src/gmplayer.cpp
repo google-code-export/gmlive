@@ -415,6 +415,7 @@ void GMplayer::set_outfilename(const std::string& filename, const std::string& n
 void GMplayer::on_stop_record()
 {
 	is_recording = false;
+	is_record = false;
 
 	update_progress_conn.disconnect();
 	wait_record_conn.disconnect();
@@ -509,6 +510,7 @@ void GMplayer::stop()
 {
 	is_running = false;
 	is_recording = false;
+	is_record = false;
 	if (player_pid != -1) {
 		ptm_conn.disconnect();
 		wait_conn.disconnect();
