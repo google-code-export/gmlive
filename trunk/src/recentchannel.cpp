@@ -66,6 +66,7 @@ void RecentChannel::init()
 	std::string name;
 	std::string stream;
 	std::string type;
+	std::string trimstring = "\t";
 	if(file){
 		while(std::getline(file,line)){
 			size_t pos = line.find_first_of("#");
@@ -77,7 +78,8 @@ void RecentChannel::init()
 			pos = last.find_first_of("#");
 			if(pos==std::string::npos)
 				continue;
-			stream=last.substr(0,pos);
+			//stream=last.substr(0,pos);
+			stream=last.substr(0,last.find_first_of(trimstring));
 			type= last.substr(pos+1,std::string::npos);
 			
 			int id=0;
