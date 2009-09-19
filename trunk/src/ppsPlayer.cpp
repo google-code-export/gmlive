@@ -135,6 +135,7 @@ bool PPSPlayer::on_pps_time_status()
 
 		if(statbuf.st_size >4096)
 		{
+			gmplayer->set_cache(4096);
 			gmplayer->start(PPSSTREAM);
 			return false;
 		}

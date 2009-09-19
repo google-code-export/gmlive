@@ -199,14 +199,52 @@ void Channel::store_selection()
 	BookMarkChannel* bc =
 		dynamic_cast<BookMarkChannel*>(parent->get_bookmark_channel());
 	if (this != bc)
-		bc->saveLine(name,stream,page);
+		bc->saveLine(name,stream,page,"TOP");
 
+#if 0
 	RecentChannel* rc =
 		dynamic_cast<RecentChannel*>(parent->get_recent_channel());
 	if (this != rc)
 		rc->saveLine(name,stream,page);
+#endif
 }
 
+void Channel::store_selection_group()
+{
+	/** 如果本频道是书签或最近列表，都不启动此功能*/
+	BookMarkChannel* bc =
+		dynamic_cast<BookMarkChannel*>(parent->get_bookmark_channel());
+	if (this == bc)
+		return;
+	RecentChannel* rc =
+		dynamic_cast<RecentChannel*>(parent->get_recent_channel());
+	if (this == rc)
+		return;
+
+
+	Glib::RefPtr < Gtk::TreeSelection > selection =
+		this->get_selection();
+	Gtk::TreeModel::iterator iter = selection->get_selected();
+	if (!selection->count_selected_rows())
+		return ;
+	/** 利用 *iter 获取 row,然后用row.parent()的方法获取了它的父iter,也就是所在的组
+	 *  这就是由当前行获取其父组的方法 */
+	Gtk::TreeModel::Row row =*iter ;
+	Gtk::TreeModel::iterator iter_parent = row.parent();
+	Glib::ustring groupname_ = (*iter_parent)[columns.name];
+
+	Gtk::TreeModel::Children children = iter_parent->children();
+	Gtk::TreeModel::iterator listiter=children.begin();
+
+	for(;listiter!=children.end();listiter++){
+		Glib::ustring name_ = (*listiter)[columns.name];
+		//printf(" get channel %s at %s\n",name_.c_str(),groupname.c_str());
+		std::string stream_ = (*listiter)[columns.stream];
+		TypeChannel page = (*listiter)[columns.type];
+		bc->saveLine(name_,stream_,page,groupname_);
+	}
+
+}
 
 void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 {
@@ -222,6 +260,7 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 	LivePlayer* lp = parent->get_live_player();
 	LivePlayer* live_player = get_player(stream, page);
 
+	DLOG("set_live_player name = %s \n",name.c_str());
 	parent->set_live_player(live_player, name);
 	RecentChannel* rc =
 		dynamic_cast<RecentChannel*>(parent->get_recent_channel());
