@@ -510,7 +510,7 @@ void GMplayer::stop()
 {
 	is_running = false;
 	is_recording = false;
-	is_record = false;
+	//is_record = false;
 	if (player_pid != -1) {
 		ptm_conn.disconnect();
 		wait_conn.disconnect();

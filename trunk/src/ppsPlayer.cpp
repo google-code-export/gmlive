@@ -133,7 +133,7 @@ bool PPSPlayer::on_pps_time_status()
 	struct stat statbuf;
 	if(0== g_stat(PPSSTREAM, &statbuf)){
 
-		if(statbuf.st_size >1024)
+		if(statbuf.st_size >4096)
 		{
 			gmplayer->start(PPSSTREAM);
 			return false;
