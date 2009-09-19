@@ -24,6 +24,7 @@
 #include "mmsLivePlayer.h"
 #include "sopcastLivePlayer.h"
 #include "pplivePlayer.h"
+#include "ppsPlayer.h"
 
 BookMarkChannel::BookMarkChannel(MainWindow* parent_):Channel( parent_)
 {
@@ -35,9 +36,14 @@ LivePlayer* BookMarkChannel::get_player(const std::string& stream,TypeChannel pa
 		case MMS_CHANNEL:
 			return MmsLivePlayer::create(stream);
 		case PPLIVE_CHANNEL:
-				return PpLivePlayer::create(stream);
+			return PpLivePlayer::create(stream);
 		case SOPCAST_CHANNEL:
 			return SopcastLivePlayer::create(stream);
+		case PPS_CHANNEL:
+			return PPSPlayer::create(stream);
+		default:
+			g_warn_if_reached();
+			return NULL;
 	}
 }
 
@@ -54,29 +60,36 @@ void BookMarkChannel::init()
 		return;
 	}
 	std::string line;
+	std::string sec;
 	std::string last;
 	std::string name;
 	std::string stream;
 	std::string type;
+	std::string group;
 	std::string trimstring = "\t";
 	if(file){
 		while(std::getline(file,line)){
 			size_t pos = line.find_first_of("#");
 			if(pos==std::string::npos)
 				continue;
-			name = line.substr(0,pos);
-			last = line.substr(pos+1,std::string::npos);
+			name = line.substr(0,line.find_first_of(trimstring));
+			sec = line.substr(pos+1,std::string::npos);
+
+			pos = sec.find_first_of("#");
+			if(pos==std::string::npos)
+				continue;
+
+			stream=sec.substr(0,sec.find_first_of(trimstring));
+			last = sec.substr(pos+1,std::string::npos);
 
 			pos = last.find_first_of("#");
 			if(pos==std::string::npos)
 				continue;
-			//stream=last.substr(0,pos);
-			stream=last.substr(0,last.find_first_of(trimstring));
+			group=last.substr(0,last.find_first_of(trimstring));
 			type= last.substr(pos+1,std::string::npos);
 
-
-			int id=0;
-			addLine(id,name,stream,type);
+			//addLine(group,name,stream,type);
+			addLine(name,stream,type,group);
 		}
 	}
 
@@ -85,8 +98,14 @@ void BookMarkChannel::init()
 }
 
 
-void  BookMarkChannel::addLine(int num,const Glib::ustring& name,const std::string& stream_,const Glib::ustring& type)
+void  BookMarkChannel::addLine(const Glib::ustring& name,const std::string& stream_,const Glib::ustring& type,const Glib::ustring& groupname)
 {
+
+	Gtk::TreeModel::Children children = m_liststore->children();
+	Gtk::TreeModel::iterator listiter;
+	listiter = getListIter(children,groupname);
+	if(listiter == children.end())
+		listiter = addGroup(groupname);
 
 	TypeChannel type_;
 	if("mms"==type)
@@ -113,14 +132,15 @@ void  BookMarkChannel::addLine(int num,const Glib::ustring& name,const std::stri
 	else
 		type_ = NONE;
 
-	Gtk::TreeModel::iterator iter = m_liststore->prepend();
+	//Gtk::TreeModel::iterator iter = m_liststore->prepend();
+	Gtk::TreeModel::iterator iter = m_liststore->prepend(listiter->children());
 	(*iter)[columns.name] = name;
 	(*iter)[columns.freq] = 100;
 	(*iter)[columns.stream]=stream_;
 	(*iter)[columns.type]=type_ ;
 
 }
-void BookMarkChannel::saveLine(const Glib::ustring & name,const std::string& stream_,TypeChannel type)
+void BookMarkChannel::saveLine(const Glib::ustring & name,const std::string& stream_,TypeChannel type,const Glib::ustring&groupname_)
 {
 
 	char buf[512];
@@ -138,26 +158,22 @@ void BookMarkChannel::saveLine(const Glib::ustring & name,const std::string& str
 	std::string strtype;
 	switch (type) {
 		case MMS_CHANNEL:
-			stream = name +"\t#"+stream_+"\t#mms";
 			strtype = "mms";
 			break;
 		case SOPCAST_CHANNEL:
-			stream = name +"\t#"+stream_+"\t#sopcast";
 			strtype = "sopcast";
 			break;
 		case PPLIVE_CHANNEL:
-			stream = name +"\t#"+stream_+"\t#pplive";
 			strtype = "pplive";
 			break;
 		case PPS_CHANNEL:
-			stream = name +"\t#"+stream_+"\t#ppstream";
 			strtype = "ppstream";
 			break;
 	}
+	stream = name +"\t#"+stream_+"\t#"+groupname_+"\t#"+strtype;
 	file<<stream<<std::endl;
 	file.close();
-	int users = 0;
-	addLine(users, name,stream_,strtype);
+	addLine( name,stream_,strtype,groupname_);
 
 }
 

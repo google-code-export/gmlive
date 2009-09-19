@@ -46,6 +46,9 @@ LivePlayer* RecentChannel::get_player( const std::string& stream,TypeChannel pag
 			return SopcastLivePlayer::create(stream);
 		case PPS_CHANNEL:
 			return PPSPlayer::create(stream);
+		default:
+			g_warn_if_reached();
+			return NULL;
 	}
 }
 void RecentChannel::init()
@@ -147,7 +150,7 @@ void RecentChannel::saveLine(const Glib::ustring & name,const std::string& strea
 		while(std::getline(file,line)){
 			list.push_back(line);
 			num++;
-			if(10==num)
+			if(25==num)
 				break;
 		}
 	}
@@ -157,25 +160,26 @@ void RecentChannel::saveLine(const Glib::ustring & name,const std::string& strea
 	std::string strtype;
 	if(type == MMS_CHANNEL)
 	{
-		stream = name +"\t#"+stream_+"\t#mms";
+		//stream = name +"\t#"+stream_+"\t#mms";
 		strtype = "mms";
 	}
 	else if (type == SOPCAST_CHANNEL)
 	{
-		stream = name +"\t#"+stream_+"\t#sopcast";
+		//stream = name +"\t#"+stream_+"\t#sopcast";
 		strtype = "sopcast";
 	}
 	else if(type == PPLIVE_CHANNEL)
 	{
-		stream = name +"\t#"+stream_+"\t#pplive";
+		//stream = name +"\t#"+stream_+"\t#pplive";
 		strtype = "pplive";
 	}
 	else if(type ==PPS_CHANNEL)
 	{
-		stream = name +"\t#"+stream_+"\t#ppstream";
+		//stream = name +"\t#"+stream_+"\t#ppstream";
 		strtype = "ppstream";
 
 	}
+	stream = name +"\t#"+stream_+"\t#"+strtype;
 	std::vector<std::string>::iterator iter = std::find(list.begin(),list.end(),stream);
 	if(iter == list.end())
 	{

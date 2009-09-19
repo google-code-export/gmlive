@@ -36,9 +36,14 @@ class Channel:public Gtk::TreeView
 	public:
 		Channel(MainWindow* parent_);
 		virtual ~Channel();
+		/** 播放所选择的频道*/
 		void play_selection();
+		/** 录制所选择的频道*/
 		void record_selection();
+		/** 保存选择的频道至书签*/
 		void store_selection();
+		/** 保存选择的频道的整组*/
+		void store_selection_group();
 		std::string get_stream();
 		void search_channel(const Glib::ustring& name);
 		virtual void refresh_list(){};

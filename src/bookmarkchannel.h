@@ -25,8 +25,8 @@ class BookMarkChannel:public Channel
 	public:
 		BookMarkChannel(MainWindow* parent_);
 		void init();
-		void  addLine(int users,const Glib::ustring& name,const std::string& sream,const Glib::ustring& groupname);
-		void saveLine(const Glib::ustring& name,const std::string& sream,TypeChannel type);
+		void addLine(const Glib::ustring& name,const std::string& sream,const Glib::ustring& type,const Glib::ustring& groupname);
+		void saveLine(const Glib::ustring& name,const std::string& sream,TypeChannel type,const Glib::ustring& groupname);
 	protected:
 		LivePlayer* get_player(const std::string& stream,TypeChannel page);
 };

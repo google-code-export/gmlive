@@ -206,6 +206,7 @@ Glib::ustring ui_info =
 "		<separator/>"
 "		<menuitem action='PopRefreshList'/>"
 "		<menuitem action='PopAddToBookmark'/>"
+"		<menuitem action='PopAddGroupToBookmark'/>"
 "	</popup>"
 "	<popup name='TryPopupMenu'>"
 "		<menuitem action='FilePlay'/>"
@@ -369,6 +370,9 @@ void MainWindow::init_ui_manager()
 	action_group->add(Gtk::Action::create("PopAddToBookmark", 
 				_("_Add to bookmark"), _("Bookmark this channel")),
 			sigc::mem_fun(*this, &MainWindow::on_menu_pop_add_to_bookmark));
+	action_group->add(Gtk::Action::create("PopAddGroupToBookmark", 
+				_("Add _Group to bookmark"), _("Bookmark the Group which the channel lie on")),
+			sigc::mem_fun(*this, &MainWindow::on_menu_pop_add_group_to_bookmark));
 	action_group->add(Gtk::Action::create("PopCopyUrl", 
 				_("_Copy url"), _("Copy url to clipboard")),
 			sigc::mem_fun(*this, &MainWindow::on_menu_pop_copy_to_clipboard));
@@ -551,7 +555,17 @@ void MainWindow::on_menu_pop_add_to_bookmark()
 	if (channel)
 		channel->store_selection();
 	else
-		DLOG("Error");
+		g_log("gmlive",G_LOG_LEVEL_WARNING,"add channel to bookmark failed");
+}
+
+void MainWindow::on_menu_pop_add_group_to_bookmark()
+{
+	Channel* channel = get_cur_select_channel();
+	if (channel)
+		channel->store_selection_group();
+	else
+		g_log("gmlive",G_LOG_LEVEL_WARNING,"add group to bookmark failed");
+
 }
 
 void MainWindow::on_menu_pop_copy_to_clipboard()

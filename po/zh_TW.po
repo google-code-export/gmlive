@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-30 14:15+0800\n"
-"PO-Revision-Date: 2009-08-21 21:21+0800\n"
+"POT-Creation-Date: 2009-09-19 17:39+0800\n"
+"PO-Revision-Date: 2009-09-19 17:40+0800\n"
 "Last-Translator: Liu, Shuyuan <victorangus@gmail.com>\n"
 "Language-Team: Chinese/Traditional\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr "基於 P2P 的串流廣播系統"
 #, fuzzy
 msgid ""
 "\t\t\t                  \n"
-"                                             gmlive 0.22.1 \n"
+"                                             gmlive 0.22.2 \n"
 "\n"
 "              GMLive try to became a universal streaming media player case.\n"
 "         it use Almighty Mplayer for its engine. the Goal is to support  a \n"
@@ -44,7 +44,7 @@ msgid ""
 "  "
 msgstr ""
 "\t\t\t                  \n"
-"                                             gmlive 0.22 \n"
+"                                             gmlive 0.22.2 \n"
 "\n"
 "              GMLive 嘗試成為一款通用型的串流媒體播放外殼。\n"
 "         它以全能的 Mplayer 播放器為引擎。目標是支援 Linux 下\n"
@@ -342,42 +342,42 @@ msgstr "位元率"
 msgid "user"
 msgstr "使用者"
 
-#: ../src/channel.cpp:159 ../src/MainWindow.cpp:390
+#: ../src/channel.cpp:159 ../src/MainWindow.cpp:394
 msgid "Choose File"
 msgstr "選擇檔案"
 
-#: ../src/channel.cpp:290 ../src/channel.cpp:372
+#: ../src/channel.cpp:329 ../src/channel.cpp:411
 msgid "PPLive Stream"
 msgstr "PPLive 串流"
 
-#: ../src/channel.cpp:292 ../src/channel.cpp:374
+#: ../src/channel.cpp:331 ../src/channel.cpp:413
 msgid "SopCast Stream"
 msgstr "SopCast 流"
 
-#: ../src/channel.cpp:294 ../src/channel.cpp:376
+#: ../src/channel.cpp:333 ../src/channel.cpp:415
 msgid "MMS stream"
 msgstr "MMS流"
 
-#: ../src/channel.cpp:296 ../src/channel.cpp:378
+#: ../src/channel.cpp:335 ../src/channel.cpp:417
 #, fuzzy
 msgid "PPS stream"
 msgstr "MMS流"
 
-#: ../src/channel.cpp:306 ../src/channel.cpp:309 ../src/channel.cpp:388
-#: ../src/channel.cpp:393
+#: ../src/channel.cpp:345 ../src/channel.cpp:348 ../src/channel.cpp:427
+#: ../src/channel.cpp:432
 msgid "users:"
 msgstr "使用者數："
 
-#: ../src/channel.cpp:307 ../src/channel.cpp:310 ../src/channel.cpp:389
-#: ../src/channel.cpp:394
+#: ../src/channel.cpp:346 ../src/channel.cpp:349 ../src/channel.cpp:428
+#: ../src/channel.cpp:433
 msgid "Type:"
 msgstr "類型："
 
-#: ../src/channel.cpp:410
+#: ../src/channel.cpp:449
 msgid "Please select a channel list file"
 msgstr "請選擇一個頻道清單檔案"
 
-#: ../src/channel.cpp:411
+#: ../src/channel.cpp:450
 msgid "open channles error"
 msgstr "打開頻道清單錯誤"
 
@@ -385,208 +385,218 @@ msgstr "打開頻道清單錯誤"
 msgid "GMLive Conf Window"
 msgstr "GMLive 設定"
 
-#: ../src/gmplayer.cpp:438
+#: ../src/gmplayer.cpp:439
 msgid "Record finial"
 msgstr "錄製完成"
 
-#: ../src/gmplayer.cpp:439
+#: ../src/gmplayer.cpp:440
 msgid " record finial"
 msgstr "錄製完成"
 
-#: ../src/gmplayer.cpp:487
+#: ../src/gmplayer.cpp:488
 #, c-format
 msgid "Recording %s To %s (%u Kb)"
 msgstr "錄製 %s 至 %s (%u Kb)"
 
-#: ../src/gmplayer.cpp:492
+#: ../src/gmplayer.cpp:493
 #, c-format
 msgid "Recording %s To %s (%u.%u Mb)"
 msgstr "錄製 %s 至 %s (%u.%u Mb)"
 
-#: ../src/MainWindow.cpp:248
+#: ../src/MainWindow.cpp:249
 msgid "_HideChannels"
 msgstr "隱藏清單(_H)"
 
-#: ../src/MainWindow.cpp:260 ../src/MainWindow.cpp:276
+#: ../src/MainWindow.cpp:261 ../src/MainWindow.cpp:277
 msgid "Open_URL"
 msgstr "打開網路串流(_U)"
 
 #. File menu:
-#: ../src/MainWindow.cpp:270
+#: ../src/MainWindow.cpp:271
 msgid "_File"
 msgstr "檔案(_F)"
 
-#: ../src/MainWindow.cpp:272
+#: ../src/MainWindow.cpp:273
 msgid "_Open local file"
 msgstr "打開本地檔案(_O)"
 
-#: ../src/MainWindow.cpp:273
+#: ../src/MainWindow.cpp:274
 msgid "Open Local File"
 msgstr "打開本地檔案"
 
-#: ../src/MainWindow.cpp:277
+#: ../src/MainWindow.cpp:278
 msgid "Open Network Stream"
 msgstr "打開網路串流"
 
-#: ../src/MainWindow.cpp:281
+#: ../src/MainWindow.cpp:282
 msgid "Play"
 msgstr "播放"
 
-#: ../src/MainWindow.cpp:286
+#: ../src/MainWindow.cpp:287
 msgid "Pause"
 msgstr "暫停"
 
-#: ../src/MainWindow.cpp:291
+#: ../src/MainWindow.cpp:292
 msgid "Record"
 msgstr "錄製"
 
-#: ../src/MainWindow.cpp:296
+#: ../src/MainWindow.cpp:297
 msgid "Stop"
 msgstr "停止"
 
 #. View menu:
-#: ../src/MainWindow.cpp:304
+#: ../src/MainWindow.cpp:305
 msgid "_View"
 msgstr "檢視(_V)"
 
-#: ../src/MainWindow.cpp:308
+#: ../src/MainWindow.cpp:309
 msgid "Show or hide channels list"
 msgstr "顯示或隱藏頻道清單"
 
-#: ../src/MainWindow.cpp:313
+#: ../src/MainWindow.cpp:314
 msgid "Hide_Toolbar"
 msgstr "隱藏工具列(_T)"
 
-#: ../src/MainWindow.cpp:313
+#: ../src/MainWindow.cpp:314
 msgid "Show or hide Toolbar"
 msgstr "顯示或隱藏工具列"
 
-#: ../src/MainWindow.cpp:318
+#: ../src/MainWindow.cpp:319
 msgid "_AlwaysOnTop"
 msgstr "置頂(_A)"
 
-#: ../src/MainWindow.cpp:318
+#: ../src/MainWindow.cpp:319
 msgid "Make GMlive ontop of other windows"
 msgstr "使GMlive的視窗置頂"
 
-#: ../src/MainWindow.cpp:322
+#: ../src/MainWindow.cpp:323
 msgid "FullScreen"
 msgstr "全螢幕"
 
-#: ../src/MainWindow.cpp:327
+#: ../src/MainWindow.cpp:328
 msgid "_Embed Mplayer"
 msgstr "嵌入播放器(_E)"
 
-#: ../src/MainWindow.cpp:327
+#: ../src/MainWindow.cpp:328
 msgid "Embed or Separate mplayer play"
 msgstr "嵌入或分離播放器"
 
 #. Tool menu:
-#: ../src/MainWindow.cpp:331
+#: ../src/MainWindow.cpp:332
 msgid "_Tool"
 msgstr "工具(_T)"
 
-#: ../src/MainWindow.cpp:334
+#: ../src/MainWindow.cpp:335
 msgid "Volume _increase"
 msgstr "音量增加(_i)"
 
-#: ../src/MainWindow.cpp:334
+#: ../src/MainWindow.cpp:335
 msgid "Volume Increase"
 msgstr "增加音量"
 
-#: ../src/MainWindow.cpp:338
+#: ../src/MainWindow.cpp:339
 msgid "Volume _decrease"
 msgstr "音量降低(_d)"
 
-#: ../src/MainWindow.cpp:338
+#: ../src/MainWindow.cpp:339
 msgid "Volume Decrease"
 msgstr "降低音量"
 
-#: ../src/MainWindow.cpp:342
+#: ../src/MainWindow.cpp:343
 msgid "Audio delay i_ncrease"
 msgstr "音頻延時前進(_N)"
 
-#: ../src/MainWindow.cpp:342
+#: ../src/MainWindow.cpp:343
 msgid "AudioDelay Increase"
 msgstr "音頻延時前進"
 
-#: ../src/MainWindow.cpp:346
+#: ../src/MainWindow.cpp:347
 msgid "Audio delay d_ecrease"
 msgstr "音頻延時後退(_E)"
 
-#: ../src/MainWindow.cpp:346
+#: ../src/MainWindow.cpp:347
 msgid "AudioDelay Decrease"
 msgstr "音頻延時後退"
 
-#: ../src/MainWindow.cpp:351
+#: ../src/MainWindow.cpp:352
 msgid "_Mute"
 msgstr "靜音(_M)"
 
-#: ../src/MainWindow.cpp:351
+#: ../src/MainWindow.cpp:352
 msgid "Mute"
 msgstr "靜音"
 
 #. Help menu:
-#: ../src/MainWindow.cpp:361
+#: ../src/MainWindow.cpp:362
 msgid "_Help"
 msgstr "說明(_H)"
 
-#: ../src/MainWindow.cpp:367
+#: ../src/MainWindow.cpp:368
 msgid "_Refresh list"
 msgstr "更新清單(_R)"
 
-#: ../src/MainWindow.cpp:367
+#: ../src/MainWindow.cpp:368
 msgid "Refresh current channel list"
 msgstr "更新目前頻道清單"
 
-#: ../src/MainWindow.cpp:370
+#: ../src/MainWindow.cpp:371
 msgid "_Add to bookmark"
 msgstr "添加到書簽(_A)"
 
-#: ../src/MainWindow.cpp:370
+#: ../src/MainWindow.cpp:371
 msgid "Bookmark this channel"
 msgstr "收藏此頻道"
 
-#: ../src/MainWindow.cpp:373
+#: ../src/MainWindow.cpp:374
+#, fuzzy
+msgid "Add _Group to bookmark"
+msgstr "添加到書簽(_A)"
+
+#: ../src/MainWindow.cpp:374
+#, fuzzy
+msgid "Bookmark the Group which the channel lie on"
+msgstr "收藏此頻道"
+
+#: ../src/MainWindow.cpp:377
 msgid "_Copy url"
 msgstr "複製串流位址(_C)"
 
-#: ../src/MainWindow.cpp:373
+#: ../src/MainWindow.cpp:377
 msgid "Copy url to clipboard"
 msgstr "複製串流位址至剪貼簿"
 
-#: ../src/MainWindow.cpp:412
+#: ../src/MainWindow.cpp:416
 msgid "Open URL"
 msgstr "打開網路串流"
 
-#: ../src/MainWindow.cpp:771
+#: ../src/MainWindow.cpp:790
 #, c-format
 msgid "Caching... %d%%"
 msgstr "快取中... %d%%"
 
-#: ../src/MainWindow.cpp:1171
+#: ../src/MainWindow.cpp:1190
 msgid "NO SUPPORT"
 msgstr "未支援"
 
-#: ../src/MainWindow.cpp:1175
+#: ../src/MainWindow.cpp:1194
 msgid ""
 "you have not install sopcast and pplive program, so GMLive can't support "
 "them now"
 msgstr "您還未安裝 sopcast 和 PPLive 程式，所以 GMLive 還不能支援它們。"
 
-#: ../src/MainWindow.cpp:1177
+#: ../src/MainWindow.cpp:1196
 msgid "you have not install sopcast program,so GMLive can't support it now"
 msgstr "您還未安裝 sopcast 程式，所以 GMLive 還不能支援它。"
 
-#: ../src/MainWindow.cpp:1179
+#: ../src/MainWindow.cpp:1198
 msgid "you have not install pplive program,so GMLive can't support it now"
 msgstr "您還未安裝 PPLive 程式，所以 GMLive 還不能支援它。"
 
-#: ../src/MainWindow.cpp:1182
+#: ../src/MainWindow.cpp:1201
 msgid " So you can install the program first"
 msgstr "請您安裝以上程式。謝謝。"
 
-#: ../src/pplivechannel.cpp:227
+#: ../src/pplivechannel.cpp:228
 msgid ""
 "open the pplive channel error,will you select a local file to instead the "
 "broken channel list?"
