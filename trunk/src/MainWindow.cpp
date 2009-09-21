@@ -1233,7 +1233,7 @@ void MainWindow::init()
 		GMConf["mms_mplayer_cache"]     =       "8192";
 		GMConf["sopcast_mplayer_cache"] =       "64";
 		GMConf["pplive_mplayer_cache"]  =       "64";
-		GMConf["pplive_delay_time"]     =       "5";
+		GMConf["pplive_delay_time"]     =       "15";
 		GMConf["channels_hide"]		=	"0";
 		GMConf["toolbar_hide"]		=	"0";
 		GMConf["sopcast_channel_url"]	=	"http://channel.sopcast.com/gchlxml";

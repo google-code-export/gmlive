@@ -133,9 +133,9 @@ bool PPSPlayer::on_pps_time_status()
 	struct stat statbuf;
 	if(0== g_stat(PPSSTREAM, &statbuf)){
 
-		if(statbuf.st_size >4096)
+		if(statbuf.st_size >10240)
 		{
-			gmplayer->set_cache(4096);
+			gmplayer->set_cache(256);
 			gmplayer->start(PPSSTREAM);
 			return false;
 		}
