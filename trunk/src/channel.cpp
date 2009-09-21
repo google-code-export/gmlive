@@ -260,7 +260,6 @@ void Channel::play_selection_iter(Gtk::TreeModel::iterator& iter)
 	LivePlayer* lp = parent->get_live_player();
 	LivePlayer* live_player = get_player(stream, page);
 
-	DLOG("set_live_player name = %s \n",name.c_str());
 	parent->set_live_player(live_player, name);
 	RecentChannel* rc =
 		dynamic_cast<RecentChannel*>(parent->get_recent_channel());
