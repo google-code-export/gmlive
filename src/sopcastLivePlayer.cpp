@@ -104,7 +104,7 @@ void SopcastLivePlayer::start(GMplayer& gmp)
 
 	signal_status_.emit(0);
 
-	int idelay=9;
+	int idelay=15;
 	sop_time_conn = Glib::signal_timeout().connect(sigc::mem_fun(*this, &SopcastLivePlayer::on_sop_time_status), idelay*1000);
 
 }
