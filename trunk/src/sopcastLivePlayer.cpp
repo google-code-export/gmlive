@@ -104,12 +104,20 @@ void SopcastLivePlayer::start(GMplayer& gmp)
 
 	signal_status_.emit(0);
 
-	sop_time_conn = Glib::signal_timeout().connect(sigc::mem_fun(*this, &SopcastLivePlayer::on_sop_time_status), 1000);
+	int idelay=9;
+	sop_time_conn = Glib::signal_timeout().connect(sigc::mem_fun(*this, &SopcastLivePlayer::on_sop_time_status), idelay*1000);
 
 }
 
 bool SopcastLivePlayer::on_sop_time_status()
 {
+		std::string& cache = GMConf["sopcast_mplayer_cache"];
+		int icache = atoi(cache.c_str());
+		icache = icache > 64 ? icache : 64;
+
+		gmplayer->start(SOPCASTSTREAM);
+		return false;
+#if 0
 	if (-1 == sop_sock) {
 		try {
 			sop_sock = connect_to_server("127.0.0.1", 8908);
@@ -127,6 +135,7 @@ bool SopcastLivePlayer::on_sop_time_status()
 	write(sop_sock, "s\n", sizeof("s\n"));
 	sop_file = fdopen(sop_sock, "r");
 	return true;
+#endif
 }
 
 bool SopcastLivePlayer::on_sop_sock(const Glib::IOCondition& condition)

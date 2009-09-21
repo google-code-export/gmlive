@@ -485,12 +485,12 @@ bool GMplayer::on_update_progress()
 	int len;
 	if(size<1024)
 	{
-		len = snprintf(buf, 512, _("Recording %s To %s (%u Kb)"),channelname.c_str(), outfilename.c_str(), size);
+		len = snprintf(buf, 512, _("Recording %s To %s (%u Kb)"),channelname.c_str(), outfilename.c_str(), (unsigned int)size);
 	}
 	else{
 		off_t mb=size/1024;
 		off_t kb=size%1024;
-		len = snprintf(buf, 512, _("Recording %s To %s (%u.%u Mb)"),channelname.c_str(), outfilename.c_str(), mb,kb);
+		len = snprintf(buf, 512, _("Recording %s To %s (%u.%u Mb)"),channelname.c_str(), outfilename.c_str(), (unsigned int)mb,(unsigned int)kb);
 	}
 	buf[len] = 0;
 
