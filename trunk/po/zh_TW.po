@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-19 17:39+0800\n"
+"POT-Creation-Date: 2009-09-24 18:31+0800\n"
 "PO-Revision-Date: 2009-09-19 17:40+0800\n"
 "Last-Translator: Liu, Shuyuan <victorangus@gmail.com>\n"
 "Language-Team: Chinese/Traditional\n"
@@ -346,38 +346,38 @@ msgstr "使用者"
 msgid "Choose File"
 msgstr "選擇檔案"
 
-#: ../src/channel.cpp:329 ../src/channel.cpp:411
+#: ../src/channel.cpp:328 ../src/channel.cpp:410
 msgid "PPLive Stream"
 msgstr "PPLive 串流"
 
-#: ../src/channel.cpp:331 ../src/channel.cpp:413
+#: ../src/channel.cpp:330 ../src/channel.cpp:412
 msgid "SopCast Stream"
 msgstr "SopCast 流"
 
-#: ../src/channel.cpp:333 ../src/channel.cpp:415
+#: ../src/channel.cpp:332 ../src/channel.cpp:414
 msgid "MMS stream"
 msgstr "MMS流"
 
-#: ../src/channel.cpp:335 ../src/channel.cpp:417
+#: ../src/channel.cpp:334 ../src/channel.cpp:416
 #, fuzzy
 msgid "PPS stream"
 msgstr "MMS流"
 
-#: ../src/channel.cpp:345 ../src/channel.cpp:348 ../src/channel.cpp:427
-#: ../src/channel.cpp:432
+#: ../src/channel.cpp:344 ../src/channel.cpp:347 ../src/channel.cpp:426
+#: ../src/channel.cpp:431
 msgid "users:"
 msgstr "使用者數："
 
-#: ../src/channel.cpp:346 ../src/channel.cpp:349 ../src/channel.cpp:428
-#: ../src/channel.cpp:433
+#: ../src/channel.cpp:345 ../src/channel.cpp:348 ../src/channel.cpp:427
+#: ../src/channel.cpp:432
 msgid "Type:"
 msgstr "類型："
 
-#: ../src/channel.cpp:449
+#: ../src/channel.cpp:448
 msgid "Please select a channel list file"
 msgstr "請選擇一個頻道清單檔案"
 
-#: ../src/channel.cpp:450
+#: ../src/channel.cpp:449
 msgid "open channles error"
 msgstr "打開頻道清單錯誤"
 
