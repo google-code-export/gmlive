@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-19 17:39+0800\n"
+"POT-Creation-Date: 2009-09-24 18:31+0800\n"
 "PO-Revision-Date: 2009-08-27 09:21+0100\n"
 "Last-Translator: Dariusz Jakoniuk <pipaceliny@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -306,38 +306,38 @@ msgstr "użytkownik"
 msgid "Choose File"
 msgstr "Wybierz plik"
 
-#: ../src/channel.cpp:329 ../src/channel.cpp:411
+#: ../src/channel.cpp:328 ../src/channel.cpp:410
 msgid "PPLive Stream"
 msgstr "Strumień PPLive"
 
-#: ../src/channel.cpp:331 ../src/channel.cpp:413
+#: ../src/channel.cpp:330 ../src/channel.cpp:412
 msgid "SopCast Stream"
 msgstr "Strumień SopCast"
 
-#: ../src/channel.cpp:333 ../src/channel.cpp:415
+#: ../src/channel.cpp:332 ../src/channel.cpp:414
 msgid "MMS stream"
 msgstr "Strumień MMS"
 
-#: ../src/channel.cpp:335 ../src/channel.cpp:417
+#: ../src/channel.cpp:334 ../src/channel.cpp:416
 #, fuzzy
 msgid "PPS stream"
 msgstr "Strumień MMS"
 
-#: ../src/channel.cpp:345 ../src/channel.cpp:348 ../src/channel.cpp:427
-#: ../src/channel.cpp:432
+#: ../src/channel.cpp:344 ../src/channel.cpp:347 ../src/channel.cpp:426
+#: ../src/channel.cpp:431
 msgid "users:"
 msgstr "użytkownicy:"
 
-#: ../src/channel.cpp:346 ../src/channel.cpp:349 ../src/channel.cpp:428
-#: ../src/channel.cpp:433
+#: ../src/channel.cpp:345 ../src/channel.cpp:348 ../src/channel.cpp:427
+#: ../src/channel.cpp:432
 msgid "Type:"
 msgstr "Typ:"
 
-#: ../src/channel.cpp:449
+#: ../src/channel.cpp:448
 msgid "Please select a channel list file"
 msgstr "Proszę wybierz plik listy kanałów"
 
-#: ../src/channel.cpp:450
+#: ../src/channel.cpp:449
 msgid "open channles error"
 msgstr "błąd otwarcia kanałów"
 
