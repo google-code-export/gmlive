@@ -493,7 +493,6 @@ void MainWindow::on_fullscreen()
 		/** 设置全屏状态*/
 		menubar->hide();
 		toolbar->hide();
-		//tool_hbox->hide();
 		statusbar->hide();
 		menu_tool_box->hide();
 		channels_box->hide();
@@ -505,10 +504,11 @@ void MainWindow::on_fullscreen()
 
 		/**解除全屏状态*/
 		menubar->show();
-		toolbar->show();
-		//tool_hbox->show();
 		statusbar->show();
-		menu_tool_box->show();
+		set_toolbar_hide(toolbar_hide);
+		
+		//toolbar->show();
+		//menu_tool_box->show();
 		if(!channels_hide)
 			channels_box->show();
 		this->unfullscreen();
@@ -637,11 +637,13 @@ void MainWindow::on_menu_hide_toolbar()
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewShowToolbar"));
 
 	if (show->get_active()){
-		toolbar_hide = true;
-		toolbar->hide();
+		set_toolbar_hide(true);
+		//toolbar_hide = true;
+		//toolbar->hide();
 	} else {
-		toolbar_hide = false;
-		toolbar->show();
+		set_toolbar_hide(false);
+		//toolbar_hide = false;
+		//toolbar->show();
 	}
 	this->resize(1, 1);
 }
@@ -1118,9 +1120,11 @@ void MainWindow::set_toolbar_hide(bool hide)
 	toolbar_hide = hide;
 	if(toolbar_hide){
 		toolbar->hide();
+		menu_tool_box->hide();
 	}
 	else{
 		toolbar->show();
+		menu_tool_box->show();
 	}	
 	Glib::RefPtr<Gtk::ToggleAction> menu = 
 		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ViewShowToolbar"));

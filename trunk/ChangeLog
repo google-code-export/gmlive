@@ -1,5 +1,8 @@
 
-2009年 09月 19日 星期六 17:41:43 CST
+2009年 10月 01日 星期四 12:40:20 CST lerosua<lerosua@gmail.com>
+	修正工具栏隐藏的bug
+
+2009年 09月 19日 星期六 17:41:43 CST lerosua<lerosua@gmail.com>
 	将xpps的方式改成读文件方式，需要xpps的配合。
 	在右键菜单中加入添加整组进书签功能。
 	配置文件转入 ~/.config/gmlive 目录下.
