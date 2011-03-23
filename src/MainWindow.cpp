@@ -48,119 +48,18 @@
 #include <sys/socket.h>
 #include <sys/wait.h>
 
+#define HEX_ESCAPE '%'
+
 using namespace std;
 
-
-
-#define HEX_ESCAPE '%'
-int hex_to_int (gchar c)
-{
-	return  c >= '0' && c <= '9' ? c - '0'
-		: c >= 'A' && c <= 'F' ? c - 'A' + 10
-		: c >= 'a' && c <= 'f' ? c - 'a' + 10
-		: -1;
-}
-
-int unescape_character (const char *scanner)
-{
-	int first_digit;
-	int second_digit;
-
-	first_digit = hex_to_int (*scanner++);
-	if (first_digit < 0) {
-		return -1;
-	}
-
-	second_digit = hex_to_int (*scanner++);
-	if (second_digit < 0) {
-		return -1;
-	}
-
-	return (first_digit << 4) | second_digit;
-}
-
-/** 用于在拖放时得到的文件名的转码*/
+int hex_to_int (gchar c);
+int unescape_character (const char *scanner);
 std::string  wind_unescape_string (const char *escaped_string, 
-		const gchar *illegal_characters)
-{
-	const char *in;
-	char *out;
-	int character;
-
-	if (escaped_string == NULL) {
-		return std::string();
-	}
-
-	//result = g_malloc (strlen (escaped_string) + 1);
-	char result[strlen (escaped_string) + 1];
-
-	out = result;
-	for (in = escaped_string; *in != '\0'; in++) {
-		character = *in;
-		if (*in == HEX_ESCAPE) {
-			character = unescape_character (in + 1);
-
-			/* Check for an illegal character. We consider '\0' illegal here. */
-			if (character <= 0
-					|| (illegal_characters != NULL
-						&& strchr (illegal_characters, (char)character) != NULL)) {
-				return std::string();
-			}
-			in += 2;
-		}
-		*out++ = (char)character;
-	}
-
-	*out = '\0';
-	assert (out - result <= strlen (escaped_string));
-	return std::string(result);
-
-}
+		const gchar *illegal_characters);
+Glib::ustring get_print_string(const char* buf, int len);
+bool get_video_resolution(const char* buf, int& w, int& h);
 
 
-Glib::ustring get_print_string(const char* buf, int len)
-{
-
-	char new_buf[len];
-	char* pnew = new_buf;
-	const char* pend = buf + len;
-	for(;buf < pend; ++buf) {
-		if (!iscntrl(*buf))
-			*pnew++ = *buf;
-		else
-			printf("%o\n", *buf);
-	}
-	*pnew = 0;
-	return Glib::ustring(new_buf, pnew);
-}
-
-bool get_video_resolution(const char* buf, int& w, int& h)
-{
-	// 输出行应该是这样的
-	// VO: [xv] 800x336 => 800x336 Planar YV12 
-
-	if ( (buf[0] == 'V') &&
-			(buf[1] == 'O') &&
-			(buf[2] == ':')) {
-
-
-		w = -1; 
-		h = -1;
-		const char* pw = strstr(buf, "] ");
-		if (NULL == ++pw) 
-			return false;
-		w = atoi(pw);
-
-		const char* ph = strstr(pw, "x");
-		if (NULL == ++ph)
-			return false;
-		h = atoi(ph);
-
-		DLOG("w = %d, h = %d\n", w, h);
-		return true;
-	}
-	return false;
-}
 
 
 Glib::ustring ui_info =
@@ -231,7 +130,221 @@ Glib::ustring ui_info =
 "	</toolbar>"
 "</ui>";
 
-void register_stock_items()
+MainWindow::MainWindow():
+	live_player(NULL)
+	,gmp_width(-1)
+	,gmp_height(-1)
+	,gmp_rate(-1)
+	,gmp_embed(true)
+	,channels_hide(false)
+	,toolbar_hide(false)
+	,refresh_sopcast_channels(true)
+	,enable_pplive(true)
+	,enable_pps(true)
+	,enable_sopcast(true)
+	,full_screen(false)
+	,window_width(1)
+	,window_height(1)
+	,confwindow(NULL)
+	,menubar(NULL)
+	,toolbar(NULL)
+	,enable_tray(false)
+	,tray_icon(NULL)
+	,fd_skt(-1)
+{
+	std::list<Gtk::TargetEntry> listTargets;
+	listTargets.push_back(Gtk::TargetEntry("STRING"));
+	listTargets.push_back(Gtk::TargetEntry("text/plain"));
+
+	ui_xml = Gtk::Builder::create_from_file(main_ui, "mainFrame");
+	if (!ui_xml) 
+		exit(127);
+
+
+	Gtk::VBox* main_frame = 0;
+	ui_xml->get_widget("mainFrame", main_frame);
+
+	statusbar = 0;
+	ui_xml->get_widget("statusbar", statusbar);
+
+	play_frame = 0;
+	ui_xml->get_widget("playFrame", play_frame);
+
+	channels = 0;
+	ui_xml->get_widget("channels", channels);
+
+	channels_box = 0;
+	ui_xml->get_widget("channels_box", channels_box);
+	//channels_box->set_size_request(120,100); //set channels box size
+
+	Channel* channel = Gtk::manage(new class MMSChannel(this));
+	Gtk::ScrolledWindow* swnd = 0;
+	ui_xml->get_widget("mmsChannelWnd", swnd);
+	swnd->add(*channel);
+
+	init_conf();
+	/** 检测是否支持pplive和sopcast */
+	check_support();
+	refresh_sopcast_channels = atoi(GMConf["check_refresh_sopcast_channels"].c_str());
+
+	if(enable_sopcast)
+	{
+		channel = Gtk::manage(new SopcastChannel(this));
+		swnd = 0;
+		ui_xml->get_widget("sopcastChannelWnd", swnd);
+		swnd->add(*channel);
+		DLOG("support sopcast\n");
+		if(refresh_sopcast_channels)
+			channel->refresh_list();
+	}
+	else
+		channels->remove_page(1);
+
+	if(enable_pplive)
+	{
+		channel = Gtk::manage(new class PpliveChannel(this));
+		swnd = 0;
+		ui_xml->get_widget("ppliveChannelWnd", swnd);
+		swnd->add(*channel);
+		DLOG("support pplive\n");
+		if (refresh_pplive_channels)
+			channel->refresh_list();
+	}
+	else
+	{
+		if(enable_sopcast)
+			channels->remove_page(2);
+		else
+			channels->remove_page(1);
+	}
+	if(enable_pps){
+		//for test 
+		Gtk::ScrolledWindow* scroll_pps = Gtk::manage(new Gtk::ScrolledWindow());
+		scroll_pps->set_policy(Gtk::POLICY_AUTOMATIC,Gtk::POLICY_AUTOMATIC);
+		channel = Gtk::manage(new class PPSChannel(this));
+		scroll_pps->add(*channel);
+		int num=1;
+		if(enable_pplive)
+			num++;
+		if(enable_sopcast)
+			num++;
+		channels->insert_page(*scroll_pps,"PPStream",num);
+
+	}
+
+
+	recent_channel = Gtk::manage(new class RecentChannel(this));
+	swnd = 0;
+	ui_xml->get_widget("recentChannelWnd", swnd);
+	swnd->add(*recent_channel);
+
+	bookmark_channel = Gtk::manage(new class BookMarkChannel(this));
+	swnd = 0;
+	ui_xml->get_widget("bookmarkChannelWnd", swnd);
+	swnd->add(*bookmark_channel);
+
+
+	background = new Gtk::Image(
+			Gdk::Pixbuf::create_from_file (
+				DATA_DIR"/gmlive_play.png"));
+
+	gmp = new GMplayer();	
+	gmp->set_out_slot(sigc::mem_fun(*this, &MainWindow::on_gmplayer_out));
+	gmp->signal_start().connect(
+			sigc::mem_fun(*this, &MainWindow::on_gmplayer_start));
+	gmp->signal_stop().connect(
+			sigc::mem_fun(*this, &MainWindow::on_gmplayer_stop));
+
+	init_ui_manager();
+	menubar = ui_manager->get_widget("/MenuBar");
+	toolbar = ui_manager->get_widget("/ToolBar");
+	channels_pop_menu = dynamic_cast<Gtk::Menu*>(
+			ui_manager->get_widget("/PopupMenu"));
+
+	try_pop_menu = dynamic_cast<Gtk::Menu*>(
+			ui_manager->get_widget("/TryPopupMenu"));
+
+	//Gtk::VBox* menu_tool_box = 0;
+	ui_xml->get_widget("box_menu_toolbar", menu_tool_box);
+	menu_tool_box->pack_start(*menubar,true,true);
+	//menu_tool_box->pack_start(*toolbar,false,false);
+
+	Gtk::HBox* hbox_la=0;
+	ui_xml->get_widget("hbox_la",hbox_la);
+
+
+	//menu_tool_box->pack_start(*hbox_la,false,false);
+	hbox_la->pack_start(*toolbar,true,true);
+
+	play_eventbox = Gtk::manage(new Gtk::EventBox());
+	play_eventbox->set_events(Gdk::BUTTON_PRESS_MASK);
+	play_eventbox->signal_button_press_event().connect(sigc::
+			mem_fun(*this, &MainWindow::on_doubleclick_picture));
+	play_eventbox->add(*background);
+	play_eventbox->modify_bg(Gtk::STATE_NORMAL,Gdk::Color("black"));
+
+	play_frame->pack_start(*play_eventbox,true,true);
+
+	play_frame->drag_dest_set(listTargets);
+	play_frame->signal_drag_data_received().connect(
+			sigc::mem_fun(*this, &MainWindow::on_drog_data_received));
+	signal_check_resize().connect(
+			sigc::mem_fun(*this,&MainWindow::on_update_video_widget));
+
+
+	this->add(*main_frame);
+
+	Glib::RefPtr<Gdk::Pixbuf> pix = Gdk::Pixbuf::create_from_file(DATA_DIR"/gmlive.png");
+	this->set_icon(pix);
+
+	Gtk::Button* bt = 0;
+	ui_xml->get_widget("bt_search_channel", bt);
+	bt->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_search_channel));
+
+	bt = 0;
+	ui_xml->get_widget("bt_refresh_channel", bt);
+	bt->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_refresh_channel));
+
+	this->show_all();
+	//channels->hide();
+	this->resize(1,1);
+	//init();
+
+	Gtk::ScaleButton* vbt = 0;
+	//ui_xml->get_widget("av_sync_button", vbt);
+	//vbt->signal_value_changed().connect(sigc::mem_fun(*this, &MainWindow::on_av_sync_change));
+
+	vbt = 0;
+	ui_xml->get_widget("volume_button", vbt);
+	vbt->signal_value_changed().connect(sigc::mem_fun(*this, &MainWindow::on_volume_change));
+
+	if (atoi(GMConf["enable_tray"].c_str()))
+		tray_icon = new TrayIcon(*this);
+
+	const std::string& wnd_width = GMConf["main_window_width"];
+	window_width = atoi(wnd_width.c_str());
+	window_width = window_width > 0 ? window_width : 1;
+
+	const std::string& wnd_height = GMConf["main_window_height"];
+	window_height = atoi(wnd_height.c_str());
+	window_height = window_height > 0 ? window_height : 1;
+
+	channels_hide = atoi(GMConf["channels_hide"].c_str());
+	toolbar_hide = atoi(GMConf["toolbar_hide"].c_str());
+	gmp_embed     = atoi(GMConf["mplayer_embed"].c_str());
+
+	set_channels_hide(channels_hide);
+	set_toolbar_hide(toolbar_hide);
+	//set_gmp_embed(gmp_embed);
+	set_other_player(atoi(GMConf["player_type"].c_str()));
+	//	Glib::RefPtr<Gtk::ToggleAction> menu = 
+	//		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ToolMute"));
+	//	menu->set_active(false);
+	((Gtk::Toolbar*)toolbar)->set_toolbar_style(Gtk::TOOLBAR_ICONS);
+
+
+}
+void MainWindow::register_stock_items()
 {
 	Glib::RefPtr<Gtk::IconFactory> factory = Gtk::IconFactory::create();
 	Gtk::IconSource source;
@@ -793,220 +906,6 @@ void MainWindow::on_live_player_out(int percentage)
 	show_msg(buf);
 }
 
-MainWindow::MainWindow():
-	live_player(NULL)
-	,gmp_width(-1)
-	,gmp_height(-1)
-	,gmp_rate(-1)
-	,gmp_embed(true)
-	,channels_hide(false)
-	,toolbar_hide(false)
-	,refresh_sopcast_channels(true)
-	,enable_pplive(true)
-	,enable_pps(true)
-	,enable_sopcast(true)
-	,full_screen(false)
-	,window_width(1)
-	,window_height(1)
-	,confwindow(NULL)
-	,menubar(NULL)
-	,toolbar(NULL)
-	,enable_tray(false)
-	,tray_icon(NULL)
-	,fd_skt(-1)
-{
-	std::list<Gtk::TargetEntry> listTargets;
-	listTargets.push_back(Gtk::TargetEntry("STRING"));
-	listTargets.push_back(Gtk::TargetEntry("text/plain"));
-
-	ui_xml = Gtk::Builder::create_from_file(main_ui, "mainFrame");
-	if (!ui_xml) 
-		exit(127);
-
-
-	Gtk::VBox* main_frame = 0;
-	ui_xml->get_widget("mainFrame", main_frame);
-
-	statusbar = 0;
-	ui_xml->get_widget("statusbar", statusbar);
-
-	play_frame = 0;
-	ui_xml->get_widget("playFrame", play_frame);
-
-	channels = 0;
-	ui_xml->get_widget("channels", channels);
-
-	channels_box = 0;
-	ui_xml->get_widget("channels_box", channels_box);
-	//channels_box->set_size_request(120,100); //set channels box size
-
-	Channel* channel = Gtk::manage(new class MMSChannel(this));
-	Gtk::ScrolledWindow* swnd = 0;
-	ui_xml->get_widget("mmsChannelWnd", swnd);
-	swnd->add(*channel);
-
-	init();
-	/** 检测是否支持pplive和sopcast */
-	check_support();
-	refresh_sopcast_channels = atoi(GMConf["check_refresh_sopcast_channels"].c_str());
-
-	if(enable_sopcast)
-	{
-		channel = Gtk::manage(new SopcastChannel(this));
-		swnd = 0;
-		ui_xml->get_widget("sopcastChannelWnd", swnd);
-		swnd->add(*channel);
-		DLOG("support sopcast\n");
-		if(refresh_sopcast_channels)
-			channel->refresh_list();
-	}
-	else
-		channels->remove_page(1);
-
-	if(enable_pplive)
-	{
-		channel = Gtk::manage(new class PpliveChannel(this));
-		swnd = 0;
-		ui_xml->get_widget("ppliveChannelWnd", swnd);
-		swnd->add(*channel);
-		DLOG("support pplive\n");
-		if (refresh_pplive_channels)
-			channel->refresh_list();
-	}
-	else
-	{
-		if(enable_sopcast)
-			channels->remove_page(2);
-		else
-			channels->remove_page(1);
-	}
-	if(enable_pps){
-		//for test 
-		Gtk::ScrolledWindow* scroll_pps = Gtk::manage(new Gtk::ScrolledWindow());
-		scroll_pps->set_policy(Gtk::POLICY_AUTOMATIC,Gtk::POLICY_AUTOMATIC);
-		channel = Gtk::manage(new class PPSChannel(this));
-		scroll_pps->add(*channel);
-		int num=1;
-		if(enable_pplive)
-			num++;
-		if(enable_sopcast)
-			num++;
-		channels->insert_page(*scroll_pps,"PPStream",num);
-
-	}
-
-
-	recent_channel = Gtk::manage(new class RecentChannel(this));
-	swnd = 0;
-	ui_xml->get_widget("recentChannelWnd", swnd);
-	swnd->add(*recent_channel);
-
-	bookmark_channel = Gtk::manage(new class BookMarkChannel(this));
-	swnd = 0;
-	ui_xml->get_widget("bookmarkChannelWnd", swnd);
-	swnd->add(*bookmark_channel);
-
-
-	background = new Gtk::Image(
-			Gdk::Pixbuf::create_from_file (
-				DATA_DIR"/gmlive_play.png"));
-
-	gmp = new GMplayer();	
-	gmp->set_out_slot(sigc::mem_fun(*this, &MainWindow::on_gmplayer_out));
-	gmp->signal_start().connect(
-			sigc::mem_fun(*this, &MainWindow::on_gmplayer_start));
-	gmp->signal_stop().connect(
-			sigc::mem_fun(*this, &MainWindow::on_gmplayer_stop));
-
-	init_ui_manager();
-	menubar = ui_manager->get_widget("/MenuBar");
-	toolbar = ui_manager->get_widget("/ToolBar");
-	channels_pop_menu = dynamic_cast<Gtk::Menu*>(
-			ui_manager->get_widget("/PopupMenu"));
-
-	try_pop_menu = dynamic_cast<Gtk::Menu*>(
-			ui_manager->get_widget("/TryPopupMenu"));
-
-	//Gtk::VBox* menu_tool_box = 0;
-	ui_xml->get_widget("box_menu_toolbar", menu_tool_box);
-	menu_tool_box->pack_start(*menubar,true,true);
-	//menu_tool_box->pack_start(*toolbar,false,false);
-
-	Gtk::HBox* hbox_la=0;
-	ui_xml->get_widget("hbox_la",hbox_la);
-
-
-	//menu_tool_box->pack_start(*hbox_la,false,false);
-	hbox_la->pack_start(*toolbar,true,true);
-
-	play_eventbox = Gtk::manage(new Gtk::EventBox());
-	play_eventbox->set_events(Gdk::BUTTON_PRESS_MASK);
-	play_eventbox->signal_button_press_event().connect(sigc::
-			mem_fun(*this, &MainWindow::on_doubleclick_picture));
-	play_eventbox->add(*background);
-	play_eventbox->modify_bg(Gtk::STATE_NORMAL,Gdk::Color("black"));
-
-	play_frame->pack_start(*play_eventbox,true,true);
-
-	play_frame->drag_dest_set(listTargets);
-	play_frame->signal_drag_data_received().connect(
-			sigc::mem_fun(*this, &MainWindow::on_drog_data_received));
-	signal_check_resize().connect(
-			sigc::mem_fun(*this,&MainWindow::on_update_video_widget));
-
-
-	this->add(*main_frame);
-
-	Glib::RefPtr<Gdk::Pixbuf> pix = Gdk::Pixbuf::create_from_file(DATA_DIR"/gmlive.png");
-	this->set_icon(pix);
-
-	Gtk::Button* bt = 0;
-	ui_xml->get_widget("bt_search_channel", bt);
-	bt->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_search_channel));
-
-	bt = 0;
-	ui_xml->get_widget("bt_refresh_channel", bt);
-	bt->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_refresh_channel));
-
-	this->show_all();
-	//channels->hide();
-	this->resize(1,1);
-	//init();
-
-	Gtk::ScaleButton* vbt = 0;
-	//ui_xml->get_widget("av_sync_button", vbt);
-	//vbt->signal_value_changed().connect(sigc::mem_fun(*this, &MainWindow::on_av_sync_change));
-
-	vbt = 0;
-	ui_xml->get_widget("volume_button", vbt);
-	vbt->signal_value_changed().connect(sigc::mem_fun(*this, &MainWindow::on_volume_change));
-
-	if (atoi(GMConf["enable_tray"].c_str()))
-		tray_icon = new TrayIcon(*this);
-
-	const std::string& wnd_width = GMConf["main_window_width"];
-	window_width = atoi(wnd_width.c_str());
-	window_width = window_width > 0 ? window_width : 1;
-
-	const std::string& wnd_height = GMConf["main_window_height"];
-	window_height = atoi(wnd_height.c_str());
-	window_height = window_height > 0 ? window_height : 1;
-
-	channels_hide = atoi(GMConf["channels_hide"].c_str());
-	toolbar_hide = atoi(GMConf["toolbar_hide"].c_str());
-	gmp_embed     = atoi(GMConf["mplayer_embed"].c_str());
-
-	set_channels_hide(channels_hide);
-	set_toolbar_hide(toolbar_hide);
-	//set_gmp_embed(gmp_embed);
-	set_other_player(atoi(GMConf["player_type"].c_str()));
-	//	Glib::RefPtr<Gtk::ToggleAction> menu = 
-	//		Glib::RefPtr<Gtk::ToggleAction>::cast_dynamic(action_group->get_action("ToolMute"));
-	//	menu->set_active(false);
-	((Gtk::Toolbar*)toolbar)->set_toolbar_style(Gtk::TOOLBAR_ICONS);
-
-
-}
 
 
 void MainWindow::on_menu_volume_increase()
@@ -1218,7 +1117,7 @@ void MainWindow::check_support()
 
 }
 
-void MainWindow::init()
+void MainWindow::init_conf()
 {
 	char buf[512];
 	std::string homedir=Glib::get_user_config_dir();
@@ -1542,4 +1441,113 @@ bool MainWindow::on_sock_io(const Glib::IOCondition&)
 	close(fd_cli);
 	return true;
 
+}
+
+int hex_to_int (gchar c)
+{
+	return  c >= '0' && c <= '9' ? c - '0'
+		: c >= 'A' && c <= 'F' ? c - 'A' + 10
+		: c >= 'a' && c <= 'f' ? c - 'a' + 10
+		: -1;
+}
+
+int unescape_character (const char *scanner)
+{
+	int first_digit;
+	int second_digit;
+
+	first_digit = hex_to_int (*scanner++);
+	if (first_digit < 0) {
+		return -1;
+	}
+
+	second_digit = hex_to_int (*scanner++);
+	if (second_digit < 0) {
+		return -1;
+	}
+
+	return (first_digit << 4) | second_digit;
+}
+
+/** 用于在拖放时得到的文件名的转码*/
+std::string  wind_unescape_string (const char *escaped_string, 
+		const gchar *illegal_characters)
+{
+	const char *in;
+	char *out;
+	int character;
+
+	if (escaped_string == NULL) {
+		return std::string();
+	}
+
+	//result = g_malloc (strlen (escaped_string) + 1);
+	char result[strlen (escaped_string) + 1];
+
+	out = result;
+	for (in = escaped_string; *in != '\0'; in++) {
+		character = *in;
+		if (*in == HEX_ESCAPE) {
+			character = unescape_character (in + 1);
+
+			/* Check for an illegal character. We consider '\0' illegal here. */
+			if (character <= 0
+					|| (illegal_characters != NULL
+						&& strchr (illegal_characters, (char)character) != NULL)) {
+				return std::string();
+			}
+			in += 2;
+		}
+		*out++ = (char)character;
+	}
+
+	*out = '\0';
+	assert (out - result <= strlen (escaped_string));
+	return std::string(result);
+
+}
+
+
+Glib::ustring get_print_string(const char* buf, int len)
+{
+
+	char new_buf[len];
+	char* pnew = new_buf;
+	const char* pend = buf + len;
+	for(;buf < pend; ++buf) {
+		if (!iscntrl(*buf))
+			*pnew++ = *buf;
+		else
+			printf("%o\n", *buf);
+	}
+	*pnew = 0;
+	return Glib::ustring(new_buf, pnew);
+}
+
+bool get_video_resolution(const char* buf, int& w, int& h)
+{
+	// 输出行应该是这样的
+	// VO: [xv] 800x336 => 800x336 Planar YV12 
+
+	if ( (buf[0] == 'V') &&
+			(buf[1] == 'O') &&
+			(buf[2] == ':')) {
+
+
+		w = -1; 
+		h = -1;
+		const char* pw = strstr(buf, "] ");
+		if (NULL == ++pw) 
+			return false;
+		w = atoi(pw);
+
+		const char* ph = strstr(pw, "x");
+		if (NULL == ++ph)
+			return false;
+		h = atoi(ph);
+
+		DLOG("w = %d, h = %d\n", w, h);
+		return true;
+	}
+	return false;
 }

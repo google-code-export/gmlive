@@ -39,9 +39,8 @@ class ConfWindow: public Gtk::Window
 		typedef sigc::signal<void> type_signal_quit;
 		type_signal_quit signal_quit()
 		{ return signal_quit_; }
-	private:
-		void save();
 		void write_to_GMConf();
+	private:
 		type_signal_quit signal_quit_;
 		MainWindow* parent;
 		VariablesMap* m_pVariablesMap;

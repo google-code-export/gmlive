@@ -3,7 +3,7 @@
  *
  *       Filename:  variablesmap.h
  *
- * 		 Description:  ligblademm variablesmap 的复制品
+ * 		 Description:  libglademm variablesmap 的复制品
  *
  *        Version:  1.0
  *        Created:  2009年08月10日 19时45分58秒
@@ -15,6 +15,9 @@
  *
  * =====================================================================================
  */
+#ifndef VARIABLEMAP_HH_
+#define VARIABLEMAP_HH_
+
 #include <gtkmm.h>
 #include <map>
 class VariablesMap {
@@ -55,3 +58,4 @@ class VariablesMap {
 		Glib::RefPtr<Gtk::Builder> m_refGlade;
 };
 
+#endif

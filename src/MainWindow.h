@@ -48,7 +48,7 @@ class MainWindow : public Gtk::Window {
 		void show_msg(const Glib::ustring& msg,unsigned int id=0);
 		void init_ui_manager();
 		void save_conf();
-		void init();
+		void init_conf();
 	private:
 		friend class Channel;
 		void set_live_player(LivePlayer*, const Glib::ustring& name = "");
@@ -57,6 +57,7 @@ class MainWindow : public Gtk::Window {
 		Gtk::Menu* get_channels_pop_menu() { return channels_pop_menu; }
 		Channel* get_recent_channel() { return recent_channel; }
 		Channel* get_bookmark_channel() { return bookmark_channel; }
+		void register_stock_items();
 		// 菜单回调
 		void on_menu_open_file();
 		void on_menu_open_url();

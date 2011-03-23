@@ -1,8 +1,20 @@
-CCTV-1#mms://2008.live.cctv.com/live_cctv1    #CCTV
-CCTV-2#mms://2008.live.cctv.com/live_cctv2   #CCTV
-CCTV-4#mms://2008.live.cctv.com/live_cctv4 #CCTV
-CCTV-7#mms://2008.live.cctv.com/live_cctv7  #CCTV
-CCTV-新闻#mms://2008.live.cctv.com/live_cctvnews #新闻
+CCTV-1综合 #mms://cctv-live-cctv1.wm.llnwd.net/cctv_live_cctv1 #CCTV
+CCTV-2财经 #mms://cctv-live-cctv1.wm.llnwd.net/cctv_live_cctv2   #CCTV
+CCTV-3文艺 #mms://cctv-live-cctv1.wm.llnwd.net/cctv_live_cctv3   #CCTV
+CCTV-4国际 #mms://cctv-live-cctv1.wm.llnwd.net/cctv_live_cctv4 #CCTV
+CCTV-4亚洲 #mms://cctv-live-cctv1.wm.llnwd.net/cctv_live_cctv4_eu #CCTV
+CCTV-4美洲 #mms://cctv-live-cctv1.wm.llnwd.net/cctv_live_cctv4_us #CCTV
+CCTV-5体育 #mms://cctv-live-cctv1.wm.llnwd.net/cctv_live_cctv5 #CCTV
+CCTV-6电影 #mms://cctv-live-cctv1.wm.llnwd.net/cctv_live_cctv6 #CCTV
+CCTV-7军事 #mms://cctv-live-cctv1.wm.llnwd.net/cctv_live_cctv7 #CCTV
+CCTV-8电视剧 #mms://cctv-live-cctv1.wm.llnwd.net/cctv_live_cctv8 #CCTV
+CCTV-9英语 #mms://cctv-live-cctv1.wm.llnwd.net/cctv_live_cctv9 #CCTV
+CCTV-10科教 #mms://cctv-live-cctv1.wm.llnwd.net/cctv_live_cctv10 #CCTV
+CCTV-11戏曲 #mms://cctv-live-cctv1.wm.llnwd.net/cctv_live_cctv11 #CCTV
+CCTV-12法制 #mms://cctv-live-cctv1.wm.llnwd.net/cctv_live_cctv12 #CCTV
+CCTV-高清 #mms://cctv.wm.llnwd.net/cctv_live_cctvhd #CCTV
+CCTV-新闻#mms://cctv.wm.llnwd.net/cctv_live_cctvnews  #新闻
+
 
 
 中天新闻台#mms://ctinews.apbb.com.tw/cti_news #新闻
