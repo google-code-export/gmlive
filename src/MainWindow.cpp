@@ -139,8 +139,8 @@ MainWindow::MainWindow():
 	,channels_hide(false)
 	,toolbar_hide(false)
 	,refresh_sopcast_channels(true)
-	,enable_pplive(true)
-	,enable_pps(true)
+	,enable_pplive(false)
+	,enable_pps(false)
 	,enable_sopcast(true)
 	,full_screen(false)
 	,window_width(1)
@@ -1082,11 +1082,14 @@ void MainWindow::check_support()
 	std::string sopcast_cmd("sp-sc-auth");
 
 	enable_sopcast=check_file(sopcast_cmd.c_str());
-	enable_pplive=check_file(pplive_cmd.c_str());
+	//enable_pplive=check_file(pplive_cmd.c_str());
+	enable_pplive=false;
 
 	std::string& enablesopcast_ = GMConf["enable_sopcast"];
-	std::string& enablepplive_ = GMConf["enable_pplive"];
-	std::string& enablepps_ =    GMConf["enable_pps"];
+	//std::string& enablepplive_ = GMConf["enable_pplive"];
+	//std::string& enablepps_ =    GMConf["enable_pps"];
+	std::string enablepplive_ = "0";
+	std::string enablepps_ =    "0";
 	if(enablesopcast_[0]=='1'|enablepplive_[0]=='1')
 		if(!enable_pplive| !enable_sopcast)
 		{
@@ -1131,8 +1134,8 @@ void MainWindow::init_conf()
 		GMConf["other_player_cmd"]="";
 		GMConf["mplayer_embed"]		=	"1";
 		GMConf["enable_sopcast"] = "1";
-		GMConf["enable_pplive"]= "1";
-		GMConf["enable_pps"] ="1";
+		GMConf["enable_pplive"]= "0";
+		GMConf["enable_pps"] ="0";
 		GMConf["mms_mplayer_cache"]     =       "8192";
 		GMConf["sopcast_mplayer_cache"] =       "64";
 		GMConf["pplive_mplayer_cache"]  =       "64";

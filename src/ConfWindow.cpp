@@ -127,7 +127,7 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 
 	if(!m_enable_sopcast)
 		notebook->remove_page(3);
-	if(!m_enable_pplive)
+	//if(!m_enable_pplive)
 		notebook->remove_page(2);
 
 	set_default_size(600, 400);

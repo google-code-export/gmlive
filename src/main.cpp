@@ -50,7 +50,7 @@ int singleon(const std::string& url)
 	srvaddr.sin_port=htons(GMPORT);
 	srvaddr.sin_addr.s_addr=htonl(INADDR_ANY);
 
-	int on=1;
+	int on = 1;
 	EC_THROW( -1 == (setsockopt( sockfd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on) )));
 	if(bind(sockfd,(struct sockaddr*)&srvaddr,
 			sizeof(struct sockaddr))==-1){

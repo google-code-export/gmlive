@@ -113,8 +113,9 @@ bool SopcastLivePlayer::on_sop_time_status()
 {
 		std::string& cache = GMConf["sopcast_mplayer_cache"];
 		int icache = atoi(cache.c_str());
-		icache = icache > 64 ? icache : 64;
+		//icache = icache > 64 ? icache : 64;
 
+		gmplayer->set_cache(icache);
 		gmplayer->start(SOPCASTSTREAM);
 		return false;
 #if 0
@@ -150,8 +151,9 @@ bool SopcastLivePlayer::on_sop_sock(const Glib::IOCondition& condition)
 	if (i > 70){
 		std::string& cache = GMConf["sopcast_mplayer_cache"];
 		int icache = atoi(cache.c_str());
-		icache = icache > 64 ? icache : 64;
+		//icache = icache > 64 ? icache : 64;
 
+		gmplayer->set_cache(icache);
 		gmplayer->start(SOPCASTSTREAM);
 
 		sop_time_conn.disconnect(); // 启动mpaleyr，停掉显示缓冲状态
