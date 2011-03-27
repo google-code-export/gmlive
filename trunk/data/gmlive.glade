@@ -799,9 +799,10 @@ audio-volume-medium</property>
                             <child>
                               <object class="GtkCheckButton" id="enable_pplive">
                                 <property name="label" translatable="yes">Enable PPLive</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
+                                <property name="sensitive">False</property>
+                                <property name="can_focus">False</property>
                                 <property name="receives_default">False</property>
+                                <property name="tooltip_text" translatable="yes">Now is disabled</property>
                                 <property name="use_underline">True</property>
                                 <property name="draw_indicator">True</property>
                               </object>
@@ -816,6 +817,7 @@ audio-volume-medium</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
+                                <property name="tooltip_text" translatable="yes">Now is disabled</property>
                                 <property name="use_underline">True</property>
                                 <property name="draw_indicator">True</property>
                               </object>

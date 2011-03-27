@@ -86,6 +86,7 @@ Gtk::TreeModel::iterator Channel::addGroup(const Glib::ustring& group)
 bool Channel::on_button_press_event(GdkEventButton * ev)
 {
 	bool result = Gtk::TreeView::on_button_press_event(ev);
+	tooltips->hideTooltip();
 
 	Glib::RefPtr < Gtk::TreeSelection > selection =
 		this->get_selection();
@@ -306,6 +307,7 @@ bool Channel::on_leave_event(GdkEventCrossing * ev)
 {
 	if (tipTimeout.connected()) {
 		tipTimeout.disconnect();
+		tooltips->hideTooltip();
 	}
 	return false;
 }
@@ -363,9 +365,7 @@ bool Channel::on_motion_event(GdkEventMotion * ev)
 	int delay = 600;
 
 	if (tipTimeout.connected()) {
-
 		tipTimeout.disconnect();
-		tooltips->hideTooltip();
 	}
 	if (this->
 			get_path_at_pos((int) ev->x, (int) ev->y, path, column, cell_x,
