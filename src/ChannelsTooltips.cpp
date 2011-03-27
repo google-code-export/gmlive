@@ -49,6 +49,8 @@ ChannelsTooltips::ChannelsTooltips(Channel* view):channel(view)
 	add_events(Gdk::POINTER_MOTION_MASK); 
 	this->signal_expose_event().connect(sigc::mem_fun(*this,
 				&ChannelsTooltips::on_expose_event));
+	this->signal_button_press_event().connect(sigc::mem_fun(*this,
+				&ChannelsTooltips::on_button_press_event),false);
 	//this->signal_motion_notify_event().connect(sigc::mem_fun(
 	//			*this,&ChannelsTooltips::on_motion_event),false);
 
@@ -74,6 +76,7 @@ void ChannelsTooltips::hideTooltip()
 {
 	this->hide();
 }
+
 
 void ChannelsTooltips::showTooltip(GdkEventMotion* ev)
 {

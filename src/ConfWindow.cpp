@@ -101,8 +101,6 @@ ConfWindow::ConfWindow(MainWindow * parent_):parent(parent_)
 	bt = 0;
 	vbox_xml->get_widget("button_cancel", bt);
 	bt->signal_clicked().connect(sigc::mem_fun(*this,&ConfWindow::on_button_cancel));
-	//vbox_xml->connect_clicked("button_save", sigc::mem_fun(*this,&ConfWindow::on_button_save));
-	//vbox_xml->connect_clicked("button_cancel", sigc::mem_fun(*this, &ConfWindow::on_button_cancel));
 
 
 	enable_tray = 0;
